@@ -550,6 +550,7 @@ if __name__ == "__main__":
     
     # Load tokenizer
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+    tokenizer.pad_token = tokenizer.eos_token
     
     # Create and load a trained SAE (replace with your trained model)
     sae = create_sae_for_gpt2("gpt2", expansion_factor=16)

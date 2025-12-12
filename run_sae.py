@@ -182,6 +182,7 @@ def main():
     print("-" * 70)
     
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+    tokenizer.pad_token = tokenizer.eos_token
     analyzer = FeatureAnalyzer(sae, tokenizer, device)
     
     # Generate report

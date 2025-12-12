@@ -59,6 +59,8 @@ class GPT2ActivationCollector:
         
         # Load model and tokenizer
         self.tokenizer = GPT2Tokenizer.from_pretrained(model_name)
+        # GPT-2 doesn't have a padding token by default, so we set it to eos_token
+        self.tokenizer.pad_token = self.tokenizer.eos_token
         self.model = GPT2LMHeadModel.from_pretrained(
             model_name,
             output_hidden_states=True  # Critical: enables access to intermediate layers
