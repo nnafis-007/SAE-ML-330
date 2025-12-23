@@ -170,7 +170,7 @@ class SparseAutoencoder(nn.Module):
             x_reconstructed = F.linear(f, self.W_enc.t(), self.b_dec)
         else:
             # Use separate decoder weights
-            x_reconstructed = F.linear(f, self.W_dec.t(), self.b_dec)
+            x_reconstructed = F.linear(f, self.W_dec, self.b_dec)
         
         return x_reconstructed
     
