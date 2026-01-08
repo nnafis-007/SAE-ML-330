@@ -231,8 +231,15 @@ class SAETrainer:
         self,
         num_epochs: int,
         early_stopping_patience: int = 10,
+        disable_early_stopping: bool = False,
         save_every: int = 5,
-        log_every: int = 1
+        log_every: int = 1,
+        resample_dead_features: bool = False,
+        resample_every: int = 1,
+        resample_freq_threshold: float = 0.0,
+        resample_eval_samples: int = 8192,
+        resample_max_features: int = 2048,
+        resample_start_epoch: int = 5,
     ) -> Dict[str, List[float]]:
         """
         Full training loop.
@@ -240,8 +247,15 @@ class SAETrainer:
         Args:
             num_epochs: Maximum number of epochs to train
             early_stopping_patience: Stop if validation loss doesn't improve for this many epochs
+            disable_early_stopping: If True, never early-stop
             save_every: Save checkpoint every N epochs
             log_every: Print metrics every N epochs
+            resample_dead_features: If True, periodically re-initialize rarely-active features
+            resample_every: Resample cadence in epochs (e.g. 1 = every epoch)
+            resample_freq_threshold: Features with activation frequency below this threshold are resampled
+            resample_eval_samples: Number of training samples used to estimate activation frequency
+            resample_max_features: Maximum number of features to resample per step
+            resample_start_epoch: First epoch (1-indexed) at which resampling is allowed
         
         Returns:
             Training history dictionary
@@ -258,6 +272,9 @@ class SAETrainer:
         print(f"Model parameters: {sum(p.numel() for p in self.model.parameters()):,}")
         print()
         
+        if disable_early_stopping:
+            early_stopping_patience = 0
+
         for epoch in range(num_epochs):
             print(f"Epoch {epoch + 1}/{num_epochs}")
             
@@ -300,9 +317,27 @@ class SAETrainer:
             # Save periodic checkpoint
             if (epoch + 1) % save_every == 0:
                 self.save_checkpoint(f"checkpoint_epoch_{epoch + 1}.pt", epoch, val_metrics)
+
+            # Optional: resample dead/rare features to improve utilization in overcomplete SAEs.
+            # This can help when training collapses to a small subset of always-on features.
+            if (
+                resample_dead_features
+                and resample_freq_threshold > 0.0
+                and resample_every > 0
+                and (epoch + 1) >= int(resample_start_epoch)
+                and ((epoch + 1) % resample_every == 0)
+            ):
+                freqs = self._estimate_feature_frequencies(max_samples=resample_eval_samples)
+                dead_mask = freqs < float(resample_freq_threshold)
+                num_resampled = self._resample_features(dead_mask, max_features=resample_max_features)
+                if num_resampled > 0:
+                    print(
+                        f"  ↻ Resampled {num_resampled} features "
+                        f"(freq < {resample_freq_threshold:g} over ~{resample_eval_samples} samples)"
+                    )
             
             # Early stopping
-            if self.epochs_without_improvement >= early_stopping_patience:
+            if early_stopping_patience and early_stopping_patience > 0 and self.epochs_without_improvement >= early_stopping_patience:
                 print(f"\nEarly stopping triggered after {epoch + 1} epochs")
                 print(f"Best validation loss: {self.best_val_loss:.6f}")
                 break
@@ -311,6 +346,93 @@ class SAETrainer:
         print(f"Best validation loss: {self.best_val_loss:.6f}")
         
         return self.history
+
+    @torch.no_grad()
+    def _estimate_feature_frequencies(self, max_samples: int = 8192) -> torch.Tensor:
+        """Estimate per-feature activation frequency on a subset of training data."""
+        self.model.eval()
+
+        device = next(self.model.parameters()).device
+        total = 0
+        counts = torch.zeros(self.model.d_hidden, device=device)
+
+        for batch in self.train_loader:
+            x = batch[0].to(device)
+            f = self.model.encode(x)
+            counts += (f > 0).sum(dim=0)
+            total += x.shape[0]
+            if total >= max_samples:
+                break
+
+        if total == 0:
+            return torch.zeros(self.model.d_hidden, device=device)
+
+        return counts / float(total)
+
+    @torch.no_grad()
+    def _resample_features(self, dead_mask: torch.Tensor, max_features: int = 2048) -> int:
+        """Re-initialize encoder/decoder params for a subset of dead features."""
+        if dead_mask is None:
+            return 0
+
+        dead_mask = dead_mask.to(next(self.model.parameters()).device).bool().flatten()
+        dead_indices = dead_mask.nonzero(as_tuple=False).flatten()
+        if dead_indices.numel() == 0:
+            return 0
+
+        if self.model.use_tied_weights:
+            # Keeping behavior simple: resampling requires independent decoder columns.
+            return 0
+
+        if max_features and dead_indices.numel() > max_features:
+            perm = torch.randperm(dead_indices.numel(), device=dead_indices.device)
+            dead_indices = dead_indices[perm[: int(max_features)]]
+
+        d_model = self.model.d_model
+        d_hidden = self.model.d_hidden
+
+        # Encoder: random rows
+        self.model.W_enc.data[dead_indices] = (
+            torch.randn(dead_indices.numel(), d_model, device=self.model.W_enc.device)
+            / (d_model ** 0.5)
+        )
+        self.model.b_enc.data[dead_indices] = 0.0
+
+        # Decoder: random unit columns
+        new_cols = torch.randn(d_model, dead_indices.numel(), device=self.model.W_dec.device) / (d_hidden ** 0.5)
+        new_cols = torch.nn.functional.normalize(new_cols, dim=0)
+        self.model.W_dec.data[:, dead_indices] = new_cols
+
+        if self.model.normalize_decoder:
+            self.model.normalize_decoder_weights()
+
+        # Best-effort: reset Adam moments for the resampled slices.
+        try:
+            for param in (self.model.W_enc, self.model.b_enc, self.model.W_dec):
+                state = self.optimizer.state.get(param)
+                if not state:
+                    continue
+                if "exp_avg" in state:
+                    exp_avg = state["exp_avg"]
+                    if param is self.model.W_enc:
+                        exp_avg[dead_indices] = 0
+                    elif param is self.model.b_enc:
+                        exp_avg[dead_indices] = 0
+                    elif param is self.model.W_dec:
+                        exp_avg[:, dead_indices] = 0
+                if "exp_avg_sq" in state:
+                    exp_avg_sq = state["exp_avg_sq"]
+                    if param is self.model.W_enc:
+                        exp_avg_sq[dead_indices] = 0
+                    elif param is self.model.b_enc:
+                        exp_avg_sq[dead_indices] = 0
+                    elif param is self.model.W_dec:
+                        exp_avg_sq[:, dead_indices] = 0
+        except Exception:
+            # Optimizer state reset is optional; ignore failures.
+            pass
+
+        return int(dead_indices.numel())
     
     def save_checkpoint(self, filename: str, epoch: int, metrics: Dict[str, float]):
         """

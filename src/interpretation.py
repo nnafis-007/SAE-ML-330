@@ -341,7 +341,8 @@ class FeatureAnalyzer:
     def analyze_dead_features(
         self,
         activations: torch.Tensor,
-        threshold: float = 1e-6
+        threshold: float = 1e-6,
+        freq_threshold: float = 0.001
     ) -> Dict[str, any]:
         """
         Identify "dead" features that rarely activate.
@@ -369,7 +370,7 @@ class FeatureAnalyzer:
         # Identify dead features (multiple criteria)
         dead_by_mean = mean_acts < threshold
         dead_by_max = max_acts < threshold
-        dead_by_freq = activation_freq < 0.001  # Less than 0.1% activation
+        dead_by_freq = activation_freq < freq_threshold
         
         dead_features = dead_by_mean | dead_by_max | dead_by_freq
         
@@ -377,18 +378,60 @@ class FeatureAnalyzer:
             "num_dead": dead_features.sum().item(),
             "frac_dead": dead_features.float().mean().item(),
             "dead_indices": dead_features.nonzero().squeeze().cpu().tolist(),
+            "dead_threshold": threshold,
+            "freq_threshold": freq_threshold,
             "mean_activations": mean_acts.cpu(),
             "max_activations": max_acts.cpu(),
             "activation_frequencies": activation_freq.cpu()
         }
         
         return analysis
+
+    @torch.no_grad()
+    def prune_dead_features_and_save(
+        self,
+        activations: torch.Tensor,
+        save_path: str,
+        threshold: float = 1e-6,
+        freq_threshold: float = 0.001
+    ):
+        """Create and save a pruned SAE with dead features removed.
+
+        This does not change the current SAE in memory.
+        """
+        analysis = self.analyze_dead_features(activations, threshold=threshold, freq_threshold=freq_threshold)
+        dead = analysis["dead_indices"]
+
+        dead_mask = torch.zeros(self.sae.d_hidden, dtype=torch.bool)
+        if isinstance(dead, int):
+            dead = [dead]
+        if isinstance(dead, list) and len(dead) > 0:
+            dead_mask[torch.tensor(dead, dtype=torch.long)] = True
+
+        keep_indices = (~dead_mask).nonzero().flatten()
+        pruned = self.sae.pruned_copy(keep_indices.to(self.device))
+
+        payload = {
+            "model_state_dict": pruned.state_dict(),
+            "d_model": pruned.d_model,
+            "d_hidden": pruned.d_hidden,
+            "l1_coeff": pruned.l1_coeff,
+            "keep_indices": keep_indices.cpu(),
+            "dead_threshold": analysis.get("dead_threshold", threshold),
+            "freq_threshold": analysis.get("freq_threshold", freq_threshold),
+        }
+        torch.save(payload, save_path)
+        print(f"Pruned model saved to {save_path}")
+
+        return pruned
     
     def create_summary_report(
         self,
         activations: torch.Tensor,
         texts: List[str],
-        save_path: str = "sae_analysis_report.txt"
+        save_path: str = "sae_analysis_report.txt",
+        dead_threshold: float = 1e-6,
+        freq_threshold: float = 0.001,
     ):
         """
         Generate a comprehensive text report about the SAE.
@@ -434,9 +477,14 @@ class FeatureAnalyzer:
         # Dead features
         report.append("DEAD FEATURES ANALYSIS")
         report.append("-"*80)
-        dead_analysis = self.analyze_dead_features(activations)
+        dead_analysis = self.analyze_dead_features(
+            activations,
+            threshold=dead_threshold,
+            freq_threshold=freq_threshold,
+        )
         report.append(f"Number of dead features: {dead_analysis['num_dead']}")
         report.append(f"Fraction of dead features: {dead_analysis['frac_dead']:.2%}")
+        report.append(f"Dead thresholds: mean/max < {dead_analysis.get('dead_threshold', 1e-6)} OR freq < {dead_analysis.get('freq_threshold', 0.001)}")
         report.append("")
         
         # Most active features

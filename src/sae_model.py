@@ -235,6 +235,51 @@ class SparseAutoencoder(nn.Module):
             return x_reconstructed, total_loss, loss_dict
         
         return x_reconstructed, total_loss, None
+
+    @torch.no_grad()
+    def pruned_copy(self, keep_indices: torch.Tensor) -> "SparseAutoencoder":
+        """Return a new SAE containing only the specified hidden features.
+
+        This is useful when the model is heavily overcomplete and many features are
+        "dead" (never/rarely activate). Pruning keeps behavior for the retained
+        features while reducing parameter count.
+
+        Args:
+            keep_indices: 1D tensor of feature indices to keep.
+
+        Returns:
+            A new SparseAutoencoder with d_hidden = len(keep_indices).
+        """
+        keep_indices = keep_indices.to(self.W_enc.device).long().flatten()
+        if keep_indices.numel() == 0:
+            raise ValueError("keep_indices must be non-empty")
+
+        if self.use_tied_weights:
+            raise NotImplementedError("pruned_copy is not implemented for tied weights")
+
+        pruned = SparseAutoencoder(
+            d_model=self.d_model,
+            d_hidden=int(keep_indices.numel()),
+            l1_coeff=self.l1_coeff,
+            use_tied_weights=False,
+            use_pre_bias=self.use_pre_bias,
+            normalize_decoder=self.normalize_decoder,
+        ).to(self.W_enc.device)
+
+        # Copy biases
+        pruned.b_dec.data.copy_(self.b_dec.data)
+        if self.use_pre_bias and self.b_pre is not None and pruned.b_pre is not None:
+            pruned.b_pre.data.copy_(self.b_pre.data)
+
+        # Copy selected features
+        pruned.W_enc.data.copy_(self.W_enc.data[keep_indices])
+        pruned.b_enc.data.copy_(self.b_enc.data[keep_indices])
+        pruned.W_dec.data.copy_(self.W_dec.data[:, keep_indices])
+
+        if pruned.normalize_decoder:
+            pruned.W_dec.data = F.normalize(pruned.W_dec.data, dim=0)
+
+        return pruned
     
     @torch.no_grad()
     def normalize_decoder_weights(self):

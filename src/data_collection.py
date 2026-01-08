@@ -172,6 +172,9 @@ class GPT2ActivationCollector:
         dataset_name: str = "openwebtext",
         split: str = "train",
         num_texts: int = 10000,
+        shuffle_buffer_size: int = 10_000,
+        seed: int = 0,
+        text_field: Optional[str] = None,
         **kwargs
     ) -> torch.Tensor:
         """
@@ -199,6 +202,11 @@ class GPT2ActivationCollector:
         try:
             # Load dataset from HuggingFace
             dataset = load_dataset(dataset_name, split=split, streaming=True)
+
+            # Streaming datasets iterate in a deterministic order unless shuffled.
+            # Shuffling (with a buffer) significantly improves diversity of collected activations.
+            if shuffle_buffer_size and shuffle_buffer_size > 0:
+                dataset = dataset.shuffle(seed=seed, buffer_size=int(shuffle_buffer_size))
             
             # Sample texts from the dataset
             texts = []
@@ -207,7 +215,16 @@ class GPT2ActivationCollector:
                 if i >= num_texts:
                     break
                 # Different datasets have different text field names
-                text = example.get("text", example.get("content", ""))
+                if text_field is not None:
+                    text = example.get(text_field, "")
+                else:
+                    text = example.get(
+                        "text",
+                        example.get(
+                            "content",
+                            example.get("article", example.get("document", ""))
+                        ),
+                    )
                 if text.strip():  # Only add non-empty texts
                     texts.append(text)
             
