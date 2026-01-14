@@ -293,13 +293,15 @@ class FeatureAnalyzer:
     @torch.no_grad()
     def get_reconstruction_quality(
         self,
-        activations: torch.Tensor
+        activations: torch.Tensor,
+        batch_size: int = 1024
     ) -> Dict[str, float]:
         """
         Measure how well the SAE reconstructs activations.
         
         Args:
             activations: Input activations to reconstruct
+            batch_size: Process in batches to avoid OOM
         
         Returns:
             Dictionary with reconstruction metrics
@@ -309,31 +311,50 @@ class FeatureAnalyzer:
         - Cosine similarity: Direction preservation
         - Explained variance: How much variance is captured
         """
-        activations = activations.to(self.device)
+        n = activations.shape[0]
         
-        # Get reconstruction
-        reconstructed, loss, loss_dict = self.sae(
-            activations,
-            return_loss_components=True
-        )
+        total_mse = 0.0
+        total_cos_sim = 0.0
+        total_l1 = 0.0
+        total_frac_active = 0.0
         
-        # Compute additional metrics
-        # Cosine similarity: measures if directions are preserved
-        cos_sim = F.cosine_similarity(
-            activations, reconstructed, dim=1
-        ).mean().item()
+        # For explained variance we need running sums
+        sum_var_original = 0.0
+        sum_var_residual = 0.0
         
-        # Explained variance
-        var_original = activations.var(dim=0).sum().item()
-        var_residual = (activations - reconstructed).var(dim=0).sum().item()
-        explained_var = 1 - (var_residual / var_original)
+        for start in range(0, n, batch_size):
+            end = min(start + batch_size, n)
+            batch = activations[start:end].to(self.device)
+            bs = batch.shape[0]
+            
+            reconstructed, loss, loss_dict = self.sae(batch, return_loss_components=True)
+            
+            total_mse += loss_dict["mse_loss"] * bs
+            total_l1 += loss_dict["l1_loss"] * bs
+            total_frac_active += loss_dict["frac_active"] * bs
+            
+            cos_sim = F.cosine_similarity(batch, reconstructed, dim=1).sum().item()
+            total_cos_sim += cos_sim
+            
+            sum_var_original += batch.var(dim=0).sum().item() * bs
+            sum_var_residual += (batch - reconstructed).var(dim=0).sum().item() * bs
+            
+            del batch, reconstructed
+            if self.device == "cuda":
+                torch.cuda.empty_cache()
+        
+        mse = total_mse / n
+        cos_sim = total_cos_sim / n
+        mean_l1 = total_l1 / n
+        feature_density = total_frac_active / n
+        explained_var = 1 - (sum_var_residual / (sum_var_original + 1e-8))
         
         metrics = {
-            "mse": loss_dict["mse_loss"],
+            "mse": mse,
             "cosine_similarity": cos_sim,
             "explained_variance": explained_var,
-            "mean_l1": loss_dict["l1_loss"],
-            "feature_density": loss_dict["frac_active"]
+            "mean_l1": mean_l1,
+            "feature_density": feature_density
         }
         
         return metrics
@@ -342,7 +363,8 @@ class FeatureAnalyzer:
         self,
         activations: torch.Tensor,
         threshold: float = 1e-6,
-        freq_threshold: float = 0.001
+        freq_threshold: float = 0.001,
+        batch_size: int = 1024
     ) -> Dict[str, any]:
         """
         Identify "dead" features that rarely activate.
@@ -350,6 +372,7 @@ class FeatureAnalyzer:
         Args:
             activations: Input activations
             threshold: Minimum mean activation to be considered "alive"
+            batch_size: Process activations in batches to avoid OOM on large datasets
         
         Returns:
             Dictionary with dead feature analysis
@@ -359,20 +382,40 @@ class FeatureAnalyzer:
         - Waste model capacity
         - Can be reinitialized or pruned
         """
-        activations = activations.to(self.device)
-        features = self.sae.encode(activations)
+        # Process in batches to avoid OOM
+        n = activations.shape[0]
+        d_hidden = self.sae.d_hidden
         
-        # Calculate statistics for each feature
-        mean_acts = features.mean(dim=0)
-        max_acts = features.max(dim=0).values
-        activation_freq = (features > 0).float().mean(dim=0)
+        sum_acts = torch.zeros(d_hidden, device=self.device)
+        max_acts = torch.full((d_hidden,), float('-inf'), device=self.device)
+        count_active = torch.zeros(d_hidden, device=self.device)
         
+        for start in range(0, n, batch_size):
+            end = min(start + batch_size, n)
+            batch = activations[start:end].to(self.device)
+            features = self.sae.encode(batch)
+            
+            sum_acts += features.sum(dim=0)
+            max_acts = torch.maximum(max_acts, features.max(dim=0).values)
+            count_active += (features > 0).float().sum(dim=0)
+            
+            del features, batch
+            if self.device == "cuda":
+                torch.cuda.empty_cache()
+        
+        mean_acts = sum_acts / n
+        activation_freq = count_active / n
+
         # Identify dead features (multiple criteria)
         dead_by_mean = mean_acts < threshold
         dead_by_max = max_acts < threshold
         dead_by_freq = activation_freq < freq_threshold
-        
+
         dead_features = dead_by_mean | dead_by_max | dead_by_freq
+
+        # Helpful breakdown: distinguish truly-never-active from just very rare.
+        never_active = activation_freq == 0
+        rare_but_nonzero = (activation_freq > 0) & (activation_freq < freq_threshold)
         
         analysis = {
             "num_dead": dead_features.sum().item(),
@@ -380,6 +423,11 @@ class FeatureAnalyzer:
             "dead_indices": dead_features.nonzero().squeeze().cpu().tolist(),
             "dead_threshold": threshold,
             "freq_threshold": freq_threshold,
+            "num_dead_by_mean": dead_by_mean.sum().item(),
+            "num_dead_by_max": dead_by_max.sum().item(),
+            "num_dead_by_freq": dead_by_freq.sum().item(),
+            "num_never_active": never_active.sum().item(),
+            "num_rare_but_nonzero": rare_but_nonzero.sum().item(),
             "mean_activations": mean_acts.cpu(),
             "max_activations": max_acts.cpu(),
             "activation_frequencies": activation_freq.cpu()
@@ -485,6 +533,15 @@ class FeatureAnalyzer:
         report.append(f"Number of dead features: {dead_analysis['num_dead']}")
         report.append(f"Fraction of dead features: {dead_analysis['frac_dead']:.2%}")
         report.append(f"Dead thresholds: mean/max < {dead_analysis.get('dead_threshold', 1e-6)} OR freq < {dead_analysis.get('freq_threshold', 0.001)}")
+        # Breakdown to help interpret what 'dead' means under the current thresholds
+        report.append(
+            "Breakdown: "
+            f"dead_by_mean={dead_analysis.get('num_dead_by_mean', 0)}, "
+            f"dead_by_max={dead_analysis.get('num_dead_by_max', 0)}, "
+            f"dead_by_freq={dead_analysis.get('num_dead_by_freq', 0)}, "
+            f"never_active={dead_analysis.get('num_never_active', 0)}, "
+            f"rare_but_nonzero={dead_analysis.get('num_rare_but_nonzero', 0)}"
+        )
         report.append("")
         
         # Most active features

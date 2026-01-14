@@ -371,7 +371,14 @@ class SAETrainer:
 
     @torch.no_grad()
     def _resample_features(self, dead_mask: torch.Tensor, max_features: int = 2048) -> int:
-        """Re-initialize encoder/decoder params for a subset of dead features."""
+        """Re-initialize encoder/decoder params for a subset of dead features.
+
+        Note: For large, overcomplete SAEs (e.g. 32-64x), purely-random reinit
+        often produces features that remain dead. We instead seed new decoder
+        directions from real residuals on a minibatch, then align the encoder
+        row with that direction and set the bias so the feature activates on a
+        small fraction of that minibatch.
+        """
         if dead_mask is None:
             return 0
 
@@ -388,20 +395,73 @@ class SAETrainer:
             perm = torch.randperm(dead_indices.numel(), device=dead_indices.device)
             dead_indices = dead_indices[perm[: int(max_features)]]
 
+        device = next(self.model.parameters()).device
         d_model = self.model.d_model
-        d_hidden = self.model.d_hidden
 
-        # Encoder: random rows
-        self.model.W_enc.data[dead_indices] = (
-            torch.randn(dead_indices.numel(), d_model, device=self.model.W_enc.device)
-            / (d_model ** 0.5)
-        )
-        self.model.b_enc.data[dead_indices] = 0.0
+        # Pick a minibatch and compute residuals in activation space.
+        # This makes resampled decoder columns start on-manifold.
+        try:
+            batch = next(iter(self.train_loader))[0].to(device)
+        except Exception:
+            batch = None
 
-        # Decoder: random unit columns
-        new_cols = torch.randn(d_model, dead_indices.numel(), device=self.model.W_dec.device) / (d_hidden ** 0.5)
-        new_cols = torch.nn.functional.normalize(new_cols, dim=0)
-        self.model.W_dec.data[:, dead_indices] = new_cols
+        if batch is None or batch.numel() == 0:
+            # Fallback: if we cannot access data, do a random re-init.
+            self.model.W_enc.data[dead_indices] = (
+                torch.randn(dead_indices.numel(), d_model, device=self.model.W_enc.device)
+                / (d_model ** 0.5)
+            )
+            self.model.b_enc.data[dead_indices] = 0.0
+            new_cols = torch.randn(d_model, dead_indices.numel(), device=self.model.W_dec.device)
+            new_cols = torch.nn.functional.normalize(new_cols, dim=0)
+            self.model.W_dec.data[:, dead_indices] = new_cols
+        else:
+            x = batch
+            f = self.model.encode(x)
+            x_hat = self.model.decode(f)
+            residual = (x - x_hat).detach()
+
+            # Sample residual vectors to seed decoder columns.
+            k = int(dead_indices.numel())
+            n = int(residual.shape[0])
+            if n == 0:
+                return 0
+
+            # Choose residual examples with probability proportional to residual norm.
+            norms = residual.norm(dim=1)
+            probs = norms / (norms.sum() + 1e-12)
+            sample_idx = torch.multinomial(probs, num_samples=k, replacement=(k > n))
+            new_cols = residual[sample_idx].T.contiguous()  # (d_model, k)
+            new_cols = torch.nn.functional.normalize(new_cols, dim=0)
+
+            # Set decoder columns for these features.
+            self.model.W_dec.data[:, dead_indices] = new_cols
+
+            # Align encoder rows with decoder directions.
+            # This makes the feature's dot-product correlate with its decode direction.
+            self.model.W_enc.data[dead_indices] = new_cols.T
+
+            # Bias calibration: target a small activation rate on this minibatch
+            # so features don't stay completely off.
+            target_active = 0.01
+            if hasattr(self.model, "l1_coeff") and self.model.l1_coeff is not None:
+                # If L1 is very small, allow slightly higher initial activity.
+                if float(self.model.l1_coeff) <= 1e-4:
+                    target_active = 0.02
+
+            # Compute pre-activations (without bias) on the minibatch.
+            if self.model.use_pre_bias and getattr(self.model, "b_pre", None) is not None:
+                x_centered = x - self.model.b_pre
+            else:
+                x_centered = x
+            preact = torch.matmul(x_centered, self.model.W_enc.data[dead_indices].T)  # (batch, k)
+
+            # Set b_enc so that ~target_active fraction is positive.
+            # Use kthvalue for speed/compatibility.
+            q = max(0.0, min(1.0, 1.0 - float(target_active)))
+            kth = max(1, min(preact.shape[0], int(q * preact.shape[0])))
+            thresh = preact.kthvalue(kth, dim=0).values
+            self.model.b_enc.data[dead_indices] = (-thresh).to(self.model.b_enc.device)
 
         if self.model.normalize_decoder:
             self.model.normalize_decoder_weights()

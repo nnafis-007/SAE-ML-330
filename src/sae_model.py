@@ -216,8 +216,9 @@ class SparseAutoencoder(nn.Module):
         mse_loss = F.mse_loss(x_reconstructed, x)
         
         # Calculate L1 sparsity loss
-        # We take the mean over batch and sum over features
-        l1_loss = f.abs().mean()
+        # We take the mean over batch and sum over features (per-sample L1 norm).
+        # This keeps the meaning of l1_coeff stable as d_hidden changes.
+        l1_loss = f.abs().sum(dim=1).mean()
         
         # Total loss
         total_loss = mse_loss + self.l1_coeff * l1_loss
