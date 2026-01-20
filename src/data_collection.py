@@ -109,8 +109,8 @@ class GPT2ActivationCollector:
         with torch.no_grad():  # Disable gradient computation (we're not training GPT-2)
             for i in tqdm(range(0, len(texts), batch_size), desc="Collecting activations"):
                 # Handle max_samples limit
-                if max_samples and num_collected >= max_samples:
-                    break
+                # if max_samples and num_collected >= max_samples:
+                #     break
                     
                 batch_texts = texts[i:i + batch_size]
                 
@@ -150,8 +150,8 @@ class GPT2ActivationCollector:
                     all_activations.append(token_activations.cpu())
                     num_collected += token_activations.shape[0]
                     
-                    if max_samples and num_collected >= max_samples:
-                        break
+                    # if max_samples and num_collected >= max_samples:
+                    #     break
         
         # Concatenate all activations into a single tensor
         activations = torch.cat(all_activations, dim=0)
@@ -247,7 +247,9 @@ class GPT2ActivationCollector:
 def prepare_training_data(
     activations: torch.Tensor,
     train_ratio: float = 0.9,
-    normalize: bool = True
+    normalize: bool = True,
+    normalize_mode: str = "standardize",
+    std_floor: float = 1e-3,
 ) -> Tuple[torch.Tensor, torch.Tensor, Dict[str, float]]:
     """
     Prepare activation data for SAE training.
@@ -278,21 +280,46 @@ def prepare_training_data(
     stats = {}
     
     if normalize:
-        # Calculate mean and std on training data
+        # Calculate mean/std on training data only (avoid leakage).
         mean = train_data.mean(dim=0, keepdim=True)
         std = train_data.std(dim=0, keepdim=True)
-        
-        # Store statistics
+
+        # Store statistics (CPU-friendly; caller may torch.save this dict).
         stats["mean"] = mean
         stats["std"] = std
-        
-        # Normalize both train and validation using training statistics
-        # This is important: validation data should be normalized using
-        # the same parameters as training data
-        train_data = (train_data - mean) / (std + 1e-8)
-        val_data = (val_data - mean) / (std + 1e-8)
-        
-        print(f"Normalized data (mean=0, std=1)")
+        stats["std_floor"] = float(std_floor)
+        stats["normalize_mode"] = str(normalize_mode)
+
+        # Diagnostics: very small per-dim std can explode values during standardization,
+        # causing unstable training and heavy gradient clipping.
+        std_min = std.min().item()
+        std_median = std.median().item()
+        std_max = std.max().item()
+        stats["std_min"] = std_min
+        stats["std_median"] = std_median
+        stats["std_max"] = std_max
+        print(f"Per-dim std stats: min={std_min:.3e}, median={std_median:.3e}, max={std_max:.3e}")
+
+        mode = (normalize_mode or "standardize").lower().strip()
+        if mode in {"standardize", "zscore", "z-score"}:
+            if std_floor and std_floor > 0:
+                std_used = std.clamp_min(float(std_floor))
+            else:
+                std_used = std
+            train_data = (train_data - mean) / (std_used + 1e-8)
+            val_data = (val_data - mean) / (std_used + 1e-8)
+            stats["std_used_min"] = std_used.min().item()
+            print("Normalized data (standardize: (x-mean)/std)")
+        elif mode in {"center", "center_only", "mean"}:
+            train_data = train_data - mean
+            val_data = val_data - mean
+            print("Normalized data (center-only: x-mean)")
+        elif mode in {"none", "off", "no"}:
+            print("Normalization disabled (mode=none)")
+        else:
+            raise ValueError(
+                f"Unknown normalize_mode='{normalize_mode}'. Expected one of: standardize|center|none."
+            )
     
     print(f"Training samples: {train_data.shape[0]}")
     print(f"Validation samples: {val_data.shape[0]}")

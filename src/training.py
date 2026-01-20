@@ -47,6 +47,7 @@ class SAETrainer:
         val_data: torch.Tensor,
         lr: float = 1e-3,
         batch_size: int = 256,
+        grad_clip_norm: float = 1.0,
         device: str = "cuda" if torch.cuda.is_available() else "cpu",
         checkpoint_dir: str = "checkpoints"
     ):

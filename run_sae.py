@@ -90,6 +90,10 @@ def main():
         "--lr", type=float, default=1e-3,
         help="Learning rate. Default: 1e-3"
     )
+    parser.add_argument(
+        "--grad-clip-norm", type=float, default=1.0,
+        help="Max grad norm for clipping (0 disables). Default: 1.0"
+    )
 
     parser.add_argument(
         "--early-stopping-patience", type=int, default=10,
@@ -146,6 +150,17 @@ def main():
     parser.add_argument(
         "--skip-collection", action="store_true",
         help="Skip data collection (use existing activations.pt)"
+    )
+
+    # Data normalization
+    parser.add_argument(
+        "--normalize-mode", type=str, default="standardize",
+        choices=["standardize", "center", "none"],
+        help="How to normalize activations before training. Default: standardize"
+    )
+    parser.add_argument(
+        "--std-floor", type=float, default=1e-3,
+        help="Clamp per-dimension std to this floor when standardizing (prevents blowups). Default: 1e-3"
     )
 
     # Optional: prune dead features after training
@@ -217,7 +232,9 @@ def main():
     train_data, val_data, stats = prepare_training_data(
         activations,
         train_ratio=0.9,
-        normalize=True
+        normalize=True,
+        normalize_mode=args.normalize_mode,
+        std_floor=args.std_floor,
     )
     
     # Step 3: Create model
@@ -240,6 +257,7 @@ def main():
         val_data=val_data,
         lr=args.lr,
         batch_size=args.batch_size,
+        grad_clip_norm=args.grad_clip_norm,
         device=device,
         checkpoint_dir=args.checkpoint_dir
     )
