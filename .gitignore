@@ -1,0 +1,7 @@
+*/__pycache__/
+*.lock
+*.toml
+*.png
+.venv
+venv
+*.txt
