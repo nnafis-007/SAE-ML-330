@@ -187,14 +187,18 @@ class FeatureAnalyzer:
         ax3.axis('off')
         
         top_examples = self.find_max_activating_examples(
-            activations, texts, feature_idx, k=10
+            activations, texts, feature_idx, k=5
         )
         
-        examples_text = f"Top 10 Activating Examples:\n\n"
+        examples_text = f"Top Activating Examples:\n\n"
+        order = 0
         for i, (text, value, pos) in enumerate(top_examples, 1):
             # Truncate long texts
+            if text is None or text == "N/A" :
+                continue
+            order += 1
             display_text = text[:60] + "..." if len(text) > 60 else text
-            examples_text += f"{i}. [{value:.3f}] {display_text}\n"
+            examples_text += f"{order}. {display_text}\n"
         
         ax3.text(0.05, 0.95, examples_text, fontsize=9, family='monospace',
                 verticalalignment='top', wrap=True)

@@ -3,3 +3,4 @@
 *.toml
 *.png
 .venv
+checkpoints/
