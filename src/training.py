@@ -72,6 +72,7 @@ class SAETrainer:
         self.device = device
         self.lr = lr
         self.batch_size = batch_size
+        self.grad_clip_norm = grad_clip_norm
         
         # Create checkpoint directory
         self.checkpoint_dir = Path(checkpoint_dir)
@@ -162,7 +163,8 @@ class SAETrainer:
             
             # Gradient clipping (prevents exploding gradients)
             # Not always necessary but can help stability
-            torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
+            if self.grad_clip_norm and self.grad_clip_norm > 0:
+                torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=self.grad_clip_norm)
             
             # Update weights
             self.optimizer.step()

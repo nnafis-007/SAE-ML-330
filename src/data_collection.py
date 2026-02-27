@@ -129,15 +129,22 @@ class GPT2ActivationCollector:
                 # Forward pass through GPT-2
                 outputs = self.model(**inputs)
                 
-                # Extract hidden states from the target layer
+                # Extract hidden states from the target layer immediately and
+                # delete the full outputs object to free all other hidden states.
                 # hidden_states is a tuple: (embedding_layer, layer_0, layer_1, ..., layer_n)
                 # We add 1 because index 0 is the embedding layer
-                hidden_states = outputs.hidden_states[self.layer_index + 1]
+                hidden_states = outputs.hidden_states[self.layer_index + 1].detach()
                 # Shape: (batch_size, sequence_length, hidden_size)
                 
                 # Get the attention mask to filter out padding tokens
                 attention_mask = inputs["attention_mask"]
                 # Shape: (batch_size, sequence_length)
+                
+                # Free outputs and inputs from GPU immediately — they hold all
+                # intermediate hidden states and embeddings which we no longer need.
+                del outputs, inputs
+                if self.device == "cuda":
+                    torch.cuda.empty_cache()
                 
                 # Extract only real (non-padded) token activations
                 for j in range(hidden_states.shape[0]):
@@ -152,6 +159,11 @@ class GPT2ActivationCollector:
                     
                     # if max_samples and num_collected >= max_samples:
                     #     break
+                
+                # Free the batch tensors before the next iteration
+                del hidden_states, attention_mask
+                if self.device == "cuda":
+                    torch.cuda.empty_cache()
         
         # Concatenate all activations into a single tensor
         activations = torch.cat(all_activations, dim=0)

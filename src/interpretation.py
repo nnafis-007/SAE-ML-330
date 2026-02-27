@@ -60,7 +60,8 @@ class FeatureAnalyzer:
     def get_feature_activations(
         self,
         activations: torch.Tensor,
-        feature_idx: int
+        feature_idx: int,
+        batch_size: int = 1024
     ) -> torch.Tensor:
         """
         Get activations for a specific feature across all samples.
@@ -68,21 +69,24 @@ class FeatureAnalyzer:
         Args:
             activations: Input activations, shape (n_samples, d_model)
             feature_idx: Index of the feature to analyze
+            batch_size: Process in batches to avoid GPU OOM
         
         Returns:
             Feature activation values for all samples
             
         This tells us how strongly the feature responds to each input.
         """
-        activations = activations.to(self.device)
-        
-        # Encode to get all feature activations
-        features = self.sae.encode(activations)
-        
-        # Extract specific feature
-        feature_acts = features[:, feature_idx].cpu()
-        
-        return feature_acts
+        all_acts = []
+        n = activations.shape[0]
+        for start in range(0, n, batch_size):
+            end = min(start + batch_size, n)
+            batch = activations[start:end].to(self.device)
+            features = self.sae.encode(batch)
+            all_acts.append(features[:, feature_idx].cpu())
+            del features, batch
+            if self.device == "cuda":
+                torch.cuda.empty_cache()
+        return torch.cat(all_acts, dim=0)
     
     @torch.no_grad()
     def find_max_activating_examples(
@@ -245,6 +249,9 @@ class FeatureAnalyzer:
         
         # Get activations for these features
         top_feature_acts = features[:, top_features].cpu()
+        del features
+        if self.device == "cuda":
+            torch.cuda.empty_cache()
         
         # Compute correlation matrix
         correlation = torch.corrcoef(top_feature_acts.T)
@@ -513,13 +520,37 @@ class FeatureAnalyzer:
             report.append(f"{key}: {value:.6f}")
         report.append("")
         
-        # Feature statistics
+        # Feature statistics (encoded in batches to avoid GPU OOM)
         report.append("FEATURE STATISTICS")
         report.append("-"*80)
-        features = self.sae.encode(activations.to(self.device))
-        report.append(f"Mean feature activation: {features.mean().item():.6f}")
-        report.append(f"Max feature activation: {features.max().item():.6f}")
-        report.append(f"Feature density: {(features > 0).float().mean().item():.2%}")
+        _batch_sz = 8192
+        _n = activations.shape[0]
+        _sum_acts = torch.zeros(self.sae.d_hidden)
+        _count_active = torch.zeros(self.sae.d_hidden)
+        _sum_all = 0.0
+        _max_all_val = 0.0
+        _total_elements = 0
+        for _start in range(0, _n, _batch_sz):
+            _end = min(_start + _batch_sz, _n)
+            _batch = activations[_start:_end].to(self.device)
+            with torch.no_grad():
+                _feats = self.sae.encode(_batch)
+            _feats_cpu = _feats.cpu()
+            _sum_acts += _feats_cpu.sum(dim=0)
+            _count_active += (_feats_cpu > 0).float().sum(dim=0)
+            _sum_all += _feats_cpu.sum().item()
+            _max_all_val = max(_max_all_val, _feats_cpu.max().item())
+            _total_elements += _feats_cpu.numel()
+            del _feats, _feats_cpu, _batch
+            if self.device == "cuda":
+                torch.cuda.empty_cache()
+        _mean_acts = _sum_acts / _n          # per-feature mean (CPU)
+        _freq_per_feat = _count_active / _n  # per-feature activation frequency (CPU)
+        _global_mean = _sum_all / max(_total_elements, 1)
+        _global_density = _count_active.sum().item() / max(_total_elements, 1)
+        report.append(f"Mean feature activation: {_global_mean:.6f}")
+        report.append(f"Max feature activation: {_max_all_val:.6f}")
+        report.append(f"Feature density: {_global_density:.2%}")
         report.append("")
         
         # Dead features
@@ -547,12 +578,11 @@ class FeatureAnalyzer:
         # Most active features
         report.append("TOP 10 MOST ACTIVE FEATURES")
         report.append("-"*80)
-        mean_acts = features.mean(dim=0)
-        top_features = torch.topk(mean_acts, 10)
+        top_features = torch.topk(_mean_acts, 10)
         for idx, (feat_idx, act) in enumerate(zip(top_features.indices, top_features.values)):
             feat_idx = feat_idx.item()
             act = act.item()
-            freq = (features[:, feat_idx] > 0).float().mean().item()
+            freq = _freq_per_feat[feat_idx].item()
             report.append(f"{idx+1}. Feature {feat_idx}: mean={act:.4f}, freq={freq:.2%}")
         report.append("")
         

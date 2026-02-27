@@ -13,6 +13,7 @@ Usage:
 """
 
 import argparse
+import gc
 import sys
 from pathlib import Path
 
@@ -219,6 +220,13 @@ def main():
         # Save activations
         torch.save(activations, "activations.pt")
         print(f"\n✓ Activations saved to activations.pt")
+        
+        # Free GPT-2 model from GPU — it's no longer needed and takes ~500 MB.
+        # Do this before loading the SAE to avoid holding both models on GPU.
+        del collector
+        gc.collect()
+        if device == "cuda":
+            torch.cuda.empty_cache()
     else:
         print("Step 1: Loading existing activations...")
         print("-" * 70)
@@ -236,6 +244,13 @@ def main():
         normalize_mode=args.normalize_mode,
         std_floor=args.std_floor,
     )
+    
+    # Free the original (unsplit) activations tensor — train_data and val_data
+    # are independent copies; holding this reference wastes ~150+ MB of RAM.
+    del activations
+    gc.collect()
+    if device == "cuda":
+        torch.cuda.empty_cache()
     
     # Step 3: Create model
     print("\nStep 3: Creating Sparse Autoencoder...")
