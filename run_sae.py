@@ -45,6 +45,27 @@ def main():
         "--dataset", type=str, default="openwebtext",
         help="HuggingFace dataset to use. Default: openwebtext"
     )
+
+    parser.add_argument(
+        "--num-texts", type=int, default=None,
+        help="Number of texts to load from the dataset (overrides samples//10)."
+    )
+    parser.add_argument(
+        "--max-length", type=int, default=128,
+        help="Max token length per text when collecting activations. Default: 128"
+    )
+    parser.add_argument(
+        "--collection-batch-size", type=int, default=16,
+        help="Batch size for activation collection (GPT-2 forward). Default: 16"
+    )
+    parser.add_argument(
+        "--shuffle-buffer-size", type=int, default=10_000,
+        help="Shuffle buffer size for streaming datasets (0 disables shuffling). Default: 10000"
+    )
+    parser.add_argument(
+        "--dataset-seed", type=int, default=0,
+        help="Shuffle seed for streaming dataset. Default: 0"
+    )
     
     # Model arguments
     parser.add_argument(
@@ -69,6 +90,53 @@ def main():
         "--lr", type=float, default=1e-3,
         help="Learning rate. Default: 1e-3"
     )
+    parser.add_argument(
+        "--grad-clip-norm", type=float, default=1.0,
+        help="Max grad norm for clipping (0 disables). Default: 1.0"
+    )
+
+    parser.add_argument(
+        "--early-stopping-patience", type=int, default=10,
+        help="Early stopping patience in epochs (0 disables). Default: 10"
+    )
+    parser.add_argument(
+        "--disable-early-stopping", action="store_true",
+        help="Disable early stopping and always run all epochs."
+    )
+    parser.add_argument(
+        "--save-every", type=int, default=10,
+        help="Save a checkpoint every N epochs. Default: 10"
+    )
+    parser.add_argument(
+        "--log-every", type=int, default=1,
+        help="Print metrics every N epochs. Default: 1"
+    )
+
+    # Optional: dead-feature resampling
+    parser.add_argument(
+        "--resample-dead", action="store_true",
+        help="Periodically re-initialize rarely-active features during training."
+    )
+    parser.add_argument(
+        "--resample-every", type=int, default=1,
+        help="Resample cadence in epochs. Default: 1"
+    )
+    parser.add_argument(
+        "--resample-freq-threshold", type=float, default=0.0002,
+        help="Resample features with activation frequency below this threshold. Default: 0.0002"
+    )
+    parser.add_argument(
+        "--resample-eval-samples", type=int, default=8192,
+        help="Training samples used to estimate feature frequency. Default: 8192"
+    )
+    parser.add_argument(
+        "--resample-max-features", type=int, default=2048,
+        help="Max features to resample per step. Default: 2048"
+    )
+    parser.add_argument(
+        "--resample-start-epoch", type=int, default=5,
+        help="First epoch (1-indexed) at which resampling is allowed. Default: 5"
+    )
     
     # Other arguments
     parser.add_argument(
@@ -82,6 +150,27 @@ def main():
     parser.add_argument(
         "--skip-collection", action="store_true",
         help="Skip data collection (use existing activations.pt)"
+    )
+
+    # Data normalization
+    parser.add_argument(
+        "--normalize-mode", type=str, default="standardize",
+        choices=["standardize", "center", "none"],
+        help="How to normalize activations before training. Default: standardize"
+    )
+    parser.add_argument(
+        "--std-floor", type=float, default=1e-3,
+        help="Clamp per-dimension std to this floor when standardizing (prevents blowups). Default: 1e-3"
+    )
+
+    # Optional: prune dead features after training
+    parser.add_argument(
+        "--save-pruned", action="store_true",
+        help="Save a pruned SAE with dead features removed (default thresholds)."
+    )
+    parser.add_argument(
+        "--dead-freq-threshold", type=float, default=0.001,
+        help="Dead feature frequency threshold used for pruning/reporting. Default: 0.001"
     )
     
     args = parser.parse_args()
@@ -101,6 +190,7 @@ def main():
     print(f"  Expansion factor: {args.expansion}x")
     print(f"  L1 coefficient: {args.l1_coeff}")
     print(f"  Epochs: {args.epochs}")
+    print(f"  Early stopping patience: {args.early_stopping_patience}{' (disabled)' if args.disable_early_stopping or args.early_stopping_patience == 0 else ''}")
     print(f"  Batch size: {args.batch_size}")
     print(f"  Device: {device}")
     print()
@@ -118,9 +208,12 @@ def main():
         
         activations = collector.collect_from_dataset(
             dataset_name=args.dataset,
-            num_texts=args.samples // 10,  # Approximate
+            num_texts=(args.num_texts if args.num_texts is not None else args.samples // 10),  # Approximate
             max_samples=args.samples,
-            batch_size=16
+            batch_size=args.collection_batch_size,
+            max_length=args.max_length,
+            shuffle_buffer_size=args.shuffle_buffer_size,
+            seed=args.dataset_seed,
         )
         
         # Save activations
@@ -139,7 +232,9 @@ def main():
     train_data, val_data, stats = prepare_training_data(
         activations,
         train_ratio=0.9,
-        normalize=True
+        normalize=True,
+        normalize_mode=args.normalize_mode,
+        std_floor=args.std_floor,
     )
     
     # Step 3: Create model
@@ -162,20 +257,32 @@ def main():
         val_data=val_data,
         lr=args.lr,
         batch_size=args.batch_size,
+        grad_clip_norm=args.grad_clip_norm,
         device=device,
         checkpoint_dir=args.checkpoint_dir
     )
     
     history = trainer.train(
         num_epochs=args.epochs,
-        early_stopping_patience=5,
-        save_every=10
+        early_stopping_patience=args.early_stopping_patience,
+        disable_early_stopping=args.disable_early_stopping,
+        save_every=args.save_every,
+        log_every=args.log_every,
+        resample_dead_features=args.resample_dead,
+        resample_every=args.resample_every,
+        resample_freq_threshold=args.resample_freq_threshold,
+        resample_eval_samples=args.resample_eval_samples,
+        resample_max_features=args.resample_max_features,
+        resample_start_epoch=args.resample_start_epoch,
     )
     
     # Plot results
     trainer.plot_training_history(
         save_path=f"{args.checkpoint_dir}/training_history.png"
     )
+
+    # Ensure we analyze/prune the best-performing checkpoint, not the last epoch.
+    trainer.load_checkpoint("best_model.pt")
     
     # Step 5: Analysis
     print("\nStep 5: Analyzing results...")
@@ -189,8 +296,16 @@ def main():
     analyzer.create_summary_report(
         activations=val_data,
         texts=[f"Sample {i}" for i in range(len(val_data))],
-        save_path=f"{args.checkpoint_dir}/analysis_report.txt"
+        save_path=f"{args.checkpoint_dir}/analysis_report.txt",
+        freq_threshold=args.dead_freq_threshold,
     )
+
+    if args.save_pruned:
+        analyzer.prune_dead_features_and_save(
+            activations=val_data,
+            save_path=f"{args.checkpoint_dir}/pruned_model.pt",
+            freq_threshold=args.dead_freq_threshold,
+        )
     
     # Reconstruction quality
     metrics = analyzer.get_reconstruction_quality(val_data)

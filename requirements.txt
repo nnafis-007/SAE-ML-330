@@ -1,4 +1,3 @@
-torch>=2.0.0
 transformers>=4.30.0
 datasets>=2.14.0
 numpy>=1.24.0
@@ -10,3 +9,6 @@ einops>=0.7.0
 wandb>=0.15.0
 jupyter>=1.0.0
 ipywidgets>=8.0.0
+nltk
+fastapi
+uvicorn[standard]
