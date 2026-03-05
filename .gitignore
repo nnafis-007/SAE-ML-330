@@ -5,3 +5,4 @@
 .venv
 venv
 *.txt
+checkpoints/
