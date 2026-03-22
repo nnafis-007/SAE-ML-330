@@ -454,6 +454,8 @@ class TopKSparseAutoencoder(nn.Module):
         use_tied_weights: bool = False,
         use_pre_bias: bool = True,
         normalize_decoder: bool = True,
+        aux_k: Optional[int] = None,
+        aux_loss_coeff: float = 1 / 32,
     ):
         """
         Initialize the Top-K Sparse Autoencoder.
@@ -470,6 +472,21 @@ class TopKSparseAutoencoder(nn.Module):
             use_pre_bias:      Subtract a learned bias before encoding (recommended).
             normalize_decoder: Normalize each decoder column to unit norm after
                                every gradient step (prevents scale / shrinkage collapse).
+            aux_k:             Number of dead features activated in the auxiliary
+                               reconstruction pass. Defaults to d_hidden // 2,
+                               matching the OpenAI paper. Set to 0 to disable.
+            aux_loss_coeff:    Weight applied to the auxiliary loss term.
+                               The OpenAI paper uses 1/32 (~0.03125). Increase if
+                               dead features persist; decrease if reconstruction
+                               quality degrades. Default: 1/32.
+
+        Why aux_k matters with large expansion factors:
+            With d_hidden=18432 and k=32, a feature has only a 0.17% chance of
+            landing in the top-k per sample. Random initialisation breaks symmetry
+            immediately — features that win early get stronger, win more often, and
+            dominate permanently. The remaining ~70% receive zero gradient and die.
+            The aux loss gives every dead feature a residual-based gradient signal
+            every batch, preventing this rich-get-richer collapse.
 
         Why untied weights as default for Top-K?
         - The L1 SAE paper used tied weights in early experiments but found that
@@ -491,9 +508,25 @@ class TopKSparseAutoencoder(nn.Module):
         self.use_pre_bias = use_pre_bias
         self.normalize_decoder = normalize_decoder
 
+        # aux_k defaults to d_hidden // 2, matching Gao et al. 2024.
+        # Set to 0 to disable the auxiliary loss entirely.
+        self.aux_k: int = (d_hidden // 2) if aux_k is None else int(aux_k)
+        self.aux_loss_coeff: float = float(aux_loss_coeff)
+
         # Kept at 0.0 for SAETrainer / checkpoint compatibility.
         # Top-K SAEs do not use an L1 penalty — sparsity is structural.
         self.l1_coeff: float = 0.0
+
+        # EMA of per-feature activation frequency, updated every training
+        # forward pass. Used to identify dead features for the aux loss without
+        # requiring a separate data pass.
+        #   decay = 0.99  →  a feature must fire consistently over ~100 recent
+        #   batches to be considered alive.
+        # Registered as a buffer: saved/loaded with state_dict and moved to the
+        # correct device automatically, but receives NO gradient.
+        self.register_buffer("ema_activations", torch.zeros(d_hidden))
+        self.ema_decay: float = 0.99
+        self.dead_threshold: float = 1e-3  # ema value below which a feature is "dead"
 
         # Pre-encoding bias: centers activations before projection
         if use_pre_bias:
@@ -523,6 +556,46 @@ class TopKSparseAutoencoder(nn.Module):
                 self.W_dec.data = F.normalize(self.W_dec.data, dim=0)
 
     # ------------------------------------------------------------------
+    # Internal helpers
+    # ------------------------------------------------------------------
+
+    def _pre_activations(self, x: torch.Tensor) -> torch.Tensor:
+        """Center input (optionally) and return linear pre-activations z.
+
+        Kept separate so forward() can reuse z for both the main top-k pass
+        and the auxiliary dead-feature pass without recomputing it.
+
+        Args:
+            x: Input activations, shape (batch_size, d_model).
+
+        Returns:
+            z: Pre-activations, shape (batch_size, d_hidden).
+        """
+        if self.use_pre_bias:
+            x = x - self.b_pre
+        return F.linear(x, self.W_enc, self.b_enc)
+
+    @staticmethod
+    def _topk_scatter(z: torch.Tensor, k: int) -> torch.Tensor:
+        """Apply Top-K selection + ReLU to pre-activations.
+
+        Keeps the k largest values per row, zeros the rest, then applies ReLU.
+        Differentiable w.r.t. z via standard autograd.
+
+        Args:
+            z: Pre-activations, shape (batch_size, n_features).
+            k: Number of features to keep active.
+
+        Returns:
+            f: Sparse non-negative activations, shape (batch_size, n_features).
+        """
+        k = min(k, z.shape[-1])
+        topk_values, topk_indices = z.topk(k=k, dim=-1)
+        f = torch.zeros_like(z)
+        f.scatter_(dim=-1, index=topk_indices, src=topk_values)
+        return F.relu(f)
+
+    # ------------------------------------------------------------------
     # Core forward methods
     # ------------------------------------------------------------------
 
@@ -530,50 +603,18 @@ class TopKSparseAutoencoder(nn.Module):
         """
         Encode input activations to a sparse Top-K hidden representation.
 
+        The EMA is NOT updated here so that analysis / eval calls to encode()
+        do not corrupt the dead-feature statistics tracked by forward().
+
         Args:
             x: Input activations, shape (batch_size, d_model).
 
         Returns:
             f: Sparse hidden activations, shape (batch_size, d_hidden).
-               At most k values per sample are non-zero (may be fewer if
-               some of the k largest pre-activations were negative and get
-               zeroed by the trailing ReLU).
-
-        Steps:
-            1. Optionally subtract b_pre to center the input.
-            2. Linear projection:  z = x W_enc^T + b_enc
-            3. Top-K selection:    keep the k largest values, zero the rest.
-            4. ReLU:               enforce non-negativity.
-
-        Gradient flow:
-            torch.topk is differentiable w.r.t. its value inputs.
-            Gradients propagate directly through the k selected positions
-            via standard autograd — no straight-through estimator needed.
+               At most k values per sample are non-zero.
         """
-        if self.use_pre_bias:
-            x = x - self.b_pre
-
-        # Linear pre-activations, shape (batch, d_hidden)
-        z = F.linear(x, self.W_enc, self.b_enc)
-
-        # Top-K selection ------------------------------------------------
-        # Clamp k defensively in case d_hidden is unexpectedly smaller at
-        # inference time (shouldn't happen after __init__ validation).
-        k = min(self.k, z.shape[-1])
-
-        # topk_values keeps its gradient connection to z.
-        topk_values, topk_indices = z.topk(k=k, dim=-1)  # (batch, k)
-
-        # Scatter top-k values into a zero tensor of full width.
-        # All non-top-k positions remain exactly 0.
-        f = torch.zeros_like(z)
-        f.scatter_(dim=-1, index=topk_indices, src=topk_values)
-
-        # Enforce non-negativity — consistent with standard SAE semantics
-        # and ensures feature magnitudes are interpretable.
-        f = F.relu(f)
-
-        return f
+        z = self._pre_activations(x)
+        return self._topk_scatter(z, self.k)
 
     def decode(self, f: torch.Tensor) -> torch.Tensor:
         """
@@ -596,47 +637,99 @@ class TopKSparseAutoencoder(nn.Module):
         return_loss_components: bool = False,
     ) -> Tuple[torch.Tensor, torch.Tensor, Optional[dict]]:
         """
-        Full forward pass: encode → decode → loss.
+        Full forward pass: encode → decode → loss (main + optional auxiliary).
 
-        Args:
-            x:                      Input activations, shape (batch_size, d_model).
-            return_loss_components: If True, return a detailed per-component dict.
+        Main loss:
+            L_main = MSE(x, x_hat)
 
-        Returns:
-            x_reconstructed: Reconstructed activations, shape (batch_size, d_model).
-            loss:            Scalar MSE reconstruction loss.
-            loss_dict:       Optional metrics dict (same keys as SparseAutoencoder
-                             for drop-in compatibility with SAETrainer / analysis code).
+        Auxiliary loss (training only, when aux_k > 0):
+            1. Identify dead features: those whose EMA activation frequency
+               has dropped below dead_threshold (~1e-3).
+            2. Run a separate top-aux_k selection over ONLY those dead features.
+            3. Use them to reconstruct the residual (x − x_hat).
+            4. L_aux = MSE(residual, x_hat_aux)
 
-        Loss:
-            L = ‖x − x̂‖²    (MSE only — Top-K enforces sparsity structurally)
+            Total: L = L_main + aux_loss_coeff * L_aux
 
-        Compatibility note:
-            loss_dict always contains "l1_loss" and "l1_scaled" keys (both 0.0)
-            so that any downstream code written for SparseAutoencoder continues
-            to work without modification.
+        The EMA of per-feature activation frequency is updated every training
+        forward pass, so dead features are tracked online at zero extra cost.
+
+        Compatibility:
+            loss_dict always contains "l1_loss" / "l1_scaled" keys (both 0.0)
+            so downstream code written for SparseAutoencoder still works.
         """
-        f = self.encode(x)
-        x_reconstructed = self.decode(f)
+        # ---- Compute pre-activations once; reuse for aux pass --------------
+        z = self._pre_activations(x)
 
-        # Pure reconstruction loss — sparsity is guaranteed by Top-K selection,
-        # not by penalizing it in the objective.
+        # ---- Main top-k pass -----------------------------------------------
+        f = self._topk_scatter(z, self.k)
+        x_reconstructed = self.decode(f)
         mse_loss = F.mse_loss(x_reconstructed, x)
-        total_loss = mse_loss
+
+        # ---- EMA update (training only) ------------------------------------
+        # Track per-feature activation frequency as an exponential moving
+        # average so we can identify dead features cheaply every batch.
+        if self.training:
+            with torch.no_grad():
+                batch_freq = (f > 0).float().mean(dim=0)  # (d_hidden,)
+                self.ema_activations.mul_(self.ema_decay).add_(
+                    batch_freq * (1.0 - self.ema_decay)
+                )
+
+        # ---- Auxiliary dead-feature loss (training only) -------------------
+        # Provides gradient signal to features that never win the top-k
+        # competition, preventing the rich-get-richer collapse seen with large
+        # expansion factors (e.g. 24x with k=32).
+        aux_loss = torch.tensor(0.0, device=x.device, dtype=x.dtype)
+
+        if self.training and self.aux_k > 0 and self.aux_loss_coeff > 0.0:
+            with torch.no_grad():
+                dead_mask = self.ema_activations < self.dead_threshold  # (d_hidden,)
+                n_dead = int(dead_mask.sum().item())
+
+            if n_dead > 0:
+                k_aux = min(self.aux_k, n_dead)
+
+                # Pre-activations for dead features only: (batch, n_dead)
+                z_dead = z[:, dead_mask]
+
+                # Top-k_aux selection among dead features only.
+                f_aux = self._topk_scatter(z_dead, k_aux)  # (batch, n_dead)
+
+                # Decode using only the dead-feature decoder columns.
+                # No b_dec offset: we are targeting the residual, not x itself.
+                assert self.W_dec is not None
+                W_dec_dead = self.W_dec[:, dead_mask]  # (d_model, n_dead)
+                x_hat_aux = F.linear(f_aux, W_dec_dead)  # (batch, d_model)
+
+                # Target: residual after main reconstruction (detached so
+                # gradients do NOT flow back through the main reconstruction path).
+                residual = (x - x_reconstructed).detach()
+                aux_loss = F.mse_loss(x_hat_aux, residual)
+
+        total_loss = mse_loss + self.aux_loss_coeff * aux_loss
 
         if return_loss_components:
             active_per_sample = (f > 0).float().sum(dim=-1)  # (batch,)
+            with torch.no_grad():
+                n_ema_dead = int(
+                    (self.ema_activations < self.dead_threshold).sum().item()
+                )
             loss_dict = {
                 "loss": total_loss.item(),
                 "mse_loss": mse_loss.item(),
                 # Always 0.0 — kept for SAETrainer / logging compatibility
                 "l1_loss": 0.0,
                 "l1_scaled": 0.0,
+                # Auxiliary loss diagnostics
+                "aux_loss": aux_loss.item(),
+                "aux_loss_scaled": (self.aux_loss_coeff * aux_loss).item(),
+                "ema_dead_features": n_ema_dead,
                 # Standard SAE diagnostics
                 "mean_activation": f.mean().item(),
                 "frac_active": (f > 0).float().mean().item(),
                 "max_activation": f.max().item(),
-                # Top-K specific: how many features actually fired (≤ k due to ReLU)
+                # Top-K specific
                 "mean_active_per_sample": active_per_sample.mean().item(),
             }
             return x_reconstructed, total_loss, loss_dict
@@ -698,6 +791,8 @@ class TopKSparseAutoencoder(nn.Module):
             use_tied_weights=False,
             use_pre_bias=self.use_pre_bias,
             normalize_decoder=self.normalize_decoder,
+            aux_k=min(self.aux_k, new_d_hidden // 2),
+            aux_loss_coeff=self.aux_loss_coeff,
         ).to(self.W_enc.device)
 
         pruned.b_dec.data.copy_(self.b_dec.data)
@@ -711,6 +806,8 @@ class TopKSparseAutoencoder(nn.Module):
         pruned.W_enc.data.copy_(self.W_enc.data[keep_indices])
         pruned.b_enc.data.copy_(self.b_enc.data[keep_indices])
         pruned.W_dec.data.copy_(self.W_dec.data[:, keep_indices])
+        # Carry over the EMA so dead-feature tracking survives pruning.
+        pruned.ema_activations.copy_(self.ema_activations[keep_indices])
 
         if pruned.normalize_decoder:
             pruned.W_dec.data = F.normalize(pruned.W_dec.data, dim=0)
@@ -763,6 +860,8 @@ class TopKSparseAutoencoder(nn.Module):
         feature_magnitudes = feature_sums / (feature_counts + 1e-8)
         dead_features = int((feature_counts == 0).sum().item())
 
+        ema_dead = int((self.ema_activations < self.dead_threshold).sum().item())
+
         return {
             "feature_frequencies": feature_frequencies,
             "feature_magnitudes": feature_magnitudes,
@@ -771,6 +870,10 @@ class TopKSparseAutoencoder(nn.Module):
             "mean_frequency": feature_frequencies.mean().item(),
             "median_frequency": feature_frequencies.median().item(),
             "mean_k_active": total_active / max(total_samples, 1),
+            # EMA-based dead count: reflects online training history rather
+            # than a single eval pass, useful for monitoring convergence.
+            "ema_dead_features": ema_dead,
+            "ema_dead_fraction": ema_dead / self.d_hidden,
         }
 
     def get_feature_density(self, x: torch.Tensor) -> float:
@@ -843,6 +946,8 @@ def create_topk_sae_for_gpt2(
     expansion_factor: int = 16,
     k: Optional[int] = None,
     use_tied_weights: bool = False,
+    aux_k: Optional[int] = None,
+    aux_loss_coeff: float = 1 / 32,
     **kwargs,
 ) -> TopKSparseAutoencoder:
     """
@@ -857,6 +962,9 @@ def create_topk_sae_for_gpt2(
                           If None, suggest_k() is called automatically using
                           the model's d_model and expansion_factor.
         use_tied_weights: Use W_enc^T as decoder (default False for Top-K).
+        aux_k:            Dead-feature aux-loss budget. Defaults to d_hidden//2.
+                          Set to 0 to disable the auxiliary loss.
+        aux_loss_coeff:   Weight of the auxiliary loss. Default: 1/32.
         **kwargs:         Additional keyword arguments forwarded to
                           TopKSparseAutoencoder (e.g. use_pre_bias,
                           normalize_decoder).
@@ -883,10 +991,15 @@ def create_topk_sae_for_gpt2(
     if k is None:
         k = suggest_k(d_model, expansion_factor=expansion_factor)
 
+    _aux_k_display = (d_hidden // 2) if aux_k is None else aux_k
     print(f"Creating Top-K SAE for {model_name}")
     print(f"  d_model:          {d_model}")
-    print(f"  d_hidden:         {d_hidden}  (expansion ×{expansion_factor})")
+    print(f"  d_hidden:         {d_hidden}  (expansion x{expansion_factor})")
     print(f"  k:                {k}  (~{k / d_model:.1%} of d_model active per token)")
+    print(
+        f"  aux_k:            {_aux_k_display}  (aux loss {'disabled' if _aux_k_display == 0 else 'enabled'})"
+    )
+    print(f"  aux_loss_coeff:   {aux_loss_coeff:.4f}")
     print(f"  use_tied_weights: {use_tied_weights}")
 
     return TopKSparseAutoencoder(
@@ -894,6 +1007,8 @@ def create_topk_sae_for_gpt2(
         d_hidden=d_hidden,
         k=k,
         use_tied_weights=use_tied_weights,
+        aux_k=aux_k,
+        aux_loss_coeff=aux_loss_coeff,
         **kwargs,
     )
 

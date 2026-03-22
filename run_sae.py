@@ -116,7 +116,30 @@ def main():
             "Number of active features per token for the Top-K SAE. "
             "Only used when --sae-type=topk. "
             "If omitted, suggest_k(d_model, expansion_factor) is called automatically "
-            "(targets ~4%% of d_model active per token, e.g. k≈35 for gpt2 + expansion=16)."
+            "(targets ~4%% of d_model active per token, e.g. k~35 for gpt2 + expansion=16)."
+        ),
+    )
+    parser.add_argument(
+        "--aux-k",
+        type=int,
+        default=None,
+        help=(
+            "Number of dead features used in the auxiliary reconstruction pass. "
+            "Only used when --sae-type=topk. "
+            "Defaults to d_hidden // 2 (matching the OpenAI paper). "
+            "Set to 0 to disable the auxiliary loss entirely."
+        ),
+    )
+    parser.add_argument(
+        "--aux-loss-coeff",
+        type=float,
+        default=1 / 32,
+        help=(
+            "Weight applied to the auxiliary loss term. "
+            "Only used when --sae-type=topk. "
+            "OpenAI paper uses 1/32 (~0.03125). "
+            "Increase if dead features persist; decrease if reconstruction degrades. "
+            "Default: 0.03125 (1/32)."
         ),
     )
 
@@ -268,7 +291,15 @@ def main():
         _k_display = (
             args.topk_k if args.topk_k is not None else suggest_k(768, args.expansion)
         )
-        print(f"  Top-K k: {_k_display} (auto={args.topk_k is None})")
+        _d_hidden_display = 768 * args.expansion
+        _aux_k_display = (
+            args.aux_k if args.aux_k is not None else _d_hidden_display // 2
+        )
+        print(f"  Top-K k:          {_k_display} (auto={args.topk_k is None})")
+        print(
+            f"  aux_k:            {_aux_k_display} ({'disabled' if _aux_k_display == 0 else 'enabled'})"
+        )
+        print(f"  aux_loss_coeff:   {args.aux_loss_coeff:.4f}")
     print(f"  Epochs: {args.epochs}")
     print(
         f"  Early stopping patience: {args.early_stopping_patience}{' (disabled)' if args.disable_early_stopping or args.early_stopping_patience == 0 else ''}"
@@ -325,13 +356,17 @@ def main():
 
     if args.sae_type == "topk":
         # Top-K SAE: sparsity is enforced by hard Top-K selection.
-        # No L1 penalty is used; the loss is purely MSE.
+        # No L1 penalty is used; the loss is purely MSE + aux_loss.
         # If --topk-k is not specified, suggest_k() picks a sensible default
         # based on the model dimension and expansion factor.
+        # The auxiliary loss (aux_k, aux_loss_coeff) prevents the dead-feature
+        # collapse that occurs with large expansion factors and small k.
         sae = create_topk_sae_for_gpt2(
             model_name="gpt2",
             expansion_factor=args.expansion,
             k=args.topk_k,  # None → auto-computed inside factory
+            aux_k=args.aux_k,  # None → d_hidden // 2
+            aux_loss_coeff=args.aux_loss_coeff,
         )
     else:
         # Standard SAE: ReLU activation + L1 sparsity penalty.
@@ -411,6 +446,8 @@ def main():
     print(f"  SAE type: {args.sae_type}")
     if args.sae_type == "topk":
         print(f"  k (active features/token): {sae.k}")
+        print(f"  aux_k:                     {sae.aux_k}")
+        print(f"  aux_loss_coeff:            {sae.aux_loss_coeff:.4f}")
     else:
         print(f"  L1 coefficient: {args.l1_coeff}")
     print(f"  Validation Loss: {history['val_loss'][-1]:.6f}")
