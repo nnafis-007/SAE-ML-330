@@ -119,6 +119,9 @@ class SAETrainer:
             "val_mse": [],
             "train_l1": [],
             "val_l1": [],
+            "train_aux": [],
+            "val_aux": [],
+            "ema_dead_features": [],
             "feature_density": [],
             "learning_rate": [],
         }
@@ -146,6 +149,8 @@ class SAETrainer:
             "loss": 0.0,
             "mse_loss": 0.0,
             "l1_loss": 0.0,
+            "aux_loss": 0.0,
+            "ema_dead_features": 0.0,
             "frac_active": 0.0,
         }
 
@@ -184,6 +189,9 @@ class SAETrainer:
             epoch_metrics["loss"] += loss_dict["loss"]
             epoch_metrics["mse_loss"] += loss_dict["mse_loss"]
             epoch_metrics["l1_loss"] += loss_dict["l1_loss"]
+            # aux_loss is in loss_dict for TopK SAE, 0.0 for standard SAE
+            epoch_metrics["aux_loss"] += loss_dict.get("aux_loss", 0.0)
+            epoch_metrics["ema_dead_features"] += loss_dict.get("ema_dead_features", 0.0)
             epoch_metrics["frac_active"] += loss_dict["frac_active"]
             num_batches += 1
 
@@ -206,7 +214,14 @@ class SAETrainer:
         """
         self.model.eval()
 
-        val_metrics = {"loss": 0.0, "mse_loss": 0.0, "l1_loss": 0.0, "frac_active": 0.0}
+        val_metrics = {
+            "loss": 0.0,
+            "mse_loss": 0.0,
+            "l1_loss": 0.0,
+            "aux_loss": 0.0,
+            "ema_dead_features": 0.0,
+            "frac_active": 0.0,
+        }
 
         num_batches = 0
 
@@ -222,6 +237,8 @@ class SAETrainer:
             val_metrics["loss"] += loss_dict["loss"]
             val_metrics["mse_loss"] += loss_dict["mse_loss"]
             val_metrics["l1_loss"] += loss_dict["l1_loss"]
+            val_metrics["aux_loss"] += loss_dict.get("aux_loss", 0.0)
+            val_metrics["ema_dead_features"] += loss_dict.get("ema_dead_features", 0.0)
             val_metrics["frac_active"] += loss_dict["frac_active"]
             num_batches += 1
 
@@ -295,6 +312,9 @@ class SAETrainer:
             self.history["val_mse"].append(val_metrics["mse_loss"])
             self.history["train_l1"].append(train_metrics["l1_loss"])
             self.history["val_l1"].append(val_metrics["l1_loss"])
+            self.history["train_aux"].append(train_metrics["aux_loss"])
+            self.history["val_aux"].append(val_metrics["aux_loss"])
+            self.history["ema_dead_features"].append(train_metrics["ema_dead_features"])
             self.history["feature_density"].append(train_metrics["frac_active"])
             self.history["learning_rate"].append(self.optimizer.param_groups[0]["lr"])
 
@@ -302,13 +322,25 @@ class SAETrainer:
             if (epoch + 1) % log_every == 0:
                 print(
                     f"  Train Loss: {train_metrics['loss']:.6f} "
-                    f"(MSE: {train_metrics['mse_loss']:.6f}, L1: {train_metrics['l1_loss']:.6f})"
+                    f"(MSE: {train_metrics['mse_loss']:.6f}, L1: {train_metrics['l1_loss']:.6f}"
                 )
+                if train_metrics["aux_loss"] > 0:
+                    print(f"           Aux: {train_metrics['aux_loss']:.6f})")
+                else:
+                    print(")")
                 print(
                     f"  Val Loss:   {val_metrics['loss']:.6f} "
-                    f"(MSE: {val_metrics['mse_loss']:.6f}, L1: {val_metrics['l1_loss']:.6f})"
+                    f"(MSE: {val_metrics['mse_loss']:.6f}, L1: {val_metrics['l1_loss']:.6f}"
                 )
+                if val_metrics["aux_loss"] > 0:
+                    print(f"           Aux: {val_metrics['aux_loss']:.6f})")
+                else:
+                    print(")")
                 print(f"  Feature Density: {train_metrics['frac_active']:.2%}")
+                if train_metrics["ema_dead_features"] > 0:
+                    print(
+                        f"  EMA Dead Features: {int(train_metrics['ema_dead_features'])}"
+                    )
                 print()
 
             # Check for improvement

@@ -473,8 +473,12 @@ class TopKSparseAutoencoder(nn.Module):
             normalize_decoder: Normalize each decoder column to unit norm after
                                every gradient step (prevents scale / shrinkage collapse).
             aux_k:             Number of dead features activated in the auxiliary
-                               reconstruction pass. Defaults to d_hidden // 2,
-                               matching the OpenAI paper. Set to 0 to disable.
+                               reconstruction pass. Defaults to a scaled value:
+                               - expansion ≤ 8x:  d_hidden // 2
+                               - expansion ≤ 16x: d_hidden // 4
+                               - expansion > 16x: max(512, d_hidden // 8)
+                               Set to 0 to disable. For large expansions, smaller
+                               aux_k gives more focused gradients to fewer features.
             aux_loss_coeff:    Weight applied to the auxiliary loss term.
                                The OpenAI paper uses 1/32 (~0.03125). Increase if
                                dead features persist; decrease if reconstruction
@@ -508,9 +512,25 @@ class TopKSparseAutoencoder(nn.Module):
         self.use_pre_bias = use_pre_bias
         self.normalize_decoder = normalize_decoder
 
-        # aux_k defaults to d_hidden // 2, matching Gao et al. 2024.
-        # Set to 0 to disable the auxiliary loss entirely.
-        self.aux_k: int = (d_hidden // 2) if aux_k is None else int(aux_k)
+        # aux_k defaults to a value that scales with expansion factor.
+        # Gao et al. 2024 used d_hidden // 2 for smaller expansions (4-8x),
+        # but for large expansions (16x+), this gives too many dead features
+        # a gradient signal simultaneously, diluting the learning.
+        # Rule of thumb: use ~min(512, d_hidden // 4) to ~min(2048, d_hidden // 2)
+        # depending on expansion factor.
+        if aux_k is None:
+            # Scale aux_k inversely with expansion factor
+            expansion = d_hidden / d_model
+            if expansion <= 8:
+                self.aux_k = d_hidden // 2
+            elif expansion <= 16:
+                self.aux_k = d_hidden // 4
+            else:  # expansion > 16
+                # For very large expansions (24x), use even smaller aux_k
+                # to give focused gradients to fewer dead features at a time
+                self.aux_k = max(512, d_hidden // 8)
+        else:
+            self.aux_k = int(aux_k)
         self.aux_loss_coeff: float = float(aux_loss_coeff)
 
         # Kept at 0.0 for SAETrainer / checkpoint compatibility.
@@ -991,7 +1011,18 @@ def create_topk_sae_for_gpt2(
     if k is None:
         k = suggest_k(d_model, expansion_factor=expansion_factor)
 
-    _aux_k_display = (d_hidden // 2) if aux_k is None else aux_k
+    # Calculate default aux_k with the same logic as __init__
+    if aux_k is None:
+        expansion = expansion_factor
+        if expansion <= 8:
+            _aux_k_display = d_hidden // 2
+        elif expansion <= 16:
+            _aux_k_display = d_hidden // 4
+        else:
+            _aux_k_display = max(512, d_hidden // 8)
+    else:
+        _aux_k_display = aux_k
+
     print(f"Creating Top-K SAE for {model_name}")
     print(f"  d_model:          {d_model}")
     print(f"  d_hidden:         {d_hidden}  (expansion x{expansion_factor})")

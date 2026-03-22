@@ -126,7 +126,9 @@ def main():
         help=(
             "Number of dead features used in the auxiliary reconstruction pass. "
             "Only used when --sae-type=topk. "
-            "Defaults to d_hidden // 2 (matching the OpenAI paper). "
+            "Defaults to a scaled value based on expansion factor: "
+            "expansion≤8x: d_hidden//2, expansion≤16x: d_hidden//4, expansion>16x: max(512, d_hidden//8). "
+            "For large expansions, smaller aux_k gives focused gradients. "
             "Set to 0 to disable the auxiliary loss entirely."
         ),
     )
@@ -292,9 +294,18 @@ def main():
             args.topk_k if args.topk_k is not None else suggest_k(768, args.expansion)
         )
         _d_hidden_display = 768 * args.expansion
-        _aux_k_display = (
-            args.aux_k if args.aux_k is not None else _d_hidden_display // 2
-        )
+        # Calculate default aux_k with same logic as TopKSparseAutoencoder.__init__
+        if args.aux_k is None:
+            expansion = args.expansion
+            if expansion <= 8:
+                _aux_k_display = _d_hidden_display // 2
+            elif expansion <= 16:
+                _aux_k_display = _d_hidden_display // 4
+            else:
+                _aux_k_display = max(512, _d_hidden_display // 8)
+        else:
+            _aux_k_display = args.aux_k
+
         print(f"  Top-K k:          {_k_display} (auto={args.topk_k is None})")
         print(
             f"  aux_k:            {_aux_k_display} ({'disabled' if _aux_k_display == 0 else 'enabled'})"

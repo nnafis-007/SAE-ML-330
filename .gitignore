@@ -3,3 +3,5 @@
 *.toml
 *.png
 checkpoints/
+DIAGNOSIS_AND_FIXES.md
+results_comparison.md
