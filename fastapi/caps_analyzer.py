@@ -267,10 +267,11 @@ class CapsAnalyzer(BaseAnalyzer):
 
     def _get_gpt2(self):
         if "tokenizer" not in self._gpt2_cache:
-            from transformers import GPT2LMHeadModel, GPT2Tokenizer
+            from transformers import GPT2Model, GPT2Tokenizer
             tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
             tokenizer.pad_token = tokenizer.eos_token
-            gpt2 = GPT2LMHeadModel.from_pretrained("gpt2", output_hidden_states=True).to(self._device)
+            gpt2 = GPT2Model.from_pretrained("gpt2").to(self._device)
+            gpt2.config.output_hidden_states = True
             gpt2.eval()
             self._gpt2_cache["tokenizer"] = tokenizer
             self._gpt2_cache["gpt2"] = gpt2

@@ -353,6 +353,10 @@ def get_sae_activations_at_positions(
 
     result = []
     for pos in positions:
+        # Skip features for the first token (often an attention sink/BOS)
+        if pos == 0:
+            continue
+            
         act_vec = hidden[pos].unsqueeze(0)          # (1, d_model)
         feat_vec = sae.encode(act_vec).squeeze(0)   # (d_hidden,)
         result.append(feat_vec.cpu())

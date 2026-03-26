@@ -1,0 +1,972 @@
+{
+  "5164": {
+    "feature_idx": 5164,
+    "label": "Emotional Experience",
+    "explanation": "The feature detects words related to evoking emotions, such as attracting, satisfying, or haunting, which are often used to describe intense experiences",
+    "confidence": "medium",
+    "top_tokens": [
+      "attract",
+      "T",
+      "hungry",
+      "satisfy",
+      "meals",
+      "ory",
+      "sav",
+      "delicious",
+      "nights",
+      "haunt"
+    ],
+    "top_contexts": [
+      {
+        "token": "attract",
+        "context": "Scented fragrant aromatic flowers>>> attract<<< small tiny insects.",
+        "activation_value": 5.117379188537598
+      },
+      {
+        "token": "T",
+        "context": ">>>T<<<asty delicious savory meals satisfy hungry famished guests",
+        "activation_value": 0.0
+      },
+      {
+        "token": "hungry",
+        "context": "Tasty delicious savory meals satisfy>>> hungry<<< famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "satisfy",
+        "context": "Tasty delicious savory meals>>> satisfy<<< hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "meals",
+        "context": "Tasty delicious savory>>> meals<<< satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "ory",
+        "context": "Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "sav",
+        "context": "Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "delicious",
+        "context": "Tasty>>> delicious<<< savory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "nights",
+        "context": "Scary frightening terrifying dreams haunt dark black>>> nights<<<.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "haunt",
+        "context": "Scary frightening terrifying dreams>>> haunt<<< dark black nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "dark",
+        "context": "Scary frightening terrifying dreams haunt>>> dark<<< black nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "black",
+        "context": "Scary frightening terrifying dreams haunt dark>>> black<<< nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "asty",
+        "context": "T>>>asty<<< delicious savory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": ".",
+        "context": "Scary frightening terrifying dreams haunt dark black nights>>>.<<<",
+        "activation_value": 0.0
+      },
+      {
+        "token": "fam",
+        "context": "Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.",
+        "activation_value": 0.0
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Emotional Experience\",\n  \"explanation\": \"The feature detects words related to evoking emotions, such as attracting, satisfying, or haunting, which are often used to describe intense experiences\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
+  },
+  "7534": {
+    "feature_idx": 7534,
+    "label": "Contrasting Ideas",
+    "explanation": "The feature detects tokens that are part of phrases or sentences expressing contrasting or opposing ideas, such as loud vs quiet or massive vs desolate",
+    "confidence": "high",
+    "top_tokens": [
+      "j",
+      "ifer",
+      "ignore",
+      "ant",
+      "-",
+      "el",
+      "satisfy",
+      "desolate",
+      "garg",
+      "ory"
+    ],
+    "top_contexts": [
+      {
+        "token": "j",
+        "context": "Clean pure pristine lakes reflect>>> j<<<agged sharp peaks.",
+        "activation_value": 1.077355146408081
+      },
+      {
+        "token": "ifer",
+        "context": "Loud noisy voc>>>ifer<<<ous crowds ignore quiet silent whispers.",
+        "activation_value": 0.9905809760093689
+      },
+      {
+        "token": "ignore",
+        "context": "Loud noisy vociferous crowds>>> ignore<<< quiet silent whispers.",
+        "activation_value": 0.7684271335601807
+      },
+      {
+        "token": "ant",
+        "context": "Massive garg>>>ant<<<uan behemoths roam desolate barren wastelands",
+        "activation_value": 0.6479716300964355
+      },
+      {
+        "token": "-",
+        "context": "Fast>>>-<<<paced speedy quick changes create chaotic messy situations.",
+        "activation_value": 0.4699910879135132
+      },
+      {
+        "token": "el",
+        "context": " gargantuan behemoths roam desolate barren wast>>>el<<<ands.",
+        "activation_value": 0.3547462224960327
+      },
+      {
+        "token": "satisfy",
+        "context": "Tasty delicious savory meals>>> satisfy<<< hungry famished guests.",
+        "activation_value": 0.32815051078796387
+      },
+      {
+        "token": "desolate",
+        "context": "Massive gargantuan behemoths roam>>> desolate<<< barren wastelands.",
+        "activation_value": 0.3082903027534485
+      },
+      {
+        "token": "garg",
+        "context": "Massive>>> garg<<<antuan behemoths roam desolate barren wastel",
+        "activation_value": 0.11821556091308594
+      },
+      {
+        "token": "ory",
+        "context": "Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": ".",
+        "context": "Scary frightening terrifying dreams haunt dark black nights>>>.<<<",
+        "activation_value": 0.0
+      },
+      {
+        "token": "fam",
+        "context": "Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "hungry",
+        "context": "Tasty delicious savory meals satisfy>>> hungry<<< famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "meals",
+        "context": "Tasty delicious savory>>> meals<<< satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "asty",
+        "context": "T>>>asty<<< delicious savory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Contrasting Ideas\",\n  \"explanation\": \"The feature detects tokens that are part of phrases or sentences expressing contrasting or opposing ideas, such as loud vs quiet or massive vs desolate\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "11579": {
+    "feature_idx": 11579,
+    "label": "Positive Adjective",
+    "explanation": "The feature detects words with positive connotations, such as 'basic', 'mild', 'joyful', and 'clever', which describe pleasant or desirable qualities",
+    "confidence": "high",
+    "top_tokens": [
+      "basic",
+      "sav",
+      "mild",
+      "joyful",
+      "clever",
+      "soft",
+      "satisfy",
+      "hungry",
+      "meals",
+      "ory"
+    ],
+    "top_contexts": [
+      {
+        "token": "basic",
+        "context": "Simple easy>>> basic<<< tasks require minimal small effort.",
+        "activation_value": 2.349740982055664
+      },
+      {
+        "token": "sav",
+        "context": "Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.",
+        "activation_value": 0.8202447891235352
+      },
+      {
+        "token": "mild",
+        "context": "Gentle soft>>> mild<<< breezes stir colorful vibrant leaves.",
+        "activation_value": 0.6854543685913086
+      },
+      {
+        "token": "joyful",
+        "context": "Happy>>> joyful<<< cheerful emotions brighten gloomy somber days.",
+        "activation_value": 0.5801372528076172
+      },
+      {
+        "token": "clever",
+        "context": "Intelligent smart>>> clever<<< scholars study complex intricate subjects.",
+        "activation_value": 0.5579557418823242
+      },
+      {
+        "token": "soft",
+        "context": "Gentle>>> soft<<< mild breezes stir colorful vibrant leaves.",
+        "activation_value": 0.06528759002685547
+      },
+      {
+        "token": "satisfy",
+        "context": "Tasty delicious savory meals>>> satisfy<<< hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "hungry",
+        "context": "Tasty delicious savory meals satisfy>>> hungry<<< famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "meals",
+        "context": "Tasty delicious savory>>> meals<<< satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "ory",
+        "context": "Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": ".",
+        "context": "Scary frightening terrifying dreams haunt dark black nights>>>.<<<",
+        "activation_value": 0.0
+      },
+      {
+        "token": "black",
+        "context": "Scary frightening terrifying dreams haunt dark>>> black<<< nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "nights",
+        "context": "Scary frightening terrifying dreams haunt dark black>>> nights<<<.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "delicious",
+        "context": "Tasty>>> delicious<<< savory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "T",
+        "context": ">>>T<<<asty delicious savory meals satisfy hungry famished guests",
+        "activation_value": 0.0
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Positive Adjective\",\n  \"explanation\": \"The feature detects words with positive connotations, such as 'basic', 'mild', 'joyful', and 'clever', which describe pleasant or desirable qualities\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "8897": {
+    "feature_idx": 8897,
+    "label": "Adjective intensification",
+    "explanation": "The feature detects the presence of words that intensify or emphasize adjectives, such as 'minimal', 'delicious', or 'terrifying', which modify nouns to convey stronger meanings",
+    "confidence": "medium",
+    "top_tokens": [
+      "minimal",
+      "fam",
+      "dark",
+      "black",
+      "nights",
+      ".",
+      "T",
+      "asty",
+      "delicious",
+      "sav"
+    ],
+    "top_contexts": [
+      {
+        "token": "minimal",
+        "context": "Simple easy basic tasks require>>> minimal<<< small effort.",
+        "activation_value": 4.984591007232666
+      },
+      {
+        "token": "fam",
+        "context": "Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "dark",
+        "context": "Scary frightening terrifying dreams haunt>>> dark<<< black nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "black",
+        "context": "Scary frightening terrifying dreams haunt dark>>> black<<< nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "nights",
+        "context": "Scary frightening terrifying dreams haunt dark black>>> nights<<<.",
+        "activation_value": 0.0
+      },
+      {
+        "token": ".",
+        "context": "Scary frightening terrifying dreams haunt dark black nights>>>.<<<",
+        "activation_value": 0.0
+      },
+      {
+        "token": "T",
+        "context": ">>>T<<<asty delicious savory meals satisfy hungry famished guests",
+        "activation_value": 0.0
+      },
+      {
+        "token": "asty",
+        "context": "T>>>asty<<< delicious savory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "delicious",
+        "context": "Tasty>>> delicious<<< savory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "sav",
+        "context": "Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "ory",
+        "context": "Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "meals",
+        "context": "Tasty delicious savory>>> meals<<< satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "satisfy",
+        "context": "Tasty delicious savory meals>>> satisfy<<< hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "hungry",
+        "context": "Tasty delicious savory meals satisfy>>> hungry<<< famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "stars",
+        "context": "Bright luminous radiant>>> stars<<< illuminate deep black space.",
+        "activation_value": 0.0
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Adjective intensification\",\n  \"explanation\": \"The feature detects the presence of words that intensify or emphasize adjectives, such as 'minimal', 'delicious', or 'terrifying', which modify nouns to convey stronger meanings\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
+  },
+  "3665": {
+    "feature_idx": 3665,
+    "label": "Emphasis on Adjectives",
+    "explanation": "The feature detects the presence of emphatic or descriptive adjectives in the text, often used to modify nouns or create vivid imagery",
+    "confidence": "medium",
+    "top_tokens": [
+      ".",
+      "hungry",
+      "dark",
+      "satisfy",
+      "meals",
+      "ory",
+      "sav",
+      "space",
+      "black",
+      "nights"
+    ],
+    "top_contexts": [
+      {
+        "token": ".",
+        "context": "sterious strange odd occurrences baffle wise learned men>>>.<<<",
+        "activation_value": 2.661705732345581
+      },
+      {
+        "token": ".",
+        "context": "Honest truthful sincere friends provide helpful useful advice>>>.<<<",
+        "activation_value": 2.155458450317383
+      },
+      {
+        "token": ".",
+        "context": "Ancient old antique artifacts reveal hidden secret histories>>>.<<<",
+        "activation_value": 0.16598796844482422
+      },
+      {
+        "token": "hungry",
+        "context": "Tasty delicious savory meals satisfy>>> hungry<<< famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "dark",
+        "context": "Scary frightening terrifying dreams haunt>>> dark<<< black nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "satisfy",
+        "context": "Tasty delicious savory meals>>> satisfy<<< hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "meals",
+        "context": "Tasty delicious savory>>> meals<<< satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "ory",
+        "context": "Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "sav",
+        "context": "Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": ".",
+        "context": "Scary frightening terrifying dreams haunt dark black nights>>>.<<<",
+        "activation_value": 0.0
+      },
+      {
+        "token": "space",
+        "context": "Bright luminous radiant stars illuminate deep black>>> space<<<.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "black",
+        "context": "Scary frightening terrifying dreams haunt dark>>> black<<< nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "nights",
+        "context": "Scary frightening terrifying dreams haunt dark black>>> nights<<<.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "delicious",
+        "context": "Tasty>>> delicious<<< savory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "T",
+        "context": ">>>T<<<asty delicious savory meals satisfy hungry famished guests",
+        "activation_value": 0.0
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Emphasis on Adjectives\",\n  \"explanation\": \"The feature detects the presence of emphatic or descriptive adjectives in the text, often used to modify nouns or create vivid imagery\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
+  },
+  "8221": {
+    "feature_idx": 8221,
+    "label": "Adjective Intensifiers",
+    "explanation": "The feature detects words that intensify or modify the meaning of adjacent adjectives, often indicating extreme or heightened states",
+    "confidence": "high",
+    "top_tokens": [
+      "hem",
+      "follow",
+      "bright",
+      "stir",
+      "baff",
+      "satisfy",
+      "delicious",
+      "fam",
+      "dark",
+      "meals"
+    ],
+    "top_contexts": [
+      {
+        "token": "hem",
+        "context": "Massive gargantuan be>>>hem<<<oths roam desolate barren wastelands.",
+        "activation_value": 2.0138354301452637
+      },
+      {
+        "token": "follow",
+        "context": "Bitter cold freezing winters>>> follow<<< warm hot summers.",
+        "activation_value": 1.795518398284912
+      },
+      {
+        "token": "bright",
+        "context": "Happy joyful cheerful emotions>>> bright<<<en gloomy somber days.",
+        "activation_value": 0.8944940567016602
+      },
+      {
+        "token": "stir",
+        "context": "Gentle soft mild breezes>>> stir<<< colorful vibrant leaves.",
+        "activation_value": 0.7287745475769043
+      },
+      {
+        "token": "baff",
+        "context": "Mysterious strange odd occurrences>>> baff<<<le wise learned men.",
+        "activation_value": 0.3404521942138672
+      },
+      {
+        "token": "satisfy",
+        "context": "Tasty delicious savory meals>>> satisfy<<< hungry famished guests.",
+        "activation_value": 0.03779935836791992
+      },
+      {
+        "token": "delicious",
+        "context": "Tasty>>> delicious<<< savory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "fam",
+        "context": "Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "dark",
+        "context": "Scary frightening terrifying dreams haunt>>> dark<<< black nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "meals",
+        "context": "Tasty delicious savory>>> meals<<< satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "ory",
+        "context": "Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "sav",
+        "context": "Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "T",
+        "context": ">>>T<<<asty delicious savory meals satisfy hungry famished guests",
+        "activation_value": 0.0
+      },
+      {
+        "token": "black",
+        "context": "Scary frightening terrifying dreams haunt dark>>> black<<< nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": ".",
+        "context": "Scary frightening terrifying dreams haunt dark black nights>>>.<<<",
+        "activation_value": 0.0
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Adjective Intensifiers\",\n  \"explanation\": \"The feature detects words that intensify or modify the meaning of adjacent adjectives, often indicating extreme or heightened states\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "9295": {
+    "feature_idx": 9295,
+    "label": "Emotional Intensity",
+    "explanation": "The feature detects words and phrases that convey strong emotions or intense experiences, such as happiness, tastiness, or fear",
+    "confidence": "high",
+    "top_tokens": [
+      ".",
+      "fam",
+      "warm",
+      "summers",
+      "el",
+      "meals",
+      "ory",
+      "black",
+      "sav",
+      "space"
+    ],
+    "top_contexts": [
+      {
+        "token": ".",
+        "context": "Happy joyful cheerful emotions brighten gloomy somber days>>>.<<<",
+        "activation_value": 2.485764503479004
+      },
+      {
+        "token": "fam",
+        "context": "Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.",
+        "activation_value": 1.2237359285354614
+      },
+      {
+        "token": ".",
+        "context": "Honest truthful sincere friends provide helpful useful advice>>>.<<<",
+        "activation_value": 0.702021598815918
+      },
+      {
+        "token": ".",
+        "context": "Fast swift rapid movements characterize agile nimble creatures>>>.<<<",
+        "activation_value": 0.6015431880950928
+      },
+      {
+        "token": "warm",
+        "context": "Bitter cold freezing winters follow>>> warm<<< hot summers.",
+        "activation_value": 0.31865501403808594
+      },
+      {
+        "token": ".",
+        "context": "sterious strange odd occurrences baffle wise learned men>>>.<<<",
+        "activation_value": 0.23601722717285156
+      },
+      {
+        "token": "summers",
+        "context": "Bitter cold freezing winters follow warm hot>>> summers<<<.",
+        "activation_value": 0.1414850950241089
+      },
+      {
+        "token": "el",
+        "context": " gargantuan behemoths roam desolate barren wast>>>el<<<ands.",
+        "activation_value": 0.0789186954498291
+      },
+      {
+        "token": "meals",
+        "context": "Tasty delicious savory>>> meals<<< satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "ory",
+        "context": "Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "black",
+        "context": "Scary frightening terrifying dreams haunt dark>>> black<<< nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "sav",
+        "context": "Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "space",
+        "context": "Bright luminous radiant stars illuminate deep black>>> space<<<.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "nights",
+        "context": "Scary frightening terrifying dreams haunt dark black>>> nights<<<.",
+        "activation_value": 0.0
+      },
+      {
+        "token": ".",
+        "context": "Scary frightening terrifying dreams haunt dark black nights>>>.<<<",
+        "activation_value": 0.0
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Emotional Intensity\",\n  \"explanation\": \"The feature detects words and phrases that convey strong emotions or intense experiences, such as happiness, tastiness, or fear\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "4423": {
+    "feature_idx": 4423,
+    "label": "Emphasis on Darkness",
+    "explanation": "The feature detects words related to darkness, fear, or intensity, often in descriptive phrases with strong adjectives",
+    "confidence": "high",
+    "top_tokens": [
+      "black",
+      "ished",
+      "dark",
+      "nights",
+      ".",
+      "T",
+      "asty",
+      "delicious",
+      "sav",
+      "ory"
+    ],
+    "top_contexts": [
+      {
+        "token": "black",
+        "context": "Scary frightening terrifying dreams haunt dark>>> black<<< nights.",
+        "activation_value": 5.7832207679748535
+      },
+      {
+        "token": "ished",
+        "context": "Tasty delicious savory meals satisfy hungry fam>>>ished<<< guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "dark",
+        "context": "Scary frightening terrifying dreams haunt>>> dark<<< black nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "nights",
+        "context": "Scary frightening terrifying dreams haunt dark black>>> nights<<<.",
+        "activation_value": 0.0
+      },
+      {
+        "token": ".",
+        "context": "Scary frightening terrifying dreams haunt dark black nights>>>.<<<",
+        "activation_value": 0.0
+      },
+      {
+        "token": "T",
+        "context": ">>>T<<<asty delicious savory meals satisfy hungry famished guests",
+        "activation_value": 0.0
+      },
+      {
+        "token": "asty",
+        "context": "T>>>asty<<< delicious savory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "delicious",
+        "context": "Tasty>>> delicious<<< savory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "sav",
+        "context": "Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "ory",
+        "context": "Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "meals",
+        "context": "Tasty delicious savory>>> meals<<< satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "satisfy",
+        "context": "Tasty delicious savory meals>>> satisfy<<< hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "hungry",
+        "context": "Tasty delicious savory meals satisfy>>> hungry<<< famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "fam",
+        "context": "Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "illuminate",
+        "context": "Bright luminous radiant stars>>> illuminate<<< deep black space.",
+        "activation_value": 0.0
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Emphasis on Darkness\",\n  \"explanation\": \"The feature detects words related to darkness, fear, or intensity, often in descriptive phrases with strong adjectives\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "9275": {
+    "feature_idx": 9275,
+    "label": "Emotive Intensifiers",
+    "explanation": "The feature detects words that intensify or describe strong emotions, sensations, or experiences, such as 'odd', 'sincere', 'chaotic', and 'famished'.",
+    "confidence": "high",
+    "top_tokens": [
+      "odd",
+      "ands",
+      "guests",
+      "sincere",
+      "chaotic",
+      "creatures",
+      "satisfy",
+      "fam",
+      "meals",
+      "ory"
+    ],
+    "top_contexts": [
+      {
+        "token": "odd",
+        "context": "Mysterious strange>>> odd<<< occurrences baffle wise learned men.",
+        "activation_value": 1.944814682006836
+      },
+      {
+        "token": "ands",
+        "context": "antuan behemoths roam desolate barren wastel>>>ands<<<.",
+        "activation_value": 1.3666489124298096
+      },
+      {
+        "token": "guests",
+        "context": "Tasty delicious savory meals satisfy hungry famished>>> guests<<<.",
+        "activation_value": 1.3505754470825195
+      },
+      {
+        "token": "sincere",
+        "context": "Honest truthful>>> sincere<<< friends provide helpful useful advice.",
+        "activation_value": 0.6110873818397522
+      },
+      {
+        "token": "chaotic",
+        "context": "Fast-paced speedy quick changes create>>> chaotic<<< messy situations.",
+        "activation_value": 0.30681562423706055
+      },
+      {
+        "token": "creatures",
+        "context": "Fast swift rapid movements characterize agile nimble>>> creatures<<<.",
+        "activation_value": 0.06425142288208008
+      },
+      {
+        "token": "satisfy",
+        "context": "Tasty delicious savory meals>>> satisfy<<< hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "fam",
+        "context": "Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "meals",
+        "context": "Tasty delicious savory>>> meals<<< satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "ory",
+        "context": "Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "sav",
+        "context": "Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "black",
+        "context": "Scary frightening terrifying dreams haunt dark>>> black<<< nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "nights",
+        "context": "Scary frightening terrifying dreams haunt dark black>>> nights<<<.",
+        "activation_value": 0.0
+      },
+      {
+        "token": ".",
+        "context": "Scary frightening terrifying dreams haunt dark black nights>>>.<<<",
+        "activation_value": 0.0
+      },
+      {
+        "token": "dark",
+        "context": "Scary frightening terrifying dreams haunt>>> dark<<< black nights.",
+        "activation_value": 0.0
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Emotive Intensifiers\",\n  \"explanation\": \"The feature detects words that intensify or describe strong emotions, sensations, or experiences, such as 'odd', 'sincere', 'chaotic', and 'famished'.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "3986": {
+    "feature_idx": 3986,
+    "label": "Sensory Experience",
+    "explanation": "The feature detects words related to sensory experiences, such as tastes, smells, and textures, often used to describe pleasant or intense experiences",
+    "confidence": "high",
+    "top_tokens": [
+      "pure",
+      "aromatic",
+      "mild",
+      "asty",
+      "satisfy",
+      "meals",
+      "ory",
+      "sav",
+      ".",
+      "dark"
+    ],
+    "top_contexts": [
+      {
+        "token": "pure",
+        "context": "Clean>>> pure<<< pristine lakes reflect jagged sharp peaks.",
+        "activation_value": 2.3110876083374023
+      },
+      {
+        "token": "aromatic",
+        "context": "Scented fragrant>>> aromatic<<< flowers attract small tiny insects.",
+        "activation_value": 2.2347769737243652
+      },
+      {
+        "token": "mild",
+        "context": "Gentle soft>>> mild<<< breezes stir colorful vibrant leaves.",
+        "activation_value": 1.0624241828918457
+      },
+      {
+        "token": "asty",
+        "context": "T>>>asty<<< delicious savory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "satisfy",
+        "context": "Tasty delicious savory meals>>> satisfy<<< hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "meals",
+        "context": "Tasty delicious savory>>> meals<<< satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "ory",
+        "context": "Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "sav",
+        "context": "Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": ".",
+        "context": "Scary frightening terrifying dreams haunt dark black nights>>>.<<<",
+        "activation_value": 0.0
+      },
+      {
+        "token": "dark",
+        "context": "Scary frightening terrifying dreams haunt>>> dark<<< black nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "black",
+        "context": "Scary frightening terrifying dreams haunt dark>>> black<<< nights.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "nights",
+        "context": "Scary frightening terrifying dreams haunt dark black>>> nights<<<.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "delicious",
+        "context": "Tasty>>> delicious<<< savory meals satisfy hungry famished guests.",
+        "activation_value": 0.0
+      },
+      {
+        "token": "T",
+        "context": ">>>T<<<asty delicious savory meals satisfy hungry famished guests",
+        "activation_value": 0.0
+      },
+      {
+        "token": "fam",
+        "context": "Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.",
+        "activation_value": 0.0
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Sensory Experience\",\n  \"explanation\": \"The feature detects words related to sensory experiences, such as tastes, smells, and textures, often used to describe pleasant or intense experiences\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  }
+}

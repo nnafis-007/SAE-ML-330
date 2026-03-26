@@ -14,7 +14,7 @@ Key Concepts:
 
 import torch
 import torch.nn as nn
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+from transformers import GPT2Model, GPT2Tokenizer
 from datasets import load_dataset
 from typing import Optional, List, Tuple, Dict
 from tqdm.auto import tqdm
@@ -61,10 +61,10 @@ class GPT2ActivationCollector:
         self.tokenizer = GPT2Tokenizer.from_pretrained(model_name)
         # GPT-2 doesn't have a padding token by default, so we set it to eos_token
         self.tokenizer.pad_token = self.tokenizer.eos_token
-        self.model = GPT2LMHeadModel.from_pretrained(
-            model_name,
-            output_hidden_states=True  # Critical: enables access to intermediate layers
-        ).to(device)
+        # Use GPT2Model since we only need hidden states, not LM logits.
+        # This avoids lm_head-related checkpoint load warnings.
+        self.model = GPT2Model.from_pretrained(model_name).to(device)
+        self.model.config.output_hidden_states = True
         
         # Set model to evaluation mode (disables dropout, etc.)
         self.model.eval()

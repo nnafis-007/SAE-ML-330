@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, useWindowDimensions, TouchableOpacity, ActivityIndicator, TextInput, Platform, Modal } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import FeatureDetails from './FeatureDetails';
@@ -11,6 +11,7 @@ const API_BASE = 'http://localhost:8000';
 const TAB_SAE = 'sae';
 const TAB_SYNONYM = 'synonym';
 const TAB_CAPS = 'caps';
+const TAB_FEATURE_MAP = 'feature-map';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState(TAB_SAE);
@@ -28,7 +29,7 @@ export default function App() {
   // Selection State
   const [activeTokenIndex, setActiveTokenIndex] = useState(null);
   const [hoveredTokenIndex, setHoveredTokenIndex] = useState(null);
-  const [topK, setTopK] = useState(3); // Default to Top 3 features
+  const [topK, setTopK] = useState(0); // 0 = all active features for selected token
   const [selectedFeature, setSelectedFeature] = useState(null); // Feature for details modal
 
   // Synonym test state
@@ -46,6 +47,15 @@ export default function App() {
   const [selectedCapsWords, setSelectedCapsWords] = useState([]);
   const [capsResults, setCapsResults] = useState(null);
   const [capsLoading, setCapsLoading] = useState(false);
+
+  // Feature lookup state (feature -> sentences/tokens from dataset)
+  const [lookupFeatureId, setLookupFeatureId] = useState('');
+  const [lookupMaxSentences, setLookupMaxSentences] = useState('200');
+  const [lookupMaxResults, setLookupMaxResults] = useState('100');
+  const [lookupMinActivation, setLookupMinActivation] = useState('0.0');
+  const [featureLookupLoading, setFeatureLookupLoading] = useState(false);
+  const [featureLookupError, setFeatureLookupError] = useState(null);
+  const [featureLookupResults, setFeatureLookupResults] = useState(null);
 
   const { width } = useWindowDimensions();
   const isLargeScreen = width > 768;
@@ -92,6 +102,15 @@ export default function App() {
     }
   }, [selectedModel]);
 
+  // Refresh analysis whenever Top K changes so backend returns matching feature count.
+  useEffect(() => {
+    if (!selectedModel || activeTab !== TAB_SAE) return;
+    const timer = setTimeout(() => {
+      analyzeText(inputText);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [topK, selectedModel, activeTab]);
+
   // Fetch synonym clusters and caps words metadata
   useEffect(() => {
     const fetchMeta = async () => {
@@ -128,7 +147,8 @@ export default function App() {
           text: textToAnalyze,
           model_id: selectedModel,
           analyzer: 'sae',
-          top_k: topK * 3, // Fetch more from backend, slice per token in UI
+          // 0 means "all active features" (handled in backend analyzer).
+          top_k: topK,
         }),
       });
       
@@ -220,6 +240,50 @@ export default function App() {
     }
   };
 
+  const runFeatureLookup = async () => {
+    if (!selectedModel) {
+      setFeatureLookupError('Please select a model first.');
+      return;
+    }
+
+    const parsedFeatureId = Number(lookupFeatureId);
+    if (!Number.isInteger(parsedFeatureId) || parsedFeatureId < 0) {
+      setFeatureLookupError('Enter a valid non-negative feature ID.');
+      return;
+    }
+
+    setFeatureLookupLoading(true);
+    setFeatureLookupError(null);
+    try {
+      const response = await fetch(`${API_BASE}/feature-activations`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model_id: selectedModel,
+          feature_id: parsedFeatureId,
+          dataset_name: 'MLCommons/peoples_speech',
+          dataset_config: 'validation',
+          split: 'validation',
+          max_sentences: Math.max(1, Number(lookupMaxSentences) || 200),
+          max_results: Math.max(1, Number(lookupMaxResults) || 100),
+          min_activation: Math.max(0, Number(lookupMinActivation) || 0),
+        }),
+      });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.detail || 'Feature activation lookup failed');
+      }
+
+      const data = await response.json();
+      setFeatureLookupResults(data);
+    } catch (e) {
+      setFeatureLookupError(e.message);
+    } finally {
+      setFeatureLookupLoading(false);
+    }
+  };
+
   const handleTokenClick = (index) => {
     if (activeTokenIndex === index) {
       setActiveTokenIndex(null); // Deselect if clicked again
@@ -239,6 +303,52 @@ export default function App() {
   };
 
   const activeToken = getActiveToken();
+  const visibleFeatureCount = topK > 0 ? topK : null;
+  const visibleActiveFeatures = activeToken
+    ? (visibleFeatureCount ? activeToken.features.slice(0, visibleFeatureCount) : activeToken.features)
+    : [];
+
+  const activatedTokenRows = useMemo(() => {
+    return tokens
+      .map((token, tokenIndex) => ({ token, tokenIndex }))
+      .filter(({ token }) => (token.features || []).length > 0)
+      .map(({ token, tokenIndex }) => {
+        const features = visibleFeatureCount ? token.features.slice(0, visibleFeatureCount) : token.features;
+        const start = Math.max(0, tokenIndex - 5);
+        const end = Math.min(tokens.length, tokenIndex + 6);
+        const before = tokens.slice(start, tokenIndex).map(t => t.text).join('');
+        const after = tokens.slice(tokenIndex + 1, end).map(t => t.text).join('');
+        return {
+          tokenIndex,
+          tokenText: token.text,
+          before,
+          after,
+          totalFeatures: token.features.length,
+          features,
+        };
+      });
+  }, [tokens, visibleFeatureCount]);
+
+  const featureToTokensRows = useMemo(() => {
+    const featureMap = new Map();
+    activatedTokenRows.forEach((row) => {
+      row.features.forEach((feature) => {
+        if (!featureMap.has(feature.id)) {
+          featureMap.set(feature.id, {
+            id: feature.id,
+            description: feature.description,
+            tokens: [],
+          });
+        }
+        featureMap.get(feature.id).tokens.push({
+          tokenText: row.tokenText,
+          tokenIndex: row.tokenIndex,
+          activation: feature.activation,
+        });
+      });
+    });
+    return Array.from(featureMap.values()).sort((a, b) => b.tokens.length - a.tokens.length);
+  }, [activatedTokenRows]);
 
   // Helper: signal badge color
   const signalColor = (interpretation) => {
@@ -284,14 +394,50 @@ export default function App() {
                 <Text style={styles.metricValue}>{cluster.universal_shared_features?.length ?? 0}</Text>
               </View>
             </View>
+
+            {/* Universal Shared Features */}
+            {cluster.universal_shared_features?.length > 0 && (
+              <View style={{ marginBottom: 15 }}>
+                <Text style={styles.pairwiseTitle}>Universal Shared Features (all words)</Text>
+                <View style={styles.featureChipList}>
+                  {cluster.universal_shared_features.map(feat => (
+                    <TouchableOpacity 
+                      key={feat.id} 
+                      style={styles.smallFeatureChip}
+                      onPress={() => setSelectedFeature(feat)}
+                    >
+                      <Text style={styles.featureChipText}>{feat.label || `Feature ${feat.id}`}</Text>
+                      <Text style={styles.featureChipId}>#{feat.id}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              </View>
+            )}
+
             {/* Pairwise detail */}
             <Text style={styles.pairwiseTitle}>Pairwise Comparison</Text>
             {cluster.pairwise?.map((pw, pi) => (
-              <View key={pi} style={styles.pairRow}>
-                <Text style={styles.pairWords}>{pw.word_a} ↔ {pw.word_b}</Text>
-                <Text style={styles.pairStat}>J={pw.jaccard?.toFixed(3)}</Text>
-                <Text style={styles.pairStat}>cos={pw.cosine_sim?.toFixed(3)}</Text>
-                <Text style={styles.pairStat}>shared={pw.shared_feature_count}</Text>
+              <View key={pi} style={styles.pairCard}>
+                <View style={styles.pairRow}>
+                  <Text style={styles.pairWords}>{pw.word_a} ↔ {pw.word_b}</Text>
+                  <Text style={styles.pairStat}>J={pw.jaccard?.toFixed(3)}</Text>
+                  <Text style={styles.pairStat}>cos={pw.cosine_sim?.toFixed(3)}</Text>
+                  <Text style={styles.pairStat}>shared={pw.shared_feature_count}</Text>
+                </View>
+                {pw.shared_features?.length > 0 && (
+                  <View style={styles.featureChipList}>
+                    {pw.shared_features.map(feat => (
+                      <TouchableOpacity 
+                        key={feat.id} 
+                        style={styles.smallFeatureChip}
+                        onPress={() => setSelectedFeature(feat)}
+                      >
+                        <Text style={styles.featureChipText}>{feat.label || `Feature ${feat.id}`}</Text>
+                        <Text style={styles.featureChipId}>#{feat.id}</Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                )}
               </View>
             ))}
           </View>
@@ -390,6 +536,12 @@ export default function App() {
         >
           <Text style={[styles.tabText, activeTab === TAB_CAPS && styles.tabTextActive]}>Caps Test</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.tabItem, activeTab === TAB_FEATURE_MAP && styles.tabItemActive]}
+          onPress={() => setActiveTab(TAB_FEATURE_MAP)}
+        >
+          <Text style={[styles.tabText, activeTab === TAB_FEATURE_MAP && styles.tabTextActive]}>Feature Map</Text>
+        </TouchableOpacity>
       </View>
 
       {/* ===================== SAE TAB ===================== */}
@@ -469,7 +621,7 @@ export default function App() {
         {/* Right Panel: Activated Feature */}
         <View style={[styles.panel, styles.rightPanel, isLargeScreen && styles.rightPanelLarge]}>
           <View style={styles.featuresHeaderRow}>
-             <Text style={styles.sectionTitle}>Top Features Activated</Text>
+             <Text style={styles.sectionTitle}>Activated Features</Text>
              
              {/* K Selector */}
              <View style={styles.kSelector}>
@@ -477,12 +629,20 @@ export default function App() {
                <TextInput 
                  style={styles.kInput}
                  value={String(topK)}
-                 onChangeText={(text) => setTopK(Number(text.replace(/[^0-9]/g, '')) || 1)}
+                 onChangeText={(text) => {
+                   const digitsOnly = text.replace(/[^0-9]/g, '');
+                   if (digitsOnly === '') {
+                     setTopK(0);
+                   } else {
+                     setTopK(Number(digitsOnly));
+                   }
+                 }}
                  keyboardType="numeric"
-                 maxLength={2}
+                 maxLength={4}
                />
              </View>
           </View>
+          <Text style={styles.kHint}>Set Top K to 0 to show all active features and scroll down the page.</Text>
           
           {activeToken ? (
              <View>
@@ -493,8 +653,12 @@ export default function App() {
                    </TouchableOpacity>
                  </View>
 
-                 <ScrollView style={styles.featuresScroll} nestedScrollEnabled={true}>
-                 {activeToken.features.slice(0, topK).map((feature, idx) => (
+                 <Text style={styles.featureCountText}>
+                   Showing {visibleActiveFeatures.length} of {activeToken.features.length} active features
+                 </Text>
+
+                 <View>
+                 {visibleActiveFeatures.map((feature) => (
                     <View key={feature.id} style={styles.featureCard}>
                         <View style={styles.featureHeader}>
                         <View style={styles.dot} />
@@ -510,7 +674,7 @@ export default function App() {
                         </View>
                     </View>
                  ))}
-                 </ScrollView>
+                     </View>
                  {activeToken.features.length === 0 && (
                      <Text>No active features for this token.</Text>
                  )}
@@ -717,6 +881,197 @@ export default function App() {
       </View>
       )}
 
+      {/* ===================== FEATURE MAP TAB ===================== */}
+      {activeTab === TAB_FEATURE_MAP && (
+      <View style={styles.contentContainer}>
+        <View style={styles.panel}>
+          <Text style={styles.sectionTitle}>Feature Map (Human-Readable)</Text>
+          <Text style={styles.instructionText}>
+            Maps activated tokens to their features with local sentence context.
+            Use this view to understand what each feature is responding to.
+          </Text>
+
+          <View style={styles.inputCard}>
+            <Text style={styles.featureMapSentenceLabel}>Current Sentence</Text>
+            <Text style={styles.featureMapSentence}>{inputText}</Text>
+          </View>
+
+          <View style={styles.featureMapMetaRow}>
+            <Text style={styles.featureMapMetaText}>Activated tokens: {activatedTokenRows.length}</Text>
+            <Text style={styles.featureMapMetaText}>Top K per token: {topK === 0 ? 'All' : topK}</Text>
+          </View>
+
+          <Text style={styles.subSectionTitle}>Feature -> All Dataset Activations</Text>
+          <View style={styles.featureLookupCard}>
+            <Text style={styles.instructionText}>
+              Select any feature ID and fetch sentences (+tokens) from MLCommons/peoples_speech where it activates.
+            </Text>
+
+            <View style={styles.featureLookupRow}>
+              <View style={styles.featureLookupField}>
+                <Text style={styles.inputLabel}>Feature ID</Text>
+                <TextInput
+                  style={styles.featureLookupInput}
+                  value={lookupFeatureId}
+                  onChangeText={(t) => setLookupFeatureId(t.replace(/[^0-9]/g, ''))}
+                  keyboardType="numeric"
+                  placeholder="e.g. 42"
+                />
+              </View>
+              <View style={styles.featureLookupField}>
+                <Text style={styles.inputLabel}>Max Sentences</Text>
+                <TextInput
+                  style={styles.featureLookupInput}
+                  value={lookupMaxSentences}
+                  onChangeText={(t) => setLookupMaxSentences(t.replace(/[^0-9]/g, ''))}
+                  keyboardType="numeric"
+                  placeholder="200"
+                />
+              </View>
+              <View style={styles.featureLookupField}>
+                <Text style={styles.inputLabel}>Max Results</Text>
+                <TextInput
+                  style={styles.featureLookupInput}
+                  value={lookupMaxResults}
+                  onChangeText={(t) => setLookupMaxResults(t.replace(/[^0-9]/g, ''))}
+                  keyboardType="numeric"
+                  placeholder="100"
+                />
+              </View>
+              <View style={styles.featureLookupField}>
+                <Text style={styles.inputLabel}>Min Activation</Text>
+                <TextInput
+                  style={styles.featureLookupInput}
+                  value={lookupMinActivation}
+                  onChangeText={(t) => setLookupMinActivation(t.replace(/[^0-9.]/g, ''))}
+                  keyboardType="numeric"
+                  placeholder="0.0"
+                />
+              </View>
+            </View>
+
+            <View style={styles.featureLookupActionsRow}>
+              <TouchableOpacity
+                style={[styles.button, featureLookupLoading && { opacity: 0.6 }]}
+                onPress={runFeatureLookup}
+                disabled={featureLookupLoading}
+              >
+                <Text style={styles.buttonText}>{featureLookupLoading ? 'SEARCHING...' : 'FIND ACTIVATIONS'}</Text>
+              </TouchableOpacity>
+              {!!selectedFeature?.id && (
+                <TouchableOpacity
+                  style={styles.secondaryButton}
+                  onPress={() => setLookupFeatureId(String(selectedFeature.id))}
+                >
+                  <Text style={styles.secondaryButtonText}>Use Selected Feature #{selectedFeature.id}</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+
+            {featureLookupError && (
+              <View style={styles.errorBox}>
+                <Text style={styles.errorText}>{featureLookupError}</Text>
+              </View>
+            )}
+
+            {featureLookupResults && (
+              <View style={styles.featureLookupResultsWrap}>
+                <View style={styles.resultsSummaryCard}>
+                  <Text style={styles.summaryTitle}>Feature</Text>
+                  <Text style={styles.summaryValue}>#{featureLookupResults.feature_id}</Text>
+                  <Text style={styles.clusterWords}>{featureLookupResults.feature_description}</Text>
+                  <Text style={styles.clusterWords}>
+                    Dataset: {featureLookupResults.dataset} [{featureLookupResults.split}] | Scanned {featureLookupResults.scanned_sentences} sentences / {featureLookupResults.scanned_tokens} tokens
+                  </Text>
+                  <Text style={styles.clusterWords}>
+                    Matches: {featureLookupResults.matches?.length ?? 0} shown ({featureLookupResults.total_matches ?? 0} total)
+                  </Text>
+                </View>
+
+                {(featureLookupResults.matches || []).map((match, idx) => (
+                  <View key={`lookup-match-${idx}`} style={styles.featureLookupMatchCard}>
+                    <View style={styles.featureMapTokenHeader}>
+                      <Text style={styles.featureMapTokenIndex}>Sentence #{match.sentence_index} | Token #{match.token_index}</Text>
+                      <Text style={styles.featureMapTokenCount}>Activation {match.activation?.toFixed?.(4) ?? match.activation}</Text>
+                    </View>
+                    <Text style={styles.featureMapContextText}>
+                      {match.left_context}
+                      <Text style={styles.featureMapContextToken}>{match.token}</Text>
+                      {match.right_context}
+                    </Text>
+                    <Text style={styles.featureLookupSentence}>{match.sentence}</Text>
+                  </View>
+                ))}
+              </View>
+            )}
+          </View>
+
+          {tokens.length === 0 && (
+            <View style={styles.placeholderCard}>
+              <Text style={styles.placeholderText}>No analysis found yet.</Text>
+              <Text style={styles.placeholderSubText}>Run ANALYZE in SAE Analysis tab first.</Text>
+            </View>
+          )}
+
+          {tokens.length > 0 && activatedTokenRows.length === 0 && (
+            <View style={styles.placeholderCard}>
+              <Text style={styles.placeholderText}>No activated tokens in current result.</Text>
+              <Text style={styles.placeholderSubText}>Try a different sentence or model checkpoint.</Text>
+            </View>
+          )}
+
+          {activatedTokenRows.length > 0 && (
+            <View>
+              <Text style={styles.subSectionTitle}>Token -> Features</Text>
+              {activatedTokenRows.map((row) => (
+                <View key={`token-${row.tokenIndex}`} style={styles.featureMapTokenCard}>
+                  <View style={styles.featureMapTokenHeader}>
+                    <Text style={styles.featureMapTokenIndex}>Token #{row.tokenIndex}</Text>
+                    <Text style={styles.featureMapTokenCount}>Features {row.features.length}/{row.totalFeatures}</Text>
+                  </View>
+                  <Text style={styles.featureMapContextText}>
+                    {row.before}
+                    <Text style={styles.featureMapContextToken}>{row.tokenText}</Text>
+                    {row.after}
+                  </Text>
+                  {row.features.map((feature) => (
+                    <TouchableOpacity
+                      key={`token-${row.tokenIndex}-feature-${feature.id}`}
+                      style={styles.featureMapFeatureRow}
+                      onPress={() => setSelectedFeature(feature)}
+                    >
+                      <Text style={styles.featureMapFeatureId}>#{feature.id}</Text>
+                      <Text style={styles.featureMapFeatureDesc}>{feature.description}</Text>
+                      <Text style={styles.featureMapFeatureActivation}>
+                        {feature.activation?.toFixed(2) ?? 'n/a'}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              ))}
+
+              <Text style={styles.subSectionTitle}>Feature -> Activated Tokens</Text>
+              {featureToTokensRows.map((featureRow) => (
+                <View key={`feature-${featureRow.id}`} style={styles.featureMapFeatureCard}>
+                  <Text style={styles.featureMapFeatureCardTitle}>#{featureRow.id} {featureRow.description}</Text>
+                  <Text style={styles.featureMapFeatureCardMeta}>Activated by {featureRow.tokens.length} token(s)</Text>
+                  <View style={styles.featureMapTokenChips}>
+                    {featureRow.tokens.map((entry, idx) => (
+                      <View key={`feature-${featureRow.id}-token-${idx}`} style={styles.featureMapTokenChip}>
+                        <Text style={styles.featureMapTokenChipText}>
+                          {entry.tokenText.trim() || '(space)'} @ {entry.tokenIndex}
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                </View>
+              ))}
+            </View>
+          )}
+        </View>
+      </View>
+      )}
+
       </ScrollView>
       
       <View style={styles.footer}>
@@ -912,8 +1267,13 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 4,
     padding: 5,
-    width: 40,
+    width: 56,
     textAlign: 'center',
+  },
+  kHint: {
+    fontSize: 12,
+    color: '#6b7280',
+    marginBottom: 10,
   },
 
   activeTokenChip: {
@@ -937,10 +1297,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  // Feature Card
-  featuresScroll: {
-    maxHeight: 400, // Show roughly 5 items (approx 80px each)
+  featureCountText: {
+    fontSize: 12,
+    color: '#4b5563',
+    marginBottom: 10,
   },
+
+  // Feature Card
   featureCard: {
     backgroundColor: '#e6fcf5',
     borderRadius: 12,
@@ -1189,6 +1552,40 @@ const styles = StyleSheet.create({
     color: '#64748b',
     fontFamily: Platform.OS === 'web' ? 'monospace' : undefined,
   },
+  pairCard: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#f1f5f9',
+    paddingBottom: 8,
+    marginBottom: 4,
+  },
+  featureChipList: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 6,
+    paddingHorizontal: 8,
+    marginTop: 4,
+  },
+  smallFeatureChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f1f5f9',
+    borderRadius: 6,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderWidth: 1,
+    borderColor: '#e2e8f0',
+  },
+  featureChipText: {
+    fontSize: 11,
+    color: '#334155',
+    fontWeight: '500',
+    marginRight: 4,
+  },
+  featureChipId: {
+    fontSize: 10,
+    color: '#64748b',
+    fontWeight: 'bold',
+  },
 
   // ── Mode toggle ──────────────────────────────────────────────────────────
   modeToggleRow: {
@@ -1231,5 +1628,201 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     marginBottom: 14,
     lineHeight: 18,
+  },
+
+  // Feature map tab
+  subSectionTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1f2937',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  featureMapSentenceLabel: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#6b7280',
+    marginBottom: 6,
+  },
+  featureMapSentence: {
+    fontSize: 14,
+    color: '#111827',
+    lineHeight: 22,
+  },
+  featureMapMetaRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 12,
+    marginBottom: 12,
+  },
+  featureMapMetaText: {
+    fontSize: 12,
+    color: '#4b5563',
+    fontWeight: '600',
+  },
+  featureMapTokenCard: {
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 10,
+  },
+  featureMapTokenHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 6,
+  },
+  featureMapTokenIndex: {
+    fontSize: 12,
+    color: '#374151',
+    fontWeight: '700',
+  },
+  featureMapTokenCount: {
+    fontSize: 12,
+    color: '#6b7280',
+    fontWeight: '600',
+  },
+  featureMapContextText: {
+    fontSize: 14,
+    color: '#374151',
+    lineHeight: 22,
+    marginBottom: 8,
+  },
+  featureMapContextToken: {
+    backgroundColor: '#d1fae5',
+    color: '#065f46',
+    fontWeight: '700',
+    borderRadius: 4,
+  },
+  featureMapFeatureRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ecfeff',
+    backgroundColor: '#f0fdfa',
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    marginBottom: 6,
+    gap: 8,
+  },
+  featureMapFeatureId: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#0f766e',
+    minWidth: 42,
+  },
+  featureMapFeatureDesc: {
+    flex: 1,
+    fontSize: 13,
+    color: '#134e4a',
+  },
+  featureMapFeatureActivation: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: '#0f766e',
+    minWidth: 36,
+    textAlign: 'right',
+  },
+  featureMapFeatureCard: {
+    backgroundColor: '#f8fafc',
+    borderWidth: 1,
+    borderColor: '#e2e8f0',
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 10,
+  },
+  featureMapFeatureCardTitle: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#1e293b',
+    marginBottom: 4,
+  },
+  featureMapFeatureCardMeta: {
+    fontSize: 12,
+    color: '#64748b',
+    marginBottom: 8,
+  },
+  featureMapTokenChips: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  featureMapTokenChip: {
+    backgroundColor: '#e2e8f0',
+    borderRadius: 14,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+  },
+  featureMapTokenChipText: {
+    fontSize: 12,
+    color: '#334155',
+    fontWeight: '600',
+  },
+  featureLookupCard: {
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#dbeafe',
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 14,
+  },
+  featureLookupRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+  },
+  featureLookupField: {
+    minWidth: 120,
+    flexGrow: 1,
+  },
+  featureLookupInput: {
+    borderWidth: 1,
+    borderColor: '#cbd5e1',
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    fontSize: 14,
+    color: '#111827',
+    outlineStyle: 'none',
+  },
+  featureLookupActionsRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+    alignItems: 'center',
+    marginTop: 12,
+    marginBottom: 6,
+  },
+  secondaryButton: {
+    borderWidth: 1,
+    borderColor: '#93c5fd',
+    backgroundColor: '#eff6ff',
+    borderRadius: 6,
+    paddingVertical: 9,
+    paddingHorizontal: 12,
+  },
+  secondaryButtonText: {
+    color: '#1d4ed8',
+    fontWeight: '700',
+    fontSize: 12,
+  },
+  featureLookupResultsWrap: {
+    marginTop: 12,
+  },
+  featureLookupMatchCard: {
+    backgroundColor: '#ffffff',
+    borderWidth: 1,
+    borderColor: '#e2e8f0',
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 10,
+  },
+  featureLookupSentence: {
+    fontSize: 13,
+    color: '#475569',
+    lineHeight: 20,
+    marginTop: 4,
   },
 });

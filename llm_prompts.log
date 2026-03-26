@@ -1,0 +1,285 @@
+
+================================================================================
+FEATURE INDEX: 8221
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 8221
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=2.014]  Massive gargantuan be>>>hem<<<oths roam desolate barren wastelands.
+   2. [act=1.796]  Bitter cold freezing winters>>> follow<<< warm hot summers.
+   3. [act=0.894]  Happy joyful cheerful emotions>>> bright<<<en gloomy somber days.
+   4. [act=0.729]  Gentle soft mild breezes>>> stir<<< colorful vibrant leaves.
+   5. [act=0.340]  Mysterious strange odd occurrences>>> baff<<<le wise learned men.
+   6. [act=0.038]  Tasty delicious savory meals>>> satisfy<<< hungry famished guests.
+   7. [act=0.000]  Tasty>>> delicious<<< savory meals satisfy hungry famished guests.
+   8. [act=0.000]  Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.
+   9. [act=0.000]  Scary frightening terrifying dreams haunt>>> dark<<< black nights.
+  10. [act=0.000]  Tasty delicious savory>>> meals<<< satisfy hungry famished guests.
+  11. [act=0.000]  Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.
+  12. [act=0.000]  Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.
+  13. [act=0.000]  >>>T<<<asty delicious savory meals satisfy hungry famished guests
+  14. [act=0.000]  Scary frightening terrifying dreams haunt dark>>> black<<< nights.
+  15. [act=0.000]  Scary frightening terrifying dreams haunt dark black nights>>>.<<<
+
+Most frequent activating tokens (top 10): "hem", "follow", "bright", "stir", "baff", "satisfy", "delicious", "fam", "dark", "meals"
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Adjective Intensifiers",
+  "explanation": "The feature detects words that intensify or modify the meaning of adjacent adjectives, often indicating extreme or heightened states",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE INDEX: 9295
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 9295
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=2.486]  Happy joyful cheerful emotions brighten gloomy somber days>>>.<<<
+   2. [act=1.224]  Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.
+   3. [act=0.702]  Honest truthful sincere friends provide helpful useful advice>>>.<<<
+   4. [act=0.602]  Fast swift rapid movements characterize agile nimble creatures>>>.<<<
+   5. [act=0.319]  Bitter cold freezing winters follow>>> warm<<< hot summers.
+   6. [act=0.236]  sterious strange odd occurrences baffle wise learned men>>>.<<<
+   7. [act=0.141]  Bitter cold freezing winters follow warm hot>>> summers<<<.
+   8. [act=0.079]   gargantuan behemoths roam desolate barren wast>>>el<<<ands.
+   9. [act=0.000]  Tasty delicious savory>>> meals<<< satisfy hungry famished guests.
+  10. [act=0.000]  Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.
+  11. [act=0.000]  Scary frightening terrifying dreams haunt dark>>> black<<< nights.
+  12. [act=0.000]  Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.
+  13. [act=0.000]  Bright luminous radiant stars illuminate deep black>>> space<<<.
+  14. [act=0.000]  Scary frightening terrifying dreams haunt dark black>>> nights<<<.
+  15. [act=0.000]  Scary frightening terrifying dreams haunt dark black nights>>>.<<<
+
+Most frequent activating tokens (top 10): ".", "fam", "warm", "summers", "el", "meals", "ory", "black", "sav", "space"
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Emotional Intensity",
+  "explanation": "The feature detects words and phrases that convey strong emotions or intense experiences, such as happiness, tastiness, or fear",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE INDEX: 4423
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 4423
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=5.783]  Scary frightening terrifying dreams haunt dark>>> black<<< nights.
+   2. [act=0.000]  Tasty delicious savory meals satisfy hungry fam>>>ished<<< guests.
+   3. [act=0.000]  Scary frightening terrifying dreams haunt>>> dark<<< black nights.
+   4. [act=0.000]  Scary frightening terrifying dreams haunt dark black>>> nights<<<.
+   5. [act=0.000]  Scary frightening terrifying dreams haunt dark black nights>>>.<<<
+   6. [act=0.000]  >>>T<<<asty delicious savory meals satisfy hungry famished guests
+   7. [act=0.000]  T>>>asty<<< delicious savory meals satisfy hungry famished guests.
+   8. [act=0.000]  Tasty>>> delicious<<< savory meals satisfy hungry famished guests.
+   9. [act=0.000]  Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.
+  10. [act=0.000]  Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.
+  11. [act=0.000]  Tasty delicious savory>>> meals<<< satisfy hungry famished guests.
+  12. [act=0.000]  Tasty delicious savory meals>>> satisfy<<< hungry famished guests.
+  13. [act=0.000]  Tasty delicious savory meals satisfy>>> hungry<<< famished guests.
+  14. [act=0.000]  Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.
+  15. [act=0.000]  Bright luminous radiant stars>>> illuminate<<< deep black space.
+
+Most frequent activating tokens (top 10): "black", "ished", "dark", "nights", ".", "T", "asty", "delicious", "sav", "ory"
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Emphasis on Darkness",
+  "explanation": "The feature detects words related to darkness, fear, or intensity, often in descriptive phrases with strong adjectives",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE INDEX: 9275
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 9275
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=1.945]  Mysterious strange>>> odd<<< occurrences baffle wise learned men.
+   2. [act=1.367]  antuan behemoths roam desolate barren wastel>>>ands<<<.
+   3. [act=1.351]  Tasty delicious savory meals satisfy hungry famished>>> guests<<<.
+   4. [act=0.611]  Honest truthful>>> sincere<<< friends provide helpful useful advice.
+   5. [act=0.307]  Fast-paced speedy quick changes create>>> chaotic<<< messy situations.
+   6. [act=0.064]  Fast swift rapid movements characterize agile nimble>>> creatures<<<.
+   7. [act=0.000]  Tasty delicious savory meals>>> satisfy<<< hungry famished guests.
+   8. [act=0.000]  Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.
+   9. [act=0.000]  Tasty delicious savory>>> meals<<< satisfy hungry famished guests.
+  10. [act=0.000]  Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.
+  11. [act=0.000]  Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.
+  12. [act=0.000]  Scary frightening terrifying dreams haunt dark>>> black<<< nights.
+  13. [act=0.000]  Scary frightening terrifying dreams haunt dark black>>> nights<<<.
+  14. [act=0.000]  Scary frightening terrifying dreams haunt dark black nights>>>.<<<
+  15. [act=0.000]  Scary frightening terrifying dreams haunt>>> dark<<< black nights.
+
+Most frequent activating tokens (top 10): "odd", "ands", "guests", "sincere", "chaotic", "creatures", "satisfy", "fam", "meals", "ory"
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Emotive Intensifiers",
+  "explanation": "The feature detects words that intensify or describe strong emotions, sensations, or experiences, such as 'odd', 'sincere', 'chaotic', and 'famished'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE INDEX: 3986
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 3986
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=2.311]  Clean>>> pure<<< pristine lakes reflect jagged sharp peaks.
+   2. [act=2.235]  Scented fragrant>>> aromatic<<< flowers attract small tiny insects.
+   3. [act=1.062]  Gentle soft>>> mild<<< breezes stir colorful vibrant leaves.
+   4. [act=0.000]  T>>>asty<<< delicious savory meals satisfy hungry famished guests.
+   5. [act=0.000]  Tasty delicious savory meals>>> satisfy<<< hungry famished guests.
+   6. [act=0.000]  Tasty delicious savory>>> meals<<< satisfy hungry famished guests.
+   7. [act=0.000]  Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.
+   8. [act=0.000]  Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.
+   9. [act=0.000]  Scary frightening terrifying dreams haunt dark black nights>>>.<<<
+  10. [act=0.000]  Scary frightening terrifying dreams haunt>>> dark<<< black nights.
+  11. [act=0.000]  Scary frightening terrifying dreams haunt dark>>> black<<< nights.
+  12. [act=0.000]  Scary frightening terrifying dreams haunt dark black>>> nights<<<.
+  13. [act=0.000]  Tasty>>> delicious<<< savory meals satisfy hungry famished guests.
+  14. [act=0.000]  >>>T<<<asty delicious savory meals satisfy hungry famished guests
+  15. [act=0.000]  Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.
+
+Most frequent activating tokens (top 10): "pure", "aromatic", "mild", "asty", "satisfy", "meals", "ory", "sav", ".", "dark"
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Sensory Experience",
+  "explanation": "The feature detects words related to sensory experiences, such as tastes, smells, and textures, often used to describe pleasant or intense experiences",
+  "confidence": "high"
+}
+================================================================================

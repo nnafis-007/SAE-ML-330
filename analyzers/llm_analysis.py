@@ -38,8 +38,10 @@ Typical usage
 from __future__ import annotations
 
 import json
+import argparse
 import os
 import re
+import sys
 import time
 import warnings
 from dataclasses import dataclass, field, asdict
@@ -49,6 +51,12 @@ from typing import List, Optional, Dict, Any
 import torch
 from tqdm.auto import tqdm
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
+
+# Ensure local project modules under src/ are importable when running this file directly.
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
 
 from sae_model import SparseAutoencoder
 
@@ -105,6 +113,7 @@ class LabelingConfig:
     openai_api_key: Optional[str] = None
     groq_api_key: Optional[str] = None    # from console.groq.com — free tier
     ollama_host: str = "http://localhost:11434"
+    prompt_log_path: Optional[str] = "llm_prompts.log"  # Log all prompts/responses here
 
 
 # ---------------------------------------------------------------------------
@@ -246,11 +255,18 @@ class _GroqBackend:
             ) from exc
 
         api_key = cfg.groq_api_key or os.environ.get("GROQ_API_KEY")
+        
+        # Fallback: try reading from apikey.txt in project root
+        if not api_key:
+            apikey_path = PROJECT_ROOT / "apikey.txt"
+            if apikey_path.exists():
+                api_key = apikey_path.read_text().strip().replace("+", "") # Remove '+' from the user's snippet if present
+
         if not api_key:
             raise EnvironmentError(
                 "No Groq API key found.  Either pass it via "
                 "LabelingConfig(groq_api_key='gsk_...') or set the "
-                "GROQ_API_KEY environment variable.\n"
+                "GROQ_API_KEY environment variable, or place it in apikey.txt.\n"
                 "Get a free key at: https://console.groq.com"
             )
         self.client = openai.OpenAI(
@@ -468,7 +484,28 @@ class FeatureLabeler:
 
         raw = ""
         try:
+            # 1. Log the prompts if enabled
+            if self.cfg.prompt_log_path:
+                with open(self.cfg.prompt_log_path, "a", encoding="utf-8") as f:
+                    f.write("\n" + "="*80 + "\n")
+                    f.write(f"FEATURE INDEX: {feature_idx}\n")
+                    f.write("-" * 40 + "\n")
+                    f.write("SYSTEM PROMPT:\n")
+                    f.write(f"{_SYSTEM_PROMPT}\n")
+                    f.write("-" * 40 + "\n")
+                    f.write("USER PROMPT:\n")
+                    f.write(f"{user_prompt}\n")
+                    f.write("-" * 40 + "\n")
+
             raw = self._backend.call(_SYSTEM_PROMPT, user_prompt)
+            
+            # 2. Log the response if enabled
+            if self.cfg.prompt_log_path:
+                with open(self.cfg.prompt_log_path, "a", encoding="utf-8") as f:
+                    f.write("LLM RESPONSE:\n")
+                    f.write(f"{raw}\n")
+                    f.write("="*80 + "\n")
+
             parsed = self._parse_response(raw)
             return LabelResult(
                 feature_idx=feature_idx,
@@ -1033,17 +1070,133 @@ if __name__ == "__main__":
     Run:
         OPENAI_API_KEY=sk-... python src/analysis.py
     """
-    import sys
-    sys.path.insert(0, str(Path(__file__).parent))
+    sys.path.insert(0, str(SRC_DIR))
 
     from sae_model import SparseAutoencoder
     from data_collection import GPT2ActivationCollector
+
+    parser = argparse.ArgumentParser(
+        description="Label SAE features with an LLM using GPT-2 activations."
+    )
+    parser.add_argument(
+        "--dataset",
+        type=str,
+        default="openwebtext",
+        help="Hugging Face dataset name. Use empty string to use built-in sample_texts.",
+    )
+    parser.add_argument(
+        "--num-texts",
+        type=int,
+        default=4000,
+        help="Number of texts to load from dataset when --dataset is set.",
+    )
+    parser.add_argument(
+        "--dataset-split",
+        type=str,
+        default="train",
+        help="Dataset split name.",
+    )
+    parser.add_argument(
+        "--dataset-text-field",
+        type=str,
+        default=None,
+        help="Optional explicit text field in the dataset records.",
+    )
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=8,
+        help="Batch size for GPT-2 activation collection.",
+    )
+    parser.add_argument(
+        "--max-length",
+        type=int,
+        default=128,
+        help="Max token length per text for activation collection and token maps.",
+    )
+    parser.add_argument(
+        "--label-all-alive",
+        action="store_true",
+        help="Label all alive features found in the activation corpus.",
+    )
+    parser.add_argument(
+        "--num-features",
+        type=int,
+        default=5,
+        help="If --label-all-alive is not set, label this many mid-ranked alive features.",
+    )
+    parser.add_argument(
+        "--save-path",
+        type=str,
+        default="feature_labels.json",
+        help="Output JSON file for labels.",
+    )
+    parser.add_argument(
+        "--prompt-log-path",
+        type=str,
+        default="llm_prompts.log",
+        help="Log file path for all LLM prompts and responses.",
+    )
+    parser.add_argument(
+        "--backend",
+        type=str,
+        default="groq",
+        choices=["openai", "groq", "ollama"],
+        help="LLM backend.",
+    )
+    parser.add_argument(
+        "--model",
+        type=str,
+        default="llama-3.3-70b-versatile",
+        help="Model name for selected backend.",
+    )
+    parser.add_argument(
+        "--request-delay",
+        type=float,
+        default=0.2,
+        help="Delay between LLM requests.",
+    )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Resume labeling from --save-path if it exists.",
+    )
+    parser.add_argument(
+        "--activation-cache-path",
+        type=str,
+        default="checkpoints/llm_analysis_activation_cache.pt",
+        help="Path to activation/token-map cache (.pt).",
+    )
+    parser.add_argument(
+        "--no-cache-load",
+        action="store_true",
+        help="Do not load from --activation-cache-path even if it exists.",
+    )
+    parser.add_argument(
+        "--no-cache-save",
+        action="store_true",
+        help="Do not save activation/token-map cache after collection.",
+    )
+    args = parser.parse_args()
 
     # ------------------------------------------------------------------ #
     # 1.  Load the trained SAE
     # ------------------------------------------------------------------ #
     print("Loading SAE checkpoint…")
-    payload = torch.load("checkpoints/best_model.pt", map_location="cpu")
+    checkpoint_candidates = [
+        # PROJECT_ROOT / "checkpoints" / "best_model.pt",
+        PROJECT_ROOT / "checkpoints" / "FC_SAE_Best.pt",
+        # PROJECT_ROOT / "checkpoints" / "best_model x48.pt",
+    ]
+    ckpt_path = next((p for p in checkpoint_candidates if p.exists()), None)
+    if ckpt_path is None:
+        raise FileNotFoundError(
+            "No checkpoint found. Tried: "
+            + ", ".join(str(p) for p in checkpoint_candidates)
+        )
+
+    payload = torch.load(str(ckpt_path), map_location="cpu")
+    print(f"  checkpoint={ckpt_path}")
 
     # Architecture params saved under "hyperparameters" by the trainer.
     hp    = payload.get("hyperparameters", {})
@@ -1059,7 +1212,7 @@ if __name__ == "__main__":
     sae.eval()
 
     # ------------------------------------------------------------------ #
-    # 2.  Sample corpus
+    # 2.  Sample corpus fallback
     # ------------------------------------------------------------------ #
     sample_texts = [
         "Massive gargantuan behemoths roam desolate barren wastelands.",
@@ -1087,33 +1240,116 @@ if __name__ == "__main__":
     # ------------------------------------------------------------------ #
     # 3.  Collect GPT-2 activations FOR THESE EXACT TEXTS
     #     (same layer the SAE was trained on)
+    #     with optional checkpointing of activations/token maps
     # ------------------------------------------------------------------ #
-    print(f"\nCollecting GPT-2 activations from sample corpus (layer {layer_index})…")
-    collector = GPT2ActivationCollector(
-        model_name="gpt2",
-        layer_index=layer_index,
-    )
-    activations = collector.collect_activations(
-        texts=sample_texts,
-        batch_size=4,
-        max_length=128,
-    )
-    # activations: (total_tokens_in_sample_texts, d_model)
-    print(f"  Collected {activations.shape[0]} token activations.")
+    use_dataset = bool(args.dataset and args.dataset.strip())
+    cache_path = Path(args.activation_cache_path)
+    tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+    tokenizer.pad_token = tokenizer.eos_token
 
-    tokenizer = collector.tokenizer   # reuse the same tokenizer
+    cache_loaded = False
+    if cache_path.exists() and not args.no_cache_load:
+        print(f"\nLoading activation cache from {cache_path}…")
+        try:
+            cache = torch.load(str(cache_path), map_location="cpu")
+            activations = cache["activations"].float().cpu()
+            sample_texts = cache["texts"]
+            token_ids = cache.get("token_ids")
+            doc_map = cache.get("token_doc_map")
+            pos_map = cache.get("token_pos_map")
 
-    # ------------------------------------------------------------------ #
-    # 4.  Build token maps from the SAME sample_texts
-    #     → rows match activations 1-to-1
-    # ------------------------------------------------------------------ #
-    print("Building token maps…")
-    token_ids, doc_map, pos_map = build_token_maps(
-        sample_texts, tokenizer, max_length=128
-    )
-    assert len(doc_map) == activations.shape[0], (
-        f"Token map length {len(doc_map)} != activations rows {activations.shape[0]}"
-    )
+            if token_ids is None or doc_map is None or pos_map is None:
+                print("  Cache missing token maps. Rebuilding from cached texts…")
+                token_ids, doc_map, pos_map = build_token_maps(
+                    sample_texts, tokenizer, max_length=args.max_length
+                )
+
+            if len(doc_map) != activations.shape[0]:
+                raise ValueError(
+                    f"Cached token map length {len(doc_map)} != activations rows {activations.shape[0]}"
+                )
+
+            meta = cache.get("meta", {})
+            print(
+                "  Cache loaded: "
+                f"tokens={activations.shape[0]}, texts={len(sample_texts)}, "
+                f"dataset={meta.get('dataset', 'unknown')}, split={meta.get('split', 'unknown')}"
+            )
+            cache_loaded = True
+        except Exception as exc:  # noqa: BLE001
+            print(f"  Cache load failed ({exc}). Falling back to fresh collection.")
+
+    if not cache_loaded:
+        if use_dataset:
+            print(
+                f"\nCollecting GPT-2 activations from Hugging Face dataset "
+                f"'{args.dataset}' ({args.num_texts} texts, split='{args.dataset_split}', "
+                f"layer {layer_index})…"
+            )
+        else:
+            print(
+                f"\nCollecting GPT-2 activations from built-in sample corpus "
+                f"(layer {layer_index})…"
+            )
+
+        collector = GPT2ActivationCollector(
+            model_name="gpt2",
+            layer_index=layer_index,
+        )
+        tokenizer = collector.tokenizer   # reuse the exact tokenizer from collection
+
+        if use_dataset:
+            activations, sample_texts = collector.collect_from_dataset_with_texts(
+                dataset_name=args.dataset,
+                split=args.dataset_split,
+                num_texts=args.num_texts,
+                text_field=args.dataset_text_field,
+                batch_size=args.batch_size,
+                max_length=args.max_length,
+                max_samples=args.num_texts * max(args.max_length, 1),
+            )
+        else:
+            activations = collector.collect_activations(
+                texts=sample_texts,
+                batch_size=args.batch_size,
+                max_length=args.max_length,
+            )
+
+        # activations: (total_tokens_in_sample_texts, d_model)
+        print(f"  Collected {activations.shape[0]} token activations.")
+
+        # ------------------------------------------------------------------ #
+        # 4.  Build token maps from the SAME sample_texts
+        #     → rows match activations 1-to-1
+        # ------------------------------------------------------------------ #
+        print("Building token maps…")
+        token_ids, doc_map, pos_map = build_token_maps(
+            sample_texts, tokenizer, max_length=args.max_length
+        )
+        assert len(doc_map) == activations.shape[0], (
+            f"Token map length {len(doc_map)} != activations rows {activations.shape[0]}"
+        )
+
+        if not args.no_cache_save:
+            cache_path.parent.mkdir(parents=True, exist_ok=True)
+            torch.save(
+                {
+                    "activations": activations.cpu(),
+                    "texts": sample_texts,
+                    "token_ids": token_ids,
+                    "token_doc_map": doc_map,
+                    "token_pos_map": pos_map,
+                    "meta": {
+                        "dataset": args.dataset if use_dataset else "built_in_sample",
+                        "split": args.dataset_split if use_dataset else "n/a",
+                        "num_texts": len(sample_texts),
+                        "max_length": args.max_length,
+                        "layer_index": layer_index,
+                    },
+                },
+                str(cache_path),
+            )
+            print(f"  Saved activation cache to {cache_path}")
 
     # ------------------------------------------------------------------ #
     # 5.  Find top-5 most active features across this mini-corpus
@@ -1130,33 +1366,44 @@ if __name__ == "__main__":
     alive_sorted = mean_acts.argsort(descending=True)
     alive_sorted = alive_sorted[mean_acts[alive_sorted] > 0]
 
-    # Pick 5 features from the middle of the alive ranking.
     n_alive = len(alive_sorted)
-    mid = n_alive // 2
-    mid_feats = alive_sorted[mid - 2 : mid + 3].tolist()   # 5 around the median
-    print(f"\nAlive features: {n_alive}  |  Median rank: {mid}")
-    print(f"Mid-range feature indices (ranks {mid-2}–{mid+2}): {mid_feats}")
+    if args.label_all_alive:
+        target_features = alive_sorted.tolist()
+        print(f"\nAlive features: {n_alive}")
+        print("Label mode: ALL alive features")
+    else:
+        # Pick N features from the middle of the alive ranking.
+        n_pick = max(1, min(args.num_features, n_alive))
+        mid = n_alive // 2
+        half = n_pick // 2
+        start = max(0, min(mid - half, n_alive - n_pick))
+        end = start + n_pick
+        target_features = alive_sorted[start:end].tolist()
+        print(f"\nAlive features: {n_alive}  |  Median rank: {mid}")
+        print(f"Mid-range feature indices (ranks {start}–{end-1}): {target_features}")
 
     # ------------------------------------------------------------------ #
     # 6.  Configure LLM and run labeling
     # ------------------------------------------------------------------ #
     cfg = LabelingConfig(
-        backend="groq",
-        model="llama-3.3-70b-versatile",  # free on Groq; change to "mixtral-8x7b-32768" etc.
+        backend=args.backend,
+        model=args.model,
         top_k=min(15, activations.shape[0]),
-        request_delay=0.2,   # Groq is fast; short delay is fine
+        request_delay=args.request_delay,
+        prompt_log_path=args.prompt_log_path,
     )
 
     labeler = FeatureLabeler(sae, tokenizer, cfg)
 
     print("\nLabeling features…")
     results = labeler.label_features_from_activations(
-        feature_indices=mid_feats,
+        feature_indices=target_features,
         activations=activations,
         token_ids=token_ids,
         token_doc_map=doc_map,
         token_pos_map=pos_map,
-        save_path="feature_labels.json",
+        save_path=args.save_path,
+        resume=args.resume,
     )
 
     FeatureLabeler.print_summary(results)

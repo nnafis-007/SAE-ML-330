@@ -14,6 +14,7 @@ and cached so repeated requests are fast.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -161,8 +162,17 @@ class SAEAnalyzer(BaseAnalyzer):
         tokens_data: List[Dict[str, Any]] = []
         for i, tid in enumerate(token_id_list):
             token_str = tokenizer.decode([tid])
+            
+            # Skip features for the first token (often an attention sink/BOS)
+            if i == 0:
+                tokens_data.append({
+                    "text": token_str,
+                    "features": [],
+                    "info": "First token (attention sink) skipped"
+                })
+                continue
+                
             feat_vec = features[i].cpu()
-
             active = int((feat_vec > 0).sum().item())
             k = min(top_k, max(active, 1))
             top_vals, top_idxs = torch.topk(feat_vec, k)
@@ -282,6 +292,157 @@ class SAEAnalyzer(BaseAnalyzer):
             "confidence": result.confidence,
             "top_tokens": result.top_tokens,
             "error": result.error,
+        }
+
+    def find_feature_activations(
+        self,
+        model_id: str,
+        feature_id: int,
+        dataset_name: str = "MLCommons/peoples_speech",
+        dataset_config: str = "validation",
+        split: str = "validation",
+        max_sentences: int = 200,
+        max_results: int = 100,
+        min_activation: float = 0.0,
+        text_field: Optional[str] = None,
+        max_length: int = 128,
+        seed: int = 0,
+    ) -> Dict[str, Any]:
+        """
+        Find sentence/token examples where a given SAE feature activates.
+
+        This scans a sampled subset of the requested dataset split, computes
+        token-level SAE activations, and returns tokens whose value for the
+        selected ``feature_id`` exceeds ``min_activation``.
+        """
+        checkpoint_path = str(self._checkpoints_dir / model_id)
+        info = self._load_sae(checkpoint_path)
+        sae: SparseAutoencoder = info["sae"]
+        layer_index: int = info["layer_index"]
+        d_hidden: int = int(info["d_hidden"])
+
+        if feature_id < 0 or feature_id >= d_hidden:
+            raise ValueError(f"feature_id must be in [0, {d_hidden - 1}]")
+
+        collector = self._get_collector(layer_index)
+        tokenizer = collector.tokenizer
+        labels = self._load_feature_labels(checkpoint_path)
+
+        # Lazy import keeps server startup fast.
+        from datasets import Audio, load_dataset  # noqa: E402
+
+        ds = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
+
+        # People's Speech contains audio columns; disable decode and keep only
+        # text-like columns so torchcodec is never required for this endpoint.
+        try:
+            features = getattr(ds, "features", None) or {}
+            for col, feat in features.items():
+                if isinstance(feat, Audio):
+                    ds = ds.cast_column(col, Audio(decode=False))
+        except Exception:
+            pass
+        try:
+            ds = ds.shuffle(seed=seed, buffer_size=max(1000, max_sentences * 4))
+        except Exception:
+            # Some streaming sources may not support shuffle.
+            pass
+
+        candidate_fields = [
+            text_field,
+            "text",
+            "sentence",
+            "transcript",
+            "content",
+            "article",
+            "document",
+        ]
+        candidate_fields = [f for f in candidate_fields if f]
+
+        available_cols = list((getattr(ds, "features", None) or {}).keys())
+        selected_text_fields = [f for f in candidate_fields if f in available_cols]
+        if selected_text_fields:
+            try:
+                ds = ds.select_columns(selected_text_fields)
+            except Exception:
+                # Older dataset wrappers may not support select_columns.
+                pass
+
+        texts: List[str] = []
+        for example in ds:
+            value = ""
+            for field in candidate_fields:
+                raw = example.get(field)
+                if isinstance(raw, str) and raw.strip():
+                    value = raw.strip()
+                    break
+            if value:
+                texts.append(value)
+            if len(texts) >= max_sentences:
+                break
+
+        hits: List[Dict[str, Any]] = []
+        total_tokens_scanned = 0
+
+        with torch.no_grad():
+            for sent_idx, sentence in enumerate(texts):
+                encoding = tokenizer(
+                    sentence,
+                    return_tensors="pt",
+                    truncation=True,
+                    max_length=max_length,
+                    add_special_tokens=False,
+                )
+                input_ids = encoding["input_ids"].to(collector.device)
+                token_id_list = input_ids[0].tolist()
+                if not token_id_list:
+                    continue
+
+                outputs = collector.model(input_ids)
+                hidden_states = outputs.hidden_states[layer_index + 1][0]
+                feature_mat = sae.encode(hidden_states.to(self._device)).cpu()
+
+                feat_col = feature_mat[:, feature_id]
+                active_positions = torch.nonzero(feat_col > float(min_activation), as_tuple=False).flatten().tolist()
+                if not active_positions:
+                    total_tokens_scanned += len(token_id_list)
+                    continue
+
+                decoded_tokens = [tokenizer.decode([tid]) for tid in token_id_list]
+
+                for pos in active_positions:
+                    token_text = decoded_tokens[pos]
+                    left = "".join(decoded_tokens[max(0, pos - 6):pos])
+                    right = "".join(decoded_tokens[pos + 1:min(len(decoded_tokens), pos + 7)])
+                    hits.append({
+                        "sentence_index": sent_idx,
+                        "sentence": sentence,
+                        "token_index": int(pos),
+                        "token": token_text,
+                        "activation": round(float(feat_col[pos].item()), 4),
+                        "left_context": left,
+                        "right_context": right,
+                    })
+
+                total_tokens_scanned += len(token_id_list)
+
+        hits.sort(key=lambda x: x["activation"], reverse=True)
+        limited_hits = hits[:max_results]
+
+        return {
+            "model": model_id,
+            "feature_id": feature_id,
+            "feature_description": labels.get(feature_id, f"Feature {feature_id}"),
+            "dataset": dataset_name,
+            "dataset_config": dataset_config,
+            "split": split,
+            "text_fields_checked": selected_text_fields or candidate_fields,
+            "scanned_sentences": len(texts),
+            "scanned_tokens": total_tokens_scanned,
+            "min_activation": min_activation,
+            "max_results": max_results,
+            "matches": limited_hits,
+            "total_matches": len(hits),
         }
 
     # -- Internal helpers ------------------------------------------------------

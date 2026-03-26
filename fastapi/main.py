@@ -73,6 +73,20 @@ class LabelFeatureRequest(BaseModel):
     groq_api_key: Optional[str] = None  # falls back to GROQ_API_KEY env var
 
 
+class FeatureActivationsRequest(BaseModel):
+    model_id: str
+    feature_id: int
+    dataset_name: str = "MLCommons/peoples_speech"
+    dataset_config: str = "validation"
+    split: str = "validation"
+    max_sentences: int = 200
+    max_results: int = 100
+    min_activation: float = 0.0
+    text_field: Optional[str] = None
+    max_length: int = 128
+    seed: int = 0
+
+
 # ---------------------------------------------------------------------------
 # Routes
 # ---------------------------------------------------------------------------
@@ -230,3 +244,39 @@ def label_feature(request: LabelFeatureRequest):
         return result
     except Exception as exc:
         raise HTTPException(500, f"Labeling failed: {exc}")
+
+
+@app.post("/feature-activations")
+def feature_activations(request: FeatureActivationsRequest):
+    """
+    Fetch sentence/token examples where a selected SAE feature activates.
+    """
+    try:
+        a = get_analyzer("sae")
+    except KeyError:
+        raise HTTPException(404, "SAE analyzer not registered")
+
+    if not hasattr(a, "find_feature_activations"):
+        raise HTTPException(400, "SAE analyzer does not support feature activation search")
+
+    try:
+        result = a.find_feature_activations(
+            model_id=request.model_id,
+            feature_id=request.feature_id,
+            dataset_name=request.dataset_name,
+            dataset_config=request.dataset_config,
+            split=request.split,
+            max_sentences=request.max_sentences,
+            max_results=request.max_results,
+            min_activation=request.min_activation,
+            text_field=request.text_field,
+            max_length=request.max_length,
+            seed=request.seed,
+        )
+        return result
+    except FileNotFoundError as exc:
+        raise HTTPException(404, f"Model not found: {exc}")
+    except ValueError as exc:
+        raise HTTPException(400, str(exc))
+    except Exception as exc:
+        raise HTTPException(500, f"Feature activation lookup failed: {exc}")

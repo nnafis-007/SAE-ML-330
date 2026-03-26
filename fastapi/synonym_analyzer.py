@@ -139,6 +139,7 @@ class SynonymAnalyzer(BaseAnalyzer):
                 layer_index=layer_index,
                 device=self._device,
                 top_k=top_k,
+                checkpoint_path=checkpoint_path,
             )
 
             return {
@@ -182,6 +183,7 @@ class SynonymAnalyzer(BaseAnalyzer):
                 layer_index=layer_index,
                 device=self._device,
                 top_k=top_k,
+                checkpoint_path=checkpoint_path,
             )
             all_results.append(result)
 
@@ -216,6 +218,7 @@ class SynonymAnalyzer(BaseAnalyzer):
         layer_index: int,
         device: str,
         top_k: int,
+        checkpoint_path: str,
     ) -> dict:
         profiles: Dict[str, torch.Tensor] = {}
         n_positions: Dict[str, int] = {}
@@ -236,10 +239,20 @@ class SynonymAnalyzer(BaseAnalyzer):
 
         words = list(profiles.keys())
         pairwise = []
+        # Load labels for the current model
+        labels = self._load_labels(checkpoint_path)
+
         for w1, w2 in combinations(words, 2):
             s1 = set(top_features[w1])
             s2 = set(top_features[w2])
-            shared = sorted(s1 & s2)
+            shared_ids = sorted(s1 & s2)
+            
+            # Convert to feature objects with labels
+            shared_features = [
+                {"id": fid, "label": labels.get(fid, f"Feature {fid}")}
+                for fid in shared_ids
+            ]
+            
             j = jaccard(s1, s2)
             cos = cosine_sim(profiles[w1], profiles[w2])
             pairwise.append({
@@ -247,12 +260,16 @@ class SynonymAnalyzer(BaseAnalyzer):
                 "word_b": w2,
                 "jaccard": round(j, 4),
                 "cosine_sim": round(cos, 4),
-                "shared_feature_count": len(shared),
-                "shared_features": shared,
+                "shared_feature_count": len(shared_ids),
+                "shared_features": shared_features,
             })
 
         all_sets = [set(top_features[w]) for w in words]
-        universal_shared = sorted(set.intersection(*all_sets))
+        universal_ids = sorted(set.intersection(*all_sets))
+        universal_shared = [
+            {"id": fid, "label": labels.get(fid, f"Feature {fid}")}
+            for fid in universal_ids
+        ]
 
         unique_to: Dict[str, List[int]] = {}
         for w in words:
@@ -311,6 +328,25 @@ class SynonymAnalyzer(BaseAnalyzer):
         l1_coeff = hp.get("l1_coeff", payload.get("l1_coeff", "unknown"))
         return {"d_model": d_model, "d_hidden": d_hidden, "l1_coeff": l1_coeff, "layer_index": layer_index}
 
+    def _load_labels(self, checkpoint_path: str) -> Dict[int, str]:
+        """Load feature labels from a .json file adjacent to the .pt checkpoint."""
+        import json
+        label_path = Path(checkpoint_path).with_suffix(".json")
+        if not label_path.exists():
+            return {}
+        try:
+            with label_path.open("r") as f:
+                data = json.load(f)
+                # handle both list of dicts or dict of IDs
+                if isinstance(data, list):
+                    return {int(i): d.get("label", f"Feature {i}") for i, d in enumerate(data)}
+                elif isinstance(data, dict):
+                    # check if keys are standard "0", "1"...
+                    return {int(k): v for k, v in data.items() if k.isdigit()}
+        except Exception as exc:
+            print(f"[synonym_analyzer] Failed to load labels from {label_path}: {exc}")
+        return {}
+
     def _load_sae(self, checkpoint_path: str) -> Dict[str, Any]:
         if checkpoint_path in self._sae_cache:
             return self._sae_cache[checkpoint_path]
@@ -338,10 +374,11 @@ class SynonymAnalyzer(BaseAnalyzer):
 
     def _get_gpt2(self):
         if "tokenizer" not in self._gpt2_cache:
-            from transformers import GPT2LMHeadModel, GPT2Tokenizer
+            from transformers import GPT2Model, GPT2Tokenizer
             tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
             tokenizer.pad_token = tokenizer.eos_token
-            gpt2 = GPT2LMHeadModel.from_pretrained("gpt2", output_hidden_states=True).to(self._device)
+            gpt2 = GPT2Model.from_pretrained("gpt2").to(self._device)
+            gpt2.config.output_hidden_states = True
             gpt2.eval()
             self._gpt2_cache["tokenizer"] = tokenizer
             self._gpt2_cache["gpt2"] = gpt2
