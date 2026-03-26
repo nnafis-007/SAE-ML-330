@@ -170,6 +170,7 @@ class GPT2ActivationCollector:
     def collect_from_dataset(
         self,
         dataset_name: str = "openwebtext",
+        dataset_config: Optional[str] = None,
         split: str = "train",
         num_texts: int = 10000,
         shuffle_buffer_size: int = 10_000,
@@ -179,29 +180,37 @@ class GPT2ActivationCollector:
     ) -> torch.Tensor:
         """
         Convenience method to collect activations from a HuggingFace dataset.
-        
+
         Args:
             dataset_name: Name of the dataset on HuggingFace
                          "openwebtext": Web text (similar to GPT-2 training data)
-                         "openwebtext": Wikipedia articles
+                         "wikitext": Wikipedia articles (requires dataset_config)
                          "bookcorpus": Book text
+            dataset_config: Dataset configuration name (e.g., "wikitext-103-v1" for wikitext)
+                           Required for some datasets like wikitext
             split: Dataset split to use
             num_texts: Number of texts to sample from dataset
             **kwargs: Additional arguments passed to collect_activations
-        
+
         Returns:
             Tensor of collected activations
-            
+
         Why dataset choice matters:
         - Use data similar to what GPT-2 was trained on for best results
         - OpenWebText is a good default (mimics GPT-2's training data)
         - More diverse data = more diverse features learned
         """
-        print(f"Loading dataset: {dataset_name}")
-        
+        if dataset_config:
+            print(f"Loading dataset: {dataset_name} (config: {dataset_config})")
+        else:
+            print(f"Loading dataset: {dataset_name}")
+
         try:
             # Load dataset from HuggingFace
-            dataset = load_dataset(dataset_name, split=split, streaming=True)
+            if dataset_config:
+                dataset = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
+            else:
+                dataset = load_dataset(dataset_name, split=split, streaming=True)
 
             # Streaming datasets iterate in a deterministic order unless shuffled.
             # Shuffling (with a buffer) significantly improves diversity of collected activations.
@@ -246,6 +255,7 @@ class GPT2ActivationCollector:
     def collect_from_dataset_with_texts(
         self,
         dataset_name: str = "openwebtext",
+        dataset_config: Optional[str] = None,
         split: str = "train",
         num_texts: int = 10000,
         shuffle_buffer_size: int = 10_000,
@@ -261,6 +271,8 @@ class GPT2ActivationCollector:
 
         Args:
             dataset_name: HuggingFace dataset identifier (e.g. "openwebtext").
+            dataset_config: Dataset configuration name (e.g., "wikitext-103-v1" for wikitext).
+                           Required for some datasets like wikitext.
             split: Dataset split.
             num_texts: Number of texts to load.
             shuffle_buffer_size: Streaming shuffle buffer size.
@@ -280,10 +292,16 @@ class GPT2ActivationCollector:
               - activations : Tensor of shape (N_tokens, hidden_size)
               - texts       : List[str] of the raw text strings used
         """
-        print(f"Loading dataset: {dataset_name}")
+        if dataset_config:
+            print(f"Loading dataset: {dataset_name} (config: {dataset_config})")
+        else:
+            print(f"Loading dataset: {dataset_name}")
 
         try:
-            dataset = load_dataset(dataset_name, split=split, streaming=True)
+            if dataset_config:
+                dataset = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
+            else:
+                dataset = load_dataset(dataset_name, split=split, streaming=True)
 
             if shuffle_buffer_size and shuffle_buffer_size > 0:
                 dataset = dataset.shuffle(seed=seed, buffer_size=int(shuffle_buffer_size))

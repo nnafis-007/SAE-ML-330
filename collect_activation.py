@@ -181,6 +181,8 @@ Examples:
         print(f"  Layer: {args.layer}")
         print(f"  Max samples: {args.samples:,}")
         print(f"  Dataset: {args.dataset}")
+        if args.dataset_config:
+            print(f"  Dataset config: {args.dataset_config}")
         print(f"  Device: {device}")
         print(f"  Output: {args.output}")
         print()
@@ -202,6 +204,7 @@ Examples:
 
         activations, texts = collector.collect_from_dataset_with_texts(
             dataset_name=args.dataset,
+            dataset_config=args.dataset_config,
             split=args.dataset_split,
             num_texts=num_texts,
             shuffle_buffer_size=args.shuffle_buffer_size,
@@ -221,6 +224,7 @@ Examples:
 
         activations = collector.collect_from_dataset(
             dataset_name=args.dataset,
+            dataset_config=args.dataset_config,
             split=args.dataset_split,
             num_texts=num_texts,
             shuffle_buffer_size=args.shuffle_buffer_size,

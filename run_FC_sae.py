@@ -366,6 +366,10 @@ def main():
         help="HuggingFace dataset to use. Default: openwebtext"
     )
     parser.add_argument(
+        "--dataset-config", type=str, default=None,
+        help="Dataset configuration name (e.g., 'wikitext-103-v1' for wikitext)"
+    )
+    parser.add_argument(
         "--num-texts", type=int, default=None,
         help="Number of texts to load from the dataset."
     )
@@ -498,6 +502,7 @@ def main():
 
         activations = collector.collect_from_dataset(
             dataset_name=args.dataset,
+            dataset_config=args.dataset_config,
             num_texts=(
                 args.num_texts if args.num_texts is not None
                 else args.samples // 10
