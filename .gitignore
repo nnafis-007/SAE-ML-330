@@ -4,7 +4,6 @@
 *.png
 checkpoints/
 *venv/
-*venv/
 .expo
 node_modules/
 assets/
