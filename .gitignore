@@ -4,7 +4,7 @@
 *.png
 checkpoints/
 *venv/
+*venv/
 .expo
 node_modules/
 assets/
-apikey.txt

@@ -47,6 +47,11 @@ def main():
     )
 
     parser.add_argument(
+        "--dataset-config", type=str, default=None,
+        help="Dataset configuration name (e.g., 'wikitext-103-v1' for wikitext)"
+    )
+
+    parser.add_argument(
         "--num-texts", type=int, default=None,
         help="Number of texts to load from the dataset (overrides samples//10)."
     )
@@ -208,6 +213,7 @@ def main():
         
         activations = collector.collect_from_dataset(
             dataset_name=args.dataset,
+            dataset_config=args.dataset_config,
             num_texts=(args.num_texts if args.num_texts is not None else args.samples // 10),  # Approximate
             max_samples=args.samples,
             batch_size=args.collection_batch_size,
