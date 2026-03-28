@@ -25,6 +25,8 @@ import torch
 # ---------------------------------------------------------------------------
 _SAE_ROOT = Path(__file__).resolve().parent.parent
 _SAE_SRC = _SAE_ROOT / "src"
+if str(_SAE_ROOT) not in sys.path:
+    sys.path.insert(0, str(_SAE_ROOT))
 if str(_SAE_SRC) not in sys.path:
     sys.path.insert(0, str(_SAE_SRC))
 
@@ -32,7 +34,7 @@ if str(_SAE_SRC) not in sys.path:
 # to keep server startup fast.  Only lightweight imports happen here.
 from sae_model import SparseAutoencoder                                # noqa: E402
 
-from . import BaseAnalyzer, register                                   # noqa: E402
+from analyzers import BaseAnalyzer, register                           # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Checkpoints directory

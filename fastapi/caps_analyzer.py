@@ -20,19 +20,20 @@ import torch
 # ---------------------------------------------------------------------------
 _SAE_ROOT = Path(__file__).resolve().parent.parent
 _SAE_SRC = _SAE_ROOT / "src"
+if str(_SAE_ROOT) not in sys.path:
+    sys.path.insert(0, str(_SAE_ROOT))
 if str(_SAE_SRC) not in sys.path:
     sys.path.insert(0, str(_SAE_SRC))
 
 from sae_model import SparseAutoencoder  # noqa: E402
-from . import BaseAnalyzer, register  # noqa: E402
+from analyzers import BaseAnalyzer, register  # noqa: E402
 
 CHECKPOINTS_DIR = _SAE_ROOT / "checkpoints"
 
 # ---------------------------------------------------------------------------
 # Import caps test helpers from the test script
 # ---------------------------------------------------------------------------
-sys.path.insert(0, str(_SAE_ROOT))
-from run_caps_test import (  # noqa: E402
+from analyzers.run_caps_test import (  # noqa: E402
     WORD_TEMPLATES,
     _cap_variants,
     collect_variant_profile,

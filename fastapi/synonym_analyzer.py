@@ -20,20 +20,20 @@ import torch
 # ---------------------------------------------------------------------------
 _SAE_ROOT = Path(__file__).resolve().parent.parent
 _SAE_SRC = _SAE_ROOT / "src"
+if str(_SAE_ROOT) not in sys.path:
+    sys.path.insert(0, str(_SAE_ROOT))
 if str(_SAE_SRC) not in sys.path:
     sys.path.insert(0, str(_SAE_SRC))
 
 from sae_model import SparseAutoencoder  # noqa: E402
-from . import BaseAnalyzer, register  # noqa: E402
+from analyzers import BaseAnalyzer, register  # noqa: E402
 
 CHECKPOINTS_DIR = _SAE_ROOT / "checkpoints"
 
 # ---------------------------------------------------------------------------
 # Import synonym clusters from the test script
 # ---------------------------------------------------------------------------
-_SYNONYM_SCRIPT = _SAE_ROOT / "run_synonym_test.py"
-sys.path.insert(0, str(_SAE_ROOT))
-from run_synonym_test import (  # noqa: E402
+from analyzers.run_synonym_test import (  # noqa: E402
     SYNONYM_CLUSTERS,
     collect_word_feature_profile,
     top_k_features,
@@ -43,27 +43,28 @@ from run_synonym_test import (  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Generic sentence templates for user-supplied words
-# Each template has exactly one {} where the word is inserted.
-# Variety covers different syntactic positions so BPE tokenisation
-# can find the word in several contexts.
+# Using generic emotional contexts (e.g. "She felt {}") forces strange parts-of-speech.
+# Using just "{}" places the word at GPT-2's position 0, causing the position-0
+# "document start" embedding to override semantic embeddings, resulting in
+# identical features for all words.
+# We use completely neutral "mention" contexts to shift the word away from pos 0
+# while avoiding grammatical contradictions.
 # ---------------------------------------------------------------------------
 _GENERIC_TEMPLATES: List[str] = [
-    "She felt {} when she heard the good news from her friend.",
-    "The {} atmosphere in the room was obvious to everyone present.",
-    "He described the situation as {} during the team meeting.",
-    "It was a {} experience that none of them would ever forget.",
-    "Everyone agreed that the result was truly {} and remarkable.",
-    "The professor said the answer was {} and moved on quickly.",
-    "A {} feeling spread through the crowd after the announcement.",
-    "She looked {} as she walked out of the examination hall.",
-    "They considered the whole event to be quite {} overall.",
-    "He was {} about the new project that had just been approved.",
-    "The children seemed {} while playing together in the garden.",
-    "We found the entire performance to be {} and well executed.",
-    "His {} reaction surprised everyone who was watching closely.",
-    "The report concluded that the outcome was {} for the company.",
-    "Being {} is something that many people aspire to every day.",
+    "Consider the word {}.",
+    "Let us talk about {}.",
+    "In this context, {} is used.",
+    "The concept of {} is interesting.",
 ]
+# Instead of this:
+# _GENERIC_TEMPLATES: List[str] = ["{}"]
+
+# # Use this:
+# _GENERIC_TEMPLATES: List[str] = [
+#     "The word is {}.",
+#     "It is {}.",
+#     "They saw {}.",
+# ]
 
 
 class SynonymAnalyzer(BaseAnalyzer):
@@ -105,7 +106,7 @@ class SynonymAnalyzer(BaseAnalyzer):
             top_k (int): number of top features per word (default 30).
             custom_words (list[str]): user-supplied words to compare.
         """
-        top_k = kwargs.get("top_k", 30)
+        top_k = kwargs.get("top_k", 1000)
         custom_words = kwargs.get("custom_words", None)
 
         # Load models

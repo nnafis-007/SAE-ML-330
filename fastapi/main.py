@@ -8,10 +8,19 @@ Provides:
     POST /label-feature    – on-demand LLM-based feature labeling (via analysis.py)
 """
 
+import sys
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List
+
+# Ensure project-root packages (e.g., analyzers/) are importable regardless
+# of whether uvicorn is launched from project root or fastapi/.
+_SAE_ROOT = Path(__file__).resolve().parent.parent
+if str(_SAE_ROOT) not in sys.path:
+    sys.path.insert(0, str(_SAE_ROOT))
 
 app = FastAPI(title="SAE Interpretability API")
 
@@ -26,9 +35,9 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 # Import analyzers – each module auto-registers on import
 # ---------------------------------------------------------------------------
-from analyzers import sae_analyzer as _sae_reg  # noqa: F401, E402
-from analyzers import synonym_analyzer as _syn_reg  # noqa: F401, E402
-from analyzers import caps_analyzer as _caps_reg  # noqa: F401, E402
+import sae_analyzer as _sae_reg  # noqa: F401, E402
+import synonym_analyzer as _syn_reg  # noqa: F401, E402
+import caps_analyzer as _caps_reg  # noqa: F401, E402
 from analyzers import get_analyzer, list_analyzers, get_all_models  # noqa: E402
 
 
@@ -47,7 +56,7 @@ class SynonymTestRequest(BaseModel):
     model_id: str
     clusters: Optional[List[str]] = None  # None = all clusters
     custom_words: Optional[List[str]] = None  # user-typed words to compare
-    top_k: int = 30
+    top_k: int = 1000
 
 
 class CapsTestRequest(BaseModel):
@@ -151,7 +160,7 @@ def get_synonym_clusters():
     try:
         a = get_analyzer("synonym")
         # Perform a dummy analyze to get cluster names, or just return them directly
-        from analyzers.synonym_analyzer import SYNONYM_CLUSTERS
+        from synonym_analyzer import SYNONYM_CLUSTERS
         return {
             "clusters": list(SYNONYM_CLUSTERS.keys()),
             "details": {
@@ -189,7 +198,7 @@ def caps_test(request: CapsTestRequest):
 def get_caps_words():
     """Return available test words for the caps invariance test."""
     try:
-        from analyzers.caps_analyzer import WORD_TEMPLATES
+        from caps_analyzer import WORD_TEMPLATES
         return {"words": list(WORD_TEMPLATES.keys())}
     except Exception as exc:
         raise HTTPException(500, f"Failed to list words: {exc}")
