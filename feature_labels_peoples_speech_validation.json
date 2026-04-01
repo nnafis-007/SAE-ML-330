@@ -1,0 +1,2233 @@
+{
+  "4105": {
+    "feature_idx": 4105,
+    "label": "Reaching Out Concept",
+    "explanation": "This feature detects the concept of connecting or contacting others, often for help, invitation, or collaboration, as evident from the frequent activation on words like 'reach', 'out', and 'invite'",
+    "confidence": "high",
+    "top_tokens": [
+      "out",
+      "to",
+      "down",
+      "reach",
+      "folks",
+      "the",
+      "invite",
+      "these",
+      "around",
+      "able",
+      "a",
+      "someone",
+      "beyond",
+      "uren",
+      "into"
+    ],
+    "top_contexts": [
+      {
+        "token": "out",
+        "context": " what communities do you know of that we could reach>>> out<<< to to invite to the next conversation so we can",
+        "activation_value": 19.651962280273438
+      },
+      {
+        "token": "out",
+        "context": " this meeting but we didn't do anything to reach>>> out<<< to the people who are trying to help",
+        "activation_value": 19.478408813476562
+      },
+      {
+        "token": "out",
+        "context": " people organizations initiatives research hubs like who can we reach>>> out<<< to to help us try to get more specific with",
+        "activation_value": 17.188148498535156
+      },
+      {
+        "token": "to",
+        "context": " communities do you know of that we could reach out>>> to<<< to invite to the next conversation so we can start",
+        "activation_value": 5.678224563598633
+      },
+      {
+        "token": "to",
+        "context": " meeting but we didn't do anything to reach out>>> to<<< the people who are trying to help",
+        "activation_value": 4.857843399047852
+      },
+      {
+        "token": "down",
+        "context": "so today we decided to drill>>> down<<< you know onto the into the digital inclusion topic specifically",
+        "activation_value": 3.7346293926239014
+      },
+      {
+        "token": "to",
+        "context": " do you know of that we could reach out to>>> to<<< invite to the next conversation so we can start to",
+        "activation_value": 3.630552291870117
+      },
+      {
+        "token": "to",
+        "context": " organizations initiatives research hubs like who can we reach out>>> to<<< to help us try to get more specific with this",
+        "activation_value": 3.3444035053253174
+      },
+      {
+        "token": "folks",
+        "context": "i think the notion of reaching>>> folks<<< where they're at and trying to really assess what",
+        "activation_value": 3.133932590484619
+      },
+      {
+        "token": "down",
+        "context": " that in other comments but i just want to drill>>> down<<< and say that as we think of the internet as",
+        "activation_value": 3.1313023567199707
+      },
+      {
+        "token": "the",
+        "context": " but we didn't do anything to reach out to>>> the<<< people who are trying to help",
+        "activation_value": 1.9866063594818115
+      },
+      {
+        "token": "to",
+        "context": " initiatives research hubs like who can we reach out to>>> to<<< help us try to get more specific with this data",
+        "activation_value": 1.7419651746749878
+      },
+      {
+        "token": "invite",
+        "context": " you know of that we could reach out to to>>> invite<<< to the next conversation so we can start to think",
+        "activation_value": 1.6147704124450684
+      },
+      {
+        "token": "out",
+        "context": " it to better their lives and create opportunities and seek>>> out<<< opportunities in a community",
+        "activation_value": 1.5227934122085571
+      },
+      {
+        "token": "these",
+        "context": "and so since they've they've kind of reached>>> these<<< goals and as they reach these goals of certain data",
+        "activation_value": 1.4924086332321167
+      },
+      {
+        "token": "around",
+        "context": " good way of saying it so i kind of dug>>> around<<< dug around dug around there",
+        "activation_value": 1.2348055839538574
+      },
+      {
+        "token": "able",
+        "context": " through the city website and each of these are click>>>able<<< links that bring you to this this dashboard that does",
+        "activation_value": 1.0800944566726685
+      },
+      {
+        "token": "down",
+        "context": "but i think drilling>>> down<<< into the digital inclusion piece of that which we're",
+        "activation_value": 0.9537320137023926
+      },
+      {
+        "token": "a",
+        "context": " of the expertise in the room and then just reaching>>> a<<< targeted population you know we have all of these great",
+        "activation_value": 0.7736717462539673
+      },
+      {
+        "token": "someone",
+        "context": " you could understand it that maybe we can look to>>> someone<<< like that to write a comprehensive use of the internet",
+        "activation_value": 0.7674243450164795
+      },
+      {
+        "token": "out",
+        "context": "anytime somebody runs for office that they send>>> out<<< to each candidate and they say fill this out and",
+        "activation_value": 0.6032922267913818
+      },
+      {
+        "token": "beyond",
+        "context": " as i feel it does as i try to dig>>> beyond<<< the very basic thing",
+        "activation_value": 0.37898075580596924
+      },
+      {
+        "token": "reach",
+        "context": " like what communities do you know of that we could>>> reach<<< out to to invite to the next conversation so we",
+        "activation_value": 0.2959631681442261
+      },
+      {
+        "token": "uren",
+        "context": " can't wait to read through those notes that la>>>uren<<<'s taking",
+        "activation_value": 0.18231093883514404
+      },
+      {
+        "token": "reach",
+        "context": " to people organizations initiatives research hubs like who can we>>> reach<<< out to to help us try to get more specific",
+        "activation_value": 0.179443359375
+      },
+      {
+        "token": "into",
+        "context": " we've been talking about is there one to tap>>> into<<< is there anyone here that didn't actually register for",
+        "activation_value": 0.15694165229797363
+      },
+      {
+        "token": "out",
+        "context": " bit i think through reds and democracy to help>>> out<<< with you in this evening",
+        "activation_value": 0.10195469856262207
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Reaching Out Concept\",\n  \"explanation\": \"This feature detects the concept of connecting or contacting others, often for help, invitation, or collaboration, as evident from the frequent activation on words like 'reach', 'out', and 'invite'\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "1383": {
+    "feature_idx": 1383,
+    "label": "Second Person Reference",
+    "explanation": "The feature activates on tokens related to addressing or referring to the listener or reader, such as 'you' and 'those', indicating it detects second-person references.",
+    "confidence": "high",
+    "top_tokens": [
+      "you",
+      "'t",
+      "a",
+      "how",
+      "than",
+      "don",
+      "those",
+      "thing",
+      "ask",
+      "already",
+      "digital",
+      "like",
+      "different",
+      "prepares",
+      "used",
+      "sense",
+      "to",
+      "long",
+      "they",
+      "this"
+    ],
+    "top_contexts": [
+      {
+        "token": "those",
+        "context": "and also to say for>>> those<<< of you who know me that i am i am",
+        "activation_value": 1.612223505973816
+      },
+      {
+        "token": "you",
+        "context": "and also to say for those of>>> you<<< who know me that i am i am not here",
+        "activation_value": 1.2383146286010742
+      },
+      {
+        "token": "you",
+        "context": " is looking at right now i don't know if>>> you<<< guys saw this but there's the main street revital",
+        "activation_value": 1.2368321418762207
+      },
+      {
+        "token": "thing",
+        "context": "sixty five was a whole different>>> thing<<<",
+        "activation_value": 1.0893621444702148
+      },
+      {
+        "token": "ask",
+        "context": " that the barrier i think those are good questions to>>> ask<<<",
+        "activation_value": 1.0888866186141968
+      },
+      {
+        "token": "already",
+        "context": " a part of because we do have a lot here>>> already<<<",
+        "activation_value": 1.0738831758499146
+      },
+      {
+        "token": "digital",
+        "context": "and that recent graduates are speaking the same>>> digital<<< language as our employers for example",
+        "activation_value": 1.0422362089157104
+      },
+      {
+        "token": "like",
+        "context": " example like where would it live what would it look>>> like<<< and then build alliance",
+        "activation_value": 1.0273644924163818
+      },
+      {
+        "token": "different",
+        "context": "sixty five was a whole>>> different<<< thing",
+        "activation_value": 0.9965591430664062
+      },
+      {
+        "token": "'t",
+        "context": " did i know how to get to them you don>>>'t<<<",
+        "activation_value": 0.9703792929649353
+      },
+      {
+        "token": "prepares",
+        "context": " with both teams launching mock atomic attacks as nato>>> prepares<<< against possible aggression from the east",
+        "activation_value": 0.9672718048095703
+      },
+      {
+        "token": "used",
+        "context": " two thousand and seventeen more people have access than they>>> used<<< to",
+        "activation_value": 0.9429156184196472
+      },
+      {
+        "token": "a",
+        "context": "i'm from florida so there's not>>> a<<< lot of difference between winter and the rest of the",
+        "activation_value": 0.9279584288597107
+      },
+      {
+        "token": "sense",
+        "context": "does that make>>> sense<<< the default should be privacy",
+        "activation_value": 0.9231120347976685
+      },
+      {
+        "token": "to",
+        "context": "it's hard>>> to<<< see i know it's very small",
+        "activation_value": 0.9146238565444946
+      },
+      {
+        "token": "how",
+        "context": "and i don't know>>> how<<< a lot of the stuff i don't know how",
+        "activation_value": 0.9079906940460205
+      },
+      {
+        "token": "a",
+        "context": "and how you know that may paint>>> a<<< picture of gaps and places where we need to really",
+        "activation_value": 0.9006240367889404
+      },
+      {
+        "token": "long",
+        "context": "i have lived in burlington for a>>> long<<< time",
+        "activation_value": 0.8677515983581543
+      },
+      {
+        "token": "they",
+        "context": " in two thousand and seventeen more people have access than>>> they<<< used to",
+        "activation_value": 0.8559213876724243
+      },
+      {
+        "token": "how",
+        "context": "so if you did i know>>> how<<< to get to them you don't",
+        "activation_value": 0.8509165644645691
+      },
+      {
+        "token": "this",
+        "context": "is that an old quote did i do>>> this<<< one can you go back a slide okay great so",
+        "activation_value": 0.8200746774673462
+      },
+      {
+        "token": "while",
+        "context": " obviously you all have been doing this work for a>>> while<<< and probably have even more places to point to but",
+        "activation_value": 0.8128805756568909
+      },
+      {
+        "token": "do",
+        "context": " say what do you think about this what would you>>> do<<< about this what would you do and so you can",
+        "activation_value": 0.8094387054443359
+      },
+      {
+        "token": "but",
+        "context": " diverse communities here in the burlington in burlington>>> but<<< also in burlington area",
+        "activation_value": 0.8061869144439697
+      },
+      {
+        "token": "you",
+        "context": " quickly the last event we did in case some of>>> you<<< weren't there was an event that focused on a",
+        "activation_value": 0.8021222352981567
+      },
+      {
+        "token": "what",
+        "context": "and the people that do ancestry dna i mean>>> what<<< are you thinking things like that just crazy",
+        "activation_value": 0.800377368927002
+      },
+      {
+        "token": "know",
+        "context": " though they know a lot about the internet don't>>> know<<< how to teach it",
+        "activation_value": 0.7933510541915894
+      },
+      {
+        "token": "than",
+        "context": " personal networks and access to helpful people often matter more>>> than<<< access to information itself and i think that's very",
+        "activation_value": 0.7889363765716553
+      },
+      {
+        "token": "have",
+        "context": " online that can thwart some of those things but people>>> have<<< to know and you have to teach them and having",
+        "activation_value": 0.7807391881942749
+      },
+      {
+        "token": "at",
+        "context": "does that sound like a good plan>>> at<<< least for",
+        "activation_value": 0.7744885683059692
+      },
+      {
+        "token": "wouldn",
+        "context": " or smartphones or combooks probably like anything that people>>> wouldn<<<'t get access to",
+        "activation_value": 0.7577957510948181
+      },
+      {
+        "token": "picture",
+        "context": "and how you know that may paint a>>> picture<<< of gaps and places where we need to really focus",
+        "activation_value": 0.7544186115264893
+      },
+      {
+        "token": "internet",
+        "context": " you know whatever free super affordable access to the fastest>>> internet<<< available and all of the tools and resources necessary to",
+        "activation_value": 0.7207698822021484
+      },
+      {
+        "token": "don",
+        "context": "and there's so much going on that they>>> don<<<'t know",
+        "activation_value": 0.700965166091919
+      },
+      {
+        "token": "perfectly",
+        "context": "i know>>> perfectly<<< positioned",
+        "activation_value": 0.6867109537124634
+      },
+      {
+        "token": "something",
+        "context": "that's>>> something<<< we could think about here when they put this through",
+        "activation_value": 0.6670442819595337
+      },
+      {
+        "token": "anybody",
+        "context": "i mean does>>> anybody<<< have a thought on that what that goal would be",
+        "activation_value": 0.663642942905426
+      },
+      {
+        "token": "necessary",
+        "context": " fastest internet available and all of the tools and resources>>> necessary<<< to use it",
+        "activation_value": 0.6631861329078674
+      },
+      {
+        "token": "anyone",
+        "context": "a quick overview davis north carolina for>>> anyone<<< who isn't familiar with e2d is literally",
+        "activation_value": 0.6608563661575317
+      },
+      {
+        "token": "world",
+        "context": "and she says in a>>> world<<< where information is easily available strong personal networks and access",
+        "activation_value": 0.6454907059669495
+      },
+      {
+        "token": "tell",
+        "context": "and i can already>>> tell<<< that there's like a divide in our group",
+        "activation_value": 0.634559154510498
+      },
+      {
+        "token": "least",
+        "context": "does that sound like a good plan at>>> least<<< for",
+        "activation_value": 0.6290708780288696
+      },
+      {
+        "token": "than",
+        "context": " because in two thousand and seventeen more people have access>>> than<<< they used to",
+        "activation_value": 0.6048183441162109
+      },
+      {
+        "token": "don",
+        "context": " you did i know how to get to them you>>> don<<<'t",
+        "activation_value": 0.5947620272636414
+      },
+      {
+        "token": "'t",
+        "context": " close to our size or have a similar i don>>>'t<<< know geographical location and access that we do that we",
+        "activation_value": 0.5862625241279602
+      },
+      {
+        "token": "case",
+        "context": " open but i understand that that might not be the>>> case<<< for the whole event",
+        "activation_value": 0.5798245072364807
+      },
+      {
+        "token": "pronoun",
+        "context": " can feel free to write your name your preferred gender>>> pronoun<<< if you like",
+        "activation_value": 0.573884129524231
+      },
+      {
+        "token": "would",
+        "context": "and they say what do you think about this what>>> would<<< you do about this what would you do and so",
+        "activation_value": 0.5720254182815552
+      },
+      {
+        "token": "the",
+        "context": " here the fact that you're i don't know>>> the<<< right word of like clearly we're all in this",
+        "activation_value": 0.570638120174408
+      },
+      {
+        "token": "vast",
+        "context": " people would feel comfortable with but that could engage a>>> vast<<< greater number of people that are currently engaged by these",
+        "activation_value": 0.5632460117340088
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Second Person Reference\",\n  \"explanation\": \"The feature activates on tokens related to addressing or referring to the listener or reader, such as 'you' and 'those', indicating it detects second-person references.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "5829": {
+    "feature_idx": 5829,
+    "label": "Proper Noun Detector",
+    "explanation": "This feature detects the presence of proper nouns, particularly names, in the input text",
+    "confidence": "high",
+    "top_tokens": [
+      "ary",
+      "laure",
+      "oy"
+    ],
+    "top_contexts": [
+      {
+        "token": "ary",
+        "context": " okay what do you like to do in winter m>>>ary<<< oh in perfect conditions cross country skiing",
+        "activation_value": 24.874677658081055
+      },
+      {
+        "token": "ary",
+        "context": "i'm very m>>>ary<<< danko",
+        "activation_value": 23.29607391357422
+      },
+      {
+        "token": "ary",
+        "context": "i mean along the lines of what m>>>ary<<<'s showed maybe even more detail",
+        "activation_value": 23.13300132751465
+      },
+      {
+        "token": "ary",
+        "context": "okay so we looked at this m>>>ary<<< brought in some slides at the last event and i",
+        "activation_value": 22.767873764038086
+      },
+      {
+        "token": "laure",
+        "context": "i'm>>> laure<<<nglenn davitian i work at",
+        "activation_value": 4.213911056518555
+      },
+      {
+        "token": "oy",
+        "context": "i'm dennis m>>>oy<<<nihan",
+        "activation_value": 0.6956683397293091
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Proper Noun Detector\",\n  \"explanation\": \"This feature detects the presence of proper nouns, particularly names, in the input text\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "2806": {
+    "feature_idx": 2806,
+    "label": "Recipient of action",
+    "explanation": "The feature detects when a sentence or phrase implies someone or something is receiving an action, often indicated by pronouns like 'me', 'you', or 'us'.",
+    "confidence": "high",
+    "top_tokens": [
+      "me",
+      "you",
+      "us",
+      "have",
+      "them",
+      "people",
+      "it",
+      "some",
+      "simple",
+      "lots",
+      "with",
+      "is",
+      "for",
+      "already",
+      "our",
+      "ry"
+    ],
+    "top_contexts": [
+      {
+        "token": "you",
+        "context": "it's gonna give>>> you<<< that thing there you go",
+        "activation_value": 10.485025405883789
+      },
+      {
+        "token": "me",
+        "context": "because it gives>>> me<<< a great opportunity to get fit stay fit and get",
+        "activation_value": 9.814723014831543
+      },
+      {
+        "token": "you",
+        "context": " see the benefits what supports do we need to give>>> you<<< to be able to access that and if you don",
+        "activation_value": 9.739498138427734
+      },
+      {
+        "token": "us",
+        "context": " didn't register online if you want to just give>>> us<<< your contact information before you go and then we'll",
+        "activation_value": 9.59634017944336
+      },
+      {
+        "token": "us",
+        "context": "'s figuring out those things we can act on gives>>> us<<< some direction",
+        "activation_value": 9.086938858032227
+      },
+      {
+        "token": "me",
+        "context": "lington telecom which for better or for worse has given>>> me<<< the opportunity to meet all of you and get really",
+        "activation_value": 8.545440673828125
+      },
+      {
+        "token": "people",
+        "context": "it's something different than just giving>>> people<<< access because in two thousand and seventeen more people have",
+        "activation_value": 8.093375205993652
+      },
+      {
+        "token": "me",
+        "context": " an echo is shoveling what the road cloud gives>>> me<<<",
+        "activation_value": 4.701712608337402
+      },
+      {
+        "token": "me",
+        "context": "and i'm here cause julia sent>>> me<<< a message after i looked up an article",
+        "activation_value": 3.8538732528686523
+      },
+      {
+        "token": "it",
+        "context": "not open and give>>> it<<< all away",
+        "activation_value": 2.9397902488708496
+      },
+      {
+        "token": "us",
+        "context": " lasts as long as that company was around they owed>>> us<<< a million dollars",
+        "activation_value": 2.8781659603118896
+      },
+      {
+        "token": "me",
+        "context": "well that brought>>> me<<< to the point that i was making",
+        "activation_value": 2.4941420555114746
+      },
+      {
+        "token": "you",
+        "context": "and then what we'll do is send>>> you<<< just a follow up and maybe a survey just to",
+        "activation_value": 2.3663604259490967
+      },
+      {
+        "token": "you",
+        "context": " and each of these are clickable links that bring>>> you<<< to this this dashboard that does an assessment of these",
+        "activation_value": 1.6289074420928955
+      },
+      {
+        "token": "me",
+        "context": "and what brings>>> me<<< here tonight is i really value the kbtl",
+        "activation_value": 1.3139886856079102
+      },
+      {
+        "token": "you",
+        "context": " pronoun if you prefer to do that and what brought>>> you<<< here today where you're from",
+        "activation_value": 1.1704177856445312
+      },
+      {
+        "token": "some",
+        "context": "to give>>> some<<< context for this particular event i'll do an introduction",
+        "activation_value": 1.1526786088943481
+      },
+      {
+        "token": "you",
+        "context": " if your income below a certain threshold they'll set>>> you<<< up with a bicycle and a lock for twenty five",
+        "activation_value": 1.1390612125396729
+      },
+      {
+        "token": "simple",
+        "context": "and she has given very>>> simple<<< ways to discuss how to use computers how to use",
+        "activation_value": 1.0204074382781982
+      },
+      {
+        "token": "us",
+        "context": "and i also know that shae got>>> us<<< involved to help sponsor a bit i think through red",
+        "activation_value": 0.7726021409034729
+      },
+      {
+        "token": "lots",
+        "context": "that's okay you get>>> lots<<< of ideas",
+        "activation_value": 0.6777476668357849
+      },
+      {
+        "token": "them",
+        "context": " also that whatever apps or resources that are provided to>>> them<<< have very transparent ways of saying this is how your",
+        "activation_value": 0.6464461088180542
+      },
+      {
+        "token": "with",
+        "context": "i imagine i'm probably one of the few people>>> with<<< an actual networking degree in the room if not the",
+        "activation_value": 0.5846502184867859
+      },
+      {
+        "token": "is",
+        "context": "and on that main website page there>>> is<<< a map that people can see any upcoming event related",
+        "activation_value": 0.5430482625961304
+      },
+      {
+        "token": "for",
+        "context": " the city at burlington telecom which for better or>>> for<<< worse has given me the opportunity to meet all of",
+        "activation_value": 0.5182287693023682
+      },
+      {
+        "token": "already",
+        "context": "because there is>>> already<<< work identity that's going on to get resources skills",
+        "activation_value": 0.5043138265609741
+      },
+      {
+        "token": "us",
+        "context": "obviously it's going to take>>> us<<< a little while to figure out what we want to",
+        "activation_value": 0.472313791513443
+      },
+      {
+        "token": "our",
+        "context": "what are>>> our<<< goals as a community now we want open networks we",
+        "activation_value": 0.4114517569541931
+      },
+      {
+        "token": "have",
+        "context": " mixed up i still hit the wrong thing i still>>> have<<< pages fly up or blow up or won't open",
+        "activation_value": 0.3699667453765869
+      },
+      {
+        "token": "me",
+        "context": "and that's what brings>>> me<<< here",
+        "activation_value": 0.3498603105545044
+      },
+      {
+        "token": "ry",
+        "context": " hairy audacious goal would be is getting the citizen>>>ry<<< of burlington to the point where we could have",
+        "activation_value": 0.2684619426727295
+      },
+      {
+        "token": "them",
+        "context": " their suggestions of what we need to progress half of>>> them<<< almost are tech and digital related",
+        "activation_value": 0.23536062240600586
+      },
+      {
+        "token": "have",
+        "context": "and you are fortunate because you>>> have<<< all of that knowledge to say like this is dangerous",
+        "activation_value": 0.2213803380727768
+      },
+      {
+        "token": "have",
+        "context": " and feel comfortable getting at it but we should also>>> have<<< things available for people that don't feel comfortable in",
+        "activation_value": 0.1358492076396942
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Recipient of action\",\n  \"explanation\": \"The feature detects when a sentence or phrase implies someone or something is receiving an action, often indicated by pronouns like 'me', 'you', or 'us'.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "8746": {
+    "feature_idx": 8746,
+    "label": "Positive Adjectives",
+    "explanation": "The feature detects words with positive connotations, such as 'quick', 'cool', 'nice', and 'awesome', which are often used to express approval or enthusiasm",
+    "confidence": "high",
+    "top_tokens": [
+      "kind",
+      "quick",
+      "cool",
+      "nice",
+      "hairy",
+      "flexible",
+      "ank",
+      "smart",
+      "neat",
+      "sticky",
+      "selfish",
+      "tired",
+      "warm",
+      "crazy",
+      "nervous",
+      "tricky",
+      "awesome",
+      "tough",
+      "hardest",
+      "scary"
+    ],
+    "top_contexts": [
+      {
+        "token": "quick",
+        "context": " picked these because i think they really kind of are>>> quick<<< and easy to understand for the context of this event",
+        "activation_value": 4.4534454345703125
+      },
+      {
+        "token": "ank",
+        "context": "i'm very mary d>>>ank<<<o",
+        "activation_value": 3.8412182331085205
+      },
+      {
+        "token": "cool",
+        "context": "ooh>>> cool<<< thank you welcome",
+        "activation_value": 3.572326183319092
+      },
+      {
+        "token": "quick",
+        "context": "just a>>> quick<<< story about something that happened here when the city was",
+        "activation_value": 3.521028995513916
+      },
+      {
+        "token": "smart",
+        "context": " of you and get really passionate about fiber internet technology>>> smart<<< cities gigabit cities",
+        "activation_value": 3.2897520065307617
+      },
+      {
+        "token": "quick",
+        "context": "so let me just clear up>>> quick<<< feedback saying that the whole reason that bt got",
+        "activation_value": 3.1375107765197754
+      },
+      {
+        "token": "quick",
+        "context": "a>>> quick<<< overview davis north carolina for anyone who isn",
+        "activation_value": 3.0179667472839355
+      },
+      {
+        "token": "cool",
+        "context": " a time you know and you know that could be>>> cool<<<",
+        "activation_value": 2.8766021728515625
+      },
+      {
+        "token": "cool",
+        "context": " people to understand some of those factors that that the>>> cool<<< factor about apps",
+        "activation_value": 2.5280580520629883
+      },
+      {
+        "token": "neat",
+        "context": " there as just kind of i thought that was a>>> neat<<< way of doing it next slide",
+        "activation_value": 2.30597186088562
+      },
+      {
+        "token": "sticky",
+        "context": "can't be>>> sticky<<< can't be too cold",
+        "activation_value": 2.2896687984466553
+      },
+      {
+        "token": "selfish",
+        "context": "and i added your favorite winter activity here for>>> selfish<<< reasons",
+        "activation_value": 2.277623176574707
+      },
+      {
+        "token": "nice",
+        "context": "oh wow>>> nice<<<",
+        "activation_value": 2.2122035026550293
+      },
+      {
+        "token": "tired",
+        "context": "munjom after three years as a red pow>>> tired<<< and worn but covered with glory an old soldier comes",
+        "activation_value": 2.1784775257110596
+      },
+      {
+        "token": "nice",
+        "context": " free it's wheelchair accessible it has bathrooms it has>>> nice<<< places to sit and that at least the conversation could",
+        "activation_value": 1.939159631729126
+      },
+      {
+        "token": "warm",
+        "context": "stay>>> warm<<<",
+        "activation_value": 1.8096894025802612
+      },
+      {
+        "token": "crazy",
+        "context": " i mean what are you thinking things like that just>>> crazy<<<",
+        "activation_value": 1.7467002868652344
+      },
+      {
+        "token": "nervous",
+        "context": " don't have the device is it that they're>>> nervous<<< about security is it an i think we really need",
+        "activation_value": 1.674492597579956
+      },
+      {
+        "token": "hairy",
+        "context": "big>>> hairy<<< audacious goal",
+        "activation_value": 1.6051968336105347
+      },
+      {
+        "token": "tricky",
+        "context": " you're saying because to me it's really a>>> tricky<<< thing right now because the way everybody's connecting with",
+        "activation_value": 1.5857353210449219
+      },
+      {
+        "token": "hairy",
+        "context": "what do you guys any questions what is the big>>> hairy<<< goal here yeah",
+        "activation_value": 1.5628292560577393
+      },
+      {
+        "token": "awesome",
+        "context": " you know ten fifteen years ago email was so like>>> awesome<<< and past me",
+        "activation_value": 1.3994160890579224
+      },
+      {
+        "token": "hairy",
+        "context": " we can kind of set for me what the big>>> hairy<<< audacious goal would be is getting the citizenry",
+        "activation_value": 1.3488422632217407
+      },
+      {
+        "token": "tough",
+        "context": " to are people who are digitally excluded and it's>>> tough<<< to you can get really ahead of yourself thinking about",
+        "activation_value": 1.322618007659912
+      },
+      {
+        "token": "flexible",
+        "context": " then just the last thing is that it's a>>> flexible<<< agenda",
+        "activation_value": 1.303171157836914
+      },
+      {
+        "token": "quick",
+        "context": " what are the benefits of these things adoption was very>>> quick<<< yeah",
+        "activation_value": 1.2342528104782104
+      },
+      {
+        "token": "hardest",
+        "context": "and they are definitely the>>> hardest<<< folks to bring along",
+        "activation_value": 1.2083872556686401
+      },
+      {
+        "token": "cool",
+        "context": "so i thought that was really>>> cool<<< example",
+        "activation_value": 1.1205207109451294
+      },
+      {
+        "token": "scary",
+        "context": "and so one of the>>> scary<<< things is that this inclusion process and access process is",
+        "activation_value": 1.0487926006317139
+      },
+      {
+        "token": "kind",
+        "context": "and so>>> kind<<< of buried in this report is something called the environment",
+        "activation_value": 1.0322390794754028
+      },
+      {
+        "token": "kind",
+        "context": "so i'm>>> kind<<< of leaning towards now after hearing all of this is",
+        "activation_value": 0.9786701202392578
+      },
+      {
+        "token": "kind",
+        "context": "so i really i'm>>> kind<<< of at this intersection between digital inclusion technology art design",
+        "activation_value": 0.9588704109191895
+      },
+      {
+        "token": "kind",
+        "context": "so i'm like i'm>>> kind<<< of a metric skeptical",
+        "activation_value": 0.9127851724624634
+      },
+      {
+        "token": "left",
+        "context": " we've got folks who are being left out and>>> left<<< behind",
+        "activation_value": 0.8460205793380737
+      },
+      {
+        "token": "curious",
+        "context": "i'm>>> curious<<<",
+        "activation_value": 0.8231865763664246
+      },
+      {
+        "token": "easier",
+        "context": " should use macbook computers because they're a lot>>> easier<<<",
+        "activation_value": 0.8202446699142456
+      },
+      {
+        "token": "nice",
+        "context": " sort of measure that you know it would be a>>> nice<<< project that we could use as a model for doing",
+        "activation_value": 0.8135489225387573
+      },
+      {
+        "token": "kind",
+        "context": "so this is>>> kind<<< of the next level and this is the austin",
+        "activation_value": 0.800011396408081
+      },
+      {
+        "token": "easy",
+        "context": " because i think they really kind of are quick and>>> easy<<< to understand for the context of this event",
+        "activation_value": 0.7907308340072632
+      },
+      {
+        "token": "woo",
+        "context": "now that means lots of all kinds of very>>> woo<<<ly things",
+        "activation_value": 0.7510889172554016
+      },
+      {
+        "token": "kind",
+        "context": "and so the thing that i've been>>> kind<<< of really thinking about in terms of setting goals is",
+        "activation_value": 0.7454541921615601
+      },
+      {
+        "token": "acious",
+        "context": "big hairy aud>>>acious<<< goal",
+        "activation_value": 0.7375022172927856
+      },
+      {
+        "token": "flexible",
+        "context": "and again this is a>>> flexible<<< can you hear me okay we're good this is",
+        "activation_value": 0.6976390480995178
+      },
+      {
+        "token": "short",
+        "context": "'s an interesting way to explain in really in a>>> short<<< way this circle of prosperity that they're talking about",
+        "activation_value": 0.6971676349639893
+      },
+      {
+        "token": "long",
+        "context": "so i'm just this is a>>> long<<< way of saying i just think there's a lot",
+        "activation_value": 0.6924068927764893
+      },
+      {
+        "token": "kind",
+        "context": "ello which is the burlington is>>> kind<<< of a step towards that",
+        "activation_value": 0.691688597202301
+      },
+      {
+        "token": "hot",
+        "context": " the seasons but i'll take any excuse for a>>> hot<<< dog",
+        "activation_value": 0.6824025511741638
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Positive Adjectives\",\n  \"explanation\": \"The feature detects words with positive connotations, such as 'quick', 'cool', 'nice', and 'awesome', which are often used to express approval or enthusiasm\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "11980": {
+    "feature_idx": 11980,
+    "label": "Human Assistance",
+    "explanation": "The feature detects instances where help or support is being offered to individuals or groups, often in the context of technology or community development.",
+    "confidence": "high",
+    "top_tokens": [
+      "people",
+      "you",
+      "me",
+      "us",
+      "it",
+      "everyone",
+      "them",
+      "or",
+      "internet",
+      "we",
+      "things",
+      "just",
+      "her",
+      "by",
+      "know",
+      "community",
+      "everything",
+      "public",
+      "ab",
+      "member"
+    ],
+    "top_contexts": [
+      {
+        "token": "you",
+        "context": " so that they can work on the internet and let>>> you<<< be the focal point with from which we all can",
+        "activation_value": 10.861597061157227
+      },
+      {
+        "token": "people",
+        "context": "hm on the computer my computer you know just let>>> people<<< know to show a response",
+        "activation_value": 10.571080207824707
+      },
+      {
+        "token": "her",
+        "context": "i'm going to let>>> her<<< speak about it but it's called e2d",
+        "activation_value": 10.34579849243164
+      },
+      {
+        "token": "everyone",
+        "context": " at we have so many resources how do we let>>> everyone<<< know about them and then how do we utilize them",
+        "activation_value": 8.935335159301758
+      },
+      {
+        "token": "everyone",
+        "context": " one maybe it's a library where we can let>>> everyone<<< know that if you have questions at all about the",
+        "activation_value": 8.113680839538574
+      },
+      {
+        "token": "by",
+        "context": "i'm going to get i'm gonna let ab>>>by<<< comeback",
+        "activation_value": 6.566051006317139
+      },
+      {
+        "token": "you",
+        "context": "point being is education lets>>> you<<< understand what the applications can do and what the capability",
+        "activation_value": 4.640015125274658
+      },
+      {
+        "token": "me",
+        "context": "so let>>> me<<< just clear up quick feedback saying that the whole reason",
+        "activation_value": 3.5528156757354736
+      },
+      {
+        "token": "us",
+        "context": " hubs like who can we reach out to to help>>> us<<< try to get more specific with this data identify existing",
+        "activation_value": 2.133796215057373
+      },
+      {
+        "token": "people",
+        "context": " filtered which i've had serious concern about and helping>>> people<<< understand what programming is about and how you are being",
+        "activation_value": 2.062615394592285
+      },
+      {
+        "token": "them",
+        "context": " and they've got issues that they can just help>>> them<<<",
+        "activation_value": 2.0219173431396484
+      },
+      {
+        "token": "you",
+        "context": "access and helping>>> you<<< get access that they need to use so that they",
+        "activation_value": 2.0060179233551025
+      },
+      {
+        "token": "me",
+        "context": " it to remain private after the recording's finished let>>> me<<< know at the end of this event",
+        "activation_value": 1.9967479705810547
+      },
+      {
+        "token": "them",
+        "context": " people can teach them on a oneonone help>>> them<<< find exactly the things that they need",
+        "activation_value": 1.7666888236999512
+      },
+      {
+        "token": "or",
+        "context": "perhaps we can help initiate>>> or<<< fundraise whatever you might need to start collecting information",
+        "activation_value": 1.6120028495788574
+      },
+      {
+        "token": "people",
+        "context": " if you want to request your data you can other>>> people<<< were talking about open source and get help",
+        "activation_value": 1.4875773191452026
+      },
+      {
+        "token": "know",
+        "context": " on the computer my computer you know just let people>>> know<<< to show a response",
+        "activation_value": 1.1461442708969116
+      },
+      {
+        "token": "community",
+        "context": " say right now my favorite winter activity is helping our>>> community<<< member's understand the winter",
+        "activation_value": 1.1348532438278198
+      },
+      {
+        "token": "internet",
+        "context": "because they want to>>> internet<<<work it with the other networks on the planet and",
+        "activation_value": 1.0876469612121582
+      },
+      {
+        "token": "it",
+        "context": " to apply our effort to what's working and help>>> it<<< work better",
+        "activation_value": 1.0361473560333252
+      },
+      {
+        "token": "we",
+        "context": "now what can>>> we<<< do that actually brings the best of providing equal opportunity",
+        "activation_value": 1.0033420324325562
+      },
+      {
+        "token": "people",
+        "context": "and my job is helping>>> people<<< with their computers",
+        "activation_value": 0.9458592534065247
+      },
+      {
+        "token": "you",
+        "context": " many people's jobs but i think the internet helps>>> you<<< get your work done",
+        "activation_value": 0.9177705645561218
+      },
+      {
+        "token": "internet",
+        "context": " need to own and have their own network first to>>> internet<<<work with another network and whether their network is simply",
+        "activation_value": 0.8776111602783203
+      },
+      {
+        "token": "me",
+        "context": "and thank you for helping>>> me<<< connect with all these folks",
+        "activation_value": 0.8457390666007996
+      },
+      {
+        "token": "everything",
+        "context": " us have that exact like thing that's gonna make>>> everything<<< better right but we have each other and we have",
+        "activation_value": 0.8124996423721313
+      },
+      {
+        "token": "public",
+        "context": "and we'll make sure not to make it>>> public<<< online but the idea would be that we would share",
+        "activation_value": 0.7397208213806152
+      },
+      {
+        "token": "ab",
+        "context": "i'm going to get i'm gonna let>>> ab<<<by comeback",
+        "activation_value": 0.7200357913970947
+      },
+      {
+        "token": "it",
+        "context": "and we'll make sure not to make>>> it<<< public online but the idea would be that we would",
+        "activation_value": 0.6569199562072754
+      },
+      {
+        "token": "things",
+        "context": " like to you know well anyway just like to get>>> things<<< going right and well and like backwards",
+        "activation_value": 0.6445211172103882
+      },
+      {
+        "token": "us",
+        "context": " i pointed out one already which is who can help>>> us<<< get this data how do we start this who can",
+        "activation_value": 0.6345875263214111
+      },
+      {
+        "token": "us",
+        "context": "'s a poster back there that says who can help>>> us<<< get the data we need to identify barriers to digital",
+        "activation_value": 0.6316808462142944
+      },
+      {
+        "token": "member",
+        "context": " right now my favorite winter activity is helping our community>>> member<<<'s understand the winter",
+        "activation_value": 0.6229641437530518
+      },
+      {
+        "token": "it",
+        "context": " as an example like where would it live what would>>> it<<< look like and then build alliance",
+        "activation_value": 0.505121111869812
+      },
+      {
+        "token": "just",
+        "context": "so let me>>> just<<< clear up quick feedback saying that the whole reason that",
+        "activation_value": 0.48989081382751465
+      },
+      {
+        "token": "really",
+        "context": " know exactly what to make to serve people and to>>> really<<< bridge that divide",
+        "activation_value": 0.48048460483551025
+      },
+      {
+        "token": "speak",
+        "context": "i'm going to let her>>> speak<<< about it but it's called e2d",
+        "activation_value": 0.46634674072265625
+      },
+      {
+        "token": "one",
+        "context": "when did the iph>>>one<<< come out it went out",
+        "activation_value": 0.4544631838798523
+      },
+      {
+        "token": "you",
+        "context": "we have a statewide nonprofit organization that helps>>> you<<< find the best deal planning or common good vermont",
+        "activation_value": 0.43489134311676025
+      },
+      {
+        "token": "things",
+        "context": " feel comfortable getting at it but we should also have>>> things<<< available for people that don't feel comfortable in those",
+        "activation_value": 0.40371760725975037
+      },
+      {
+        "token": "just",
+        "context": "oh let's>>> just<<< get over here and then we'll bounce back",
+        "activation_value": 0.3913770616054535
+      },
+      {
+        "token": "people",
+        "context": "it sort of distracts>>> people<<< from really recognizing what's going on",
+        "activation_value": 0.36986902356147766
+      },
+      {
+        "token": "people",
+        "context": "it's something different than just giving>>> people<<< access because in two thousand and seventeen more people have",
+        "activation_value": 0.35103416442871094
+      },
+      {
+        "token": "or",
+        "context": " list or a website or something where i could access>>> or<<< others could access the things that we've been talking",
+        "activation_value": 0.2949555516242981
+      },
+      {
+        "token": "tonight",
+        "context": "so these are some things that we can>>> tonight<<< start to brainstorm around",
+        "activation_value": 0.18038657307624817
+      },
+      {
+        "token": "from",
+        "context": "it sort of distracts people>>> from<<< really recognizing what's going on",
+        "activation_value": 0.1590103805065155
+      },
+      {
+        "token": "comeback",
+        "context": "'m going to get i'm gonna let abby>>> comeback<<<",
+        "activation_value": 0.1384889781475067
+      },
+      {
+        "token": "anything",
+        "context": "that i won't put>>> anything<<< out there of mine that i can't take back",
+        "activation_value": 0.1336393654346466
+      },
+      {
+        "token": "we",
+        "context": " why are we boxed into comcast why don't>>> we<<< have access to this burlington telecom and in that",
+        "activation_value": 0.13048481941223145
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Human Assistance\",\n  \"explanation\": \"The feature detects instances where help or support is being offered to individuals or groups, often in the context of technology or community development.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "9222": {
+    "feature_idx": 9222,
+    "label": "Vermont Location",
+    "explanation": "The feature detects mentions of the state of Vermont, often in the context of locations, cities, or counties within the state",
+    "confidence": "high",
+    "top_tokens": [
+      "mont",
+      "ver",
+      "and",
+      "then",
+      "became",
+      "olina",
+      "released",
+      "es",
+      "oos",
+      "county",
+      "sex",
+      "otte",
+      "bridge",
+      "of",
+      "he",
+      "min",
+      "calling",
+      "flexible",
+      "resources",
+      "red"
+    ],
+    "top_contexts": [
+      {
+        "token": "then",
+        "context": " chittenden county and then vermont and>>> then<<< the country and then the world has affordable or you",
+        "activation_value": 3.441220998764038
+      },
+      {
+        "token": "and",
+        "context": "every single person in burlington>>> and<<< then chittenden county and then vermont",
+        "activation_value": 2.5452775955200195
+      },
+      {
+        "token": "mont",
+        "context": " and then chittenden county and then ver>>>mont<<< and then the country and then the world has affordable",
+        "activation_value": 2.520050048828125
+      },
+      {
+        "token": "ver",
+        "context": " andrews and i've been back here in>>> ver<<<mont since one thousand nine hundred and eighty four",
+        "activation_value": 2.340343713760376
+      },
+      {
+        "token": "mont",
+        "context": "rews and i've been back here in ver>>>mont<<< since one thousand nine hundred and eighty four",
+        "activation_value": 2.258639097213745
+      },
+      {
+        "token": "ver",
+        "context": "lington and then chittenden county and then>>> ver<<<mont and then the country and then the world has",
+        "activation_value": 2.237654685974121
+      },
+      {
+        "token": "ver",
+        "context": "and i live in>>> ver<<<mont because i grew up in minnesota and i",
+        "activation_value": 2.1297342777252197
+      },
+      {
+        "token": "then",
+        "context": " burlington and then chittenden county and>>> then<<< vermont and then the country and then the world",
+        "activation_value": 2.0204524993896484
+      },
+      {
+        "token": "and",
+        "context": " in burlington and then chittenden county>>> and<<< then vermont and then the country and then the",
+        "activation_value": 2.020015001296997
+      },
+      {
+        "token": "and",
+        "context": " then chittenden county and then vermont>>> and<<< then the country and then the world has affordable or",
+        "activation_value": 1.8397102355957031
+      },
+      {
+        "token": "then",
+        "context": " county and then vermont and then the country and>>> then<<< the world has affordable or you know whatever free super",
+        "activation_value": 1.734222650527954
+      },
+      {
+        "token": "mont",
+        "context": "big building in ver>>>mont<<<",
+        "activation_value": 1.716578722000122
+      },
+      {
+        "token": "mont",
+        "context": "amyn west who's a librarian in ver>>>mont<<< has written that book actually",
+        "activation_value": 1.671594262123108
+      },
+      {
+        "token": "olina",
+        "context": "it's located in davidson north car>>>olina<<<",
+        "activation_value": 1.6465401649475098
+      },
+      {
+        "token": "released",
+        "context": "returning too is general william dean>>> released<<< at panmunjom after three years as a",
+        "activation_value": 1.5839275121688843
+      },
+      {
+        "token": "mont",
+        "context": " so she's very and she's based in ver>>>mont<<< yeah wow",
+        "activation_value": 1.5237244367599487
+      },
+      {
+        "token": "es",
+        "context": "and i almost simultaneously moved out of burlington to>>> es<<<sex and started working for the city at burlington",
+        "activation_value": 1.3363075256347656
+      },
+      {
+        "token": "mont",
+        "context": "and i live in ver>>>mont<<< because i grew up in minnesota and i love",
+        "activation_value": 1.280799150466919
+      },
+      {
+        "token": "ver",
+        "context": "essamyn west who's a librarian in>>> ver<<<mont has written that book actually",
+        "activation_value": 1.2472314834594727
+      },
+      {
+        "token": "oos",
+        "context": " i'm a communications coordinator for the city of win>>>oos<<<ki",
+        "activation_value": 1.177076816558838
+      },
+      {
+        "token": "county",
+        "context": " person in burlington and then chittenden>>> county<<< and then vermont and then the country and then",
+        "activation_value": 1.1552221775054932
+      },
+      {
+        "token": "ver",
+        "context": " reps and it's the largest affordable housing complex in>>> ver<<<mont",
+        "activation_value": 1.108144998550415
+      },
+      {
+        "token": "and",
+        "context": " then ie water supply wastewater stormwater broadband solid waste>>> and<<< recycling",
+        "activation_value": 1.0477557182312012
+      },
+      {
+        "token": "mont",
+        "context": "i grew up in ver>>>mont<<< and got here about a year ago",
+        "activation_value": 1.0268464088439941
+      },
+      {
+        "token": "became",
+        "context": "as i got older my favorite winter activity>>> became<<< became planning summer",
+        "activation_value": 1.000319480895996
+      },
+      {
+        "token": "sex",
+        "context": " i almost simultaneously moved out of burlington to es>>>sex<<< and started working for the city at burlington telecom",
+        "activation_value": 0.9970637559890747
+      },
+      {
+        "token": "otte",
+        "context": " taking care of all the middle schools in charl>>>otte<<<",
+        "activation_value": 0.9884799122810364
+      },
+      {
+        "token": "bridge",
+        "context": "'s managing a research project out of mit in cam>>>bridge<<< massachusetts",
+        "activation_value": 0.976789116859436
+      },
+      {
+        "token": "of",
+        "context": " sumner i'm a communications coordinator for the city>>> of<<< winooski",
+        "activation_value": 0.9665440320968628
+      },
+      {
+        "token": "became",
+        "context": "as i got older my favorite winter activity became>>> became<<< planning summer",
+        "activation_value": 0.9557924866676331
+      },
+      {
+        "token": "he",
+        "context": "yes lauren the vermont department of public service>>> he<<<'s updating the tenyear telecom plan which they do",
+        "activation_value": 0.9526228904724121
+      },
+      {
+        "token": "mont",
+        "context": " and it's the largest affordable housing complex in ver>>>mont<<<",
+        "activation_value": 0.9311138391494751
+      },
+      {
+        "token": "ver",
+        "context": " well so she's very and she's based in>>> ver<<<mont yeah wow",
+        "activation_value": 0.8386173248291016
+      },
+      {
+        "token": "min",
+        "context": " i live in vermont because i grew up in>>> min<<<nesota and i love winters it's hard to pick",
+        "activation_value": 0.8342611789703369
+      },
+      {
+        "token": "calling",
+        "context": "they're>>> calling<<< themselves now the vermont data center",
+        "activation_value": 0.7983741164207458
+      },
+      {
+        "token": "flexible",
+        "context": " you hear me okay we're good this is a>>> flexible<<< event so we can steer in whatever direction we need",
+        "activation_value": 0.7982208132743835
+      },
+      {
+        "token": "resources",
+        "context": " interested in access to resources digital resources access to digital>>> resources<<< for everything from civic data projects through small scale entrepreneurial",
+        "activation_value": 0.7929724454879761
+      },
+      {
+        "token": "then",
+        "context": "every single person in burlington and>>> then<<< chittenden county and then vermont and",
+        "activation_value": 0.7895587682723999
+      },
+      {
+        "token": "red",
+        "context": " at panmunjom after three years as a>>> red<<< pow tired and worn but covered with glory an old",
+        "activation_value": 0.7740762233734131
+      },
+      {
+        "token": "simply",
+        "context": "so the access is just the>>> simply<<< the affordability and the availability of these tools and these",
+        "activation_value": 0.7474477887153625
+      },
+      {
+        "token": "ver",
+        "context": "i grew up in>>> ver<<<mont and got here about a year ago",
+        "activation_value": 0.7427452802658081
+      },
+      {
+        "token": "services",
+        "context": " have higher ed and i would say business and administrative>>> services<<< also is very closely related to this topic",
+        "activation_value": 0.7344428896903992
+      },
+      {
+        "token": "could",
+        "context": "so i don't know how we>>> could<<< get that in there",
+        "activation_value": 0.6781071424484253
+      },
+      {
+        "token": "and",
+        "context": " walking and snowshoeing and cross country skiing>>> and<<< ice skating",
+        "activation_value": 0.6747175455093384
+      },
+      {
+        "token": "press",
+        "context": "you know they>>> press<<< maybe one of four words to get where they need",
+        "activation_value": 0.6710247993469238
+      },
+      {
+        "token": "and",
+        "context": " almost simultaneously moved out of burlington to essex>>> and<<< started working for the city at burlington telecom which",
+        "activation_value": 0.6707344651222229
+      },
+      {
+        "token": "the",
+        "context": "ittenden county and then vermont and then>>> the<<< country and then the world has affordable or you know",
+        "activation_value": 0.6551466584205627
+      },
+      {
+        "token": "one",
+        "context": "hold on>>> one<<< minute alex again yeah absolutely",
+        "activation_value": 0.6505776643753052
+      },
+      {
+        "token": "be",
+        "context": "it would>>> be<<< nice to make a study out of this thing start",
+        "activation_value": 0.6386803984642029
+      },
+      {
+        "token": "over",
+        "context": "oh let's just get>>> over<<< here and then we'll bounce back",
+        "activation_value": 0.6348408460617065
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Vermont Location\",\n  \"explanation\": \"The feature detects mentions of the state of Vermont, often in the context of locations, cities, or counties within the state\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "11386": {
+    "feature_idx": 11386,
+    "label": "Personal Preference",
+    "explanation": "The feature detects instances where individuals express their personal preferences, favorites, or opinions, often in the context of discussions or introductions.",
+    "confidence": "high",
+    "top_tokens": [
+      "favorite",
+      "you",
+      "of",
+      "is",
+      "questions",
+      "to",
+      "we",
+      "preferred",
+      "i",
+      "a",
+      "cro",
+      "own",
+      "y",
+      "out",
+      "your",
+      "and",
+      "at",
+      "that",
+      "most",
+      "what"
+    ],
+    "top_contexts": [
+      {
+        "token": "favorite",
+        "context": " and i love winters it's hard to pick a>>> favorite<<<",
+        "activation_value": 1.4649258852005005
+      },
+      {
+        "token": "favorite",
+        "context": "now a>>> favorite<<< activity i'm inviting everybody over tomorrow",
+        "activation_value": 1.3999053239822388
+      },
+      {
+        "token": "cro",
+        "context": "my name's matt>>> cro<<<ck",
+        "activation_value": 1.1671942472457886
+      },
+      {
+        "token": "own",
+        "context": "yes i'm looking at hearing everyone and just my>>> own<<< having been with the internet for years i still get",
+        "activation_value": 1.103630781173706
+      },
+      {
+        "token": "y",
+        "context": "he will i work there as and>>>y<<< as a tech director",
+        "activation_value": 1.0924046039581299
+      },
+      {
+        "token": "out",
+        "context": " some of us start writing or is there some software>>> out<<< there that's called easy for the seniors",
+        "activation_value": 0.9837518930435181
+      },
+      {
+        "token": "you",
+        "context": " people that do ancestry dna i mean what are>>> you<<< thinking things like that just crazy",
+        "activation_value": 0.9238581657409668
+      },
+      {
+        "token": "favorite",
+        "context": "oh and what's your>>> favorite<<< winter activity avoiding snow",
+        "activation_value": 0.9213896989822388
+      },
+      {
+        "token": "is",
+        "context": "so my favorite winter activity i think>>> is<<< shoveling snow",
+        "activation_value": 0.917877197265625
+      },
+      {
+        "token": "favorite",
+        "context": " sort of say and i'd say right now my>>> favorite<<< winter activity is helping our community member's understand the",
+        "activation_value": 0.9024826288223267
+      },
+      {
+        "token": "your",
+        "context": "oh and what's>>> your<<< favorite winter activity avoiding snow",
+        "activation_value": 0.8954299688339233
+      },
+      {
+        "token": "and",
+        "context": "but my favorite of all>>> and<<< this is a bit of an echo is shoveling",
+        "activation_value": 0.8261538147926331
+      },
+      {
+        "token": "favorite",
+        "context": "a>>> favorite<<< activity around the holidays is defined a messiah sing",
+        "activation_value": 0.7907607555389404
+      },
+      {
+        "token": "at",
+        "context": " we can let everyone know that if you have questions>>> at<<< all about the internet you could go to the library",
+        "activation_value": 0.7879812717437744
+      },
+      {
+        "token": "favorite",
+        "context": "i feel pretty confident about you know technology and my>>> favorite<<< winter activity is probably sledding",
+        "activation_value": 0.7855943441390991
+      },
+      {
+        "token": "questions",
+        "context": " there before we jump on these posters here and take>>> questions<<< if you have them i would like everyone to go",
+        "activation_value": 0.761530876159668
+      },
+      {
+        "token": "that",
+        "context": " in these conversations weighing applications talking about this application or>>> that<<< application",
+        "activation_value": 0.7592929601669312
+      },
+      {
+        "token": "most",
+        "context": " fiber networks that press across the state that run past>>> most<<< towns and cities or through most towns and cities in",
+        "activation_value": 0.7335970997810364
+      },
+      {
+        "token": "you",
+        "context": " bothers me every time somebody says oh let's just>>> you<<< know i mean i hate to say it the google",
+        "activation_value": 0.7121648788452148
+      },
+      {
+        "token": "what",
+        "context": " if we had an inclusive burlington would never leave>>> what<<< would be different and who are the people that we",
+        "activation_value": 0.7070704102516174
+      },
+      {
+        "token": "cause",
+        "context": "and then i just put this image here>>> cause<<< i think it's an interesting way to explain in",
+        "activation_value": 0.7020893692970276
+      },
+      {
+        "token": "all",
+        "context": "so my name's julia v>>>all<<<era",
+        "activation_value": 0.6920427680015564
+      },
+      {
+        "token": "to",
+        "context": " a map that people can see any upcoming event related>>> to<<< digital inclusion and internet related and digital topics",
+        "activation_value": 0.6897836327552795
+      },
+      {
+        "token": "we",
+        "context": " trying to take a step back and say what are>>> we<<< talking about it as a group here and what i",
+        "activation_value": 0.6866768598556519
+      },
+      {
+        "token": "seems",
+        "context": " to centralize all this into one space and it>>> seems<<< like we really need education and we need access",
+        "activation_value": 0.6454750895500183
+      },
+      {
+        "token": "caught",
+        "context": " where we see kind of open meeting law hasn't>>> caught<<< up with what's possible for engaging online governance",
+        "activation_value": 0.6393114924430847
+      },
+      {
+        "token": "death",
+        "context": "tirelessly he toiled at this desk until>>> death<<< in one thousand nine hundred and nineteen stilled his",
+        "activation_value": 0.6226098537445068
+      },
+      {
+        "token": "is",
+        "context": " and i'd say right now my favorite winter activity>>> is<<< helping our community member's understand the winter",
+        "activation_value": 0.6194207668304443
+      },
+      {
+        "token": "preferred",
+        "context": "you can feel free to write your name your>>> preferred<<< gender pronoun if you like",
+        "activation_value": 0.6159807443618774
+      },
+      {
+        "token": "i",
+        "context": "it's a community where>>> i<<< mean it's already happening",
+        "activation_value": 0.6066069602966309
+      },
+      {
+        "token": "era",
+        "context": "so my name's julia vall>>>era<<<",
+        "activation_value": 0.6044399738311768
+      },
+      {
+        "token": "to",
+        "context": " is layering on top of free apps that are>>> to<<< make it convenient and efficient for us to network and",
+        "activation_value": 0.6001150012016296
+      },
+      {
+        "token": "of",
+        "context": " can solve the digital divide right it's a combination>>> of<<< many",
+        "activation_value": 0.5993564128875732
+      },
+      {
+        "token": "within",
+        "context": "i mean we have more we practically have more rules>>> within<<< our community about what you say in an email to",
+        "activation_value": 0.5932604074478149
+      },
+      {
+        "token": "a",
+        "context": "don't agree for>>> a<<< solution for a problem that doesn't actually exist",
+        "activation_value": 0.5898412466049194
+      },
+      {
+        "token": "questions",
+        "context": "what do you guys any>>> questions<<< what is the big hairy goal here yeah",
+        "activation_value": 0.5775148272514343
+      },
+      {
+        "token": "for",
+        "context": " reality in some of the more remote communities you know>>> for<<< monitor's full of meaningfully underutilized fiber",
+        "activation_value": 0.57530677318573
+      },
+      {
+        "token": "ways",
+        "context": " i mean that says and that could go two different>>> ways<<<",
+        "activation_value": 0.5750055313110352
+      },
+      {
+        "token": "preferred",
+        "context": " we could go around the room and do our name>>> preferred<<< gender pronoun if you prefer to do that and what",
+        "activation_value": 0.5722039937973022
+      },
+      {
+        "token": "welcome",
+        "context": "ooh cool thank you>>> welcome<<<",
+        "activation_value": 0.5696633458137512
+      },
+      {
+        "token": "we",
+        "context": " with that said just briefly this is what we're>>> we<<<'ll be going through we're gonna do introductions",
+        "activation_value": 0.5676858425140381
+      },
+      {
+        "token": "of",
+        "context": " can find data related to what we that i know>>> of<<<",
+        "activation_value": 0.5643345713615417
+      },
+      {
+        "token": "down",
+        "context": " of the stuff i don't know how it breaks>>> down<<<",
+        "activation_value": 0.5636441707611084
+      },
+      {
+        "token": "i",
+        "context": "so my favorite winter activity>>> i<<< think is shoveling snow",
+        "activation_value": 0.5600982308387756
+      },
+      {
+        "token": "of",
+        "context": " percentage of those buildings that have access to different levels>>> of<<< broadband",
+        "activation_value": 0.5558637380599976
+      },
+      {
+        "token": "a",
+        "context": " whether it's a phone or a chromebook or>>> a<<< more comprehensive computer and you may have a router or",
+        "activation_value": 0.5536985993385315
+      },
+      {
+        "token": "you",
+        "context": "aren't>>> you<<< going to end with an awesome quote oh you're",
+        "activation_value": 0.5462032556533813
+      },
+      {
+        "token": "are",
+        "context": " show one two or three of these that i think>>> are<<< very very influential for us in this context",
+        "activation_value": 0.5450024604797363
+      },
+      {
+        "token": "'ve",
+        "context": " and the people that i've been meeting since i>>>'ve<<< been here",
+        "activation_value": 0.5401545763015747
+      },
+      {
+        "token": "after",
+        "context": " i'm here cause julia sent me a message>>> after<<< i looked up an article",
+        "activation_value": 0.5390886664390564
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Personal Preference\",\n  \"explanation\": \"The feature detects instances where individuals express their personal preferences, favorites, or opinions, often in the context of discussions or introductions.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "6094": {
+    "feature_idx": 6094,
+    "label": "Preposition and location",
+    "explanation": "The feature activates on tokens related to prepositions and location, such as 'in', 'at', 'side', and 'next', indicating a concept related to spatial relationships and positioning",
+    "confidence": "high",
+    "top_tokens": [
+      "in",
+      "end",
+      "at",
+      "side",
+      "know",
+      "l",
+      "much",
+      "internally",
+      "about",
+      "the",
+      "released",
+      "role",
+      "is",
+      "enter",
+      "what",
+      "person",
+      "start",
+      "reach",
+      "eth",
+      "next"
+    ],
+    "top_contexts": [
+      {
+        "token": "know",
+        "context": " to remain private after the recording's finished let me>>> know<<< at the end of this event",
+        "activation_value": 1.4535788297653198
+      },
+      {
+        "token": "l",
+        "context": "all right stephen barrac>>>l<<<ough i run burlington telecom",
+        "activation_value": 1.2944281101226807
+      },
+      {
+        "token": "much",
+        "context": " i should find out about so i don't know>>> much<<< about it",
+        "activation_value": 1.265164852142334
+      },
+      {
+        "token": "internally",
+        "context": " to do that research or they have people that work>>> internally<<<",
+        "activation_value": 1.2143933773040771
+      },
+      {
+        "token": "in",
+        "context": " aspect and a network aspect and we'd get lost>>> in<<< these conversations weighing applications talking about this application or that",
+        "activation_value": 1.1895684003829956
+      },
+      {
+        "token": "about",
+        "context": " in this maybe it's something i should find out>>> about<<< so i don't know much about it",
+        "activation_value": 1.1612809896469116
+      },
+      {
+        "token": "the",
+        "context": " private after the recording's finished let me know at>>> the<<< end of this event",
+        "activation_value": 1.1450294256210327
+      },
+      {
+        "token": "released",
+        "context": "returning too is general william dean>>> released<<< at panmunjom after three years as a",
+        "activation_value": 1.104405164718628
+      },
+      {
+        "token": "role",
+        "context": " the people who we're surveying should have a>>> role<<< in that process or you know whatever the case",
+        "activation_value": 1.099701166152954
+      },
+      {
+        "token": "is",
+        "context": " just related to that data piece like how important it>>> is<<< to have data in order to know exactly what to",
+        "activation_value": 0.9926804304122925
+      },
+      {
+        "token": "enter",
+        "context": " is press go or they express stop or they press>>> enter<<<",
+        "activation_value": 0.9666955471038818
+      },
+      {
+        "token": "end",
+        "context": "every single person in burlington and then chitt>>>end<<<en county and then vermont and then the country",
+        "activation_value": 0.9603910446166992
+      },
+      {
+        "token": "in",
+        "context": " from the grave of his youngest son quentin killed>>> in<<< france in one thousand nine hundred and eighteen",
+        "activation_value": 0.9109619855880737
+      },
+      {
+        "token": "what",
+        "context": " already doing instead of creating new work and then see>>> what<<< the data actually does show about where the gaps are",
+        "activation_value": 0.8717132806777954
+      },
+      {
+        "token": "person",
+        "context": " information and learn the same thing in perhaps an in>>>person<<< session or with printouts",
+        "activation_value": 0.8652723431587219
+      },
+      {
+        "token": "start",
+        "context": " lake behind the dam flows out of another reservoir to>>> start<<< a twisting journey of sixty miles or more through can",
+        "activation_value": 0.8209440112113953
+      },
+      {
+        "token": "reach",
+        "context": " to people organizations initiatives research hubs like who can we>>> reach<<< out to to help us try to get more specific",
+        "activation_value": 0.8151824474334717
+      },
+      {
+        "token": "at",
+        "context": " a good amount of time like ten minutes or so>>> at<<< the end to have reflections",
+        "activation_value": 0.8094296455383301
+      },
+      {
+        "token": "eth",
+        "context": " our community can pull together that are both kind of>>> eth<<<ically designed and nonextractive but also very very",
+        "activation_value": 0.8071445226669312
+      },
+      {
+        "token": "next",
+        "context": "i live with don who's>>> next<<< door to me there",
+        "activation_value": 0.7978903651237488
+      },
+      {
+        "token": "every",
+        "context": " that goal would be i think mine would be like>>> every<<< single person in burlington has",
+        "activation_value": 0.7850574851036072
+      },
+      {
+        "token": "mock",
+        "context": " europe's first atomic maneuvers with both teams launching>>> mock<<< atomic attacks as nato prepares against possible aggression from",
+        "activation_value": 0.7694203853607178
+      },
+      {
+        "token": "outs",
+        "context": " thing in perhaps an inperson session or with print>>>outs<<<",
+        "activation_value": 0.7650680541992188
+      },
+      {
+        "token": "forever",
+        "context": " other lowincome seniors will have a fixed cable rate>>> forever<<< and it didn't last forever but it lasts as",
+        "activation_value": 0.7403664588928223
+      },
+      {
+        "token": "at",
+        "context": " remain private after the recording's finished let me know>>> at<<< the end of this event",
+        "activation_value": 0.7209055423736572
+      },
+      {
+        "token": "one",
+        "context": " the things that we've been talking about is there>>> one<<< to tap into is there anyone here that didn't",
+        "activation_value": 0.7177709341049194
+      },
+      {
+        "token": "any",
+        "context": " see you boys in the same way i'd expect>>> any<<< one of you to act in a football game",
+        "activation_value": 0.6927495002746582
+      },
+      {
+        "token": "comfortable",
+        "context": " also have things available for people that don't feel>>> comfortable<<< in those spaces but can access the same information and",
+        "activation_value": 0.6767052412033081
+      },
+      {
+        "token": "by",
+        "context": " can book a librarian and they will sit side>>> by<<< side with you and do those things",
+        "activation_value": 0.6212813854217529
+      },
+      {
+        "token": "people",
+        "context": "and snowwomen snow>>>people<<<",
+        "activation_value": 0.6155503988265991
+      },
+      {
+        "token": "side",
+        "context": " you can book a librarian and they will sit>>> side<<< by side with you and do those things",
+        "activation_value": 0.6032084226608276
+      },
+      {
+        "token": "poster",
+        "context": " improve how can i help yeah so there's a>>> poster<<< back there that says who can help us get the",
+        "activation_value": 0.594465434551239
+      },
+      {
+        "token": "or",
+        "context": " guessing either they work with organizations to do that research>>> or<<< they have people that work internally",
+        "activation_value": 0.5927565097808838
+      },
+      {
+        "token": "speed",
+        "context": " is very much included to sort of think about high>>> speed<<< internet and fiber and stuff",
+        "activation_value": 0.5892623662948608
+      },
+      {
+        "token": "end",
+        "context": "i pull just the chitt>>>end<<<en county stats here",
+        "activation_value": 0.5852400064468384
+      },
+      {
+        "token": "'t",
+        "context": " i do want to capture these suggestions so they don>>>'t<<< get lost in the air",
+        "activation_value": 0.5831092000007629
+      },
+      {
+        "token": "lost",
+        "context": " want to capture these suggestions so they don't get>>> lost<<< in the air",
+        "activation_value": 0.560345470905304
+      },
+      {
+        "token": "around",
+        "context": "mozilla foundation has been doing a lot of work>>> around<<< five issues related to internet health",
+        "activation_value": 0.5600937604904175
+      },
+      {
+        "token": "out",
+        "context": " framework and again these are definitions there's many definitions>>> out<<< there many and a lot of them are great",
+        "activation_value": 0.5573344230651855
+      },
+      {
+        "token": "good",
+        "context": " with one hundred over one hundred so that's pretty>>> good<<<",
+        "activation_value": 0.5502957105636597
+      },
+      {
+        "token": "of",
+        "context": " another great quote that i think does a nice job>>> of<<< demonstrating how the the way that we disperse these tools",
+        "activation_value": 0.548531174659729
+      },
+      {
+        "token": "qu",
+        "context": " is the flag from the grave of his youngest son>>> qu<<<entin killed in france in one thousand nine hundred",
+        "activation_value": 0.546849250793457
+      },
+      {
+        "token": "a",
+        "context": " behind the dam flows out of another reservoir to start>>> a<<< twisting journey of sixty miles or more through canals",
+        "activation_value": 0.540056586265564
+      },
+      {
+        "token": "largest",
+        "context": " ten residents in four community reps and it's the>>> largest<<< affordable housing complex in vermont",
+        "activation_value": 0.5397462248802185
+      },
+      {
+        "token": "communities",
+        "context": " we should plan the next conversation but invite individuals from>>> communities<<< or places that are within have those barriers",
+        "activation_value": 0.5395292043685913
+      },
+      {
+        "token": "ec",
+        "context": "so i'm dod>>>ec<<<i bomba",
+        "activation_value": 0.5345985889434814
+      },
+      {
+        "token": "so",
+        "context": " this maybe it's something i should find out about>>> so<<< i don't know much about it",
+        "activation_value": 0.5338090658187866
+      },
+      {
+        "token": "side",
+        "context": " book a librarian and they will sit side by>>> side<<< with you and do those things",
+        "activation_value": 0.5325942635536194
+      },
+      {
+        "token": "like",
+        "context": " example like where would it live what would it look>>> like<<< and then build alliance",
+        "activation_value": 0.5303629636764526
+      },
+      {
+        "token": "exists",
+        "context": " signal that's encrypted and one of the safest that>>> exists<<< as far as privacy is concerned right now where we",
+        "activation_value": 0.5281923413276672
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Preposition and location\",\n  \"explanation\": \"The feature activates on tokens related to prepositions and location, such as 'in', 'at', 'side', and 'next', indicating a concept related to spatial relationships and positioning\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "3013": {
+    "feature_idx": 3013,
+    "label": "Interrogative Pronoun",
+    "explanation": "The feature detects the use of interrogative pronouns, particularly 'who', in various contexts, indicating a question or inquiry about individuals or entities",
+    "confidence": "high",
+    "top_tokens": [
+      "who",
+      "event",
+      "what",
+      "they",
+      "to",
+      "welcome",
+      "sure"
+    ],
+    "top_contexts": [
+      {
+        "token": "who",
+        "context": " do the rest that at hands i saw whoa>>> who<<<a hold on i just got",
+        "activation_value": 11.233672142028809
+      },
+      {
+        "token": "who",
+        "context": " burlington would never leave what would be different and>>> who<<< are the people that we think would have a delta",
+        "activation_value": 10.911783218383789
+      },
+      {
+        "token": "who",
+        "context": "so anything that seems to go across>>> who<<< i am or what i believe in i like to",
+        "activation_value": 9.353399276733398
+      },
+      {
+        "token": "who",
+        "context": " help us get this data how do we start this>>> who<<< can we talk to and there's markers and i",
+        "activation_value": 9.208309173583984
+      },
+      {
+        "token": "who",
+        "context": "and i pointed out one already which is>>> who<<< can help us get this data how do we start",
+        "activation_value": 8.062783241271973
+      },
+      {
+        "token": "who",
+        "context": " let's do the rest that at hands i saw>>> who<<<a whoa hold on i just got",
+        "activation_value": 7.1072258949279785
+      },
+      {
+        "token": "who",
+        "context": "i live with don>>> who<<<'s next door to me there",
+        "activation_value": 6.825514793395996
+      },
+      {
+        "token": "who",
+        "context": " yeah so there's a poster back there that says>>> who<<< can help us get the data we need to identify",
+        "activation_value": 5.959822654724121
+      },
+      {
+        "token": "who",
+        "context": " like take the survey so that we know how what>>> who<<< we need to serve and how we can serve you",
+        "activation_value": 5.64951753616333
+      },
+      {
+        "token": "who",
+        "context": " i think maybe necessary is to think about consent with>>> who<<< gets the internet and whether they want it in the",
+        "activation_value": 5.452080249786377
+      },
+      {
+        "token": "who",
+        "context": "so anything related to people organizations initiatives research hubs like>>> who<<< can we reach out to to help us try to",
+        "activation_value": 5.409816741943359
+      },
+      {
+        "token": "who",
+        "context": "jessamyn west>>> who<<<'s a librarian in vermont has written that",
+        "activation_value": 3.33262038230896
+      },
+      {
+        "token": "who",
+        "context": "'re going to be delivering but the real key is>>> who<<<'s life you're making better through the product",
+        "activation_value": 2.163545846939087
+      },
+      {
+        "token": "who",
+        "context": "anyone>>> who<<< has things they want to discuss about any sales related",
+        "activation_value": 1.572864055633545
+      },
+      {
+        "token": "who",
+        "context": "anybody>>> who<<< didn't register online if you want to just give",
+        "activation_value": 1.0617436170578003
+      },
+      {
+        "token": "they",
+        "context": "and so since they've>>> they<<<'ve kind of reached these goals and as they reach",
+        "activation_value": 0.9327222108840942
+      },
+      {
+        "token": "event",
+        "context": " or any relevant examples as we move on throughout the>>> event<<< tonight",
+        "activation_value": 0.8910390138626099
+      },
+      {
+        "token": "who",
+        "context": " lot more granular data on what we know about>>> who<<<'s using the internet why they're using it why",
+        "activation_value": 0.7761580348014832
+      },
+      {
+        "token": "to",
+        "context": "thank you two>>> to<<< share your friends with the cctv venue and",
+        "activation_value": 0.49292904138565063
+      },
+      {
+        "token": "welcome",
+        "context": "thank you>>> welcome<<<",
+        "activation_value": 0.3814019560813904
+      },
+      {
+        "token": "who",
+        "context": " also was made possible by the generosity of gis>>> who<<< see their dream come true",
+        "activation_value": 0.3159087896347046
+      },
+      {
+        "token": "what",
+        "context": "and they say what do you think about this>>> what<<< would you do about this what would you do and",
+        "activation_value": 0.3134775459766388
+      },
+      {
+        "token": "who",
+        "context": "so people>>> who<<< couldn't make it could see it after",
+        "activation_value": 0.309764564037323
+      },
+      {
+        "token": "who",
+        "context": " doing and then we also bridge to the maker community>>> who<<< was working with you know raspberry pis and ardu",
+        "activation_value": 0.29859447479248047
+      },
+      {
+        "token": "sure",
+        "context": " would be willing to start those conversations for us sure>>> sure<<<",
+        "activation_value": 0.26096421480178833
+      },
+      {
+        "token": "what",
+        "context": " on this event what we could do better next time>>> what<<< we need to include and things like that",
+        "activation_value": 0.17435166239738464
+      },
+      {
+        "token": "event",
+        "context": " are these questions were were what we really focus that>>> event<<< on",
+        "activation_value": 0.12631219625473022
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Interrogative Pronoun\",\n  \"explanation\": \"The feature detects the use of interrogative pronouns, particularly 'who', in various contexts, indicating a question or inquiry about individuals or entities\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  }
+}

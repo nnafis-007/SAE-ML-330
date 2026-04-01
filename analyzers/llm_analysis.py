@@ -103,7 +103,7 @@ class LabelingConfig:
 
     backend: str = "groq"             # "openai" | "groq" | "ollama"
     model: str = "llama-3.3-70b-versatile"  # fast & free on Groq
-    top_k: int = 20
+    top_k: int = 0  # 0 or negative => include all contexts above min_activation
     context_window: int = 10          # tokens on each side of the activating token
     batch_size: int = 512
     max_features: Optional[int] = None
@@ -118,6 +118,9 @@ class LabelingConfig:
     std_floor: float = 1e-3
     skip_first_token: bool = True
     global_top_features_k: int = 10
+    min_activation: float = 0.0
+    include_global_top_features: bool = False
+    top_tokens_k: int = 10  # 0 => none, <0 => all, >0 => top-k
 
 
 # ---------------------------------------------------------------------------
@@ -339,10 +342,7 @@ The activating token is marked with >>> <<< to help you focus on it.
 Top {n_examples} activating examples (ordered strongest first):
 {examples_block}
 
-Most frequent activating tokens (top 10): {top_tokens}
-
-Top activated features across the analyzed corpus (top 10, feature_idx:mean_activation):
-{global_top_features}
+{top_tokens_block}
 
 Based on these examples, what concept does this SAE feature detect?
 """
@@ -525,11 +525,25 @@ class FeatureLabeler:
             return []
 
         candidate_vals = feat_vals[candidate_rows]
-        k = min(cfg.top_k, int(candidate_rows.numel()))
+
+        # Ignore weak activations to reduce noisy/irrelevant contexts.
+        if cfg.min_activation > 0:
+            keep_mask = candidate_vals >= float(cfg.min_activation)
+            candidate_rows = candidate_rows[keep_mask]
+            candidate_vals = candidate_vals[keep_mask]
+
+        if candidate_rows.numel() == 0:
+            return []
+
+        if cfg.top_k is None or int(cfg.top_k) <= 0:
+            k = int(candidate_rows.numel())
+        else:
+            k = min(int(cfg.top_k), int(candidate_rows.numel()))
         top_vals, rel_top_idxs = torch.topk(candidate_vals, k)
         top_idxs = candidate_rows[rel_top_idxs]
 
         contexts: List[TokenContext] = []
+        seen_contexts = set()
         cw = cfg.context_window
 
         for val, row_idx in zip(top_vals.tolist(), top_idxs.tolist()):
@@ -551,6 +565,11 @@ class FeatureLabeler:
 
             context_str = f"{prefix}>>>{token_s}<<<{suffix}"
 
+            dedupe_key = (token_s.strip(), context_str)
+            if dedupe_key in seen_contexts:
+                continue
+            seen_contexts.add(dedupe_key)
+
             contexts.append(TokenContext(
                 token=token_s.strip(),
                 context=context_str,
@@ -571,11 +590,15 @@ class FeatureLabeler:
             )
         return "\n".join(lines)
 
-    def _top_token_list(self, contexts: List[TokenContext], n: int = 10) -> str:
+    def _top_tokens(self, contexts: List[TokenContext]) -> List[str]:
         from collections import Counter
         counts = Counter(c.token for c in contexts if c.token)
-        most_common = [tok for tok, _ in counts.most_common(n)]
-        return ", ".join(f'"{t}"' for t in most_common) if most_common else "(none)"
+        k = int(self.cfg.top_tokens_k)
+        if k == 0:
+            return []
+        if k < 0:
+            return [tok for tok, _ in counts.most_common()]
+        return [tok for tok, _ in counts.most_common(k)]
 
     def _call_llm(
         self,
@@ -585,15 +608,32 @@ class FeatureLabeler:
     ) -> LabelResult:
         """Build the prompt, call the backend, parse the JSON response."""
         examples_block = self._build_examples_block(contexts)
-        top_tokens_str = self._top_token_list(contexts)
+        top_tokens = self._top_tokens(contexts)
+        if int(self.cfg.top_tokens_k) == 0:
+            top_tokens_block = ""
+        else:
+            if int(self.cfg.top_tokens_k) < 0:
+                top_tokens_label = "all"
+            else:
+                top_tokens_label = f"top {len(top_tokens)}"
+            top_tokens_str = ", ".join(f'"{t}"' for t in top_tokens) if top_tokens else "(none)"
+            top_tokens_block = (
+                f"Most frequent activating tokens ({top_tokens_label}): {top_tokens_str}\n"
+            )
 
         user_prompt = _USER_PROMPT_TEMPLATE.format(
             feature_idx=feature_idx,
             n_examples=len(contexts),
             examples_block=examples_block,
-            top_tokens=top_tokens_str,
-            global_top_features=global_top_features,
+            top_tokens_block=top_tokens_block,
         )
+
+        if self.cfg.include_global_top_features:
+            user_prompt += (
+                "\n\nTop activated features across the analyzed corpus "
+                "(top 10, feature_idx:mean_activation):\n"
+                f"{global_top_features}\n"
+            )
 
         raw = ""
         try:
@@ -625,7 +665,7 @@ class FeatureLabeler:
                 label=parsed.get("label", "unlabeled"),
                 explanation=parsed.get("explanation", ""),
                 confidence=parsed.get("confidence", "low"),
-                top_tokens=self._top_token_list(contexts).replace('"', '').split(", "),
+                top_tokens=top_tokens,
                 top_contexts=contexts,
                 raw_response=raw,
             )
@@ -1235,7 +1275,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--dataset",
         type=str,
-        default="openwebtext",
+        default="MLCommons/peoples_speech",
         help="Hugging Face dataset name. Use empty string to use built-in sample_texts.",
     )
     parser.add_argument(
@@ -1251,10 +1291,28 @@ if __name__ == "__main__":
         help="Dataset split name.",
     )
     parser.add_argument(
+        "--dataset-config",
+        type=str,
+        default=None,
+        help="Optional Hugging Face dataset config name (subset).",
+    )
+    parser.add_argument(
         "--dataset-text-field",
         type=str,
         default=None,
         help="Optional explicit text field in the dataset records.",
+    )
+    parser.add_argument(
+        "--dataset-shuffle-buffer-size",
+        type=int,
+        default=0,
+        help="Streaming shuffle buffer size for Hugging Face datasets. Set 0 to disable shuffle and start yielding texts immediately.",
+    )
+    parser.add_argument(
+        "--dataset-seed",
+        type=int,
+        default=0,
+        help="Random seed for streaming dataset shuffle.",
     )
     parser.add_argument(
         "--batch-size",
@@ -1277,7 +1335,7 @@ if __name__ == "__main__":
         "--num-features",
         type=int,
         default=5,
-        help="If --label-all-alive is not set, label this many mid-ranked alive features.",
+        help="Number of features to interpret. If --label-all-alive is not set, label this many mid-ranked alive features. Use a positive integer to select specific count.",
     )
     parser.add_argument(
         "--save-path",
@@ -1349,7 +1407,40 @@ if __name__ == "__main__":
         action="store_true",
         help="Do not save activation/token-map cache after collection.",
     )
+    parser.add_argument(
+        "--min-activation",
+        type=float,
+        default=0.0,
+        help="Minimum feature activation to include in LLM examples.",
+    )
+    parser.add_argument(
+        "--top-k",
+        type=int,
+        default=0,
+        help="Maximum number of activating contexts to send to the LLM. Use 0 or negative to send all contexts above --min-activation.",
+    )
+    parser.add_argument(
+        "--include-global-top-features",
+        action="store_true",
+        help="Include corpus-global top activated feature IDs in the LLM prompt.",
+    )
+    parser.add_argument(
+        "--top-tokens-k",
+        type=int,
+        default=10,
+        help="How many most frequent activating tokens to include. 0=none, negative=all, positive=top-k.",
+    )
     args = parser.parse_args()
+
+    # MLCommons/peoples_speech requires an explicit config/subset.
+    # If omitted, default to 'clean' so the run does not fail immediately.
+    if (
+        args.dataset
+        and args.dataset.strip() == "MLCommons/peoples_speech"
+        and not args.dataset_config
+    ):
+        args.dataset_config = "clean"
+        print("[llm_analysis] --dataset-config not provided; defaulting to 'clean'.")
 
     # ------------------------------------------------------------------ #
     # 1.  Load the trained SAE
@@ -1442,10 +1533,25 @@ if __name__ == "__main__":
                 )
 
             meta = cache.get("meta", {})
+
+            expected_dataset = args.dataset if use_dataset else "built_in_sample"
+            expected_split = args.dataset_split if use_dataset else "n/a"
+            expected_config = args.dataset_config if use_dataset else None
+            if (
+                meta.get("dataset") != expected_dataset
+                or meta.get("split") != expected_split
+                or meta.get("dataset_config") != expected_config
+                or int(meta.get("max_length", -1)) != int(args.max_length)
+            ):
+                raise ValueError(
+                    "Cache metadata does not match current dataset/split/config/max_length."
+                )
+
             print(
                 "  Cache loaded: "
                 f"tokens={activations.shape[0]}, texts={len(sample_texts)}, "
-                f"dataset={meta.get('dataset', 'unknown')}, split={meta.get('split', 'unknown')}"
+                f"dataset={meta.get('dataset', 'unknown')}, split={meta.get('split', 'unknown')}, "
+                f"config={meta.get('dataset_config', 'none')}"
             )
             cache_loaded = True
         except Exception as exc:  # noqa: BLE001
@@ -1455,7 +1561,7 @@ if __name__ == "__main__":
         if use_dataset:
             print(
                 f"\nCollecting GPT-2 activations from Hugging Face dataset "
-                f"'{args.dataset}' ({args.num_texts} texts, split='{args.dataset_split}', "
+                f"'{args.dataset}' ({args.num_texts} texts, config='{args.dataset_config}', split='{args.dataset_split}', "
                 f"layer {layer_index})…"
             )
         else:
@@ -1473,9 +1579,13 @@ if __name__ == "__main__":
         if use_dataset:
             activations, sample_texts = collector.collect_from_dataset_with_texts(
                 dataset_name=args.dataset,
+                dataset_config=args.dataset_config,
                 split=args.dataset_split,
                 num_texts=args.num_texts,
+                shuffle_buffer_size=args.dataset_shuffle_buffer_size,
+                seed=args.dataset_seed,
                 text_field=args.dataset_text_field,
+                allow_fallback=False,
                 batch_size=args.batch_size,
                 max_length=args.max_length,
                 max_samples=args.num_texts * max(args.max_length, 1),
@@ -1513,6 +1623,7 @@ if __name__ == "__main__":
                     "token_pos_map": pos_map,
                     "meta": {
                         "dataset": args.dataset if use_dataset else "built_in_sample",
+                        "dataset_config": args.dataset_config if use_dataset else None,
                         "split": args.dataset_split if use_dataset else "n/a",
                         "num_texts": len(sample_texts),
                         "max_length": args.max_length,
@@ -1526,13 +1637,16 @@ if __name__ == "__main__":
     cfg = LabelingConfig(
         backend=args.backend,
         model=args.model,
-        top_k=min(15, activations.shape[0]),
+        top_k=args.top_k,
         request_delay=args.request_delay,
         prompt_log_path=args.prompt_log_path,
         normalize_mode=args.normalize_mode,
         std_floor=args.std_floor,
         skip_first_token=not args.include_first_token,
         global_top_features_k=10,
+        min_activation=args.min_activation,
+        include_global_top_features=args.include_global_top_features,
+        top_tokens_k=args.top_tokens_k,
     )
 
     labeler = FeatureLabeler(sae, tokenizer, cfg)
