@@ -3,3 +3,6 @@ cd ui && npx expo start --web
 
 
 python3 analyzers/llm_analysis.py   --backend groq   --model llama-3.3-70b-versatile   --dataset MLCommons/peoples_speech   --dataset-config validation   --dataset-split validation   --dataset-shuffle-buffer-size 0   --num-texts 1000   --max-length 128   --normalize-mode standardize   --std-floor 1e-3   --save-path feature_labels_peoples_speech_validation.json   --prompt-log-path llm_prompts.log   --num-features 10   --min-activation 0.1   --no-cache-load  --top-k 50 --top-tokens-k 20
+
+--top-k -> how many sentences to send to llm for each feature
+--top-tokens-k -> how many top tokens to send to llm for each feature // useless maybe
