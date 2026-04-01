@@ -5588,5 +5588,435 @@
     ],
     "raw_response": "",
     "error": "Connection error."
+  },
+  "7134": {
+    "feature_idx": 7134,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "one",
+        "context": " for some time, going forward,\n\nany>>>one<<< caught watching foreign films that malign the Supreme Leader",
+        "activation_value": 3.809250831604004
+      },
+      {
+        "token": "individual",
+        "context": " the leader into the future. In my vision every>>> individual<<< will have an unalienable right to a quarter",
+        "activation_value": 1.2379965782165527
+      },
+      {
+        "token": "anything",
+        "context": "'t. It's impossible to accurately explain Bitcoin in>>> anything<<< less than mind-numbingly boring technical terms",
+        "activation_value": 1.1908389329910278
+      },
+      {
+        "token": "",
+        "context": " THE EMMYS.\n\nWill Farrell\n>>>\n<<<Magnus\n\nMattias\n\nSoccer",
+        "activation_value": 1.097937822341919
+      },
+      {
+        "token": "of",
+        "context": " stars all too often falling to ground at the slightest>>> of<<< touches and the beautiful game suffering, some would say",
+        "activation_value": 1.0821123123168945
+      },
+      {
+        "token": "-",
+        "context": " as a glossy new title and a free-to>>>-<<<access website with the tagline \"Life not lifestyle",
+        "activation_value": 1.0126651525497437
+      },
+      {
+        "token": ",",
+        "context": "The software system known as the Niagara Framework enables corporate>>>,<<< military, health-care and other users to remotely",
+        "activation_value": 0.9048842787742615
+      },
+      {
+        "token": "able",
+        "context": " In my vision every individual will have an unalien>>>able<<< right to a quarter-acre floating island interlinked",
+        "activation_value": 0.8719455003738403
+      },
+      {
+        "token": "federal",
+        "context": " federal judge says Georgia cannot close voter registration for any>>> federal<<< election, including runoff contests, more than 30 days",
+        "activation_value": 0.7589068412780762
+      },
+      {
+        "token": "or",
+        "context": " survival from its equatorial location on either the Atlantic>>> or<<< Pacific Oceans. Each island will be interlinked",
+        "activation_value": 0.7343159914016724
+      },
+      {
+        "token": "any",
+        "context": " A federal judge says Georgia cannot close voter registration for>>> any<<< federal election, including runoff contests, more than 30",
+        "activation_value": 0.704546332359314
+      },
+      {
+        "token": ",",
+        "context": " divided the United States into five regions—the Midwest>>>,<<< Northeast, Southeast, Southwest, and West—and",
+        "activation_value": 0.6459447145462036
+      },
+      {
+        "token": "Reuters",
+        "context": ",\" a man said in the video, according to>>> Reuters<<<.\n\nThe authenticity of the video could not",
+        "activation_value": 0.6329061388969421
+      },
+      {
+        "token": "AAA",
+        "context": ", coinciding with increasing demand from international investors for>>> AAA<<< rated Australian government bonds.\n\nWhere there could",
+        "activation_value": 0.592205286026001
+      },
+      {
+        "token": "any",
+        "context": " tolerated for some time, going forward,\n\n>>>any<<<one caught watching foreign films that malign the Supreme",
+        "activation_value": 0.584173321723938
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 400 - {'error': {'message': 'Organization has been restricted. Please reach out to support if you believe this was in error.', 'type': 'invalid_request_error', 'code': 'organization_restricted'}}"
+  },
+  "3668": {
+    "feature_idx": 3668,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "Framework",
+        "context": ".\n\nThe software system known as the Niagara>>> Framework<<< enables corporate, military, health-care and other",
+        "activation_value": 2.183055877685547
+      },
+      {
+        "token": "archae",
+        "context": " study of the Nazca lines with a Peruvian>>> archae<<<ologist, Jorge Alano.",
+        "activation_value": 1.7805595397949219
+      },
+      {
+        "token": "forgive",
+        "context": " authorities\n\ndeclared, “We will>>> forgive<<< all those who have",
+        "activation_value": 1.6446125507354736
+      },
+      {
+        "token": "aders",
+        "context": " often recommended as one of the best CRT sh>>>aders<<<, has never quite looked right on my 1366",
+        "activation_value": 1.4873313903808594
+      },
+      {
+        "token": "Aaron",
+        "context": "SOBERING NUMBERS.\n\n>>>Aaron<<< Levine\n\nSea-Tac Ratings:\n",
+        "activation_value": 1.42578125
+      },
+      {
+        "token": "essentials",
+        "context": " zone. Each island will be designed to extract the>>> essentials<<< of survival from its equatorial location on either the",
+        "activation_value": 1.3098526000976562
+      },
+      {
+        "token": "Connor",
+        "context": " up, thanks in no small part to global phenomenon>>> Connor<<< McGregor. Boxing has rediscovered its mojo,",
+        "activation_value": 1.2048028707504272
+      },
+      {
+        "token": "gates",
+        "context": ".\n\nProperty entrepreneur Dawn is throwing open the>>> gates<<< of her Warford Hall home to paying guests for",
+        "activation_value": 1.1409857273101807
+      },
+      {
+        "token": "ancient",
+        "context": " back into the headlines. And in Ireland, the>>> ancient<<< indigenous sport of cam",
+        "activation_value": 1.0876940488815308
+      },
+      {
+        "token": "Archae",
+        "context": " say depicts an imaginary animal with a long tongue.>>> Archae<<<ologists say the rock carving may date back 2,",
+        "activation_value": 1.0767643451690674
+      },
+      {
+        "token": "Fi",
+        "context": " Sciences (IOMS) and the International Islamic>>> Fi<<<qh Academy (IIFA). Both institutions comprise",
+        "activation_value": 1.0128154754638672
+      },
+      {
+        "token": "Scouts",
+        "context": "Boy>>> Scouts<<< of America’s Executive Committee Unanimously",
+        "activation_value": 1.004446029663086
+      },
+      {
+        "token": "Harper",
+        "context": " the George Schuck family, in an 1872>>> Harper<<<’s Weekly illustration titled “The Em",
+        "activation_value": 0.9064122438430786
+      },
+      {
+        "token": "Scouts",
+        "context": " A vote by the National Executive Board, the Boy>>> Scouts<<<’ governing body, is set for July 27",
+        "activation_value": 0.8609147667884827
+      },
+      {
+        "token": "overnight",
+        "context": " guests for the first time, with the introduction of>>> overnight<<< luxury stay packages at her beauty clinic Skulpt and",
+        "activation_value": 0.6762616634368896
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 400 - {'error': {'message': 'Organization has been restricted. Please reach out to support if you believe this was in error.', 'type': 'invalid_request_error', 'code': 'organization_restricted'}}"
+  },
+  "861": {
+    "feature_idx": 861,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "and",
+        "context": "I think it will definitely help the travel times,>>> and<<< people will want to take Amtrak more often, if",
+        "activation_value": 3.8612935543060303
+      },
+      {
+        "token": "and",
+        "context": " is that CRT Royale looks terrible on my screen>>> and<<< I always accepted this as a downside to using an",
+        "activation_value": 2.0146031379699707
+      },
+      {
+        "token": ",",
+        "context": "�I think it will definitely help the travel times>>>,<<< and people will want to take Amtrak more often,",
+        "activation_value": 1.73562753200531
+      },
+      {
+        "token": ",",
+        "context": " hilarious if it weren’t so … well>>>,<<< hilarious, really, but in a very sad way",
+        "activation_value": 1.6815358400344849
+      },
+      {
+        "token": "and",
+        "context": "T Royale is intended for 1080p or higher (>>>and<<< reportedly looks best in the 4k range). That",
+        "activation_value": 1.4551138877868652
+      },
+      {
+        "token": ",",
+        "context": " how\n\nNo. Tech journalism is uniformly terrible>>>,<<< always remember this.\n\n3) How does",
+        "activation_value": 1.3092855215072632
+      },
+      {
+        "token": ":",
+        "context": " “Just think about the qualities these teachers have>>>:<<< personal courage,",
+        "activation_value": 1.3038583993911743
+      },
+      {
+        "token": "-",
+        "context": "erosene\n\nDevi's husband and parents>>>-<<<in-law are in jail awaiting trial\n\n",
+        "activation_value": 1.1159451007843018
+      },
+      {
+        "token": ",",
+        "context": ", and people will want to take Amtrak more often>>>,<<< if they arrive to where they need to go on",
+        "activation_value": 1.012489676475525
+      },
+      {
+        "token": "people",
+        "context": " think it will definitely help the travel times, and>>> people<<< will want to take Amtrak more often, if they",
+        "activation_value": 0.9908353090286255
+      },
+      {
+        "token": "and",
+        "context": " keep seeing all this stuff in the news about them>>> and<<< how\n\nNo. Tech journalism is uniformly terrible",
+        "activation_value": 0.9804184436798096
+      },
+      {
+        "token": ",",
+        "context": " block Sony Picture’s “The Interview>>>,<<<” a controversial film\n\nbased on a",
+        "activation_value": 0.963797926902771
+      },
+      {
+        "token": ",",
+        "context": " (ISIS) warns in a new video that countries>>>,<<< including the U.S., that are taking part",
+        "activation_value": 0.8671901226043701
+      },
+      {
+        "token": "(",
+        "context": " CRT Royale is intended for 1080p or higher>>> (<<<and reportedly looks best in the 4k range).",
+        "activation_value": 0.855350136756897
+      },
+      {
+        "token": ".",
+        "context": " 720p and 1080p with my eyesight anyway>>>.<<< What I do notice is that CRT Royale looks",
+        "activation_value": 0.835861325263977
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 400 - {'error': {'message': 'Organization has been restricted. Please reach out to support if you believe this was in error.', 'type': 'invalid_request_error', 'code': 'organization_restricted'}}"
+  },
+  "2783": {
+    "feature_idx": 2783,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "al",
+        "context": " rally in Los Angeles on April 9. Mark R>>>al<<<ston/AFP/Getty Images\n\nUnder pressure",
+        "activation_value": 2.561387062072754
+      },
+      {
+        "token": "aly",
+        "context": " In this article (published in 2010), Mohammed Gh>>>aly<<< gives a comprehensive analysis of these conferences, the relation",
+        "activation_value": 2.5300354957580566
+      },
+      {
+        "token": "and",
+        "context": " corresponding resolution adopted on 25 November 2005 by the Food>>> and<<< Agriculture Organization, which was to facilitate the implementation of",
+        "activation_value": 2.2589399814605713
+      },
+      {
+        "token": "of",
+        "context": "\n\nProperty entrepreneur Dawn is throwing open the gates>>> of<<< her Warford Hall home to paying guests for the",
+        "activation_value": 1.920330286026001
+      },
+      {
+        "token": "ine",
+        "context": " were the Germans from the Palatine and Rh>>>ine<<< River regions who",
+        "activation_value": 1.5953251123428345
+      },
+      {
+        "token": "of",
+        "context": " of hackers targeting popular Niagara software\n\nThe Department>>> of<<< Homeland Security on Friday warned that a popular system used",
+        "activation_value": 1.5678386688232422
+      },
+      {
+        "token": "E",
+        "context": " films that malign the Supreme Leader [Kim Jong>>> E<<<un] will face\n\nsevere penalties.\n",
+        "activation_value": 1.5457407236099243
+      },
+      {
+        "token": "and",
+        "context": " food security and eradicating poverty.[1] Food>>> and<<< Agriculture Organization was invited to facilitate its implementation.\n",
+        "activation_value": 1.2565431594848633
+      },
+      {
+        "token": "to",
+        "context": ",000 was compared with the unemployment figures for January>>> to<<<",
+        "activation_value": 1.1770601272583008
+      },
+      {
+        "token": "ogly",
+        "context": "Experts have discovered a new ge>>>ogly<<<ph 30 meters (100 feet) long among the",
+        "activation_value": 1.1552670001983643
+      },
+      {
+        "token": "1",
+        "context": " play in providing food security and eradicating poverty.[>>>1<<<] Food and Agriculture Organization was invited to facilitate its",
+        "activation_value": 1.1468887329101562
+      },
+      {
+        "token": "you",
+        "context": " the biggest What's On stories by email Subscribe Thank>>> you<<< for subscribing We have more newsletters Show me See our",
+        "activation_value": 1.1439306735992432
+      },
+      {
+        "token": "ph",
+        "context": "Experts have discovered a new geogly>>>ph<<< 30 meters (100 feet) long among the Naz",
+        "activation_value": 1.1433360576629639
+      },
+      {
+        "token": "�",
+        "context": "s benevolent governance, “Julia,�>>>�<<< that managed to creep out so many women that they",
+        "activation_value": 0.9970616102218628
+      },
+      {
+        "token": "�",
+        "context": " teachers to come forward,” Johnson said.>>> �<<<�Just think about the qualities these teachers have:",
+        "activation_value": 0.9732645750045776
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 400 - {'error': {'message': 'Organization has been restricted. Please reach out to support if you believe this was in error.', 'type': 'invalid_request_error', 'code': 'organization_restricted'}}"
+  },
+  "4795": {
+    "feature_idx": 4795,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": ",",
+        "context": "@scoutsforequality.org\n\nWASHINGTON>>>,<<< D.C.—Today, the Boy Scouts of",
+        "activation_value": 2.6536924839019775
+      },
+      {
+        "token": "over",
+        "context": " latest push centers on two amendments, one to win>>> over<<< conservative opponents, the other to win over more moderate",
+        "activation_value": 2.125123977661133
+      },
+      {
+        "token": "the",
+        "context": " he is sentenced in April. Motions to dismiss>>> the<<< case on various legal grounds are also still pending",
+        "activation_value": 1.8633928298950195
+      },
+      {
+        "token": "the",
+        "context": " verdict overturned.\n\nSterling will have>>> the<<< option to appeal his case after he is sentenced in",
+        "activation_value": 1.6201074123382568
+      },
+      {
+        "token": ",",
+        "context": "(CBS/AP) SACRAMENTO>>>,<<< Calif. - Prosecutors have taken the unusual step of",
+        "activation_value": 1.5832362174987793
+      },
+      {
+        "token": "his",
+        "context": " Live” today, Charlie Woods, who lost>>> his<<< son in the attack on the Benghazi consulate, reacts",
+        "activation_value": 1.4697729349136353
+      },
+      {
+        "token": "'s",
+        "context": "\nSoftBank itself will assume 15 percent of Uber>>>'s<<< shares, while other members of the group will take",
+        "activation_value": 1.1483960151672363
+      },
+      {
+        "token": "an",
+        "context": " to participate in a June 20 special election runoff for>>> an<<< open U.S. House seat.\n\n",
+        "activation_value": 1.11661696434021
+      },
+      {
+        "token": "the",
+        "context": ". Speaking very calmly, Woods said his son deserves>>> the<<< same moral courage from the country’s leaders",
+        "activation_value": 1.0648233890533447
+      },
+      {
+        "token": "the",
+        "context": " and I believe that California should be the leader into>>> the<<< future. In my vision every individual will have an",
+        "activation_value": 0.924213707447052
+      },
+      {
+        "token": "claiming",
+        "context": " have gone on the offensive over Biden's remarks,>>> claiming<<< he misled the American people by claiming ignorance over security",
+        "activation_value": 0.9000959992408752
+      },
+      {
+        "token": "Seattle",
+        "context": "cer Business Insider\n\nSaturday's LA Galaxy->>>Seattle<<< Sounders game",
+        "activation_value": 0.8711361289024353
+      },
+      {
+        "token": "the",
+        "context": " Verizon and T-Mobile had a statistical tie in>>> the<<< Southwest.Ver",
+        "activation_value": 0.8664811253547668
+      },
+      {
+        "token": "to",
+        "context": " House Speaker Paul Ryan and his allies are still fighting>>> to<<< pass the American Health Care Act, more than a",
+        "activation_value": 0.8152602314949036
+      },
+      {
+        "token": "'s",
+        "context": " will pursue every available legal option to get the jury>>>'s<<< verdict overturned.\n\nSterling will have",
+        "activation_value": 0.7502484321594238
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 400 - {'error': {'message': 'Organization has been restricted. Please reach out to support if you believe this was in error.', 'type': 'invalid_request_error', 'code': 'organization_restricted'}}"
   }
 }

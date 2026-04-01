@@ -114,6 +114,10 @@ class LabelingConfig:
     groq_api_key: Optional[str] = None    # from console.groq.com — free tier
     ollama_host: str = "http://localhost:11434"
     prompt_log_path: Optional[str] = "llm_prompts.log"  # Log all prompts/responses here
+    normalize_mode: str = "standardize"  # standardize | center | none
+    std_floor: float = 1e-3
+    skip_first_token: bool = True
+    global_top_features_k: int = 10
 
 
 # ---------------------------------------------------------------------------
@@ -337,6 +341,9 @@ Top {n_examples} activating examples (ordered strongest first):
 
 Most frequent activating tokens (top 10): {top_tokens}
 
+Top activated features across the analyzed corpus (top 10, feature_idx:mean_activation):
+{global_top_features}
+
 Based on these examples, what concept does this SAE feature detect?
 """
 
@@ -380,6 +387,95 @@ class FeatureLabeler:
         self.sae.to(self.device).eval()
         self._backend = _build_backend(cfg)
 
+    def _compute_normalization_stats(self, activations: torch.Tensor) -> Dict[str, Any]:
+        """Compute normalization stats from the provided activation corpus."""
+        mean = activations.mean(dim=0, keepdim=True)
+        std = activations.std(dim=0, keepdim=True)
+        return {
+            "mean": mean,
+            "std": std,
+            "normalize_mode": self.cfg.normalize_mode,
+            "std_floor": float(self.cfg.std_floor),
+        }
+
+    def _apply_activation_normalization(
+        self,
+        x: torch.Tensor,
+        norm_stats: Optional[Dict[str, Any]],
+    ) -> torch.Tensor:
+        """Apply the same normalization mode used for SAE training inputs."""
+        if norm_stats is None:
+            return x
+
+        mode = str(norm_stats.get("normalize_mode", "standardize")).lower().strip()
+        mean = norm_stats.get("mean")
+        std = norm_stats.get("std")
+        std_floor = float(norm_stats.get("std_floor", self.cfg.std_floor))
+
+        if mean is None:
+            return x
+
+        mean = mean.to(device=x.device, dtype=x.dtype)
+
+        if mode in {"none", "off", "no"}:
+            return x
+        if mode in {"center", "center_only", "mean"}:
+            return x - mean
+        if mode in {"standardize", "zscore", "z-score"}:
+            if std is None:
+                return x - mean
+            std = std.to(device=x.device, dtype=x.dtype)
+            if std_floor > 0:
+                std = std.clamp_min(std_floor)
+            return (x - mean) / (std + 1e-8)
+
+        raise ValueError(
+            f"Unknown normalize_mode='{mode}'. Expected one of: standardize|center|none."
+        )
+
+    def _build_valid_row_indices(self, token_pos_map: List[int]) -> torch.Tensor:
+        """Build a row-index tensor that excludes first-token activations if configured."""
+        if self.cfg.skip_first_token:
+            idxs = [i for i, pos in enumerate(token_pos_map) if pos > 0]
+            return torch.tensor(idxs, dtype=torch.long)
+        return torch.arange(len(token_pos_map), dtype=torch.long)
+
+    @torch.no_grad()
+    def _compute_mean_feature_activations(
+        self,
+        activations: torch.Tensor,
+        valid_row_indices: torch.Tensor,
+        norm_stats: Optional[Dict[str, Any]],
+    ) -> torch.Tensor:
+        """Compute corpus-wide mean feature activations over valid token rows."""
+        if valid_row_indices.numel() == 0:
+            return torch.zeros(self.sae.d_hidden, dtype=torch.float32)
+
+        mean_acts = torch.zeros(self.sae.d_hidden, dtype=torch.float32)
+        n_valid = int(valid_row_indices.numel())
+
+        for start in range(0, n_valid, self.cfg.batch_size):
+            end = min(start + self.cfg.batch_size, n_valid)
+            row_idx = valid_row_indices[start:end]
+            batch = activations[row_idx].to(self.device)
+            batch = self._apply_activation_normalization(batch, norm_stats)
+            enc = self.sae.encode(batch)
+            mean_acts += enc.sum(dim=0).cpu()
+
+        mean_acts /= max(n_valid, 1)
+        return mean_acts
+
+    def _format_global_top_features(self, mean_acts: torch.Tensor, top_n: int = 10) -> str:
+        """Format a compact top-N global feature list for prompt injection."""
+        if mean_acts.numel() == 0:
+            return "(none)"
+        n = min(int(top_n), int(mean_acts.numel()))
+        if n <= 0:
+            return "(none)"
+        vals, idxs = torch.topk(mean_acts, n)
+        parts = [f"{int(i)}:{float(v):.3f}" for v, i in zip(vals.tolist(), idxs.tolist())]
+        return ", ".join(parts) if parts else "(none)"
+
     # ------------------------------------------------------------------
     # Step 1 – Collect token-level top-activating contexts
     # ------------------------------------------------------------------
@@ -392,6 +488,8 @@ class FeatureLabeler:
         activations: torch.Tensor,    # (total_tokens, d_model)
         token_doc_map: List[int],     # which document each activation row belongs to
         token_pos_map: List[int],     # position of each activation within its document
+        norm_stats: Optional[Dict[str, Any]] = None,
+        valid_row_indices: Optional[torch.Tensor] = None,
     ) -> List[TokenContext]:
         """
         Scan pre-collected activations and return the top-K contexts for
@@ -415,12 +513,21 @@ class FeatureLabeler:
         for start in range(0, n, cfg.batch_size):
             end = min(start + cfg.batch_size, n)
             batch = activations[start:end].to(self.device)
+            batch = self._apply_activation_normalization(batch, norm_stats)
             encoded = self.sae.encode(batch)           # (batch, d_hidden)
             feat_vals[start:end] = encoded[:, feature_idx].cpu()
 
-        # Pick the top-K
-        k = min(cfg.top_k, n)
-        top_vals, top_idxs = torch.topk(feat_vals, k)
+        candidate_rows = valid_row_indices
+        if candidate_rows is None:
+            candidate_rows = self._build_valid_row_indices(token_pos_map)
+
+        if candidate_rows.numel() == 0:
+            return []
+
+        candidate_vals = feat_vals[candidate_rows]
+        k = min(cfg.top_k, int(candidate_rows.numel()))
+        top_vals, rel_top_idxs = torch.topk(candidate_vals, k)
+        top_idxs = candidate_rows[rel_top_idxs]
 
         contexts: List[TokenContext] = []
         cw = cfg.context_window
@@ -470,7 +577,12 @@ class FeatureLabeler:
         most_common = [tok for tok, _ in counts.most_common(n)]
         return ", ".join(f'"{t}"' for t in most_common) if most_common else "(none)"
 
-    def _call_llm(self, feature_idx: int, contexts: List[TokenContext]) -> LabelResult:
+    def _call_llm(
+        self,
+        feature_idx: int,
+        contexts: List[TokenContext],
+        global_top_features: str = "(not computed)",
+    ) -> LabelResult:
         """Build the prompt, call the backend, parse the JSON response."""
         examples_block = self._build_examples_block(contexts)
         top_tokens_str = self._top_token_list(contexts)
@@ -480,6 +592,7 @@ class FeatureLabeler:
             n_examples=len(contexts),
             examples_block=examples_block,
             top_tokens=top_tokens_str,
+            global_top_features=global_top_features,
         )
 
         raw = ""
@@ -819,6 +932,9 @@ class FeatureLabeler:
         token_ids: List[List[int]],
         token_doc_map: List[int],
         token_pos_map: List[int],
+        norm_stats: Optional[Dict[str, Any]] = None,
+        valid_row_indices: Optional[torch.Tensor] = None,
+        global_top_features: Optional[str] = None,
     ) -> LabelResult:
         """
         Label a single feature using **pre-collected GPT-2 activations**.
@@ -845,8 +961,28 @@ class FeatureLabeler:
         -------
         LabelResult
         """
+        norm_stats = norm_stats or self._compute_normalization_stats(activations)
+        if valid_row_indices is None:
+            valid_row_indices = self._build_valid_row_indices(token_pos_map)
+        if global_top_features is None:
+            mean_acts = self._compute_mean_feature_activations(
+                activations=activations,
+                valid_row_indices=valid_row_indices,
+                norm_stats=norm_stats,
+            )
+            global_top_features = self._format_global_top_features(
+                mean_acts,
+                top_n=self.cfg.global_top_features_k,
+            )
+
         contexts = self._collect_token_contexts(
-            feature_idx, token_ids, activations, token_doc_map, token_pos_map
+            feature_idx,
+            token_ids,
+            activations,
+            token_doc_map,
+            token_pos_map,
+            norm_stats=norm_stats,
+            valid_row_indices=valid_row_indices,
         )
         if not contexts:
             return LabelResult(
@@ -857,7 +993,7 @@ class FeatureLabeler:
                 top_tokens=[],
                 error="no activating examples found",
             )
-        return self._call_llm(feature_idx, contexts)
+        return self._call_llm(feature_idx, contexts, global_top_features)
 
     def label_features_from_activations(
         self,
@@ -902,10 +1038,28 @@ class FeatureLabeler:
             feature_indices = feature_indices[:self.cfg.max_features]
 
         results: Dict[int, LabelResult] = dict(existing)
+        norm_stats = self._compute_normalization_stats(activations)
+        valid_row_indices = self._build_valid_row_indices(token_pos_map)
+        mean_acts = self._compute_mean_feature_activations(
+            activations=activations,
+            valid_row_indices=valid_row_indices,
+            norm_stats=norm_stats,
+        )
+        global_top_features = self._format_global_top_features(
+            mean_acts,
+            top_n=self.cfg.global_top_features_k,
+        )
 
         for feat_idx in tqdm(feature_indices, desc="Labeling features"):
             result = self.label_feature_from_activations(
-                feat_idx, activations, token_ids, token_doc_map, token_pos_map
+                feat_idx,
+                activations,
+                token_ids,
+                token_doc_map,
+                token_pos_map,
+                norm_stats=norm_stats,
+                valid_row_indices=valid_row_indices,
+                global_top_features=global_top_features,
             )
             results[feat_idx] = result
 
@@ -1157,6 +1311,24 @@ if __name__ == "__main__":
         help="Delay between LLM requests.",
     )
     parser.add_argument(
+        "--normalize-mode",
+        type=str,
+        default="standardize",
+        choices=["standardize", "center", "none"],
+        help="Normalization mode before SAE encoding. Default: standardize",
+    )
+    parser.add_argument(
+        "--std-floor",
+        type=float,
+        default=1e-3,
+        help="Std clamp floor for standardization. Default: 1e-3",
+    )
+    parser.add_argument(
+        "--include-first-token",
+        action="store_true",
+        help="Include first-token activations (disabled by default due to GPT-2 attention sink).",
+    )
+    parser.add_argument(
         "--resume",
         action="store_true",
         help="Resume labeling from --save-path if it exists.",
@@ -1351,16 +1523,30 @@ if __name__ == "__main__":
             )
             print(f"  Saved activation cache to {cache_path}")
 
+    cfg = LabelingConfig(
+        backend=args.backend,
+        model=args.model,
+        top_k=min(15, activations.shape[0]),
+        request_delay=args.request_delay,
+        prompt_log_path=args.prompt_log_path,
+        normalize_mode=args.normalize_mode,
+        std_floor=args.std_floor,
+        skip_first_token=not args.include_first_token,
+        global_top_features_k=10,
+    )
+
+    labeler = FeatureLabeler(sae, tokenizer, cfg)
+
     # ------------------------------------------------------------------ #
-    # 5.  Find top-5 most active features across this mini-corpus
+    # 5.  Find top active features across this mini-corpus
     # ------------------------------------------------------------------ #
-    mean_acts = torch.zeros(sae.d_hidden)
-    with torch.no_grad():
-        for start in range(0, activations.shape[0], 256):
-            batch = activations[start:start + 256]
-            enc = sae.encode(batch)
-            mean_acts += enc.sum(dim=0).cpu()
-    mean_acts /= activations.shape[0]
+    norm_stats = labeler._compute_normalization_stats(activations)
+    valid_rows = labeler._build_valid_row_indices(pos_map)
+    mean_acts = labeler._compute_mean_feature_activations(
+        activations=activations,
+        valid_row_indices=valid_rows,
+        norm_stats=norm_stats,
+    )
     # Sort all features by mean activation.
     # Skip dead features (mean_acts == 0) — they carry no signal.
     alive_sorted = mean_acts.argsort(descending=True)
@@ -1383,17 +1569,8 @@ if __name__ == "__main__":
         print(f"Mid-range feature indices (ranks {start}–{end-1}): {target_features}")
 
     # ------------------------------------------------------------------ #
-    # 6.  Configure LLM and run labeling
+    # 6.  Run labeling
     # ------------------------------------------------------------------ #
-    cfg = LabelingConfig(
-        backend=args.backend,
-        model=args.model,
-        top_k=min(15, activations.shape[0]),
-        request_delay=args.request_delay,
-        prompt_log_path=args.prompt_log_path,
-    )
-
-    labeler = FeatureLabeler(sae, tokenizer, cfg)
 
     print("\nLabeling features…")
     results = labeler.label_features_from_activations(

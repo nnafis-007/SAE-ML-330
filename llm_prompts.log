@@ -283,3 +283,328 @@ LLM RESPONSE:
   "confidence": "high"
 }
 ================================================================================
+
+================================================================================
+FEATURE INDEX: 7134
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 7134
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=3.809]   for some time, going forward,
+
+any>>>one<<< caught watching foreign films that malign the Supreme Leader
+   2. [act=1.238]   the leader into the future. In my vision every>>> individual<<< will have an unalienable right to a quarter
+   3. [act=1.191]  't. It's impossible to accurately explain Bitcoin in>>> anything<<< less than mind-numbingly boring technical terms
+   4. [act=1.098]   THE EMMYS.
+
+Will Farrell
+>>>
+<<<Magnus
+
+Mattias
+
+Soccer
+   5. [act=1.082]   stars all too often falling to ground at the slightest>>> of<<< touches and the beautiful game suffering, some would say
+   6. [act=1.013]   as a glossy new title and a free-to>>>-<<<access website with the tagline "Life not lifestyle
+   7. [act=0.905]  The software system known as the Niagara Framework enables corporate>>>,<<< military, health-care and other users to remotely
+   8. [act=0.872]   In my vision every individual will have an unalien>>>able<<< right to a quarter-acre floating island interlinked
+   9. [act=0.759]   federal judge says Georgia cannot close voter registration for any>>> federal<<< election, including runoff contests, more than 30 days
+  10. [act=0.734]   survival from its equatorial location on either the Atlantic>>> or<<< Pacific Oceans. Each island will be interlinked
+  11. [act=0.705]   A federal judge says Georgia cannot close voter registration for>>> any<<< federal election, including runoff contests, more than 30
+  12. [act=0.646]   divided the United States into five regions—the Midwest>>>,<<< Northeast, Southeast, Southwest, and West—and
+  13. [act=0.633]  ," a man said in the video, according to>>> Reuters<<<.
+
+The authenticity of the video could not
+  14. [act=0.592]  , coinciding with increasing demand from international investors for>>> AAA<<< rated Australian government bonds.
+
+Where there could
+  15. [act=0.584]   tolerated for some time, going forward,
+
+>>>any<<<one caught watching foreign films that malign the Supreme
+
+Most frequent activating tokens (top 10): ",", "any", "one", "individual", "anything", "of", "-", "able", "federal", "or"
+
+Top activated features across the analyzed corpus (top 10, feature_idx:mean_activation):
+12138:0.219, 10921:0.192, 9089:0.188, 6787:0.133, 6636:0.121, 2888:0.115, 12119:0.107, 2604:0.106, 6195:0.103, 2883:0.097
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+
+================================================================================
+FEATURE INDEX: 3668
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 3668
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=2.183]  .
+
+The software system known as the Niagara>>> Framework<<< enables corporate, military, health-care and other
+   2. [act=1.781]   study of the Nazca lines with a Peruvian>>> archae<<<ologist, Jorge Alano.
+   3. [act=1.645]   authorities
+
+declared, “We will>>> forgive<<< all those who have
+   4. [act=1.487]   often recommended as one of the best CRT sh>>>aders<<<, has never quite looked right on my 1366
+   5. [act=1.426]  SOBERING NUMBERS.
+
+>>>Aaron<<< Levine
+
+Sea-Tac Ratings:
+
+   6. [act=1.310]   zone. Each island will be designed to extract the>>> essentials<<< of survival from its equatorial location on either the
+   7. [act=1.205]   up, thanks in no small part to global phenomenon>>> Connor<<< McGregor. Boxing has rediscovered its mojo,
+   8. [act=1.141]  .
+
+Property entrepreneur Dawn is throwing open the>>> gates<<< of her Warford Hall home to paying guests for
+   9. [act=1.088]   back into the headlines. And in Ireland, the>>> ancient<<< indigenous sport of cam
+  10. [act=1.077]   say depicts an imaginary animal with a long tongue.>>> Archae<<<ologists say the rock carving may date back 2,
+  11. [act=1.013]   Sciences (IOMS) and the International Islamic>>> Fi<<<qh Academy (IIFA). Both institutions comprise
+  12. [act=1.004]  Boy>>> Scouts<<< of America’s Executive Committee Unanimously
+  13. [act=0.906]   the George Schuck family, in an 1872>>> Harper<<<’s Weekly illustration titled “The Em
+  14. [act=0.861]   A vote by the National Executive Board, the Boy>>> Scouts<<<’ governing body, is set for July 27
+  15. [act=0.676]   guests for the first time, with the introduction of>>> overnight<<< luxury stay packages at her beauty clinic Skulpt and
+
+Most frequent activating tokens (top 10): "Scouts", "Framework", "archae", "forgive", "aders", "Aaron", "essentials", "Connor", "gates", "ancient"
+
+Top activated features across the analyzed corpus (top 10, feature_idx:mean_activation):
+12138:0.219, 10921:0.192, 9089:0.188, 6787:0.133, 6636:0.121, 2888:0.115, 12119:0.107, 2604:0.106, 6195:0.103, 2883:0.097
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+
+================================================================================
+FEATURE INDEX: 861
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 861
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=3.861]  I think it will definitely help the travel times,>>> and<<< people will want to take Amtrak more often, if
+   2. [act=2.015]   is that CRT Royale looks terrible on my screen>>> and<<< I always accepted this as a downside to using an
+   3. [act=1.736]  �I think it will definitely help the travel times>>>,<<< and people will want to take Amtrak more often,
+   4. [act=1.682]   hilarious if it weren’t so … well>>>,<<< hilarious, really, but in a very sad way
+   5. [act=1.455]  T Royale is intended for 1080p or higher (>>>and<<< reportedly looks best in the 4k range). That
+   6. [act=1.309]   how
+
+No. Tech journalism is uniformly terrible>>>,<<< always remember this.
+
+3) How does
+   7. [act=1.304]   “Just think about the qualities these teachers have>>>:<<< personal courage,
+   8. [act=1.116]  erosene
+
+Devi's husband and parents>>>-<<<in-law are in jail awaiting trial
+
+
+   9. [act=1.012]  , and people will want to take Amtrak more often>>>,<<< if they arrive to where they need to go on
+  10. [act=0.991]   think it will definitely help the travel times, and>>> people<<< will want to take Amtrak more often, if they
+  11. [act=0.980]   keep seeing all this stuff in the news about them>>> and<<< how
+
+No. Tech journalism is uniformly terrible
+  12. [act=0.964]   block Sony Picture’s “The Interview>>>,<<<” a controversial film
+
+based on a
+  13. [act=0.867]   (ISIS) warns in a new video that countries>>>,<<< including the U.S., that are taking part
+  14. [act=0.855]   CRT Royale is intended for 1080p or higher>>> (<<<and reportedly looks best in the 4k range).
+  15. [act=0.836]   720p and 1080p with my eyesight anyway>>>.<<< What I do notice is that CRT Royale looks
+
+Most frequent activating tokens (top 10): ",", "and", ":", "-", "people", "(", "."
+
+Top activated features across the analyzed corpus (top 10, feature_idx:mean_activation):
+12138:0.219, 10921:0.192, 9089:0.188, 6787:0.133, 6636:0.121, 2888:0.115, 12119:0.107, 2604:0.106, 6195:0.103, 2883:0.097
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+
+================================================================================
+FEATURE INDEX: 2783
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 2783
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=2.561]   rally in Los Angeles on April 9. Mark R>>>al<<<ston/AFP/Getty Images
+
+Under pressure
+   2. [act=2.530]   In this article (published in 2010), Mohammed Gh>>>aly<<< gives a comprehensive analysis of these conferences, the relation
+   3. [act=2.259]   corresponding resolution adopted on 25 November 2005 by the Food>>> and<<< Agriculture Organization, which was to facilitate the implementation of
+   4. [act=1.920]  
+
+Property entrepreneur Dawn is throwing open the gates>>> of<<< her Warford Hall home to paying guests for the
+   5. [act=1.595]   were the Germans from the Palatine and Rh>>>ine<<< River regions who
+   6. [act=1.568]   of hackers targeting popular Niagara software
+
+The Department>>> of<<< Homeland Security on Friday warned that a popular system used
+   7. [act=1.546]   films that malign the Supreme Leader [Kim Jong>>> E<<<un] will face
+
+severe penalties.
+
+   8. [act=1.257]   food security and eradicating poverty.[1] Food>>> and<<< Agriculture Organization was invited to facilitate its implementation.
+
+   9. [act=1.177]  ,000 was compared with the unemployment figures for January>>> to<<<
+  10. [act=1.155]  Experts have discovered a new ge>>>ogly<<<ph 30 meters (100 feet) long among the
+  11. [act=1.147]   play in providing food security and eradicating poverty.[>>>1<<<] Food and Agriculture Organization was invited to facilitate its
+  12. [act=1.144]   the biggest What's On stories by email Subscribe Thank>>> you<<< for subscribing We have more newsletters Show me See our
+  13. [act=1.143]  Experts have discovered a new geogly>>>ph<<< 30 meters (100 feet) long among the Naz
+  14. [act=0.997]  s benevolent governance, “Julia,�>>>�<<< that managed to creep out so many women that they
+  15. [act=0.973]   teachers to come forward,” Johnson said.>>> �<<<�Just think about the qualities these teachers have:
+
+Most frequent activating tokens (top 10): "and", "of", "�", "al", "aly", "ine", "E", "to", "ogly", "1"
+
+Top activated features across the analyzed corpus (top 10, feature_idx:mean_activation):
+12138:0.219, 10921:0.192, 9089:0.188, 6787:0.133, 6636:0.121, 2888:0.115, 12119:0.107, 2604:0.106, 6195:0.103, 2883:0.097
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+
+================================================================================
+FEATURE INDEX: 4795
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 4795
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=2.654]  @scoutsforequality.org
+
+WASHINGTON>>>,<<< D.C.—Today, the Boy Scouts of
+   2. [act=2.125]   latest push centers on two amendments, one to win>>> over<<< conservative opponents, the other to win over more moderate
+   3. [act=1.863]   he is sentenced in April. Motions to dismiss>>> the<<< case on various legal grounds are also still pending
+   4. [act=1.620]   verdict overturned.
+
+Sterling will have>>> the<<< option to appeal his case after he is sentenced in
+   5. [act=1.583]  (CBS/AP) SACRAMENTO>>>,<<< Calif. - Prosecutors have taken the unusual step of
+   6. [act=1.470]   Live” today, Charlie Woods, who lost>>> his<<< son in the attack on the Benghazi consulate, reacts
+   7. [act=1.148]  
+SoftBank itself will assume 15 percent of Uber>>>'s<<< shares, while other members of the group will take
+   8. [act=1.117]   to participate in a June 20 special election runoff for>>> an<<< open U.S. House seat.
+
+
+   9. [act=1.065]  . Speaking very calmly, Woods said his son deserves>>> the<<< same moral courage from the country’s leaders
+  10. [act=0.924]   and I believe that California should be the leader into>>> the<<< future. In my vision every individual will have an
+  11. [act=0.900]   have gone on the offensive over Biden's remarks,>>> claiming<<< he misled the American people by claiming ignorance over security
+  12. [act=0.871]  cer Business Insider
+
+Saturday's LA Galaxy->>>Seattle<<< Sounders game
+  13. [act=0.866]   Verizon and T-Mobile had a statistical tie in>>> the<<< Southwest.Ver
+  14. [act=0.815]   House Speaker Paul Ryan and his allies are still fighting>>> to<<< pass the American Health Care Act, more than a
+  15. [act=0.750]   will pursue every available legal option to get the jury>>>'s<<< verdict overturned.
+
+Sterling will have
+
+Most frequent activating tokens (top 10): "the", ",", "'s", "over", "his", "an", "claiming", "Seattle", "to"
+
+Top activated features across the analyzed corpus (top 10, feature_idx:mean_activation):
+12138:0.219, 10921:0.192, 9089:0.188, 6787:0.133, 6636:0.121, 2888:0.115, 12119:0.107, 2604:0.106, 6195:0.103, 2883:0.097
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
