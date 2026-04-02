@@ -37,6 +37,13 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
   const [activationPayload, setActivationPayload] = useState(null);
   const [analysisMeta, setAnalysisMeta] = useState(null);
 
+  const promptAlignedRows = (llmLabel?.llm_prompt_examples || []).map((ex, idx) => ({
+    id: `prompt-${idx}`,
+    context: ex.context,
+    activation: ex.activation,
+  }));
+  const usePromptAlignedRows = llmLabel?.llm_prompt_examples?.length > 0;
+
   const loadActivationPage = async (query, pageNo) => {
     setPageLoading(true);
     try {
@@ -328,34 +335,49 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
             )}
           </View>
 
-          {activationPayload?.matches?.length > 0 && (
+          {(usePromptAlignedRows || activationPayload?.matches?.length > 0) && (
             <View style={styles.activationsListWrap}>
-              <Text style={styles.subheading}>Top Activation Matches</Text>
-              {activationPayload.matches.map((match, idx) => (
-                <View key={`match-${idx}`} style={styles.matchCard}>
-                  <View style={styles.matchMetaRow}>
-                    <Text style={styles.matchMetaText}>
-                      Sentence #{match.sentence_index} | Token #{match.token_index}
-                    </Text>
-                    <Text style={styles.matchActivation}>{Number(match.activation || 0).toFixed(4)}</Text>
+              <Text style={styles.subheading}>
+                {usePromptAlignedRows ? 'Top Activation Matches (Prompt-Aligned)' : 'Top Activation Matches'}
+              </Text>
+
+              {usePromptAlignedRows ? (
+                promptAlignedRows.map((row, idx) => (
+                  <View key={row.id} style={styles.matchCard}>
+                    <View style={styles.matchMetaRow}>
+                      <Text style={styles.matchMetaText}>Prompt example #{idx + 1}</Text>
+                      <Text style={styles.matchActivation}>{Number(row.activation || 0).toFixed(4)}</Text>
+                    </View>
+                    <Text style={styles.matchContext}>{row.context}</Text>
                   </View>
+                ))
+              ) : (
+                activationPayload.matches.map((match, idx) => (
+                  <View key={`match-${idx}`} style={styles.matchCard}>
+                    <View style={styles.matchMetaRow}>
+                      <Text style={styles.matchMetaText}>
+                        Sentence #{match.sentence_index} | Token #{match.token_index}
+                      </Text>
+                      <Text style={styles.matchActivation}>{Number(match.activation || 0).toFixed(4)}</Text>
+                    </View>
 
-                  <Text style={styles.matchContext}>
-                    {match.left_context}
-                    <Text style={styles.matchToken}>{match.token}</Text>
-                    {match.right_context}
-                  </Text>
+                    <Text style={styles.matchContext}>
+                      {match.left_context}
+                      <Text style={styles.matchToken}>{match.token}</Text>
+                      {match.right_context}
+                    </Text>
 
-                  <Text style={styles.matchSentence}>{match.sentence}</Text>
-                </View>
-              ))}
+                    <Text style={styles.matchSentence}>{match.sentence}</Text>
+                  </View>
+                ))
+              )}
 
             </View>
           )}
         </View>
       </ScrollView>
 
-      {activationPayload?.matches?.length > 0 && (
+      {activationPayload?.matches?.length > 0 && !usePromptAlignedRows && (
         <View style={styles.fixedPaginationBar}>
           <TouchableOpacity
             style={[styles.doneButton, (!activationPayload?.has_prev_page || llmLoading || pageLoading) && { opacity: 0.5 }]}

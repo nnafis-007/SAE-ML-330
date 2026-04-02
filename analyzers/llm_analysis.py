@@ -423,64 +423,24 @@ class FeatureLabeler:
         return all_latents
 
     def _collect_contexts_from_latents(
-
-    @staticmethod
-    def _normalize_activations(batch: torch.Tensor, eps: float = 1e-6) -> torch.Tensor:
-        """Apply per-token standardization before SAE encoding."""
-        mean = batch.mean(dim=-1, keepdim=True)
-        std = batch.std(dim=-1, keepdim=True, unbiased=False)
-        return (batch - mean) / (std + eps)
-
-    # ------------------------------------------------------------------
-    # Step 1 – Collect token-level top-activating contexts
-    # ------------------------------------------------------------------
-
-    @torch.no_grad()
-    def _collect_token_contexts(
         self,
         feature_idx: int,
-        feature_activations: torch.Tensor, # Pre-computed activations for this feature
+        feature_activations: torch.Tensor,
         token_ids: List[List[int]],
         token_doc_map: List[int],
         token_pos_map: List[int],
         valid_row_indices: torch.Tensor,
     ) -> List[TokenContext]:
         """
-        Collects top contexts given the pre-computed activation values.
-        No SAE forward pass happens here.
+        Collect top contexts given pre-computed activation values for one feature.
         """
         cfg = self.cfg
 
-        # Safety check: activations and token maps must correspond row-for-row.
-        n = activations.shape[0]
-        if n != len(token_doc_map):
-            raise ValueError(
-                f"activations has {n} rows but token_doc_map has {len(token_doc_map)} entries. "
-                "They must be the same size — the token maps must be built from the SAME "
-                "corpus that generated the activations.  Use build_token_maps() on the texts "
-                "you originally passed to GPT2ActivationCollector."
-            )
-
-        # Encode all activations in mini-batches to get feature values
-        feat_vals = torch.zeros(n, dtype=torch.float32)
-
-        for start in range(0, n, cfg.batch_size):
-            end = min(start + cfg.batch_size, n)
-            batch = activations[start:end].to(self.device)
-            batch = self._normalize_activations(batch)
-            encoded = self.sae.encode(batch)           # (batch, d_hidden)
-            feat_vals[start:end] = encoded[:, feature_idx].cpu()
-
-        candidate_rows = valid_row_indices
-        if candidate_rows is None:
-            candidate_rows = self._build_valid_row_indices(token_pos_map)
-
-        if candidate_rows.numel() == 0:
+        if valid_row_indices.numel() == 0:
             return []
 
         candidate_vals = feature_activations[valid_row_indices]
 
-        # Filter by min_activation
         if cfg.min_activation > 0:
             mask = candidate_vals >= cfg.min_activation
             rows_subset = valid_row_indices[mask]
@@ -492,13 +452,11 @@ class FeatureLabeler:
         if rows_subset.numel() == 0:
             return []
 
-        # Top-K selection
         if cfg.top_k is None or int(cfg.top_k) <= 0:
             k = int(rows_subset.numel())
         else:
             k = min(int(cfg.top_k), int(rows_subset.numel()))
-        
-        # Efficient top-k on CPU tensor
+
         top_vals, rel_top_idxs = torch.topk(vals_subset, k)
         top_idxs = rows_subset[rel_top_idxs]
 
@@ -508,34 +466,40 @@ class FeatureLabeler:
 
         for val, row_idx in zip(top_vals.tolist(), top_idxs.tolist()):
             doc_id = token_doc_map[row_idx]
-            pos    = token_pos_map[row_idx]
-            toks   = token_ids[doc_id]
+            pos = token_pos_map[row_idx]
+            toks = token_ids[doc_id]
 
             lo = max(0, pos - cw)
             hi = min(len(toks), pos + cw + 1)
 
-            # FIX: Improved tokenization handling
-            # Decode parts separately but logically connected
             prefix_text = self.tokenizer.decode(toks[lo:pos], skip_special_tokens=True)
-            target_text = self.tokenizer.decode(toks[pos:pos+1], skip_special_tokens=True)
-            suffix_text = self.tokenizer.decode(toks[pos+1:hi], skip_special_tokens=True)
+            target_text = self.tokenizer.decode(toks[pos:pos + 1], skip_special_tokens=True)
+            suffix_text = self.tokenizer.decode(toks[pos + 1:hi], skip_special_tokens=True)
 
             context_str = f"{prefix_text}>>>{target_text}<<<{suffix_text}"
 
-            # Deduplication
             token_s = target_text.strip()
             dedupe_key = (token_s, context_str)
             if dedupe_key in seen_contexts:
                 continue
             seen_contexts.add(dedupe_key)
 
-            contexts.append(TokenContext(
-                token=token_s,
-                context=context_str,
-                activation_value=val,
-            ))
+            contexts.append(
+                TokenContext(
+                    token=token_s,
+                    context=context_str,
+                    activation_value=val,
+                )
+            )
 
         return contexts
+
+    @staticmethod
+    def _normalize_activations(batch: torch.Tensor, eps: float = 1e-6) -> torch.Tensor:
+        """Apply per-token standardization before SAE encoding."""
+        mean = batch.mean(dim=-1, keepdim=True)
+        std = batch.std(dim=-1, keepdim=True, unbiased=False)
+        return (batch - mean) / (std + eps)
 
     # ------------------------------------------------------------------
     # LLM Interaction

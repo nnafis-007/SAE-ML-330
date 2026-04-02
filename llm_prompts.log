@@ -1265,3 +1265,136 @@ RESPONSE:
   "confidence": "high"
 }
 ================================================================================
+
+================================================================================
+REQUEST_ID 16db8340-eb64-42c0-ba22-08fb604a92d0
+FEATURE 3658
+USER PROMPT:
+Feature index: 3658
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 13 activating examples (ordered strongest first):
+   1. [act=4.950]   they're kind of an artistic choices here for the>>> pots<<<
+   2. [act=1.573]  they're a kind of a buttery tasting>>> potato<<< and they're just plain delicious
+   3. [act=1.305]  you can charge just like you>>> plug<<< in your toaster at home you can plug in
+   4. [act=1.291]   course i'd given away the originals to the bro>>>ok<<<lyn art library i started playing around with printing them
+   5. [act=1.087]   the firstgeneration volt you have a sixteen kilow>>>att<<< hour battery that you're only allowed to use ten
+   6. [act=0.879]   and still has forty five left of the original brake>>> pads<<<
+   7. [act=0.647]  you can get the most of the other cars>>> seat<<< five
+   8. [act=0.560]   time of us being able to kind of heal and>>> laugh<<< and enjoy a relationship that we hadn't had before
+   9. [act=0.428]  ers here in belmont down by the claf>>>in<<< lot
+  10. [act=0.378]  you can charge just like you plug in your to>>>aster<<< at home you can plug in your electric car that
+  11. [act=0.349]   you're in a detached home or you have a>>> place<<< at work where you can change the time you spent
+  12. [act=0.240]   ebay typically from a a car that was that>>> was<<< in an accident or something with it where you can
+  13. [act=0.103]   that to keep em moist that's to keep the>>> weeds<<< out
+
+Most frequent activating tokens (top 10): "pots", "potato", "plug", "ok", "att", "pads", "seat", "laugh", "in", "aster"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Common nouns and objects",
+  "explanation": "The feature activates on a variety of common, everyday nouns and objects, such as household items and food, indicating it detects generic concepts rather than abstract or specific ideas",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 0c895872-2fdf-4d1c-9234-28e2f5d4bc79
+FEATURE 9077
+USER PROMPT:
+Feature index: 9077
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 30 activating examples (ordered strongest first):
+   1. [act=6.661]  and you said yep born and raised in h>>>oll<<<and
+   2. [act=1.757]   a city where you want to enjoy life and a>>> city<<< that must be yours mine
+   3. [act=1.249]   battery that you're only allowed to use ten kil>>>ow<<<att in the middle of
+   4. [act=0.901]   that you're only allowed to use ten kilow>>>att<<< in the middle of
+   5. [act=0.887]  my father was a dutch>>> immigrant<<<
+   6. [act=0.709]   a city where you want to live a city where>>> you<<< want to enjoy life and a city that must be
+   7. [act=0.614]   parking like everybody else but you don't have to>>> pay<<< for the electricity
+   8. [act=0.613]  you can get the most of the other cars>>> seat<<< five
+   9. [act=0.582]  i looked at the numbers i have a volks>>>wagen<<< golf
+  10. [act=0.566]  's just say plot number one what happens is that>>> plot<<< gets a soil sample taken out of it
+  11. [act=0.436]   so glad you're here and i'm glad you>>>'re<<< all able to see where i live and what we
+  12. [act=0.436]   going to have a youpick green bean day that>>> you<<< can come and pick green beans
+  13. [act=0.407]  pick green bean day that you can come and pick>>> green<<< beans
+  14. [act=0.339]   vehicles in town and also to encourage owners of electric>>> vehicles<<< to charge them to charge smart
+  15. [act=0.324]  the>>> fast<<< chargers yes okay
+  16. [act=0.301]  got ready got downstairs car's nice and to>>>asty<<< you know pulling that off of the off the grid
+  17. [act=0.296]   we have more than enough ready and available and sometimes>>> we<<<'re short and we have to scramble
+  18. [act=0.288]  and there's not a single battery>>> out<<< of that that has ever had that's ever lost
+  19. [act=0.280]   new car that gets twenty nine miles per gallon to>>> an<<< electric vehicle without changing your driving habits is equivalent to
+  20. [act=0.279]   so in the winter time you you all cars gas>>> cars<<< also reduce range you just don't notice it in
+  21. [act=0.256]  it was sc>>>utt<<<led at the end of the war
+  22. [act=0.254]  're only allowed to use ten kilowatt in>>> the<<< middle of
+  23. [act=0.238]   or it's about the equivalent of your entire electrical>>> the<<< emissions from all of the electricity you would use for
+  24. [act=0.203]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+  25. [act=0.197]  but we're thrilled to death>>> to<<< be part of a ninety where you know of the
+  26. [act=0.163]   we have cheap buns for you too midd>>>el<<<burg a city where you want to live a city
+  27. [act=0.162]   couple of hundred bucks for for one that you can>>> buy<<< on ebay typically from a a car that was
+  28. [act=0.150]  they're a kind of a butter>>>y<<< tasting potato and they're just plain delicious
+  29. [act=0.147]   but we have cheap buns for you too m>>>idd<<<elburg a city where you want to live a
+  30. [act=0.125]  and you help them with how to prepare or>>> are<<< they pretty much it's fully cooked ready to eat
+
+Most frequent activating tokens (top 10): "you", "the", "oll", "city", "ow", "att", "immigrant", "pay", "seat", "wagen"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Dutch Origin Reference",
+  "explanation": "The feature detects text snippets that mention or imply a connection to Dutch origin, such as the country 'Holland', 'Dutch immigrant', or the city 'Middelburg'.",
+  "confidence": "medium"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID cf4349d6-3c1d-4ac7-a665-0f41a19d1f1f
+FEATURE 5519
+USER PROMPT:
+Feature index: 5519
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 18 activating examples (ordered strongest first):
+   1. [act=5.933]   grow lettuce and the beans and the carrots and the>>> rad<<<ishes
+   2. [act=3.283]  they're a kind of a buttery tasting>>> potato<<< and they're just plain delicious
+   3. [act=2.814]  but we you know we grow>>> lettuce<<< and the beans and the carrots and the radishes
+   4. [act=2.732]   you know we grow lettuce and the beans and the>>> carrots<<< and the radishes
+   5. [act=2.115]   like the natural color in real fruits and vegetables and>>> greens<<<
+   6. [act=1.996]  's nothing like the natural color in real fruits and>>> vegetables<<< and greens
+   7. [act=1.899]   and i'd have to say no no it's>>> steak<<<
+   8. [act=1.825]   eight we're going to have a youpick green>>> bean<<< day that you can come and pick green beans
+   9. [act=1.727]  and auburn is awesome you have the ch>>>ilies<<< they have two sets free
+  10. [act=1.473]   pretty much it's fully cooked ready to eat smoked>>> fish<<< is
+  11. [act=1.391]   kinds of pastas or different kinds of things like>>> gran<<<ola and things that are just kind of uncommon when
+  12. [act=1.152]  these>>> beans<<< are fed by drip irrigation
+  13. [act=0.851]   we grow lettuce and the beans and the carrots and>>> the<<< radishes
+  14. [act=0.588]   of pastas or different kinds of things like gran>>>ola<<< and things that are just kind of uncommon when you
+  15. [act=0.584]  cause we had a lot of people yesterday like my>>> bean<<< plants aren't looking very good no more
+  16. [act=0.368]   they pretty much it's fully cooked ready to eat>>> smoked<<< fish is
+  17. [act=0.304]   lettuce and the beans and the carrots and the rad>>>ishes<<<
+  18. [act=0.226]   green bean day that you can come and pick green>>> beans<<<
+
+Most frequent activating tokens (top 10): "bean", "beans", "rad", "potato", "lettuce", "carrots", "greens", "vegetables", "steak", "ilies"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Fresh Produce Detection",
+  "explanation": "The feature detects mentions of various types of fresh produce, such as vegetables, fruits, and legumes, in the given text snippets",
+  "confidence": "high"
+}
+================================================================================
