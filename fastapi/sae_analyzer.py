@@ -4,8 +4,8 @@ SAE Analyzer – connects the Sparse Autoencoder pipeline to the FastAPI backend
 Uses:
     - ``sae_model.SparseAutoencoder``   for encoding activations
     - ``data_collection.GPT2ActivationCollector`` for extracting GPT-2 hidden states
-    - ``analysis.FeatureLabeler``        for on-demand LLM-based feature labeling
-    - ``analysis.build_token_maps``      for building corpus token maps
+    - ``analyzers.llm_analysis.FeatureLabeler`` for on-demand LLM-based feature labeling
+    - ``analyzers.llm_analysis.build_token_maps`` for corpus token maps
 
 All heavy objects (GPT-2 model, SAE checkpoints, collectors) are lazily loaded
 and cached so repeated requests are fast.
@@ -55,7 +55,7 @@ class SAEAnalyzer(BaseAnalyzer):
     * ``analyze`` tokenises the input text with GPT-2, collects hidden-state
       activations from the layer the SAE was trained on, encodes them through
       the SAE, and returns per-token top-K feature activations.
-    * ``label_feature`` optionally calls an LLM (via ``analysis.py``) to
+    * ``label_feature`` optionally calls an LLM (via ``analyzers/llm_analysis.py``) to
       generate a human-readable label for a single feature.
     """
 
@@ -196,7 +196,7 @@ class SAEAnalyzer(BaseAnalyzer):
             "tokens": tokens_data,
         }
 
-    # -- On-demand feature labeling (uses analysis.py's FeatureLabeler) --------
+    # -- On-demand feature labeling (uses analyzers.llm_analysis.FeatureLabeler) --------
 
     def label_feature(
         self,
@@ -207,7 +207,8 @@ class SAEAnalyzer(BaseAnalyzer):
         groq_api_key: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
-        Label a single SAE feature using an LLM via ``analysis.FeatureLabeler``.
+        Label a single SAE feature using an LLM via
+        ``analyzers.llm_analysis.FeatureLabeler``.
 
         Parameters
         ----------
@@ -254,14 +255,14 @@ class SAEAnalyzer(BaseAnalyzer):
             texts=corpus_texts, batch_size=8, max_length=128,
         )
 
-        from analysis import build_token_maps  # lazy import
+        from analyzers.llm_analysis import build_token_maps  # lazy import
 
         token_ids, doc_map, pos_map = build_token_maps(
             corpus_texts, tokenizer, max_length=128,
         )
 
         # Labeling config (lazy imports)
-        from analysis import FeatureLabeler, LabelingConfig, LabelResult  # noqa: E811
+        from analyzers.llm_analysis import FeatureLabeler, LabelingConfig, LabelResult  # noqa: E811
 
         resolved_api_key = groq_api_key or os.environ.get("GROQ_API_KEY")
         cfg_kwargs: Dict[str, Any] = {

@@ -5588,5 +5588,1842 @@
     ],
     "raw_response": "",
     "error": "Connection error."
+  },
+  "7134": {
+    "feature_idx": 7134,
+    "label": "General Terms and Phrases",
+    "explanation": "The feature detects common function words and general terms that are often used in various contexts to connect ideas or provide non-specific information",
+    "confidence": "medium",
+    "top_tokens": [
+      ",",
+      "any",
+      "one",
+      "individual",
+      "anything",
+      "of",
+      "-",
+      "able",
+      "federal",
+      "or"
+    ],
+    "top_contexts": [
+      {
+        "token": "one",
+        "context": " for some time, going forward,\n\nany>>>one<<< caught watching foreign films that malign the Supreme Leader",
+        "activation_value": 3.809250831604004
+      },
+      {
+        "token": "individual",
+        "context": " the leader into the future. In my vision every>>> individual<<< will have an unalienable right to a quarter",
+        "activation_value": 1.2379965782165527
+      },
+      {
+        "token": "anything",
+        "context": "'t. It's impossible to accurately explain Bitcoin in>>> anything<<< less than mind-numbingly boring technical terms",
+        "activation_value": 1.1908389329910278
+      },
+      {
+        "token": "",
+        "context": " THE EMMYS.\n\nWill Farrell\n>>>\n<<<Magnus\n\nMattias\n\nSoccer",
+        "activation_value": 1.097937822341919
+      },
+      {
+        "token": "of",
+        "context": " stars all too often falling to ground at the slightest>>> of<<< touches and the beautiful game suffering, some would say",
+        "activation_value": 1.0821123123168945
+      },
+      {
+        "token": "-",
+        "context": " as a glossy new title and a free-to>>>-<<<access website with the tagline \"Life not lifestyle",
+        "activation_value": 1.0126651525497437
+      },
+      {
+        "token": ",",
+        "context": "The software system known as the Niagara Framework enables corporate>>>,<<< military, health-care and other users to remotely",
+        "activation_value": 0.9048842787742615
+      },
+      {
+        "token": "able",
+        "context": " In my vision every individual will have an unalien>>>able<<< right to a quarter-acre floating island interlinked",
+        "activation_value": 0.8719455003738403
+      },
+      {
+        "token": "federal",
+        "context": " federal judge says Georgia cannot close voter registration for any>>> federal<<< election, including runoff contests, more than 30 days",
+        "activation_value": 0.7589068412780762
+      },
+      {
+        "token": "or",
+        "context": " survival from its equatorial location on either the Atlantic>>> or<<< Pacific Oceans. Each island will be interlinked",
+        "activation_value": 0.7343159914016724
+      },
+      {
+        "token": "any",
+        "context": " A federal judge says Georgia cannot close voter registration for>>> any<<< federal election, including runoff contests, more than 30",
+        "activation_value": 0.704546332359314
+      },
+      {
+        "token": ",",
+        "context": " divided the United States into five regions—the Midwest>>>,<<< Northeast, Southeast, Southwest, and West—and",
+        "activation_value": 0.6459447145462036
+      },
+      {
+        "token": "Reuters",
+        "context": ",\" a man said in the video, according to>>> Reuters<<<.\n\nThe authenticity of the video could not",
+        "activation_value": 0.6329061388969421
+      },
+      {
+        "token": "AAA",
+        "context": ", coinciding with increasing demand from international investors for>>> AAA<<< rated Australian government bonds.\n\nWhere there could",
+        "activation_value": 0.592205286026001
+      },
+      {
+        "token": "any",
+        "context": " tolerated for some time, going forward,\n\n>>>any<<<one caught watching foreign films that malign the Supreme",
+        "activation_value": 0.584173321723938
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"General Terms and Phrases\",\n  \"explanation\": \"The feature detects common function words and general terms that are often used in various contexts to connect ideas or provide non-specific information\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
+  },
+  "3668": {
+    "feature_idx": 3668,
+    "label": "Proper Nouns Entities",
+    "explanation": "The feature strongly activates on tokens that are often proper nouns, such as names of people, organizations, and specific concepts, indicating it detects named entities",
+    "confidence": "high",
+    "top_tokens": [
+      "Scouts",
+      "Framework",
+      "archae",
+      "forgive",
+      "aders",
+      "Aaron",
+      "essentials",
+      "Connor",
+      "gates",
+      "ancient"
+    ],
+    "top_contexts": [
+      {
+        "token": "Framework",
+        "context": ".\n\nThe software system known as the Niagara>>> Framework<<< enables corporate, military, health-care and other",
+        "activation_value": 2.183055877685547
+      },
+      {
+        "token": "archae",
+        "context": " study of the Nazca lines with a Peruvian>>> archae<<<ologist, Jorge Alano.",
+        "activation_value": 1.7805595397949219
+      },
+      {
+        "token": "forgive",
+        "context": " authorities\n\ndeclared, “We will>>> forgive<<< all those who have",
+        "activation_value": 1.6446125507354736
+      },
+      {
+        "token": "aders",
+        "context": " often recommended as one of the best CRT sh>>>aders<<<, has never quite looked right on my 1366",
+        "activation_value": 1.4873313903808594
+      },
+      {
+        "token": "Aaron",
+        "context": "SOBERING NUMBERS.\n\n>>>Aaron<<< Levine\n\nSea-Tac Ratings:\n",
+        "activation_value": 1.42578125
+      },
+      {
+        "token": "essentials",
+        "context": " zone. Each island will be designed to extract the>>> essentials<<< of survival from its equatorial location on either the",
+        "activation_value": 1.3098526000976562
+      },
+      {
+        "token": "Connor",
+        "context": " up, thanks in no small part to global phenomenon>>> Connor<<< McGregor. Boxing has rediscovered its mojo,",
+        "activation_value": 1.2048028707504272
+      },
+      {
+        "token": "gates",
+        "context": ".\n\nProperty entrepreneur Dawn is throwing open the>>> gates<<< of her Warford Hall home to paying guests for",
+        "activation_value": 1.1409857273101807
+      },
+      {
+        "token": "ancient",
+        "context": " back into the headlines. And in Ireland, the>>> ancient<<< indigenous sport of cam",
+        "activation_value": 1.0876940488815308
+      },
+      {
+        "token": "Archae",
+        "context": " say depicts an imaginary animal with a long tongue.>>> Archae<<<ologists say the rock carving may date back 2,",
+        "activation_value": 1.0767643451690674
+      },
+      {
+        "token": "Fi",
+        "context": " Sciences (IOMS) and the International Islamic>>> Fi<<<qh Academy (IIFA). Both institutions comprise",
+        "activation_value": 1.0128154754638672
+      },
+      {
+        "token": "Scouts",
+        "context": "Boy>>> Scouts<<< of America’s Executive Committee Unanimously",
+        "activation_value": 1.004446029663086
+      },
+      {
+        "token": "Harper",
+        "context": " the George Schuck family, in an 1872>>> Harper<<<’s Weekly illustration titled “The Em",
+        "activation_value": 0.9064122438430786
+      },
+      {
+        "token": "Scouts",
+        "context": " A vote by the National Executive Board, the Boy>>> Scouts<<<’ governing body, is set for July 27",
+        "activation_value": 0.8609147667884827
+      },
+      {
+        "token": "overnight",
+        "context": " guests for the first time, with the introduction of>>> overnight<<< luxury stay packages at her beauty clinic Skulpt and",
+        "activation_value": 0.6762616634368896
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Proper Nouns Entities\",\n  \"explanation\": \"The feature strongly activates on tokens that are often proper nouns, such as names of people, organizations, and specific concepts, indicating it detects named entities\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "861": {
+    "feature_idx": 861,
+    "label": "Conjunction and listing",
+    "explanation": "The feature activates on tokens that introduce a connection or continuation of ideas, such as 'and' or commas used in lists",
+    "confidence": "high",
+    "top_tokens": [
+      ",",
+      "and",
+      ":",
+      "-",
+      "people",
+      "(",
+      "."
+    ],
+    "top_contexts": [
+      {
+        "token": "and",
+        "context": "I think it will definitely help the travel times,>>> and<<< people will want to take Amtrak more often, if",
+        "activation_value": 3.8612935543060303
+      },
+      {
+        "token": "and",
+        "context": " is that CRT Royale looks terrible on my screen>>> and<<< I always accepted this as a downside to using an",
+        "activation_value": 2.0146031379699707
+      },
+      {
+        "token": ",",
+        "context": "�I think it will definitely help the travel times>>>,<<< and people will want to take Amtrak more often,",
+        "activation_value": 1.73562753200531
+      },
+      {
+        "token": ",",
+        "context": " hilarious if it weren’t so … well>>>,<<< hilarious, really, but in a very sad way",
+        "activation_value": 1.6815358400344849
+      },
+      {
+        "token": "and",
+        "context": "T Royale is intended for 1080p or higher (>>>and<<< reportedly looks best in the 4k range). That",
+        "activation_value": 1.4551138877868652
+      },
+      {
+        "token": ",",
+        "context": " how\n\nNo. Tech journalism is uniformly terrible>>>,<<< always remember this.\n\n3) How does",
+        "activation_value": 1.3092855215072632
+      },
+      {
+        "token": ":",
+        "context": " “Just think about the qualities these teachers have>>>:<<< personal courage,",
+        "activation_value": 1.3038583993911743
+      },
+      {
+        "token": "-",
+        "context": "erosene\n\nDevi's husband and parents>>>-<<<in-law are in jail awaiting trial\n\n",
+        "activation_value": 1.1159451007843018
+      },
+      {
+        "token": ",",
+        "context": ", and people will want to take Amtrak more often>>>,<<< if they arrive to where they need to go on",
+        "activation_value": 1.012489676475525
+      },
+      {
+        "token": "people",
+        "context": " think it will definitely help the travel times, and>>> people<<< will want to take Amtrak more often, if they",
+        "activation_value": 0.9908353090286255
+      },
+      {
+        "token": "and",
+        "context": " keep seeing all this stuff in the news about them>>> and<<< how\n\nNo. Tech journalism is uniformly terrible",
+        "activation_value": 0.9804184436798096
+      },
+      {
+        "token": ",",
+        "context": " block Sony Picture’s “The Interview>>>,<<<” a controversial film\n\nbased on a",
+        "activation_value": 0.963797926902771
+      },
+      {
+        "token": ",",
+        "context": " (ISIS) warns in a new video that countries>>>,<<< including the U.S., that are taking part",
+        "activation_value": 0.8671901226043701
+      },
+      {
+        "token": "(",
+        "context": " CRT Royale is intended for 1080p or higher>>> (<<<and reportedly looks best in the 4k range).",
+        "activation_value": 0.855350136756897
+      },
+      {
+        "token": ".",
+        "context": " 720p and 1080p with my eyesight anyway>>>.<<< What I do notice is that CRT Royale looks",
+        "activation_value": 0.835861325263977
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Conjunction and listing\",\n  \"explanation\": \"The feature activates on tokens that introduce a connection or continuation of ideas, such as 'and' or commas used in lists\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "2783": {
+    "feature_idx": 2783,
+    "label": "Prepositions and Conjunctions",
+    "explanation": "The feature strongly activates on common prepositions and conjunctions like 'of', 'and', and 'to', indicating it detects grammatical connectors in text",
+    "confidence": "high",
+    "top_tokens": [
+      "and",
+      "of",
+      "�",
+      "al",
+      "aly",
+      "ine",
+      "E",
+      "to",
+      "ogly",
+      "1"
+    ],
+    "top_contexts": [
+      {
+        "token": "al",
+        "context": " rally in Los Angeles on April 9. Mark R>>>al<<<ston/AFP/Getty Images\n\nUnder pressure",
+        "activation_value": 2.561387062072754
+      },
+      {
+        "token": "aly",
+        "context": " In this article (published in 2010), Mohammed Gh>>>aly<<< gives a comprehensive analysis of these conferences, the relation",
+        "activation_value": 2.5300354957580566
+      },
+      {
+        "token": "and",
+        "context": " corresponding resolution adopted on 25 November 2005 by the Food>>> and<<< Agriculture Organization, which was to facilitate the implementation of",
+        "activation_value": 2.2589399814605713
+      },
+      {
+        "token": "of",
+        "context": "\n\nProperty entrepreneur Dawn is throwing open the gates>>> of<<< her Warford Hall home to paying guests for the",
+        "activation_value": 1.920330286026001
+      },
+      {
+        "token": "ine",
+        "context": " were the Germans from the Palatine and Rh>>>ine<<< River regions who",
+        "activation_value": 1.5953251123428345
+      },
+      {
+        "token": "of",
+        "context": " of hackers targeting popular Niagara software\n\nThe Department>>> of<<< Homeland Security on Friday warned that a popular system used",
+        "activation_value": 1.5678386688232422
+      },
+      {
+        "token": "E",
+        "context": " films that malign the Supreme Leader [Kim Jong>>> E<<<un] will face\n\nsevere penalties.\n",
+        "activation_value": 1.5457407236099243
+      },
+      {
+        "token": "and",
+        "context": " food security and eradicating poverty.[1] Food>>> and<<< Agriculture Organization was invited to facilitate its implementation.\n",
+        "activation_value": 1.2565431594848633
+      },
+      {
+        "token": "to",
+        "context": ",000 was compared with the unemployment figures for January>>> to<<<",
+        "activation_value": 1.1770601272583008
+      },
+      {
+        "token": "ogly",
+        "context": "Experts have discovered a new ge>>>ogly<<<ph 30 meters (100 feet) long among the",
+        "activation_value": 1.1552670001983643
+      },
+      {
+        "token": "1",
+        "context": " play in providing food security and eradicating poverty.[>>>1<<<] Food and Agriculture Organization was invited to facilitate its",
+        "activation_value": 1.1468887329101562
+      },
+      {
+        "token": "you",
+        "context": " the biggest What's On stories by email Subscribe Thank>>> you<<< for subscribing We have more newsletters Show me See our",
+        "activation_value": 1.1439306735992432
+      },
+      {
+        "token": "ph",
+        "context": "Experts have discovered a new geogly>>>ph<<< 30 meters (100 feet) long among the Naz",
+        "activation_value": 1.1433360576629639
+      },
+      {
+        "token": "�",
+        "context": "s benevolent governance, “Julia,�>>>�<<< that managed to creep out so many women that they",
+        "activation_value": 0.9970616102218628
+      },
+      {
+        "token": "�",
+        "context": " teachers to come forward,” Johnson said.>>> �<<<�Just think about the qualities these teachers have:",
+        "activation_value": 0.9732645750045776
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Prepositions and Conjunctions\",\n  \"explanation\": \"The feature strongly activates on common prepositions and conjunctions like 'of', 'and', and 'to', indicating it detects grammatical connectors in text\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "4795": {
+    "feature_idx": 4795,
+    "label": "Geographic Location",
+    "explanation": "The feature activates on tokens related to locations, such as city or state names, like 'WASHINGTON', 'SACRAMENTO', and 'Seattle'",
+    "confidence": "high",
+    "top_tokens": [
+      "the",
+      ",",
+      "'s",
+      "over",
+      "his",
+      "an",
+      "claiming",
+      "Seattle",
+      "to"
+    ],
+    "top_contexts": [
+      {
+        "token": ",",
+        "context": "@scoutsforequality.org\n\nWASHINGTON>>>,<<< D.C.—Today, the Boy Scouts of",
+        "activation_value": 2.6536924839019775
+      },
+      {
+        "token": "over",
+        "context": " latest push centers on two amendments, one to win>>> over<<< conservative opponents, the other to win over more moderate",
+        "activation_value": 2.125123977661133
+      },
+      {
+        "token": "the",
+        "context": " he is sentenced in April. Motions to dismiss>>> the<<< case on various legal grounds are also still pending",
+        "activation_value": 1.8633928298950195
+      },
+      {
+        "token": "the",
+        "context": " verdict overturned.\n\nSterling will have>>> the<<< option to appeal his case after he is sentenced in",
+        "activation_value": 1.6201074123382568
+      },
+      {
+        "token": ",",
+        "context": "(CBS/AP) SACRAMENTO>>>,<<< Calif. - Prosecutors have taken the unusual step of",
+        "activation_value": 1.5832362174987793
+      },
+      {
+        "token": "his",
+        "context": " Live” today, Charlie Woods, who lost>>> his<<< son in the attack on the Benghazi consulate, reacts",
+        "activation_value": 1.4697729349136353
+      },
+      {
+        "token": "'s",
+        "context": "\nSoftBank itself will assume 15 percent of Uber>>>'s<<< shares, while other members of the group will take",
+        "activation_value": 1.1483960151672363
+      },
+      {
+        "token": "an",
+        "context": " to participate in a June 20 special election runoff for>>> an<<< open U.S. House seat.\n\n",
+        "activation_value": 1.11661696434021
+      },
+      {
+        "token": "the",
+        "context": ". Speaking very calmly, Woods said his son deserves>>> the<<< same moral courage from the country’s leaders",
+        "activation_value": 1.0648233890533447
+      },
+      {
+        "token": "the",
+        "context": " and I believe that California should be the leader into>>> the<<< future. In my vision every individual will have an",
+        "activation_value": 0.924213707447052
+      },
+      {
+        "token": "claiming",
+        "context": " have gone on the offensive over Biden's remarks,>>> claiming<<< he misled the American people by claiming ignorance over security",
+        "activation_value": 0.9000959992408752
+      },
+      {
+        "token": "Seattle",
+        "context": "cer Business Insider\n\nSaturday's LA Galaxy->>>Seattle<<< Sounders game",
+        "activation_value": 0.8711361289024353
+      },
+      {
+        "token": "the",
+        "context": " Verizon and T-Mobile had a statistical tie in>>> the<<< Southwest.Ver",
+        "activation_value": 0.8664811253547668
+      },
+      {
+        "token": "to",
+        "context": " House Speaker Paul Ryan and his allies are still fighting>>> to<<< pass the American Health Care Act, more than a",
+        "activation_value": 0.8152602314949036
+      },
+      {
+        "token": "'s",
+        "context": " will pursue every available legal option to get the jury>>>'s<<< verdict overturned.\n\nSterling will have",
+        "activation_value": 0.7502484321594238
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Geographic Location\",\n  \"explanation\": \"The feature activates on tokens related to locations, such as city or state names, like 'WASHINGTON', 'SACRAMENTO', and 'Seattle'\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "1191": {
+    "feature_idx": 1191,
+    "label": "Preposition and conjunction",
+    "explanation": "The feature activates on tokens such as 'to', 'and', and '-' which are commonly used prepositions and conjunctions in English language",
+    "confidence": "high",
+    "top_tokens": [
+      ".",
+      "to",
+      "-",
+      "and",
+      "ac",
+      "honor",
+      "time"
+    ],
+    "top_contexts": [
+      {
+        "token": "to",
+        "context": "Uber will sell up>>> to<<< a 20 percent stake in its company to a consortium",
+        "activation_value": 8.021394729614258
+      },
+      {
+        "token": "to",
+        "context": " bluntly predicting that the post-Maria exodus of up>>> to<<< one million Puerto Ricans will mean “a",
+        "activation_value": 7.048310279846191
+      },
+      {
+        "token": "and",
+        "context": " regions of the United States, while its up->>>and<<<-coming rival T-Mobile has the top speeds",
+        "activation_value": 2.367075204849243
+      },
+      {
+        "token": "-",
+        "context": " of the United States, while its up-and>>>-<<<coming rival T-Mobile has the top speeds throughout",
+        "activation_value": 2.0470075607299805
+      },
+      {
+        "token": "-",
+        "context": " western regions of the United States, while its up>>>-<<<and-coming rival T-Mobile has the top",
+        "activation_value": 1.7759374380111694
+      },
+      {
+        "token": "ac",
+        "context": "by Emrys West>>>ac<<<ott\n\nImmanuel Kant (1724-",
+        "activation_value": 1.2411612272262573
+      },
+      {
+        "token": ".",
+        "context": "� governing body, is set for July 27th>>>.<<<\n\nBased on the BSA’s",
+        "activation_value": 0.8892046809196472
+      },
+      {
+        "token": ".",
+        "context": " for a total 20 percent stake, the Journal reported>>>.<<<\n\n\"We look forward to working with the",
+        "activation_value": 0.7676420211791992
+      },
+      {
+        "token": ".",
+        "context": " to appeal his case after he is sentenced in April>>>.<<< Motions to dismiss the case on various legal grounds",
+        "activation_value": 0.7517061233520508
+      },
+      {
+        "token": "honor",
+        "context": "’s death. It’s about>>> honor<<<, integrity and justice,” he said.",
+        "activation_value": 0.634268045425415
+      },
+      {
+        "token": "time",
+        "context": " if they arrive to where they need to go on>>> time<<<,” Dixon said.\n\nBut the",
+        "activation_value": 0.6064221262931824
+      },
+      {
+        "token": ".",
+        "context": " T-Mobile had a statistical tie in the Southwest>>>.<<<Ver",
+        "activation_value": 0.49747878313064575
+      },
+      {
+        "token": ".",
+        "context": " those of ILADS, which were posted in 2014>>>.<<< This is quite good for the Lyme community. Here",
+        "activation_value": 0.44232726097106934
+      },
+      {
+        "token": ".",
+        "context": " filed by then-Connecticut Attorney General Richard Blumenthal>>>.<<< (Blumenthal is now a U.S.",
+        "activation_value": 0.4180222451686859
+      },
+      {
+        "token": ".",
+        "context": " feminist magazine Spare Rib as early as next month>>>.<<<\n\nRaven, a Guardian contributor and one of",
+        "activation_value": 0.3991110324859619
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Preposition and conjunction\",\n  \"explanation\": \"The feature activates on tokens such as 'to', 'and', and '-' which are commonly used prepositions and conjunctions in English language\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "10355": {
+    "feature_idx": 10355,
+    "label": "Proper Noun Indicator",
+    "explanation": "This feature detects the presence of proper nouns, such as names of places, organizations, or individuals, often indicated by capitalization or specific tokens like 'S' or ",
+    "confidence": "high",
+    "top_tokens": [
+      "S",
+      "?",
+      "Ireland",
+      ",",
+      "Southwest",
+      "and",
+      "email",
+      "'s",
+      "Subscribe"
+    ],
+    "top_contexts": [
+      {
+        "token": "S",
+        "context": "(CBS/AP)>>> S<<<ACRAMENTO, Calif. - Prosecutors have",
+        "activation_value": 11.165881156921387
+      },
+      {
+        "token": "S",
+        "context": " 24, 2013\n\nBy Paul Kennedy\n\n>>>S<<<OBERING NUMBERS.\n\nAaron",
+        "activation_value": 9.076130867004395
+      },
+      {
+        "token": "S",
+        "context": " to get the jury's verdict overturned.\n\n>>>S<<<terling will have the option to appeal his case",
+        "activation_value": 6.535977363586426
+      },
+      {
+        "token": "?",
+        "context": ". Supreme Court. Does it typically affect the outcome>>>?<<< Do Justices use the argument primarily to get answers",
+        "activation_value": 1.2102892398834229
+      },
+      {
+        "token": "",
+        "context": "Will Farrell\n\nMagnus\n\nMattias>>>\n<<<\nSoccer America on Twitter:\n\nGoogle",
+        "activation_value": 1.1496225595474243
+      },
+      {
+        "token": "",
+        "context": " Version\n\n1) Should I buy Bitcoins?>>>\n<<<\nNo.\n\n2) But I keep",
+        "activation_value": 0.9774372577667236
+      },
+      {
+        "token": "",
+        "context": "YS.\n\nWill Farrell\n\nMagnus>>>\n<<<\nMattias\n\nSoccer America on Twitter",
+        "activation_value": 0.6350969076156616
+      },
+      {
+        "token": "?",
+        "context": " each other? Has oral argument changed over the years>>>?<<< Legal scholars and political scientists have tried to answer some",
+        "activation_value": 0.5130501985549927
+      },
+      {
+        "token": "Ireland",
+        "context": " the heavyweight game back into the headlines. And in>>> Ireland<<<, the ancient indigenous sport of cam",
+        "activation_value": 0.13224577903747559
+      },
+      {
+        "token": ",",
+        "context": "�s encouragement to develop the Australian corporate bond market>>>,<<< coinciding with increasing demand from international investors for AAA",
+        "activation_value": 0.12295177578926086
+      },
+      {
+        "token": "Southwest",
+        "context": " five regions—the Midwest, Northeast, Southeast,>>> Southwest<<<, and West—and found that Verizon had the",
+        "activation_value": 0.029443979263305664
+      },
+      {
+        "token": "and",
+        "context": " have a day, God willing, like France's>>> and<<<, by God, as we struck France in the",
+        "activation_value": 0.006802797317504883
+      },
+      {
+        "token": "email",
+        "context": "Get the biggest What's On stories by>>> email<<< Subscribe Thank you for subscribing We have more newsletters Show",
+        "activation_value": 0.0
+      },
+      {
+        "token": "'s",
+        "context": "Get the biggest What>>>'s<<< On stories by email Subscribe Thank you for subscribing We",
+        "activation_value": 0.0
+      },
+      {
+        "token": "Subscribe",
+        "context": "Get the biggest What's On stories by email>>> Subscribe<<< Thank you for subscribing We have more newsletters Show me",
+        "activation_value": 0.0
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Proper Noun Indicator\",\n  \"explanation\": \"This feature detects the presence of proper nouns, such as names of places, organizations, or individuals, often indicated by capitalization or specific tokens like 'S' or \"'s'\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "4624": {
+    "feature_idx": 4624,
+    "label": "Definite Article Detection",
+    "explanation": "The feature detects the presence of the definite article 'the' in a sentence, which is the most frequent activating token across the examples",
+    "confidence": "high",
+    "top_tokens": [
+      "the",
+      "its",
+      "potential",
+      "a",
+      ".—"
+    ],
+    "top_contexts": [
+      {
+        "token": "the",
+        "context": " the Food and Agriculture Organization, which was to facilitate>>> the<<< implementation of the year, affirmed \"the need to",
+        "activation_value": 3.6772284507751465
+      },
+      {
+        "token": "the",
+        "context": "The federal government applied for the stay while it asks>>> the<<< Supreme Court to hear its appeal of the case.",
+        "activation_value": 2.931959629058838
+      },
+      {
+        "token": "the",
+        "context": " Moreover, they say the detention conflicts with laws governing>>> the<<< well-being of foster children, and with Mars",
+        "activation_value": 1.6643474102020264
+      },
+      {
+        "token": "its",
+        "context": "1] Food and Agriculture Organization was invited to facilitate>>> its<<< implementation.\n\nThe corresponding resolution adopted on 25",
+        "activation_value": 1.5059829950332642
+      },
+      {
+        "token": "potential",
+        "context": " exists between poverty, food security, malnutrition and the>>> potential<<< contribution of the potato",
+        "activation_value": 1.4790984392166138
+      },
+      {
+        "token": "the",
+        "context": ", food security, malnutrition and the potential contribution of>>> the<<< potato",
+        "activation_value": 1.307631015777588
+      },
+      {
+        "token": "the",
+        "context": "�s energy needs.\n\nThe other was>>> the<<< Treasurer’s encouragement to develop the Australian corporate",
+        "activation_value": 1.3060882091522217
+      },
+      {
+        "token": "the",
+        "context": ".S. soil. The alleged crimes occurred after>>> the<<< man was released.\n\nThe man, Pedro",
+        "activation_value": 1.1996368169784546
+      },
+      {
+        "token": "the",
+        "context": " to facilitate the implementation of the year, affirmed \">>>the<<< need to revive public awareness of the relationship that exists",
+        "activation_value": 1.173103928565979
+      },
+      {
+        "token": "the",
+        "context": " a youth.\n\nThe federal government applied for>>> the<<< stay while it asks the Supreme Court to hear its",
+        "activation_value": 1.160058617591858
+      },
+      {
+        "token": "the",
+        "context": " 9 ceremony. “It took great courage for>>> the<<< Filipino teachers to come forward,” Johnson said",
+        "activation_value": 1.1183924674987793
+      },
+      {
+        "token": "the",
+        "context": " that exists between poverty, food security, malnutrition and>>> the<<< potential contribution of the potato",
+        "activation_value": 0.9582085013389587
+      },
+      {
+        "token": "a",
+        "context": " day to be \"working.\" The backlash has sparked>>> a<<< furious debate on the merits of WFH, and",
+        "activation_value": 0.8313536047935486
+      },
+      {
+        "token": "the",
+        "context": " Rights Under Law had filed a lawsuit in April challenging>>> the<<< state's registration deadline for voters wishing to participate in",
+        "activation_value": 0.7922486066818237
+      },
+      {
+        "token": ".—",
+        "context": "quality.org\n\nWASHINGTON, D.C>>>.—<<<Today, the Boy Scouts of America announced that the",
+        "activation_value": 0.7687292098999023
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Definite Article Detection\",\n  \"explanation\": \"The feature detects the presence of the definite article 'the' in a sentence, which is the most frequent activating token across the examples\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "11436": {
+    "feature_idx": 11436,
+    "label": "Question or inquiry",
+    "explanation": "The feature activates on tokens such as 'does', 'has', and 'how', which are often used to form questions or express inquiry, indicating that the feature is detecting interrogative or inquiring language",
+    "confidence": "high",
+    "top_tokens": [
+      ",",
+      ",",
+      "does",
+      "Does",
+      "Has",
+      "writes",
+      "this",
+      "as",
+      "�",
+      "of"
+    ],
+    "top_contexts": [
+      {
+        "token": "does",
+        "context": ", always remember this.\n\n3) How>>> does<<< this shit work? It doesn't make any sense",
+        "activation_value": 11.381023406982422
+      },
+      {
+        "token": "Does",
+        "context": " argument before the U.S. Supreme Court.>>> Does<<< it typically affect the outcome? Do Justices use",
+        "activation_value": 9.884549140930176
+      },
+      {
+        "token": "Has",
+        "context": " answers from advocates, or to influence each other?>>> Has<<< oral argument changed over the years? Legal scholars and",
+        "activation_value": 5.493210792541504
+      },
+      {
+        "token": ",\"",
+        "context": " that we will strike America at its center in Washington>>>,\"<<< a man said in the video, according to Reuters",
+        "activation_value": 1.8246123790740967
+      },
+      {
+        "token": "writes",
+        "context": " will now be unlocked by achieving \"specific milestones,\">>> writes<<< EA in a blog post, while only a \"",
+        "activation_value": 0.8568057417869568
+      },
+      {
+        "token": "this",
+        "context": " always remember this.\n\n3) How does>>> this<<< shit work? It doesn't make any sense!",
+        "activation_value": 0.5306879281997681
+      },
+      {
+        "token": ",\"",
+        "context": ", fuel our growth, and strengthen our corporate governance>>>,\"<<< Uber said in a statement.\n\nUber told",
+        "activation_value": 0.40279412269592285
+      },
+      {
+        "token": "as",
+        "context": " Border Patrol agents. He was processed and released,>>> as<<< are all illegal immigrants who come as unaccompanied minors or",
+        "activation_value": 0.39563554525375366
+      },
+      {
+        "token": ",",
+        "context": " Niagara users should immediately prohibit guest users, bolster passwords>>>,<<< cut off direct access to the",
+        "activation_value": 0.2623324394226074
+      },
+      {
+        "token": "�",
+        "context": "�s about honor, integrity and justice,�>>>�<<< he said.\n\n“This news that",
+        "activation_value": 0.1763211488723755
+      },
+      {
+        "token": ",",
+        "context": " into five regions—the Midwest, Northeast, Southeast>>>,<<< Southwest, and West—and found that Verizon had",
+        "activation_value": 0.10525685548782349
+      },
+      {
+        "token": ",",
+        "context": " regions—the Midwest, Northeast, Southeast, Southwest>>>,<<< and West—and found that Verizon had the fastest",
+        "activation_value": 0.09170514345169067
+      },
+      {
+        "token": "of",
+        "context": "\n\nProperty entrepreneur Dawn is throwing open the gates>>> of<<< her Warford Hall home to paying guests for the",
+        "activation_value": 0.025902271270751953
+      },
+      {
+        "token": "6",
+        "context": " Raven says she and her supporters have raised the £>>>6<<<,000 needed to launch phase one of the Sp",
+        "activation_value": 0.016938351094722748
+      },
+      {
+        "token": "email",
+        "context": "Get the biggest What's On stories by>>> email<<< Subscribe Thank you for subscribing We have more newsletters Show",
+        "activation_value": 0.0
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Question or inquiry\",\n  \"explanation\": \"The feature activates on tokens such as 'does', 'has', and 'how', which are often used to form questions or express inquiry, indicating that the feature is detecting interrogative or inquiring language\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "2913": {
+    "feature_idx": 2913,
+    "label": "Possessive Pronouns",
+    "explanation": "The feature detects the presence of possessive pronouns, such as 'its', 'our', 'his', which are among the most frequent activating tokens",
+    "confidence": "high",
+    "top_tokens": [
+      "its",
+      "our",
+      "able",
+      "assume",
+      "1",
+      "his",
+      "another",
+      "-",
+      "some",
+      "vice"
+    ],
+    "top_contexts": [
+      {
+        "token": "our",
+        "context": " foreword,\n\nSocialism promised to fulfill>>> our<<< hopes for a more rational, more just world.",
+        "activation_value": 2.141373634338379
+      },
+      {
+        "token": "able",
+        "context": " In my vision every individual will have an unalien>>>able<<< right to a quarter-acre floating island interlinked",
+        "activation_value": 1.9070700407028198
+      },
+      {
+        "token": "its",
+        "context": " to global phenomenon Connor McGregor. Boxing has rediscovered>>> its<<< mojo, with the likes of Englishman Anthony",
+        "activation_value": 1.6297364234924316
+      },
+      {
+        "token": "assume",
+        "context": "subscription required).\n\nSoftBank itself will>>> assume<<< 15 percent of Uber's shares, while other members",
+        "activation_value": 1.5860811471939087
+      },
+      {
+        "token": "1",
+        "context": " -- © Christian Wagner\n\nShort Version\n\n>>>1<<<) Should I buy Bitcoins?\n\nNo.",
+        "activation_value": 1.4054667949676514
+      },
+      {
+        "token": "its",
+        "context": " the stay while it asks the Supreme Court to hear>>> its<<< appeal of the case.\n\nOne of Kh",
+        "activation_value": 1.2359092235565186
+      },
+      {
+        "token": "his",
+        "context": " part of the decision that ruled he should be serving>>> his<<< sentence in Canada as a youth.\n\nThe",
+        "activation_value": 1.122978687286377
+      },
+      {
+        "token": "another",
+        "context": " rules\n\nBut they didn’t waive>>> another<<< part of the decision that ruled he should be serving",
+        "activation_value": 1.1079158782958984
+      },
+      {
+        "token": "-",
+        "context": " Benghazi, following Joe Biden's insistence in the vice>>>-<<<presidential debate that \"we weren't told\".",
+        "activation_value": 1.080021858215332
+      },
+      {
+        "token": "some",
+        "context": "EA has ceded>>> some<<< ground to Star Wars: Battlefront 2 beta players",
+        "activation_value": 0.9599844217300415
+      },
+      {
+        "token": "vice",
+        "context": " in Benghazi, following Joe Biden's insistence in the>>> vice<<<-presidential debate that \"we weren't told",
+        "activation_value": 0.9503574371337891
+      },
+      {
+        "token": "of",
+        "context": "\nBut they didn’t waive another part>>> of<<< the decision that ruled he should be serving his sentence",
+        "activation_value": 0.9218318462371826
+      },
+      {
+        "token": "my",
+        "context": " running for Governor of California? I believe it is>>> my<<< civic duty as a citizen to reveal what I think",
+        "activation_value": 0.827965497970581
+      },
+      {
+        "token": "to",
+        "context": " National Executive Committee unanimously approved a resolution allowing gay adults>>> to<<< serve as employees and volunteers. A vote by the",
+        "activation_value": 0.7524735927581787
+      },
+      {
+        "token": "serve",
+        "context": " Executive Committee unanimously approved a resolution allowing gay adults to>>> serve<<< as employees and volunteers. A vote by the National",
+        "activation_value": 0.7341698408126831
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Possessive Pronouns\",\n  \"explanation\": \"The feature detects the presence of possessive pronouns, such as 'its', 'our', 'his', which are among the most frequent activating tokens\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "3925": {
+    "feature_idx": 3925,
+    "label": "Definition of terms",
+    "explanation": "The feature detects sentences that define or describe a concept, in this case 'machine learning', by strongly activating on the token 'is' in a definitional context.",
+    "confidence": "high",
+    "top_tokens": [
+      "is"
+    ],
+    "top_contexts": [
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      },
+      {
+        "token": "is",
+        "context": "Machine learning>>> is<<< a subset of artificial intelligence.",
+        "activation_value": 0.4824885129928589
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Definition of terms\",\n  \"explanation\": \"The feature detects sentences that define or describe a concept, in this case 'machine learning', by strongly activating on the token 'is' in a definitional context.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "8965": {
+    "feature_idx": 8965,
+    "label": "Artificial Intelligence",
+    "explanation": "The feature detects the concept of artificial intelligence as it strongly activates on the token 'artificial intelligence' in various contexts",
+    "confidence": "high",
+    "top_tokens": [
+      "."
+    ],
+    "top_contexts": [
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4824005663394928
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Artificial Intelligence\",\n  \"explanation\": \"The feature detects the concept of artificial intelligence as it strongly activates on the token 'artificial intelligence' in various contexts\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "6421": {
+    "feature_idx": 6421,
+    "label": "Animal Attribute Lazy",
+    "explanation": "The feature detects the concept of laziness, specifically in the context of animals, as evidenced by the strong activation on the word 'lazy' in the phrase 'the lazy dog'.",
+    "confidence": "high",
+    "top_tokens": [
+      "lazy"
+    ],
+    "top_contexts": [
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      },
+      {
+        "token": "lazy",
+        "context": "The quick brown fox jumps over the>>> lazy<<< dog.",
+        "activation_value": 0.4821811318397522
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Animal Attribute Lazy\",\n  \"explanation\": \"The feature detects the concept of laziness, specifically in the context of animals, as evidenced by the strong activation on the word 'lazy' in the phrase 'the lazy dog'.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "6914": {
+    "feature_idx": 6914,
+    "label": "Sentence Ending",
+    "explanation": "The feature activates on the token at the end of a sentence, which is typically a period.",
+    "confidence": "high",
+    "top_tokens": [
+      "."
+    ],
+    "top_contexts": [
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.3123599588871002
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Sentence Ending\",\n  \"explanation\": \"The feature activates on the token at the end of a sentence, which is typically a period.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "2253": {
+    "feature_idx": 2253,
+    "label": "Artificial Intelligence",
+    "explanation": "The feature activates on sentences defining machine learning as a subset of artificial intelligence, indicating it detects the concept of artificial intelligence",
+    "confidence": "high",
+    "top_tokens": [
+      "."
+    ],
+    "top_contexts": [
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.4816121459007263
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Artificial Intelligence\",\n  \"explanation\": \"The feature activates on sentences defining machine learning as a subset of artificial intelligence, indicating it detects the concept of artificial intelligence\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "5521": {
+    "feature_idx": 5521,
+    "label": "Human Language Concept",
+    "explanation": "The feature detects the concept of human language, as it strongly activates on the token 'human' in the context of natural language processing",
+    "confidence": "high",
+    "top_tokens": [
+      "human"
+    ],
+    "top_contexts": [
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      },
+      {
+        "token": "human",
+        "context": "Natural language processing enables computers to understand>>> human<<< language.",
+        "activation_value": 0.24615108966827393
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Human Language Concept\",\n  \"explanation\": \"The feature detects the concept of human language, as it strongly activates on the token 'human' in the context of natural language processing\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "6615": {
+    "feature_idx": 6615,
+    "label": "Indefinite Article",
+    "explanation": "The feature detects the presence of the indefinite article 'a' in a sentence, which is a common function word in English language.",
+    "confidence": "high",
+    "top_tokens": [
+      "a"
+    ],
+    "top_contexts": [
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 0.48101747035980225
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Indefinite Article\",\n  \"explanation\": \"The feature detects the presence of the indefinite article 'a' in a sentence, which is a common function word in English language.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "11653": {
+    "feature_idx": 11653,
+    "label": "Artificial Intelligence",
+    "explanation": "The feature activates on sentences defining machine learning as a subset of artificial intelligence, indicating it detects the concept of artificial intelligence",
+    "confidence": "high",
+    "top_tokens": [
+      "."
+    ],
+    "top_contexts": [
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 0.480634480714798
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Artificial Intelligence\",\n  \"explanation\": \"The feature activates on sentences defining machine learning as a subset of artificial intelligence, indicating it detects the concept of artificial intelligence\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "7243": {
+    "feature_idx": 7243,
+    "label": "Language Understanding",
+    "explanation": "The feature detects the concept of language understanding, as it strongly activates on the token 'language' in the context of natural language processing.",
+    "confidence": "high",
+    "top_tokens": [
+      "."
+    ],
+    "top_contexts": [
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      },
+      {
+        "token": ".",
+        "context": "Natural language processing enables computers to understand human language>>>.<<<",
+        "activation_value": 0.4803985357284546
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Language Understanding\",\n  \"explanation\": \"The feature detects the concept of language understanding, as it strongly activates on the token 'language' in the context of natural language processing.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "5878": {
+    "feature_idx": 5878,
+    "label": "Sentence Ending",
+    "explanation": "The feature strongly activates on the token that marks the end of a sentence, which is typically a period.",
+    "confidence": "high",
+    "top_tokens": [
+      "."
+    ],
+    "top_contexts": [
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 0.2098202258348465
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Sentence Ending\",\n  \"explanation\": \"The feature strongly activates on the token that marks the end of a sentence, which is typically a period.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
   }
 }

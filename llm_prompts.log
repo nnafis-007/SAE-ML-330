@@ -1,6 +1,6 @@
 
 ================================================================================
-FEATURE INDEX: 8221
+FEATURE INDEX: 4105
 ----------------------------------------
 SYSTEM PROMPT:
 You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
@@ -21,43 +21,56 @@ Rules:
 
 ----------------------------------------
 USER PROMPT:
-Feature index: 8221
+Feature index: 4105
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
-Top 15 activating examples (ordered strongest first):
-   1. [act=2.014]  Massive gargantuan be>>>hem<<<oths roam desolate barren wastelands.
-   2. [act=1.796]  Bitter cold freezing winters>>> follow<<< warm hot summers.
-   3. [act=0.894]  Happy joyful cheerful emotions>>> bright<<<en gloomy somber days.
-   4. [act=0.729]  Gentle soft mild breezes>>> stir<<< colorful vibrant leaves.
-   5. [act=0.340]  Mysterious strange odd occurrences>>> baff<<<le wise learned men.
-   6. [act=0.038]  Tasty delicious savory meals>>> satisfy<<< hungry famished guests.
-   7. [act=0.000]  Tasty>>> delicious<<< savory meals satisfy hungry famished guests.
-   8. [act=0.000]  Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.
-   9. [act=0.000]  Scary frightening terrifying dreams haunt>>> dark<<< black nights.
-  10. [act=0.000]  Tasty delicious savory>>> meals<<< satisfy hungry famished guests.
-  11. [act=0.000]  Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.
-  12. [act=0.000]  Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.
-  13. [act=0.000]  >>>T<<<asty delicious savory meals satisfy hungry famished guests
-  14. [act=0.000]  Scary frightening terrifying dreams haunt dark>>> black<<< nights.
-  15. [act=0.000]  Scary frightening terrifying dreams haunt dark black nights>>>.<<<
+Top 27 activating examples (ordered strongest first):
+   1. [act=19.652]   what communities do you know of that we could reach>>> out<<< to to invite to the next conversation so we can
+   2. [act=19.478]   this meeting but we didn't do anything to reach>>> out<<< to the people who are trying to help
+   3. [act=17.188]   people organizations initiatives research hubs like who can we reach>>> out<<< to to help us try to get more specific with
+   4. [act=5.678]   communities do you know of that we could reach out>>> to<<< to invite to the next conversation so we can start
+   5. [act=4.858]   meeting but we didn't do anything to reach out>>> to<<< the people who are trying to help
+   6. [act=3.735]  so today we decided to drill>>> down<<< you know onto the into the digital inclusion topic specifically
+   7. [act=3.631]   do you know of that we could reach out to>>> to<<< invite to the next conversation so we can start to
+   8. [act=3.344]   organizations initiatives research hubs like who can we reach out>>> to<<< to help us try to get more specific with this
+   9. [act=3.134]  i think the notion of reaching>>> folks<<< where they're at and trying to really assess what
+  10. [act=3.131]   that in other comments but i just want to drill>>> down<<< and say that as we think of the internet as
+  11. [act=1.987]   but we didn't do anything to reach out to>>> the<<< people who are trying to help
+  12. [act=1.742]   initiatives research hubs like who can we reach out to>>> to<<< help us try to get more specific with this data
+  13. [act=1.615]   you know of that we could reach out to to>>> invite<<< to the next conversation so we can start to think
+  14. [act=1.523]   it to better their lives and create opportunities and seek>>> out<<< opportunities in a community
+  15. [act=1.492]  and so since they've they've kind of reached>>> these<<< goals and as they reach these goals of certain data
+  16. [act=1.235]   good way of saying it so i kind of dug>>> around<<< dug around dug around there
+  17. [act=1.080]   through the city website and each of these are click>>>able<<< links that bring you to this this dashboard that does
+  18. [act=0.954]  but i think drilling>>> down<<< into the digital inclusion piece of that which we're
+  19. [act=0.774]   of the expertise in the room and then just reaching>>> a<<< targeted population you know we have all of these great
+  20. [act=0.767]   you could understand it that maybe we can look to>>> someone<<< like that to write a comprehensive use of the internet
+  21. [act=0.603]  anytime somebody runs for office that they send>>> out<<< to each candidate and they say fill this out and
+  22. [act=0.379]   as i feel it does as i try to dig>>> beyond<<< the very basic thing
+  23. [act=0.296]   like what communities do you know of that we could>>> reach<<< out to to invite to the next conversation so we
+  24. [act=0.182]   can't wait to read through those notes that la>>>uren<<<'s taking
+  25. [act=0.179]   to people organizations initiatives research hubs like who can we>>> reach<<< out to to help us try to get more specific
+  26. [act=0.157]   we've been talking about is there one to tap>>> into<<< is there anyone here that didn't actually register for
+  27. [act=0.102]   bit i think through reds and democracy to help>>> out<<< with you in this evening
 
-Most frequent activating tokens (top 10): "hem", "follow", "bright", "stir", "baff", "satisfy", "delicious", "fam", "dark", "meals"
+Most frequent activating tokens (top 15): "out", "to", "down", "reach", "folks", "the", "invite", "these", "around", "able", "a", "someone", "beyond", "uren", "into"
+
 
 Based on these examples, what concept does this SAE feature detect?
 
 ----------------------------------------
 LLM RESPONSE:
 {
-  "label": "Adjective Intensifiers",
-  "explanation": "The feature detects words that intensify or modify the meaning of adjacent adjectives, often indicating extreme or heightened states",
+  "label": "Reaching Out Concept",
+  "explanation": "This feature detects the concept of connecting or contacting others, often for help, invitation, or collaboration, as evident from the frequent activation on words like 'reach', 'out', and 'invite'",
   "confidence": "high"
 }
 ================================================================================
 
 ================================================================================
-FEATURE INDEX: 9295
+FEATURE INDEX: 1383
 ----------------------------------------
 SYSTEM PROMPT:
 You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
@@ -78,43 +91,79 @@ Rules:
 
 ----------------------------------------
 USER PROMPT:
-Feature index: 9295
+Feature index: 1383
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
-Top 15 activating examples (ordered strongest first):
-   1. [act=2.486]  Happy joyful cheerful emotions brighten gloomy somber days>>>.<<<
-   2. [act=1.224]  Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.
-   3. [act=0.702]  Honest truthful sincere friends provide helpful useful advice>>>.<<<
-   4. [act=0.602]  Fast swift rapid movements characterize agile nimble creatures>>>.<<<
-   5. [act=0.319]  Bitter cold freezing winters follow>>> warm<<< hot summers.
-   6. [act=0.236]  sterious strange odd occurrences baffle wise learned men>>>.<<<
-   7. [act=0.141]  Bitter cold freezing winters follow warm hot>>> summers<<<.
-   8. [act=0.079]   gargantuan behemoths roam desolate barren wast>>>el<<<ands.
-   9. [act=0.000]  Tasty delicious savory>>> meals<<< satisfy hungry famished guests.
-  10. [act=0.000]  Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.
-  11. [act=0.000]  Scary frightening terrifying dreams haunt dark>>> black<<< nights.
-  12. [act=0.000]  Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.
-  13. [act=0.000]  Bright luminous radiant stars illuminate deep black>>> space<<<.
-  14. [act=0.000]  Scary frightening terrifying dreams haunt dark black>>> nights<<<.
-  15. [act=0.000]  Scary frightening terrifying dreams haunt dark black nights>>>.<<<
+Top 50 activating examples (ordered strongest first):
+   1. [act=1.612]  and also to say for>>> those<<< of you who know me that i am i am
+   2. [act=1.238]  and also to say for those of>>> you<<< who know me that i am i am not here
+   3. [act=1.237]   is looking at right now i don't know if>>> you<<< guys saw this but there's the main street revital
+   4. [act=1.089]  sixty five was a whole different>>> thing<<<
+   5. [act=1.089]   that the barrier i think those are good questions to>>> ask<<<
+   6. [act=1.074]   a part of because we do have a lot here>>> already<<<
+   7. [act=1.042]  and that recent graduates are speaking the same>>> digital<<< language as our employers for example
+   8. [act=1.027]   example like where would it live what would it look>>> like<<< and then build alliance
+   9. [act=0.997]  sixty five was a whole>>> different<<< thing
+  10. [act=0.970]   did i know how to get to them you don>>>'t<<<
+  11. [act=0.967]   with both teams launching mock atomic attacks as nato>>> prepares<<< against possible aggression from the east
+  12. [act=0.943]   two thousand and seventeen more people have access than they>>> used<<< to
+  13. [act=0.928]  i'm from florida so there's not>>> a<<< lot of difference between winter and the rest of the
+  14. [act=0.923]  does that make>>> sense<<< the default should be privacy
+  15. [act=0.915]  it's hard>>> to<<< see i know it's very small
+  16. [act=0.908]  and i don't know>>> how<<< a lot of the stuff i don't know how
+  17. [act=0.901]  and how you know that may paint>>> a<<< picture of gaps and places where we need to really
+  18. [act=0.868]  i have lived in burlington for a>>> long<<< time
+  19. [act=0.856]   in two thousand and seventeen more people have access than>>> they<<< used to
+  20. [act=0.851]  so if you did i know>>> how<<< to get to them you don't
+  21. [act=0.820]  is that an old quote did i do>>> this<<< one can you go back a slide okay great so
+  22. [act=0.813]   obviously you all have been doing this work for a>>> while<<< and probably have even more places to point to but
+  23. [act=0.809]   say what do you think about this what would you>>> do<<< about this what would you do and so you can
+  24. [act=0.806]   diverse communities here in the burlington in burlington>>> but<<< also in burlington area
+  25. [act=0.802]   quickly the last event we did in case some of>>> you<<< weren't there was an event that focused on a
+  26. [act=0.800]  and the people that do ancestry dna i mean>>> what<<< are you thinking things like that just crazy
+  27. [act=0.793]   though they know a lot about the internet don't>>> know<<< how to teach it
+  28. [act=0.789]   personal networks and access to helpful people often matter more>>> than<<< access to information itself and i think that's very
+  29. [act=0.781]   online that can thwart some of those things but people>>> have<<< to know and you have to teach them and having
+  30. [act=0.774]  does that sound like a good plan>>> at<<< least for
+  31. [act=0.758]   or smartphones or combooks probably like anything that people>>> wouldn<<<'t get access to
+  32. [act=0.754]  and how you know that may paint a>>> picture<<< of gaps and places where we need to really focus
+  33. [act=0.721]   you know whatever free super affordable access to the fastest>>> internet<<< available and all of the tools and resources necessary to
+  34. [act=0.701]  and there's so much going on that they>>> don<<<'t know
+  35. [act=0.687]  i know>>> perfectly<<< positioned
+  36. [act=0.667]  that's>>> something<<< we could think about here when they put this through
+  37. [act=0.664]  i mean does>>> anybody<<< have a thought on that what that goal would be
+  38. [act=0.663]   fastest internet available and all of the tools and resources>>> necessary<<< to use it
+  39. [act=0.661]  a quick overview davis north carolina for>>> anyone<<< who isn't familiar with e2d is literally
+  40. [act=0.645]  and she says in a>>> world<<< where information is easily available strong personal networks and access
+  41. [act=0.635]  and i can already>>> tell<<< that there's like a divide in our group
+  42. [act=0.629]  does that sound like a good plan at>>> least<<< for
+  43. [act=0.605]   because in two thousand and seventeen more people have access>>> than<<< they used to
+  44. [act=0.595]   you did i know how to get to them you>>> don<<<'t
+  45. [act=0.586]   close to our size or have a similar i don>>>'t<<< know geographical location and access that we do that we
+  46. [act=0.580]   open but i understand that that might not be the>>> case<<< for the whole event
+  47. [act=0.574]   can feel free to write your name your preferred gender>>> pronoun<<< if you like
+  48. [act=0.572]  and they say what do you think about this what>>> would<<< you do about this what would you do and so
+  49. [act=0.571]   here the fact that you're i don't know>>> the<<< right word of like clearly we're all in this
+  50. [act=0.563]   people would feel comfortable with but that could engage a>>> vast<<< greater number of people that are currently engaged by these
 
-Most frequent activating tokens (top 10): ".", "fam", "warm", "summers", "el", "meals", "ory", "black", "sav", "space"
+Most frequent activating tokens (top 20): "you", "'t", "a", "how", "than", "don", "those", "thing", "ask", "already", "digital", "like", "different", "prepares", "used", "sense", "to", "long", "they", "this"
+
 
 Based on these examples, what concept does this SAE feature detect?
 
 ----------------------------------------
 LLM RESPONSE:
 {
-  "label": "Emotional Intensity",
-  "explanation": "The feature detects words and phrases that convey strong emotions or intense experiences, such as happiness, tastiness, or fear",
+  "label": "Second Person Reference",
+  "explanation": "The feature activates on tokens related to addressing or referring to the listener or reader, such as 'you' and 'those', indicating it detects second-person references.",
   "confidence": "high"
 }
 ================================================================================
 
 ================================================================================
-FEATURE INDEX: 4423
+FEATURE INDEX: 5829
 ----------------------------------------
 SYSTEM PROMPT:
 You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
@@ -135,43 +184,35 @@ Rules:
 
 ----------------------------------------
 USER PROMPT:
-Feature index: 4423
+Feature index: 5829
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
-Top 15 activating examples (ordered strongest first):
-   1. [act=5.783]  Scary frightening terrifying dreams haunt dark>>> black<<< nights.
-   2. [act=0.000]  Tasty delicious savory meals satisfy hungry fam>>>ished<<< guests.
-   3. [act=0.000]  Scary frightening terrifying dreams haunt>>> dark<<< black nights.
-   4. [act=0.000]  Scary frightening terrifying dreams haunt dark black>>> nights<<<.
-   5. [act=0.000]  Scary frightening terrifying dreams haunt dark black nights>>>.<<<
-   6. [act=0.000]  >>>T<<<asty delicious savory meals satisfy hungry famished guests
-   7. [act=0.000]  T>>>asty<<< delicious savory meals satisfy hungry famished guests.
-   8. [act=0.000]  Tasty>>> delicious<<< savory meals satisfy hungry famished guests.
-   9. [act=0.000]  Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.
-  10. [act=0.000]  Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.
-  11. [act=0.000]  Tasty delicious savory>>> meals<<< satisfy hungry famished guests.
-  12. [act=0.000]  Tasty delicious savory meals>>> satisfy<<< hungry famished guests.
-  13. [act=0.000]  Tasty delicious savory meals satisfy>>> hungry<<< famished guests.
-  14. [act=0.000]  Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.
-  15. [act=0.000]  Bright luminous radiant stars>>> illuminate<<< deep black space.
+Top 6 activating examples (ordered strongest first):
+   1. [act=24.875]   okay what do you like to do in winter m>>>ary<<< oh in perfect conditions cross country skiing
+   2. [act=23.296]  i'm very m>>>ary<<< danko
+   3. [act=23.133]  i mean along the lines of what m>>>ary<<<'s showed maybe even more detail
+   4. [act=22.768]  okay so we looked at this m>>>ary<<< brought in some slides at the last event and i
+   5. [act=4.214]  i'm>>> laure<<<nglenn davitian i work at
+   6. [act=0.696]  i'm dennis m>>>oy<<<nihan
 
-Most frequent activating tokens (top 10): "black", "ished", "dark", "nights", ".", "T", "asty", "delicious", "sav", "ory"
+Most frequent activating tokens (top 3): "ary", "laure", "oy"
+
 
 Based on these examples, what concept does this SAE feature detect?
 
 ----------------------------------------
 LLM RESPONSE:
 {
-  "label": "Emphasis on Darkness",
-  "explanation": "The feature detects words related to darkness, fear, or intensity, often in descriptive phrases with strong adjectives",
+  "label": "Proper Noun Detector",
+  "explanation": "This feature detects the presence of proper nouns, particularly names, in the input text",
   "confidence": "high"
 }
 ================================================================================
 
 ================================================================================
-FEATURE INDEX: 9275
+FEATURE INDEX: 2806
 ----------------------------------------
 SYSTEM PROMPT:
 You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
@@ -192,43 +233,63 @@ Rules:
 
 ----------------------------------------
 USER PROMPT:
-Feature index: 9275
+Feature index: 2806
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
-Top 15 activating examples (ordered strongest first):
-   1. [act=1.945]  Mysterious strange>>> odd<<< occurrences baffle wise learned men.
-   2. [act=1.367]  antuan behemoths roam desolate barren wastel>>>ands<<<.
-   3. [act=1.351]  Tasty delicious savory meals satisfy hungry famished>>> guests<<<.
-   4. [act=0.611]  Honest truthful>>> sincere<<< friends provide helpful useful advice.
-   5. [act=0.307]  Fast-paced speedy quick changes create>>> chaotic<<< messy situations.
-   6. [act=0.064]  Fast swift rapid movements characterize agile nimble>>> creatures<<<.
-   7. [act=0.000]  Tasty delicious savory meals>>> satisfy<<< hungry famished guests.
-   8. [act=0.000]  Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.
-   9. [act=0.000]  Tasty delicious savory>>> meals<<< satisfy hungry famished guests.
-  10. [act=0.000]  Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.
-  11. [act=0.000]  Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.
-  12. [act=0.000]  Scary frightening terrifying dreams haunt dark>>> black<<< nights.
-  13. [act=0.000]  Scary frightening terrifying dreams haunt dark black>>> nights<<<.
-  14. [act=0.000]  Scary frightening terrifying dreams haunt dark black nights>>>.<<<
-  15. [act=0.000]  Scary frightening terrifying dreams haunt>>> dark<<< black nights.
+Top 34 activating examples (ordered strongest first):
+   1. [act=10.485]  it's gonna give>>> you<<< that thing there you go
+   2. [act=9.815]  because it gives>>> me<<< a great opportunity to get fit stay fit and get
+   3. [act=9.739]   see the benefits what supports do we need to give>>> you<<< to be able to access that and if you don
+   4. [act=9.596]   didn't register online if you want to just give>>> us<<< your contact information before you go and then we'll
+   5. [act=9.087]  's figuring out those things we can act on gives>>> us<<< some direction
+   6. [act=8.545]  lington telecom which for better or for worse has given>>> me<<< the opportunity to meet all of you and get really
+   7. [act=8.093]  it's something different than just giving>>> people<<< access because in two thousand and seventeen more people have
+   8. [act=4.702]   an echo is shoveling what the road cloud gives>>> me<<<
+   9. [act=3.854]  and i'm here cause julia sent>>> me<<< a message after i looked up an article
+  10. [act=2.940]  not open and give>>> it<<< all away
+  11. [act=2.878]   lasts as long as that company was around they owed>>> us<<< a million dollars
+  12. [act=2.494]  well that brought>>> me<<< to the point that i was making
+  13. [act=2.366]  and then what we'll do is send>>> you<<< just a follow up and maybe a survey just to
+  14. [act=1.629]   and each of these are clickable links that bring>>> you<<< to this this dashboard that does an assessment of these
+  15. [act=1.314]  and what brings>>> me<<< here tonight is i really value the kbtl
+  16. [act=1.170]   pronoun if you prefer to do that and what brought>>> you<<< here today where you're from
+  17. [act=1.153]  to give>>> some<<< context for this particular event i'll do an introduction
+  18. [act=1.139]   if your income below a certain threshold they'll set>>> you<<< up with a bicycle and a lock for twenty five
+  19. [act=1.020]  and she has given very>>> simple<<< ways to discuss how to use computers how to use
+  20. [act=0.773]  and i also know that shae got>>> us<<< involved to help sponsor a bit i think through red
+  21. [act=0.678]  that's okay you get>>> lots<<< of ideas
+  22. [act=0.646]   also that whatever apps or resources that are provided to>>> them<<< have very transparent ways of saying this is how your
+  23. [act=0.585]  i imagine i'm probably one of the few people>>> with<<< an actual networking degree in the room if not the
+  24. [act=0.543]  and on that main website page there>>> is<<< a map that people can see any upcoming event related
+  25. [act=0.518]   the city at burlington telecom which for better or>>> for<<< worse has given me the opportunity to meet all of
+  26. [act=0.504]  because there is>>> already<<< work identity that's going on to get resources skills
+  27. [act=0.472]  obviously it's going to take>>> us<<< a little while to figure out what we want to
+  28. [act=0.411]  what are>>> our<<< goals as a community now we want open networks we
+  29. [act=0.370]   mixed up i still hit the wrong thing i still>>> have<<< pages fly up or blow up or won't open
+  30. [act=0.350]  and that's what brings>>> me<<< here
+  31. [act=0.268]   hairy audacious goal would be is getting the citizen>>>ry<<< of burlington to the point where we could have
+  32. [act=0.235]   their suggestions of what we need to progress half of>>> them<<< almost are tech and digital related
+  33. [act=0.221]  and you are fortunate because you>>> have<<< all of that knowledge to say like this is dangerous
+  34. [act=0.136]   and feel comfortable getting at it but we should also>>> have<<< things available for people that don't feel comfortable in
 
-Most frequent activating tokens (top 10): "odd", "ands", "guests", "sincere", "chaotic", "creatures", "satisfy", "fam", "meals", "ory"
+Most frequent activating tokens (top 16): "me", "you", "us", "have", "them", "people", "it", "some", "simple", "lots", "with", "is", "for", "already", "our", "ry"
+
 
 Based on these examples, what concept does this SAE feature detect?
 
 ----------------------------------------
 LLM RESPONSE:
 {
-  "label": "Emotive Intensifiers",
-  "explanation": "The feature detects words that intensify or describe strong emotions, sensations, or experiences, such as 'odd', 'sincere', 'chaotic', and 'famished'.",
+  "label": "Recipient of action",
+  "explanation": "The feature detects when a sentence or phrase implies someone or something is receiving an action, often indicated by pronouns like 'me', 'you', or 'us'.",
   "confidence": "high"
 }
 ================================================================================
 
 ================================================================================
-FEATURE INDEX: 3986
+FEATURE INDEX: 8746
 ----------------------------------------
 SYSTEM PROMPT:
 You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
@@ -249,37 +310,627 @@ Rules:
 
 ----------------------------------------
 USER PROMPT:
-Feature index: 3986
+Feature index: 8746
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
-Top 15 activating examples (ordered strongest first):
-   1. [act=2.311]  Clean>>> pure<<< pristine lakes reflect jagged sharp peaks.
-   2. [act=2.235]  Scented fragrant>>> aromatic<<< flowers attract small tiny insects.
-   3. [act=1.062]  Gentle soft>>> mild<<< breezes stir colorful vibrant leaves.
-   4. [act=0.000]  T>>>asty<<< delicious savory meals satisfy hungry famished guests.
-   5. [act=0.000]  Tasty delicious savory meals>>> satisfy<<< hungry famished guests.
-   6. [act=0.000]  Tasty delicious savory>>> meals<<< satisfy hungry famished guests.
-   7. [act=0.000]  Tasty delicious sav>>>ory<<< meals satisfy hungry famished guests.
-   8. [act=0.000]  Tasty delicious>>> sav<<<ory meals satisfy hungry famished guests.
-   9. [act=0.000]  Scary frightening terrifying dreams haunt dark black nights>>>.<<<
-  10. [act=0.000]  Scary frightening terrifying dreams haunt>>> dark<<< black nights.
-  11. [act=0.000]  Scary frightening terrifying dreams haunt dark>>> black<<< nights.
-  12. [act=0.000]  Scary frightening terrifying dreams haunt dark black>>> nights<<<.
-  13. [act=0.000]  Tasty>>> delicious<<< savory meals satisfy hungry famished guests.
-  14. [act=0.000]  >>>T<<<asty delicious savory meals satisfy hungry famished guests
-  15. [act=0.000]  Tasty delicious savory meals satisfy hungry>>> fam<<<ished guests.
+Top 47 activating examples (ordered strongest first):
+   1. [act=4.453]   picked these because i think they really kind of are>>> quick<<< and easy to understand for the context of this event
+   2. [act=3.841]  i'm very mary d>>>ank<<<o
+   3. [act=3.572]  ooh>>> cool<<< thank you welcome
+   4. [act=3.521]  just a>>> quick<<< story about something that happened here when the city was
+   5. [act=3.290]   of you and get really passionate about fiber internet technology>>> smart<<< cities gigabit cities
+   6. [act=3.138]  so let me just clear up>>> quick<<< feedback saying that the whole reason that bt got
+   7. [act=3.018]  a>>> quick<<< overview davis north carolina for anyone who isn
+   8. [act=2.877]   a time you know and you know that could be>>> cool<<<
+   9. [act=2.528]   people to understand some of those factors that that the>>> cool<<< factor about apps
+  10. [act=2.306]   there as just kind of i thought that was a>>> neat<<< way of doing it next slide
+  11. [act=2.290]  can't be>>> sticky<<< can't be too cold
+  12. [act=2.278]  and i added your favorite winter activity here for>>> selfish<<< reasons
+  13. [act=2.212]  oh wow>>> nice<<<
+  14. [act=2.178]  munjom after three years as a red pow>>> tired<<< and worn but covered with glory an old soldier comes
+  15. [act=1.939]   free it's wheelchair accessible it has bathrooms it has>>> nice<<< places to sit and that at least the conversation could
+  16. [act=1.810]  stay>>> warm<<<
+  17. [act=1.747]   i mean what are you thinking things like that just>>> crazy<<<
+  18. [act=1.674]   don't have the device is it that they're>>> nervous<<< about security is it an i think we really need
+  19. [act=1.605]  big>>> hairy<<< audacious goal
+  20. [act=1.586]   you're saying because to me it's really a>>> tricky<<< thing right now because the way everybody's connecting with
+  21. [act=1.563]  what do you guys any questions what is the big>>> hairy<<< goal here yeah
+  22. [act=1.399]   you know ten fifteen years ago email was so like>>> awesome<<< and past me
+  23. [act=1.349]   we can kind of set for me what the big>>> hairy<<< audacious goal would be is getting the citizenry
+  24. [act=1.323]   to are people who are digitally excluded and it's>>> tough<<< to you can get really ahead of yourself thinking about
+  25. [act=1.303]   then just the last thing is that it's a>>> flexible<<< agenda
+  26. [act=1.234]   what are the benefits of these things adoption was very>>> quick<<< yeah
+  27. [act=1.208]  and they are definitely the>>> hardest<<< folks to bring along
+  28. [act=1.121]  so i thought that was really>>> cool<<< example
+  29. [act=1.049]  and so one of the>>> scary<<< things is that this inclusion process and access process is
+  30. [act=1.032]  and so>>> kind<<< of buried in this report is something called the environment
+  31. [act=0.979]  so i'm>>> kind<<< of leaning towards now after hearing all of this is
+  32. [act=0.959]  so i really i'm>>> kind<<< of at this intersection between digital inclusion technology art design
+  33. [act=0.913]  so i'm like i'm>>> kind<<< of a metric skeptical
+  34. [act=0.846]   we've got folks who are being left out and>>> left<<< behind
+  35. [act=0.823]  i'm>>> curious<<<
+  36. [act=0.820]   should use macbook computers because they're a lot>>> easier<<<
+  37. [act=0.814]   sort of measure that you know it would be a>>> nice<<< project that we could use as a model for doing
+  38. [act=0.800]  so this is>>> kind<<< of the next level and this is the austin
+  39. [act=0.791]   because i think they really kind of are quick and>>> easy<<< to understand for the context of this event
+  40. [act=0.751]  now that means lots of all kinds of very>>> woo<<<ly things
+  41. [act=0.745]  and so the thing that i've been>>> kind<<< of really thinking about in terms of setting goals is
+  42. [act=0.738]  big hairy aud>>>acious<<< goal
+  43. [act=0.698]  and again this is a>>> flexible<<< can you hear me okay we're good this is
+  44. [act=0.697]  's an interesting way to explain in really in a>>> short<<< way this circle of prosperity that they're talking about
+  45. [act=0.692]  so i'm just this is a>>> long<<< way of saying i just think there's a lot
+  46. [act=0.692]  ello which is the burlington is>>> kind<<< of a step towards that
+  47. [act=0.682]   the seasons but i'll take any excuse for a>>> hot<<< dog
 
-Most frequent activating tokens (top 10): "pure", "aromatic", "mild", "asty", "satisfy", "meals", "ory", "sav", ".", "dark"
+Most frequent activating tokens (top 20): "kind", "quick", "cool", "nice", "hairy", "flexible", "ank", "smart", "neat", "sticky", "selfish", "tired", "warm", "crazy", "nervous", "tricky", "awesome", "tough", "hardest", "scary"
+
 
 Based on these examples, what concept does this SAE feature detect?
 
 ----------------------------------------
 LLM RESPONSE:
 {
-  "label": "Sensory Experience",
-  "explanation": "The feature detects words related to sensory experiences, such as tastes, smells, and textures, often used to describe pleasant or intense experiences",
+  "label": "Positive Adjectives",
+  "explanation": "The feature detects words with positive connotations, such as 'quick', 'cool', 'nice', and 'awesome', which are often used to express approval or enthusiasm",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE INDEX: 11980
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 11980
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 49 activating examples (ordered strongest first):
+   1. [act=10.862]   so that they can work on the internet and let>>> you<<< be the focal point with from which we all can
+   2. [act=10.571]  hm on the computer my computer you know just let>>> people<<< know to show a response
+   3. [act=10.346]  i'm going to let>>> her<<< speak about it but it's called e2d
+   4. [act=8.935]   at we have so many resources how do we let>>> everyone<<< know about them and then how do we utilize them
+   5. [act=8.114]   one maybe it's a library where we can let>>> everyone<<< know that if you have questions at all about the
+   6. [act=6.566]  i'm going to get i'm gonna let ab>>>by<<< comeback
+   7. [act=4.640]  point being is education lets>>> you<<< understand what the applications can do and what the capability
+   8. [act=3.553]  so let>>> me<<< just clear up quick feedback saying that the whole reason
+   9. [act=2.134]   hubs like who can we reach out to to help>>> us<<< try to get more specific with this data identify existing
+  10. [act=2.063]   filtered which i've had serious concern about and helping>>> people<<< understand what programming is about and how you are being
+  11. [act=2.022]   and they've got issues that they can just help>>> them<<<
+  12. [act=2.006]  access and helping>>> you<<< get access that they need to use so that they
+  13. [act=1.997]   it to remain private after the recording's finished let>>> me<<< know at the end of this event
+  14. [act=1.767]   people can teach them on a oneonone help>>> them<<< find exactly the things that they need
+  15. [act=1.612]  perhaps we can help initiate>>> or<<< fundraise whatever you might need to start collecting information
+  16. [act=1.488]   if you want to request your data you can other>>> people<<< were talking about open source and get help
+  17. [act=1.146]   on the computer my computer you know just let people>>> know<<< to show a response
+  18. [act=1.135]   say right now my favorite winter activity is helping our>>> community<<< member's understand the winter
+  19. [act=1.088]  because they want to>>> internet<<<work it with the other networks on the planet and
+  20. [act=1.036]   to apply our effort to what's working and help>>> it<<< work better
+  21. [act=1.003]  now what can>>> we<<< do that actually brings the best of providing equal opportunity
+  22. [act=0.946]  and my job is helping>>> people<<< with their computers
+  23. [act=0.918]   many people's jobs but i think the internet helps>>> you<<< get your work done
+  24. [act=0.878]   need to own and have their own network first to>>> internet<<<work with another network and whether their network is simply
+  25. [act=0.846]  and thank you for helping>>> me<<< connect with all these folks
+  26. [act=0.812]   us have that exact like thing that's gonna make>>> everything<<< better right but we have each other and we have
+  27. [act=0.740]  and we'll make sure not to make it>>> public<<< online but the idea would be that we would share
+  28. [act=0.720]  i'm going to get i'm gonna let>>> ab<<<by comeback
+  29. [act=0.657]  and we'll make sure not to make>>> it<<< public online but the idea would be that we would
+  30. [act=0.645]   like to you know well anyway just like to get>>> things<<< going right and well and like backwards
+  31. [act=0.635]   i pointed out one already which is who can help>>> us<<< get this data how do we start this who can
+  32. [act=0.632]  's a poster back there that says who can help>>> us<<< get the data we need to identify barriers to digital
+  33. [act=0.623]   right now my favorite winter activity is helping our community>>> member<<<'s understand the winter
+  34. [act=0.505]   as an example like where would it live what would>>> it<<< look like and then build alliance
+  35. [act=0.490]  so let me>>> just<<< clear up quick feedback saying that the whole reason that
+  36. [act=0.480]   know exactly what to make to serve people and to>>> really<<< bridge that divide
+  37. [act=0.466]  i'm going to let her>>> speak<<< about it but it's called e2d
+  38. [act=0.454]  when did the iph>>>one<<< come out it went out
+  39. [act=0.435]  we have a statewide nonprofit organization that helps>>> you<<< find the best deal planning or common good vermont
+  40. [act=0.404]   feel comfortable getting at it but we should also have>>> things<<< available for people that don't feel comfortable in those
+  41. [act=0.391]  oh let's>>> just<<< get over here and then we'll bounce back
+  42. [act=0.370]  it sort of distracts>>> people<<< from really recognizing what's going on
+  43. [act=0.351]  it's something different than just giving>>> people<<< access because in two thousand and seventeen more people have
+  44. [act=0.295]   list or a website or something where i could access>>> or<<< others could access the things that we've been talking
+  45. [act=0.180]  so these are some things that we can>>> tonight<<< start to brainstorm around
+  46. [act=0.159]  it sort of distracts people>>> from<<< really recognizing what's going on
+  47. [act=0.138]  'm going to get i'm gonna let abby>>> comeback<<<
+  48. [act=0.134]  that i won't put>>> anything<<< out there of mine that i can't take back
+  49. [act=0.130]   why are we boxed into comcast why don't>>> we<<< have access to this burlington telecom and in that
+
+Most frequent activating tokens (top 20): "people", "you", "me", "us", "it", "everyone", "them", "or", "internet", "we", "things", "just", "her", "by", "know", "community", "everything", "public", "ab", "member"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Human Assistance",
+  "explanation": "The feature detects instances where help or support is being offered to individuals or groups, often in the context of technology or community development.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE INDEX: 9222
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 9222
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 50 activating examples (ordered strongest first):
+   1. [act=3.441]   chittenden county and then vermont and>>> then<<< the country and then the world has affordable or you
+   2. [act=2.545]  every single person in burlington>>> and<<< then chittenden county and then vermont
+   3. [act=2.520]   and then chittenden county and then ver>>>mont<<< and then the country and then the world has affordable
+   4. [act=2.340]   andrews and i've been back here in>>> ver<<<mont since one thousand nine hundred and eighty four
+   5. [act=2.259]  rews and i've been back here in ver>>>mont<<< since one thousand nine hundred and eighty four
+   6. [act=2.238]  lington and then chittenden county and then>>> ver<<<mont and then the country and then the world has
+   7. [act=2.130]  and i live in>>> ver<<<mont because i grew up in minnesota and i
+   8. [act=2.020]   burlington and then chittenden county and>>> then<<< vermont and then the country and then the world
+   9. [act=2.020]   in burlington and then chittenden county>>> and<<< then vermont and then the country and then the
+  10. [act=1.840]   then chittenden county and then vermont>>> and<<< then the country and then the world has affordable or
+  11. [act=1.734]   county and then vermont and then the country and>>> then<<< the world has affordable or you know whatever free super
+  12. [act=1.717]  big building in ver>>>mont<<<
+  13. [act=1.672]  amyn west who's a librarian in ver>>>mont<<< has written that book actually
+  14. [act=1.647]  it's located in davidson north car>>>olina<<<
+  15. [act=1.584]  returning too is general william dean>>> released<<< at panmunjom after three years as a
+  16. [act=1.524]   so she's very and she's based in ver>>>mont<<< yeah wow
+  17. [act=1.336]  and i almost simultaneously moved out of burlington to>>> es<<<sex and started working for the city at burlington
+  18. [act=1.281]  and i live in ver>>>mont<<< because i grew up in minnesota and i love
+  19. [act=1.247]  essamyn west who's a librarian in>>> ver<<<mont has written that book actually
+  20. [act=1.177]   i'm a communications coordinator for the city of win>>>oos<<<ki
+  21. [act=1.155]   person in burlington and then chittenden>>> county<<< and then vermont and then the country and then
+  22. [act=1.108]   reps and it's the largest affordable housing complex in>>> ver<<<mont
+  23. [act=1.048]   then ie water supply wastewater stormwater broadband solid waste>>> and<<< recycling
+  24. [act=1.027]  i grew up in ver>>>mont<<< and got here about a year ago
+  25. [act=1.000]  as i got older my favorite winter activity>>> became<<< became planning summer
+  26. [act=0.997]   i almost simultaneously moved out of burlington to es>>>sex<<< and started working for the city at burlington telecom
+  27. [act=0.988]   taking care of all the middle schools in charl>>>otte<<<
+  28. [act=0.977]  's managing a research project out of mit in cam>>>bridge<<< massachusetts
+  29. [act=0.967]   sumner i'm a communications coordinator for the city>>> of<<< winooski
+  30. [act=0.956]  as i got older my favorite winter activity became>>> became<<< planning summer
+  31. [act=0.953]  yes lauren the vermont department of public service>>> he<<<'s updating the tenyear telecom plan which they do
+  32. [act=0.931]   and it's the largest affordable housing complex in ver>>>mont<<<
+  33. [act=0.839]   well so she's very and she's based in>>> ver<<<mont yeah wow
+  34. [act=0.834]   i live in vermont because i grew up in>>> min<<<nesota and i love winters it's hard to pick
+  35. [act=0.798]  they're>>> calling<<< themselves now the vermont data center
+  36. [act=0.798]   you hear me okay we're good this is a>>> flexible<<< event so we can steer in whatever direction we need
+  37. [act=0.793]   interested in access to resources digital resources access to digital>>> resources<<< for everything from civic data projects through small scale entrepreneurial
+  38. [act=0.790]  every single person in burlington and>>> then<<< chittenden county and then vermont and
+  39. [act=0.774]   at panmunjom after three years as a>>> red<<< pow tired and worn but covered with glory an old
+  40. [act=0.747]  so the access is just the>>> simply<<< the affordability and the availability of these tools and these
+  41. [act=0.743]  i grew up in>>> ver<<<mont and got here about a year ago
+  42. [act=0.734]   have higher ed and i would say business and administrative>>> services<<< also is very closely related to this topic
+  43. [act=0.678]  so i don't know how we>>> could<<< get that in there
+  44. [act=0.675]   walking and snowshoeing and cross country skiing>>> and<<< ice skating
+  45. [act=0.671]  you know they>>> press<<< maybe one of four words to get where they need
+  46. [act=0.671]   almost simultaneously moved out of burlington to essex>>> and<<< started working for the city at burlington telecom which
+  47. [act=0.655]  ittenden county and then vermont and then>>> the<<< country and then the world has affordable or you know
+  48. [act=0.651]  hold on>>> one<<< minute alex again yeah absolutely
+  49. [act=0.639]  it would>>> be<<< nice to make a study out of this thing start
+  50. [act=0.635]  oh let's just get>>> over<<< here and then we'll bounce back
+
+Most frequent activating tokens (top 20): "mont", "ver", "and", "then", "became", "olina", "released", "es", "oos", "county", "sex", "otte", "bridge", "of", "he", "min", "calling", "flexible", "resources", "red"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Vermont Location",
+  "explanation": "The feature detects mentions of the state of Vermont, often in the context of locations, cities, or counties within the state",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE INDEX: 11386
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 11386
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 50 activating examples (ordered strongest first):
+   1. [act=1.465]   and i love winters it's hard to pick a>>> favorite<<<
+   2. [act=1.400]  now a>>> favorite<<< activity i'm inviting everybody over tomorrow
+   3. [act=1.167]  my name's matt>>> cro<<<ck
+   4. [act=1.104]  yes i'm looking at hearing everyone and just my>>> own<<< having been with the internet for years i still get
+   5. [act=1.092]  he will i work there as and>>>y<<< as a tech director
+   6. [act=0.984]   some of us start writing or is there some software>>> out<<< there that's called easy for the seniors
+   7. [act=0.924]   people that do ancestry dna i mean what are>>> you<<< thinking things like that just crazy
+   8. [act=0.921]  oh and what's your>>> favorite<<< winter activity avoiding snow
+   9. [act=0.918]  so my favorite winter activity i think>>> is<<< shoveling snow
+  10. [act=0.902]   sort of say and i'd say right now my>>> favorite<<< winter activity is helping our community member's understand the
+  11. [act=0.895]  oh and what's>>> your<<< favorite winter activity avoiding snow
+  12. [act=0.826]  but my favorite of all>>> and<<< this is a bit of an echo is shoveling
+  13. [act=0.791]  a>>> favorite<<< activity around the holidays is defined a messiah sing
+  14. [act=0.788]   we can let everyone know that if you have questions>>> at<<< all about the internet you could go to the library
+  15. [act=0.786]  i feel pretty confident about you know technology and my>>> favorite<<< winter activity is probably sledding
+  16. [act=0.762]   there before we jump on these posters here and take>>> questions<<< if you have them i would like everyone to go
+  17. [act=0.759]   in these conversations weighing applications talking about this application or>>> that<<< application
+  18. [act=0.734]   fiber networks that press across the state that run past>>> most<<< towns and cities or through most towns and cities in
+  19. [act=0.712]   bothers me every time somebody says oh let's just>>> you<<< know i mean i hate to say it the google
+  20. [act=0.707]   if we had an inclusive burlington would never leave>>> what<<< would be different and who are the people that we
+  21. [act=0.702]  and then i just put this image here>>> cause<<< i think it's an interesting way to explain in
+  22. [act=0.692]  so my name's julia v>>>all<<<era
+  23. [act=0.690]   a map that people can see any upcoming event related>>> to<<< digital inclusion and internet related and digital topics
+  24. [act=0.687]   trying to take a step back and say what are>>> we<<< talking about it as a group here and what i
+  25. [act=0.645]   to centralize all this into one space and it>>> seems<<< like we really need education and we need access
+  26. [act=0.639]   where we see kind of open meeting law hasn't>>> caught<<< up with what's possible for engaging online governance
+  27. [act=0.623]  tirelessly he toiled at this desk until>>> death<<< in one thousand nine hundred and nineteen stilled his
+  28. [act=0.619]   and i'd say right now my favorite winter activity>>> is<<< helping our community member's understand the winter
+  29. [act=0.616]  you can feel free to write your name your>>> preferred<<< gender pronoun if you like
+  30. [act=0.607]  it's a community where>>> i<<< mean it's already happening
+  31. [act=0.604]  so my name's julia vall>>>era<<<
+  32. [act=0.600]   is layering on top of free apps that are>>> to<<< make it convenient and efficient for us to network and
+  33. [act=0.599]   can solve the digital divide right it's a combination>>> of<<< many
+  34. [act=0.593]  i mean we have more we practically have more rules>>> within<<< our community about what you say in an email to
+  35. [act=0.590]  don't agree for>>> a<<< solution for a problem that doesn't actually exist
+  36. [act=0.578]  what do you guys any>>> questions<<< what is the big hairy goal here yeah
+  37. [act=0.575]   reality in some of the more remote communities you know>>> for<<< monitor's full of meaningfully underutilized fiber
+  38. [act=0.575]   i mean that says and that could go two different>>> ways<<<
+  39. [act=0.572]   we could go around the room and do our name>>> preferred<<< gender pronoun if you prefer to do that and what
+  40. [act=0.570]  ooh cool thank you>>> welcome<<<
+  41. [act=0.568]   with that said just briefly this is what we're>>> we<<<'ll be going through we're gonna do introductions
+  42. [act=0.564]   can find data related to what we that i know>>> of<<<
+  43. [act=0.564]   of the stuff i don't know how it breaks>>> down<<<
+  44. [act=0.560]  so my favorite winter activity>>> i<<< think is shoveling snow
+  45. [act=0.556]   percentage of those buildings that have access to different levels>>> of<<< broadband
+  46. [act=0.554]   whether it's a phone or a chromebook or>>> a<<< more comprehensive computer and you may have a router or
+  47. [act=0.546]  aren't>>> you<<< going to end with an awesome quote oh you're
+  48. [act=0.545]   show one two or three of these that i think>>> are<<< very very influential for us in this context
+  49. [act=0.540]   and the people that i've been meeting since i>>>'ve<<< been here
+  50. [act=0.539]   i'm here cause julia sent me a message>>> after<<< i looked up an article
+
+Most frequent activating tokens (top 20): "favorite", "you", "of", "is", "questions", "to", "we", "preferred", "i", "a", "cro", "own", "y", "out", "your", "and", "at", "that", "most", "what"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Personal Preference",
+  "explanation": "The feature detects instances where individuals express their personal preferences, favorites, or opinions, often in the context of discussions or introductions.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE INDEX: 6094
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 6094
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 50 activating examples (ordered strongest first):
+   1. [act=1.454]   to remain private after the recording's finished let me>>> know<<< at the end of this event
+   2. [act=1.294]  all right stephen barrac>>>l<<<ough i run burlington telecom
+   3. [act=1.265]   i should find out about so i don't know>>> much<<< about it
+   4. [act=1.214]   to do that research or they have people that work>>> internally<<<
+   5. [act=1.190]   aspect and a network aspect and we'd get lost>>> in<<< these conversations weighing applications talking about this application or that
+   6. [act=1.161]   in this maybe it's something i should find out>>> about<<< so i don't know much about it
+   7. [act=1.145]   private after the recording's finished let me know at>>> the<<< end of this event
+   8. [act=1.104]  returning too is general william dean>>> released<<< at panmunjom after three years as a
+   9. [act=1.100]   the people who we're surveying should have a>>> role<<< in that process or you know whatever the case
+  10. [act=0.993]   just related to that data piece like how important it>>> is<<< to have data in order to know exactly what to
+  11. [act=0.967]   is press go or they express stop or they press>>> enter<<<
+  12. [act=0.960]  every single person in burlington and then chitt>>>end<<<en county and then vermont and then the country
+  13. [act=0.911]   from the grave of his youngest son quentin killed>>> in<<< france in one thousand nine hundred and eighteen
+  14. [act=0.872]   already doing instead of creating new work and then see>>> what<<< the data actually does show about where the gaps are
+  15. [act=0.865]   information and learn the same thing in perhaps an in>>>person<<< session or with printouts
+  16. [act=0.821]   lake behind the dam flows out of another reservoir to>>> start<<< a twisting journey of sixty miles or more through can
+  17. [act=0.815]   to people organizations initiatives research hubs like who can we>>> reach<<< out to to help us try to get more specific
+  18. [act=0.809]   a good amount of time like ten minutes or so>>> at<<< the end to have reflections
+  19. [act=0.807]   our community can pull together that are both kind of>>> eth<<<ically designed and nonextractive but also very very
+  20. [act=0.798]  i live with don who's>>> next<<< door to me there
+  21. [act=0.785]   that goal would be i think mine would be like>>> every<<< single person in burlington has
+  22. [act=0.769]   europe's first atomic maneuvers with both teams launching>>> mock<<< atomic attacks as nato prepares against possible aggression from
+  23. [act=0.765]   thing in perhaps an inperson session or with print>>>outs<<<
+  24. [act=0.740]   other lowincome seniors will have a fixed cable rate>>> forever<<< and it didn't last forever but it lasts as
+  25. [act=0.721]   remain private after the recording's finished let me know>>> at<<< the end of this event
+  26. [act=0.718]   the things that we've been talking about is there>>> one<<< to tap into is there anyone here that didn't
+  27. [act=0.693]   see you boys in the same way i'd expect>>> any<<< one of you to act in a football game
+  28. [act=0.677]   also have things available for people that don't feel>>> comfortable<<< in those spaces but can access the same information and
+  29. [act=0.621]   can book a librarian and they will sit side>>> by<<< side with you and do those things
+  30. [act=0.616]  and snowwomen snow>>>people<<<
+  31. [act=0.603]   you can book a librarian and they will sit>>> side<<< by side with you and do those things
+  32. [act=0.594]   improve how can i help yeah so there's a>>> poster<<< back there that says who can help us get the
+  33. [act=0.593]   guessing either they work with organizations to do that research>>> or<<< they have people that work internally
+  34. [act=0.589]   is very much included to sort of think about high>>> speed<<< internet and fiber and stuff
+  35. [act=0.585]  i pull just the chitt>>>end<<<en county stats here
+  36. [act=0.583]   i do want to capture these suggestions so they don>>>'t<<< get lost in the air
+  37. [act=0.560]   want to capture these suggestions so they don't get>>> lost<<< in the air
+  38. [act=0.560]  mozilla foundation has been doing a lot of work>>> around<<< five issues related to internet health
+  39. [act=0.557]   framework and again these are definitions there's many definitions>>> out<<< there many and a lot of them are great
+  40. [act=0.550]   with one hundred over one hundred so that's pretty>>> good<<<
+  41. [act=0.549]   another great quote that i think does a nice job>>> of<<< demonstrating how the the way that we disperse these tools
+  42. [act=0.547]   is the flag from the grave of his youngest son>>> qu<<<entin killed in france in one thousand nine hundred
+  43. [act=0.540]   behind the dam flows out of another reservoir to start>>> a<<< twisting journey of sixty miles or more through canals
+  44. [act=0.540]   ten residents in four community reps and it's the>>> largest<<< affordable housing complex in vermont
+  45. [act=0.540]   we should plan the next conversation but invite individuals from>>> communities<<< or places that are within have those barriers
+  46. [act=0.535]  so i'm dod>>>ec<<<i bomba
+  47. [act=0.534]   this maybe it's something i should find out about>>> so<<< i don't know much about it
+  48. [act=0.533]   book a librarian and they will sit side by>>> side<<< with you and do those things
+  49. [act=0.530]   example like where would it live what would it look>>> like<<< and then build alliance
+  50. [act=0.528]   signal that's encrypted and one of the safest that>>> exists<<< as far as privacy is concerned right now where we
+
+Most frequent activating tokens (top 20): "in", "end", "at", "side", "know", "l", "much", "internally", "about", "the", "released", "role", "is", "enter", "what", "person", "start", "reach", "eth", "next"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Preposition and location",
+  "explanation": "The feature activates on tokens related to prepositions and location, such as 'in', 'at', 'side', and 'next', indicating a concept related to spatial relationships and positioning",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE INDEX: 3013
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 3013
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 27 activating examples (ordered strongest first):
+   1. [act=11.234]   do the rest that at hands i saw whoa>>> who<<<a hold on i just got
+   2. [act=10.912]   burlington would never leave what would be different and>>> who<<< are the people that we think would have a delta
+   3. [act=9.353]  so anything that seems to go across>>> who<<< i am or what i believe in i like to
+   4. [act=9.208]   help us get this data how do we start this>>> who<<< can we talk to and there's markers and i
+   5. [act=8.063]  and i pointed out one already which is>>> who<<< can help us get this data how do we start
+   6. [act=7.107]   let's do the rest that at hands i saw>>> who<<<a whoa hold on i just got
+   7. [act=6.826]  i live with don>>> who<<<'s next door to me there
+   8. [act=5.960]   yeah so there's a poster back there that says>>> who<<< can help us get the data we need to identify
+   9. [act=5.650]   like take the survey so that we know how what>>> who<<< we need to serve and how we can serve you
+  10. [act=5.452]   i think maybe necessary is to think about consent with>>> who<<< gets the internet and whether they want it in the
+  11. [act=5.410]  so anything related to people organizations initiatives research hubs like>>> who<<< can we reach out to to help us try to
+  12. [act=3.333]  jessamyn west>>> who<<<'s a librarian in vermont has written that
+  13. [act=2.164]  're going to be delivering but the real key is>>> who<<<'s life you're making better through the product
+  14. [act=1.573]  anyone>>> who<<< has things they want to discuss about any sales related
+  15. [act=1.062]  anybody>>> who<<< didn't register online if you want to just give
+  16. [act=0.933]  and so since they've>>> they<<<'ve kind of reached these goals and as they reach
+  17. [act=0.891]   or any relevant examples as we move on throughout the>>> event<<< tonight
+  18. [act=0.776]   lot more granular data on what we know about>>> who<<<'s using the internet why they're using it why
+  19. [act=0.493]  thank you two>>> to<<< share your friends with the cctv venue and
+  20. [act=0.381]  thank you>>> welcome<<<
+  21. [act=0.316]   also was made possible by the generosity of gis>>> who<<< see their dream come true
+  22. [act=0.313]  and they say what do you think about this>>> what<<< would you do about this what would you do and
+  23. [act=0.310]  so people>>> who<<< couldn't make it could see it after
+  24. [act=0.299]   doing and then we also bridge to the maker community>>> who<<< was working with you know raspberry pis and ardu
+  25. [act=0.261]   would be willing to start those conversations for us sure>>> sure<<<
+  26. [act=0.174]   on this event what we could do better next time>>> what<<< we need to include and things like that
+  27. [act=0.126]   are these questions were were what we really focus that>>> event<<< on
+
+Most frequent activating tokens (top 7): "who", "event", "what", "they", "to", "welcome", "sure"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Interrogative Pronoun",
+  "explanation": "The feature detects the use of interrogative pronouns, particularly 'who', in various contexts, indicating a question or inquiry about individuals or entities",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE INDEX: 4761
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 4761
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=10.715]   a lot of that she would think she was around>>> world<<< war ii and that there were soldiers around the house
+   2. [act=0.000]   that she would think she was around world war ii>>> and<<< that there were soldiers around the house and or she
+   3. [act=0.000]   and that there were soldiers around the house and or>>> she<<<'d think that we were eating dog meat for dinner
+   4. [act=0.000]   ii and that there were soldiers around the house and>>> or<<< she'd think that we were eating dog meat for
+   5. [act=0.000]   war ii and that there were soldiers around the house>>> and<<< or she'd think that we were eating dog meat
+   6. [act=0.000]   world war ii and that there were soldiers around the>>> house<<< and or she'd think that we were eating dog
+   7. [act=0.000]   around world war ii and that there were soldiers around>>> the<<< house and or she'd think that we were eating
+   8. [act=0.000]   was around world war ii and that there were soldiers>>> around<<< the house and or she'd think that we were
+   9. [act=0.000]   she was around world war ii and that there were>>> soldiers<<< around the house and or she'd think that we
+  10. [act=0.000]   think she was around world war ii and that there>>> were<<< soldiers around the house and or she'd think that
+  11. [act=0.000]   would think she was around world war ii and that>>> there<<< were soldiers around the house and or she'd think
+  12. [act=0.000]   and sometimes it would happen a lot of that she>>> would<<< think she was around world war ii and that there
+  13. [act=0.000]   it would happen a lot of that she would think>>> she<<< was around world war ii and that there were soldiers
+  14. [act=0.000]   sometimes it would happen a lot of that she would>>> think<<< she was around world war ii and that there were
+  15. [act=0.000]   would happen a lot of that she would think she>>> was<<< around world war ii and that there were soldiers around
+
+Most frequent activating tokens (top 10): "and", "she", "world", "or", "house", "the", "around", "soldiers", "were", "there"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "World War II context",
+  "explanation": "The feature detects text snippets that mention or imply a setting or situation related to World War II, often involving soldiers or a wartime atmosphere",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE INDEX: 11399
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 11399
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=13.070]  that one that was the point yep>>> good<<< next
+   2. [act=11.805]  that's that's not>>> good<<< for the environment
+   3. [act=10.610]  the farm has been>>> good<<< for productivity
+   4. [act=8.817]  so putting it together basically electric vehicles are are>>> good<<< for the environment they're lowering our carbon carbon footprint
+   5. [act=8.669]  it's so>>> good<<<
+   6. [act=6.637]  and it's been really>>> good<<<
+   7. [act=6.404]   market master and with us vendors to really do a>>> good<<< job
+   8. [act=4.173]   people yesterday like my bean plants aren't looking very>>> good<<< no more
+   9. [act=2.632]   this is really a unique piece with that having a>>> bad<<< hair day there that's cool
+  10. [act=1.156]  they've had>>> great<<< people that worked with the city with our market master
+  11. [act=0.197]  and i love this market because the people are so>>> nice<<< and they're willing to try new things which is
+  12. [act=0.000]  that one that was>>> the<<< point yep good next
+  13. [act=0.000]  that one that was the point yep good>>> next<<<
+  14. [act=0.000]  that>>>'s<<< that's not good for the environment
+  15. [act=0.000]  that one>>> that<<< was the point yep good next
+
+Most frequent activating tokens (top 8): "good", "bad", "great", "nice", "the", "next", "'s", "that"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Positive Evaluation",
+  "explanation": "The feature detects tokens that express a positive or favorable assessment, such as 'good', 'great', or 'nice'.",
   "confidence": "high"
 }
 ================================================================================

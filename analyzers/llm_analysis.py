@@ -103,7 +103,7 @@ class LabelingConfig:
 
     backend: str = "groq"             # "openai" | "groq" | "ollama"
     model: str = "llama-3.3-70b-versatile"  # fast & free on Groq
-    top_k: int = 20
+    top_k: int = 0  # 0 or negative => include all contexts above min_activation
     context_window: int = 10          # tokens on each side of the activating token
     batch_size: int = 512
     max_features: Optional[int] = None
@@ -114,6 +114,13 @@ class LabelingConfig:
     groq_api_key: Optional[str] = None    # from console.groq.com — free tier
     ollama_host: str = "http://localhost:11434"
     prompt_log_path: Optional[str] = "llm_prompts.log"  # Log all prompts/responses here
+    normalize_mode: str = "standardize"  # standardize | center | none
+    std_floor: float = 1e-3
+    skip_first_token: bool = True
+    global_top_features_k: int = 10
+    min_activation: float = 0.0
+    include_global_top_features: bool = False
+    top_tokens_k: int = 10  # 0 => none, <0 => all, >0 => top-k
 
 
 # ---------------------------------------------------------------------------
@@ -335,7 +342,7 @@ The activating token is marked with >>> <<< to help you focus on it.
 Top {n_examples} activating examples (ordered strongest first):
 {examples_block}
 
-Most frequent activating tokens (top 10): {top_tokens}
+{top_tokens_block}
 
 Based on these examples, what concept does this SAE feature detect?
 """
@@ -380,6 +387,95 @@ class FeatureLabeler:
         self.sae.to(self.device).eval()
         self._backend = _build_backend(cfg)
 
+    def _compute_normalization_stats(self, activations: torch.Tensor) -> Dict[str, Any]:
+        """Compute normalization stats from the provided activation corpus."""
+        mean = activations.mean(dim=0, keepdim=True)
+        std = activations.std(dim=0, keepdim=True)
+        return {
+            "mean": mean,
+            "std": std,
+            "normalize_mode": self.cfg.normalize_mode,
+            "std_floor": float(self.cfg.std_floor),
+        }
+
+    def _apply_activation_normalization(
+        self,
+        x: torch.Tensor,
+        norm_stats: Optional[Dict[str, Any]],
+    ) -> torch.Tensor:
+        """Apply the same normalization mode used for SAE training inputs."""
+        if norm_stats is None:
+            return x
+
+        mode = str(norm_stats.get("normalize_mode", "standardize")).lower().strip()
+        mean = norm_stats.get("mean")
+        std = norm_stats.get("std")
+        std_floor = float(norm_stats.get("std_floor", self.cfg.std_floor))
+
+        if mean is None:
+            return x
+
+        mean = mean.to(device=x.device, dtype=x.dtype)
+
+        if mode in {"none", "off", "no"}:
+            return x
+        if mode in {"center", "center_only", "mean"}:
+            return x - mean
+        if mode in {"standardize", "zscore", "z-score"}:
+            if std is None:
+                return x - mean
+            std = std.to(device=x.device, dtype=x.dtype)
+            if std_floor > 0:
+                std = std.clamp_min(std_floor)
+            return (x - mean) / (std + 1e-8)
+
+        raise ValueError(
+            f"Unknown normalize_mode='{mode}'. Expected one of: standardize|center|none."
+        )
+
+    def _build_valid_row_indices(self, token_pos_map: List[int]) -> torch.Tensor:
+        """Build a row-index tensor that excludes first-token activations if configured."""
+        if self.cfg.skip_first_token:
+            idxs = [i for i, pos in enumerate(token_pos_map) if pos > 0]
+            return torch.tensor(idxs, dtype=torch.long)
+        return torch.arange(len(token_pos_map), dtype=torch.long)
+
+    @torch.no_grad()
+    def _compute_mean_feature_activations(
+        self,
+        activations: torch.Tensor,
+        valid_row_indices: torch.Tensor,
+        norm_stats: Optional[Dict[str, Any]],
+    ) -> torch.Tensor:
+        """Compute corpus-wide mean feature activations over valid token rows."""
+        if valid_row_indices.numel() == 0:
+            return torch.zeros(self.sae.d_hidden, dtype=torch.float32)
+
+        mean_acts = torch.zeros(self.sae.d_hidden, dtype=torch.float32)
+        n_valid = int(valid_row_indices.numel())
+
+        for start in range(0, n_valid, self.cfg.batch_size):
+            end = min(start + self.cfg.batch_size, n_valid)
+            row_idx = valid_row_indices[start:end]
+            batch = activations[row_idx].to(self.device)
+            batch = self._apply_activation_normalization(batch, norm_stats)
+            enc = self.sae.encode(batch)
+            mean_acts += enc.sum(dim=0).cpu()
+
+        mean_acts /= max(n_valid, 1)
+        return mean_acts
+
+    def _format_global_top_features(self, mean_acts: torch.Tensor, top_n: int = 10) -> str:
+        """Format a compact top-N global feature list for prompt injection."""
+        if mean_acts.numel() == 0:
+            return "(none)"
+        n = min(int(top_n), int(mean_acts.numel()))
+        if n <= 0:
+            return "(none)"
+        vals, idxs = torch.topk(mean_acts, n)
+        parts = [f"{int(i)}:{float(v):.3f}" for v, i in zip(vals.tolist(), idxs.tolist())]
+        return ", ".join(parts) if parts else "(none)"
+
     # ------------------------------------------------------------------
     # Step 1 – Collect token-level top-activating contexts
     # ------------------------------------------------------------------
@@ -392,6 +488,8 @@ class FeatureLabeler:
         activations: torch.Tensor,    # (total_tokens, d_model)
         token_doc_map: List[int],     # which document each activation row belongs to
         token_pos_map: List[int],     # position of each activation within its document
+        norm_stats: Optional[Dict[str, Any]] = None,
+        valid_row_indices: Optional[torch.Tensor] = None,
     ) -> List[TokenContext]:
         """
         Scan pre-collected activations and return the top-K contexts for
@@ -415,14 +513,37 @@ class FeatureLabeler:
         for start in range(0, n, cfg.batch_size):
             end = min(start + cfg.batch_size, n)
             batch = activations[start:end].to(self.device)
+            batch = self._apply_activation_normalization(batch, norm_stats)
             encoded = self.sae.encode(batch)           # (batch, d_hidden)
             feat_vals[start:end] = encoded[:, feature_idx].cpu()
 
-        # Pick the top-K
-        k = min(cfg.top_k, n)
-        top_vals, top_idxs = torch.topk(feat_vals, k)
+        candidate_rows = valid_row_indices
+        if candidate_rows is None:
+            candidate_rows = self._build_valid_row_indices(token_pos_map)
+
+        if candidate_rows.numel() == 0:
+            return []
+
+        candidate_vals = feat_vals[candidate_rows]
+
+        # Ignore weak activations to reduce noisy/irrelevant contexts.
+        if cfg.min_activation > 0:
+            keep_mask = candidate_vals >= float(cfg.min_activation)
+            candidate_rows = candidate_rows[keep_mask]
+            candidate_vals = candidate_vals[keep_mask]
+
+        if candidate_rows.numel() == 0:
+            return []
+
+        if cfg.top_k is None or int(cfg.top_k) <= 0:
+            k = int(candidate_rows.numel())
+        else:
+            k = min(int(cfg.top_k), int(candidate_rows.numel()))
+        top_vals, rel_top_idxs = torch.topk(candidate_vals, k)
+        top_idxs = candidate_rows[rel_top_idxs]
 
         contexts: List[TokenContext] = []
+        seen_contexts = set()
         cw = cfg.context_window
 
         for val, row_idx in zip(top_vals.tolist(), top_idxs.tolist()):
@@ -444,6 +565,11 @@ class FeatureLabeler:
 
             context_str = f"{prefix}>>>{token_s}<<<{suffix}"
 
+            dedupe_key = (token_s.strip(), context_str)
+            if dedupe_key in seen_contexts:
+                continue
+            seen_contexts.add(dedupe_key)
+
             contexts.append(TokenContext(
                 token=token_s.strip(),
                 context=context_str,
@@ -464,23 +590,50 @@ class FeatureLabeler:
             )
         return "\n".join(lines)
 
-    def _top_token_list(self, contexts: List[TokenContext], n: int = 10) -> str:
+    def _top_tokens(self, contexts: List[TokenContext]) -> List[str]:
         from collections import Counter
         counts = Counter(c.token for c in contexts if c.token)
-        most_common = [tok for tok, _ in counts.most_common(n)]
-        return ", ".join(f'"{t}"' for t in most_common) if most_common else "(none)"
+        k = int(self.cfg.top_tokens_k)
+        if k == 0:
+            return []
+        if k < 0:
+            return [tok for tok, _ in counts.most_common()]
+        return [tok for tok, _ in counts.most_common(k)]
 
-    def _call_llm(self, feature_idx: int, contexts: List[TokenContext]) -> LabelResult:
+    def _call_llm(
+        self,
+        feature_idx: int,
+        contexts: List[TokenContext],
+        global_top_features: str = "(not computed)",
+    ) -> LabelResult:
         """Build the prompt, call the backend, parse the JSON response."""
         examples_block = self._build_examples_block(contexts)
-        top_tokens_str = self._top_token_list(contexts)
+        top_tokens = self._top_tokens(contexts)
+        if int(self.cfg.top_tokens_k) == 0:
+            top_tokens_block = ""
+        else:
+            if int(self.cfg.top_tokens_k) < 0:
+                top_tokens_label = "all"
+            else:
+                top_tokens_label = f"top {len(top_tokens)}"
+            top_tokens_str = ", ".join(f'"{t}"' for t in top_tokens) if top_tokens else "(none)"
+            top_tokens_block = (
+                f"Most frequent activating tokens ({top_tokens_label}): {top_tokens_str}\n"
+            )
 
         user_prompt = _USER_PROMPT_TEMPLATE.format(
             feature_idx=feature_idx,
             n_examples=len(contexts),
             examples_block=examples_block,
-            top_tokens=top_tokens_str,
+            top_tokens_block=top_tokens_block,
         )
+
+        if self.cfg.include_global_top_features:
+            user_prompt += (
+                "\n\nTop activated features across the analyzed corpus "
+                "(top 10, feature_idx:mean_activation):\n"
+                f"{global_top_features}\n"
+            )
 
         raw = ""
         try:
@@ -512,7 +665,7 @@ class FeatureLabeler:
                 label=parsed.get("label", "unlabeled"),
                 explanation=parsed.get("explanation", ""),
                 confidence=parsed.get("confidence", "low"),
-                top_tokens=self._top_token_list(contexts).replace('"', '').split(", "),
+                top_tokens=top_tokens,
                 top_contexts=contexts,
                 raw_response=raw,
             )
@@ -819,6 +972,9 @@ class FeatureLabeler:
         token_ids: List[List[int]],
         token_doc_map: List[int],
         token_pos_map: List[int],
+        norm_stats: Optional[Dict[str, Any]] = None,
+        valid_row_indices: Optional[torch.Tensor] = None,
+        global_top_features: Optional[str] = None,
     ) -> LabelResult:
         """
         Label a single feature using **pre-collected GPT-2 activations**.
@@ -845,8 +1001,28 @@ class FeatureLabeler:
         -------
         LabelResult
         """
+        norm_stats = norm_stats or self._compute_normalization_stats(activations)
+        if valid_row_indices is None:
+            valid_row_indices = self._build_valid_row_indices(token_pos_map)
+        if global_top_features is None:
+            mean_acts = self._compute_mean_feature_activations(
+                activations=activations,
+                valid_row_indices=valid_row_indices,
+                norm_stats=norm_stats,
+            )
+            global_top_features = self._format_global_top_features(
+                mean_acts,
+                top_n=self.cfg.global_top_features_k,
+            )
+
         contexts = self._collect_token_contexts(
-            feature_idx, token_ids, activations, token_doc_map, token_pos_map
+            feature_idx,
+            token_ids,
+            activations,
+            token_doc_map,
+            token_pos_map,
+            norm_stats=norm_stats,
+            valid_row_indices=valid_row_indices,
         )
         if not contexts:
             return LabelResult(
@@ -857,7 +1033,7 @@ class FeatureLabeler:
                 top_tokens=[],
                 error="no activating examples found",
             )
-        return self._call_llm(feature_idx, contexts)
+        return self._call_llm(feature_idx, contexts, global_top_features)
 
     def label_features_from_activations(
         self,
@@ -902,10 +1078,28 @@ class FeatureLabeler:
             feature_indices = feature_indices[:self.cfg.max_features]
 
         results: Dict[int, LabelResult] = dict(existing)
+        norm_stats = self._compute_normalization_stats(activations)
+        valid_row_indices = self._build_valid_row_indices(token_pos_map)
+        mean_acts = self._compute_mean_feature_activations(
+            activations=activations,
+            valid_row_indices=valid_row_indices,
+            norm_stats=norm_stats,
+        )
+        global_top_features = self._format_global_top_features(
+            mean_acts,
+            top_n=self.cfg.global_top_features_k,
+        )
 
         for feat_idx in tqdm(feature_indices, desc="Labeling features"):
             result = self.label_feature_from_activations(
-                feat_idx, activations, token_ids, token_doc_map, token_pos_map
+                feat_idx,
+                activations,
+                token_ids,
+                token_doc_map,
+                token_pos_map,
+                norm_stats=norm_stats,
+                valid_row_indices=valid_row_indices,
+                global_top_features=global_top_features,
             )
             results[feat_idx] = result
 
@@ -1081,7 +1275,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--dataset",
         type=str,
-        default="openwebtext",
+        default="MLCommons/peoples_speech",
         help="Hugging Face dataset name. Use empty string to use built-in sample_texts.",
     )
     parser.add_argument(
@@ -1097,10 +1291,28 @@ if __name__ == "__main__":
         help="Dataset split name.",
     )
     parser.add_argument(
+        "--dataset-config",
+        type=str,
+        default=None,
+        help="Optional Hugging Face dataset config name (subset).",
+    )
+    parser.add_argument(
         "--dataset-text-field",
         type=str,
         default=None,
         help="Optional explicit text field in the dataset records.",
+    )
+    parser.add_argument(
+        "--dataset-shuffle-buffer-size",
+        type=int,
+        default=0,
+        help="Streaming shuffle buffer size for Hugging Face datasets. Set 0 to disable shuffle and start yielding texts immediately.",
+    )
+    parser.add_argument(
+        "--dataset-seed",
+        type=int,
+        default=0,
+        help="Random seed for streaming dataset shuffle.",
     )
     parser.add_argument(
         "--batch-size",
@@ -1123,7 +1335,7 @@ if __name__ == "__main__":
         "--num-features",
         type=int,
         default=5,
-        help="If --label-all-alive is not set, label this many mid-ranked alive features.",
+        help="Number of features to interpret. If --label-all-alive is not set, label this many mid-ranked alive features. Use a positive integer to select specific count.",
     )
     parser.add_argument(
         "--save-path",
@@ -1157,6 +1369,24 @@ if __name__ == "__main__":
         help="Delay between LLM requests.",
     )
     parser.add_argument(
+        "--normalize-mode",
+        type=str,
+        default="standardize",
+        choices=["standardize", "center", "none"],
+        help="Normalization mode before SAE encoding. Default: standardize",
+    )
+    parser.add_argument(
+        "--std-floor",
+        type=float,
+        default=1e-3,
+        help="Std clamp floor for standardization. Default: 1e-3",
+    )
+    parser.add_argument(
+        "--include-first-token",
+        action="store_true",
+        help="Include first-token activations (disabled by default due to GPT-2 attention sink).",
+    )
+    parser.add_argument(
         "--resume",
         action="store_true",
         help="Resume labeling from --save-path if it exists.",
@@ -1177,7 +1407,40 @@ if __name__ == "__main__":
         action="store_true",
         help="Do not save activation/token-map cache after collection.",
     )
+    parser.add_argument(
+        "--min-activation",
+        type=float,
+        default=0.0,
+        help="Minimum feature activation to include in LLM examples.",
+    )
+    parser.add_argument(
+        "--top-k",
+        type=int,
+        default=0,
+        help="Maximum number of activating contexts to send to the LLM. Use 0 or negative to send all contexts above --min-activation.",
+    )
+    parser.add_argument(
+        "--include-global-top-features",
+        action="store_true",
+        help="Include corpus-global top activated feature IDs in the LLM prompt.",
+    )
+    parser.add_argument(
+        "--top-tokens-k",
+        type=int,
+        default=10,
+        help="How many most frequent activating tokens to include. 0=none, negative=all, positive=top-k.",
+    )
     args = parser.parse_args()
+
+    # MLCommons/peoples_speech requires an explicit config/subset.
+    # If omitted, default to 'clean' so the run does not fail immediately.
+    if (
+        args.dataset
+        and args.dataset.strip() == "MLCommons/peoples_speech"
+        and not args.dataset_config
+    ):
+        args.dataset_config = "clean"
+        print("[llm_analysis] --dataset-config not provided; defaulting to 'clean'.")
 
     # ------------------------------------------------------------------ #
     # 1.  Load the trained SAE
@@ -1270,10 +1533,25 @@ if __name__ == "__main__":
                 )
 
             meta = cache.get("meta", {})
+
+            expected_dataset = args.dataset if use_dataset else "built_in_sample"
+            expected_split = args.dataset_split if use_dataset else "n/a"
+            expected_config = args.dataset_config if use_dataset else None
+            if (
+                meta.get("dataset") != expected_dataset
+                or meta.get("split") != expected_split
+                or meta.get("dataset_config") != expected_config
+                or int(meta.get("max_length", -1)) != int(args.max_length)
+            ):
+                raise ValueError(
+                    "Cache metadata does not match current dataset/split/config/max_length."
+                )
+
             print(
                 "  Cache loaded: "
                 f"tokens={activations.shape[0]}, texts={len(sample_texts)}, "
-                f"dataset={meta.get('dataset', 'unknown')}, split={meta.get('split', 'unknown')}"
+                f"dataset={meta.get('dataset', 'unknown')}, split={meta.get('split', 'unknown')}, "
+                f"config={meta.get('dataset_config', 'none')}"
             )
             cache_loaded = True
         except Exception as exc:  # noqa: BLE001
@@ -1283,7 +1561,7 @@ if __name__ == "__main__":
         if use_dataset:
             print(
                 f"\nCollecting GPT-2 activations from Hugging Face dataset "
-                f"'{args.dataset}' ({args.num_texts} texts, split='{args.dataset_split}', "
+                f"'{args.dataset}' ({args.num_texts} texts, config='{args.dataset_config}', split='{args.dataset_split}', "
                 f"layer {layer_index})…"
             )
         else:
@@ -1301,9 +1579,13 @@ if __name__ == "__main__":
         if use_dataset:
             activations, sample_texts = collector.collect_from_dataset_with_texts(
                 dataset_name=args.dataset,
+                dataset_config=args.dataset_config,
                 split=args.dataset_split,
                 num_texts=args.num_texts,
+                shuffle_buffer_size=args.dataset_shuffle_buffer_size,
+                seed=args.dataset_seed,
                 text_field=args.dataset_text_field,
+                allow_fallback=False,
                 batch_size=args.batch_size,
                 max_length=args.max_length,
                 max_samples=args.num_texts * max(args.max_length, 1),
@@ -1341,6 +1623,7 @@ if __name__ == "__main__":
                     "token_pos_map": pos_map,
                     "meta": {
                         "dataset": args.dataset if use_dataset else "built_in_sample",
+                        "dataset_config": args.dataset_config if use_dataset else None,
                         "split": args.dataset_split if use_dataset else "n/a",
                         "num_texts": len(sample_texts),
                         "max_length": args.max_length,
@@ -1351,16 +1634,33 @@ if __name__ == "__main__":
             )
             print(f"  Saved activation cache to {cache_path}")
 
+    cfg = LabelingConfig(
+        backend=args.backend,
+        model=args.model,
+        top_k=args.top_k,
+        request_delay=args.request_delay,
+        prompt_log_path=args.prompt_log_path,
+        normalize_mode=args.normalize_mode,
+        std_floor=args.std_floor,
+        skip_first_token=not args.include_first_token,
+        global_top_features_k=10,
+        min_activation=args.min_activation,
+        include_global_top_features=args.include_global_top_features,
+        top_tokens_k=args.top_tokens_k,
+    )
+
+    labeler = FeatureLabeler(sae, tokenizer, cfg)
+
     # ------------------------------------------------------------------ #
-    # 5.  Find top-5 most active features across this mini-corpus
+    # 5.  Find top active features across this mini-corpus
     # ------------------------------------------------------------------ #
-    mean_acts = torch.zeros(sae.d_hidden)
-    with torch.no_grad():
-        for start in range(0, activations.shape[0], 256):
-            batch = activations[start:start + 256]
-            enc = sae.encode(batch)
-            mean_acts += enc.sum(dim=0).cpu()
-    mean_acts /= activations.shape[0]
+    norm_stats = labeler._compute_normalization_stats(activations)
+    valid_rows = labeler._build_valid_row_indices(pos_map)
+    mean_acts = labeler._compute_mean_feature_activations(
+        activations=activations,
+        valid_row_indices=valid_rows,
+        norm_stats=norm_stats,
+    )
     # Sort all features by mean activation.
     # Skip dead features (mean_acts == 0) — they carry no signal.
     alive_sorted = mean_acts.argsort(descending=True)
@@ -1383,17 +1683,8 @@ if __name__ == "__main__":
         print(f"Mid-range feature indices (ranks {start}–{end-1}): {target_features}")
 
     # ------------------------------------------------------------------ #
-    # 6.  Configure LLM and run labeling
+    # 6.  Run labeling
     # ------------------------------------------------------------------ #
-    cfg = LabelingConfig(
-        backend=args.backend,
-        model=args.model,
-        top_k=min(15, activations.shape[0]),
-        request_delay=args.request_delay,
-        prompt_log_path=args.prompt_log_path,
-    )
-
-    labeler = FeatureLabeler(sae, tokenizer, cfg)
 
     print("\nLabeling features…")
     results = labeler.label_features_from_activations(

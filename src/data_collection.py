@@ -21,6 +21,80 @@ from tqdm.auto import tqdm
 import numpy as np
 
 
+def _extract_text_from_example(example: Dict, explicit_field: Optional[str] = None) -> str:
+    """Best-effort extraction of text/transcript content from heterogeneous datasets."""
+    if explicit_field:
+        value = example.get(explicit_field, "")
+        if isinstance(value, str):
+            return value
+        if isinstance(value, dict):
+            for k in ("text", "transcript", "sentence", "normalized_text", "raw"):
+                v = value.get(k)
+                if isinstance(v, str) and v.strip():
+                    return v
+
+    candidate_keys = (
+        "text",
+        "sentence",
+        "transcript",
+        "normalized_text",
+        "utterance",
+        "content",
+        "article",
+        "document",
+    )
+
+    for key in candidate_keys:
+        value = example.get(key)
+        if isinstance(value, str) and value.strip():
+            return value
+        if isinstance(value, dict):
+            for nested_key in ("text", "transcript", "sentence", "normalized_text", "raw"):
+                nested = value.get(nested_key)
+                if isinstance(nested, str) and nested.strip():
+                    return nested
+
+    return ""
+
+
+def _prune_dataset_to_text_columns(dataset, explicit_field: Optional[str] = None):
+    """Drop heavy/non-text columns (e.g., audio) so streaming reads text-only records."""
+    features = getattr(dataset, "features", None)
+    if not features:
+        return dataset
+
+    feature_names = list(features.keys())
+    if not feature_names:
+        return dataset
+
+    candidate_text_cols = {
+        "text",
+        "sentence",
+        "transcript",
+        "normalized_text",
+        "utterance",
+        "content",
+        "article",
+        "document",
+    }
+    if explicit_field:
+        candidate_text_cols.add(explicit_field)
+
+    keep_cols = [c for c in feature_names if c in candidate_text_cols]
+    if not keep_cols:
+        return dataset
+
+    # Prefer select_columns so the streaming reader never materializes audio/video blobs.
+    if hasattr(dataset, "select_columns"):
+        dataset = dataset.select_columns(keep_cols)
+    else:
+        drop_cols = [c for c in feature_names if c not in keep_cols]
+        if drop_cols:
+            dataset = dataset.remove_columns(drop_cols)
+
+    return dataset
+
+
 class GPT2ActivationCollector:
     """
     Collects activations from a specific layer of GPT-2.
@@ -176,6 +250,8 @@ class GPT2ActivationCollector:
         shuffle_buffer_size: int = 10_000,
         seed: int = 0,
         text_field: Optional[str] = None,
+        dataset_config: Optional[str] = None,
+        allow_fallback: bool = True,
         **kwargs
     ) -> torch.Tensor:
         """
@@ -207,10 +283,8 @@ class GPT2ActivationCollector:
 
         try:
             # Load dataset from HuggingFace
-            if dataset_config:
-                dataset = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
-            else:
-                dataset = load_dataset(dataset_name, split=split, streaming=True)
+            dataset = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
+            dataset = _prune_dataset_to_text_columns(dataset, text_field)
 
             # Streaming datasets iterate in a deterministic order unless shuffled.
             # Shuffling (with a buffer) significantly improves diversity of collected activations.
@@ -224,22 +298,17 @@ class GPT2ActivationCollector:
                 if i >= num_texts:
                     break
                 # Different datasets have different text field names
-                if text_field is not None:
-                    text = example.get(text_field, "")
-                else:
-                    text = example.get(
-                        "text",
-                        example.get(
-                            "content",
-                            example.get("article", example.get("document", ""))
-                        ),
-                    )
+                text = _extract_text_from_example(example, text_field)
                 if text.strip():  # Only add non-empty texts
                     texts.append(text)
             
             print(f"Loaded {len(texts)} texts from {dataset_name}")
             
         except Exception as e:
+            if not allow_fallback:
+                raise RuntimeError(
+                    f"Failed to load dataset '{dataset_name}' (config={dataset_config}, split={split}): {e}"
+                ) from e
             print(f"Error loading dataset: {e}")
             print("Falling back to sample texts...")
             # Fallback: use some sample texts
@@ -261,6 +330,8 @@ class GPT2ActivationCollector:
         shuffle_buffer_size: int = 10_000,
         seed: int = 0,
         text_field: Optional[str] = None,
+        dataset_config: Optional[str] = None,
+        allow_fallback: bool = True,
         corpus_output: Optional[str] = None,
         **kwargs,
     ) -> Tuple[torch.Tensor, List[str]]:
@@ -298,10 +369,7 @@ class GPT2ActivationCollector:
             print(f"Loading dataset: {dataset_name}")
 
         try:
-            if dataset_config:
-                dataset = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
-            else:
-                dataset = load_dataset(dataset_name, split=split, streaming=True)
+            dataset = load_dataset(dataset_name, split=split, streaming=True)
 
             if shuffle_buffer_size and shuffle_buffer_size > 0:
                 dataset = dataset.shuffle(seed=seed, buffer_size=int(shuffle_buffer_size))
@@ -312,22 +380,23 @@ class GPT2ActivationCollector:
             ):
                 if i >= num_texts:
                     break
-                if text_field is not None:
-                    text = example.get(text_field, "")
-                else:
-                    text = example.get(
-                        "text",
-                        example.get(
-                            "content",
-                            example.get("article", example.get("document", "")),
-                        ),
-                    )
+                text = _extract_text_from_example(example, text_field)
                 if text.strip():
                     texts.append(text)
+
+            if not texts:
+                raise ValueError(
+                    "No non-empty text field found in dataset examples. "
+                    "Try setting text_field explicitly."
+                )
 
             print(f"Loaded {len(texts)} texts from {dataset_name}")
 
         except Exception as e:
+            if not allow_fallback:
+                raise RuntimeError(
+                    f"Failed to load dataset '{dataset_name}' (config={dataset_config}, split={split}): {e}"
+                ) from e
             print(f"Error loading dataset: {e}")
             print("Falling back to sample texts...")
             texts = [

@@ -513,7 +513,7 @@ export default function App() {
     <View style={styles.container}>
       <ScrollView style={styles.scrollContainer}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Sparse AutoEncoder by ANTLR</Text>
+        <Text style={styles.headerTitle}>Feature Interpretation using SAE by ANTLR</Text>
       </View>
 
       {/* Tab Bar */}
@@ -1075,7 +1075,6 @@ export default function App() {
       </ScrollView>
       
       <View style={styles.footer}>
-        <Text style={styles.footerText}>© 2026 Sparse AutoEncoder. All rights reserved.</Text>
         <Text style={styles.footerText}>Created by: Nafis Nahian, Arnob Biswas, Tanvir Liaquat Uday</Text>
       </View>
       
