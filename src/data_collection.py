@@ -369,7 +369,8 @@ class GPT2ActivationCollector:
             print(f"Loading dataset: {dataset_name}")
 
         try:
-            dataset = load_dataset(dataset_name, split=split, streaming=True)
+            dataset = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
+            dataset = _prune_dataset_to_text_columns(dataset, text_field)
 
             if shuffle_buffer_size and shuffle_buffer_size > 0:
                 dataset = dataset.shuffle(seed=seed, buffer_size=int(shuffle_buffer_size))
