@@ -423,6 +423,20 @@ class FeatureLabeler:
         return all_latents
 
     def _collect_contexts_from_latents(
+
+    @staticmethod
+    def _normalize_activations(batch: torch.Tensor, eps: float = 1e-6) -> torch.Tensor:
+        """Apply per-token standardization before SAE encoding."""
+        mean = batch.mean(dim=-1, keepdim=True)
+        std = batch.std(dim=-1, keepdim=True, unbiased=False)
+        return (batch - mean) / (std + eps)
+
+    # ------------------------------------------------------------------
+    # Step 1 – Collect token-level top-activating contexts
+    # ------------------------------------------------------------------
+
+    @torch.no_grad()
+    def _collect_token_contexts(
         self,
         feature_idx: int,
         feature_activations: torch.Tensor, # Pre-computed activations for this feature
@@ -437,9 +451,31 @@ class FeatureLabeler:
         """
         cfg = self.cfg
 
-        # Filter by valid rows (skipping first token if configured)
-        # We assume valid_row_indices is already computed
-        if valid_row_indices.numel() == 0:
+        # Safety check: activations and token maps must correspond row-for-row.
+        n = activations.shape[0]
+        if n != len(token_doc_map):
+            raise ValueError(
+                f"activations has {n} rows but token_doc_map has {len(token_doc_map)} entries. "
+                "They must be the same size — the token maps must be built from the SAME "
+                "corpus that generated the activations.  Use build_token_maps() on the texts "
+                "you originally passed to GPT2ActivationCollector."
+            )
+
+        # Encode all activations in mini-batches to get feature values
+        feat_vals = torch.zeros(n, dtype=torch.float32)
+
+        for start in range(0, n, cfg.batch_size):
+            end = min(start + cfg.batch_size, n)
+            batch = activations[start:end].to(self.device)
+            batch = self._normalize_activations(batch)
+            encoded = self.sae.encode(batch)           # (batch, d_hidden)
+            feat_vals[start:end] = encoded[:, feature_idx].cpu()
+
+        candidate_rows = valid_row_indices
+        if candidate_rows is None:
+            candidate_rows = self._build_valid_row_indices(token_pos_map)
+
+        if candidate_rows.numel() == 0:
             return []
 
         candidate_vals = feature_activations[valid_row_indices]
@@ -835,21 +871,162 @@ def build_token_maps(
 if __name__ == "__main__":
     from data_collection import GPT2ActivationCollector
 
-    parser = argparse.ArgumentParser(description="Label SAE features with an LLM.")
-    parser.add_argument("--dataset", type=str, default="", help="Hugging Face dataset name. Empty string uses built-in samples.")
-    parser.add_argument("--num-texts", type=int, default=1000)
-    parser.add_argument("--dataset-split", type=str, default="train")
-    parser.add_argument("--dataset-config", type=str, default=None)
-    parser.add_argument("--batch-size", type=int, default=8)
-    parser.add_argument("--max-length", type=int, default=128)
-    parser.add_argument("--num-features", type=int, default=5, help="Number of mid-range features to label.")
-    parser.add_argument("--save-path", type=str, default="feature_labels.json")
-    parser.add_argument("--backend", type=str, default="groq", choices=["openai", "groq", "ollama"])
-    parser.add_argument("--model", type=str, default="llama-3.3-70b-versatile")
-    parser.add_argument("--request-delay", type=float, default=0.2)
-    parser.add_argument("--resume", action="store_true")
-    parser.add_argument("--activation-cache-path", type=str, default="checkpoints/activation_cache.pt")
-    
+    parser = argparse.ArgumentParser(
+        description="Label SAE features with an LLM using GPT-2 activations."
+    )
+    parser.add_argument(
+        "--dataset",
+        type=str,
+        default="MLCommons/peoples_speech",
+        help="Hugging Face dataset name. Use empty string to use built-in sample_texts.",
+    )
+    parser.add_argument(
+        "--num-texts",
+        type=int,
+        default=4000,
+        help="Number of texts to load from dataset when --dataset is set.",
+    )
+    parser.add_argument(
+        "--dataset-split",
+        type=str,
+        default="train",
+        help="Dataset split name.",
+    )
+    parser.add_argument(
+        "--dataset-config",
+        type=str,
+        default=None,
+        help="Optional Hugging Face dataset config name (subset).",
+    )
+    parser.add_argument(
+        "--dataset-text-field",
+        type=str,
+        default=None,
+        help="Optional explicit text field in the dataset records.",
+    )
+    parser.add_argument(
+        "--dataset-shuffle-buffer-size",
+        type=int,
+        default=0,
+        help="Streaming shuffle buffer size for Hugging Face datasets. Set 0 to disable shuffle and start yielding texts immediately.",
+    )
+    parser.add_argument(
+        "--dataset-seed",
+        type=int,
+        default=0,
+        help="Random seed for streaming dataset shuffle.",
+    )
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=8,
+        help="Batch size for GPT-2 activation collection.",
+    )
+    parser.add_argument(
+        "--max-length",
+        type=int,
+        default=128,
+        help="Max token length per text for activation collection and token maps.",
+    )
+    parser.add_argument(
+        "--top-feature-count",
+        type=int,
+        default=10,
+        help="Number of features to interpret. Number of top activated alive features. Use a positive integer to select specific count to label. Default: 10",
+    )
+    parser.add_argument(
+        "--save-path",
+        type=str,
+        default="feature_labels.json",
+        help="Output JSON file for labels.",
+    )
+    parser.add_argument(
+        "--prompt-log-path",
+        type=str,
+        default="llm_prompts.log",
+        help="Log file path for all LLM prompts and responses.",
+    )
+    parser.add_argument(
+        "--backend",
+        type=str,
+        default="groq",
+        choices=["openai", "groq", "ollama"],
+        help="LLM backend.",
+    )
+    parser.add_argument(
+        "--model",
+        type=str,
+        default="llama-3.3-70b-versatile",
+        help="Model name for selected backend.",
+    )
+    parser.add_argument(
+        "--request-delay",
+        type=float,
+        default=0.2,
+        help="Delay between LLM requests.",
+    )
+    parser.add_argument(
+        "--normalize-mode",
+        type=str,
+        default="standardize",
+        choices=["standardize", "center", "none"],
+        help="Normalization mode before SAE encoding. Default: standardize",
+    )
+    parser.add_argument(
+        "--std-floor",
+        type=float,
+        default=1e-3,
+        help="Std clamp floor for standardization. Default: 1e-3",
+    )
+    parser.add_argument(
+        "--include-first-token",
+        action="store_true",
+        help="Include first-token activations (disabled by default due to GPT-2 attention sink).",
+    )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Resume labeling from --save-path if it exists.",
+    )
+    parser.add_argument(
+        "--activation-cache-path",
+        type=str,
+        default="checkpoints/llm_analysis_activation_cache.pt",
+        help="Path to activation/token-map cache (.pt).",
+    )
+    parser.add_argument(
+        "--no-cache-load",
+        action="store_true",
+        help="Do not load from --activation-cache-path even if it exists.",
+    )
+    parser.add_argument(
+        "--no-cache-save",
+        action="store_true",
+        help="Do not save activation/token-map cache after collection.",
+    )
+    parser.add_argument(
+        "--min-activation",
+        type=float,
+        default=0.0,
+        help="Minimum feature activation to include in LLM examples.",
+    )
+    parser.add_argument(
+        "--top-k",
+        type=int,
+        default=0,
+        help="Maximum number of activating contexts to send to the LLM. Use 0 or negative to send all contexts above --min-activation.",
+    )
+    parser.add_argument(
+        "--include-global-top-features",
+        action="store_true",
+        help="Include corpus-global top activated feature IDs in the LLM prompt.",
+    )
+    parser.add_argument(
+        "--top-tokens-k",
+        type=int,
+        default=10,
+        help="How many most frequent activating tokens to include. 0=none, negative=all, positive=top-k.",
+    )
     args = parser.parse_args()
     LOGGER.info(
         "llm_analysis started | dataset=%s split=%s config=%s num_texts=%d batch_size=%d max_length=%d num_features=%d backend=%s model=%s",
@@ -986,7 +1163,34 @@ if __name__ == "__main__":
     )
     
     labeler = FeatureLabeler(sae, tokenizer, cfg)
-    
+
+    # ------------------------------------------------------------------ #
+    # 5.  Find top activated alive features across this corpus
+    # ------------------------------------------------------------------ #
+    mean_acts = torch.zeros(sae.d_hidden)
+    with torch.no_grad():
+        for start in range(0, activations.shape[0], 256):
+            batch = activations[start:start + 256]
+            batch = FeatureLabeler._normalize_activations(batch)
+            enc = sae.encode(batch)
+            mean_acts += enc.sum(dim=0).cpu()
+    mean_acts /= activations.shape[0]
+    # Sort all features by mean activation.
+    # Skip dead features (mean_acts == 0) — they carry no signal.
+    alive_sorted = mean_acts.argsort(descending=True)
+    alive_sorted = alive_sorted[mean_acts[alive_sorted] > 0]
+
+    n_alive = len(alive_sorted)
+    top_n = max(1, min(args.top_feature_count, n_alive))
+    target_features = alive_sorted[:top_n].tolist()
+    print(f"\nAlive features: {n_alive}")
+    print(f"Top-{top_n} feature indices by mean activation: {target_features}")
+
+    # ------------------------------------------------------------------ #
+    # 6.  Run labeling
+    # ------------------------------------------------------------------ #
+
+    print("\nLabeling features…")
     results = labeler.label_features_from_activations(
         feature_indices=target_features,
         activations=activations,

@@ -1,0 +1,882 @@
+{
+  "8475": {
+    "feature_idx": 8475,
+    "label": "Definite Article",
+    "explanation": "The feature detects the presence of the definite article 'a' in a sentence, indicating a specific grammatical concept.",
+    "confidence": "high",
+    "top_tokens": [
+      "a"
+    ],
+    "top_contexts": [
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      },
+      {
+        "token": "a",
+        "context": "Machine learning is>>> a<<< subset of artificial intelligence.",
+        "activation_value": 2.4864377975463867
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Definite Article\",\n  \"explanation\": \"The feature detects the presence of the definite article 'a' in a sentence, indicating a specific grammatical concept.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "6878": {
+    "feature_idx": 6878,
+    "label": "Definite Article",
+    "explanation": "The feature detects the presence of the definite article 'The' in a sentence.",
+    "confidence": "high",
+    "top_tokens": [
+      "The"
+    ],
+    "top_contexts": [
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.7816569805145264
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Definite Article\",\n  \"explanation\": \"The feature detects the presence of the definite article 'The' in a sentence.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "6234": {
+    "feature_idx": 6234,
+    "label": "Definite Article",
+    "explanation": "The feature detects the presence of the definite article 'The' in a sentence.",
+    "confidence": "high",
+    "top_tokens": [
+      "The"
+    ],
+    "top_contexts": [
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      },
+      {
+        "token": "The",
+        "context": ">>>The<<< quick brown fox jumps over the lazy dog.",
+        "activation_value": 2.18118953704834
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Definite Article\",\n  \"explanation\": \"The feature detects the presence of the definite article 'The' in a sentence.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "8812": {
+    "feature_idx": 8812,
+    "label": "Natural Language",
+    "explanation": "The feature detects the concept of natural language, particularly in the context of language processing and computer understanding.",
+    "confidence": "high",
+    "top_tokens": [
+      "Natural"
+    ],
+    "top_contexts": [
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      },
+      {
+        "token": "Natural",
+        "context": ">>>Natural<<< language processing enables computers to understand human language.",
+        "activation_value": 2.097895860671997
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Natural Language\",\n  \"explanation\": \"The feature detects the concept of natural language, particularly in the context of language processing and computer understanding.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "9077": {
+    "feature_idx": 9077,
+    "label": "Artificial Intelligence",
+    "explanation": "The feature detects the concept of artificial intelligence due to its strong activation on the token 'intelligence' in the context of machine learning and artificial intelligence",
+    "confidence": "high",
+    "top_tokens": [
+      "intelligence"
+    ],
+    "top_contexts": [
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.2920660972595215
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Artificial Intelligence\",\n  \"explanation\": \"The feature detects the concept of artificial intelligence due to its strong activation on the token 'intelligence' in the context of machine learning and artificial intelligence\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "192": {
+    "feature_idx": 192,
+    "label": "Human Language Concept",
+    "explanation": "The feature detects the concept of human language, as it strongly activates on the token 'language' in the context of natural language processing.",
+    "confidence": "high",
+    "top_tokens": [
+      "language"
+    ],
+    "top_contexts": [
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      },
+      {
+        "token": "language",
+        "context": "Natural language processing enables computers to understand human>>> language<<<.",
+        "activation_value": 1.4684054851531982
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Human Language Concept\",\n  \"explanation\": \"The feature detects the concept of human language, as it strongly activates on the token 'language' in the context of natural language processing.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "2590": {
+    "feature_idx": 2590,
+    "label": "End of sentence",
+    "explanation": "The feature activates on periods at the end of sentences, indicating it detects sentence boundaries.",
+    "confidence": "high",
+    "top_tokens": [
+      "."
+    ],
+    "top_contexts": [
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.876943826675415
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"End of sentence\",\n  \"explanation\": \"The feature activates on periods at the end of sentences, indicating it detects sentence boundaries.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "9732": {
+    "feature_idx": 9732,
+    "label": "Artificial Intelligence",
+    "explanation": "The feature detects the concept of artificial intelligence due to its strong activation on the token 'intelligence' in the context of machine learning and artificial intelligence",
+    "confidence": "high",
+    "top_tokens": [
+      "intelligence"
+    ],
+    "top_contexts": [
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      },
+      {
+        "token": "intelligence",
+        "context": "Machine learning is a subset of artificial>>> intelligence<<<.",
+        "activation_value": 1.3939552307128906
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Artificial Intelligence\",\n  \"explanation\": \"The feature detects the concept of artificial intelligence due to its strong activation on the token 'intelligence' in the context of machine learning and artificial intelligence\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "3208": {
+    "feature_idx": 3208,
+    "label": "Sentence Ending",
+    "explanation": "The feature activates on sentence-ending periods, indicating it detects sentence boundaries.",
+    "confidence": "high",
+    "top_tokens": [
+      "."
+    ],
+    "top_contexts": [
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      },
+      {
+        "token": ".",
+        "context": "The quick brown fox jumps over the lazy dog>>>.<<<",
+        "activation_value": 2.678694248199463
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Sentence Ending\",\n  \"explanation\": \"The feature activates on sentence-ending periods, indicating it detects sentence boundaries.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "10965": {
+    "feature_idx": 10965,
+    "label": "End of sentence",
+    "explanation": "The feature activates on the period at the end of sentences, indicating it detects sentence boundaries.",
+    "confidence": "high",
+    "top_tokens": [
+      "."
+    ],
+    "top_contexts": [
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      },
+      {
+        "token": ".",
+        "context": "Machine learning is a subset of artificial intelligence>>>.<<<",
+        "activation_value": 1.243209958076477
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"End of sentence\",\n  \"explanation\": \"The feature activates on the period at the end of sentences, indicating it detects sentence boundaries.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  }
+}
