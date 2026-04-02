@@ -28,23 +28,41 @@ Usage
 -----
     python run_caps_test.py                          # defaults
     python run_caps_test.py --top-k 20
-    python run_caps_test.py --checkpoint checkpoints/best_model.pt
+    python run_caps_test.py --model-id gpt2-small-res-jb:blocks.8.hook_resid_pre
     python run_caps_test.py --words cat king happy   # subset
     python run_caps_test.py --output caps_report.json
 """
 
 import argparse
 import json
+import re
 import sys
 from itertools import combinations
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 sys.path.append(str(Path(__file__).parent / "src"))
 
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
-from sae_model import SparseAutoencoder
+from sae_lens import SAE
+
+SparseAutoencoder = SAE
+DEFAULT_MODEL_ID = "gpt2-small-res-jb:blocks.8.hook_resid_pre"
+
+
+def _parse_model_id(model_id: str) -> tuple[str, str]:
+    if not re.match(r"^[^:]+:[^:]+$", model_id):
+        raise ValueError(
+            "model-id must be in 'release:sae_id' format, "
+            "e.g. gpt2-small-res-jb:blocks.8.hook_resid_pre"
+        )
+    return tuple(model_id.split(":", 1))  # type: ignore[return-value]
+
+
+def _layer_from_hook(hook_name: str) -> int:
+    match = re.search(r"blocks\.(\d+)\.", hook_name)
+    return int(match.group(1)) if match else 0
 
 
 # ============================================================================
@@ -310,28 +328,6 @@ def jaccard(set_a: set, set_b: set) -> float:
     return len(set_a & set_b) / len(set_a | set_b)
 
 
-def weighted_jaccard(
-    a: torch.Tensor,
-    b: torch.Tensor,
-    indices: Optional[List[int]] = None,
-) -> float:
-    """Activation-aware Jaccard using min/max over non-negative activations."""
-    if indices is not None:
-        if len(indices) == 0:
-            return 1.0
-        idx = torch.tensor(indices, dtype=torch.long)
-        a = a[idx]
-        b = b[idx]
-
-    a = torch.clamp(a, min=0)
-    b = torch.clamp(b, min=0)
-    numer = torch.minimum(a, b).sum().item()
-    denom = torch.maximum(a, b).sum().item()
-    if denom == 0:
-        return 1.0
-    return float(numer / denom)
-
-
 def cosine_sim(a: torch.Tensor, b: torch.Tensor) -> float:
     denom = a.norm() * b.norm()
     if denom == 0:
@@ -386,14 +382,12 @@ def analyse_word(
     for va, vb in combinations(variant_strs, 2):
         sa, sb = set(top_features[va]), set(top_features[vb])
         shared = sorted(sa & sb)
-        union = sorted(sa | sb)
         pairwise.append({
             "variant_a":          va,
             "label_a":            variant_labels[va],
             "variant_b":          vb,
             "label_b":            variant_labels[vb],
             "jaccard":            round(jaccard(sa, sb), 4),
-            "weighted_jaccard":   round(weighted_jaccard(profiles[va], profiles[vb], indices=union), 4),
             "cosine_sim":         round(cosine_sim(profiles[va], profiles[vb]), 4),
             "shared_feature_count": len(shared),
             "shared_features":    shared,
@@ -415,18 +409,11 @@ def analyse_word(
     mean_jaccard = (
         sum(p["jaccard"] for p in pairwise) / len(pairwise) if pairwise else 0.0
     )
-    mean_weighted_jaccard = (
-        sum(p["weighted_jaccard"] for p in pairwise) / len(pairwise) if pairwise else 0.0
-    )
     mean_cosine = (
         sum(p["cosine_sim"] for p in pairwise) / len(pairwise) if pairwise else 0.0
     )
 
-    print(
-        f"    → Mean Jaccard: {mean_jaccard:.3f}  |  "
-        f"Mean weighted Jaccard: {mean_weighted_jaccard:.3f}  |  "
-        f"Mean cosine: {mean_cosine:.3f}"
-    )
+    print(f"    → Mean Jaccard: {mean_jaccard:.3f}  |  Mean cosine: {mean_cosine:.3f}")
     if key_pair:
         print(f"    → lower↔upper  Jaccard: {key_pair['jaccard']:.3f}  "
               f"cosine: {key_pair['cosine_sim']:.3f}")
@@ -442,12 +429,11 @@ def analyse_word(
         "pairwise":          pairwise,
         "universal_shared_features": universal,
         "mean_jaccard":      round(mean_jaccard, 4),
-        "mean_weighted_jaccard": round(mean_weighted_jaccard, 4),
         "mean_cosine_sim":   round(mean_cosine, 4),
         "lower_vs_upper":    key_pair,
         "interpretation": (
-            "CASE-INVARIANT (strong)"   if mean_weighted_jaccard > 0.40 else
-            "PARTIALLY case-sensitive"  if mean_weighted_jaccard > 0.20 else
+            "CASE-INVARIANT (strong)"   if mean_jaccard > 0.40 else
+            "PARTIALLY case-sensitive"  if mean_jaccard > 0.20 else
             "CASE-SENSITIVE (features differ)"
         ),
     }
@@ -463,16 +449,15 @@ def main() -> None:
                     "variants of the same word."
     )
     parser.add_argument(
-        "--checkpoint", default="checkpoints/best_model.pt",
-        help="Path to trained SAE checkpoint. Default: checkpoints/best_model.pt"
+        "--model-id", default=DEFAULT_MODEL_ID,
+        help=(
+            "Pretrained SAE id in release:sae_id format. "
+            f"Default: {DEFAULT_MODEL_ID}"
+        ),
     )
     parser.add_argument(
         "--top-k", type=int, default=30,
         help="Number of top features per variant to compare. Default: 30"
-    )
-    parser.add_argument(
-        "--layer", type=int, default=None,
-        help="GPT-2 layer index (overrides checkpoint). Default: from checkpoint."
     )
     parser.add_argument(
         "--device", default="auto",
@@ -498,24 +483,20 @@ def main() -> None:
     print("CAPITALISATION INVARIANCE TEST")
     print("=" * 70)
 
-    ckpt = Path(args.checkpoint)
-    if not ckpt.exists():
-        print(f"ERROR: checkpoint not found: {ckpt}")
-        sys.exit(1)
-
-    print(f"\n[1/3] Loading SAE from {ckpt}...")
-    payload  = torch.load(ckpt, map_location="cpu", weights_only=False)
-    hp       = payload.get("hyperparameters", {})
-    state    = payload["model_state_dict"]
-    d_model  = hp.get("d_model",  state["W_enc"].shape[1])
-    d_hidden = hp.get("d_hidden", state["W_enc"].shape[0])
-    l1_coeff = hp.get("l1_coeff", 3e-4)
-    layer_index = args.layer or hp.get("layer_index", 8)
-
-    sae = SparseAutoencoder(d_model=d_model, d_hidden=d_hidden, l1_coeff=l1_coeff)
-    sae.load_state_dict(state)
+    release, sae_id = _parse_model_id(args.model_id)
+    print(f"\n[1/3] Loading pretrained SAE from {args.model_id}...")
+    sae = SAE.from_pretrained(release=release, sae_id=sae_id, device=device)
+    if isinstance(sae, tuple):
+        sae = sae[0]
     sae.eval().to(device)
-    print(f"  d_model={d_model}, d_hidden={d_hidden}, layer={layer_index}")
+
+    d_model = int(getattr(sae.cfg, "d_in", getattr(sae.cfg, "d_model", sae.W_enc.shape[1])))
+    d_hidden = int(getattr(sae.cfg, "d_sae", getattr(sae.cfg, "d_hidden", sae.W_enc.shape[0])))
+    setattr(sae, "d_hidden", d_hidden)
+
+    hook_name = str(getattr(getattr(sae.cfg, "metadata", object()), "hook_name", sae_id))
+    layer_index = _layer_from_hook(hook_name)
+    print(f"  d_model={d_model}, d_hidden={d_hidden}, layer={layer_index}, hook={hook_name}")
 
     # ── Load GPT-2 ────────────────────────────────────────────────────────────
     print(f"\n[2/3] Loading GPT-2...")
@@ -548,7 +529,7 @@ def main() -> None:
     # ── Save JSON ─────────────────────────────────────────────────────────────
     report = {
         "settings": {
-            "checkpoint":  str(ckpt),
+            "model_id":    args.model_id,
             "top_k":       args.top_k,
             "layer_index": layer_index,
             "d_model":     d_model,

@@ -79,6 +79,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from tqdm.auto import tqdm
+from sae_lens import SAE
 
 # Optional heavy imports: graceful fallback
 try:
@@ -93,7 +94,7 @@ try:
 except ImportError:
     HAS_SCIPY = False
 
-from sae_model import SparseAutoencoder
+SparseAutoencoder = SAE
 
 
 # ============================================================================
@@ -450,11 +451,27 @@ class FeatureInterpreter:
             )
             return []
 
-        # Get decoder column for this feature
-        if self.sae.use_tied_weights:
-            d_f = self.sae.W_enc[feature_idx, :].detach().float()  # (d_model,)
+        # Get decoder direction for this feature.
+        # Supports both legacy SAE checkpoints and sae-lens pretrained SAEs.
+        use_tied = bool(getattr(self.sae, "use_tied_weights", False))
+        if use_tied:
+            d_f = self.sae.W_enc[feature_idx, :].detach().float()
         else:
-            d_f = self.sae.W_dec[:, feature_idx].detach().float()  # (d_model,)
+            w_dec = self.sae.W_dec.detach().float()
+            candidate_a = w_dec[feature_idx, :] if w_dec.ndim == 2 and feature_idx < w_dec.shape[0] else None
+            candidate_b = w_dec[:, feature_idx] if w_dec.ndim == 2 and feature_idx < w_dec.shape[1] else None
+
+            target_dim = int(self._W_U.shape[1])
+            if candidate_a is not None and candidate_a.numel() == target_dim:
+                d_f = candidate_a
+            elif candidate_b is not None and candidate_b.numel() == target_dim:
+                d_f = candidate_b
+            elif candidate_a is not None:
+                d_f = candidate_a
+            elif candidate_b is not None:
+                d_f = candidate_b
+            else:
+                raise ValueError(f"Unable to extract decoder direction for feature_idx={feature_idx}")
 
         # Project onto unembedding: (vocab, d_model) @ (d_model,) → (vocab,)
         logits = self._W_U @ d_f.to(self._W_U.device)
@@ -1130,30 +1147,29 @@ if __name__ == "__main__":
     import sys
     sys.path.insert(0, str(Path(__file__).parent))
 
-    from sae_model import SparseAutoencoder
-    from data_collection import GPT2ActivationCollector
+    import re
+    from sae_lens import SAE
 
     # ------------------------------------------------------------------ #
     # 1.  Load SAE
     # ------------------------------------------------------------------ #
-    print("Loading SAE checkpoint...")
-    ckpt_path = Path("checkpoints/best_model.pt")
-    if not ckpt_path.exists():
-        print(f"ERROR: {ckpt_path} not found. Train a model first with run_sae.py")
-        sys.exit(1)
-
-    payload = torch.load(ckpt_path, map_location="cpu")
-    hp = payload.get("hyperparameters", {})
-    state = payload["model_state_dict"]
-    d_model = hp.get("d_model", state["W_enc"].shape[1])
-    d_hidden = hp.get("d_hidden", state["W_enc"].shape[0])
-    l1_coeff = hp.get("l1_coeff", 3e-4)
-    layer_index = hp.get("layer_index", 8)
-
-    sae = SparseAutoencoder(d_model=d_model, d_hidden=d_hidden, l1_coeff=l1_coeff)
-    sae.load_state_dict(state)
+    model_id = "gpt2-small-res-jb:blocks.8.hook_resid_pre"
+    print(f"Loading pretrained SAE: {model_id}...")
+    release, sae_id = model_id.split(":", 1)
+    sae = SAE.from_pretrained(release=release, sae_id=sae_id, device="cpu")
+    if isinstance(sae, tuple):
+        sae = sae[0]
     sae.eval()
-    print(f"  SAE: d_model={d_model}, d_hidden={d_hidden}")
+
+    d_model = int(getattr(sae.cfg, "d_in", getattr(sae.cfg, "d_model", sae.W_enc.shape[1])))
+    d_hidden = int(getattr(sae.cfg, "d_sae", getattr(sae.cfg, "d_hidden", sae.W_enc.shape[0])))
+    setattr(sae, "d_hidden", d_hidden)
+
+    hook_name = str(getattr(getattr(sae.cfg, "metadata", object()), "hook_name", sae_id))
+    layer_match = re.search(r"blocks\.(\d+)\.", hook_name)
+    layer_index = int(layer_match.group(1)) if layer_match else 8
+
+    print(f"  SAE: d_model={d_model}, d_hidden={d_hidden}, layer={layer_index}")
 
     # ------------------------------------------------------------------ #
     # 2.  Load GPT-2 (for logit lens)
@@ -1163,7 +1179,7 @@ if __name__ == "__main__":
     print("Loading GPT-2 for logit lens...")
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
     tokenizer.pad_token = tokenizer.eos_token
-    gpt2_model = GPT2LMHeadModel.from_pretrained("gpt2")
+    gpt2_model = GPT2LMHeadModel.from_pretrained("gpt2", output_hidden_states=True)
     gpt2_model.eval()
 
     # ------------------------------------------------------------------ #
@@ -1198,12 +1214,24 @@ if __name__ == "__main__":
     ]
 
     print(f"Collecting GPT-2 activations from {len(sample_texts)} texts (layer {layer_index})...")
-    collector = GPT2ActivationCollector(
-        model_name="gpt2", layer_index=layer_index
-    )
-    activations = collector.collect_activations(
-        texts=sample_texts, batch_size=4, max_length=128
-    )
+    act_rows: List[torch.Tensor] = []
+    with torch.no_grad():
+        for text in sample_texts:
+            enc = tokenizer(
+                text,
+                return_tensors="pt",
+                truncation=True,
+                max_length=128,
+                add_special_tokens=False,
+            )
+            input_ids = enc["input_ids"]
+            if input_ids.numel() == 0:
+                continue
+            out = gpt2_model(input_ids=input_ids)
+            hidden = out.hidden_states[layer_index + 1][0].cpu()
+            act_rows.append(hidden)
+
+    activations = torch.cat(act_rows, dim=0)
     print(f"  Collected {activations.shape[0]} activation vectors")
 
     # Build flat token IDs

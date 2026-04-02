@@ -33,23 +33,41 @@ Usage
 -----
     python run_synonym_test.py                         # defaults
     python run_synonym_test.py --top-k 20              # top-20 features per word
-    python run_synonym_test.py --checkpoint checkpoints/best_model.pt
+    python run_synonym_test.py --model-id gpt2-small-res-jb:blocks.8.hook_resid_pre
     python run_synonym_test.py --output synonym_report.json
     python run_synonym_test.py --clusters happy angry big fast  # subset of clusters
 """
 
 import argparse
 import json
+import re
 import sys
 from itertools import combinations
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 sys.path.append(str(Path(__file__).parent / "src"))
 
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
-from sae_model import SparseAutoencoder
+from sae_lens import SAE
+
+SparseAutoencoder = SAE
+DEFAULT_MODEL_ID = "gpt2-small-res-jb:blocks.8.hook_resid_pre"
+
+
+def _parse_model_id(model_id: str) -> tuple[str, str]:
+    if not re.match(r"^[^:]+:[^:]+$", model_id):
+        raise ValueError(
+            "model-id must be in 'release:sae_id' format, "
+            "e.g. gpt2-small-res-jb:blocks.8.hook_resid_pre"
+        )
+    return tuple(model_id.split(":", 1))  # type: ignore[return-value]
+
+
+def _layer_from_hook(hook_name: str) -> int:
+    match = re.search(r"blocks\.(\d+)\.", hook_name)
+    return int(match.group(1)) if match else 0
 
 
 # ============================================================================
@@ -373,7 +391,7 @@ def collect_word_feature_profile(
     device: str,
 ) -> Tuple[torch.Tensor, int]:
     """
-    Average SAE feature activations across all [target word] positions in all sentences
+    Average SAE feature activations across all positions in all sentences
     where *word* appears.
 
     Returns:
@@ -408,35 +426,6 @@ def jaccard(set_a: set, set_b: set) -> float:
         return 1.0
     union = set_a | set_b
     return len(set_a & set_b) / len(union)
-
-
-def weighted_jaccard(
-    a: torch.Tensor,
-    b: torch.Tensor,
-    indices: Optional[List[int]] = None,
-) -> float:
-    """
-    Activation-aware Jaccard for non-negative feature vectors.
-
-    Standard Jaccard treats every selected feature equally (binary present/absent).
-    Weighted Jaccard scales overlap by activation magnitude:
-      sum_i min(a_i, b_i) / sum_i max(a_i, b_i)
-    """
-    if indices is not None:
-        if len(indices) == 0:
-            return 1.0
-        idx = torch.tensor(indices, dtype=torch.long)
-        a = a[idx]
-        b = b[idx]
-
-    a = torch.clamp(a, min=0)
-    b = torch.clamp(b, min=0)
-
-    numer = torch.minimum(a, b).sum().item()
-    denom = torch.maximum(a, b).sum().item()
-    if denom == 0:
-        return 1.0
-    return float(numer / denom)
 
 
 def cosine_sim(a: torch.Tensor, b: torch.Tensor) -> float:
@@ -482,7 +471,7 @@ def analyse_cluster(
         w: top_k_features(v, top_k) for w, v in profiles.items()
     }
 
-    # Pairwise Jaccard + weighted Jaccard + cosine
+    # Pairwise Jaccard + cosine
     words = list(profiles.keys())
     pairwise = []
     for w1, w2 in combinations(words, 2):
@@ -490,14 +479,11 @@ def analyse_cluster(
         s2 = set(top_features[w2])
         shared = sorted(s1 & s2)
         j = jaccard(s1, s2)
-        union = sorted(s1 | s2)
-        wj = weighted_jaccard(profiles[w1], profiles[w2], indices=union)
         cos = cosine_sim(profiles[w1], profiles[w2])
         pairwise.append({
             "word_a": w1,
             "word_b": w2,
             "jaccard": round(j, 4),
-            "weighted_jaccard": round(wj, 4),
             "cosine_sim": round(cos, 4),
             "shared_feature_count": len(shared),
             "shared_features": shared,
@@ -517,18 +503,11 @@ def analyse_cluster(
     mean_jaccard = (
         sum(p["jaccard"] for p in pairwise) / len(pairwise) if pairwise else 0.0
     )
-    mean_weighted_jaccard = (
-        sum(p["weighted_jaccard"] for p in pairwise) / len(pairwise) if pairwise else 0.0
-    )
     mean_cosine = (
         sum(p["cosine_sim"] for p in pairwise) / len(pairwise) if pairwise else 0.0
     )
 
-    print(
-        f"    → Mean Jaccard: {mean_jaccard:.3f}  |  "
-        f"Mean weighted Jaccard: {mean_weighted_jaccard:.3f}  |  "
-        f"Mean cosine: {mean_cosine:.3f}"
-    )
+    print(f"    → Mean Jaccard: {mean_jaccard:.3f}  |  Mean cosine: {mean_cosine:.3f}")
     print(f"    → Features shared by ALL {len(words)} words: {len(universal_shared)}")
 
     return {
@@ -541,11 +520,10 @@ def analyse_cluster(
         "universal_shared_features": universal_shared,
         "unique_features_per_word": unique_to,
         "mean_jaccard": round(mean_jaccard, 4),
-        "mean_weighted_jaccard": round(mean_weighted_jaccard, 4),
         "mean_cosine_sim": round(mean_cosine, 4),
         "interpretation": (
-            "STRONG synonym signal"   if mean_weighted_jaccard > 0.40 else
-            "MODERATE synonym signal" if mean_weighted_jaccard > 0.20 else
+            "STRONG synonym signal"   if mean_jaccard > 0.40 else
+            "MODERATE synonym signal" if mean_jaccard > 0.20 else
             "WEAK synonym signal"
         ),
     }
@@ -560,16 +538,15 @@ def main():
         description="Test whether SAE features are activated consistently by synonyms."
     )
     parser.add_argument(
-        "--checkpoint", default="checkpoints/best_model.pt",
-        help="Path to trained SAE checkpoint."
+        "--model-id", default=DEFAULT_MODEL_ID,
+        help=(
+            "Pretrained SAE id in release:sae_id format. "
+            f"Default: {DEFAULT_MODEL_ID}"
+        ),
     )
     parser.add_argument(
         "--top-k", type=int, default=30,
         help="Number of top features per word to compare. Default: 30"
-    )
-    parser.add_argument(
-        "--layer", type=int, default=None,
-        help="GPT-2 layer index (overrides checkpoint). Default: from checkpoint."
     )
     parser.add_argument(
         "--device", default="auto",
@@ -595,24 +572,20 @@ def main():
     print("SYNONYM FEATURE-OVERLAP TEST")
     print("=" * 70)
 
-    ckpt = Path(args.checkpoint)
-    if not ckpt.exists():
-        print(f"ERROR: checkpoint not found: {ckpt}")
-        sys.exit(1)
-
-    print(f"\n[1/3] Loading SAE from {ckpt}...")
-    payload = torch.load(ckpt, map_location="cpu", weights_only=False)
-    hp     = payload.get("hyperparameters", {})
-    state  = payload["model_state_dict"]
-    d_model  = hp.get("d_model",  state["W_enc"].shape[1])
-    d_hidden = hp.get("d_hidden", state["W_enc"].shape[0])
-    l1_coeff = hp.get("l1_coeff", 3e-4)
-    layer_index = args.layer or hp.get("layer_index", 8)
-
-    sae = SparseAutoencoder(d_model=d_model, d_hidden=d_hidden, l1_coeff=l1_coeff)
-    sae.load_state_dict(state)
+    release, sae_id = _parse_model_id(args.model_id)
+    print(f"\n[1/3] Loading pretrained SAE from {args.model_id}...")
+    sae = SAE.from_pretrained(release=release, sae_id=sae_id, device=device)
+    if isinstance(sae, tuple):
+        sae = sae[0]
     sae.eval().to(device)
-    print(f"  d_model={d_model}, d_hidden={d_hidden}, layer={layer_index}")
+
+    d_model = int(getattr(sae.cfg, "d_in", getattr(sae.cfg, "d_model", sae.W_enc.shape[1])))
+    d_hidden = int(getattr(sae.cfg, "d_sae", getattr(sae.cfg, "d_hidden", sae.W_enc.shape[0])))
+    setattr(sae, "d_hidden", d_hidden)
+
+    hook_name = str(getattr(getattr(sae.cfg, "metadata", object()), "hook_name", sae_id))
+    layer_index = _layer_from_hook(hook_name)
+    print(f"  d_model={d_model}, d_hidden={d_hidden}, layer={layer_index}, hook={hook_name}")
 
     # ── Load GPT-2 ────────────────────────────────────────────────────────────
     print(f"\n[2/3] Loading GPT-2...")
@@ -644,7 +617,7 @@ def main():
     # ── Save JSON ─────────────────────────────────────────────────────────────
     report = {
         "settings": {
-            "checkpoint": str(ckpt),
+            "model_id": args.model_id,
             "top_k": args.top_k,
             "layer_index": layer_index,
             "d_model": d_model,

@@ -113,6 +113,10 @@ Examples:
         "--seed", type=int, default=42,
         help="Random seed for dataset shuffling. Default: 42"
     )
+    parser.add_argument(
+        "--hf-cache-dir", type=str, default=None,
+        help="Optional Hugging Face datasets cache directory (falls back to HF_DATASETS_CACHE env var)."
+    )
 
     # Output arguments
     parser.add_argument(
@@ -210,6 +214,7 @@ Examples:
             shuffle_buffer_size=args.shuffle_buffer_size,
             seed=args.seed,
             text_field=args.text_field,
+            cache_dir=args.hf_cache_dir,
             corpus_output=args.corpus_output,
             batch_size=args.batch_size,
             max_length=args.max_length,
@@ -230,6 +235,7 @@ Examples:
             shuffle_buffer_size=args.shuffle_buffer_size,
             seed=args.seed,
             text_field=args.text_field,
+            cache_dir=args.hf_cache_dir,
             batch_size=args.batch_size,
             max_length=args.max_length,
             max_samples=args.samples,

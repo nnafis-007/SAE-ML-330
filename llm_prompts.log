@@ -1502,3 +1502,132 @@ RESPONSE:
   "confidence": "high"
 }
 ================================================================================
+
+================================================================================
+FEATURE INDEX: 20380
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 20380
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=8.594]  amfam as we colloquially referred to>>> americ<<<an family insurance wisconsin
+   2. [act=7.691]  it became the duty and obligation of>>> americ<<<an family to file it's dj action on it
+   3. [act=7.284]  patsias versus>>> americ<<<an family insurance
+   4. [act=7.185]   as long as there's a bonafide defense>>> americ<<<an family cannot be can not be on the hook
+   5. [act=6.330]  or the that's in the statue>>> americ<<<an family in it's pleadings denied that it
+   6. [act=5.302]  every bottle>>> americ<<<an family suggests that the key is that is had
+   7. [act=2.303]   american family to file it's dj action on>>> it<<<'s issue of noncoverage
+   8. [act=2.118]  's dj action on it's issue of nonco>>>verage<<<
+   9. [act=0.986]   the that's in the statue american family in>>> it<<<'s pleadings denied that it had any such responsibility
+  10. [act=0.920]   the duty and obligation of american family to file>>> it<<<'s dj action on it's issue of nonco
+  11. [act=0.254]   statue american family in it's pleadings denied>>> that<<< it had any such responsibility contrary to illinois statue
+  12. [act=0.000]   in the statue american family in it's plead>>>ings<<< denied that it had any such responsibility contrary to ill
+  13. [act=0.000]   the statue american family in it's pleadings>>> denied<<< that it had any such responsibility contrary to illinois
+  14. [act=0.000]   in it's pleadings denied that it had any>>> such<<< responsibility contrary to illinois statue
+  15. [act=0.000]  pats>>>ias<<< versus american family insurance
+
+Most frequent activating tokens (top 8): "americ", "it", "verage", "that", "ings", "denied", "such", "ias"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "American Family Insurance",
+  "explanation": "The feature detects mentions of the American Family Insurance company, often in a legal or claims-related context",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE INDEX: 22130
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 22130
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 12 activating examples (ordered strongest first):
+   1. [act=16.586]   to the leader of an organization that is suing the>>> Obama<<< administration.
+
+“To be clear,
+   2. [act=13.710]   Senator Chuck Hagel(R), US President Barack>>> Obama<<<'s nominee for Secretary of Defense, testifies during
+   3. [act=13.209]  s:
+
+Q: How would you describe>>> Obama<<<'s energy policy in a few sentences?
+
+
+   4. [act=12.346]   world around him.'
+
+The White House released>>> Obama<<<'s statement on Saturday morning in which he noted the
+   5. [act=12.266]   the TARP in the George W. Bush and>>> Obama<<< administrations and general counsel of the Export-Import Bank
+   6. [act=12.072]   some people say was a racist depiction of President Barack>>> Obama<<<. Cartoonist Sean Delonas drew police having
+   7. [act=11.688]  President #Barack>>>Obama<<< is our Ally of the Year and cover of the
+   8. [act=11.636]   political disagreements' for nearly six decades.
+
+>>>Obama<<< offered his condolences to Castro's family and said his
+   9. [act=11.390]   2008 campaign -- before the global economic crisis -- Barack>>> Obama<<< said the top three things he wanted to accomplish as
+  10. [act=9.628]  9GBgXcoOZ
+
+President>>> Obama<<< appears on the latest issue of Out magazine, becoming
+  11. [act=8.949]  Advertisement
+
+U.S. President Barack>>> Obama<<< has spoken out of the passing of Cuban revolutionary leader
+  12. [act=8.782]  , the publication said.
+
+#Barack>>>Obama<<< is the 1st U.S. president to
+
+Most frequent activating tokens (top 1): "Obama"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Mentions of Obama",
+  "explanation": "The feature activates on text snippets that mention the name 'Obama', likely detecting references to the former US President",
+  "confidence": "high"
+}
+================================================================================

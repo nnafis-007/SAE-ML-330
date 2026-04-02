@@ -1,11 +1,17 @@
 """
 FastAPI backend for the SAE Interpretability UI.
 
+Model identifier format is pretrained-only:
+    release:sae_id
+
+Example:
+    gpt2-small-res-jb:blocks.8.hook_resid_pre
+
 Provides:
-    GET  /models           – list available checkpoints
-    GET  /analyzers        – list registered analysis methods
-    POST /analyze          – run analysis on input text
-    POST /label-feature    – on-demand LLM-based feature labeling (via analysis.py)
+    GET  /models
+    GET  /analyzers
+    POST /analyze
+    POST /label-feature
 """
 
 import sys
@@ -14,7 +20,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Optional, List, Dict, Any
+from typing import Optional, List
 
 # Ensure project-root packages (e.g., analyzers/) are importable regardless
 # of whether uvicorn is launched from project root or fastapi/.
@@ -39,6 +45,26 @@ import sae_analyzer as _sae_reg  # noqa: F401, E402
 import synonym_analyzer as _syn_reg  # noqa: F401, E402
 import caps_analyzer as _caps_reg  # noqa: F401, E402
 from analyzers import get_analyzer, list_analyzers, get_all_models  # noqa: E402
+from pretrained_sae import DEFAULT_PRETRAINED_MODEL_ID  # noqa: E402
+
+
+def _validate_pretrained_model_id(model_id: str) -> None:
+    if ":" not in model_id or model_id.count(":") != 1:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                "Invalid model_id format. Expected 'release:sae_id', "
+                "for example 'gpt2-small-res-jb:blocks.8.hook_resid_pre'."
+            ),
+        )
+    if model_id.strip() != DEFAULT_PRETRAINED_MODEL_ID:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                "Only one pretrained model is currently supported: "
+                f"{DEFAULT_PRETRAINED_MODEL_ID}"
+            ),
+        )
 
 
 # ---------------------------------------------------------------------------
@@ -70,20 +96,17 @@ class LabelFeatureRequest(BaseModel):
     feature_idx: int
     analyzer: str = "sae"
     corpus_texts: Optional[List[str]] = None
-    labeling_config: Optional[Dict[str, Any]] = None
     groq_api_key: Optional[str] = None  # falls back to GROQ_API_KEY env var
 
 
 class FeatureActivationsRequest(BaseModel):
     model_id: str
     feature_id: int
-    dataset_name: str = "MLCommons/peoples_speech"
-    dataset_config: str = "validation"
-    split: str = "validation"
-    max_sentences: Optional[int] = None
-    target_activating_examples: Optional[int] = None
-    page: int = 1
-    page_size: int = 25
+    dataset_name: str = "openwebtext"
+    dataset_config: Optional[str] = None
+    split: str = "train"
+    max_sentences: int = 200
+    max_results: int = 100
     min_activation: float = 0.0
     text_field: Optional[str] = None
     max_length: int = 128
@@ -115,6 +138,7 @@ def get_available_analyzers():
 @app.post("/analyze")
 def analyze(request: AnalyzeRequest):
     """Run analysis on the input text using the selected model."""
+    _validate_pretrained_model_id(request.model_id)
     try:
         a = get_analyzer(request.analyzer)
     except KeyError:
@@ -136,6 +160,7 @@ def analyze(request: AnalyzeRequest):
 @app.post("/synonym-test")
 def synonym_test(request: SynonymTestRequest):
     """Run the synonym feature-overlap test on selected clusters or custom words."""
+    _validate_pretrained_model_id(request.model_id)
     try:
         a = get_analyzer("synonym")
     except KeyError:
@@ -192,6 +217,7 @@ def get_synonym_clusters():
 @app.post("/caps-test")
 def caps_test(request: CapsTestRequest):
     """Run the capitalisation invariance test on selected words."""
+    _validate_pretrained_model_id(request.model_id)
     try:
         a = get_analyzer("caps")
     except KeyError:
@@ -229,6 +255,7 @@ def label_feature(request: LabelFeatureRequest):
     Requires a valid LLM API key (GROQ_API_KEY or OPENAI_API_KEY in env).
     Uses ``analysis.py``'s ``FeatureLabeler`` under the hood.
     """
+    _validate_pretrained_model_id(request.model_id)
     try:
         a = get_analyzer(request.analyzer)
     except KeyError:
@@ -242,7 +269,6 @@ def label_feature(request: LabelFeatureRequest):
             model_id=request.model_id,
             feature_idx=request.feature_idx,
             corpus_texts=request.corpus_texts,
-            labeling_config=request.labeling_config,
             groq_api_key=request.groq_api_key,
         )
         return result
@@ -255,6 +281,7 @@ def feature_activations(request: FeatureActivationsRequest):
     """
     Fetch sentence/token examples where a selected SAE feature activates.
     """
+    _validate_pretrained_model_id(request.model_id)
     try:
         a = get_analyzer("sae")
     except KeyError:
@@ -271,9 +298,7 @@ def feature_activations(request: FeatureActivationsRequest):
             dataset_config=request.dataset_config,
             split=request.split,
             max_sentences=request.max_sentences,
-            target_activating_examples=request.target_activating_examples,
-            page=request.page,
-            page_size=request.page_size,
+            max_results=request.max_results,
             min_activation=request.min_activation,
             text_field=request.text_field,
             max_length=request.max_length,

@@ -1,4 +1,4 @@
-source venv/bin/activate && uvicorn main:app --app-dir fastapi --host 127.0.0.1 --port 8000
+source venv/bin/activate && uvicorn main:app --app-dir fastapi --host 127.0.0.1 --port 8001
 cd ui && npx expo start --web
 
 

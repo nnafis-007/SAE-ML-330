@@ -32,19 +32,91 @@ Usage:
 """
 
 import argparse
+import re
 import sys
 from pathlib import Path
+from typing import List
 
 # Add src to path
 sys.path.append(str(Path(__file__).parent / "src"))
 
 import torch
-from sae_model import SparseAutoencoder
-from feature_interpretation import (
+from sae_lens import SAE
+from pmi_feature_interpretation import (
     FeatureInterpreter,
     InterpretationConfig,
     build_flat_token_ids,
 )
+from datasets import load_dataset
+
+DEFAULT_MODEL_ID = "gpt2-small-res-jb:blocks.8.hook_resid_pre"
+
+
+def _parse_model_id(model_id: str) -> tuple[str, str]:
+    if not re.match(r"^[^:]+:[^:]+$", model_id):
+        raise ValueError(
+            "model-id must be in 'release:sae_id' format, "
+            "e.g. gpt2-small-res-jb:blocks.8.hook_resid_pre"
+        )
+    return tuple(model_id.split(":", 1))  # type: ignore[return-value]
+
+
+def _layer_from_hook(hook_name: str) -> int:
+    match = re.search(r"blocks\.(\d+)\.", hook_name)
+    return int(match.group(1)) if match else 0
+
+
+def _collect_texts_from_dataset(
+    dataset_name: str,
+    dataset_config: str | None,
+    split: str,
+    num_texts: int,
+) -> List[str]:
+    ds = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
+    texts: List[str] = []
+    fields = ["text", "sentence", "transcript", "content", "article", "document"]
+    for ex in ds:
+        value = ""
+        for field in fields:
+            raw = ex.get(field)
+            if isinstance(raw, str) and raw.strip():
+                value = raw.strip()
+                break
+        if value:
+            texts.append(value)
+        if len(texts) >= num_texts:
+            break
+    return texts
+
+
+def _collect_gpt2_hidden_activations(
+    texts: List[str],
+    tokenizer,
+    gpt2_model,
+    layer_index: int,
+    device: str,
+    max_length: int = 128,
+) -> torch.Tensor:
+    rows: List[torch.Tensor] = []
+    with torch.no_grad():
+        for text in texts:
+            enc = tokenizer(
+                text,
+                return_tensors="pt",
+                truncation=True,
+                max_length=max_length,
+                add_special_tokens=False,
+            )
+            input_ids = enc["input_ids"].to(device)
+            if input_ids.numel() == 0:
+                continue
+            out = gpt2_model(input_ids=input_ids)
+            hidden = out.hidden_states[layer_index + 1][0].cpu()
+            rows.append(hidden)
+
+    if not rows:
+        raise ValueError("No activations were collected from the selected corpus")
+    return torch.cat(rows, dim=0)
 
 
 # -- Diverse sample corpus for feature interpretation --
@@ -144,8 +216,11 @@ def main():
         help="Number of top features to auto-select if --features is not given. Default: 5"
     )
     parser.add_argument(
-        "--checkpoint", type=str, default="checkpoints/best_model.pt",
-        help="Path to SAE checkpoint. Default: checkpoints/best_model.pt"
+        "--model-id", type=str, default=DEFAULT_MODEL_ID,
+        help=(
+            "Pretrained SAE id in release:sae_id format. "
+            f"Default: {DEFAULT_MODEL_ID}"
+        ),
     )
     parser.add_argument(
         "--top-k", type=int, default=50,
@@ -168,6 +243,10 @@ def main():
         help="HuggingFace dataset for corpus (e.g., 'openwebtext'). Default: use built-in samples."
     )
     parser.add_argument(
+        "--dataset-config", type=str, default="train",
+        help="Optional HuggingFace dataset config/split alias. Default: train"
+    )
+    parser.add_argument(
         "--num-texts", type=int, default=200,
         help="Number of texts to load from dataset. Default: 200"
     )
@@ -178,10 +257,6 @@ def main():
     parser.add_argument(
         "--device", type=str, default="auto",
         help="Device (cuda/cpu/auto). Default: auto"
-    )
-    parser.add_argument(
-        "--layer", type=int, default=None,
-        help="GPT-2 layer (overrides checkpoint metadata). Default: from checkpoint."
     )
     parser.add_argument(
         "--corpus-output", type=str, default="corpus_texts.txt",
@@ -215,25 +290,19 @@ def main():
     print("SAE FEATURE INTERPRETATION PIPELINE")
     print("=" * 70)
 
-    ckpt_path = Path(args.checkpoint)
-    if not ckpt_path.exists():
-        print(f"ERROR: Checkpoint not found: {ckpt_path}")
-        print("Train an SAE first with: python run_sae.py")
-        sys.exit(1)
+    release, sae_id = _parse_model_id(args.model_id)
+    print(f"\n[1/5] Loading pretrained SAE from {args.model_id}...")
+    sae = SAE.from_pretrained(release=release, sae_id=sae_id, device=device)
+    if isinstance(sae, tuple):
+        sae = sae[0]
+    sae.eval().to(device)
 
-    print(f"\n[1/5] Loading SAE from {ckpt_path}...")
-    payload = torch.load(ckpt_path, map_location="cpu", weights_only=False)
-    hp = payload.get("hyperparameters", {})
-    state = payload["model_state_dict"]
-    d_model = hp.get("d_model", state["W_enc"].shape[1])
-    d_hidden = hp.get("d_hidden", state["W_enc"].shape[0])
-    l1_coeff = hp.get("l1_coeff", 3e-4)
-    layer_index = args.layer or hp.get("layer_index", 8)
-
-    sae = SparseAutoencoder(d_model=d_model, d_hidden=d_hidden, l1_coeff=l1_coeff)
-    sae.load_state_dict(state)
-    sae.eval()
-    print(f"  d_model={d_model}, d_hidden={d_hidden}, layer={layer_index}")
+    d_model = int(getattr(sae.cfg, "d_in", getattr(sae.cfg, "d_model", sae.W_enc.shape[1])))
+    d_hidden = int(getattr(sae.cfg, "d_sae", getattr(sae.cfg, "d_hidden", sae.W_enc.shape[0])))
+    setattr(sae, "d_hidden", d_hidden)
+    hook_name = str(getattr(getattr(sae.cfg, "metadata", object()), "hook_name", sae_id))
+    layer_index = _layer_from_hook(hook_name)
+    print(f"  d_model={d_model}, d_hidden={d_hidden}, layer={layer_index}, hook={hook_name}")
 
     # ================================================================== #
     # 2.  Load GPT-2 (for logit lens + activation collection)
@@ -254,32 +323,34 @@ def main():
     # ================================================================== #
     print(f"\n[3/5] Preparing corpus and collecting activations...")
 
-    from data_collection import GPT2ActivationCollector
-
-    collector = GPT2ActivationCollector(
-        model_name="gpt2", layer_index=layer_index, device=device
-    )
-
     if args.dataset:
-        # collect_from_dataset_with_texts returns BOTH the activations AND
-        # the raw text strings, so the same corpus drives:
-        #   • feature-selection statistics (step 4)
-        #   • token-level interpretation (PMI, logit-lens, POS) (step 5)
-        # The texts are also written to --corpus-output for offline inspection.
         print(f"  Loading {args.num_texts} texts from '{args.dataset}'...")
-        activations, texts = collector.collect_from_dataset_with_texts(
+        texts = _collect_texts_from_dataset(
             dataset_name=args.dataset,
             dataset_config=args.dataset_config,
+            split="train",
             num_texts=args.num_texts,
-            max_samples=args.num_texts * 50,
-            batch_size=8,
-            max_length=128,
-            corpus_output=args.corpus_output,
         )
+        activations = _collect_gpt2_hidden_activations(
+            texts=texts,
+            tokenizer=tokenizer,
+            gpt2_model=gpt2_model,
+            layer_index=layer_index,
+            device=device,
+            max_length=128,
+        )
+
+        with open(args.corpus_output, "w", encoding="utf-8") as fh:
+            fh.write("\n\n".join(texts))
     else:
-        texts = SAMPLE_TEXTS
-        activations = collector.collect_activations(
-            texts=texts, batch_size=8, max_length=128
+        texts = SAMPLE_TEXT
+        activations = _collect_gpt2_hidden_activations(
+            texts=texts,
+            tokenizer=tokenizer,
+            gpt2_model=gpt2_model,
+            layer_index=layer_index,
+            device=device,
+            max_length=128,
         )
 
     # dataset_activations == activations in both branches (unified corpus)

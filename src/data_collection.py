@@ -14,6 +14,7 @@ Key Concepts:
 
 import torch
 import torch.nn as nn
+import os
 from transformers import GPT2Model, GPT2Tokenizer
 from datasets import load_dataset
 from typing import Optional, List, Tuple, Dict
@@ -93,6 +94,11 @@ def _prune_dataset_to_text_columns(dataset, explicit_field: Optional[str] = None
             dataset = dataset.remove_columns(drop_cols)
 
     return dataset
+
+
+def _resolve_hf_cache_dir(cache_dir: Optional[str]) -> Optional[str]:
+    """Resolve the Hugging Face cache directory with env fallback."""
+    return cache_dir or os.environ.get("HF_DATASETS_CACHE")
 
 
 class GPT2ActivationCollector:
@@ -250,6 +256,7 @@ class GPT2ActivationCollector:
         shuffle_buffer_size: int = 10_000,
         seed: int = 0,
         text_field: Optional[str] = None,
+        cache_dir: Optional[str] = None,
         allow_fallback: bool = True,
         **kwargs
     ) -> torch.Tensor:
@@ -280,9 +287,20 @@ class GPT2ActivationCollector:
         else:
             print(f"Loading dataset: {dataset_name}")
 
+        resolved_cache_dir = _resolve_hf_cache_dir(cache_dir)
+        if resolved_cache_dir:
+            print(f"Using Hugging Face cache dir: {resolved_cache_dir}")
+
         try:
             # Load dataset from HuggingFace
-            dataset = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
+            dataset = load_dataset(
+                dataset_name,
+                dataset_config,
+                split=split,
+                streaming=True,
+                trust_remote_code=True,
+                cache_dir=resolved_cache_dir,
+            )
             dataset = _prune_dataset_to_text_columns(dataset, text_field)
 
             # Streaming datasets iterate in a deterministic order unless shuffled.
@@ -329,6 +347,7 @@ class GPT2ActivationCollector:
         shuffle_buffer_size: int = 10_000,
         seed: int = 0,
         text_field: Optional[str] = None,
+        cache_dir: Optional[str] = None,
         allow_fallback: bool = True,
         corpus_output: Optional[str] = None,
         **kwargs,
@@ -366,8 +385,19 @@ class GPT2ActivationCollector:
         else:
             print(f"Loading dataset: {dataset_name}")
 
+        resolved_cache_dir = _resolve_hf_cache_dir(cache_dir)
+        if resolved_cache_dir:
+            print(f"Using Hugging Face cache dir: {resolved_cache_dir}")
+
         try:
-            dataset = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
+            dataset = load_dataset(
+                dataset_name,
+                dataset_config,
+                split=split,
+                streaming=True,
+                trust_remote_code=True,
+                cache_dir=resolved_cache_dir,
+            )
             dataset = _prune_dataset_to_text_columns(dataset, text_field)
 
             if shuffle_buffer_size and shuffle_buffer_size > 0:

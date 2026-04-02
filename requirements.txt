@@ -13,4 +13,5 @@ ipywidgets>=8.0.0
 nltk
 fastapi
 uvicorn[standard]
-openai
+openaisae_lens
+transformer_lens
