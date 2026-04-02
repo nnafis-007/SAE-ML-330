@@ -1,110 +1,103 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TextInput, Platform, FlatList } from 'react-native';
-
-const MOCK_DATA = {
-    negativeLogits: [
-        { text: 'tonsoft', value: -0.68 },
-        { text: 'NameInMap', value: -0.65 },
-        { text: 'OFDb', value: -0.65 },
-        { text: 'thiệu', value: -0.64 },
-        { text: 'getItemId', value: -0.61 },
-        { text: 'Sympathy', value: -0.59 },
-        { text: 'şiv', value: -0.57 },
-        { text: 'testy', value: -0.54 },
-        { text: 'дописавши', value: -0.54 },
-        { text: 'createState', value: -0.53 },
-    ],
-    positiveLogits: [
-        { text: 'success', value: 1.00 },
-        { text: 'succeed', value: 0.97 },
-        { text: 'réussite', value: 0.97 },
-        { text: 'achieving', value: 0.87 },
-        { text: 'successes', value: 0.86 },
-        { text: 'successful', value: 0.86 },
-        { text: 'pursue', value: 0.85 },
-        { text: 'achieve', value: 0.85 },
-        { text: 'prosper', value: 0.84 },
-        { text: 'achievements', value: 0.84 },
-    ],
-    activations: [
-        {
-            id: 1,
-            label: 'Australians',
-            score: 69.16,
-            content: [
-                { text: "what it's like " },
-                { text: "to have giant dreams and intend to help other", highlight: true, intensity: 0.6 },
-                { text: " young " },
-                { text: "Australians achieve theirs by sharing my", highlight: true, intensity: 0.9 },
-                { text: " knowledge and developing " },
-                { text: "their", highlight: true, intensity: 0.5 },
-                { text: " talent " },
-                { text: "in", highlight: true, intensity: 0.3 },
-                { text: " collaboration with The X" }
-            ]
-        },
-        {
-            id: 2,
-            label: 'should',
-            score: 68.57,
-            content: [
-                { text: "support and guide him " },
-                { text: "towards success", highlight: true, intensity: 0.8 },
-                { text: ". The movie is simply a " },
-                { text: "reminder that you should never let go of your dream", highlight: true, intensity: 0.9 },
-                { text: " and" }
-            ]
-        },
-        {
-            id: 3,
-            label: 'to',
-            score: 67.19,
-            content: [
-                { text: ". God " },
-                { text: "has", highlight: true, intensity: 0.4 },
-                { text: " been good " },
-                { text: "to", highlight: true, intensity: 0.5 },
-                { text: " that " },
-                { text: "little boy", highlight: true, intensity: 0.3 },
-                { text: " from long " },
-                { text: "ago, enabling me to do something", highlight: true, intensity: 0.7 },
-                { text: " I love" },
-                { text: ". I am", highlight: true, intensity: 0.5 },
-                { text: " amazed and thankful every day." }
-            ]
-        }
-    ]
-};
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const API_BASE = 'http://localhost:8000';
 
 export default function FeatureDetails({ feature, onClose, modelId }) {
-  const [testText, setTestText] = useState('');
+  const [maxSentences, setMaxSentences] = useState('200');
+  const [minActivation, setMinActivation] = useState('0.1');
+  const [maxResults, setMaxResults] = useState('100');
+
   const [llmLabel, setLlmLabel] = useState(null);
   const [llmLoading, setLlmLoading] = useState(false);
   const [llmError, setLlmError] = useState(null);
 
+  const [activationPayload, setActivationPayload] = useState(null);
+  const [analysisMeta, setAnalysisMeta] = useState(null);
+
   const fetchLlmLabel = async () => {
-    if (!feature?.id || !modelId) return;
+    if (!feature?.id || !modelId) {
+      return;
+    }
+
+    const sentenceLimit = Math.max(1, Number(maxSentences) || 200);
+    const minAct = Math.max(0, Number(minActivation) || 0);
+    const resultLimit = Math.max(1, Number(maxResults) || 100);
+
     setLlmLoading(true);
     setLlmLabel(null);
     setLlmError(null);
+    setActivationPayload(null);
+    setAnalysisMeta(null);
+
     try {
-      const res = await fetch(`${API_BASE}/label-feature`, {
+      // Step 1: fetch activating contexts from dataset with user-provided filters.
+      const activationsRes = await fetch(`${API_BASE}/feature-activations`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model_id: modelId,
+          feature_id: feature.id,
+          dataset_name: 'MLCommons/peoples_speech',
+          dataset_config: 'validation',
+          split: 'validation',
+          max_sentences: sentenceLimit,
+          max_results: resultLimit,
+          min_activation: minAct,
+        }),
+      });
+
+      if (!activationsRes.ok) {
+        const err = await activationsRes.json().catch(() => ({}));
+        throw new Error(err.detail || `HTTP ${activationsRes.status}`);
+      }
+
+      const activationData = await activationsRes.json();
+      const matches = activationData.matches || [];
+      const uniqueSentences = Array.from(
+        new Set(matches.map((m) => (m.sentence || '').trim()).filter(Boolean))
+      ).slice(0, sentenceLimit);
+
+      if (uniqueSentences.length === 0) {
+        throw new Error('No activating contexts found with the selected thresholds.');
+      }
+
+      setActivationPayload(activationData);
+
+      // Step 2: run LLM labeling using only those sampled sentences.
+      const labelRes = await fetch(`${API_BASE}/label-feature`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model_id: modelId,
           feature_idx: feature.id,
           analyzer: 'sae',
+          corpus_texts: uniqueSentences,
         }),
       });
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.detail || `HTTP ${res.status}`);
+
+      if (!labelRes.ok) {
+        const err = await labelRes.json().catch(() => ({}));
+        throw new Error(err.detail || `HTTP ${labelRes.status}`);
       }
-      const data = await res.json();
-      setLlmLabel(data);
+
+      const labelData = await labelRes.json();
+      setLlmLabel(labelData);
+      setAnalysisMeta({
+        sentenceLimit,
+        minAct,
+        resultLimit,
+        corpusSentencesUsed: uniqueSentences.length,
+        totalMatches: activationData.total_matches || 0,
+      });
     } catch (e) {
       setLlmError(e.message);
     } finally {
@@ -114,174 +107,150 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
 
   return (
     <View style={styles.container}>
-      {/* Header Bar */}
       <View style={styles.topBar}>
         <TouchableOpacity style={styles.doneButton} onPress={onClose}>
-            <Text style={styles.doneButtonText}>Done</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.popupButton}>
-            <Text style={styles.popupButtonText}>↗ Popup</Text>
+          <Text style={styles.doneButtonText}>Done</Text>
         </TouchableOpacity>
       </View>
 
       <ScrollView style={styles.contentScroll}>
         <View style={styles.mainContent}>
-            
-            <View style={styles.headerRow}>
-                <Text style={styles.pageTitle}>{feature?.description || "phrases that emphasize personal aspirations and empowerment"}</Text>
-                <View style={styles.modelCard}>
-                    <Text style={styles.modelInfo}>GPT-2 SAE</Text>
-                    <Text style={styles.modelDetail}>SPARSE AUTOENCODER</Text>
-                    <Text style={styles.modelIndex}>INDEX {feature?.id || '—'}</Text>
-                </View>
+          <View style={styles.headerRow}>
+            <Text style={styles.pageTitle}>{feature?.description || `Feature ${feature?.id ?? ''}`}</Text>
+            <View style={styles.modelCard}>
+              <Text style={styles.modelInfo}>GPT-2 SAE</Text>
+              <Text style={styles.modelDetail}>LLM ANALYSIS</Text>
+              <Text style={styles.modelIndex}>FEATURE {feature?.id || '-'}</Text>
             </View>
+          </View>
 
-            {/* Logits Section */}
-            <View style={styles.logitsContainer}>
-                
-                {/* Negative Logits */}
-                <View style={styles.logitsColumn}>
-                    <View style={styles.logitsHeaderRow}>
-                         <Text style={styles.logitsTitle}>NEGATIVE LOGITS ⓘ</Text>
-                    </View>
-                    {MOCK_DATA.negativeLogits.map((item, idx) => (
-                        <View key={idx} style={styles.logitRow}>
-                            <View style={[styles.logitPill, styles.negativePill]}>
-                                <Text style={styles.logitText}>{item.text}</Text>
-                            </View>
-                            <Text style={styles.logitValue}>{item.value.toFixed(2)}</Text>
-                        </View>
-                    ))}
-                </View>
+          <View style={styles.analysisPanel}>
+            <Text style={styles.panelTitle}>Run Feature LLM Analysis</Text>
+            <Text style={styles.panelHint}>
+              Configure how many sentences to scan and the minimum token activation threshold,
+              then analyze this feature.
+            </Text>
 
-                {/* Positive Logits */}
-                <View style={styles.logitsColumn}>
-                     <View style={styles.logitsHeaderRow}>
-                         <Text style={styles.logitsTitle}>POSITIVE LOGITS ⓘ</Text>
-                    </View>
-                    {MOCK_DATA.positiveLogits.map((item, idx) => (
-                        <View key={idx} style={styles.logitRow}>
-                            <View style={[styles.logitPill, styles.positivePill]}>
-                                <Text style={styles.logitText}>{item.text}</Text>
-                            </View>
-                            <Text style={styles.logitValue}>{item.value.toFixed(2)}</Text>
-                        </View>
-                    ))}
-                </View>
-
-                {/* Histogram (Simplified) */}
-                <View style={styles.histogramColumn}>
-                    <Text style={styles.histogramTitle}>ACTIVATIONS DENSITY 0.290% ⓘ</Text>
-                    <View style={styles.histogramChart}>
-                         {/* Mock bars */}
-                         {[...Array(20)].map((_, i) => (
-                             <View key={i} style={[
-                                 styles.bar, 
-                                 { 
-                                     height: Math.random() * 80 + 10,
-                                     backgroundColor: i < 10 ? '#ffb3b3' : '#a3bffa' // Reddish then Bluish
-                                 }
-                             ]} />
-                         ))}
-                    </View>
-                    <View style={styles.xAxis}>
-                        <Text style={styles.axisLabel}>-0.5</Text>
-                        <Text style={styles.axisLabel}>0</Text>
-                        <Text style={styles.axisLabel}>0.5</Text>
-                    </View>
-                </View>
-
-            </View>
-
-            {/* LLM Label */}
-            <View style={styles.llmSection}>
-              <TouchableOpacity
-                style={[styles.actionButton, styles.llmButton]}
-                onPress={fetchLlmLabel}
-                disabled={llmLoading}
-              >
-                <Text style={styles.actionButtonText}>
-                  {llmLoading ? '…Labeling' : '✦ Get LLM Label'}
-                </Text>
-              </TouchableOpacity>
-              {llmError && (
-                <Text style={styles.llmError}>{llmError}</Text>
-              )}
-              {llmLabel && (
-                <View style={styles.llmResult}>
-                  <View style={styles.llmLabelRow}>
-                    <Text style={styles.llmLabelText}>{llmLabel.label}</Text>
-                    <View style={[styles.confidenceBadge,
-                      llmLabel.confidence === 'high' ? styles.confHigh
-                      : llmLabel.confidence === 'medium' ? styles.confMed
-                      : styles.confLow
-                    ]}>
-                      <Text style={styles.confidenceText}>{llmLabel.confidence?.toUpperCase()}</Text>
-                    </View>
-                  </View>
-                  <Text style={styles.llmExplanation}>{llmLabel.explanation}</Text>
-                  {llmLabel.top_tokens?.length > 0 && (
-                    <View style={styles.tokenChips}>
-                      {llmLabel.top_tokens.slice(0, 10).map((tok, i) => (
-                        <View key={i} style={styles.chip}>
-                          <Text style={styles.chipText}>{tok}</Text>
-                        </View>
-                      ))}
-                    </View>
-                  )}
-                </View>
-              )}
-            </View>
-
-            {/* Test Activation */}
-            <View style={styles.testSection}>
-                <TextInput 
-                    style={styles.testInput}
-                    placeholder="Test activation with custom text."
-                    value={testText}
-                    onChangeText={setTestText}
+            <View style={styles.inputRow}>
+              <View style={styles.inputField}>
+                <Text style={styles.inputLabel}>How many sentences to analyze</Text>
+                <TextInput
+                  style={styles.numericInput}
+                  value={maxSentences}
+                  onChangeText={(t) => setMaxSentences(t.replace(/[^0-9]/g, ''))}
+                  keyboardType="numeric"
+                  placeholder="200"
                 />
-                <TouchableOpacity style={[styles.actionButton, styles.testButton]}>
-                    <Text style={styles.actionButtonText}>▷ Test</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.actionButton, styles.steerButton]}>
-                    <Text style={[styles.actionButtonText, styles.steerButtonText]}>⎇ Steer</Text>
-                </TouchableOpacity>
+              </View>
+              <View style={styles.inputField}>
+                <Text style={styles.inputLabel}>Minimum activation value</Text>
+                <TextInput
+                  style={styles.numericInput}
+                  value={minActivation}
+                  onChangeText={(t) => setMinActivation(t.replace(/[^0-9.]/g, ''))}
+                  keyboardType="numeric"
+                  placeholder="0.1"
+                />
+              </View>
+              <View style={styles.inputField}>
+                <Text style={styles.inputLabel}>Maximum matches to keep</Text>
+                <TextInput
+                  style={styles.numericInput}
+                  value={maxResults}
+                  onChangeText={(t) => setMaxResults(t.replace(/[^0-9]/g, ''))}
+                  keyboardType="numeric"
+                  placeholder="100"
+                />
+              </View>
             </View>
 
-            {/* Top Activations */}
-            <View style={styles.activationsHeader}>
-                <Text style={styles.topLabel}>TOP</Text>
-                <View style={styles.activationsTag}>
-                    <Text style={styles.activationsTagText}>ACTIVATIONS</Text>
+            <TouchableOpacity
+              style={[styles.actionButton, styles.llmButton]}
+              onPress={fetchLlmLabel}
+              disabled={llmLoading}
+            >
+              <Text style={styles.actionButtonText}>
+                {llmLoading ? 'Analyzing...' : `Analyze Feature #${feature?.id}`}
+              </Text>
+            </TouchableOpacity>
+
+            {llmLoading && (
+              <View style={styles.loadingRow}>
+                <ActivityIndicator size="small" color="#2563eb" />
+                <Text style={styles.loadingText}>Collecting activations and requesting LLM label...</Text>
+              </View>
+            )}
+          </View>
+
+          <View style={styles.llmSection}>
+            {llmError && <Text style={styles.llmError}>{llmError}</Text>}
+
+            {llmLabel && (
+              <View style={styles.llmResult}>
+                <Text style={styles.resultTitle}>LLM Label Result</Text>
+                <View style={styles.llmLabelRow}>
+                  <Text style={styles.llmLabelText}>{llmLabel.label || '(no label returned)'}</Text>
+                  <View
+                    style={[
+                      styles.confidenceBadge,
+                      llmLabel.confidence === 'high'
+                        ? styles.confHigh
+                        : llmLabel.confidence === 'medium'
+                          ? styles.confMed
+                          : styles.confLow,
+                    ]}
+                  >
+                    <Text style={styles.confidenceText}>{llmLabel.confidence?.toUpperCase()}</Text>
+                  </View>
                 </View>
-            </View>
 
-            <View style={styles.activationsList}>
-                {MOCK_DATA.activations.map((act) => (
-                    <View key={act.id} style={styles.activationCard}>
-                        <View style={styles.activationScoreBox}>
-                            <Text style={styles.activationScoreLabel}>{act.label}</Text>
-                            <Text style={styles.activationScoreValue}>{act.score}</Text>
-                        </View>
-                        <View style={styles.activationContent}>
-                            <Text style={styles.activationText}>
-                                {act.content.map((segment, sIdx) => (
-                                    <Text key={sIdx} style={{
-                                        backgroundColor: segment.highlight ? `rgba(90, 230, 150, ${segment.intensity || 0.5})` : 'transparent'
-                                    }}>
-                                        {segment.text}
-                                    </Text>
-                                ))}
-                            </Text>
-                            <TouchableOpacity style={styles.copyButton}>
-                                <Text style={styles.copyIcon}>❑</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                ))}
-            </View>
+                <Text style={styles.llmExplanation}>{llmLabel.explanation}</Text>
 
+                {llmLabel.top_tokens?.length > 0 && (
+                  <View style={styles.tokenChips}>
+                    {llmLabel.top_tokens.slice(0, 10).map((tok, i) => (
+                      <View key={i} style={styles.chip}>
+                        <Text style={styles.chipText}>{tok}</Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
+
+                {analysisMeta && (
+                  <View style={styles.metaBox}>
+                    <Text style={styles.metaText}>Sentences scanned: {analysisMeta.sentenceLimit}</Text>
+                    <Text style={styles.metaText}>Min activation: {analysisMeta.minAct}</Text>
+                    <Text style={styles.metaText}>Matches returned: {analysisMeta.totalMatches}</Text>
+                    <Text style={styles.metaText}>Sentences used for LLM: {analysisMeta.corpusSentencesUsed}</Text>
+                  </View>
+                )}
+              </View>
+            )}
+          </View>
+
+          {activationPayload?.matches?.length > 0 && (
+            <View style={styles.activationsListWrap}>
+              <Text style={styles.subheading}>Top Activation Matches</Text>
+              {activationPayload.matches.slice(0, 25).map((match, idx) => (
+                <View key={`match-${idx}`} style={styles.matchCard}>
+                  <View style={styles.matchMetaRow}>
+                    <Text style={styles.matchMetaText}>
+                      Sentence #{match.sentence_index} | Token #{match.token_index}
+                    </Text>
+                    <Text style={styles.matchActivation}>{Number(match.activation || 0).toFixed(4)}</Text>
+                  </View>
+
+                  <Text style={styles.matchContext}>
+                    {match.left_context}
+                    <Text style={styles.matchToken}>{match.token}</Text>
+                    {match.right_context}
+                  </Text>
+
+                  <Text style={styles.matchSentence}>{match.sentence}</Text>
+                </View>
+              ))}
+            </View>
+          )}
         </View>
       </ScrollView>
     </View>
@@ -296,7 +265,7 @@ const styles = StyleSheet.create({
   topBar: {
     padding: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
     backgroundColor: '#f8f9fa',
@@ -307,15 +276,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   doneButtonText: {
-    fontWeight: '600',
-    color: '#475569',
-  },
-  popupButton: {
-    padding: 8,
-    backgroundColor: '#e2e8f0',
-    borderRadius: 6,
-  },
-  popupButtonText: {
     fontWeight: '600',
     color: '#475569',
   },
@@ -343,7 +303,7 @@ const styles = StyleSheet.create({
     minWidth: 300,
   },
   modelCard: {
-    backgroundColor: '#eff6ff', // Light blue bg
+    backgroundColor: '#eff6ff',
     padding: 10,
     borderRadius: 8,
     borderWidth: 1,
@@ -354,13 +314,67 @@ const styles = StyleSheet.create({
   modelDetail: { fontSize: 10, color: '#64748b' },
   modelIndex: { fontSize: 12, fontWeight: 'bold', color: '#334155' },
 
-  // LLM label area
+  analysisPanel: {
+    backgroundColor: '#f8fafc',
+    borderWidth: 1,
+    borderColor: '#e2e8f0',
+    borderRadius: 12,
+    padding: 14,
+    marginBottom: 16,
+    gap: 10,
+  },
+  panelTitle: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#0f172a',
+  },
+  panelHint: {
+    color: '#475569',
+    fontSize: 13,
+    lineHeight: 20,
+  },
+  inputRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+  },
+  inputField: {
+    flex: 1,
+    minWidth: 180,
+  },
+  inputLabel: {
+    fontSize: 12,
+    color: '#334155',
+    marginBottom: 6,
+    fontWeight: '600',
+  },
+  numericInput: {
+    borderWidth: 1,
+    borderColor: '#cbd5e1',
+    borderRadius: 8,
+    backgroundColor: '#fff',
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    fontSize: 14,
+    color: '#0f172a',
+    outlineStyle: 'none',
+  },
+  loadingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  loadingText: {
+    color: '#334155',
+    fontSize: 13,
+  },
+
   llmSection: {
     marginBottom: 20,
     gap: 10,
   },
   llmButton: {
-    backgroundColor: '#7c3aed',
+    backgroundColor: '#2563eb',
     alignSelf: 'flex-start',
   },
   llmError: {
@@ -368,12 +382,18 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   llmResult: {
-    backgroundColor: '#f5f3ff',
+    backgroundColor: '#eff6ff',
     borderRadius: 8,
     padding: 14,
     borderWidth: 1,
-    borderColor: '#ddd6fe',
+    borderColor: '#bfdbfe',
     gap: 6,
+  },
+  resultTitle: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#1e3a8a',
+    marginBottom: 4,
   },
   llmLabelRow: {
     flexDirection: 'row',
@@ -384,7 +404,7 @@ const styles = StyleSheet.create({
   llmLabelText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#3730a3',
+    color: '#1e3a8a',
     flex: 1,
   },
   confidenceBadge: {
@@ -392,9 +412,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 3,
   },
-  confHigh:  { backgroundColor: '#bbf7d0' },
-  confMed:   { backgroundColor: '#fef08a' },
-  confLow:   { backgroundColor: '#fecaca' },
+  confHigh: { backgroundColor: '#bbf7d0' },
+  confMed: { backgroundColor: '#fef08a' },
+  confLow: { backgroundColor: '#fecaca' },
   confidenceText: {
     fontSize: 10,
     fontWeight: 'bold',
@@ -412,156 +432,91 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   chip: {
-    backgroundColor: '#ede9fe',
+    backgroundColor: '#dbeafe',
     borderRadius: 12,
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderWidth: 1,
-    borderColor: '#c4b5fd',
+    borderColor: '#93c5fd',
   },
   chipText: {
+    fontSize: 11,
+    color: '#1e3a8a',
+    fontWeight: '600',
+  },
+  metaBox: {
+    marginTop: 8,
+    backgroundColor: '#f8fafc',
+    borderWidth: 1,
+    borderColor: '#e2e8f0',
+    borderRadius: 8,
+    padding: 10,
+    gap: 2,
+  },
+  metaText: {
     fontSize: 12,
-    color: '#5b21b6',
+    color: '#334155',
   },
 
-  logitsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+  actionButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 8,
+  },
+  actionButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 13,
+  },
+
+  activationsListWrap: {
     marginBottom: 20,
-    gap: 20,
   },
-  logitsColumn: {
-    flex: 1,
-    minWidth: 200,
-  },
-  logitsHeaderRow: {
+  subheading: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#0f172a',
     marginBottom: 10,
   },
-  logitsTitle: {
-      fontSize: 10,
-      fontWeight: 'bold',
-      color: '#94a3b8',
-      textTransform: 'uppercase',
+  matchCard: {
+    backgroundColor: '#f8fafc',
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#e2e8f0',
   },
-  logitRow: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      marginBottom: 4,
+  matchMetaRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 6,
   },
-  logitPill: {
-      paddingHorizontal: 6,
-      paddingVertical: 2,
-      borderRadius: 4,
-      marginRight: 8,
+  matchMetaText: {
+    fontSize: 12,
+    color: '#334155',
+    fontWeight: '600',
   },
-  negativePill: { backgroundColor: '#fee2e2' },
-  positivePill: { backgroundColor: '#dbeafe' },
-  logitText: { fontFamily: 'monospace', fontSize: 12, color: '#0f172a' },
-  logitValue: { fontFamily: 'monospace', fontSize: 12, color: '#64748b' },
-  
-  histogramColumn: {
-      flex: 1.5,
-      minWidth: 300,
-      height: 200,
-      justifyContent: 'flex-end',
+  matchActivation: {
+    fontSize: 12,
+    color: '#0f766e',
+    fontWeight: '700',
   },
-  histogramTitle: {
-      fontSize: 10,
-      fontWeight: 'bold',
-      color: '#94a3b8',
-      textAlign: 'right',
-      marginBottom: 10,
+  matchContext: {
+    flex: 1,
+    fontSize: 14,
+    color: '#1f2937',
+    lineHeight: 22,
+    marginBottom: 6,
   },
-  histogramChart: {
-      flexDirection: 'row',
-      alignItems: 'flex-end',
-      height: 150,
-      borderBottomWidth: 1,
-      borderBottomColor: '#e2e8f0',
-      gap: 2,
+  matchToken: {
+    backgroundColor: '#d1fae5',
+    color: '#065f46',
+    fontWeight: '700',
   },
-  bar: {
-      flex: 1,
-      borderTopLeftRadius: 2,
-      borderTopRightRadius: 2,
+  matchSentence: {
+    fontSize: 12,
+    lineHeight: 18,
+    color: '#64748b',
   },
-  xAxis: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginTop: 5,
-  },
-  axisLabel: { fontSize: 10, color: '#94a3b8' },
-
-  testSection: {
-      flexDirection: 'row',
-      marginBottom: 30,
-      gap: 10,
-      alignItems: 'center',
-  },
-  testInput: {
-      flex: 1,
-      borderWidth: 1,
-      borderColor: '#e2e8f0',
-      borderRadius: 4,
-      padding: 10,
-      height: 40,
-  },
-  actionButton: {
-      paddingHorizontal: 16,
-      height: 40,
-      justifyContent: 'center',
-      borderRadius: 4,
-  },
-  testButton: { backgroundColor: '#0f5385' },
-  steerButton: { backgroundColor: '#fff', borderWidth: 1, borderColor: '#22c55e' },
-  actionButtonText: { color: '#fff', fontWeight: 'bold' },
-  steerButtonText: { color: '#22c55e' },
-
-  activationsHeader: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginBottom: 15,
-  },
-  topLabel: { fontSize: 10, color: '#64748b', marginRight: 5, fontWeight: 'bold' },
-  activationsTag: { backgroundColor: '#4ade80', paddingHorizontal: 6, paddingVertical: 2, borderRadius: 2 },
-  activationsTagText: { color: '#fff', fontSize: 10, fontWeight: 'bold' },
-  
-  activationsList: { gap: 10 },
-  activationCard: {
-      flexDirection: 'row',
-      marginBottom: 10,
-      alignItems: 'flex-start',
-  },
-  activationScoreBox: {
-      width: 80,
-      padding: 5,
-      backgroundColor: '#f8fafc',
-      marginRight: 10,
-      borderRadius: 4,
-  },
-  activationScoreLabel: { fontSize: 10, fontWeight: 'bold', color: '#475569', marginBottom: 2 },
-  activationScoreValue: { fontSize: 12, color: '#166534', fontWeight: 'bold' },
-  
-  activationContent: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'flex-start',
-  },
-  activationText: {
-      flex: 1,
-      fontSize: 14,
-      lineHeight: 22,
-      color: '#334155',
-      fontFamily: 'monospace'
-  },
-  copyButton: {
-      marginLeft: 10,
-      padding: 4,
-  },
-  copyIcon: {
-      fontSize: 16,
-      color: '#cbd5e1'
-  }
-
 });
