@@ -387,94 +387,12 @@ class FeatureLabeler:
         self.sae.to(self.device).eval()
         self._backend = _build_backend(cfg)
 
-    def _compute_normalization_stats(self, activations: torch.Tensor) -> Dict[str, Any]:
-        """Compute normalization stats from the provided activation corpus."""
-        mean = activations.mean(dim=0, keepdim=True)
-        std = activations.std(dim=0, keepdim=True)
-        return {
-            "mean": mean,
-            "std": std,
-            "normalize_mode": self.cfg.normalize_mode,
-            "std_floor": float(self.cfg.std_floor),
-        }
-
-    def _apply_activation_normalization(
-        self,
-        x: torch.Tensor,
-        norm_stats: Optional[Dict[str, Any]],
-    ) -> torch.Tensor:
-        """Apply the same normalization mode used for SAE training inputs."""
-        if norm_stats is None:
-            return x
-
-        mode = str(norm_stats.get("normalize_mode", "standardize")).lower().strip()
-        mean = norm_stats.get("mean")
-        std = norm_stats.get("std")
-        std_floor = float(norm_stats.get("std_floor", self.cfg.std_floor))
-
-        if mean is None:
-            return x
-
-        mean = mean.to(device=x.device, dtype=x.dtype)
-
-        if mode in {"none", "off", "no"}:
-            return x
-        if mode in {"center", "center_only", "mean"}:
-            return x - mean
-        if mode in {"standardize", "zscore", "z-score"}:
-            if std is None:
-                return x - mean
-            std = std.to(device=x.device, dtype=x.dtype)
-            if std_floor > 0:
-                std = std.clamp_min(std_floor)
-            return (x - mean) / (std + 1e-8)
-
-        raise ValueError(
-            f"Unknown normalize_mode='{mode}'. Expected one of: standardize|center|none."
-        )
-
-    def _build_valid_row_indices(self, token_pos_map: List[int]) -> torch.Tensor:
-        """Build a row-index tensor that excludes first-token activations if configured."""
-        if self.cfg.skip_first_token:
-            idxs = [i for i, pos in enumerate(token_pos_map) if pos > 0]
-            return torch.tensor(idxs, dtype=torch.long)
-        return torch.arange(len(token_pos_map), dtype=torch.long)
-
-    @torch.no_grad()
-    def _compute_mean_feature_activations(
-        self,
-        activations: torch.Tensor,
-        valid_row_indices: torch.Tensor,
-        norm_stats: Optional[Dict[str, Any]],
-    ) -> torch.Tensor:
-        """Compute corpus-wide mean feature activations over valid token rows."""
-        if valid_row_indices.numel() == 0:
-            return torch.zeros(self.sae.d_hidden, dtype=torch.float32)
-
-        mean_acts = torch.zeros(self.sae.d_hidden, dtype=torch.float32)
-        n_valid = int(valid_row_indices.numel())
-
-        for start in range(0, n_valid, self.cfg.batch_size):
-            end = min(start + self.cfg.batch_size, n_valid)
-            row_idx = valid_row_indices[start:end]
-            batch = activations[row_idx].to(self.device)
-            batch = self._apply_activation_normalization(batch, norm_stats)
-            enc = self.sae.encode(batch)
-            mean_acts += enc.sum(dim=0).cpu()
-
-        mean_acts /= max(n_valid, 1)
-        return mean_acts
-
-    def _format_global_top_features(self, mean_acts: torch.Tensor, top_n: int = 10) -> str:
-        """Format a compact top-N global feature list for prompt injection."""
-        if mean_acts.numel() == 0:
-            return "(none)"
-        n = min(int(top_n), int(mean_acts.numel()))
-        if n <= 0:
-            return "(none)"
-        vals, idxs = torch.topk(mean_acts, n)
-        parts = [f"{int(i)}:{float(v):.3f}" for v, i in zip(vals.tolist(), idxs.tolist())]
-        return ", ".join(parts) if parts else "(none)"
+    @staticmethod
+    def _normalize_activations(batch: torch.Tensor, eps: float = 1e-6) -> torch.Tensor:
+        """Apply per-token standardization before SAE encoding."""
+        mean = batch.mean(dim=-1, keepdim=True)
+        std = batch.std(dim=-1, keepdim=True, unbiased=False)
+        return (batch - mean) / (std + eps)
 
     # ------------------------------------------------------------------
     # Step 1 – Collect token-level top-activating contexts
@@ -513,7 +431,7 @@ class FeatureLabeler:
         for start in range(0, n, cfg.batch_size):
             end = min(start + cfg.batch_size, n)
             batch = activations[start:end].to(self.device)
-            batch = self._apply_activation_normalization(batch, norm_stats)
+            batch = self._normalize_activations(batch)
             encoded = self.sae.encode(batch)           # (batch, d_hidden)
             feat_vals[start:end] = encoded[:, feature_idx].cpu()
 
@@ -1327,15 +1245,10 @@ if __name__ == "__main__":
         help="Max token length per text for activation collection and token maps.",
     )
     parser.add_argument(
-        "--label-all-alive",
-        action="store_true",
-        help="Label all alive features found in the activation corpus.",
-    )
-    parser.add_argument(
-        "--num-features",
+        "--top-feature-count",
         type=int,
-        default=5,
-        help="Number of features to interpret. If --label-all-alive is not set, label this many mid-ranked alive features. Use a positive integer to select specific count.",
+        default=10,
+        help="Number of features to interpret. Number of top activated alive features. Use a positive integer to select specific count to label. Default: 10",
     )
     parser.add_argument(
         "--save-path",
@@ -1652,35 +1565,26 @@ if __name__ == "__main__":
     labeler = FeatureLabeler(sae, tokenizer, cfg)
 
     # ------------------------------------------------------------------ #
-    # 5.  Find top active features across this mini-corpus
+    # 5.  Find top activated alive features across this corpus
     # ------------------------------------------------------------------ #
-    norm_stats = labeler._compute_normalization_stats(activations)
-    valid_rows = labeler._build_valid_row_indices(pos_map)
-    mean_acts = labeler._compute_mean_feature_activations(
-        activations=activations,
-        valid_row_indices=valid_rows,
-        norm_stats=norm_stats,
-    )
+    mean_acts = torch.zeros(sae.d_hidden)
+    with torch.no_grad():
+        for start in range(0, activations.shape[0], 256):
+            batch = activations[start:start + 256]
+            batch = FeatureLabeler._normalize_activations(batch)
+            enc = sae.encode(batch)
+            mean_acts += enc.sum(dim=0).cpu()
+    mean_acts /= activations.shape[0]
     # Sort all features by mean activation.
     # Skip dead features (mean_acts == 0) — they carry no signal.
     alive_sorted = mean_acts.argsort(descending=True)
     alive_sorted = alive_sorted[mean_acts[alive_sorted] > 0]
 
     n_alive = len(alive_sorted)
-    if args.label_all_alive:
-        target_features = alive_sorted.tolist()
-        print(f"\nAlive features: {n_alive}")
-        print("Label mode: ALL alive features")
-    else:
-        # Pick N features from the middle of the alive ranking.
-        n_pick = max(1, min(args.num_features, n_alive))
-        mid = n_alive // 2
-        half = n_pick // 2
-        start = max(0, min(mid - half, n_alive - n_pick))
-        end = start + n_pick
-        target_features = alive_sorted[start:end].tolist()
-        print(f"\nAlive features: {n_alive}  |  Median rank: {mid}")
-        print(f"Mid-range feature indices (ranks {start}–{end-1}): {target_features}")
+    top_n = max(1, min(args.top_feature_count, n_alive))
+    target_features = alive_sorted[:top_n].tolist()
+    print(f"\nAlive features: {n_alive}")
+    print(f"Top-{top_n} feature indices by mean activation: {target_features}")
 
     # ------------------------------------------------------------------ #
     # 6.  Run labeling
