@@ -38,7 +38,7 @@ import json
 import sys
 from itertools import combinations
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 sys.path.append(str(Path(__file__).parent / "src"))
 
@@ -310,6 +310,28 @@ def jaccard(set_a: set, set_b: set) -> float:
     return len(set_a & set_b) / len(set_a | set_b)
 
 
+def weighted_jaccard(
+    a: torch.Tensor,
+    b: torch.Tensor,
+    indices: Optional[List[int]] = None,
+) -> float:
+    """Activation-aware Jaccard using min/max over non-negative activations."""
+    if indices is not None:
+        if len(indices) == 0:
+            return 1.0
+        idx = torch.tensor(indices, dtype=torch.long)
+        a = a[idx]
+        b = b[idx]
+
+    a = torch.clamp(a, min=0)
+    b = torch.clamp(b, min=0)
+    numer = torch.minimum(a, b).sum().item()
+    denom = torch.maximum(a, b).sum().item()
+    if denom == 0:
+        return 1.0
+    return float(numer / denom)
+
+
 def cosine_sim(a: torch.Tensor, b: torch.Tensor) -> float:
     denom = a.norm() * b.norm()
     if denom == 0:
@@ -364,12 +386,14 @@ def analyse_word(
     for va, vb in combinations(variant_strs, 2):
         sa, sb = set(top_features[va]), set(top_features[vb])
         shared = sorted(sa & sb)
+        union = sorted(sa | sb)
         pairwise.append({
             "variant_a":          va,
             "label_a":            variant_labels[va],
             "variant_b":          vb,
             "label_b":            variant_labels[vb],
             "jaccard":            round(jaccard(sa, sb), 4),
+            "weighted_jaccard":   round(weighted_jaccard(profiles[va], profiles[vb], indices=union), 4),
             "cosine_sim":         round(cosine_sim(profiles[va], profiles[vb]), 4),
             "shared_feature_count": len(shared),
             "shared_features":    shared,
@@ -391,11 +415,18 @@ def analyse_word(
     mean_jaccard = (
         sum(p["jaccard"] for p in pairwise) / len(pairwise) if pairwise else 0.0
     )
+    mean_weighted_jaccard = (
+        sum(p["weighted_jaccard"] for p in pairwise) / len(pairwise) if pairwise else 0.0
+    )
     mean_cosine = (
         sum(p["cosine_sim"] for p in pairwise) / len(pairwise) if pairwise else 0.0
     )
 
-    print(f"    → Mean Jaccard: {mean_jaccard:.3f}  |  Mean cosine: {mean_cosine:.3f}")
+    print(
+        f"    → Mean Jaccard: {mean_jaccard:.3f}  |  "
+        f"Mean weighted Jaccard: {mean_weighted_jaccard:.3f}  |  "
+        f"Mean cosine: {mean_cosine:.3f}"
+    )
     if key_pair:
         print(f"    → lower↔upper  Jaccard: {key_pair['jaccard']:.3f}  "
               f"cosine: {key_pair['cosine_sim']:.3f}")
@@ -411,11 +442,12 @@ def analyse_word(
         "pairwise":          pairwise,
         "universal_shared_features": universal,
         "mean_jaccard":      round(mean_jaccard, 4),
+        "mean_weighted_jaccard": round(mean_weighted_jaccard, 4),
         "mean_cosine_sim":   round(mean_cosine, 4),
         "lower_vs_upper":    key_pair,
         "interpretation": (
-            "CASE-INVARIANT (strong)"   if mean_jaccard > 0.40 else
-            "PARTIALLY case-sensitive"  if mean_jaccard > 0.20 else
+            "CASE-INVARIANT (strong)"   if mean_weighted_jaccard > 0.40 else
+            "PARTIALLY case-sensitive"  if mean_weighted_jaccard > 0.20 else
             "CASE-SENSITIVE (features differ)"
         ),
     }

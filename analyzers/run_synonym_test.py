@@ -43,7 +43,7 @@ import json
 import sys
 from itertools import combinations
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 sys.path.append(str(Path(__file__).parent / "src"))
 
@@ -410,6 +410,35 @@ def jaccard(set_a: set, set_b: set) -> float:
     return len(set_a & set_b) / len(union)
 
 
+def weighted_jaccard(
+    a: torch.Tensor,
+    b: torch.Tensor,
+    indices: Optional[List[int]] = None,
+) -> float:
+    """
+    Activation-aware Jaccard for non-negative feature vectors.
+
+    Standard Jaccard treats every selected feature equally (binary present/absent).
+    Weighted Jaccard scales overlap by activation magnitude:
+      sum_i min(a_i, b_i) / sum_i max(a_i, b_i)
+    """
+    if indices is not None:
+        if len(indices) == 0:
+            return 1.0
+        idx = torch.tensor(indices, dtype=torch.long)
+        a = a[idx]
+        b = b[idx]
+
+    a = torch.clamp(a, min=0)
+    b = torch.clamp(b, min=0)
+
+    numer = torch.minimum(a, b).sum().item()
+    denom = torch.maximum(a, b).sum().item()
+    if denom == 0:
+        return 1.0
+    return float(numer / denom)
+
+
 def cosine_sim(a: torch.Tensor, b: torch.Tensor) -> float:
     denom = a.norm() * b.norm()
     if denom == 0:
@@ -453,7 +482,7 @@ def analyse_cluster(
         w: top_k_features(v, top_k) for w, v in profiles.items()
     }
 
-    # Pairwise Jaccard + cosine
+    # Pairwise Jaccard + weighted Jaccard + cosine
     words = list(profiles.keys())
     pairwise = []
     for w1, w2 in combinations(words, 2):
@@ -461,11 +490,14 @@ def analyse_cluster(
         s2 = set(top_features[w2])
         shared = sorted(s1 & s2)
         j = jaccard(s1, s2)
+        union = sorted(s1 | s2)
+        wj = weighted_jaccard(profiles[w1], profiles[w2], indices=union)
         cos = cosine_sim(profiles[w1], profiles[w2])
         pairwise.append({
             "word_a": w1,
             "word_b": w2,
             "jaccard": round(j, 4),
+            "weighted_jaccard": round(wj, 4),
             "cosine_sim": round(cos, 4),
             "shared_feature_count": len(shared),
             "shared_features": shared,
@@ -485,11 +517,18 @@ def analyse_cluster(
     mean_jaccard = (
         sum(p["jaccard"] for p in pairwise) / len(pairwise) if pairwise else 0.0
     )
+    mean_weighted_jaccard = (
+        sum(p["weighted_jaccard"] for p in pairwise) / len(pairwise) if pairwise else 0.0
+    )
     mean_cosine = (
         sum(p["cosine_sim"] for p in pairwise) / len(pairwise) if pairwise else 0.0
     )
 
-    print(f"    → Mean Jaccard: {mean_jaccard:.3f}  |  Mean cosine: {mean_cosine:.3f}")
+    print(
+        f"    → Mean Jaccard: {mean_jaccard:.3f}  |  "
+        f"Mean weighted Jaccard: {mean_weighted_jaccard:.3f}  |  "
+        f"Mean cosine: {mean_cosine:.3f}"
+    )
     print(f"    → Features shared by ALL {len(words)} words: {len(universal_shared)}")
 
     return {
@@ -502,10 +541,11 @@ def analyse_cluster(
         "universal_shared_features": universal_shared,
         "unique_features_per_word": unique_to,
         "mean_jaccard": round(mean_jaccard, 4),
+        "mean_weighted_jaccard": round(mean_weighted_jaccard, 4),
         "mean_cosine_sim": round(mean_cosine, 4),
         "interpretation": (
-            "STRONG synonym signal"   if mean_jaccard > 0.40 else
-            "MODERATE synonym signal" if mean_jaccard > 0.20 else
+            "STRONG synonym signal"   if mean_weighted_jaccard > 0.40 else
+            "MODERATE synonym signal" if mean_weighted_jaccard > 0.20 else
             "WEAK synonym signal"
         ),
     }
