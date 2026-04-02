@@ -21,6 +21,48 @@ from tqdm.auto import tqdm
 import numpy as np
 
 
+ACTIVATIONS_SCHEMA_VERSION = 2
+
+
+def make_activation_artifact(
+    activations: torch.Tensor,
+    collection_stats: Optional[Dict[str, int]] = None,
+) -> Dict:
+    """Build a versioned activation artifact for stable loading behavior."""
+    return {
+        "schema_version": ACTIVATIONS_SCHEMA_VERSION,
+        "position0_dropped": True,
+        "activations": activations,
+        "collection_stats": collection_stats or {},
+    }
+
+
+def load_activation_artifact(obj) -> Tuple[torch.Tensor, Dict]:
+    """Load activations and metadata; marks legacy tensor-only files explicitly."""
+    if isinstance(obj, torch.Tensor):
+        return obj, {
+            "is_legacy": True,
+            "schema_version": None,
+            "position0_dropped": False,
+            "collection_stats": {},
+        }
+
+    if isinstance(obj, dict) and isinstance(obj.get("activations"), torch.Tensor):
+        schema_version = obj.get("schema_version")
+        position0_dropped = bool(obj.get("position0_dropped", False))
+        return obj["activations"], {
+            "is_legacy": False,
+            "schema_version": schema_version,
+            "position0_dropped": position0_dropped,
+            "collection_stats": obj.get("collection_stats", {}),
+        }
+
+    raise ValueError(
+        "Invalid activations artifact. Expected a Tensor (legacy) or a dict "
+        "with keys: activations, schema_version, position0_dropped."
+    )
+
+
 def _extract_text_from_example(example: Dict, explicit_field: Optional[str] = None) -> str:
     """Best-effort extraction of text/transcript content from heterogeneous datasets."""
     if explicit_field:
@@ -139,6 +181,7 @@ class GPT2ActivationCollector:
         # This avoids lm_head-related checkpoint load warnings.
         self.model = GPT2Model.from_pretrained(model_name).to(device)
         self.model.config.output_hidden_states = True
+        self.last_collection_stats: Dict[str, int] = {}
         
         # Set model to evaluation mode (disables dropout, etc.)
         self.model.eval()
@@ -179,6 +222,8 @@ class GPT2ActivationCollector:
         """
         all_activations = []
         num_collected = 0
+        num_tokens_seen = 0
+        num_position0_dropped = 0
         
         with torch.no_grad():  # Disable gradient computation (we're not training GPT-2)
             for i in tqdm(range(0, len(texts), batch_size), desc="Collecting activations"):
@@ -217,8 +262,20 @@ class GPT2ActivationCollector:
                 for j in range(hidden_states.shape[0]):
                     # Get positions where mask is 1 (real tokens)
                     mask = attention_mask[j].bool()
+                    positions = torch.arange(mask.shape[0], device=mask.device)
+                    real_positions = positions[mask]
+
+                    num_tokens_seen += int(real_positions.shape[0])
+
+                    # Always drop token position 0 to avoid first-token dominance.
+                    non_position0_mask = real_positions > 0
+                    num_position0_dropped += int((~non_position0_mask).sum().item())
+
+                    if not non_position0_mask.any():
+                        continue
+
                     # Extract activations for real tokens only
-                    token_activations = hidden_states[j][mask]
+                    token_activations = hidden_states[j][mask][non_position0_mask]
                     # Shape: (num_real_tokens, hidden_size)
                     
                     all_activations.append(token_activations.cpu())
@@ -227,6 +284,12 @@ class GPT2ActivationCollector:
                     # if max_samples and num_collected >= max_samples:
                     #     break
         
+        if not all_activations:
+            raise RuntimeError(
+                "No activations collected after dropping position-0 tokens. "
+                "Increase max_length/text count or verify dataset contents."
+            )
+
         # Concatenate all activations into a single tensor
         activations = torch.cat(all_activations, dim=0)
         
@@ -235,9 +298,16 @@ class GPT2ActivationCollector:
             activations = activations[:max_samples]
         
         print(f"\nCollected {activations.shape[0]} activation vectors")
+        print(f"Dropped position-0 tokens: {num_position0_dropped:,} / {num_tokens_seen:,}")
         print(f"Shape: {activations.shape}")
         print(f"Mean activation: {activations.mean().item():.4f}")
         print(f"Std activation: {activations.std().item():.4f}")
+
+        self.last_collection_stats = {
+            "tokens_seen": int(num_tokens_seen),
+            "position0_dropped": int(num_position0_dropped),
+            "tokens_kept": int(activations.shape[0]),
+        }
         
         return activations
     

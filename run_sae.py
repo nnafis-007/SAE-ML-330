@@ -20,7 +20,13 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent / "src"))
 
 import torch
-from data_collection import GPT2ActivationCollector, prepare_training_data
+from data_collection import (
+    GPT2ActivationCollector,
+    ACTIVATIONS_SCHEMA_VERSION,
+    load_activation_artifact,
+    make_activation_artifact,
+    prepare_training_data,
+)
 from sae_model import create_sae_for_gpt2
 from training import SAETrainer
 from interpretation import FeatureAnalyzer
@@ -156,6 +162,10 @@ def main():
         "--skip-collection", action="store_true",
         help="Skip data collection (use existing activations.pt)"
     )
+    parser.add_argument(
+        "--activations-path", type=str, default="activations.pt",
+        help="Path to activations artifact. Default: activations.pt"
+    )
 
     # Data normalization
     parser.add_argument(
@@ -222,14 +232,50 @@ def main():
             seed=args.dataset_seed,
         )
         
-        # Save activations
-        torch.save(activations, "activations.pt")
-        print(f"\n✓ Activations saved to activations.pt")
+        artifact = make_activation_artifact(
+            activations,
+            collection_stats=getattr(collector, "last_collection_stats", {}),
+        )
+        torch.save(artifact, args.activations_path)
+        print(f"\n✓ Activations saved to {args.activations_path}")
+        stats = artifact.get("collection_stats", {})
+        if stats:
+            print(
+                "  Position-0 drop summary: "
+                f"dropped={stats.get('position0_dropped', 0):,}, "
+                f"kept={stats.get('tokens_kept', 0):,}"
+            )
     else:
         print("Step 1: Loading existing activations...")
         print("-" * 70)
-        activations = torch.load("activations.pt")
-        print(f"✓ Loaded {activations.shape[0]} activations")
+        loaded_obj = torch.load(args.activations_path)
+        activations, artifact_meta = load_activation_artifact(loaded_obj)
+        if artifact_meta.get("is_legacy", False):
+            raise RuntimeError(
+                "Legacy activations file detected (tensor-only format). "
+                "Re-collect activations with position-0 filtering by running without "
+                "--skip-collection."
+            )
+        if artifact_meta.get("schema_version") != ACTIVATIONS_SCHEMA_VERSION:
+            raise RuntimeError(
+                "Unsupported activations schema version "
+                f"{artifact_meta.get('schema_version')} (expected {ACTIVATIONS_SCHEMA_VERSION}). "
+                "Re-collect activations with the current code."
+            )
+        if not artifact_meta.get("position0_dropped", False):
+            raise RuntimeError(
+                "Activations artifact does not guarantee position-0 removal. "
+                "Re-collect activations without --skip-collection."
+            )
+
+        print(f"✓ Loaded {activations.shape[0]} activations from {args.activations_path}")
+        stats = artifact_meta.get("collection_stats", {})
+        if stats:
+            print(
+                "  Position-0 drop summary: "
+                f"dropped={stats.get('position0_dropped', 0):,}, "
+                f"kept={stats.get('tokens_kept', 0):,}"
+            )
     
     # Step 2: Prepare data
     print("\nStep 2: Preparing training data...")
