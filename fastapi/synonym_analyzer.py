@@ -166,11 +166,11 @@ class SynonymAnalyzer(BaseAnalyzer):
             clusters_to_run = [c for c in requested if c in SYNONYM_CLUSTERS]
 
         # Load models
-        checkpoint_path = str(self._checkpoints_dir / model_id)
-        info = self._load_sae(checkpoint_path)
-        sae: SparseAutoencoder = info["sae"]
-        layer_index: int = info["layer_index"]
-        tokenizer, gpt2 = self._get_gpt2()
+        # checkpoint_path = str(self._checkpoints_dir / model_id)
+        # info = self._load_sae(checkpoint_path)
+        # sae: SparseAutoencoder = info["sae"]
+        # layer_index: int = info["layer_index"]
+        # tokenizer, gpt2 = self._get_gpt2()
 
         all_results = []
         for cluster_name in clusters_to_run:

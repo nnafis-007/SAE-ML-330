@@ -1106,11 +1106,11 @@ def build_token_maps(
     max_length: int = 128,
 ) -> tuple:
     """
-    Tokenise a list of texts and build the per-token document / position maps
+    Tokenize a list of texts and build the per-token document / position maps
     needed by :class:`FeatureLabeler`.
 
     This is a **standalone** helper intended to be called once before labeling
-    so that the tokenisation is not repeated per feature.
+    so that the tokenization is not repeated per feature.
 
     Parameters
     ----------
