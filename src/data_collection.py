@@ -250,7 +250,6 @@ class GPT2ActivationCollector:
         shuffle_buffer_size: int = 10_000,
         seed: int = 0,
         text_field: Optional[str] = None,
-        dataset_config: Optional[str] = None,
         allow_fallback: bool = True,
         **kwargs
     ) -> torch.Tensor:
@@ -330,7 +329,6 @@ class GPT2ActivationCollector:
         shuffle_buffer_size: int = 10_000,
         seed: int = 0,
         text_field: Optional[str] = None,
-        dataset_config: Optional[str] = None,
         allow_fallback: bool = True,
         corpus_output: Optional[str] = None,
         **kwargs,
