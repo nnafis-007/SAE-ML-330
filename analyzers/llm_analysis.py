@@ -807,6 +807,44 @@ def build_token_maps(
     tokenizer: GPT2Tokenizer,
     max_length: int = 128,
 ) -> tuple:
+    """
+    Tokenize a list of texts and build the per-token document / position maps
+    needed by :class:`FeatureLabeler`.
+
+    This is a **standalone** helper intended to be called once before labeling
+    so that the tokenization is not repeated per feature.
+
+    Parameters
+    ----------
+    texts : List[str]
+        Raw text corpus.
+    tokenizer : GPT2Tokenizer
+    max_length : int
+        Truncation length.
+
+    Returns
+    -------
+    token_ids : List[List[int]]
+        Token ID list per document.
+    token_doc_map : List[int]
+        ``token_doc_map[i]`` = document index for global token row *i*.
+    token_pos_map : List[int]
+        ``token_pos_map[i]`` = position within the document for row *i*.
+
+    Example
+    -------
+    ::
+
+        activations = torch.load("activations.pt")  # (N, d_model)
+        texts = [...]  # same texts used to generate activations
+
+        token_ids, doc_map, pos_map = build_token_maps(texts, tokenizer)
+
+        labeler = FeatureLabeler(sae, tokenizer, cfg)
+        result = labeler.label_feature_from_activations(
+            42, activations, token_ids, doc_map, pos_map
+        )
+    """
     token_ids: List[List[int]] = []
     token_doc_map: List[int] = []
     token_pos_map: List[int] = []

@@ -373,7 +373,7 @@ def collect_word_feature_profile(
     device: str,
 ) -> Tuple[torch.Tensor, int]:
     """
-    Average SAE feature activations across all positions in all sentences
+    Average SAE feature activations across all [target word] positions in all sentences
     where *word* appears.
 
     Returns:
