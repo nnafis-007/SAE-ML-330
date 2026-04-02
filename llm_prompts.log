@@ -1132,3 +1132,136 @@ RESPONSE:
   "confidence": "high"
 }
 ================================================================================
+
+================================================================================
+REQUEST_ID 8b9983ce-b33b-496a-8112-b015a33f876d
+FEATURE 5752
+USER PROMPT:
+Feature index: 5752
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 67 activating examples (ordered strongest first):
+   1. [act=6.765]  you can ask it to be charged when the electricity>>> prices<<< is lowest but you can also for some charges you
+   2. [act=4.412]   so when i take my foot off the pedal both>>> motors<<< are running in reverse
+   3. [act=4.042]  the i think that the best>>> advantages<<< of electric car we we discussed it before
+   4. [act=3.807]  so we just kind of embraced whatever>>> rituals<<< would work and made that a part of life
+   5. [act=3.787]   in armenian and it's the name her>>> parents<<< gave her
+   6. [act=3.763]   it's about the equivalent of your entire electrical the>>> emissions<<< from all of the electricity you would use for other
+   7. [act=3.377]  and most of the>>> efforts<<< in our culture are about raising money for more research
+   8. [act=3.125]  but we you know we grow lettuce and the>>> beans<<< and the carrots and the radishes
+   9. [act=2.511]   shows on the vertical axis it's the the carbon>>> emissions<<< for driving per mile of the vehicle and on the
+  10. [act=2.378]  so charging>>> stations<<< if you want to buy a faster charging station they
+  11. [act=2.361]  and the charg>>>ers<<< for teslas are typically next to a star
+  12. [act=2.327]   find things are a little fresher here than the>>> stores<<< yes and just the ambiance is really friendly and
+  13. [act=2.115]  the fast charg>>>ers<<< yes okay
+  14. [act=2.089]   would get for leasing a volt when you figure the>>> incentives<<< and your fuel savings comes out to roughly around half
+  15. [act=2.036]  one of the biggest things is that physicians view>>> hallucinations<<< always as something that we need to medicate
+  16. [act=1.966]  and so when i take my foot off the pedal>>> both<<< motors are running in reverse
+  17. [act=1.802]   auburn is awesome you have the chilies>>> they<<< have two sets free
+  18. [act=1.772]   i at the point of it i was my efficiency>>> they<<< they measured it in watt hours per mile but it
+  19. [act=1.570]   a volt when you figure the incentives and your fuel>>> savings<<< comes out to roughly around half the cost per mile
+  20. [act=1.532]  so putting it together basically electric>>> vehicles<<< are are good for the environment they're lowering our
+  21. [act=1.512]  yeah so in the winter time you you all>>> cars<<< gas cars also reduce range you just don't notice
+  22. [act=1.482]  and the past service and>>> sales<<< and how everyone was circumventing they were simply complying
+  23. [act=1.438]   at the point of it i was my efficiency they>>> they<<< measured it in watt hours per mile but it was
+  24. [act=1.427]  these>>> beans<<< are fed by drip irrigation
+  25. [act=1.365]   this these were caused in new mexico and>>> they<<< simply had they got cooked and that they did the
+  26. [act=1.363]  but with the nighttime>>> rates<<< it'll be the equivalent of getting seventy cents gallon
+  27. [act=1.210]  yeah do you find>>> things<<< are a little fresher here than the stores yes
+  28. [act=1.166]  so it's so this>>> these<<< were caused in new mexico and they simply
+  29. [act=1.148]   we had a lot of people yesterday like my bean>>> plants<<< aren't looking very good no more
+  30. [act=1.122]   stations if you want to buy a faster charging station>>> they<<<'ll set you back anywhere from a couple of hundred
+  31. [act=1.066]  so so to start off belmont>>> drives<<< electric is a community program for belmont residents it
+  32. [act=1.023]  and i love this market because the>>> people<<< are so nice and they're willing to try new
+  33. [act=0.987]   simply had they got cooked and that they did the>>> batteries<<< didn't like that
+  34. [act=0.980]   so in the winter time you you all cars gas>>> cars<<< also reduce range you just don't notice it in
+  35. [act=0.974]   to all the time they find a flight and then>>> hospitals<<< public parking
+  36. [act=0.933]   started playing around with printing them up i had digital>>> copies<<< of everything but printing them up and printing some of
+  37. [act=0.776]   at a bunch of different vehicles and what the graph>>> shows<<< on the vertical axis it's the the carbon emissions
+  38. [act=0.734]   used to in peru right yeah we have our>>> markets<<< and we get fresh things every day
+  39. [act=0.725]   that way i'm not up taking up are the>>> spaces<<< pretty wide there yes
+  40. [act=0.723]  we've noticed your unusual>>> plants<<< and there are all kinds of plants and flowers that
+  41. [act=0.675]   you can get some that are you know very fast>>> some<<< that will park anywhere
+  42. [act=0.648]   you know we grow lettuce and the beans and the>>> carrots<<< and the radishes
+  43. [act=0.640]   way i'm not up taking up are the spaces>>> pretty<<< wide there yes
+  44. [act=0.634]  six thousand>>> kilometers<<<
+  45. [act=0.614]   of driving when you figure in the leasing or purchase>>> costs<<< or and the cost of fueling
+  46. [act=0.591]   to put out twenty five i think a new electric>>> cars<<< by the year two thousand and twenty five
+  47. [act=0.573]  as or different kinds of things like granola and>>> things<<< that are just kind of uncommon when you go to
+  48. [act=0.558]   geeks and all that and special people even though>>> we<<< are
+  49. [act=0.550]  many>>> parts<<< of the country are becoming foodies which means they
+  50. [act=0.521]  and the chargers for tes>>>las<<< are typically next to a starbucks or a restaurant
+  51. [act=0.495]   first and then the ride and drive event that test>>> drives<<< various vehicles out there
+  52. [act=0.449]  therefore you don't have to replace the>>> brakes<<< as much right so the guy who has the record
+  53. [act=0.443]  for example there's different kinds of past>>>as<<< or different kinds of things like granola and things
+  54. [act=0.430]   together basically electric vehicles are are good for the environment>>> they<<<'re lowering our carbon carbon footprint and cost less to
+  55. [act=0.416]   when i take my foot off the pedal both motors>>> are<<< running in reverse
+  56. [act=0.408]   for whatever price you want but we have cheap b>>>uns<<< for you too middelburg a city where
+  57. [act=0.403]  so we just kind of embraced whatever rituals>>> would<<< work and made that a part of life
+  58. [act=0.388]  're a kind of a buttery tasting potato and>>> they<<<'re just plain delicious
+  59. [act=0.291]   take my foot off the pedal both motors are running>>> in<<< reverse
+  60. [act=0.274]  one of the biggest things is that>>> physicians<<< view hallucinations always as something that we need to med
+  61. [act=0.272]   that to keep em moist that's to keep the>>> weeds<<< out
+  62. [act=0.269]  so when you're looking at the the>>> rates<<< for the leasing which is sub two hundred you need
+  63. [act=0.258]   example there's different kinds of pastas or different>>> kinds<<< of things like granola and things that are just
+  64. [act=0.248]  and through this great community effort built this structure where>>> they<<< could all share
+  65. [act=0.179]  some people travel business some>>> people<<< travel smuggling
+  66. [act=0.159]  you can charge just like>>> you<<< plug in your toaster at home you can plug
+  67. [act=0.120]   or different kinds of things like granola and things>>> that<<< are just kind of uncommon when you go to the
+
+Most frequent activating tokens (top 10): "they", "cars", "emissions", "beans", "ers", "rates", "things", "plants", "drives", "people"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Electric Vehicles",
+  "explanation": "The feature strongly activates on tokens related to electric vehicles, such as 'cars', 'emissions', 'charging', and 'electricity', indicating that it detects concepts related to electric vehicles and sustainability.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 6405454a-03b9-4e34-8ed5-1d05476412a2
+FEATURE 5519
+USER PROMPT:
+Feature index: 5519
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 18 activating examples (ordered strongest first):
+   1. [act=5.933]   grow lettuce and the beans and the carrots and the>>> rad<<<ishes
+   2. [act=3.283]  they're a kind of a buttery tasting>>> potato<<< and they're just plain delicious
+   3. [act=2.814]  but we you know we grow>>> lettuce<<< and the beans and the carrots and the radishes
+   4. [act=2.732]   you know we grow lettuce and the beans and the>>> carrots<<< and the radishes
+   5. [act=2.115]   like the natural color in real fruits and vegetables and>>> greens<<<
+   6. [act=1.996]  's nothing like the natural color in real fruits and>>> vegetables<<< and greens
+   7. [act=1.899]   and i'd have to say no no it's>>> steak<<<
+   8. [act=1.825]   eight we're going to have a youpick green>>> bean<<< day that you can come and pick green beans
+   9. [act=1.727]  and auburn is awesome you have the ch>>>ilies<<< they have two sets free
+  10. [act=1.473]   pretty much it's fully cooked ready to eat smoked>>> fish<<< is
+  11. [act=1.391]   kinds of pastas or different kinds of things like>>> gran<<<ola and things that are just kind of uncommon when
+  12. [act=1.152]  these>>> beans<<< are fed by drip irrigation
+  13. [act=0.851]   we grow lettuce and the beans and the carrots and>>> the<<< radishes
+  14. [act=0.588]   of pastas or different kinds of things like gran>>>ola<<< and things that are just kind of uncommon when you
+  15. [act=0.584]  cause we had a lot of people yesterday like my>>> bean<<< plants aren't looking very good no more
+  16. [act=0.368]   they pretty much it's fully cooked ready to eat>>> smoked<<< fish is
+  17. [act=0.304]   lettuce and the beans and the carrots and the rad>>>ishes<<<
+  18. [act=0.226]   green bean day that you can come and pick green>>> beans<<<
+
+Most frequent activating tokens (top 10): "bean", "beans", "rad", "potato", "lettuce", "carrots", "greens", "vegetables", "steak", "ilies"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Fresh Produce Detection",
+  "explanation": "The feature detects mentions of various types of fresh produce, such as vegetables, fruits, and greens, in the given text snippets.",
+  "confidence": "high"
+}
+================================================================================

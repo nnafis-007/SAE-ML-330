@@ -338,6 +338,15 @@ class SAEAnalyzer(BaseAnalyzer):
             "explanation": result.explanation,
             "confidence": result.confidence,
             "top_tokens": result.top_tokens,
+            "llm_activation_mode": cfg.normalize_mode,
+            "llm_prompt_examples": [
+                {
+                    "token": ctx.token,
+                    "context": ctx.context,
+                    "activation": round(float(ctx.activation_value), 4),
+                }
+                for ctx in result.top_contexts
+            ],
             "error": result.error,
         }
 

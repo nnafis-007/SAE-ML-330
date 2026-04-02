@@ -160,6 +160,7 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
       setLlmLabel(labelData);
       setAnalysisMeta({
         requestId: labelData.request_id || null,
+        llmActivationMode: labelData.llm_activation_mode || 'standardize',
         sentenceLimit: hasExplicitSentenceLimit ? effectiveSentenceLimit : null,
         scannedSentences: activationData.scanned_sentences,
         activatingExamplesLimit: requiredActivatingSentences,
@@ -302,6 +303,7 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
                   <View style={styles.metaBox}>
                     <Text style={styles.metaText}>Dataset: {analysisMeta.dataset}</Text>
                     <Text style={styles.metaText}>Request ID: {analysisMeta.requestId || 'n/a'}</Text>
+                    <Text style={styles.metaText}>LLM prompt activation mode: {analysisMeta.llmActivationMode}</Text>
                     <Text style={styles.metaText}>Sentences requested: {analysisMeta.sentenceLimit ?? 'auto'}</Text>
                     <Text style={styles.metaText}>Sentences scanned: {analysisMeta.scannedSentences}</Text>
                     <Text style={styles.metaText}>Activating examples requested: {analysisMeta.activatingExamplesLimit ?? 'all'}</Text>
@@ -309,6 +311,17 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
                     <Text style={styles.metaText}>Matches returned: {analysisMeta.totalMatches}</Text>
                     <Text style={styles.metaText}>Total pages: {analysisMeta.totalPages}</Text>
                     <Text style={styles.metaText}>Sentences used for LLM: {analysisMeta.corpusSentencesUsed}</Text>
+                  </View>
+                )}
+
+                {llmLabel.llm_prompt_examples?.length > 0 && (
+                  <View style={styles.metaBox}>
+                    <Text style={styles.metaText}>Exact examples sent to LLM prompt:</Text>
+                    {llmLabel.llm_prompt_examples.slice(0, 12).map((ex, i) => (
+                      <Text key={`llm-ex-${i}`} style={styles.metaText}>
+                        {`${i + 1}. [act=${Number(ex.activation || 0).toFixed(3)}] ${ex.context}`}
+                      </Text>
+                    ))}
                   </View>
                 )}
               </View>
