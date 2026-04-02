@@ -39,6 +39,7 @@ from analyzers.run_caps_test import (  # noqa: E402
     collect_variant_profile,
     top_k_features,
     jaccard,
+    weighted_jaccard,
     cosine_sim,
 )
 
@@ -110,6 +111,9 @@ class CapsAnalyzer(BaseAnalyzer):
         overall_mean_jaccard = round(
             sum(r["mean_jaccard"] for r in all_results) / len(all_results), 4
         ) if all_results else 0.0
+        overall_mean_weighted_jaccard = round(
+            sum(r["mean_weighted_jaccard"] for r in all_results) / len(all_results), 4
+        ) if all_results else 0.0
         overall_mean_cosine = round(
             sum(r["mean_cosine_sim"] for r in all_results) / len(all_results), 4
         ) if all_results else 0.0
@@ -127,6 +131,7 @@ class CapsAnalyzer(BaseAnalyzer):
             "words": all_results,
             "available_words": list(WORD_TEMPLATES.keys()),
             "overall_mean_jaccard": overall_mean_jaccard,
+            "overall_mean_weighted_jaccard": overall_mean_weighted_jaccard,
             "overall_mean_cosine": overall_mean_cosine,
         }
 
@@ -166,12 +171,14 @@ class CapsAnalyzer(BaseAnalyzer):
         for va, vb in combinations(variant_strs, 2):
             sa, sb = set(top_features[va]), set(top_features[vb])
             shared = sorted(sa & sb)
+            union = sorted(sa | sb)
             pairwise.append({
                 "variant_a": va,
                 "label_a": variant_labels[va],
                 "variant_b": vb,
                 "label_b": variant_labels[vb],
                 "jaccard": round(jaccard(sa, sb), 4),
+                "weighted_jaccard": round(weighted_jaccard(profiles[va], profiles[vb], indices=union), 4),
                 "cosine_sim": round(cosine_sim(profiles[va], profiles[vb]), 4),
                 "shared_feature_count": len(shared),
                 "shared_features": shared,
@@ -191,6 +198,9 @@ class CapsAnalyzer(BaseAnalyzer):
         mean_jaccard = (
             sum(p["jaccard"] for p in pairwise) / len(pairwise) if pairwise else 0.0
         )
+        mean_weighted_jaccard = (
+            sum(p["weighted_jaccard"] for p in pairwise) / len(pairwise) if pairwise else 0.0
+        )
         mean_cosine = (
             sum(p["cosine_sim"] for p in pairwise) / len(pairwise) if pairwise else 0.0
         )
@@ -204,11 +214,12 @@ class CapsAnalyzer(BaseAnalyzer):
             "pairwise": pairwise,
             "universal_shared_features": universal,
             "mean_jaccard": round(mean_jaccard, 4),
+            "mean_weighted_jaccard": round(mean_weighted_jaccard, 4),
             "mean_cosine_sim": round(mean_cosine, 4),
             "lower_vs_upper": key_pair,
             "interpretation": (
-                "CASE-INVARIANT (strong)"   if mean_jaccard > 0.40 else
-                "PARTIALLY case-sensitive"  if mean_jaccard > 0.20 else
+                "CASE-INVARIANT (strong)"   if mean_weighted_jaccard > 0.40 else
+                "PARTIALLY case-sensitive"  if mean_weighted_jaccard > 0.20 else
                 "CASE-SENSITIVE (features differ)"
             ),
         }

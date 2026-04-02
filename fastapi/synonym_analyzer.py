@@ -38,6 +38,7 @@ from analyzers.run_synonym_test import (  # noqa: E402
     collect_word_feature_profile,
     top_k_features,
     jaccard,
+    weighted_jaccard,
     cosine_sim,
 )
 
@@ -156,6 +157,7 @@ class SynonymAnalyzer(BaseAnalyzer):
                 "clusters": [result],
                 "available_clusters": list(SYNONYM_CLUSTERS.keys()),
                 "overall_mean_jaccard": result["mean_jaccard"],
+                "overall_mean_weighted_jaccard": result["mean_weighted_jaccard"],
             }
 
         # ----- Predefined cluster mode -----------------------------------------
@@ -190,6 +192,9 @@ class SynonymAnalyzer(BaseAnalyzer):
         overall_mean_jaccard = round(
             sum(r["mean_jaccard"] for r in all_results) / len(all_results), 4
         ) if all_results else 0.0
+        overall_mean_weighted_jaccard = round(
+            sum(r["mean_weighted_jaccard"] for r in all_results) / len(all_results), 4
+        ) if all_results else 0.0
 
         return {
             "model": model_id,
@@ -204,6 +209,7 @@ class SynonymAnalyzer(BaseAnalyzer):
             "clusters": all_results,
             "available_clusters": list(SYNONYM_CLUSTERS.keys()),
             "overall_mean_jaccard": overall_mean_jaccard,
+            "overall_mean_weighted_jaccard": overall_mean_weighted_jaccard,
         }
 
     # -- cluster analysis (mirrors run_synonym_test.analyse_cluster) -----------
@@ -246,6 +252,7 @@ class SynonymAnalyzer(BaseAnalyzer):
             s1 = set(top_features[w1])
             s2 = set(top_features[w2])
             shared_ids = sorted(s1 & s2)
+            union_ids = sorted(s1 | s2)
             
             # Convert to feature objects with labels
             shared_features = [
@@ -254,11 +261,13 @@ class SynonymAnalyzer(BaseAnalyzer):
             ]
             
             j = jaccard(s1, s2)
+            wj = weighted_jaccard(profiles[w1], profiles[w2], indices=union_ids)
             cos = cosine_sim(profiles[w1], profiles[w2])
             pairwise.append({
                 "word_a": w1,
                 "word_b": w2,
                 "jaccard": round(j, 4),
+                "weighted_jaccard": round(wj, 4),
                 "cosine_sim": round(cos, 4),
                 "shared_feature_count": len(shared_ids),
                 "shared_features": shared_features,
@@ -279,6 +288,9 @@ class SynonymAnalyzer(BaseAnalyzer):
         mean_jaccard = (
             sum(p["jaccard"] for p in pairwise) / len(pairwise) if pairwise else 0.0
         )
+        mean_weighted_jaccard = (
+            sum(p["weighted_jaccard"] for p in pairwise) / len(pairwise) if pairwise else 0.0
+        )
         mean_cosine = (
             sum(p["cosine_sim"] for p in pairwise) / len(pairwise) if pairwise else 0.0
         )
@@ -293,10 +305,11 @@ class SynonymAnalyzer(BaseAnalyzer):
             "universal_shared_features": universal_shared,
             "unique_features_per_word": unique_to,
             "mean_jaccard": round(mean_jaccard, 4),
+            "mean_weighted_jaccard": round(mean_weighted_jaccard, 4),
             "mean_cosine_sim": round(mean_cosine, 4),
             "interpretation": (
-                "STRONG synonym signal"   if mean_jaccard > 0.40 else
-                "MODERATE synonym signal" if mean_jaccard > 0.20 else
+                "STRONG synonym signal"   if mean_weighted_jaccard > 0.40 else
+                "MODERATE synonym signal" if mean_weighted_jaccard > 0.20 else
                 "WEAK synonym signal"
             ),
         }
