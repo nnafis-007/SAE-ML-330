@@ -818,3 +818,119 @@ LLM RESPONSE:
   "confidence": "high"
 }
 ================================================================================
+
+================================================================================
+FEATURE INDEX: 4761
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 4761
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=10.715]   a lot of that she would think she was around>>> world<<< war ii and that there were soldiers around the house
+   2. [act=0.000]   that she would think she was around world war ii>>> and<<< that there were soldiers around the house and or she
+   3. [act=0.000]   and that there were soldiers around the house and or>>> she<<<'d think that we were eating dog meat for dinner
+   4. [act=0.000]   ii and that there were soldiers around the house and>>> or<<< she'd think that we were eating dog meat for
+   5. [act=0.000]   war ii and that there were soldiers around the house>>> and<<< or she'd think that we were eating dog meat
+   6. [act=0.000]   world war ii and that there were soldiers around the>>> house<<< and or she'd think that we were eating dog
+   7. [act=0.000]   around world war ii and that there were soldiers around>>> the<<< house and or she'd think that we were eating
+   8. [act=0.000]   was around world war ii and that there were soldiers>>> around<<< the house and or she'd think that we were
+   9. [act=0.000]   she was around world war ii and that there were>>> soldiers<<< around the house and or she'd think that we
+  10. [act=0.000]   think she was around world war ii and that there>>> were<<< soldiers around the house and or she'd think that
+  11. [act=0.000]   would think she was around world war ii and that>>> there<<< were soldiers around the house and or she'd think
+  12. [act=0.000]   and sometimes it would happen a lot of that she>>> would<<< think she was around world war ii and that there
+  13. [act=0.000]   it would happen a lot of that she would think>>> she<<< was around world war ii and that there were soldiers
+  14. [act=0.000]   sometimes it would happen a lot of that she would>>> think<<< she was around world war ii and that there were
+  15. [act=0.000]   would happen a lot of that she would think she>>> was<<< around world war ii and that there were soldiers around
+
+Most frequent activating tokens (top 10): "and", "she", "world", "or", "house", "the", "around", "soldiers", "were", "there"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "World War II context",
+  "explanation": "The feature detects text snippets that mention or imply a setting or situation related to World War II, often involving soldiers or a wartime atmosphere",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE INDEX: 11399
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 11399
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=13.070]  that one that was the point yep>>> good<<< next
+   2. [act=11.805]  that's that's not>>> good<<< for the environment
+   3. [act=10.610]  the farm has been>>> good<<< for productivity
+   4. [act=8.817]  so putting it together basically electric vehicles are are>>> good<<< for the environment they're lowering our carbon carbon footprint
+   5. [act=8.669]  it's so>>> good<<<
+   6. [act=6.637]  and it's been really>>> good<<<
+   7. [act=6.404]   market master and with us vendors to really do a>>> good<<< job
+   8. [act=4.173]   people yesterday like my bean plants aren't looking very>>> good<<< no more
+   9. [act=2.632]   this is really a unique piece with that having a>>> bad<<< hair day there that's cool
+  10. [act=1.156]  they've had>>> great<<< people that worked with the city with our market master
+  11. [act=0.197]  and i love this market because the people are so>>> nice<<< and they're willing to try new things which is
+  12. [act=0.000]  that one that was>>> the<<< point yep good next
+  13. [act=0.000]  that one that was the point yep good>>> next<<<
+  14. [act=0.000]  that>>>'s<<< that's not good for the environment
+  15. [act=0.000]  that one>>> that<<< was the point yep good next
+
+Most frequent activating tokens (top 8): "good", "bad", "great", "nice", "the", "next", "'s", "that"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Positive Evaluation",
+  "explanation": "The feature detects tokens that express a positive or favorable assessment, such as 'good', 'great', or 'nice'.",
+  "confidence": "high"
+}
+================================================================================
