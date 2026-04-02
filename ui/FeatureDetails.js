@@ -22,8 +22,8 @@ function sanitizeDecimalInput(value) {
 }
 
 export default function FeatureDetails({ feature, onClose, modelId }) {
-  const [maxSentences, setMaxSentences] = useState('');
-  const [activatingExamples, setActivatingExamples] = useState('');
+  const [maxSentences, setMaxSentences] = useState('120');
+  const [activatingExamples, setActivatingExamples] = useState('25');
   const [minActivation, setMinActivation] = useState('0.1');
   const [pageSize] = useState(25);
   const [matchesPage, setMatchesPage] = useState(1);
@@ -134,9 +134,8 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
         );
       }
 
-      const corpusForLlm = requiredActivatingSentences
-        ? uniqueSentences.slice(0, requiredActivatingSentences)
-        : uniqueSentences;
+      const llmContextCap = requiredActivatingSentences || 25;
+      const corpusForLlm = uniqueSentences.slice(0, llmContextCap);
 
       setActivationPayload(activationData);
 
@@ -150,10 +149,10 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
           analyzer: 'sae',
           corpus_texts: corpusForLlm,
           labeling_config: {
-            top_k: requiredActivatingSentences ?? 0,
+            top_k: llmContextCap,
             skip_first_token: true,
             min_activation: minAct,
-            num_sentences: scanSentences,
+            num_sentences: scanSentences ?? effectiveSentenceLimit,
           },
         }),
       });

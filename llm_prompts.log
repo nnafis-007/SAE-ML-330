@@ -1398,3 +1398,107 @@ RESPONSE:
   "confidence": "high"
 }
 ================================================================================
+
+================================================================================
+REQUEST_ID 6b7ad163-04bb-4daa-8c20-4b61532f2b23
+FEATURE 18
+USER PROMPT:
+Feature index: 18
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 3 activating examples (ordered strongest first):
+   1. [act=14.903]  so there only the>>> night<<< ones
+   2. [act=7.699]  you know it's weekends it's>>> nights<<<
+   3. [act=3.557]   actually in case everybody noticed moving on just one every>>> night<<< of the week it seems but the audit committee met
+
+Most frequent activating tokens (top 2): "night", "nights"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Time of Day",
+  "explanation": "The feature activates on tokens related to nighttime, indicating it detects concepts related to time of day",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID b194b322-1d82-42be-b73b-5a382edb382a
+FEATURE 9077
+USER PROMPT:
+Feature index: 9077
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 5 activating examples (ordered strongest first):
+   1. [act=0.360]  pick green bean day that you can come and pick>>> green<<< beans
+   2. [act=0.359]   going to have a youpick green bean day that>>> you<<< can come and pick green beans
+   3. [act=0.321]  got ready got downstairs car's nice and to>>>asty<<< you know pulling that off of the off the grid
+   4. [act=0.178]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+   5. [act=0.132]   couple of hundred bucks for for one that you can>>> buy<<< on ebay typically from a a car that was
+
+Most frequent activating tokens (top 5): "green", "you", "asty", "and", "buy"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 7392c8eb-b357-46f5-8345-154bae0c35d6
+FEATURE 9077
+USER PROMPT:
+Feature index: 9077
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 5 activating examples (ordered strongest first):
+   1. [act=0.360]  pick green bean day that you can come and pick>>> green<<< beans
+   2. [act=0.359]   going to have a youpick green bean day that>>> you<<< can come and pick green beans
+   3. [act=0.321]  got ready got downstairs car's nice and to>>>asty<<< you know pulling that off of the off the grid
+   4. [act=0.178]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+   5. [act=0.132]   couple of hundred bucks for for one that you can>>> buy<<< on ebay typically from a a car that was
+
+Most frequent activating tokens (top 5): "green", "you", "asty", "and", "buy"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Agricultural Activity",
+  "explanation": "The feature detects tokens related to picking or buying green beans and other activities involving self-sufficiency or rural pursuits",
+  "confidence": "medium"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID b965f4c2-4635-481e-bbca-2a95c56b53d4
+FEATURE 2822
+USER PROMPT:
+Feature index: 2822
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 2 activating examples (ordered strongest first):
+   1. [act=21.223]  so the church is protected from>>> fire<<< whereas it hadn't been in the past
+   2. [act=17.127]  and as you say police chief>>> fire<<< chief you know whoever it is we have a number
+
+Most frequent activating tokens (top 1): "fire"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Fire concept",
+  "explanation": "This feature detects the concept of fire, likely due to the frequent activation on the token 'fire' in various contexts",
+  "confidence": "high"
+}
+================================================================================

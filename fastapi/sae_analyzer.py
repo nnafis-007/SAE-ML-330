@@ -19,6 +19,7 @@ import sys
 import time
 import math
 import uuid
+import hashlib
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -68,10 +69,13 @@ class SAEAnalyzer(BaseAnalyzer):
 
         # Caches (populated lazily)
         self._sae_cache: Dict[str, Dict[str, Any]] = {}
-        self._collector_cache: Dict[int, GPT2ActivationCollector] = {}
+        self._collector_cache: Dict[int, Any] = {}
         self._labels_cache: Dict[str, Dict[int, str]] = {}
         self._model_list_cache: Optional[List[Dict[str, Any]]] = None
         self._feature_activation_cache: Dict[str, Dict[str, Any]] = {}
+        self._text_corpus_cache: Dict[str, List[str]] = {}
+        self._dataset_cache_dir = _SAE_ROOT / ".cache" / "dataset_texts"
+        self._dataset_cache_dir.mkdir(parents=True, exist_ok=True)
 
     # -- BaseAnalyzer interface ------------------------------------------------
 
@@ -251,27 +255,14 @@ class SAEAnalyzer(BaseAnalyzer):
                 sentence_budget = max(1, int(labeling_config.get("num_sentences", sentence_budget)))
 
             try:
-                from datasets import Audio, load_dataset  # noqa: E402
-
-                ds = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
-                try:
-                    features = getattr(ds, "features", None) or {}
-                    for col, feat in features.items():
-                        if isinstance(feat, Audio):
-                            ds = ds.cast_column(col, Audio(decode=False))
-                except Exception:
-                    pass
-
-                candidate_fields = ["text", "sentence", "transcript", "content", "article", "document"]
-                corpus_texts = []
-                for example in ds:
-                    for field in candidate_fields:
-                        raw = example.get(field)
-                        if isinstance(raw, str) and raw.strip():
-                            corpus_texts.append(raw.strip())
-                            break
-                    if len(corpus_texts) >= sentence_budget:
-                        break
+                corpus_texts = self._load_dataset_texts(
+                    dataset_name=dataset_name,
+                    dataset_config=dataset_config,
+                    split=split,
+                    sentence_budget=sentence_budget,
+                    text_field=None,
+                    seed=0,
+                )
 
                 print(
                     "[SAEAnalyzer] label_feature corpus source | "
@@ -320,6 +311,11 @@ class SAEAnalyzer(BaseAnalyzer):
                 print(f"[SAEAnalyzer] Ignoring unsupported labeling_config keys: {ignored}")
             cfg_kwargs.update(filtered)
         cfg = LabelingConfig(**cfg_kwargs)
+
+        # Guardrail for API responsiveness: unbounded context prompts can become
+        # very large and slow (or hit provider limits) when top_k <= 0.
+        if int(getattr(cfg, "top_k", 0) or 0) <= 0:
+            cfg.top_k = min(40, int(activations.shape[0]))
 
         labeler = FeatureLabeler(sae=sae, tokenizer=tokenizer, cfg=cfg, device=self._device)
 
@@ -462,27 +458,6 @@ class SAEAnalyzer(BaseAnalyzer):
         tokenizer = collector.tokenizer
         labels = self._load_feature_labels(checkpoint_path)
 
-        # Lazy import keeps server startup fast.
-        from datasets import Audio, load_dataset  # noqa: E402
-
-        ds = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
-
-        # People's Speech contains audio columns; disable decode and keep only
-        # text-like columns so torchcodec is never required for this endpoint.
-        try:
-            features = getattr(ds, "features", None) or {}
-            for col, feat in features.items():
-                if isinstance(feat, Audio):
-                    ds = ds.cast_column(col, Audio(decode=False))
-        except Exception:
-            pass
-        try:
-            shuffle_anchor = max_sentences if max_sentences is not None else 1000
-            ds = ds.shuffle(seed=seed, buffer_size=max(1000, shuffle_anchor * 4))
-        except Exception:
-            # Some streaming sources may not support shuffle.
-            pass
-
         candidate_fields = [
             text_field,
             "text",
@@ -494,14 +469,21 @@ class SAEAnalyzer(BaseAnalyzer):
         ]
         candidate_fields = [f for f in candidate_fields if f]
 
-        available_cols = list((getattr(ds, "features", None) or {}).keys())
-        selected_text_fields = [f for f in candidate_fields if f in available_cols]
-        if selected_text_fields:
-            try:
-                ds = ds.select_columns(selected_text_fields)
-            except Exception:
-                # Older dataset wrappers may not support select_columns.
-                pass
+        sentence_budget = (
+            max_sentences
+            if max_sentences is not None
+            else max(1000, int(target_activating_examples or 50) * 50)
+        )
+
+        corpus_texts = self._load_dataset_texts(
+            dataset_name=dataset_name,
+            dataset_config=dataset_config,
+            split=split,
+            sentence_budget=sentence_budget,
+            text_field=text_field,
+            seed=seed,
+        )
+        selected_text_fields = candidate_fields
 
         texts_scanned = 0
         examples_scanned = 0
@@ -510,50 +492,49 @@ class SAEAnalyzer(BaseAnalyzer):
         activating_seen: set = set()
         total_tokens_scanned = 0
         progress_interval = 25
+        inference_batch_size = 12 if self._device == "cuda" else 6
 
-        with torch.no_grad():
-            for sentence_idx, example in enumerate(ds):
-                examples_scanned += 1
-                sentence = ""
-                for field in candidate_fields:
-                    raw = example.get(field)
-                    if isinstance(raw, str) and raw.strip():
-                        sentence = raw.strip()
-                        break
-                if not sentence:
+        def _process_sentence_batch(batch_sentences: List[str]) -> bool:
+            """Encode a sentence batch and return True when stop conditions are met."""
+            nonlocal texts_scanned, total_tokens_scanned, hits, activating_sentences, activating_seen
+
+            if not batch_sentences:
+                return False
+
+            enc = tokenizer(
+                batch_sentences,
+                return_tensors="pt",
+                padding=True,
+                truncation=True,
+                max_length=max_length,
+                add_special_tokens=False,
+            ).to(collector.device)
+
+            outputs = collector.model(**enc)
+            hidden_batch = outputs.hidden_states[layer_index + 1]
+            input_ids_batch = enc["input_ids"]
+            attention_mask_batch = enc["attention_mask"]
+
+            for row_idx, sentence in enumerate(batch_sentences):
+                token_mask = attention_mask_batch[row_idx].bool()
+                token_ids = input_ids_batch[row_idx][token_mask].tolist()
+                if not token_ids:
                     continue
 
                 texts_scanned += 1
-                encoding = tokenizer(
-                    sentence,
-                    return_tensors="pt",
-                    truncation=True,
-                    max_length=max_length,
-                    add_special_tokens=False,
-                )
-                input_ids = encoding["input_ids"].to(collector.device)
-                token_id_list = input_ids[0].tolist()
-                if not token_id_list:
-                    continue
 
-                outputs = collector.model(input_ids)
-                hidden_states = outputs.hidden_states[layer_index + 1][0]
+                hidden_states = hidden_batch[row_idx][token_mask]
                 feature_mat = sae.encode(hidden_states.to(self._device)).cpu()
 
                 feat_col = feature_mat[:, feature_id]
-                active_positions = torch.nonzero(feat_col >= float(min_activation), as_tuple=False).flatten().tolist()
+                active_positions = torch.nonzero(
+                    feat_col >= float(min_activation), as_tuple=False
+                ).flatten().tolist()
                 # Skip first token to avoid GPT-2 attention sink effects.
                 active_positions = [p for p in active_positions if p > 0]
-                if not active_positions:
-                    total_tokens_scanned += len(token_id_list)
-                    if texts_scanned % progress_interval == 0:
-                        print(
-                            "[SAEAnalyzer] Progress | "
-                            f"processed_sentences={texts_scanned} "
-                            f"tokens_scanned={total_tokens_scanned} matches_so_far={len(hits)}"
-                        )
-                else:
-                    decoded_tokens = [tokenizer.decode([tid]) for tid in token_id_list]
+
+                if active_positions:
+                    decoded_tokens = [tokenizer.decode([tid]) for tid in token_ids]
 
                     if sentence not in activating_seen:
                         activating_seen.add(sentence)
@@ -573,7 +554,8 @@ class SAEAnalyzer(BaseAnalyzer):
                             "right_context": right,
                         })
 
-                total_tokens_scanned += len(token_id_list)
+                total_tokens_scanned += len(token_ids)
+
                 if texts_scanned % progress_interval == 0:
                     print(
                         "[SAEAnalyzer] Progress | "
@@ -581,12 +563,32 @@ class SAEAnalyzer(BaseAnalyzer):
                         f"tokens_scanned={total_tokens_scanned} matches_so_far={len(hits)}"
                     )
 
-                # Stop conditions
                 if max_sentences is not None and texts_scanned >= max_sentences:
-                    break
+                    return True
+
                 if max_sentences is None and target_activating_examples is not None:
                     if len(activating_sentences) >= target_activating_examples:
+                        return True
+
+            return False
+
+        with torch.no_grad():
+            sentence_batch: List[str] = []
+            should_stop = False
+            for sentence in corpus_texts:
+                examples_scanned += 1
+                if not sentence:
+                    continue
+
+                sentence_batch.append(sentence)
+                if len(sentence_batch) >= inference_batch_size:
+                    should_stop = _process_sentence_batch(sentence_batch)
+                    sentence_batch = []
+                    if should_stop:
                         break
+
+            if not should_stop and sentence_batch:
+                _process_sentence_batch(sentence_batch)
 
         hits.sort(key=lambda x: x["activation"], reverse=True)
         total_matches = len(hits)
@@ -643,6 +645,112 @@ class SAEAnalyzer(BaseAnalyzer):
             "matches": paged_hits,
             "total_matches": total_matches,
         }
+
+    def _load_dataset_texts(
+        self,
+        dataset_name: str,
+        dataset_config: str,
+        split: str,
+        sentence_budget: int,
+        text_field: Optional[str],
+        seed: int,
+    ) -> List[str]:
+        """Load dataset texts once and reuse from memory/disk cache across requests."""
+        sentence_budget = max(1, int(sentence_budget))
+        cache_payload = {
+            "dataset_name": dataset_name,
+            "dataset_config": dataset_config,
+            "split": split,
+            "text_field": text_field,
+            "seed": int(seed),
+        }
+        key_base = json.dumps(cache_payload, sort_keys=True)
+        mem_key = f"{key_base}|budget={sentence_budget}"
+
+        cached = self._text_corpus_cache.get(mem_key)
+        if cached is not None:
+            return cached[:sentence_budget]
+
+        digest = hashlib.sha1(key_base.encode("utf-8")).hexdigest()[:16]
+        disk_cache_path = self._dataset_cache_dir / f"{digest}.json"
+
+        texts: List[str] = []
+        if disk_cache_path.exists():
+            try:
+                payload = json.loads(disk_cache_path.read_text(encoding="utf-8"))
+                if isinstance(payload, dict) and isinstance(payload.get("texts"), list):
+                    texts = [str(t) for t in payload["texts"] if isinstance(t, str) and t.strip()]
+                if len(texts) >= sentence_budget:
+                    self._text_corpus_cache[mem_key] = texts[:sentence_budget]
+                    print(
+                        "[SAEAnalyzer] Dataset text cache hit (disk) | "
+                        f"dataset={dataset_name}/{dataset_config}:{split} texts={len(texts[:sentence_budget])}"
+                    )
+                    return texts[:sentence_budget]
+            except Exception:
+                texts = []
+
+        from datasets import Audio, load_dataset  # noqa: E402
+
+        print(
+            "[SAEAnalyzer] Preparing dataset text cache | "
+            f"dataset={dataset_name}/{dataset_config}:{split} budget={sentence_budget}"
+        )
+
+        ds = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
+
+        # Keep audio columns undecoded so text extraction does not require torchcodec.
+        try:
+            features = getattr(ds, "features", None) or {}
+            for col, feat in features.items():
+                if isinstance(feat, Audio):
+                    ds = ds.cast_column(col, Audio(decode=False))
+        except Exception:
+            pass
+
+        try:
+            ds = ds.shuffle(seed=seed, buffer_size=max(1000, sentence_budget * 4))
+        except Exception:
+            pass
+
+        candidate_fields = [
+            text_field,
+            "text",
+            "sentence",
+            "transcript",
+            "content",
+            "article",
+            "document",
+        ]
+        candidate_fields = [f for f in candidate_fields if f]
+
+        for example in ds:
+            sentence = ""
+            for field in candidate_fields:
+                raw = example.get(field)
+                if isinstance(raw, str) and raw.strip():
+                    sentence = raw.strip()
+                    break
+            if sentence:
+                texts.append(sentence)
+            if len(texts) >= sentence_budget:
+                break
+
+        if texts:
+            try:
+                disk_cache_path.write_text(
+                    json.dumps({"texts": texts}, ensure_ascii=False),
+                    encoding="utf-8",
+                )
+            except Exception:
+                pass
+
+        self._text_corpus_cache[mem_key] = texts[:sentence_budget]
+        print(
+            "[SAEAnalyzer] Dataset text cache ready | "
+            f"dataset={dataset_name}/{dataset_config}:{split} texts={len(texts[:sentence_budget])}"
+        )
+        return texts[:sentence_budget]
 
     # -- Internal helpers ------------------------------------------------------
 

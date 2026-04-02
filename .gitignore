@@ -8,3 +8,4 @@ checkpoints/
 node_modules/
 assets/
 apikey.txt
+.cache/
