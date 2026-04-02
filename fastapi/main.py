@@ -14,7 +14,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional, List, Dict, Any
 
 # Ensure project-root packages (e.g., analyzers/) are importable regardless
 # of whether uvicorn is launched from project root or fastapi/.
@@ -70,6 +70,7 @@ class LabelFeatureRequest(BaseModel):
     feature_idx: int
     analyzer: str = "sae"
     corpus_texts: Optional[List[str]] = None
+    labeling_config: Optional[Dict[str, Any]] = None
     groq_api_key: Optional[str] = None  # falls back to GROQ_API_KEY env var
 
 
@@ -79,8 +80,10 @@ class FeatureActivationsRequest(BaseModel):
     dataset_name: str = "MLCommons/peoples_speech"
     dataset_config: str = "validation"
     split: str = "validation"
-    max_sentences: int = 200
-    max_results: int = 100
+    max_sentences: Optional[int] = None
+    target_activating_examples: Optional[int] = None
+    page: int = 1
+    page_size: int = 25
     min_activation: float = 0.0
     text_field: Optional[str] = None
     max_length: int = 128
@@ -239,6 +242,7 @@ def label_feature(request: LabelFeatureRequest):
             model_id=request.model_id,
             feature_idx=request.feature_idx,
             corpus_texts=request.corpus_texts,
+            labeling_config=request.labeling_config,
             groq_api_key=request.groq_api_key,
         )
         return result
@@ -267,7 +271,9 @@ def feature_activations(request: FeatureActivationsRequest):
             dataset_config=request.dataset_config,
             split=request.split,
             max_sentences=request.max_sentences,
-            max_results=request.max_results,
+            target_activating_examples=request.target_activating_examples,
+            page=request.page,
+            page_size=request.page_size,
             min_activation=request.min_activation,
             text_field=request.text_field,
             max_length=request.max_length,

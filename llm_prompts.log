@@ -934,3 +934,201 @@ LLM RESPONSE:
   "confidence": "high"
 }
 ================================================================================
+
+================================================================================
+FEATURE INDEX: 3989
+----------------------------------------
+SYSTEM PROMPT:
+You are an expert in neural network interpretability, specifically in analysing Sparse Autoencoders (SAEs) trained on language model activations.
+
+Your task: given a list of text snippets in which a particular SAE feature strongly activates, identify the **semantic concept** the feature is detecting.
+
+Rules:
+- Produce a short label (at most 8 words) that captures the concept.
+- Provide a one-sentence explanation.
+- Rate your confidence as "high", "medium", or "low".
+- Reply ONLY in the following JSON format and nothing else:
+
+{
+  "label": "<short concept label>",
+  "explanation": "<one sentence>",
+  "confidence": "high|medium|low"
+}
+
+----------------------------------------
+USER PROMPT:
+Feature index: 3989
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=10.231]  and i>>> love<<< this market because the people are so nice and they
+   2. [act=9.670]   you might have heard and say how why they they>>> love<<< driving electric
+   3. [act=0.000]   of things you might have heard and say how why>>> they<<< they love driving electric
+   4. [act=0.000]  and i love this market because the>>> people<<< are so nice and they're willing to try new
+   5. [act=0.000]  and i love this market because>>> the<<< people are so nice and they're willing to try
+   6. [act=0.000]  and i love this market>>> because<<< the people are so nice and they're willing to
+   7. [act=0.000]  and i love this>>> market<<< because the people are so nice and they're willing
+   8. [act=0.000]  and i love>>> this<<< market because the people are so nice and they're
+   9. [act=0.000]  and>>> i<<< love this market because the people are so nice and
+  10. [act=0.000]   have heard and say how why they they love driving>>> electric<<<
+  11. [act=0.000]   might have heard and say how why they they love>>> driving<<< electric
+  12. [act=0.000]   things you might have heard and say how why they>>> they<<< love driving electric
+  13. [act=0.000]   for charging electric vehicle and counter some popular misconceptions of>>> things<<< you might have heard and say how why they they
+  14. [act=0.000]   electric vehicle and counter some popular misconceptions of things you>>> might<<< have heard and say how why they they love driving
+  15. [act=0.000]   charging electric vehicle and counter some popular misconceptions of things>>> you<<< might have heard and say how why they they love
+
+Most frequent activating tokens (top 10): "love", "they", "people", "the", "because", "market", "this", "i", "electric", "driving"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+----------------------------------------
+LLM RESPONSE:
+{
+  "label": "Expression of Affection",
+  "explanation": "The feature detects phrases where the token 'love' is used to express a positive sentiment or affection towards something or someone.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE 8475
+USER PROMPT:
+Feature index: 8475
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=2.799]  again how to freeze it how to can it>>> how<<< long to blanch it if there's better ways
+   2. [act=2.772]   example there's different kinds of pastas or different>>> kinds<<< of things like granola and things that are just
+   3. [act=2.727]  so how do you do your produce how>>> do<<< you pick it we have a crew
+   4. [act=2.559]   gonna talk to some of the actual farmers and some>>> of<<< the people that have come to buy fresh fruit and
+   5. [act=2.465]   city where you want to live a city where you>>> want<<< to enjoy life and a city that must be yours
+   6. [act=2.264]  're gonna talk to some of the actual farmers and>>> some<<< of the people that have come to buy fresh fruit
+   7. [act=2.250]   i'm so glad you're here and i'm>>> glad<<< you're all able to see where i live and
+   8. [act=1.992]   thousand fewer miles a year or it's about the>>> equivalent<<< of your entire electrical the emissions from all of the
+   9. [act=1.657]   you plug in your toaster at home you can>>> plug<<< in your electric car that works great for almost every
+  10. [act=1.655]   a city where you want to enjoy life and a>>> city<<< that must be yours mine
+  11. [act=1.650]  burg a city where you want to live a city>>> where<<< you want to enjoy life and a city that must
+  12. [act=1.515]   from hiding behind the corner outdoors and another it would>>> keep<<< the devil out of the corner
+  13. [act=1.291]   down here right and the openair market that's>>> kind<<< of special
+  14. [act=1.255]  again how to freeze it>>> how<<< to can it how long to blanch it if
+  15. [act=1.227]   also for some charges you can ask it to charge>>> when<<< the power is the greenest
+
+Most frequent activating tokens (top 10): "how", "kinds", "do", "of", "want", "some", "glad", "equivalent", "plug", "city"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Query or option",
+  "explanation": "The feature detects tokens that often appear in questions, comparisons, or when presenting alternatives, indicating a semantic concept related to inquiry or optionality",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE 8475
+USER PROMPT:
+Feature index: 8475
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 11 activating examples (ordered strongest first):
+   1. [act=4.093]  basically in terms of i should state in>>> terms<<< of infrastructure standpoint belmont light could support really whatever
+   2. [act=1.143]   building on lot two though right because there's a>>> pretty<<< significant drop off on the back on that street
+   3. [act=0.706]  ables two justices of the peace as many overseers>>> of<<< roads as there are road districts in the town
+   4. [act=0.470]   two constables two justices of the peace as many>>> overse<<<ers of roads as there are road districts in the
+   5. [act=0.389]   you well they want to know how fresh it is>>> how<<< long it's gonna last what's the best way
+   6. [act=0.249]  basically in terms of i should state in terms>>> of<<< infrastructure standpoint belmont light could support really whatever you
+   7. [act=0.242]   how long it's gonna last what's the best>>> way<<< to keep it
+   8. [act=0.229]  and you spoke about the>>> fact<<< that the boosters have kicked in and helped out for
+   9. [act=0.172]   fund and just to keep the rate more less flat>>> instead<<< of changing ppt rate you know every few months
+  10. [act=0.114]   because she loved the medium so much i knew that>>> when<<< i wanted to tell our story that that was the
+  11. [act=0.102]   at belmont high school last year they've been>>> instrumental<<< and refurbishing the fitness center at bhs as
+
+Most frequent activating tokens (top 10): "of", "terms", "pretty", "overse", "how", "way", "fact", "instead", "when", "instrumental"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Prepositional Phrases",
+  "explanation": "The feature activates on tokens that are often part of prepositional phrases, indicating a focus on relational or contextual information",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE 8475
+USER PROMPT:
+Feature index: 8475
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 11 activating examples (ordered strongest first):
+   1. [act=4.093]  basically in terms of i should state in>>> terms<<< of infrastructure standpoint belmont light could support really whatever
+   2. [act=1.143]   building on lot two though right because there's a>>> pretty<<< significant drop off on the back on that street
+   3. [act=0.706]  ables two justices of the peace as many overseers>>> of<<< roads as there are road districts in the town
+   4. [act=0.470]   two constables two justices of the peace as many>>> overse<<<ers of roads as there are road districts in the
+   5. [act=0.389]   you well they want to know how fresh it is>>> how<<< long it's gonna last what's the best way
+   6. [act=0.249]  basically in terms of i should state in terms>>> of<<< infrastructure standpoint belmont light could support really whatever you
+   7. [act=0.242]   how long it's gonna last what's the best>>> way<<< to keep it
+   8. [act=0.229]  and you spoke about the>>> fact<<< that the boosters have kicked in and helped out for
+   9. [act=0.172]   fund and just to keep the rate more less flat>>> instead<<< of changing ppt rate you know every few months
+  10. [act=0.114]   because she loved the medium so much i knew that>>> when<<< i wanted to tell our story that that was the
+  11. [act=0.102]   at belmont high school last year they've been>>> instrumental<<< and refurbishing the fitness center at bhs as
+
+Most frequent activating tokens (top 10): "of", "terms", "pretty", "overse", "how", "way", "fact", "instead", "when", "instrumental"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Prepositional Phrases",
+  "explanation": "The feature detects tokens that are part of prepositional phrases, which provide relational information between entities in a sentence.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+FEATURE 8475
+USER PROMPT:
+Feature index: 8475
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 11 activating examples (ordered strongest first):
+   1. [act=4.093]  basically in terms of i should state in>>> terms<<< of infrastructure standpoint belmont light could support really whatever
+   2. [act=1.143]   building on lot two though right because there's a>>> pretty<<< significant drop off on the back on that street
+   3. [act=0.706]  ables two justices of the peace as many overseers>>> of<<< roads as there are road districts in the town
+   4. [act=0.470]   two constables two justices of the peace as many>>> overse<<<ers of roads as there are road districts in the
+   5. [act=0.389]   you well they want to know how fresh it is>>> how<<< long it's gonna last what's the best way
+   6. [act=0.249]  basically in terms of i should state in terms>>> of<<< infrastructure standpoint belmont light could support really whatever you
+   7. [act=0.242]   how long it's gonna last what's the best>>> way<<< to keep it
+   8. [act=0.229]  and you spoke about the>>> fact<<< that the boosters have kicked in and helped out for
+   9. [act=0.172]   fund and just to keep the rate more less flat>>> instead<<< of changing ppt rate you know every few months
+  10. [act=0.114]   because she loved the medium so much i knew that>>> when<<< i wanted to tell our story that that was the
+  11. [act=0.102]   at belmont high school last year they've been>>> instrumental<<< and refurbishing the fitness center at bhs as
+
+Most frequent activating tokens (top 10): "of", "terms", "pretty", "overse", "how", "way", "fact", "instead", "when", "instrumental"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Prepositional phrases",
+  "explanation": "The feature activates on tokens that are often part of prepositional phrases, indicating a focus on relational or contextual information",
+  "confidence": "high"
+}
+================================================================================

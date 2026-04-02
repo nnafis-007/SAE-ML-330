@@ -16,6 +16,9 @@ from __future__ import annotations
 import json
 import os
 import sys
+import time
+import math
+import uuid
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -68,6 +71,7 @@ class SAEAnalyzer(BaseAnalyzer):
         self._collector_cache: Dict[int, GPT2ActivationCollector] = {}
         self._labels_cache: Dict[str, Dict[int, str]] = {}
         self._model_list_cache: Optional[List[Dict[str, Any]]] = None
+        self._feature_activation_cache: Dict[str, Dict[str, Any]] = {}
 
     # -- BaseAnalyzer interface ------------------------------------------------
 
@@ -237,13 +241,44 @@ class SAEAnalyzer(BaseAnalyzer):
 
         # Corpus
         if corpus_texts is None:
-            corpus_path = _SAE_ROOT / "corpus_texts.txt"
-            if corpus_path.exists():
-                raw = corpus_path.read_text(encoding="utf-8")
-                corpus_texts = [
-                    t.strip() for t in raw.split("\n\n") if t.strip()
-                ]
-            else:
+            # Default to Hugging Face People's Speech so feature interpretation
+            # uses a consistent dataset when UI doesn't provide sentence samples.
+            dataset_name = "MLCommons/peoples_speech"
+            dataset_config = "validation"
+            split = "validation"
+            sentence_budget = 200
+            if labeling_config:
+                sentence_budget = max(1, int(labeling_config.get("num_sentences", sentence_budget)))
+
+            try:
+                from datasets import Audio, load_dataset  # noqa: E402
+
+                ds = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
+                try:
+                    features = getattr(ds, "features", None) or {}
+                    for col, feat in features.items():
+                        if isinstance(feat, Audio):
+                            ds = ds.cast_column(col, Audio(decode=False))
+                except Exception:
+                    pass
+
+                candidate_fields = ["text", "sentence", "transcript", "content", "article", "document"]
+                corpus_texts = []
+                for example in ds:
+                    for field in candidate_fields:
+                        raw = example.get(field)
+                        if isinstance(raw, str) and raw.strip():
+                            corpus_texts.append(raw.strip())
+                            break
+                    if len(corpus_texts) >= sentence_budget:
+                        break
+
+                print(
+                    "[SAEAnalyzer] label_feature corpus source | "
+                    f"dataset={dataset_name}/{dataset_config}:{split} collected_sentences={len(corpus_texts)}"
+                )
+            except Exception as exc:
+                print(f"[SAEAnalyzer] Failed to load People's Speech for label_feature ({exc}); using fallback corpus.")
                 corpus_texts = [
                     "The quick brown fox jumps over the lazy dog.",
                     "Machine learning enables computers to learn from data.",
@@ -265,15 +300,25 @@ class SAEAnalyzer(BaseAnalyzer):
         from analyzers.llm_analysis import FeatureLabeler, LabelingConfig, LabelResult  # noqa: E811
 
         resolved_api_key = groq_api_key or os.environ.get("GROQ_API_KEY")
+        request_id = str(uuid.uuid4())
         cfg_kwargs: Dict[str, Any] = {
             "backend": "groq",
             "model": "llama-3.3-70b-versatile",
             "top_k": min(15, activations.shape[0]),
             "request_delay": 0.2,
             "groq_api_key": resolved_api_key,
+            "skip_first_token": True,
+            "request_id": request_id,
         }
         if labeling_config:
-            cfg_kwargs.update(labeling_config)
+            # Ignore unsupported keys (e.g. dataset_name) so UI can pass
+            # transport metadata without breaking LabelingConfig construction.
+            allowed = set(LabelingConfig.__dataclass_fields__.keys())
+            filtered = {k: v for k, v in labeling_config.items() if k in allowed}
+            ignored = [k for k in labeling_config.keys() if k not in allowed]
+            if ignored:
+                print(f"[SAEAnalyzer] Ignoring unsupported labeling_config keys: {ignored}")
+            cfg_kwargs.update(filtered)
         cfg = LabelingConfig(**cfg_kwargs)
 
         labeler = FeatureLabeler(sae=sae, tokenizer=tokenizer, cfg=cfg, device=self._device)
@@ -287,6 +332,7 @@ class SAEAnalyzer(BaseAnalyzer):
         )
 
         return {
+            "request_id": request_id,
             "feature_idx": result.feature_idx,
             "label": result.label,
             "explanation": result.explanation,
@@ -302,8 +348,10 @@ class SAEAnalyzer(BaseAnalyzer):
         dataset_name: str = "MLCommons/peoples_speech",
         dataset_config: str = "validation",
         split: str = "validation",
-        max_sentences: int = 200,
-        max_results: int = 100,
+        max_sentences: Optional[int] = None,
+        target_activating_examples: Optional[int] = None,
+        page: int = 1,
+        page_size: int = 25,
         min_activation: float = 0.0,
         text_field: Optional[str] = None,
         max_length: int = 128,
@@ -316,11 +364,87 @@ class SAEAnalyzer(BaseAnalyzer):
         token-level SAE activations, and returns tokens whose value for the
         selected ``feature_id`` exceeds ``min_activation``.
         """
+        start_time = time.time()
         checkpoint_path = str(self._checkpoints_dir / model_id)
         info = self._load_sae(checkpoint_path)
         sae: SparseAutoencoder = info["sae"]
         layer_index: int = info["layer_index"]
         d_hidden: int = int(info["d_hidden"])
+
+        # This endpoint currently uses raw GPT-2 hidden states (no mean/std normalization).
+        normalization_mode = "none"
+
+        print(
+            "[SAEAnalyzer] Feature activation lookup started | "
+            f"model={model_id} feature_id={feature_id} layer={layer_index} "
+            f"dataset={dataset_name}/{dataset_config}:{split} max_sentences={max_sentences} "
+            f"target_activating_examples={target_activating_examples} page={page} page_size={page_size} "
+            f"min_activation={min_activation} "
+            f"normalization={normalization_mode} filter='activation >= min_activation'"
+        )
+
+        page = max(1, int(page))
+        page_size = max(1, int(page_size))
+        if max_sentences is not None:
+            max_sentences = max(1, int(max_sentences))
+        if target_activating_examples is not None:
+            target_activating_examples = max(1, int(target_activating_examples))
+
+        cache_key = json.dumps(
+            {
+                "model_id": model_id,
+                "feature_id": feature_id,
+                "dataset_name": dataset_name,
+                "dataset_config": dataset_config,
+                "split": split,
+                "max_sentences": max_sentences,
+                "target_activating_examples": target_activating_examples,
+                "min_activation": float(min_activation),
+                "text_field": text_field,
+                "max_length": int(max_length),
+                "seed": int(seed),
+            },
+            sort_keys=True,
+        )
+
+        if cache_key in self._feature_activation_cache:
+            cached = self._feature_activation_cache[cache_key]
+            hits = cached["hits"]
+            total_matches = len(hits)
+            total_pages = max(1, math.ceil(total_matches / page_size)) if total_matches > 0 else 1
+            page = min(page, total_pages)
+            start = (page - 1) * page_size
+            end = start + page_size
+            paged_hits = hits[start:end]
+            print(
+                "[SAEAnalyzer] Feature activation cache hit | "
+                f"feature_id={feature_id} total_matches={total_matches} page={page}/{total_pages}"
+            )
+            return {
+                "model": model_id,
+                "feature_id": feature_id,
+                "feature_description": cached["feature_description"],
+                "dataset": dataset_name,
+                "dataset_config": dataset_config,
+                "split": split,
+                "text_fields_checked": cached["text_fields_checked"],
+                "scanned_sentences": cached["scanned_sentences"],
+                "raw_examples_scanned": cached["raw_examples_scanned"],
+                "scanned_tokens": cached["scanned_tokens"],
+                "min_activation": min_activation,
+                "activation_filter": "activation >= min_activation",
+                "normalization_mode": normalization_mode,
+                "target_activating_examples": target_activating_examples,
+                "activating_sentences": cached["activating_sentences"],
+                "activating_sentences_count": len(cached["activating_sentences"]),
+                "page": page,
+                "page_size": page_size,
+                "total_pages": total_pages,
+                "has_next_page": page < total_pages,
+                "has_prev_page": page > 1,
+                "matches": paged_hits,
+                "total_matches": total_matches,
+            }
 
         if feature_id < 0 or feature_id >= d_hidden:
             raise ValueError(f"feature_id must be in [0, {d_hidden - 1}]")
@@ -344,7 +468,8 @@ class SAEAnalyzer(BaseAnalyzer):
         except Exception:
             pass
         try:
-            ds = ds.shuffle(seed=seed, buffer_size=max(1000, max_sentences * 4))
+            shuffle_anchor = max_sentences if max_sentences is not None else 1000
+            ds = ds.shuffle(seed=seed, buffer_size=max(1000, shuffle_anchor * 4))
         except Exception:
             # Some streaming sources may not support shuffle.
             pass
@@ -369,24 +494,27 @@ class SAEAnalyzer(BaseAnalyzer):
                 # Older dataset wrappers may not support select_columns.
                 pass
 
-        texts: List[str] = []
-        for example in ds:
-            value = ""
-            for field in candidate_fields:
-                raw = example.get(field)
-                if isinstance(raw, str) and raw.strip():
-                    value = raw.strip()
-                    break
-            if value:
-                texts.append(value)
-            if len(texts) >= max_sentences:
-                break
-
+        texts_scanned = 0
+        examples_scanned = 0
         hits: List[Dict[str, Any]] = []
+        activating_sentences: List[str] = []
+        activating_seen: set = set()
         total_tokens_scanned = 0
+        progress_interval = 25
 
         with torch.no_grad():
-            for sent_idx, sentence in enumerate(texts):
+            for sentence_idx, example in enumerate(ds):
+                examples_scanned += 1
+                sentence = ""
+                for field in candidate_fields:
+                    raw = example.get(field)
+                    if isinstance(raw, str) and raw.strip():
+                        sentence = raw.strip()
+                        break
+                if not sentence:
+                    continue
+
+                texts_scanned += 1
                 encoding = tokenizer(
                     sentence,
                     return_tensors="pt",
@@ -404,31 +532,82 @@ class SAEAnalyzer(BaseAnalyzer):
                 feature_mat = sae.encode(hidden_states.to(self._device)).cpu()
 
                 feat_col = feature_mat[:, feature_id]
-                active_positions = torch.nonzero(feat_col > float(min_activation), as_tuple=False).flatten().tolist()
+                active_positions = torch.nonzero(feat_col >= float(min_activation), as_tuple=False).flatten().tolist()
+                # Skip first token to avoid GPT-2 attention sink effects.
+                active_positions = [p for p in active_positions if p > 0]
                 if not active_positions:
                     total_tokens_scanned += len(token_id_list)
-                    continue
+                    if texts_scanned % progress_interval == 0:
+                        print(
+                            "[SAEAnalyzer] Progress | "
+                            f"processed_sentences={texts_scanned} "
+                            f"tokens_scanned={total_tokens_scanned} matches_so_far={len(hits)}"
+                        )
+                else:
+                    decoded_tokens = [tokenizer.decode([tid]) for tid in token_id_list]
 
-                decoded_tokens = [tokenizer.decode([tid]) for tid in token_id_list]
+                    if sentence not in activating_seen:
+                        activating_seen.add(sentence)
+                        activating_sentences.append(sentence)
 
-                for pos in active_positions:
-                    token_text = decoded_tokens[pos]
-                    left = "".join(decoded_tokens[max(0, pos - 6):pos])
-                    right = "".join(decoded_tokens[pos + 1:min(len(decoded_tokens), pos + 7)])
-                    hits.append({
-                        "sentence_index": sent_idx,
-                        "sentence": sentence,
-                        "token_index": int(pos),
-                        "token": token_text,
-                        "activation": round(float(feat_col[pos].item()), 4),
-                        "left_context": left,
-                        "right_context": right,
-                    })
+                    for pos in active_positions:
+                        token_text = decoded_tokens[pos]
+                        left = "".join(decoded_tokens[max(0, pos - 6):pos])
+                        right = "".join(decoded_tokens[pos + 1:min(len(decoded_tokens), pos + 7)])
+                        hits.append({
+                            "sentence_index": texts_scanned - 1,
+                            "sentence": sentence,
+                            "token_index": int(pos),
+                            "token": token_text,
+                            "activation": round(float(feat_col[pos].item()), 4),
+                            "left_context": left,
+                            "right_context": right,
+                        })
 
                 total_tokens_scanned += len(token_id_list)
+                if texts_scanned % progress_interval == 0:
+                    print(
+                        "[SAEAnalyzer] Progress | "
+                        f"processed_sentences={texts_scanned} "
+                        f"tokens_scanned={total_tokens_scanned} matches_so_far={len(hits)}"
+                    )
+
+                # Stop conditions
+                if max_sentences is not None and texts_scanned >= max_sentences:
+                    break
+                if max_sentences is None and target_activating_examples is not None:
+                    if len(activating_sentences) >= target_activating_examples:
+                        break
 
         hits.sort(key=lambda x: x["activation"], reverse=True)
-        limited_hits = hits[:max_results]
+        total_matches = len(hits)
+        total_pages = max(1, math.ceil(total_matches / page_size)) if total_matches > 0 else 1
+        page = min(page, total_pages)
+        start = (page - 1) * page_size
+        end = start + page_size
+        paged_hits = hits[start:end]
+
+        elapsed = time.time() - start_time
+        print(
+            "[SAEAnalyzer] Feature activation lookup finished | "
+            f"sentences_collected={texts_scanned} raw_examples_scanned={examples_scanned} "
+            f"tokens_scanned={total_tokens_scanned} total_matches={total_matches} shown={len(paged_hits)} "
+            f"elapsed_sec={elapsed:.2f}"
+        )
+
+        # Keep a small cache of full-hit results so page navigation is fast.
+        if len(self._feature_activation_cache) >= 12:
+            oldest_key = next(iter(self._feature_activation_cache.keys()))
+            self._feature_activation_cache.pop(oldest_key, None)
+        self._feature_activation_cache[cache_key] = {
+            "hits": hits,
+            "feature_description": labels.get(feature_id, f"Feature {feature_id}"),
+            "text_fields_checked": selected_text_fields or candidate_fields,
+            "scanned_sentences": texts_scanned,
+            "raw_examples_scanned": examples_scanned,
+            "scanned_tokens": total_tokens_scanned,
+            "activating_sentences": activating_sentences,
+        }
 
         return {
             "model": model_id,
@@ -438,12 +617,22 @@ class SAEAnalyzer(BaseAnalyzer):
             "dataset_config": dataset_config,
             "split": split,
             "text_fields_checked": selected_text_fields or candidate_fields,
-            "scanned_sentences": len(texts),
+            "scanned_sentences": texts_scanned,
+            "raw_examples_scanned": examples_scanned,
             "scanned_tokens": total_tokens_scanned,
             "min_activation": min_activation,
-            "max_results": max_results,
-            "matches": limited_hits,
-            "total_matches": len(hits),
+            "activation_filter": "activation >= min_activation",
+            "normalization_mode": normalization_mode,
+            "target_activating_examples": target_activating_examples,
+            "activating_sentences": activating_sentences,
+            "activating_sentences_count": len(activating_sentences),
+            "page": page,
+            "page_size": page_size,
+            "total_pages": total_pages,
+            "has_next_page": page < total_pages,
+            "has_prev_page": page > 1,
+            "matches": paged_hits,
+            "total_matches": total_matches,
         }
 
     # -- Internal helpers ------------------------------------------------------

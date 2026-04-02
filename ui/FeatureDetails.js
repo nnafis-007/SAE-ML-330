@@ -10,28 +10,79 @@ import {
 } from 'react-native';
 
 const API_BASE = 'http://localhost:8000';
+const PEOPLE_SPEECH_DATASET = 'MLCommons/peoples_speech';
+const PEOPLE_SPEECH_CONFIG = 'validation';
+const PEOPLE_SPEECH_SPLIT = 'validation';
+
+function sanitizeDecimalInput(value) {
+  const cleaned = (value || '').replace(/[^0-9.]/g, '');
+  const firstDotIndex = cleaned.indexOf('.');
+  if (firstDotIndex === -1) return cleaned;
+  return cleaned.slice(0, firstDotIndex + 1) + cleaned.slice(firstDotIndex + 1).replace(/\./g, '');
+}
 
 export default function FeatureDetails({ feature, onClose, modelId }) {
-  const [maxSentences, setMaxSentences] = useState('200');
+  const [maxSentences, setMaxSentences] = useState('');
+  const [activatingExamples, setActivatingExamples] = useState('');
   const [minActivation, setMinActivation] = useState('0.1');
-  const [maxResults, setMaxResults] = useState('100');
+  const [pageSize] = useState(25);
+  const [matchesPage, setMatchesPage] = useState(1);
+  const [lastActivationQuery, setLastActivationQuery] = useState(null);
 
   const [llmLabel, setLlmLabel] = useState(null);
   const [llmLoading, setLlmLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(false);
   const [llmError, setLlmError] = useState(null);
 
   const [activationPayload, setActivationPayload] = useState(null);
   const [analysisMeta, setAnalysisMeta] = useState(null);
+
+  const loadActivationPage = async (query, pageNo) => {
+    setPageLoading(true);
+    try {
+      const res = await fetch(`${API_BASE}/feature-activations`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...query, page: pageNo, page_size: pageSize }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.detail || `HTTP ${res.status}`);
+      }
+      const data = await res.json();
+      setActivationPayload(data);
+      setMatchesPage(data.page || pageNo);
+      return data;
+    } finally {
+      setPageLoading(false);
+    }
+  };
 
   const fetchLlmLabel = async () => {
     if (!feature?.id || !modelId) {
       return;
     }
 
-    const sentenceLimit = Math.max(1, Number(maxSentences) || 200);
-    const minAct = Math.max(0, Number(minActivation) || 0);
-    const resultLimit = Math.max(1, Number(maxResults) || 100);
+    const maxSentencesTrimmed = maxSentences.trim();
+    const activatingExamplesTrimmed = activatingExamples.trim();
 
+    const sentenceLimit =
+      maxSentencesTrimmed === '' ? null : Math.max(1, Number(maxSentencesTrimmed) || 0);
+    const activatingExamplesLimit =
+      activatingExamplesTrimmed === '' ? null : Math.max(1, Number(activatingExamplesTrimmed) || 0);
+
+    if (sentenceLimit !== null && !Number.isFinite(sentenceLimit)) {
+      setLlmError('Number of sentences must be a valid positive integer.');
+      return;
+    }
+    if (activatingExamplesLimit !== null && !Number.isFinite(activatingExamplesLimit)) {
+      setLlmError('Number of activating examples must be a valid positive integer.');
+      return;
+    }
+
+    // Fallback if user leaves both blank.
+    const effectiveSentenceLimit = sentenceLimit ?? 200;
+    const minAct = Math.max(0, Number(minActivation) || 0);
     setLlmLoading(true);
     setLlmLabel(null);
     setLlmError(null);
@@ -39,36 +90,46 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
     setAnalysisMeta(null);
 
     try {
-      // Step 1: fetch activating contexts from dataset with user-provided filters.
-      const activationsRes = await fetch(`${API_BASE}/feature-activations`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model_id: modelId,
-          feature_id: feature.id,
-          dataset_name: 'MLCommons/peoples_speech',
-          dataset_config: 'validation',
-          split: 'validation',
-          max_sentences: sentenceLimit,
-          max_results: resultLimit,
-          min_activation: minAct,
-        }),
-      });
+      // Fetch activating contexts from HF People's Speech.
+      // Rules implemented:
+      // 1) both provided => enforce both;
+      // 2) activating examples only => auto-expand scanned sentences until enough activating sentences;
+      // 3) sentences only => use those scanned sentences, then send activating-only sentence subset to LLM.
+      const requiredActivatingSentences = activatingExamplesLimit;
+      const hasExplicitSentenceLimit = sentenceLimit !== null;
+      const scanSentences = hasExplicitSentenceLimit ? effectiveSentenceLimit : null;
 
-      if (!activationsRes.ok) {
-        const err = await activationsRes.json().catch(() => ({}));
-        throw new Error(err.detail || `HTTP ${activationsRes.status}`);
-      }
+      const activationQuery = {
+        model_id: modelId,
+        feature_id: feature.id,
+        dataset_name: PEOPLE_SPEECH_DATASET,
+        dataset_config: PEOPLE_SPEECH_CONFIG,
+        split: PEOPLE_SPEECH_SPLIT,
+        max_sentences: scanSentences,
+        target_activating_examples: !hasExplicitSentenceLimit ? requiredActivatingSentences : null,
+        min_activation: minAct,
+        page: 1,
+        page_size: pageSize,
+      };
 
-      const activationData = await activationsRes.json();
-      const matches = activationData.matches || [];
-      const uniqueSentences = Array.from(
-        new Set(matches.map((m) => (m.sentence || '').trim()).filter(Boolean))
-      ).slice(0, sentenceLimit);
+      let activationData = await loadActivationPage(activationQuery, 1);
+      setLastActivationQuery(activationQuery);
+
+      let uniqueSentences = activationData.activating_sentences || [];
 
       if (uniqueSentences.length === 0) {
         throw new Error('No activating contexts found with the selected thresholds.');
       }
+
+      if (!hasExplicitSentenceLimit && requiredActivatingSentences && uniqueSentences.length < requiredActivatingSentences) {
+        throw new Error(
+          `Could not find ${requiredActivatingSentences} activating sentence(s). Try lowering minimum activation.`
+        );
+      }
+
+      const corpusForLlm = requiredActivatingSentences
+        ? uniqueSentences.slice(0, requiredActivatingSentences)
+        : uniqueSentences;
 
       setActivationPayload(activationData);
 
@@ -80,7 +141,13 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
           model_id: modelId,
           feature_idx: feature.id,
           analyzer: 'sae',
-          corpus_texts: uniqueSentences,
+          corpus_texts: corpusForLlm,
+          labeling_config: {
+            top_k: requiredActivatingSentences ?? 0,
+            skip_first_token: true,
+            min_activation: minAct,
+            num_sentences: scanSentences,
+          },
         }),
       });
 
@@ -92,11 +159,15 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
       const labelData = await labelRes.json();
       setLlmLabel(labelData);
       setAnalysisMeta({
-        sentenceLimit,
+        requestId: labelData.request_id || null,
+        sentenceLimit: hasExplicitSentenceLimit ? effectiveSentenceLimit : null,
+        scannedSentences: activationData.scanned_sentences,
+        activatingExamplesLimit: requiredActivatingSentences,
         minAct,
-        resultLimit,
-        corpusSentencesUsed: uniqueSentences.length,
+        corpusSentencesUsed: corpusForLlm.length,
         totalMatches: activationData.total_matches || 0,
+        totalPages: activationData.total_pages || 1,
+        dataset: `${PEOPLE_SPEECH_DATASET} [${PEOPLE_SPEECH_SPLIT}]`,
       });
     } catch (e) {
       setLlmError(e.message);
@@ -127,8 +198,8 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
           <View style={styles.analysisPanel}>
             <Text style={styles.panelTitle}>Run Feature LLM Analysis</Text>
             <Text style={styles.panelHint}>
-              Configure how many sentences to scan and the minimum token activation threshold,
-              then analyze this feature.
+              Dataset is fixed to Hugging Face People\'s Speech. Provide sentence count and/or activating-example count.
+              If only activating examples is provided, scanning auto-expands until enough activating sentences are found.
             </Text>
 
             <View style={styles.inputRow}>
@@ -139,7 +210,17 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
                   value={maxSentences}
                   onChangeText={(t) => setMaxSentences(t.replace(/[^0-9]/g, ''))}
                   keyboardType="numeric"
-                  placeholder="200"
+                  placeholder="Optional (e.g. 200)"
+                />
+              </View>
+              <View style={styles.inputField}>
+                <Text style={styles.inputLabel}>Activating examples to send to LLM</Text>
+                <TextInput
+                  style={styles.numericInput}
+                  value={activatingExamples}
+                  onChangeText={(t) => setActivatingExamples(t.replace(/[^0-9]/g, ''))}
+                  keyboardType="numeric"
+                  placeholder="Optional (e.g. 25)"
                 />
               </View>
               <View style={styles.inputField}>
@@ -147,20 +228,14 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
                 <TextInput
                   style={styles.numericInput}
                   value={minActivation}
-                  onChangeText={(t) => setMinActivation(t.replace(/[^0-9.]/g, ''))}
+                  onChangeText={(t) => setMinActivation(sanitizeDecimalInput(t))}
                   keyboardType="numeric"
                   placeholder="0.1"
                 />
               </View>
               <View style={styles.inputField}>
-                <Text style={styles.inputLabel}>Maximum matches to keep</Text>
-                <TextInput
-                  style={styles.numericInput}
-                  value={maxResults}
-                  onChangeText={(t) => setMaxResults(t.replace(/[^0-9]/g, ''))}
-                  keyboardType="numeric"
-                  placeholder="100"
-                />
+                <Text style={styles.inputLabel}>Pagination</Text>
+                <Text style={styles.loadingText}>Results are returned in pages of {pageSize} matches.</Text>
               </View>
             </View>
 
@@ -178,6 +253,13 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
               <View style={styles.loadingRow}>
                 <ActivityIndicator size="small" color="#2563eb" />
                 <Text style={styles.loadingText}>Collecting activations and requesting LLM label...</Text>
+              </View>
+            )}
+
+            {pageLoading && !llmLoading && (
+              <View style={styles.loadingRow}>
+                <ActivityIndicator size="small" color="#2563eb" />
+                <Text style={styles.loadingText}>Loading page...</Text>
               </View>
             )}
           </View>
@@ -218,9 +300,14 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
 
                 {analysisMeta && (
                   <View style={styles.metaBox}>
-                    <Text style={styles.metaText}>Sentences scanned: {analysisMeta.sentenceLimit}</Text>
+                    <Text style={styles.metaText}>Dataset: {analysisMeta.dataset}</Text>
+                    <Text style={styles.metaText}>Request ID: {analysisMeta.requestId || 'n/a'}</Text>
+                    <Text style={styles.metaText}>Sentences requested: {analysisMeta.sentenceLimit ?? 'auto'}</Text>
+                    <Text style={styles.metaText}>Sentences scanned: {analysisMeta.scannedSentences}</Text>
+                    <Text style={styles.metaText}>Activating examples requested: {analysisMeta.activatingExamplesLimit ?? 'all'}</Text>
                     <Text style={styles.metaText}>Min activation: {analysisMeta.minAct}</Text>
                     <Text style={styles.metaText}>Matches returned: {analysisMeta.totalMatches}</Text>
+                    <Text style={styles.metaText}>Total pages: {analysisMeta.totalPages}</Text>
                     <Text style={styles.metaText}>Sentences used for LLM: {analysisMeta.corpusSentencesUsed}</Text>
                   </View>
                 )}
@@ -231,7 +318,7 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
           {activationPayload?.matches?.length > 0 && (
             <View style={styles.activationsListWrap}>
               <Text style={styles.subheading}>Top Activation Matches</Text>
-              {activationPayload.matches.slice(0, 25).map((match, idx) => (
+              {activationPayload.matches.map((match, idx) => (
                 <View key={`match-${idx}`} style={styles.matchCard}>
                   <View style={styles.matchMetaRow}>
                     <Text style={styles.matchMetaText}>
@@ -249,10 +336,49 @@ export default function FeatureDetails({ feature, onClose, modelId }) {
                   <Text style={styles.matchSentence}>{match.sentence}</Text>
                 </View>
               ))}
+
             </View>
           )}
         </View>
       </ScrollView>
+
+      {activationPayload?.matches?.length > 0 && (
+        <View style={styles.fixedPaginationBar}>
+          <TouchableOpacity
+            style={[styles.doneButton, (!activationPayload?.has_prev_page || llmLoading || pageLoading) && { opacity: 0.5 }]}
+            disabled={!activationPayload?.has_prev_page || llmLoading || pageLoading}
+            onPress={async () => {
+              if (!lastActivationQuery || !activationPayload?.has_prev_page) return;
+              const prevPage = Math.max(1, matchesPage - 1);
+              try {
+                await loadActivationPage(lastActivationQuery, prevPage);
+              } catch (e) {
+                setLlmError(e.message);
+              }
+            }}
+          >
+            <Text style={styles.doneButtonText}>Prev</Text>
+          </TouchableOpacity>
+
+          <Text style={styles.metaText}>Page {activationPayload.page} / {activationPayload.total_pages}</Text>
+
+          <TouchableOpacity
+            style={[styles.doneButton, (!activationPayload?.has_next_page || llmLoading || pageLoading) && { opacity: 0.5 }]}
+            disabled={!activationPayload?.has_next_page || llmLoading || pageLoading}
+            onPress={async () => {
+              if (!lastActivationQuery || !activationPayload?.has_next_page) return;
+              const nextPage = matchesPage + 1;
+              try {
+                await loadActivationPage(lastActivationQuery, nextPage);
+              } catch (e) {
+                setLlmError(e.message);
+              }
+            }}
+          >
+            <Text style={styles.doneButtonText}>Next</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 }
@@ -284,6 +410,7 @@ const styles = StyleSheet.create({
   },
   mainContent: {
     padding: 20,
+    paddingBottom: 96,
     maxWidth: 1200,
     alignSelf: 'center',
     width: '100%',
@@ -518,5 +645,28 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 18,
     color: '#64748b',
+  },
+  paginationRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 8,
+    marginBottom: 16,
+    gap: 12,
+  },
+  fixedPaginationBar: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#e2e8f0',
+    backgroundColor: '#ffffff',
   },
 });

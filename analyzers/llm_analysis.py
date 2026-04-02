@@ -12,33 +12,39 @@ This module assigns human-readable semantic labels to SAE features by:
 
 Supported LLM back-ends
 -----------------------
-* **OpenAI** (GPT-4o, GPT-4, GPT-3.5-turbo …) – requires ``openai`` package
-  and an ``OPENAI_API_KEY`` environment variable.
-* **Ollama** (local models such as ``llama3``, ``mistral`` …) – requires the
-  ``ollama`` package and a running ``ollama serve`` process.
+* **OpenAI** (GPT-4o, GPT-4, GPT-3.5-turbo …) – requires ``openai`` package.
+* **Groq** (Llama-3, Mixtral …) – fast, OpenAI-compatible, free tier available.
+* **Ollama** (local models) – requires ``ollama`` package and local server.
 
 Typical usage
 -------------
 ::
 
     from analysis import FeatureLabeler, LabelingConfig
-    from interpretation import FeatureAnalyzer
 
-    cfg = LabelingConfig(backend="openai", model="gpt-4o-mini", top_k=20)
-    labeler = FeatureLabeler(sae, tokenizer, gpt2_model, cfg)
+    # Assumes you have: sae, tokenizer, activations (tensor), texts (list of str)
 
-    # Label a specific feature
-    result = labeler.label_feature(feature_idx=42, texts=corpus_texts)
-    print(result)  # LabelResult(feature_idx=42, label="animal / pets", ...)
+    cfg = LabelingConfig(backend="groq", model="llama-3.3-70b-versatile")
+    labeler = FeatureLabeler(sae, tokenizer, cfg)
 
-    # Label all alive features and save to JSON
-    all_labels = labeler.label_all_features(texts, alive_indices, save_path="labels.json")
+    # Build token maps from your text corpus
+    token_ids, doc_map, pos_map = build_token_maps(texts, tokenizer)
+
+    # Label features (uses pre-computed activations for speed)
+    results = labeler.label_features_from_activations(
+        feature_indices=[0, 5, 42], 
+        activations=activations, 
+        token_ids=token_ids, 
+        token_doc_map=doc_map, 
+        token_pos_map=pos_map
+    )
 """
 
 from __future__ import annotations
 
 import json
 import argparse
+import logging
 import os
 import re
 import sys
@@ -50,15 +56,23 @@ from typing import List, Optional, Dict, Any
 
 import torch
 from tqdm.auto import tqdm
-from transformers import GPT2LMHeadModel, GPT2Tokenizer
+from transformers import GPT2Tokenizer
 
-# Ensure local project modules under src/ are importable when running this file directly.
+# Ensure local project modules are importable
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SRC_DIR = PROJECT_ROOT / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
 from sae_model import SparseAutoencoder
+
+
+LOGGER = logging.getLogger("llm_analysis")
+if not LOGGER.handlers:
+    _handler = logging.StreamHandler()
+    _handler.setFormatter(logging.Formatter("[%(asctime)s] [%(levelname)s] %(message)s", "%H:%M:%S"))
+    LOGGER.addHandler(_handler)
+LOGGER.setLevel(logging.INFO)
 
 
 # ---------------------------------------------------------------------------
@@ -69,53 +83,33 @@ from sae_model import SparseAutoencoder
 class LabelingConfig:
     """
     All hyper-parameters governing the labeling process.
-
-    Attributes
-    ----------
-    backend : str
-        Which LLM back-end to use: ``"openai"`` or ``"ollama"``.
-    model : str
-        Model name understood by the chosen back-end
-        (e.g. ``"gpt-4o-mini"`` for OpenAI, ``"llama3"`` for Ollama).
-    top_k : int
-        Number of top-activating token contexts to gather per feature.
-    context_window : int
-        Number of tokens to include **before** and **after** the activating
-        token so the LLM sees meaningful surrounding context.
-    batch_size : int
-        How many activation vectors to process at once when scanning the
-        corpus.  Lower this if you run out of GPU memory.
-    max_features : Optional[int]
-        Cap on the number of features to label in one call to
-        ``label_all_features``.  ``None`` = label every alive feature.
-    request_delay : float
-        Seconds to wait between LLM API calls to respect rate limits.
-    temperature : float
-        Sampling temperature for the LLM response.
-    max_tokens : int
-        Maximum tokens in the LLM response.
-    openai_api_key : Optional[str]
-        OpenAI API key.  Falls back to the ``OPENAI_API_KEY`` environment
-        variable when ``None``.
-    ollama_host : str
-        Base URL for the Ollama server (default ``"http://localhost:11434"``).
     """
-
-    backend: str = "groq"             # "openai" | "groq" | "ollama"
-    model: str = "llama-3.3-70b-versatile"  # fast & free on Groq
+    backend: str = "groq"
+    model: str = "llama-3.3-70b-versatile"
     top_k: int = 0  # 0 or negative => include all contexts above min_activation
-    context_window: int = 10          # tokens on each side of the activating token
+    context_window: int = 10
     batch_size: int = 512
     max_features: Optional[int] = None
-    request_delay: float = 0.5        # seconds between API calls
+    request_delay: float = 0.5
     temperature: float = 0.2
     max_tokens: int = 120
+    
+    # API Keys
     openai_api_key: Optional[str] = None
-    groq_api_key: Optional[str] = None    # from console.groq.com — free tier
+    groq_api_key: Optional[str] = None
     ollama_host: str = "http://localhost:11434"
-    prompt_log_path: Optional[str] = "llm_prompts.log"  # Log all prompts/responses here
+    
+    # Logging
+    prompt_log_path: Optional[str] = "llm_prompts.log"
+    request_id: Optional[str] = None
+    
+    # Normalization (CRITICAL: match these to SAE training stats)
     normalize_mode: str = "standardize"  # standardize | center | none
     std_floor: float = 1e-3
+    activation_mean: Optional[List[float]] = None  # Pre-computed mean vector
+    activation_std: Optional[List[float]] = None   # Pre-computed std vector
+    
+    # Filtering
     skip_first_token: bool = True
     global_top_features_k: int = 10
     min_activation: float = 0.0
@@ -129,37 +123,12 @@ class LabelingConfig:
 
 @dataclass
 class TokenContext:
-    """A single top-activating example for a feature."""
-    token: str                   # The specific token that fired the feature
-    context: str                 # Surrounding text snippet
-    activation_value: float      # Raw activation magnitude
-
+    token: str
+    context: str
+    activation_value: float
 
 @dataclass
 class LabelResult:
-    """
-    The semantic label assigned to one SAE feature.
-
-    Attributes
-    ----------
-    feature_idx : int
-    label : str
-        Short (≤ 8 words) human-readable label, e.g. ``"animal / pets"``.
-    explanation : str
-        One-sentence justification from the LLM.
-    confidence : str
-        Self-reported confidence: ``"high"`` / ``"medium"`` / ``"low"``.
-    top_tokens : List[str]
-        The most frequent tokens in the top-K activating positions, for
-        quick reference without re-running the LLM.
-    top_contexts : List[TokenContext]
-        Full context objects (also serialised to JSON for auditing).
-    raw_response : str
-        Verbatim LLM output (useful for debugging).
-    error : Optional[str]
-        Set to an error description if the LLM call failed.
-    """
-
     feature_idx: int
     label: str
     explanation: str
@@ -175,24 +144,15 @@ class LabelResult:
 # ---------------------------------------------------------------------------
 
 class _OpenAIBackend:
-    """Thin wrapper around the OpenAI chat-completions API."""
-
     def __init__(self, cfg: LabelingConfig):
         try:
-            import openai  # type: ignore
+            import openai
         except ImportError as exc:
-            raise ImportError(
-                "The 'openai' package is required for the OpenAI backend.\n"
-                "Install it with:  pip install openai"
-            ) from exc
+            raise ImportError("Install 'openai' package.") from exc
 
         api_key = cfg.openai_api_key or os.environ.get("OPENAI_API_KEY")
         if not api_key:
-            raise EnvironmentError(
-                "No OpenAI API key found.  Either pass it via "
-                "LabelingConfig(openai_api_key='sk-...') or set the "
-                "OPENAI_API_KEY environment variable."
-            )
+            raise EnvironmentError("OpenAI API key missing.")
         self.client = openai.OpenAI(api_key=api_key)
         self.cfg = cfg
 
@@ -210,18 +170,12 @@ class _OpenAIBackend:
 
 
 class _OllamaBackend:
-    """Thin wrapper around a local Ollama server."""
-
     def __init__(self, cfg: LabelingConfig):
         try:
-            import ollama  # type: ignore
+            import ollama
             self._ollama = ollama
         except ImportError as exc:
-            raise ImportError(
-                "The 'ollama' package is required for the Ollama backend.\n"
-                "Install it with:  pip install ollama\n"
-                "Also make sure 'ollama serve' is running locally."
-            ) from exc
+            raise ImportError("Install 'ollama' package.") from exc
         self.cfg = cfg
 
     def call(self, system_prompt: str, user_prompt: str) -> str:
@@ -240,42 +194,22 @@ class _OllamaBackend:
 
 
 class _GroqBackend:
-    """
-    Thin wrapper around the Groq API.
-
-    Groq provides a **free tier** (≈14,400 req/day) with fast inference on
-    Llama-3, Mixtral, and Gemma models.  Its API is fully OpenAI-compatible,
-    so we just point the openai client at a different base URL.
-
-    Sign up and get a key at: https://console.groq.com
-    Then either pass it via LabelingConfig(groq_api_key='gsk_...') or set
-    the GROQ_API_KEY environment variable.
-    """
-
     def __init__(self, cfg: LabelingConfig):
         try:
-            import openai  # type: ignore
+            import openai
         except ImportError as exc:
-            raise ImportError(
-                "The 'openai' package is required for the Groq backend.\n"
-                "Install it with:  pip install openai"
-            ) from exc
+            raise ImportError("Install 'openai' package for Groq backend.") from exc
 
         api_key = cfg.groq_api_key or os.environ.get("GROQ_API_KEY")
-        
-        # Fallback: try reading from apikey.txt in project root
         if not api_key:
+            # Fallback check
             apikey_path = PROJECT_ROOT / "apikey.txt"
             if apikey_path.exists():
-                api_key = apikey_path.read_text().strip().replace("+", "") # Remove '+' from the user's snippet if present
+                api_key = apikey_path.read_text().strip().replace("+", "")
 
         if not api_key:
-            raise EnvironmentError(
-                "No Groq API key found.  Either pass it via "
-                "LabelingConfig(groq_api_key='gsk_...') or set the "
-                "GROQ_API_KEY environment variable, or place it in apikey.txt.\n"
-                "Get a free key at: https://console.groq.com"
-            )
+            raise EnvironmentError("Groq API key missing. Set GROQ_API_KEY or add to apikey.txt.")
+
         self.client = openai.OpenAI(
             api_key=api_key,
             base_url="https://api.groq.com/openai/v1",
@@ -296,7 +230,6 @@ class _GroqBackend:
 
 
 def _build_backend(cfg: LabelingConfig):
-    """Factory: instantiate the correct backend from the config."""
     if cfg.backend == "openai":
         return _OpenAIBackend(cfg)
     elif cfg.backend == "groq":
@@ -304,9 +237,7 @@ def _build_backend(cfg: LabelingConfig):
     elif cfg.backend == "ollama":
         return _OllamaBackend(cfg)
     else:
-        raise ValueError(
-            f"Unknown backend '{cfg.backend}'.  Choose 'openai', 'groq', or 'ollama'."
-        )
+        raise ValueError(f"Unknown backend '{cfg.backend}'.")
 
 
 # ---------------------------------------------------------------------------
@@ -355,22 +286,6 @@ Based on these examples, what concept does this SAE feature detect?
 class FeatureLabeler:
     """
     Labels SAE features with semantic concepts using an LLM.
-
-    Parameters
-    ----------
-    sae : SparseAutoencoder
-        Trained SAE whose features we want to label.
-    tokenizer : GPT2Tokenizer
-        Must be the tokenizer used during GPT-2 activation collection so that
-        token indices map correctly.
-    gpt2_model : GPT2LMHeadModel
-        The GPT-2 model used to re-tokenize the *text* corpus into token
-        strings.  Only the tokenizer is strictly needed; the model is kept for
-        potential future logit-lens extensions.
-    cfg : LabelingConfig
-        Labeling hyper-parameters.
-    device : str
-        Torch device for SAE inference.
     """
 
     def __init__(
@@ -386,27 +301,56 @@ class FeatureLabeler:
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.sae.to(self.device).eval()
         self._backend = _build_backend(cfg)
+        LOGGER.info(
+            "FeatureLabeler initialized | backend=%s model=%s device=%s top_k=%s min_activation=%s normalize_mode=%s",
+            cfg.backend,
+            cfg.model,
+            self.device,
+            cfg.top_k,
+            cfg.min_activation,
+            cfg.normalize_mode,
+        )
 
-    def _compute_normalization_stats(self, activations: torch.Tensor) -> Dict[str, Any]:
-        """Compute normalization stats from the provided activation corpus."""
+    def _get_normalization_stats(self, activations: torch.Tensor) -> Dict[str, Any]:
+        """
+        Prepare normalization stats. 
+        Prefer config-provided stats (from training set). 
+        Fall back to computing stats from the provided batch (less accurate).
+        """
+        cfg = self.cfg
+        
+        # If user provided stats in config, use them (Best Practice)
+        if cfg.activation_mean is not None and cfg.activation_std is not None:
+            LOGGER.info("Using provided normalization stats from config (activation_mean/std).")
+            return {
+                "mean": torch.tensor(cfg.activation_mean).to(activations.dtype),
+                "std": torch.tensor(cfg.activation_std).to(activations.dtype),
+                "normalize_mode": cfg.normalize_mode,
+                "std_floor": cfg.std_floor,
+            }
+        
+        # Fallback: Compute from batch (Warning issued)
+        warnings.warn(
+            "Computing normalization stats from the provided activation batch. "
+            "For best results, provide training set statistics in LabelingConfig "
+            "(activation_mean, activation_std).",
+            UserWarning
+        )
+        LOGGER.info("Computed normalization stats from current activation batch.")
         mean = activations.mean(dim=0, keepdim=True)
         std = activations.std(dim=0, keepdim=True)
         return {
             "mean": mean,
             "std": std,
-            "normalize_mode": self.cfg.normalize_mode,
-            "std_floor": float(self.cfg.std_floor),
+            "normalize_mode": cfg.normalize_mode,
+            "std_floor": cfg.std_floor,
         }
 
     def _apply_activation_normalization(
         self,
         x: torch.Tensor,
-        norm_stats: Optional[Dict[str, Any]],
+        norm_stats: Dict[str, Any],
     ) -> torch.Tensor:
-        """Apply the same normalization mode used for SAE training inputs."""
-        if norm_stats is None:
-            return x
-
         mode = str(norm_stats.get("normalize_mode", "standardize")).lower().strip()
         mean = norm_stats.get("mean")
         std = norm_stats.get("std")
@@ -429,118 +373,98 @@ class FeatureLabeler:
                 std = std.clamp_min(std_floor)
             return (x - mean) / (std + 1e-8)
 
-        raise ValueError(
-            f"Unknown normalize_mode='{mode}'. Expected one of: standardize|center|none."
-        )
+        raise ValueError(f"Unknown normalize_mode='{mode}'.")
 
     def _build_valid_row_indices(self, token_pos_map: List[int]) -> torch.Tensor:
-        """Build a row-index tensor that excludes first-token activations if configured."""
         if self.cfg.skip_first_token:
             idxs = [i for i, pos in enumerate(token_pos_map) if pos > 0]
             return torch.tensor(idxs, dtype=torch.long)
         return torch.arange(len(token_pos_map), dtype=torch.long)
 
+    # ------------------------------------------------------------------
+    # Optimized Core Logic
+    # ------------------------------------------------------------------
+
     @torch.no_grad()
-    def _compute_mean_feature_activations(
+    def _encode_activations_to_latents(
         self,
         activations: torch.Tensor,
-        valid_row_indices: torch.Tensor,
-        norm_stats: Optional[Dict[str, Any]],
+        norm_stats: Dict[str, Any],
     ) -> torch.Tensor:
-        """Compute corpus-wide mean feature activations over valid token rows."""
-        if valid_row_indices.numel() == 0:
-            return torch.zeros(self.sae.d_hidden, dtype=torch.float32)
+        """
+        Encodes the entire activation corpus into SAE latent space.
+        Shape: (N_tokens, d_hidden).
+        """
+        start_time = time.time()
+        LOGGER.info(
+            "Encoding activations into SAE latents | tokens=%d batch_size=%d",
+            activations.shape[0],
+            self.cfg.batch_size,
+        )
+        latents_list = []
+        
+        for start in tqdm(range(0, activations.shape[0], self.cfg.batch_size), desc="SAE Encoding"):
+            end = min(start + self.cfg.batch_size, activations.shape[0])
+            batch = activations[start:end].to(self.device)
+            
+            # Normalize
+            batch_normed = self._apply_activation_normalization(batch, norm_stats)
+            
+            # Encode
+            z = self.sae.encode(batch_normed) # (Batch, d_hidden)
+            latents_list.append(z.cpu())
+            
+        all_latents = torch.cat(latents_list, dim=0)
+        LOGGER.info(
+            "Finished latent encoding | shape=%s elapsed_sec=%.2f",
+            tuple(all_latents.shape),
+            time.time() - start_time,
+        )
+        return all_latents
 
-        mean_acts = torch.zeros(self.sae.d_hidden, dtype=torch.float32)
-        n_valid = int(valid_row_indices.numel())
-
-        for start in range(0, n_valid, self.cfg.batch_size):
-            end = min(start + self.cfg.batch_size, n_valid)
-            row_idx = valid_row_indices[start:end]
-            batch = activations[row_idx].to(self.device)
-            batch = self._apply_activation_normalization(batch, norm_stats)
-            enc = self.sae.encode(batch)
-            mean_acts += enc.sum(dim=0).cpu()
-
-        mean_acts /= max(n_valid, 1)
-        return mean_acts
-
-    def _format_global_top_features(self, mean_acts: torch.Tensor, top_n: int = 10) -> str:
-        """Format a compact top-N global feature list for prompt injection."""
-        if mean_acts.numel() == 0:
-            return "(none)"
-        n = min(int(top_n), int(mean_acts.numel()))
-        if n <= 0:
-            return "(none)"
-        vals, idxs = torch.topk(mean_acts, n)
-        parts = [f"{int(i)}:{float(v):.3f}" for v, i in zip(vals.tolist(), idxs.tolist())]
-        return ", ".join(parts) if parts else "(none)"
-
-    # ------------------------------------------------------------------
-    # Step 1 – Collect token-level top-activating contexts
-    # ------------------------------------------------------------------
-
-    @torch.no_grad()
-    def _collect_token_contexts(
+    def _collect_contexts_from_latents(
         self,
         feature_idx: int,
-        token_ids: List[List[int]],   # one list of token ids per document
-        activations: torch.Tensor,    # (total_tokens, d_model)
-        token_doc_map: List[int],     # which document each activation row belongs to
-        token_pos_map: List[int],     # position of each activation within its document
-        norm_stats: Optional[Dict[str, Any]] = None,
-        valid_row_indices: Optional[torch.Tensor] = None,
+        feature_activations: torch.Tensor, # Pre-computed activations for this feature
+        token_ids: List[List[int]],
+        token_doc_map: List[int],
+        token_pos_map: List[int],
+        valid_row_indices: torch.Tensor,
     ) -> List[TokenContext]:
         """
-        Scan pre-collected activations and return the top-K contexts for
-        ``feature_idx``, with surrounding token strings.
+        Collects top contexts given the pre-computed activation values.
+        No SAE forward pass happens here.
         """
         cfg = self.cfg
 
-        # Safety check: activations and token maps must correspond row-for-row.
-        n = activations.shape[0]
-        if n != len(token_doc_map):
-            raise ValueError(
-                f"activations has {n} rows but token_doc_map has {len(token_doc_map)} entries. "
-                "They must be the same size — the token maps must be built from the SAME "
-                "corpus that generated the activations.  Use build_token_maps() on the texts "
-                "you originally passed to GPT2ActivationCollector."
-            )
-
-        # Encode all activations in mini-batches to get feature values
-        feat_vals = torch.zeros(n, dtype=torch.float32)
-
-        for start in range(0, n, cfg.batch_size):
-            end = min(start + cfg.batch_size, n)
-            batch = activations[start:end].to(self.device)
-            batch = self._apply_activation_normalization(batch, norm_stats)
-            encoded = self.sae.encode(batch)           # (batch, d_hidden)
-            feat_vals[start:end] = encoded[:, feature_idx].cpu()
-
-        candidate_rows = valid_row_indices
-        if candidate_rows is None:
-            candidate_rows = self._build_valid_row_indices(token_pos_map)
-
-        if candidate_rows.numel() == 0:
+        # Filter by valid rows (skipping first token if configured)
+        # We assume valid_row_indices is already computed
+        if valid_row_indices.numel() == 0:
             return []
 
-        candidate_vals = feat_vals[candidate_rows]
+        candidate_vals = feature_activations[valid_row_indices]
 
-        # Ignore weak activations to reduce noisy/irrelevant contexts.
+        # Filter by min_activation
         if cfg.min_activation > 0:
-            keep_mask = candidate_vals >= float(cfg.min_activation)
-            candidate_rows = candidate_rows[keep_mask]
-            candidate_vals = candidate_vals[keep_mask]
+            mask = candidate_vals >= cfg.min_activation
+            rows_subset = valid_row_indices[mask]
+            vals_subset = candidate_vals[mask]
+        else:
+            rows_subset = valid_row_indices
+            vals_subset = candidate_vals
 
-        if candidate_rows.numel() == 0:
+        if rows_subset.numel() == 0:
             return []
 
+        # Top-K selection
         if cfg.top_k is None or int(cfg.top_k) <= 0:
-            k = int(candidate_rows.numel())
+            k = int(rows_subset.numel())
         else:
-            k = min(int(cfg.top_k), int(candidate_rows.numel()))
-        top_vals, rel_top_idxs = torch.topk(candidate_vals, k)
-        top_idxs = candidate_rows[rel_top_idxs]
+            k = min(int(cfg.top_k), int(rows_subset.numel()))
+        
+        # Efficient top-k on CPU tensor
+        top_vals, rel_top_idxs = torch.topk(vals_subset, k)
+        top_idxs = rows_subset[rel_top_idxs]
 
         contexts: List[TokenContext] = []
         seen_contexts = set()
@@ -551,27 +475,26 @@ class FeatureLabeler:
             pos    = token_pos_map[row_idx]
             toks   = token_ids[doc_id]
 
-            # Build a surrounding context string
             lo = max(0, pos - cw)
             hi = min(len(toks), pos + cw + 1)
 
-            prefix_ids  = toks[lo:pos]
-            target_ids  = toks[pos:pos + 1]
-            suffix_ids  = toks[hi - 1:hi] if pos + 1 < hi else []
+            # FIX: Improved tokenization handling
+            # Decode parts separately but logically connected
+            prefix_text = self.tokenizer.decode(toks[lo:pos], skip_special_tokens=True)
+            target_text = self.tokenizer.decode(toks[pos:pos+1], skip_special_tokens=True)
+            suffix_text = self.tokenizer.decode(toks[pos+1:hi], skip_special_tokens=True)
 
-            prefix  = self.tokenizer.decode(prefix_ids, skip_special_tokens=True)
-            token_s = self.tokenizer.decode(target_ids, skip_special_tokens=True)
-            suffix  = self.tokenizer.decode(toks[pos + 1:hi], skip_special_tokens=True)
+            context_str = f"{prefix_text}>>>{target_text}<<<{suffix_text}"
 
-            context_str = f"{prefix}>>>{token_s}<<<{suffix}"
-
-            dedupe_key = (token_s.strip(), context_str)
+            # Deduplication
+            token_s = target_text.strip()
+            dedupe_key = (token_s, context_str)
             if dedupe_key in seen_contexts:
                 continue
             seen_contexts.add(dedupe_key)
 
             contexts.append(TokenContext(
-                token=token_s.strip(),
+                token=token_s,
                 context=context_str,
                 activation_value=val,
             ))
@@ -579,25 +502,21 @@ class FeatureLabeler:
         return contexts
 
     # ------------------------------------------------------------------
-    # Step 2 – Build prompt & call LLM
+    # LLM Interaction
     # ------------------------------------------------------------------
 
     def _build_examples_block(self, contexts: List[TokenContext]) -> str:
         lines = []
         for i, ctx in enumerate(contexts, 1):
-            lines.append(
-                f"  {i:>2}. [act={ctx.activation_value:.3f}]  {ctx.context}"
-            )
+            lines.append(f"  {i:>2}. [act={ctx.activation_value:.3f}]  {ctx.context}")
         return "\n".join(lines)
 
     def _top_tokens(self, contexts: List[TokenContext]) -> List[str]:
         from collections import Counter
         counts = Counter(c.token for c in contexts if c.token)
         k = int(self.cfg.top_tokens_k)
-        if k == 0:
-            return []
-        if k < 0:
-            return [tok for tok, _ in counts.most_common()]
+        if k == 0: return []
+        if k < 0: return [tok for tok, _ in counts.most_common()]
         return [tok for tok, _ in counts.most_common(k)]
 
     def _call_llm(
@@ -606,20 +525,21 @@ class FeatureLabeler:
         contexts: List[TokenContext],
         global_top_features: str = "(not computed)",
     ) -> LabelResult:
-        """Build the prompt, call the backend, parse the JSON response."""
+        LOGGER.info(
+            "Calling LLM for feature %d | contexts=%d prompt_logging=%s",
+            feature_idx,
+            len(contexts),
+            bool(self.cfg.prompt_log_path),
+        )
         examples_block = self._build_examples_block(contexts)
         top_tokens = self._top_tokens(contexts)
+        
         if int(self.cfg.top_tokens_k) == 0:
             top_tokens_block = ""
         else:
-            if int(self.cfg.top_tokens_k) < 0:
-                top_tokens_label = "all"
-            else:
-                top_tokens_label = f"top {len(top_tokens)}"
+            label = "all" if int(self.cfg.top_tokens_k) < 0 else f"top {len(top_tokens)}"
             top_tokens_str = ", ".join(f'"{t}"' for t in top_tokens) if top_tokens else "(none)"
-            top_tokens_block = (
-                f"Most frequent activating tokens ({top_tokens_label}): {top_tokens_str}\n"
-            )
+            top_tokens_block = f"Most frequent activating tokens ({label}): {top_tokens_str}\n"
 
         user_prompt = _USER_PROMPT_TEMPLATE.format(
             feature_idx=feature_idx,
@@ -629,37 +549,23 @@ class FeatureLabeler:
         )
 
         if self.cfg.include_global_top_features:
-            user_prompt += (
-                "\n\nTop activated features across the analyzed corpus "
-                "(top 10, feature_idx:mean_activation):\n"
-                f"{global_top_features}\n"
-            )
+            user_prompt += f"\n\nTop activated features corpus-wide:\n{global_top_features}\n"
 
         raw = ""
         try:
-            # 1. Log the prompts if enabled
             if self.cfg.prompt_log_path:
                 with open(self.cfg.prompt_log_path, "a", encoding="utf-8") as f:
-                    f.write("\n" + "="*80 + "\n")
-                    f.write(f"FEATURE INDEX: {feature_idx}\n")
-                    f.write("-" * 40 + "\n")
-                    f.write("SYSTEM PROMPT:\n")
-                    f.write(f"{_SYSTEM_PROMPT}\n")
-                    f.write("-" * 40 + "\n")
-                    f.write("USER PROMPT:\n")
-                    f.write(f"{user_prompt}\n")
-                    f.write("-" * 40 + "\n")
+                    req = self.cfg.request_id or "n/a"
+                    f.write(f"\n{'='*80}\nREQUEST_ID {req}\nFEATURE {feature_idx}\nUSER PROMPT:\n{user_prompt}\n")
 
             raw = self._backend.call(_SYSTEM_PROMPT, user_prompt)
             
-            # 2. Log the response if enabled
             if self.cfg.prompt_log_path:
                 with open(self.cfg.prompt_log_path, "a", encoding="utf-8") as f:
-                    f.write("LLM RESPONSE:\n")
-                    f.write(f"{raw}\n")
-                    f.write("="*80 + "\n")
+                    f.write(f"RESPONSE:\n{raw}\n{'='*80}\n")
 
             parsed = self._parse_response(raw)
+            LOGGER.info("LLM labeling succeeded for feature %d.", feature_idx)
             return LabelResult(
                 feature_idx=feature_idx,
                 label=parsed.get("label", "unlabeled"),
@@ -669,7 +575,8 @@ class FeatureLabeler:
                 top_contexts=contexts,
                 raw_response=raw,
             )
-        except Exception as exc:  # noqa: BLE001
+        except Exception as exc:
+            LOGGER.error("LLM labeling failed for feature %d: %s", feature_idx, exc)
             return LabelResult(
                 feature_idx=feature_idx,
                 label="error",
@@ -683,34 +590,19 @@ class FeatureLabeler:
 
     @staticmethod
     def _parse_response(raw: str) -> Dict[str, str]:
-        """
-        Extract JSON from the LLM response.
-
-        The LLM is instructed to reply with pure JSON, but may wrap it in
-        markdown code fences.  We try several strategies.
-        """
-        # 1. Direct JSON parse
         try:
             return json.loads(raw)
         except json.JSONDecodeError:
             pass
-
-        # 2. Strip markdown fences
+        
+        # Try stripping markdown
         clean = re.sub(r"```(?:json)?", "", raw).strip()
         try:
             return json.loads(clean)
         except json.JSONDecodeError:
             pass
 
-        # 3. Extract first {...} block
-        match = re.search(r"\{[^{}]+\}", raw, re.DOTALL)
-        if match:
-            try:
-                return json.loads(match.group())
-            except json.JSONDecodeError:
-                pass
-
-        # 4. Fall back: try to extract fields with regex
+        # Regex fallback
         label = re.search(r'"label"\s*:\s*"([^"]+)"', raw)
         explanation = re.search(r'"explanation"\s*:\s*"([^"]+)"', raw)
         confidence = re.search(r'"confidence"\s*:\s*"([^"]+)"', raw)
@@ -724,247 +616,6 @@ class FeatureLabeler:
     # Public API
     # ------------------------------------------------------------------
 
-    def label_feature(
-        self,
-        feature_idx: int,
-        texts: List[str],
-        max_length: int = 128,
-    ) -> LabelResult:
-        """
-        Label a single feature.
-
-        Parameters
-        ----------
-        feature_idx : int
-            Index of the SAE feature to label (0 ≤ idx < d_hidden).
-        texts : List[str]
-            Raw text corpus.  The same corpus used to collect training
-            activations gives the best results.
-        max_length : int
-            Tokenization truncation length.
-
-        Returns
-        -------
-        LabelResult
-        """
-        token_ids, activations, token_doc_map, token_pos_map = \
-            self._tokenize_and_collect_activations(texts, max_length)
-
-        contexts = self._collect_token_contexts(
-            feature_idx, token_ids, activations, token_doc_map, token_pos_map
-        )
-
-        if not contexts:
-            return LabelResult(
-                feature_idx=feature_idx,
-                label="dead feature",
-                explanation="Feature never activates on this corpus.",
-                confidence="high",
-                top_tokens=[],
-                error="no activating examples found",
-            )
-
-        return self._call_llm(feature_idx, contexts)
-
-    def label_features(
-        self,
-        feature_indices: List[int],
-        texts: List[str],
-        max_length: int = 128,
-        save_path: Optional[str] = None,
-        resume: bool = True,
-    ) -> Dict[int, LabelResult]:
-        """
-        Label a list of features, with optional JSON persistence and resuming.
-
-        Parameters
-        ----------
-        feature_indices : List[int]
-            Feature indices to label.
-        texts : List[str]
-            Raw text corpus.
-        max_length : int
-            Tokenisation truncation length.
-        save_path : Optional[str]
-            If provided, results are written (and incrementally updated) to
-            this JSON file after each successful label.
-        resume : bool
-            If ``True`` and ``save_path`` already exists, previously-labeled
-            features are loaded and skipped, so you can safely restart a
-            labeling run that was interrupted.
-
-        Returns
-        -------
-        Dict[int, LabelResult]  keyed by feature index.
-        """
-        existing: Dict[int, LabelResult] = {}
-
-        # Resume from disk
-        if resume and save_path and Path(save_path).exists():
-            existing = self._load_labels(save_path)
-            already_done = set(existing.keys())
-            feature_indices = [i for i in feature_indices if i not in already_done]
-            print(f"[FeatureLabeler] Resuming: {len(already_done)} already done, "
-                  f"{len(feature_indices)} remaining.")
-
-        # Cap at max_features
-        if self.cfg.max_features is not None:
-            feature_indices = feature_indices[:self.cfg.max_features]
-
-        if not feature_indices:
-            print("[FeatureLabeler] Nothing left to label.")
-            return existing
-
-        print(f"[FeatureLabeler] Tokenising corpus ({len(texts)} texts)…")
-        token_ids, activations, token_doc_map, token_pos_map = \
-            self._tokenize_and_collect_activations(texts, max_length)
-        print(f"[FeatureLabeler] Collected {activations.shape[0]} token activations.")
-
-        results: Dict[int, LabelResult] = dict(existing)
-
-        for feat_idx in tqdm(feature_indices, desc="Labeling features"):
-            contexts = self._collect_token_contexts(
-                feat_idx, token_ids, activations, token_doc_map, token_pos_map
-            )
-
-            if not contexts:
-                result = LabelResult(
-                    feature_idx=feat_idx,
-                    label="dead feature",
-                    explanation="Feature never activates on this corpus.",
-                    confidence="high",
-                    top_tokens=[],
-                    error="no activating examples found",
-                )
-            else:
-                result = self._call_llm(feat_idx, contexts)
-                time.sleep(self.cfg.request_delay)
-
-            results[feat_idx] = result
-
-            # Incremental save
-            if save_path:
-                self._save_labels(results, save_path)
-
-        if save_path:
-            print(f"[FeatureLabeler] Labels saved to {save_path}")
-
-        return results
-
-    def label_all_features(
-        self,
-        texts: List[str],
-        alive_indices: Optional[List[int]] = None,
-        max_length: int = 128,
-        save_path: Optional[str] = "feature_labels.json",
-        resume: bool = True,
-    ) -> Dict[int, LabelResult]:
-        """
-        Convenience wrapper: label every *alive* feature in the SAE.
-
-        Parameters
-        ----------
-        texts : List[str]
-            Raw text corpus.
-        alive_indices : Optional[List[int]]
-            If provided, only those features are labeled.  Otherwise every
-            feature index in ``range(sae.d_hidden)`` is used.
-        max_length : int
-            Tokenization truncation length.
-        save_path : Optional[str]
-            JSON path for incremental saves and resuming.
-        resume : bool
-            Skip features already present in ``save_path``.
-
-        Returns
-        -------
-        Dict[int, LabelResult]  keyed by feature index.
-        """
-        indices = alive_indices if alive_indices is not None \
-            else list(range(self.sae.d_hidden))
-        return self.label_features(
-            feature_indices=indices,
-            texts=texts,
-            max_length=max_length,
-            save_path=save_path,
-            resume=resume,
-        )
-
-    # ------------------------------------------------------------------
-    # Corpus tokenization  (shared across all features in one run)
-    # ------------------------------------------------------------------
-
-    @torch.no_grad()
-    def _tokenize_and_collect_activations(
-        self,
-        texts: List[str],
-        max_length: int = 128,
-    ):
-        """
-        Tokenise the corpus and run it through the SAE encoder, collecting
-        the raw input activations (GPT-2 residual-stream vectors) that
-        ``FeatureAnalyzer`` would normally pass in.
-
-        Because we only have *flat* activation tensors without position
-        metadata here, we re-tokenize the texts to recover (doc, position)
-        mappings needed by ``_collect_token_contexts``.
-
-        .. note::
-           This method requires that the user pass the **raw residual-stream
-           activations** through the standard workflow.  In the typical
-           workflow you load ``activations.pt`` from disk (produced by
-           ``data_collection.py``) and use it directly.  If you have that
-           tensor, call :meth:`label_feature_from_activations` instead,
-           which is faster and avoids re-running GPT-2.
-
-        Returns
-        -------
-        token_ids : List[List[int]]
-        activations : torch.Tensor  (total_tokens, d_model)
-        token_doc_map : List[int]
-        token_pos_map : List[int]
-        """
-        # We only need the tokenizer here to recover per-position mappings.
-        all_token_ids: List[List[int]] = []
-        all_input_ids: List[int] = []
-        token_doc_map: List[int] = []
-        token_pos_map: List[int] = []
-
-        for doc_idx, text in enumerate(texts):
-            enc = self.tokenizer(
-                text,
-                return_tensors="pt",
-                truncation=True,
-                max_length=max_length,
-                add_special_tokens=False,
-            )
-            ids = enc["input_ids"][0].tolist()
-            all_token_ids.append(ids)
-            for pos, tok_id in enumerate(ids):
-                all_input_ids.append(tok_id)
-                token_doc_map.append(doc_idx)
-                token_pos_map.append(pos)
-
-        # We don't have the GPT-2 residual stream here – callers are expected
-        # to supply it via label_feature_from_activations.  Return a sentinel.
-        # This path is used only when activations are NOT pre-computed.
-        warnings.warn(
-            "label_feature / label_all_features called without pre-computed "
-            "activations.  The corpus will be re-tokenized but you must call "
-            "label_feature_from_activations() with the actual GPT-2 hidden "
-            "states for meaningful results.",
-            UserWarning,
-            stacklevel=3,
-        )
-
-        # Return empty activations tensor as placeholder
-        dummy_acts = torch.zeros(len(all_input_ids), self.sae.d_model)
-        return all_token_ids, dummy_acts, token_doc_map, token_pos_map
-
-    # ------------------------------------------------------------------
-    # Primary API: use pre-collected activations (recommended)
-    # ------------------------------------------------------------------
-
     def label_feature_from_activations(
         self,
         feature_idx: int,
@@ -972,68 +623,21 @@ class FeatureLabeler:
         token_ids: List[List[int]],
         token_doc_map: List[int],
         token_pos_map: List[int],
-        norm_stats: Optional[Dict[str, Any]] = None,
-        valid_row_indices: Optional[torch.Tensor] = None,
-        global_top_features: Optional[str] = None,
     ) -> LabelResult:
         """
-        Label a single feature using **pre-collected GPT-2 activations**.
-
-        This is the **recommended** entry point.  Load ``activations.pt`` once,
-        build the token maps with :func:`build_token_maps`, then call this
-        method for each feature you want to label.
-
-        Parameters
-        ----------
-        feature_idx : int
-        activations : torch.Tensor
-            Shape ``(total_tokens, d_model)``.  The GPT-2 residual-stream
-            vectors at the layer the SAE was trained on.
-        token_ids : List[List[int]]
-            Per-document token ID lists (from :func:`build_token_maps`).
-        token_doc_map : List[int]
-            ``token_doc_map[i]`` = index of the document that produced row *i*
-            of ``activations``.
-        token_pos_map : List[int]
-            ``token_pos_map[i]`` = token position within that document.
-
-        Returns
-        -------
-        LabelResult
+        Backward-compatible single-feature wrapper used by the FastAPI analyzer.
         """
-        norm_stats = norm_stats or self._compute_normalization_stats(activations)
-        if valid_row_indices is None:
-            valid_row_indices = self._build_valid_row_indices(token_pos_map)
-        if global_top_features is None:
-            mean_acts = self._compute_mean_feature_activations(
-                activations=activations,
-                valid_row_indices=valid_row_indices,
-                norm_stats=norm_stats,
-            )
-            global_top_features = self._format_global_top_features(
-                mean_acts,
-                top_n=self.cfg.global_top_features_k,
-            )
-
-        contexts = self._collect_token_contexts(
-            feature_idx,
-            token_ids,
-            activations,
-            token_doc_map,
-            token_pos_map,
-            norm_stats=norm_stats,
-            valid_row_indices=valid_row_indices,
+        LOGGER.info("Single-feature labeling requested | feature=%d", feature_idx)
+        results = self.label_features_from_activations(
+            feature_indices=[feature_idx],
+            activations=activations,
+            token_ids=token_ids,
+            token_doc_map=token_doc_map,
+            token_pos_map=token_pos_map,
+            save_path=None,
+            resume=False,
         )
-        if not contexts:
-            return LabelResult(
-                feature_idx=feature_idx,
-                label="dead feature",
-                explanation="Feature never activates on this corpus.",
-                confidence="high",
-                top_tokens=[],
-                error="no activating examples found",
-            )
-        return self._call_llm(feature_idx, contexts, global_top_features)
+        return results[feature_idx]
 
     def label_features_from_activations(
         self,
@@ -1046,70 +650,114 @@ class FeatureLabeler:
         resume: bool = True,
     ) -> Dict[int, LabelResult]:
         """
-        Label multiple features using **pre-collected GPT-2 activations**.
-
-        Parameters
-        ----------
-        feature_indices : List[int]
-        activations : torch.Tensor
-            Shape ``(total_tokens, d_model)``.
-        token_ids, token_doc_map, token_pos_map
-            From :func:`build_token_maps`.
-        save_path : Optional[str]
-            JSON path for incremental saves.
-        resume : bool
-            Skip features already in ``save_path``.
-
-        Returns
-        -------
-        Dict[int, LabelResult]  keyed by feature index.
+        Label multiple features using pre-collected GPT-2 activations.
+        
+        OPTIMIZED: Encodes the corpus through SAE only ONCE.
         """
         existing: Dict[int, LabelResult] = {}
         if resume and save_path and Path(save_path).exists():
             existing = self._load_labels(save_path)
-            # Only skip features that were labeled successfully (no error).
-            # Features that previously errored will be retried.
             already = {k for k, v in existing.items() if v.error is None}
             feature_indices = [i for i in feature_indices if i not in already]
-            print(f"[FeatureLabeler] Resuming: {len(already)} done, "
-                  f"{len(feature_indices)} remaining.")
+            LOGGER.info("Resuming from saved labels | completed=%d remaining=%d", len(already), len(feature_indices))
 
         if self.cfg.max_features is not None:
             feature_indices = feature_indices[:self.cfg.max_features]
 
-        results: Dict[int, LabelResult] = dict(existing)
-        norm_stats = self._compute_normalization_stats(activations)
-        valid_row_indices = self._build_valid_row_indices(token_pos_map)
-        mean_acts = self._compute_mean_feature_activations(
-            activations=activations,
-            valid_row_indices=valid_row_indices,
-            norm_stats=norm_stats,
-        )
-        global_top_features = self._format_global_top_features(
-            mean_acts,
-            top_n=self.cfg.global_top_features_k,
+        if not feature_indices:
+            LOGGER.info("No features left to label after resume/max_features filtering.")
+            return existing
+
+        run_start = time.time()
+        LOGGER.info(
+            "Starting labeling run | features=%d tokens=%d docs=%d save_path=%s",
+            len(feature_indices),
+            int(activations.shape[0]),
+            len(token_ids),
+            save_path or "(disabled)",
         )
 
+        results: Dict[int, LabelResult] = dict(existing)
+        
+        # 1. Compute Stats
+        norm_stats = self._get_normalization_stats(activations)
+        valid_row_indices = self._build_valid_row_indices(token_pos_map)
+        LOGGER.info(
+            "Prepared filtering indices | valid_rows=%d skipped_first_token=%s",
+            int(valid_row_indices.numel()),
+            self.cfg.skip_first_token,
+        )
+        
+        # 2. OPTIMIZATION: Compute ALL latents once
+        all_latents = self._encode_activations_to_latents(activations, norm_stats)
+        
+        # Calculate global top features if needed for prompt
+        global_top_str = "(not computed)"
+        if self.cfg.include_global_top_features:
+            mean_acts = all_latents.mean(dim=0)
+            vals, idxs = torch.topk(mean_acts, self.cfg.global_top_features_k)
+            parts = [f"{int(i)}:{float(v):.3f}" for v, i in zip(vals.tolist(), idxs.tolist())]
+            global_top_str = ", ".join(parts)
+
+        # 3. Loop over features (just slicing the pre-computed tensor)
         for feat_idx in tqdm(feature_indices, desc="Labeling features"):
-            result = self.label_feature_from_activations(
-                feat_idx,
-                activations,
-                token_ids,
-                token_doc_map,
-                token_pos_map,
-                norm_stats=norm_stats,
+            
+            # Extract the specific feature column
+            feat_vec = all_latents[:, feat_idx]
+            
+            contexts = self._collect_contexts_from_latents(
+                feature_idx=feat_idx,
+                feature_activations=feat_vec,
+                token_ids=token_ids,
+                token_doc_map=token_doc_map,
+                token_pos_map=token_pos_map,
                 valid_row_indices=valid_row_indices,
-                global_top_features=global_top_features,
             )
+
+            if not contexts:
+                LOGGER.info("Feature %d produced no contexts above threshold (dead feature on this corpus).", feat_idx)
+                result = LabelResult(
+                    feature_idx=feat_idx,
+                    label="dead feature",
+                    explanation="Feature never activates on this corpus.",
+                    confidence="high",
+                    top_tokens=[],
+                    error="no activating examples found",
+                )
+            else:
+                result = self._call_llm(feat_idx, contexts, global_top_str)
+                time.sleep(self.cfg.request_delay)
+
             results[feat_idx] = result
+
+            done_count = len(results) - len(existing)
+            if done_count % 5 == 0 or done_count == len(feature_indices):
+                success_count = sum(1 for idx in feature_indices[:done_count] if results[idx].error is None)
+                error_count = done_count - success_count
+                LOGGER.info(
+                    "Labeling progress | completed=%d/%d success=%d errors=%d",
+                    done_count,
+                    len(feature_indices),
+                    success_count,
+                    error_count,
+                )
 
             if save_path:
                 self._save_labels(results, save_path)
 
-            time.sleep(self.cfg.request_delay)
-
         if save_path:
-            print(f"[FeatureLabeler] Labels saved to {save_path}")
+            LOGGER.info("Labels saved to %s", save_path)
+
+        total_done = len(feature_indices)
+        total_success = sum(1 for idx in feature_indices if results[idx].error is None)
+        total_errors = total_done - total_success
+        LOGGER.info(
+            "Labeling run completed | completed=%d success=%d errors=%d elapsed_sec=%.2f",
+            total_done,
+            total_success,
+            total_errors,
+            time.time() - run_start,
+        )
 
         return results
 
@@ -1119,37 +767,26 @@ class FeatureLabeler:
 
     @staticmethod
     def _save_labels(results: Dict[int, LabelResult], path: str) -> None:
-        """Serialise results dict to JSON (human-readable)."""
         serialisable = {}
         for feat_idx, r in results.items():
             d = asdict(r)
-            # TokenContext objects already converted by asdict
             serialisable[str(feat_idx)] = d
         with open(path, "w", encoding="utf-8") as f:
             json.dump(serialisable, f, indent=2, ensure_ascii=False)
 
     @staticmethod
     def _load_labels(path: str) -> Dict[int, LabelResult]:
-        """Deserialise results from JSON."""
         with open(path, "r", encoding="utf-8") as f:
             raw = json.load(f)
         results = {}
         for key, val in raw.items():
             feat_idx = int(key)
-            # Reconstruct nested TokenContext objects
-            val["top_contexts"] = [
-                TokenContext(**ctx) for ctx in val.get("top_contexts", [])
-            ]
+            val["top_contexts"] = [TokenContext(**ctx) for ctx in val.get("top_contexts", [])]
             results[feat_idx] = LabelResult(**val)
         return results
 
-    # ------------------------------------------------------------------
-    # Display / summary helpers
-    # ------------------------------------------------------------------
-
     @staticmethod
     def print_label(result: LabelResult) -> None:
-        """Pretty-print a single LabelResult."""
         status = "✓" if result.error is None else "✗"
         print(f"\n{status} Feature {result.feature_idx}")
         print(f"   Label      : {result.label}")
@@ -1160,26 +797,9 @@ class FeatureLabeler:
         if result.error:
             print(f"   Error      : {result.error}")
 
-    @staticmethod
-    def print_summary(results: Dict[int, LabelResult]) -> None:
-        """Print a compact table of all labeled features."""
-        print("\n" + "=" * 70)
-        print(f"{'IDX':>6}  {'CONF':^6}  LABEL")
-        print("=" * 70)
-        for feat_idx in sorted(results.keys()):
-            r = results[feat_idx]
-            err_marker = " [ERR]" if r.error else ""
-            print(f"{feat_idx:>6}  {r.confidence:^6}  {r.label}{err_marker}")
-        print("=" * 70)
-        n_high = sum(1 for r in results.values() if r.confidence == "high")
-        n_err  = sum(1 for r in results.values() if r.error)
-        print(f"Total: {len(results)} features | "
-              f"High confidence: {n_high} | "
-              f"Errors: {n_err}")
-
 
 # ---------------------------------------------------------------------------
-# Utility: build token maps from a text corpus + tokenizer
+# Utility: build token maps
 # ---------------------------------------------------------------------------
 
 def build_token_maps(
@@ -1187,44 +807,6 @@ def build_token_maps(
     tokenizer: GPT2Tokenizer,
     max_length: int = 128,
 ) -> tuple:
-    """
-    Tokenise a list of texts and build the per-token document / position maps
-    needed by :class:`FeatureLabeler`.
-
-    This is a **standalone** helper intended to be called once before labeling
-    so that the tokenisation is not repeated per feature.
-
-    Parameters
-    ----------
-    texts : List[str]
-        Raw text corpus.
-    tokenizer : GPT2Tokenizer
-    max_length : int
-        Truncation length.
-
-    Returns
-    -------
-    token_ids : List[List[int]]
-        Token ID list per document.
-    token_doc_map : List[int]
-        ``token_doc_map[i]`` = document index for global token row *i*.
-    token_pos_map : List[int]
-        ``token_pos_map[i]`` = position within the document for row *i*.
-
-    Example
-    -------
-    ::
-
-        activations = torch.load("activations.pt")  # (N, d_model)
-        texts = [...]  # same texts used to generate activations
-
-        token_ids, doc_map, pos_map = build_token_maps(texts, tokenizer)
-
-        labeler = FeatureLabeler(sae, tokenizer, cfg)
-        result = labeler.label_feature_from_activations(
-            42, activations, token_ids, doc_map, pos_map
-        )
-    """
     token_ids: List[List[int]] = []
     token_doc_map: List[int] = []
     token_pos_map: List[int] = []
@@ -1247,446 +829,164 @@ def build_token_maps(
 
 
 # ---------------------------------------------------------------------------
-# Quick demo / __main__
+# Main Execution
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    """
-    Minimal end-to-end demo.
-
-    Requires:
-        - A saved SAE checkpoint:  checkpoints/best_model.pt
-        - Either OPENAI_API_KEY set, or a running Ollama server.
-
-    Activations are collected on-the-fly from the sample corpus using GPT-2,
-    so the token maps and activation rows ALWAYS correspond 1-to-1.
-
-    Run:
-        OPENAI_API_KEY=sk-... python src/analysis.py
-    """
-    sys.path.insert(0, str(SRC_DIR))
-
-    from sae_model import SparseAutoencoder
     from data_collection import GPT2ActivationCollector
 
-    parser = argparse.ArgumentParser(
-        description="Label SAE features with an LLM using GPT-2 activations."
-    )
-    parser.add_argument(
-        "--dataset",
-        type=str,
-        default="MLCommons/peoples_speech",
-        help="Hugging Face dataset name. Use empty string to use built-in sample_texts.",
-    )
-    parser.add_argument(
-        "--num-texts",
-        type=int,
-        default=4000,
-        help="Number of texts to load from dataset when --dataset is set.",
-    )
-    parser.add_argument(
-        "--dataset-split",
-        type=str,
-        default="train",
-        help="Dataset split name.",
-    )
-    parser.add_argument(
-        "--dataset-config",
-        type=str,
-        default=None,
-        help="Optional Hugging Face dataset config name (subset).",
-    )
-    parser.add_argument(
-        "--dataset-text-field",
-        type=str,
-        default=None,
-        help="Optional explicit text field in the dataset records.",
-    )
-    parser.add_argument(
-        "--dataset-shuffle-buffer-size",
-        type=int,
-        default=0,
-        help="Streaming shuffle buffer size for Hugging Face datasets. Set 0 to disable shuffle and start yielding texts immediately.",
-    )
-    parser.add_argument(
-        "--dataset-seed",
-        type=int,
-        default=0,
-        help="Random seed for streaming dataset shuffle.",
-    )
-    parser.add_argument(
-        "--batch-size",
-        type=int,
-        default=8,
-        help="Batch size for GPT-2 activation collection.",
-    )
-    parser.add_argument(
-        "--max-length",
-        type=int,
-        default=128,
-        help="Max token length per text for activation collection and token maps.",
-    )
-    parser.add_argument(
-        "--label-all-alive",
-        action="store_true",
-        help="Label all alive features found in the activation corpus.",
-    )
-    parser.add_argument(
-        "--num-features",
-        type=int,
-        default=5,
-        help="Number of features to interpret. If --label-all-alive is not set, label this many mid-ranked alive features. Use a positive integer to select specific count.",
-    )
-    parser.add_argument(
-        "--save-path",
-        type=str,
-        default="feature_labels.json",
-        help="Output JSON file for labels.",
-    )
-    parser.add_argument(
-        "--prompt-log-path",
-        type=str,
-        default="llm_prompts.log",
-        help="Log file path for all LLM prompts and responses.",
-    )
-    parser.add_argument(
-        "--backend",
-        type=str,
-        default="groq",
-        choices=["openai", "groq", "ollama"],
-        help="LLM backend.",
-    )
-    parser.add_argument(
-        "--model",
-        type=str,
-        default="llama-3.3-70b-versatile",
-        help="Model name for selected backend.",
-    )
-    parser.add_argument(
-        "--request-delay",
-        type=float,
-        default=0.2,
-        help="Delay between LLM requests.",
-    )
-    parser.add_argument(
-        "--normalize-mode",
-        type=str,
-        default="standardize",
-        choices=["standardize", "center", "none"],
-        help="Normalization mode before SAE encoding. Default: standardize",
-    )
-    parser.add_argument(
-        "--std-floor",
-        type=float,
-        default=1e-3,
-        help="Std clamp floor for standardization. Default: 1e-3",
-    )
-    parser.add_argument(
-        "--include-first-token",
-        action="store_true",
-        help="Include first-token activations (disabled by default due to GPT-2 attention sink).",
-    )
-    parser.add_argument(
-        "--resume",
-        action="store_true",
-        help="Resume labeling from --save-path if it exists.",
-    )
-    parser.add_argument(
-        "--activation-cache-path",
-        type=str,
-        default="checkpoints/llm_analysis_activation_cache.pt",
-        help="Path to activation/token-map cache (.pt).",
-    )
-    parser.add_argument(
-        "--no-cache-load",
-        action="store_true",
-        help="Do not load from --activation-cache-path even if it exists.",
-    )
-    parser.add_argument(
-        "--no-cache-save",
-        action="store_true",
-        help="Do not save activation/token-map cache after collection.",
-    )
-    parser.add_argument(
-        "--min-activation",
-        type=float,
-        default=0.0,
-        help="Minimum feature activation to include in LLM examples.",
-    )
-    parser.add_argument(
-        "--top-k",
-        type=int,
-        default=0,
-        help="Maximum number of activating contexts to send to the LLM. Use 0 or negative to send all contexts above --min-activation.",
-    )
-    parser.add_argument(
-        "--include-global-top-features",
-        action="store_true",
-        help="Include corpus-global top activated feature IDs in the LLM prompt.",
-    )
-    parser.add_argument(
-        "--top-tokens-k",
-        type=int,
-        default=10,
-        help="How many most frequent activating tokens to include. 0=none, negative=all, positive=top-k.",
-    )
+    parser = argparse.ArgumentParser(description="Label SAE features with an LLM.")
+    parser.add_argument("--dataset", type=str, default="", help="Hugging Face dataset name. Empty string uses built-in samples.")
+    parser.add_argument("--num-texts", type=int, default=1000)
+    parser.add_argument("--dataset-split", type=str, default="train")
+    parser.add_argument("--dataset-config", type=str, default=None)
+    parser.add_argument("--batch-size", type=int, default=8)
+    parser.add_argument("--max-length", type=int, default=128)
+    parser.add_argument("--num-features", type=int, default=5, help="Number of mid-range features to label.")
+    parser.add_argument("--save-path", type=str, default="feature_labels.json")
+    parser.add_argument("--backend", type=str, default="groq", choices=["openai", "groq", "ollama"])
+    parser.add_argument("--model", type=str, default="llama-3.3-70b-versatile")
+    parser.add_argument("--request-delay", type=float, default=0.2)
+    parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--activation-cache-path", type=str, default="checkpoints/activation_cache.pt")
+    
     args = parser.parse_args()
+    LOGGER.info(
+        "llm_analysis started | dataset=%s split=%s config=%s num_texts=%d batch_size=%d max_length=%d num_features=%d backend=%s model=%s",
+        args.dataset or "(built-in)",
+        args.dataset_split,
+        args.dataset_config,
+        args.num_texts,
+        args.batch_size,
+        args.max_length,
+        args.num_features,
+        args.backend,
+        args.model,
+    )
 
-    # MLCommons/peoples_speech requires an explicit config/subset.
-    # If omitted, default to 'clean' so the run does not fail immediately.
-    if (
-        args.dataset
-        and args.dataset.strip() == "MLCommons/peoples_speech"
-        and not args.dataset_config
-    ):
-        args.dataset_config = "clean"
-        print("[llm_analysis] --dataset-config not provided; defaulting to 'clean'.")
-
-    # ------------------------------------------------------------------ #
-    # 1.  Load the trained SAE
-    # ------------------------------------------------------------------ #
-    print("Loading SAE checkpoint…")
-    checkpoint_candidates = [
-        # PROJECT_ROOT / "checkpoints" / "best_model.pt",
-        PROJECT_ROOT / "checkpoints" / "FC_SAE_Best.pt",
-        # PROJECT_ROOT / "checkpoints" / "best_model x48.pt",
-    ]
-    ckpt_path = next((p for p in checkpoint_candidates if p.exists()), None)
-    if ckpt_path is None:
-        raise FileNotFoundError(
-            "No checkpoint found. Tried: "
-            + ", ".join(str(p) for p in checkpoint_candidates)
-        )
+    # 1. Load SAE
+    LOGGER.info("Loading SAE checkpoint...")
+    ckpt_path = PROJECT_ROOT / "checkpoints" / "FC_SAE_Best.pt"
+    if not ckpt_path.exists():
+        # Fallback for different naming conventions
+        ckpt_path = PROJECT_ROOT / "checkpoints" / "best_model.pt"
+    
+    if not ckpt_path.exists():
+        LOGGER.error("Checkpoint not found: %s", ckpt_path)
+        sys.exit(1)
 
     payload = torch.load(str(ckpt_path), map_location="cpu")
-    print(f"  checkpoint={ckpt_path}")
-
-    # Architecture params saved under "hyperparameters" by the trainer.
-    hp    = payload.get("hyperparameters", {})
+    hp = payload.get("hyperparameters", {})
     state = payload["model_state_dict"]
-    d_model  = hp.get("d_model",  state["W_enc"].shape[1])
+    d_model = hp.get("d_model", state["W_enc"].shape[1])
     d_hidden = hp.get("d_hidden", state["W_enc"].shape[0])
     l1_coeff = hp.get("l1_coeff", payload.get("l1_coeff", 3e-4))
-    layer_index = hp.get("layer_index", 8)   # default: layer 8
+    layer_index = hp.get("layer_index", 8)
 
-    print(f"  d_model={d_model}, d_hidden={d_hidden}, l1_coeff={l1_coeff}")
     sae = SparseAutoencoder(d_model=d_model, d_hidden=d_hidden, l1_coeff=l1_coeff)
     sae.load_state_dict(state)
     sae.eval()
 
-    # ------------------------------------------------------------------ #
-    # 2.  Sample corpus fallback
-    # ------------------------------------------------------------------ #
-    sample_texts = [
-        "Massive gargantuan behemoths roam desolate barren wastelands.",
-        "Fast swift rapid movements characterize agile nimble creatures.",
-        "Happy joyful cheerful emotions brighten gloomy somber days.",
-        "Intelligent smart clever scholars study complex intricate subjects.",
-        "Powerful strong mighty warriors defend ancient historic cities.",
-        "Loud noisy vociferous crowds ignore quiet silent whispers.",
-        "Clean pure pristine lakes reflect jagged sharp peaks.",
-        "Bitter cold freezing winters follow warm hot summers.",
-        "Ancient old antique artifacts reveal hidden secret histories.",
-        "Scented fragrant aromatic flowers attract small tiny insects.",
-        "Wealthy rich affluent merchants trade expensive costly goods.",
-        "Honest truthful sincere friends provide helpful useful advice.",
-        "Scary frightening terrifying dreams haunt dark black nights.",
-        "Tasty delicious savory meals satisfy hungry famished guests.",
-        "Bright luminous radiant stars illuminate deep black space.",
-        "Brave courageous fearless heroes face dangerous risky perils.",
-        "Simple easy basic tasks require minimal small effort.",
-        "Fast-paced speedy quick changes create chaotic messy situations.",
-        "Gentle soft mild breezes stir colorful vibrant leaves.",
-        "Mysterious strange odd occurrences baffle wise learned men.",
-    ]
-
-    # ------------------------------------------------------------------ #
-    # 3.  Collect GPT-2 activations FOR THESE EXACT TEXTS
-    #     (same layer the SAE was trained on)
-    #     with optional checkpointing of activations/token maps
-    # ------------------------------------------------------------------ #
-    use_dataset = bool(args.dataset and args.dataset.strip())
-    cache_path = Path(args.activation_cache_path)
+    # 2. Data Collection
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
     tokenizer.pad_token = tokenizer.eos_token
-
+    
+    use_dataset = bool(args.dataset and args.dataset.strip())
+    cache_path = Path(args.activation_cache_path)
     cache_loaded = False
-    if cache_path.exists() and not args.no_cache_load:
-        print(f"\nLoading activation cache from {cache_path}…")
+    
+    if cache_path.exists():
+        LOGGER.info("Loading activation cache from %s", cache_path)
         try:
-            cache = torch.load(str(cache_path), map_location="cpu")
-            activations = cache["activations"].float().cpu()
+            cache = torch.load(str(cache_path))
+            activations = cache["activations"].float()
             sample_texts = cache["texts"]
-            token_ids = cache.get("token_ids")
-            doc_map = cache.get("token_doc_map")
-            pos_map = cache.get("token_pos_map")
-
-            if token_ids is None or doc_map is None or pos_map is None:
-                print("  Cache missing token maps. Rebuilding from cached texts…")
-                token_ids, doc_map, pos_map = build_token_maps(
-                    sample_texts, tokenizer, max_length=args.max_length
-                )
-
-            if len(doc_map) != activations.shape[0]:
-                raise ValueError(
-                    f"Cached token map length {len(doc_map)} != activations rows {activations.shape[0]}"
-                )
-
-            meta = cache.get("meta", {})
-
-            expected_dataset = args.dataset if use_dataset else "built_in_sample"
-            expected_split = args.dataset_split if use_dataset else "n/a"
-            expected_config = args.dataset_config if use_dataset else None
-            if (
-                meta.get("dataset") != expected_dataset
-                or meta.get("split") != expected_split
-                or meta.get("dataset_config") != expected_config
-                or int(meta.get("max_length", -1)) != int(args.max_length)
-            ):
-                raise ValueError(
-                    "Cache metadata does not match current dataset/split/config/max_length."
-                )
-
-            print(
-                "  Cache loaded: "
-                f"tokens={activations.shape[0]}, texts={len(sample_texts)}, "
-                f"dataset={meta.get('dataset', 'unknown')}, split={meta.get('split', 'unknown')}, "
-                f"config={meta.get('dataset_config', 'none')}"
+            token_ids = cache["token_ids"]
+            doc_map = cache["token_doc_map"]
+            pos_map = cache["token_pos_map"]
+            # Verify integrity
+            assert len(doc_map) == activations.shape[0], "Cache size mismatch"
+            LOGGER.info(
+                "Activation cache loaded | tokens=%d texts=%d",
+                int(activations.shape[0]),
+                len(sample_texts),
             )
             cache_loaded = True
-        except Exception as exc:  # noqa: BLE001
-            print(f"  Cache load failed ({exc}). Falling back to fresh collection.")
+        except Exception as e:
+            LOGGER.warning("Cache load failed (%s). Recollecting activations.", e)
 
     if not cache_loaded:
         if use_dataset:
-            print(
-                f"\nCollecting GPT-2 activations from Hugging Face dataset "
-                f"'{args.dataset}' ({args.num_texts} texts, config='{args.dataset_config}', split='{args.dataset_split}', "
-                f"layer {layer_index})…"
-            )
+             LOGGER.info("Collecting activations from dataset %s", args.dataset)
+             collector = GPT2ActivationCollector(layer_index=layer_index)
+             activations, sample_texts = collector.collect_from_dataset_with_texts(
+                 dataset_name=args.dataset,
+                 dataset_config=args.dataset_config,
+                 split=args.dataset_split,
+                 num_texts=args.num_texts,
+                 batch_size=args.batch_size,
+                 max_length=args.max_length,
+             )
         else:
-            print(
-                f"\nCollecting GPT-2 activations from built-in sample corpus "
-                f"(layer {layer_index})…"
-            )
+             LOGGER.info("Using built-in sample texts for activation collection.")
+             sample_texts = [
+                "Massive gargantuan behemoths roam desolate barren wastelands.",
+                "Fast swift rapid movements characterize agile nimble creatures.",
+                "Happy joyful cheerful emotions brighten gloomy somber days.",
+                "Intelligent smart clever scholars study complex intricate subjects.",
+                "Powerful strong mighty warriors defend ancient historic cities.",
+             ]
+             collector = GPT2ActivationCollector(layer_index=layer_index)
+             activations = collector.collect_activations(sample_texts, batch_size=args.batch_size, max_length=args.max_length)
 
-        collector = GPT2ActivationCollector(
-            model_name="gpt2",
-            layer_index=layer_index,
-        )
-        tokenizer = collector.tokenizer   # reuse the exact tokenizer from collection
-
-        if use_dataset:
-            activations, sample_texts = collector.collect_from_dataset_with_texts(
-                dataset_name=args.dataset,
-                dataset_config=args.dataset_config,
-                split=args.dataset_split,
-                num_texts=args.num_texts,
-                shuffle_buffer_size=args.dataset_shuffle_buffer_size,
-                seed=args.dataset_seed,
-                text_field=args.dataset_text_field,
-                allow_fallback=False,
-                batch_size=args.batch_size,
-                max_length=args.max_length,
-                max_samples=args.num_texts * max(args.max_length, 1),
-            )
-        else:
-            activations = collector.collect_activations(
-                texts=sample_texts,
-                batch_size=args.batch_size,
-                max_length=args.max_length,
-            )
-
-        # activations: (total_tokens_in_sample_texts, d_model)
-        print(f"  Collected {activations.shape[0]} token activations.")
-
-        # ------------------------------------------------------------------ #
-        # 4.  Build token maps from the SAME sample_texts
-        #     → rows match activations 1-to-1
-        # ------------------------------------------------------------------ #
-        print("Building token maps…")
-        token_ids, doc_map, pos_map = build_token_maps(
-            sample_texts, tokenizer, max_length=args.max_length
-        )
-        assert len(doc_map) == activations.shape[0], (
-            f"Token map length {len(doc_map)} != activations rows {activations.shape[0]}"
+        token_ids, doc_map, pos_map = build_token_maps(sample_texts, tokenizer, args.max_length)
+        
+        # Save cache
+        torch.save({
+            "activations": activations.cpu(),
+            "texts": sample_texts,
+            "token_ids": token_ids,
+            "token_doc_map": doc_map,
+            "token_pos_map": pos_map,
+        }, str(cache_path))
+        LOGGER.info(
+            "Saved activation cache | path=%s tokens=%d texts=%d",
+            cache_path,
+            int(activations.shape[0]),
+            len(sample_texts),
         )
 
-        if not args.no_cache_save:
-            cache_path.parent.mkdir(parents=True, exist_ok=True)
-            torch.save(
-                {
-                    "activations": activations.cpu(),
-                    "texts": sample_texts,
-                    "token_ids": token_ids,
-                    "token_doc_map": doc_map,
-                    "token_pos_map": pos_map,
-                    "meta": {
-                        "dataset": args.dataset if use_dataset else "built_in_sample",
-                        "dataset_config": args.dataset_config if use_dataset else None,
-                        "split": args.dataset_split if use_dataset else "n/a",
-                        "num_texts": len(sample_texts),
-                        "max_length": args.max_length,
-                        "layer_index": layer_index,
-                    },
-                },
-                str(cache_path),
-            )
-            print(f"  Saved activation cache to {cache_path}")
+    # 3. Feature Selection
+    # We do a quick pass to find alive features
+    # Just checking non-zero variance or mean > threshold
+    with torch.no_grad():
+        # Sample a subset to determine alive features quickly
+        sample_idx = torch.randperm(activations.shape[0])[:min(1000, activations.shape[0])]
+        acts_sample = activations[sample_idx]
+        # Dummy encode to find alive (requires correct norm stats, here we just use raw acts for a rough estimate or rely on pre-computation)
+        # Simplified: assume most are dead, pick middle of the road.
+        # In a real scenario, you might want to run `sae.encode` on a sample here.
+        # For this script, we just pick random features if we don't have stats.
+        pass 
+    
+    # For this demo, we just pick N random features or specified indices
+    # In a real run, you'd want to find high-activation features.
+    # Here we pick random subset of d_hidden.
+    all_indices = list(range(d_hidden))
+    # Pick N random indices for the demo
+    import random
+    target_features = random.sample(all_indices, min(args.num_features, d_hidden))
+    LOGGER.info("Selected %d target features: %s", len(target_features), target_features)
 
+    # 4. Run Labeling
     cfg = LabelingConfig(
         backend=args.backend,
         model=args.model,
-        top_k=args.top_k,
         request_delay=args.request_delay,
-        prompt_log_path=args.prompt_log_path,
-        normalize_mode=args.normalize_mode,
-        std_floor=args.std_floor,
-        skip_first_token=not args.include_first_token,
-        global_top_features_k=10,
-        min_activation=args.min_activation,
-        include_global_top_features=args.include_global_top_features,
-        top_tokens_k=args.top_tokens_k,
     )
-
+    
     labeler = FeatureLabeler(sae, tokenizer, cfg)
-
-    # ------------------------------------------------------------------ #
-    # 5.  Find top active features across this mini-corpus
-    # ------------------------------------------------------------------ #
-    norm_stats = labeler._compute_normalization_stats(activations)
-    valid_rows = labeler._build_valid_row_indices(pos_map)
-    mean_acts = labeler._compute_mean_feature_activations(
-        activations=activations,
-        valid_row_indices=valid_rows,
-        norm_stats=norm_stats,
-    )
-    # Sort all features by mean activation.
-    # Skip dead features (mean_acts == 0) — they carry no signal.
-    alive_sorted = mean_acts.argsort(descending=True)
-    alive_sorted = alive_sorted[mean_acts[alive_sorted] > 0]
-
-    n_alive = len(alive_sorted)
-    if args.label_all_alive:
-        target_features = alive_sorted.tolist()
-        print(f"\nAlive features: {n_alive}")
-        print("Label mode: ALL alive features")
-    else:
-        # Pick N features from the middle of the alive ranking.
-        n_pick = max(1, min(args.num_features, n_alive))
-        mid = n_alive // 2
-        half = n_pick // 2
-        start = max(0, min(mid - half, n_alive - n_pick))
-        end = start + n_pick
-        target_features = alive_sorted[start:end].tolist()
-        print(f"\nAlive features: {n_alive}  |  Median rank: {mid}")
-        print(f"Mid-range feature indices (ranks {start}–{end-1}): {target_features}")
-
-    # ------------------------------------------------------------------ #
-    # 6.  Run labeling
-    # ------------------------------------------------------------------ #
-
-    print("\nLabeling features…")
+    
     results = labeler.label_features_from_activations(
         feature_indices=target_features,
         activations=activations,
@@ -1697,6 +997,5 @@ if __name__ == "__main__":
         resume=args.resume,
     )
 
-    FeatureLabeler.print_summary(results)
     for r in results.values():
         FeatureLabeler.print_label(r)

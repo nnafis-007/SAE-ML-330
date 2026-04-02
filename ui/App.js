@@ -13,6 +13,13 @@ const TAB_SYNONYM = 'synonym';
 const TAB_CAPS = 'caps';
 const TAB_FEATURE_MAP = 'feature-map';
 
+function sanitizeDecimalInput(value) {
+  const cleaned = (value || '').replace(/[^0-9.]/g, '');
+  const firstDotIndex = cleaned.indexOf('.');
+  if (firstDotIndex === -1) return cleaned;
+  return cleaned.slice(0, firstDotIndex + 1) + cleaned.slice(firstDotIndex + 1).replace(/\./g, '');
+}
+
 export default function App() {
   const [activeTab, setActiveTab] = useState(TAB_SAE);
 
@@ -252,6 +259,13 @@ export default function App() {
       return;
     }
 
+    const minActivationInput = lookupMinActivation.trim();
+    const parsedMinActivation = minActivationInput === '' ? 0 : Number(minActivationInput);
+    if (!Number.isFinite(parsedMinActivation) || parsedMinActivation < 0) {
+      setFeatureLookupError('Min activation must be a valid non-negative number (example: 0.25).');
+      return;
+    }
+
     setFeatureLookupLoading(true);
     setFeatureLookupError(null);
     try {
@@ -266,7 +280,7 @@ export default function App() {
           split: 'validation',
           max_sentences: Math.max(1, Number(lookupMaxSentences) || 200),
           max_results: Math.max(1, Number(lookupMaxResults) || 100),
-          min_activation: Math.max(0, Number(lookupMinActivation) || 0),
+          min_activation: parsedMinActivation,
         }),
       });
 
@@ -901,7 +915,7 @@ export default function App() {
             <Text style={styles.featureMapMetaText}>Top K per token: {topK === 0 ? 'All' : topK}</Text>
           </View>
 
-          <Text style={styles.subSectionTitle}>Feature -> All Dataset Activations</Text>
+          <Text style={styles.subSectionTitle}>{'Feature -> All Dataset Activations'}</Text>
           <View style={styles.featureLookupCard}>
             <Text style={styles.instructionText}>
               Select any feature ID and fetch sentences (+tokens) from MLCommons/peoples_speech where it activates.
@@ -929,7 +943,7 @@ export default function App() {
                 />
               </View>
               <View style={styles.featureLookupField}>
-                <Text style={styles.inputLabel}>Max Results</Text>
+                <Text style={styles.inputLabel}>Maximum Matches to Return</Text>
                 <TextInput
                   style={styles.featureLookupInput}
                   value={lookupMaxResults}
@@ -939,16 +953,22 @@ export default function App() {
                 />
               </View>
               <View style={styles.featureLookupField}>
-                <Text style={styles.inputLabel}>Min Activation</Text>
+                <Text style={styles.inputLabel}>Minimum Activation Threshold</Text>
                 <TextInput
                   style={styles.featureLookupInput}
                   value={lookupMinActivation}
-                  onChangeText={(t) => setLookupMinActivation(t.replace(/[^0-9.]/g, ''))}
+                  onChangeText={(t) => setLookupMinActivation(sanitizeDecimalInput(t))}
                   keyboardType="numeric"
                   placeholder="0.0"
                 />
               </View>
             </View>
+            <Text style={styles.hintText}>
+              Maximum Matches to Return: caps how many highest-activation token matches are shown after filtering.
+            </Text>
+            <Text style={styles.hintText}>
+              Minimum Activation Threshold uses inclusive filtering (activation {'>='} threshold).
+            </Text>
 
             <View style={styles.featureLookupActionsRow}>
               <TouchableOpacity
@@ -982,6 +1002,12 @@ export default function App() {
                   <Text style={styles.clusterWords}>{featureLookupResults.feature_description}</Text>
                   <Text style={styles.clusterWords}>
                     Dataset: {featureLookupResults.dataset} [{featureLookupResults.split}] | Scanned {featureLookupResults.scanned_sentences} sentences / {featureLookupResults.scanned_tokens} tokens
+                  </Text>
+                  <Text style={styles.clusterWords}>
+                    Raw examples scanned: {featureLookupResults.raw_examples_scanned ?? 'N/A'} | Filter: {featureLookupResults.activation_filter || 'activation >= min_activation'}
+                  </Text>
+                  <Text style={styles.clusterWords}>
+                    Min threshold: {featureLookupResults.min_activation} | Normalization: {featureLookupResults.normalization_mode || 'none'}
                   </Text>
                   <Text style={styles.clusterWords}>
                     Matches: {featureLookupResults.matches?.length ?? 0} shown ({featureLookupResults.total_matches ?? 0} total)
@@ -1022,7 +1048,7 @@ export default function App() {
 
           {activatedTokenRows.length > 0 && (
             <View>
-              <Text style={styles.subSectionTitle}>Token -> Features</Text>
+              <Text style={styles.subSectionTitle}>{'Token -> Features'}</Text>
               {activatedTokenRows.map((row) => (
                 <View key={`token-${row.tokenIndex}`} style={styles.featureMapTokenCard}>
                   <View style={styles.featureMapTokenHeader}>
@@ -1050,7 +1076,7 @@ export default function App() {
                 </View>
               ))}
 
-              <Text style={styles.subSectionTitle}>Feature -> Activated Tokens</Text>
+              <Text style={styles.subSectionTitle}>{'Feature -> Activated Tokens'}</Text>
               {featureToTokensRows.map((featureRow) => (
                 <View key={`feature-${featureRow.id}`} style={styles.featureMapFeatureCard}>
                   <Text style={styles.featureMapFeatureCardTitle}>#{featureRow.id} {featureRow.description}</Text>
