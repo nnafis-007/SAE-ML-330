@@ -832,9 +832,9 @@
   },
   "9": {
     "feature_idx": 9,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Security and protection",
+    "explanation": "The feature activates on the token 'security' across contexts like border security, facility security, and security interests, indicating it detects concepts related to safety, protection, and security.",
+    "confidence": "high",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -938,14 +938,14 @@
         "activation_value": 11.56669807434082
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99951, Requested 980. Please try again in 13m24.384s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Security and protection\",\n  \"explanation\": \"The feature activates on the token 'security' across contexts like border security, facility security, and security interests, indicating it detects concepts related to safety, protection, and security.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
   },
   "10": {
     "feature_idx": 10,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Subword fragment: bit",
+    "explanation": "The feature activates on the subword fragment 'bit' both as a standalone token and within words like 'arbitration' and 'bits', suggesting it primarily detects this tokenization fragment rather than a specific semantic concept.",
+    "confidence": "medium",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -974,8 +974,8 @@
         "activation_value": 1.0283602476119995
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99951, Requested 475. Please try again in 6m8.063999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Subword fragment: bit\",\n  \"explanation\": \"The feature activates on the subword fragment 'bit' both as a standalone token and within words like 'arbitration' and 'bits', suggesting it primarily detects this tokenization fragment rather than a specific semantic concept.\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
   },
   "11": {
     "feature_idx": 11,
@@ -989,9 +989,9 @@
   },
   "12": {
     "feature_idx": 12,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Negation and contrast",
+    "explanation": "The feature activates on negation/contrast constructions (e.g., 'not', 'don't', 'doesn't') and evaluative phrases like 'not a bad thing', indicating it detects negation and contrastive phrasing.",
+    "confidence": "high",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -1095,8 +1095,8 @@
         "activation_value": 1.3964922428131104
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99950, Requested 1017. Please try again in 13m55.488s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Negation and contrast\",\n  \"explanation\": \"The feature activates on negation/contrast constructions (e.g., 'not', 'don't', 'doesn't') and evaluative phrases like 'not a bad thing', indicating it detects negation and contrastive phrasing.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
   },
   "13": {
     "feature_idx": 13,
@@ -1110,9 +1110,9 @@
   },
   "14": {
     "feature_idx": 14,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Discourse marker: so",
+    "explanation": "The feature strongly activates on the connective/discourse marker 'so', commonly used to transition, summarize, or continue reasoning in speech.",
+    "confidence": "high",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -1216,14 +1216,14 @@
         "activation_value": 8.525164604187012
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99950, Requested 868. Please try again in 11m46.752s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Discourse marker: so\",\n  \"explanation\": \"The feature strongly activates on the connective/discourse marker 'so', commonly used to transition, summarize, or continue reasoning in speech.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
   },
   "15": {
     "feature_idx": 15,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Infinitive/preposition: to",
+    "explanation": "The feature activates on the token 'to', especially in constructions like 'seems to' and other infinitival/prepositional uses, indicating it detects this grammatical marker.",
+    "confidence": "high",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -1327,14 +1327,14 @@
         "activation_value": 14.823375701904297
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99950, Requested 961. Please try again in 13m7.104s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Infinitive/preposition: to\",\n  \"explanation\": \"The feature activates on the token 'to', especially in constructions like 'seems to' and other infinitival/prepositional uses, indicating it detects this grammatical marker.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
   },
   "16": {
     "feature_idx": 16,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Assumptions and expectations",
+    "explanation": "The feature activates on epistemic stance words like 'assumption', 'belief', 'expectation', and 'notion', indicating it detects language about beliefs, assumptions, and expectations.",
+    "confidence": "high",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -1438,14 +1438,14 @@
         "activation_value": 3.550323486328125
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99949, Requested 1006. Please try again in 13m45.12s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Assumptions and expectations\",\n  \"explanation\": \"The feature activates on epistemic stance words like 'assumption', 'belief', 'expectation', and 'notion', indicating it detects language about beliefs, assumptions, and expectations.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
   },
   "17": {
     "feature_idx": 17,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Getting and spending actions",
+    "explanation": "The feature activates on common action/transaction verbs such as 'get', 'take', and 'spend', often describing obtaining things or using resources.",
+    "confidence": "medium",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -1549,14 +1549,14 @@
         "activation_value": 3.140259265899658
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99949, Requested 1045. Please try again in 14m18.815999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Getting and spending actions\",\n  \"explanation\": \"The feature activates on common action/transaction verbs such as 'get', 'take', and 'spend', often describing obtaining things or using resources.\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
   },
   "18": {
     "feature_idx": 18,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Night and evening time",
+    "explanation": "The feature activates on words and contexts referring to nighttime (e.g., 'night', 'evening', 'dark'), indicating it detects references to night/evening.",
+    "confidence": "high",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -1660,14 +1660,14 @@
         "activation_value": 2.1447653770446777
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99949, Requested 978. Please try again in 13m20.928s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Night and evening time\",\n  \"explanation\": \"The feature activates on words and contexts referring to nighttime (e.g., 'night', 'evening', 'dark'), indicating it detects references to night/evening.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
   },
   "19": {
     "feature_idx": 19,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Visits and visitors",
+    "explanation": "The feature activates on words like 'visit' and 'visitor' and related contexts (e.g., visitor centers), indicating it detects the concept of visits/visitors.",
+    "confidence": "high",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -1771,8 +1771,8 @@
         "activation_value": 7.3121771812438965
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99948, Requested 1010. Please try again in 13m47.712s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Visits and visitors\",\n  \"explanation\": \"The feature activates on words like 'visit' and 'visitor' and related contexts (e.g., visitor centers), indicating it detects the concept of visits/visitors.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
   },
   "20": {
     "feature_idx": 20,
@@ -1786,9 +1786,9 @@
   },
   "21": {
     "feature_idx": 21,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Permission and allowance",
+    "explanation": "The feature activates on tokens like 'allowed', 'permitted', and 'allow', indicating it detects language about granting or denying permission/authorization.",
+    "confidence": "high",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -1892,14 +1892,14 @@
         "activation_value": 5.185690879821777
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99948, Requested 975. Please try again in 13m17.472s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Permission and allowance\",\n  \"explanation\": \"The feature activates on tokens like 'allowed', 'permitted', and 'allow', indicating it detects language about granting or denying permission/authorization.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
   },
   "22": {
     "feature_idx": 22,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Statements and responses",
+    "explanation": "The feature activates on communication/reporting terms such as 'spokesman', 'statement', and 'responded', indicating it detects language around public statements and responses.",
+    "confidence": "medium",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -2003,14 +2003,14 @@
         "activation_value": 2.8119969367980957
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99947, Requested 1002. Please try again in 13m39.936s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Statements and responses\",\n  \"explanation\": \"The feature activates on communication/reporting terms such as 'spokesman', 'statement', and 'responded', indicating it detects language around public statements and responses.\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
   },
   "23": {
     "feature_idx": 23,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Representation and advocacy",
+    "explanation": "The feature activates on tokens like 'listen', 'represented', 'work', and 'stand up', often in civic/political contexts, suggesting it detects language about representation, advocacy, and engagement.",
+    "confidence": "medium",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -2114,14 +2114,14 @@
         "activation_value": 2.3425235748291016
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99947, Requested 1018. Please try again in 13m53.76s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Representation and advocacy\",\n  \"explanation\": \"The feature activates on tokens like 'listen', 'represented', 'work', and 'stand up', often in civic/political contexts, suggesting it detects language about representation, advocacy, and engagement.\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
   },
   "24": {
     "feature_idx": 24,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Topic/reference marker: on",
+    "explanation": "The feature strongly activates on the preposition 'on' in phrases like 'vote on', 'decision on', and 'authority on', indicating it detects this common topic/reference marker.",
+    "confidence": "high",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -2225,14 +2225,14 @@
         "activation_value": 5.53427791595459
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99947, Requested 968. Please try again in 13m10.56s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Topic/reference marker: on\",\n  \"explanation\": \"The feature strongly activates on the preposition 'on' in phrases like 'vote on', 'decision on', and 'authority on', indicating it detects this common topic/reference marker.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
   },
   "25": {
     "feature_idx": 25,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Transition marker: from ... to ...",
+    "explanation": "The feature activates on 'to' in range/transition constructions such as 'from X to Y' and 'shift from ... to ...', indicating it detects transitions between states, values, or locations.",
+    "confidence": "high",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -2336,14 +2336,14 @@
         "activation_value": 4.458014488220215
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99946, Requested 993. Please try again in 13m31.296s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Transition marker: from ... to ...\",\n  \"explanation\": \"The feature activates on 'to' in range/transition constructions such as 'from X to Y' and 'shift from ... to ...', indicating it detects transitions between states, values, or locations.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
   },
   "26": {
     "feature_idx": 26,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Time spans and quantities",
+    "explanation": "The feature activates on quantity/time-span language such as 'single', 'half', 'ten', 'thirty', and 'years' (including phrases like 'year after year'), indicating it detects numerical quantities and temporal spans.",
+    "confidence": "medium",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -2447,14 +2447,14 @@
         "activation_value": 2.7688865661621094
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99946, Requested 1020. Please try again in 13m54.624s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Time spans and quantities\",\n  \"explanation\": \"The feature activates on quantity/time-span language such as 'single', 'half', 'ten', 'thirty', and 'years' (including phrases like 'year after year'), indicating it detects numerical quantities and temporal spans.\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
   },
   "27": {
     "feature_idx": 27,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Subword fragments: com/org",
+    "explanation": "The feature activates on token fragments like 'com', 'comm', and 'org' inside longer words (e.g., 'noncommissioned', 'committee', 'Georgia'), suggesting it primarily detects subword/tokenization fragments rather than a semantic concept.",
+    "confidence": "medium",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -2558,14 +2558,14 @@
         "activation_value": 2.112968921661377
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99946, Requested 1004. Please try again in 13m40.8s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Subword fragments: com/org\",\n  \"explanation\": \"The feature activates on token fragments like 'com', 'comm', and 'org' inside longer words (e.g., 'noncommissioned', 'committee', 'Georgia'), suggesting it primarily detects subword/tokenization fragments rather than a semantic concept.\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
   },
   "28": {
     "feature_idx": 28,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Wants and preferences",
+    "explanation": "The feature activates on words like 'want', 'wanted', and 'choose', indicating it detects language expressing desire, preference, or choice.",
+    "confidence": "high",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -2669,13 +2669,13 @@
         "activation_value": 5.012077808380127
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99945, Requested 995. Please try again in 13m32.16s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Wants and preferences\",\n  \"explanation\": \"The feature activates on words like 'want', 'wanted', and 'choose', indicating it detects language expressing desire, preference, or choice.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
   },
   "29": {
     "feature_idx": 29,
-    "label": "error",
-    "explanation": "",
+    "label": "Requests and emphasis phrases",
+    "explanation": "The feature activates on fragments often used in asking or emphasizing points (e.g., 'ask', 'wait a minute'), but the pattern is fairly noisy and mixes in other high-frequency fragments.",
     "confidence": "low",
     "top_tokens": [],
     "top_contexts": [
@@ -2780,14 +2780,14 @@
         "activation_value": 1.2817816734313965
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99945, Requested 1019. Please try again in 13m52.896s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Requests and emphasis phrases\",\n  \"explanation\": \"The feature activates on fragments often used in asking or emphasizing points (e.g., 'ask', 'wait a minute'), but the pattern is fairly noisy and mixes in other high-frequency fragments.\",\n  \"confidence\": \"low\"\n}",
+    "error": null
   },
   "30": {
     "feature_idx": 30,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Year references",
+    "explanation": "The feature strongly activates on the token 'year' in contexts like calendar year, fiscal year, and 'year after year', indicating it detects year/annual time references.",
+    "confidence": "high",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -2891,7 +2891,7 @@
         "activation_value": 7.021100997924805
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99945, Requested 977. Please try again in 13m16.608s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Year references\",\n  \"explanation\": \"The feature strongly activates on the token 'year' in contexts like calendar year, fiscal year, and 'year after year', indicating it detects year/annual time references.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
   }
 }
