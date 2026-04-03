@@ -110,8 +110,9 @@ class LabelFeatureRequest(BaseModel):
 
 class BulkLabelFeaturesRequest(BaseModel):
     model_id: str
-    feature_start: int = Field(..., ge=0)
-    feature_end: int = Field(..., ge=0)
+    feature_start: Optional[int] = Field(None, ge=0)
+    feature_end: Optional[int] = Field(None, ge=0)
+    feature_ids: Optional[List[int]] = None
     num_sentences: int = Field(200, ge=1)
     llm_top_k: int = Field(25, ge=1)
     min_activation: float = Field(0.0, ge=0.0)
@@ -374,7 +375,7 @@ def label_feature(request: LabelFeatureRequest):
 
 @app.post("/bulk-label-features")
 def bulk_label_features(request: BulkLabelFeaturesRequest):
-    """Bulk label a contiguous feature range in one backend run."""
+    """Bulk label features using either an explicit feature-id list or a contiguous range."""
     try:
         a = get_analyzer(request.analyzer)
     except KeyError:
@@ -383,11 +384,25 @@ def bulk_label_features(request: BulkLabelFeaturesRequest):
     if not hasattr(a, "bulk_label_features"):
         raise HTTPException(400, f"Analyzer '{request.analyzer}' does not support bulk feature labeling")
 
+    if request.feature_ids:
+        parsed_feature_ids = [int(x) for x in request.feature_ids if int(x) >= 0]
+        if not parsed_feature_ids:
+            raise HTTPException(400, "feature_ids must contain at least one non-negative integer.")
+        feature_start = None
+        feature_end = None
+    else:
+        if request.feature_start is None or request.feature_end is None:
+            raise HTTPException(400, "Provide either feature_ids or both feature_start and feature_end.")
+        feature_start = int(request.feature_start)
+        feature_end = int(request.feature_end)
+        parsed_feature_ids = None
+
     try:
         result = a.bulk_label_features(
             model_id=request.model_id,
-            feature_start=request.feature_start,
-            feature_end=request.feature_end,
+            feature_start=feature_start,
+            feature_end=feature_end,
+            feature_ids=parsed_feature_ids,
             num_sentences=request.num_sentences,
             llm_top_k=request.llm_top_k,
             min_activation=request.min_activation,

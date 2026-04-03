@@ -758,8 +758,9 @@ class SAEAnalyzer(BaseAnalyzer):
     def bulk_label_features(
         self,
         model_id: str,
-        feature_start: int,
-        feature_end: int,
+        feature_start: Optional[int] = None,
+        feature_end: Optional[int] = None,
+        feature_ids: Optional[List[int]] = None,
         num_sentences: int = 200,
         llm_top_k: int = 25,
         min_activation: float = 0.0,
@@ -774,10 +775,35 @@ class SAEAnalyzer(BaseAnalyzer):
         layer_index: int = int(info["layer_index"])
         d_hidden: int = int(info["d_hidden"])
 
-        if feature_start < 0 or feature_end < 0 or feature_end < feature_start:
-            raise ValueError("feature range must satisfy 0 <= start <= end")
-        if feature_end >= d_hidden:
-            raise ValueError(f"feature_end must be <= {d_hidden - 1}")
+        if feature_ids:
+            normalized_feature_ids: List[int] = []
+            seen = set()
+            for raw_id in feature_ids:
+                feat_id = int(raw_id)
+                if feat_id < 0:
+                    raise ValueError("feature_ids must contain only non-negative integers")
+                if feat_id >= d_hidden:
+                    raise ValueError(f"feature id {feat_id} must be <= {d_hidden - 1}")
+                if feat_id not in seen:
+                    normalized_feature_ids.append(feat_id)
+                    seen.add(feat_id)
+            if not normalized_feature_ids:
+                raise ValueError("feature_ids must contain at least one valid feature id")
+            feature_indices = normalized_feature_ids
+            resolved_feature_start = min(feature_indices)
+            resolved_feature_end = max(feature_indices)
+        else:
+            if feature_start is None or feature_end is None:
+                raise ValueError("Provide either feature_ids or both feature_start and feature_end")
+            feature_start = int(feature_start)
+            feature_end = int(feature_end)
+            if feature_start < 0 or feature_end < 0 or feature_end < feature_start:
+                raise ValueError("feature range must satisfy 0 <= start <= end")
+            if feature_end >= d_hidden:
+                raise ValueError(f"feature_end must be <= {d_hidden - 1}")
+            feature_indices = list(range(int(feature_start), int(feature_end) + 1))
+            resolved_feature_start = int(feature_start)
+            resolved_feature_end = int(feature_end)
 
         collector = self._get_collector(layer_index)
         tokenizer = collector.tokenizer
@@ -821,7 +847,6 @@ class SAEAnalyzer(BaseAnalyzer):
         cfg = LabelingConfig(**cfg_kwargs)
         labeler = FeatureLabeler(sae=sae, tokenizer=tokenizer, cfg=cfg, device=self._device)
 
-        feature_indices = list(range(int(feature_start), int(feature_end) + 1))
         results = labeler.label_features_from_activations(
             feature_indices=feature_indices,
             activations=activations,
@@ -886,8 +911,9 @@ class SAEAnalyzer(BaseAnalyzer):
 
         return {
             "model_id": model_id,
-            "feature_start": int(feature_start),
-            "feature_end": int(feature_end),
+            "feature_start": int(resolved_feature_start),
+            "feature_end": int(resolved_feature_end),
+            "feature_ids": feature_indices,
             "request_id": request_id,
             "num_sentences": int(num_sentences),
             "sentences_used": len(corpus_texts),

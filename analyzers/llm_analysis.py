@@ -1106,6 +1106,12 @@ if __name__ == "__main__":
         help="Number of features to interpret. Number of top activated alive features. Use a positive integer to select specific count to label. Default: 10",
     )
     parser.add_argument(
+        "--feature-ids",
+        type=str,
+        default="",
+        help="Optional explicit feature IDs to label (comma or space separated). Overrides --top-feature-count.",
+    )
+    parser.add_argument(
         "--save-path",
         type=str,
         default="feature_labels.json",
@@ -1416,9 +1422,30 @@ if __name__ == "__main__":
 
     n_alive = len(alive_sorted)
     top_n = max(1, min(args.top_feature_count, n_alive))
-    target_features = [x for x in range(1068,1071)]
-    print(f"\nAlive features: {n_alive}")
-    print(f"Top-{top_n} feature indices by mean activation: {target_features}")
+    if args.feature_ids.strip():
+        parsed_feature_ids: List[int] = []
+        seen = set()
+        for piece in re.split(r"[\s,]+", args.feature_ids.strip()):
+            if not piece:
+                continue
+            try:
+                feat_id = int(piece)
+            except ValueError as exc:
+                raise ValueError(f"Invalid feature id '{piece}' in --feature-ids") from exc
+            if feat_id < 0 or feat_id >= sae.d_hidden:
+                raise ValueError(f"Feature id {feat_id} out of range [0, {sae.d_hidden - 1}]")
+            if feat_id not in seen:
+                parsed_feature_ids.append(feat_id)
+                seen.add(feat_id)
+        if not parsed_feature_ids:
+            raise ValueError("--feature-ids provided but no valid IDs were parsed")
+        target_features = parsed_feature_ids
+        print(f"\nAlive features: {n_alive}")
+        print(f"Explicit feature IDs selected: {target_features}")
+    else:
+        target_features = alive_sorted[:top_n].tolist()
+        print(f"\nAlive features: {n_alive}")
+        print(f"Top-{top_n} feature indices by mean activation: {target_features}")
 
     # ------------------------------------------------------------------ #
     # 6.  Run labeling

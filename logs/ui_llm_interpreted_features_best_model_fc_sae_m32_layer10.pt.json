@@ -466,5 +466,192 @@
       "num_sentences": 3750
     },
     "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:55:41.966235+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1850,
+    "label": "Quantitative Comparison",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 30,
+      "min_activation": 1.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T17:55:41.967920+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1851,
+    "label": "Second Person Reference",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 30,
+      "min_activation": 1.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T17:55:41.969333+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1852,
+    "label": "Legal Document Reference",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 30,
+      "min_activation": 1.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T17:55:41.971914+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1853,
+    "label": "Legal Testimony Concept",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 30,
+      "min_activation": 1.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T17:55:41.974583+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1854,
+    "label": "Economic Crisis Event",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 30,
+      "min_activation": 1.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T17:55:41.977427+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1855,
+    "label": "Preposition Indicating Location",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 30,
+      "min_activation": 1.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T17:55:41.980517+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1856,
+    "label": "US Reference",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 30,
+      "min_activation": 1.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T17:55:41.983447+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1857,
+    "label": "Interrogative Pronouns",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 30,
+      "min_activation": 1.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T17:55:41.986053+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1858,
+    "label": "Contrast or Change",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 30,
+      "min_activation": 1.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:02:08.630765+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 6068,
+    "label": "Sufficient Condition",
+    "explanation": "The feature detects tokens indicating a sufficient or necessary condition for something to happen or be true, often marked by words like 'enough' or 'within'",
+    "confidence": "high",
+    "request_id": "5c58abab-ec6b-487e-b00c-8cd21d0e3fcd",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "enough",
+      "upset",
+      "rate",
+      "do",
+      "within",
+      "in",
+      "majority"
+    ],
+    "prompt_examples_count": 8,
+    "corpus_texts_count": 15,
+    "labeling_config": {
+      "top_k": 25,
+      "skip_first_token": true,
+      "min_activation": 1.5,
+      "num_sentences": 3500
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T18:02:35.246285+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2711,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "request_id": "fb509a64-de66-4936-b6ed-e56d754db702",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [],
+    "prompt_examples_count": 18,
+    "corpus_texts_count": 25,
+    "labeling_config": {
+      "top_k": 25,
+      "skip_first_token": true,
+      "min_activation": 1.5,
+      "num_sentences": 2000
+    },
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99536, Requested 912. Please try again in 6m27.071999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
   }
 ]

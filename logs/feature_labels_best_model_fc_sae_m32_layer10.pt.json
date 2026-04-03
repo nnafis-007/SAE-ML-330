@@ -25,11 +25,11 @@
   },
   "6068": {
     "feature_idx": 6068,
-    "label": "Preposition Usage",
-    "explanation": "The feature detects the usage of prepositions such as 'in', 'to', and 'with' in various contexts",
+    "label": "Sufficient Condition",
+    "explanation": "The feature detects tokens indicating a sufficient or necessary condition for something to happen or be true, often marked by words like 'enough' or 'within'",
     "confidence": "high",
-    "request_id": "13831d3d-865c-475c-88f0-e36b370d9db5",
-    "updated_at": "2026-04-03T16:51:35Z"
+    "request_id": "5c58abab-ec6b-487e-b00c-8cd21d0e3fcd",
+    "updated_at": "2026-04-03T18:02:08Z"
   },
   "4212": {
     "feature_idx": 4212,
@@ -94,5 +94,93 @@
     "confidence": "high",
     "request_id": "f0447e36-2308-4e20-86a5-51fb81099023",
     "updated_at": "2026-04-03T17:47:09Z"
+  },
+  "1850": {
+    "feature_idx": 1850,
+    "label": "Quantitative Comparison",
+    "explanation": "The feature detects phrases that involve numerical comparisons, often using words like 'more than', 'nearly', and specific numbers like 'eight' and 'twelve'.",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "updated_at": "2026-04-03T17:55:41Z"
+  },
+  "1851": {
+    "feature_idx": 1851,
+    "label": "Second Person Reference",
+    "explanation": "The feature detects the presence of the word 'you' in the text, indicating a second-person reference or address to the listener or reader.",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "updated_at": "2026-04-03T17:55:41Z"
+  },
+  "1852": {
+    "feature_idx": 1852,
+    "label": "Legal Document Reference",
+    "explanation": "The feature detects mentions of legal documents, such as court documents, charging documents, and evidence, in a legal or formal context",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "updated_at": "2026-04-03T17:55:41Z"
+  },
+  "1853": {
+    "feature_idx": 1853,
+    "label": "Legal Testimony Concept",
+    "explanation": "The feature detects language related to legal proceedings, testimony, and allegations, often involving words like 'oath', 'alleged', and 'testified'",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "updated_at": "2026-04-03T17:55:41Z"
+  },
+  "1854": {
+    "feature_idx": 1854,
+    "label": "Economic Crisis Event",
+    "explanation": "The feature activates on tokens related to significant economic events, such as depressions, meltdowns, and unemployment, indicating it detects discussions of economic crises.",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "updated_at": "2026-04-03T17:55:41Z"
+  },
+  "1855": {
+    "feature_idx": 1855,
+    "label": "Preposition Indicating Location",
+    "explanation": "The feature detects the preposition 'in' and similar tokens indicating a location or context, often used to establish relationships between entities or concepts",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "updated_at": "2026-04-03T17:55:41Z"
+  },
+  "1856": {
+    "feature_idx": 1856,
+    "label": "US Reference",
+    "explanation": "The feature detects mentions of the United States, often abbreviated as 'US' or 'U.S.', in various contexts.",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "updated_at": "2026-04-03T17:55:41Z"
+  },
+  "1857": {
+    "feature_idx": 1857,
+    "label": "Interrogative Pronouns",
+    "explanation": "The feature activates on tokens related to questioning or inquiry, such as 'what', 'we', 'you', and 'they', often in the context of seeking information or clarification",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "updated_at": "2026-04-03T17:55:41Z"
+  },
+  "1858": {
+    "feature_idx": 1858,
+    "label": "Contrast or Change",
+    "explanation": "The feature detects words indicating a shift, surprise, or difference in a situation or expectation.",
+    "confidence": "high",
+    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
+    "updated_at": "2026-04-03T17:55:41Z"
+  },
+  "2711": {
+    "feature_idx": 2711,
+    "label": "error",
+    "explanation": "error",
+    "confidence": "low",
+    "request_id": "fb509a64-de66-4936-b6ed-e56d754db702",
+    "updated_at": "2026-04-03T18:02:35Z"
+  },
+  "1": {
+    "feature_idx": 1,
+    "label": "Legal Procedure",
+    "explanation": "The feature activates on tokens related to legal processes, such as appeals, detainees, and conspirators, indicating a concept related to legal procedures and terminology",
+    "confidence": "high",
+    "request_id": "de3afceb-3c12-4967-9f49-e7f2396402e4",
+    "updated_at": "2026-04-03T18:08:59Z"
   }
 }

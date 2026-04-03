@@ -2161,3 +2161,990 @@ RESPONSE:
   "confidence": "high"
 }
 ================================================================================
+
+================================================================================
+REQUEST_ID 8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8
+FEATURE 1850
+USER PROMPT:
+Feature index: 1850
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 30 activating examples (ordered strongest first):
+   1. [act=2.880]   eight international officers and twelve sister exchange officers we also>>> have<<< inner agenc
+   2. [act=2.469]   faculty also includes six endowed chairs seven distinguished visiting professors>>> eight<<< international officers and twelve sister exchange officers we also have
+   3. [act=2.415]   hold masters degrees from command staff college as well to>>> more<<< hold masters degrees from civilian universities and
+   4. [act=2.407]   six endowed chairs seven distinguished visiting professors eight international officers>>> and<<< twelve sister exchange officers we also have inner agenc
+   5. [act=2.402]   visiting professors eight international officers and twelve sister exchange officers>>> we<<< also have inner agenc
+   6. [act=2.391]   endowed chairs seven distinguished visiting professors eight international officers and>>> twelve<<< sister exchange officers we also have inner agenc
+   7. [act=2.327]   of chief executive officers in addition to the twelve million>>> employees<<< that they represent they also represent nearly six trillion dollars
+   8. [act=2.320]   includes six endowed chairs seven distinguished visiting professors eight international>>> officers<<< and twelve sister exchange officers we also have inner ag
+   9. [act=2.265]   also includes six endowed chairs seven distinguished visiting professors eight>>> international<<< officers and twelve sister exchange officers we also have inner
+  10. [act=2.196]   is an association of chief executive officers in addition to>>> the<<< twelve million employees that they represent they also represent nearly
+  11. [act=2.154]   distinguished visiting professors eight international officers and twelve sister exchange>>> officers<<< we also have inner agenc
+  12. [act=2.076]  table is an association of chief executive officers in addition>>> to<<< the twelve million employees that they represent they also represent
+  13. [act=2.006]   and its largest contract facilities collectively these facilities hold more>>> than<<< half of all ice detainees ice also relies on private
+  14. [act=1.948]   policy these brave men and women civilians as well as>>> military<<< are making extraordinary sacrifices on behalf of our
+  15. [act=1.868]   answer your questions thank you mr dunn has>>> recognized<<<
+  16. [act=1.857]   by the end of this year and about ninety thousand>>> at<<< the end of two thousand and ten and could you
+  17. [act=1.853]   that they represent they also represent nearly six trillion dollars>>> in<<< annual revenue
+  18. [act=1.848]   employees that they represent they also represent nearly six trillion>>> dollars<<< in annual revenue
+  19. [act=1.841]   years of development and testing with most of the more>>> than<<< one billion dollars of funding spent today
+  20. [act=1.818]   largest contract facilities collectively these facilities hold more than half>>> of<<< all ice detainees ice also relies on private contractors
+  21. [act=1.804]   the intellectual property criminal enforcement working group which is part>>> of<<< the us china jointly is on group for law
+  22. [act=1.804]   years is now only six million dollars company with thirty>>> five<<< employees when they
+  23. [act=1.800]   hundred percent of the faculty advisors and division heads or>>> highly<<< experienced combat veterans with great appropriate command and staff experience
+  24. [act=1.735]   small and medium sized businesses these programs included presentations by>>> our<<< attorney
+  25. [act=1.723]   our faculty also includes six endowed chairs seven distinguished visiting>>> professors<<< eight international officers and twelve sister exchange officers we also
+  26. [act=1.718]   and championship tournaments they cooperate to create and sell national>>> and<<< international marketing
+  27. [act=1.706]   that as the model for dental benefits in their state>>> or<<< they can take the most popular commercial
+  28. [act=1.703]   professors eight international officers and twelve sister exchange officers we>>> also<<< have inner agenc
+  29. [act=1.698]  and about a third of those faculty are>>> retired<<< military we've we've tried to hire nationally based
+  30. [act=1.652]   example if you want that branch where we have more>>> than<<< thirty three
+
+Most frequent activating tokens (top 10): "than", "and", "officers", "of", "have", "eight", "more", "we", "twelve", "employees"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Quantitative Comparison",
+  "explanation": "The feature detects phrases that involve numerical comparisons, often using words like 'more than', 'nearly', and specific numbers like 'eight' and 'twelve'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8
+FEATURE 1851
+USER PROMPT:
+Feature index: 1851
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 30 activating examples (ordered strongest first):
+   1. [act=8.049]   thomas in the social security disability appeal i know>>> you<<< had a long morning and my time before you was
+   2. [act=8.040]   beginning of the conversation he asked carter i wish>>> you<<< would ask him because he could put the stop to
+   3. [act=7.836]  i couldn't i couldn't understand why>>> you<<<'re saying on the jury selection that you did have
+   4. [act=7.652]   i hear you i hear you just said i think>>> you<<< framed this very well in at and in questions earlier
+   5. [act=7.641]  but at this is i understand>>> you<<< this is a very strange lifestyle to me as well
+   6. [act=7.483]   did say i don't live here but i thought>>> you<<< conceded that there were no false representations to chase bank
+   7. [act=7.466]  raise the question but i figured that>>> you<<< probably would so that's why i submitted the rule
+   8. [act=7.362]   and it's been a wonderful ride and i hope>>> you<<< will
+   9. [act=7.306]  never home i'm sure>>> you<<<'re i'm sure the government pointed that out to
+  10. [act=7.089]   to the car show me her hands and i thought>>> you<<< had just said that that's what he did correct
+  11. [act=7.037]   there probably from the beginning but i don't think>>> you<<< need to decide that a summary judgment case
+  12. [act=6.837]  we reached the decision we did and i believe>>> you<<< didn't make the argument before the district court here
+  13. [act=6.713]  in afghanistan i'd like to know where>>> you<<< think our involvement in afghanistan is going obviously
+  14. [act=6.706]   we have the arguments will reserve decision though i understand>>> you<<< need a decision
+  15. [act=6.650]  we start i've heard>>> you<<< distinguish nord what do you think is the closest
+  16. [act=6.423]   it's it cuts both ways and i do think>>> you<<<'re calling on the other side who's helping us
+  17. [act=6.401]   and then you also said i think if i heard>>> you<<< earlier in your testimony quote in a perfect world it
+  18. [act=6.295]   this and explain it because i don't see how>>> you<<<'re a quote comb owner of the patent i don
+  19. [act=6.279]  i interviews do i understand>>> you<<< correctly to have argued that these were miscible to
+  20. [act=6.263]  penalty and it seems as i read it that>>> you<<< have been to alternative reading this one it says a
+  21. [act=6.263]  i think i think i>>> you<<< know i think the district court was just very troubled
+  22. [act=6.254]  i p r infringement furthermore i'd like>>> you<<< to discuss our trade agreements with other nations including those
+  23. [act=6.153]   he's entitled to this extraordinary relief and i believe>>> you<<< know in our position the government's position is that
+  24. [act=6.148]   have to work backwards to do our job i hear>>> you<<< i hear you just said i think you framed this
+  25. [act=6.042]   back in a few months i'm not sure but>>> you<<<'ll have to see what panel that is at that
+  26. [act=6.004]  ayes mr hayes my understanding is that>>> you<<<'re the thrust of your appeal is that the district
+  27. [act=5.997]   negatives is not accurate so it seems to me that>>> you<<< have a test
+  28. [act=5.941]  conduct in a conspiracy i don't think>>> you<<<'re just speeding that and as i understand it his
+  29. [act=5.812]   a downer on it with my observations here but>>> you<<< know that somehow the way this process works and i
+  30. [act=5.747]   i don't think that he did consent now do>>> you<<< say that the officer commanded him to do things or
+
+Most frequent activating tokens (top 1): "you"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Second Person Reference",
+  "explanation": "The feature detects the presence of the word 'you' in the text, indicating a second-person reference or address to the listener or reader.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8
+FEATURE 1852
+USER PROMPT:
+Feature index: 1852
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 30 activating examples (ordered strongest first):
+   1. [act=12.852]   brief question or two and possibly the production of a>>> document<<< evidencing a right
+   2. [act=12.660]  serve this individual with>>> documents<<< charging documents and everything seems to come to a scree
+   3. [act=11.932]   that there's been a negotiation right there's been>>> documents<<< provided to the defendant there's been an indictment there
+   4. [act=11.872]   warrants two years to move from a certification to a>>> document<<< which is not even a resolution right which is passed
+   5. [act=11.815]  isions but when you go and look at those underlying>>> documents<<< you will find it's one category you can look
+   6. [act=11.671]   proof of anticipation every step must be buttressed by>>> documents<<< the court i get why do you think the board
+   7. [act=11.660]  and in addition some of the other>>> documents<<< that are in the record that were presented to the
+   8. [act=11.522]  on notice and they knew of the specific>>> documents<<< at issue and we know that because the defendants responded
+   9. [act=11.356]   i mean is there any question about your getting the>>> documents<<< back if it's over and you know
+  10. [act=11.328]   those charged codes because we're looking at the actual>>> document<<< before the court which is the judgment and then
+  11. [act=11.315]  you look at any of the four>>> documents<<< that he conceded to reading on the records that would
+  12. [act=11.222]   these summonses were improper is the return of the>>> documents<<< that's what the nd circuit said in life
+  13. [act=11.087]   other competitors in this space they could have access these>>> documents<<< as well and it would have been known in the
+  14. [act=11.016]  and they were awaiting receipt of those>>> documents<<< in the meantime they had they had informed the court
+  15. [act=10.984]   the subject of the proceedings and the nature of the>>> documents<<< described whether the search was
+  16. [act=10.974]   thinking about it in that way makes sense because the>>> documents<<< don't make clear what was charged what was contemplated
+  17. [act=10.821]   that he made this is all detailed in my various>>> documents<<<
+  18. [act=10.783]  he had an opportunity to review the>>> document<<< he had opportunity counseled on it it says any
+  19. [act=10.710]   the documents in our possession which include all of the>>> documents<<< a
+  20. [act=10.582]   same year where they said we've looked at the>>> documents<<< in our possession which include all of the documents a
+  21. [act=10.554]   produced over five hundred dollars ages of additional response at>>> documents<<< as in any case the
+  22. [act=10.453]  while these>>> documents<<< reference the act when we went in connection with the
+  23. [act=10.250]  of knowledge from which she created these>>> documents<<< that she then went and got protected by the copyright
+  24. [act=10.248]   problem is we don't know who he gave the>>> document<<< to we don't know the name
+  25. [act=10.176]   this judgment was your permitted to look at the shepherd>>> documents<<< and again judge fleisig in this particular case
+  26. [act=10.082]  charging>>> document<<< which she's permitted to do then i'll ask
+  27. [act=10.080]   she wanted to cover and then she put pieces of>>> documents<<< up and if you look past that page which the
+  28. [act=10.007]   levels for occupational exposure in the air and what those>>> documents<<< say is we have those test
+  29. [act=9.943]   said yup the people that actually picked up the>>> document<<< were good designers and i want to be very clear
+  30. [act=9.517]   trial there is no way of knowing who access those>>> documents<<< and the key to these documents is their originality
+
+Most frequent activating tokens (top 2): "documents", "document"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Legal Document Reference",
+  "explanation": "The feature detects mentions of legal documents, such as court documents, charging documents, and evidence, in a legal or formal context",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8
+FEATURE 1853
+USER PROMPT:
+Feature index: 1853
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 26 activating examples (ordered strongest first):
+   1. [act=2.289]  false accusations about>>> having<<< a woman up at the fire station for the purposes
+   2. [act=2.156]  he alleged that he>>> had<<< a large mass in his gums that caused serious
+   3. [act=2.110]  academic who's declared under>>> oath<<< that they're faulty advertised and we see numerous times
+   4. [act=2.109]  and during that conversation he>>> recounted<<< his history in seeking out searching for downloading child pornography
+   5. [act=2.036]   that supported the purported to support the government's allegations>>> of<<< unindicted
+   6. [act=2.014]  harris claims to>>> have<<< learned from joseph render if if there were
+   7. [act=1.871]   on that because on the thirteenth they found>>> out<<< well apparently there was a agreed upon postponed until the
+   8. [act=1.842]   careful what she said about the incident she was later>>> told<<< this in september of two thousand and thirteen
+   9. [act=1.730]  days that firm my allegations>>> of<<< improper conduct between the knops and the trustee and
+  10. [act=1.726]  police version is to>>> believed<<< why does that video taken by the citizen created a
+  11. [act=1.711]  recovered had but for the lawyers>>> allege<<< negligence that's the standard instead we've got this
+  12. [act=1.642]  to reach internal corporate rumors>>> that<<< contain neither the actual nature of the transaction nor the
+  13. [act=1.628]   that up mishaps and in fact when she disclosed>>> that<<< information to us she was already scheduled to work multiple
+  14. [act=1.621]  organization believed to>>> be<<< responsible for the distribution of over two billion dollars where
+  15. [act=1.620]   case is is that there's been an ongoing allegation>>> that<<< the government did not cut square corners and i have
+  16. [act=1.600]   new trial was made one month after the defense learned>>> of<<< the potential basis for the motion and this court said
+  17. [act=1.580]  the information was>>> secretly<<< scheming say oh i'm getting this information now
+  18. [act=1.571]   a new trial was made one month after the defense>>> learned<<< of the potential basis for the motion and this court
+  19. [act=1.560]   cross examination that he had previously given a statement under>>> oath<<< that he heard two pops
+  20. [act=1.538]  interview he admitted>>> that<<< he was going to places in order to have sex
+  21. [act=1.531]   fill that up mishaps and in fact when she>>> disclosed<<< that information to us she was already scheduled to work
+  22. [act=1.510]  unsubstantiated claim>>> it<<< is important to note that in their original brief b
+  23. [act=1.509]  organization believed to be>>> responsible<<< for the distribution of over two billion dollars where the
+  24. [act=1.507]   correct that the government put witnesses on that said she>>> was<<< present when there were conversations about the upcoming merger she
+  25. [act=1.506]  he alleged that>>> he<<< had a large mass in his gums that caused
+  26. [act=1.506]   council just now discussed what he believes is corroboration>>> that<<< there was an intent to form an agreement but again
+
+Most frequent activating tokens (top 10): "that", "of", "oath", "having", "had", "recounted", "have", "out", "told", "believed"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Legal Testimony Concept",
+  "explanation": "The feature detects language related to legal proceedings, testimony, and allegations, often involving words like 'oath', 'alleged', and 'testified'",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8
+FEATURE 1854
+USER PROMPT:
+Feature index: 1854
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 30 activating examples (ordered strongest first):
+   1. [act=4.525]   part of the world right after musharraf took>>> power<<< and we were impressed with him we came back to
+   2. [act=4.126]   the highest unemployment levels in america since the great>>> depression<<< during these years the world has not stood still global
+   3. [act=3.958]  ration we have just as much unemployment as when we>>> started<<< we're headed towards misery index high unemployment high interest
+   4. [act=3.638]   ordinary course of banking as we knew it before the>>> meltdown<<< the forty five billion that is currently would be repaid
+   5. [act=3.449]   time he entered the united states at the texas>>> border<<< in two thousand and two he had only a few
+   6. [act=3.414]   has grown from ideas first germinated in the>>> state<<<'s first universities and flourished through entrepreneurial commitment and investor
+   7. [act=3.320]   ideas first germinated in the state's first>>> universities<<< and flourished through entrepreneurial commitment and investor financing to create
+   8. [act=3.231]  less than we had when we wrote the last farm>>> bill<<< anybody that suggests this isn't fiscally responsible
+   9. [act=3.198]  rouble when we first started the congressional oversight panel>>> back<<< in november and in december that we
+  10. [act=3.144]   a program called the abandoned mine lands program it was>>> created<<< as a federal state partnership with federal government collects the
+  11. [act=3.139]   i have been commissioner and even prior to my coming>>> commissioner<<<
+  12. [act=3.084]   bio med industry has grown from ideas first germin>>>ated<<< in the state's first universities and flourished through entrepreneurial
+  13. [act=3.030]   site recovery dot gov when the stimulus package was>>> passed<<< it said that it will save or create jobs immediately
+  14. [act=3.000]   summer just seventeen days after i was sworn into the>>> senate<<< i opposed the nomination of the director of the office
+  15. [act=2.992]  trouble when we first>>> started<<< the congressional oversight panel back in november and
+  16. [act=2.913]   consistently since i have been commissioner and even prior to>>> my<<< coming commissioner
+  17. [act=2.862]   doing a health insurance program before the federal program ever>>> started<<< ten years ago and it was
+  18. [act=2.800]   books in two thousand and nine long before the oil>>> spill<<< long before the a bit the requirement for a failed
+  19. [act=2.782]   can strengthen our program we have done that consistently since>>> i<<< have been commissioner and even prior to my coming commissioner
+  20. [act=2.773]   dispute regarding the inconsistency the testimony at the first federal>>> trial<<< was clear that anders
+  21. [act=2.710]   crisis and the highest unemployment levels in america since>>> the<<< great depression during these years the world has not stood
+  22. [act=2.710]   point in the two years between the time when we>>> started<<< this and we ended up in front of the district
+  23. [act=2.700]   since i have been commissioner and even prior to my>>> coming<<< commissioner
+  24. [act=2.656]   when presented in september when the deal was>>> announced<<< we were twenty to thirty one to thirty two dollars
+  25. [act=2.646]   of natural clusters the ben franklin technology partnership was>>> launched<<< in similar
+  26. [act=2.560]   in the two years between the time when we started>>> this<<< and we ended up in front of the district court
+  27. [act=2.516]  by the subprime>>> crisis<<< doesn't mean that they can feel secure that they
+  28. [act=2.509]   alert and warning system and from the time of the>>> earthquake<<< to the tsunami it was only ten minutes and many
+  29. [act=2.502]   highest unemployment levels in america since the great depression>>> during<<< these years the world has not stood still global competition
+  30. [act=2.472]   mine lands program it was created as a federal state>>> partnership<<< with federal government collects the money and then it is
+
+Most frequent activating tokens (top 10): "started", "power", "depression", "meltdown", "border", "state", "universities", "bill", "back", "created"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Economic Crisis Event",
+  "explanation": "The feature activates on tokens related to significant economic events, such as depressions, meltdowns, and unemployment, indicating it detects discussions of economic crises.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8
+FEATURE 1855
+USER PROMPT:
+Feature index: 1855
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 30 activating examples (ordered strongest first):
+   1. [act=5.067]   the company violated so clearly there is an ongoing relationship>>> in<<< the year prior to the point this was rolled out
+   2. [act=4.091]   information he was taking so there is actually an allegation>>> in<<< the pleading that during the time he was providing these
+   3. [act=3.867]   about the charge code there is a consistent charge code>>> in<<< the judgments and in the felony information and if you
+   4. [act=3.654]   that's america you know there's a history>>> in<<< farm country if your neighbor gets sick and the crop
+   5. [act=3.640]   athene director and you have an entire agreements provision>>> in<<< that contract as
+   6. [act=3.594]   gun down i mean to suggest that there were warnings>>> in<<< the situation strikes me is completely contrary
+   7. [act=3.284]  for example there is currently pending>>> in<<< the southern district of new york a terrorism prosecution
+   8. [act=3.249]   hear it it's not like there's a briefing>>> in<<< between that leads up to it
+   9. [act=3.080]   forty one for a second but there's a release>>> in<<< here
+  10. [act=2.974]   know there's a lot of a lot of dispute>>> in<<< the economic world in the academic world about
+  11. [act=2.952]  contending that there was a due process violation>>> in<<< consequence of the violation of the contract you know sure
+  12. [act=2.921]   absolutely true with the ski trip there was a spreadsheet>>> in<<< this case introduced into evidence that basically demonstrated that everybody
+  13. [act=2.897]  we've also put a band on mandatory arbitration>>> in<<< production contracts this is the say that are proof that
+  14. [act=2.845]   ideological reasons yes mr president there are some folks>>> in<<< the white house and on the other side
+  15. [act=2.712]  missible we did not offer it there was a motion>>> in<<< limine and to exclude the statement we had a
+  16. [act=2.683]   i think that's a philosophical debate we're having>>> in<<< the congress
+  17. [act=2.643]   don't dispute that there is a measure of discretion>>> invested<<< in district courts under the declaratory judgment statute
+  18. [act=2.637]   parity is by prohibitions on player doping doping is prohibited>>> in<<< part doesn't allow certain players and their respective teams
+  19. [act=2.591]  't even require there's no actual user request component>>> in<<< claim fifty seven for
+  20. [act=2.564]   the separation of powers it's due process is considered>>> by<<< the court it is a court thing you can say
+  21. [act=2.476]  's possible that there could have been a protocol put>>> in<<< place at the time but remember the contract specifically addresses
+  22. [act=2.472]   to tender first of all it's not a requirement>>> under<<<
+  23. [act=2.463]   the statute so clearly there is the power there's>>> in<<< fact the duty to provide a defense for negligence and
+  24. [act=2.462]   deprivation relief here there was a massive amount of litigation>>> in<<< state court there was a hold over proceeding there was
+  25. [act=2.450]   fact that we've considered is there anything like that>>> in<<< this case there's nothing like that your honor but
+  26. [act=2.431]   comes to managing the workforce there needs to be something>>> in<<< the communication to put the employer on notice that this
+  27. [act=2.428]  anted us out as quickly as possible there are some>>> in<<< afghanistan perhaps in the government perhaps in the
+  28. [act=2.392]  there is evidence>>> in<<< the record one by the fact that her repayment terms
+  29. [act=2.310]  fair and legitimate now i suspect there are many people>>> in<<< this room or perhaps elsewhere who might agree only with
+  30. [act=2.305]   your own your argument it is a notice pleading requirement>>> in<<< the federal rules right and so if you're arguing
+
+Most frequent activating tokens (top 4): "in", "invested", "by", "under"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Preposition Indicating Location",
+  "explanation": "The feature detects the preposition 'in' and similar tokens indicating a location or context, often used to establish relationships between entities or concepts",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8
+FEATURE 1856
+USER PROMPT:
+Feature index: 1856
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 30 activating examples (ordered strongest first):
+   1. [act=18.676]   now know the story of the firing of the u>>> s<<< attorneys and how it appears that
+   2. [act=18.328]   and deputy director in the equipment officers of the u>>> s<<< department of
+   3. [act=18.272]   have even larger impact on the critical and struggling u>>> s<<< manufacturing sector in that regard i appreciate the longtime support
+   4. [act=18.265]   the efforts of the department of commerce and the u>>> s<<< p t o in promoting the protection of intellectual property
+   5. [act=18.209]   thirty seven cents of new tax revenue in the u>>> s<<< economy the following excerpt came from the october edition
+   6. [act=18.044]  's ability to compete in the global marketplace the u>>> s<<< p t o statute directs us to advise the
+   7. [act=17.984]   as chief of the violent crime section in the u>>> s<<< attorney's office for the district of maryland
+   8. [act=17.557]  crisis facing two of the three u>>> s<<< based automotive automakers commerce secretary locke the multiple visits
+   9. [act=17.531]   security the cyber security policy review recommended coordination of u>>> s<<< government representation in
+  10. [act=17.417]   a bad decision and when we realized same the u>>> s<<< government pressured us to
+  11. [act=17.204]   three zero one report issued by the office of u>>> s<<< trade representative tell us that a combination of technological advances
+  12. [act=17.161]   certainly it's in the interest of both the u>>> s<<< government and the chinese government to promote innovation
+  13. [act=16.924]   trade sanctions with trading partners who refused to protect u>>> s<<< intellectual property the most recent occasion with ukraine
+  14. [act=16.858]   assistant attorney general of the criminal division at the u>>> s<<< department of
+  15. [act=16.650]   congressional research service that got the data from the u>>> s<<< department of labor and it tells you
+  16. [act=16.547]   pakistan when this buildup is complete total u>>> s<<< force levels in afghanistan will have more than
+  17. [act=16.528]  which represents the best collective judgment of all sixteen u>>> s<<< intelligence agencies told us that our intelligence community has concluded
+  18. [act=16.339]  i heard firsthand from local officials and u>>> s<<< and allied military personnel how arses civilian military coordination
+  19. [act=16.236]   care and pakistan including a review of u>>> s<<< aid to pakistan and how we are going
+  20. [act=16.021]   on how to improve the targeting and efficiency of u>>> s<<< international food aid programs a
+  21. [act=15.914]   the right balance the prompt dispatch of thirty thousand u>>> s<<< combat troops on top of the twenty one thousand already
+  22. [act=15.908]   public schools is a major impediment to improve u>>> s<<< education achievement in math and science in many respects the
+  23. [act=15.195]   government that when all is said and done the u>>> s<<< military is not going to be there to protect them
+  24. [act=14.969]   when when bank of america went to the u>>> s<<< government for help this investigation has opened up
+  25. [act=14.206]  but for whatever reason and the u>>> s<<< attorney's office still does not explain this why they
+  26. [act=13.435]  ipac i p basics program offered nationwide by u>>> s<<< p t o since two thousand and five to over
+  27. [act=13.116]  ghans and pakistanis concerned over u>>> s<<< plan all americans want to see our troops leave
+  28. [act=12.631]   programs with some of the most egregious offenders of u>>> s<<< intellectual
+  29. [act=12.551]  viewed just as the u>>> s<<< versus china will probably wait for another two hundred
+  30. [act=10.022]   enterprises that are enjoying an unfair advantage over their u>>> s<<< counterparts this unfair advantage is exacerbated by
+
+Most frequent activating tokens (top 1): "s"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "US Reference",
+  "explanation": "The feature detects mentions of the United States, often abbreviated as 'US' or 'U.S.', in various contexts.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8
+FEATURE 1857
+USER PROMPT:
+Feature index: 1857
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 30 activating examples (ordered strongest first):
+   1. [act=9.096]   held in your rainy i'm smuggling case what's>>> it<<<'s all about well it's about what a lot
+   2. [act=8.901]   that if he could do malicious prosecution here what are>>> you<<< daft do is he would have to show that
+   3. [act=8.604]   turned the whole city into a big bar what are>>> we<<< going to do about this and so it's our
+   4. [act=8.242]   which the case can be based now so what do>>> you<<< do with out only if they get past the contempt
+   5. [act=7.830]  are the two statements at issue so what do>>> you<<< think and in substance i am glad he's handling
+   6. [act=7.704]  but what he was asking was what do>>> you<<< do and she said this is what i do now
+   7. [act=7.541]   disclosed day one of the class period so what is>>> it<<< that wasn't disclosed that may mean this will or
+   8. [act=7.254]   from getting the one point two million dollars what are>>> they<<< out there out one point two
+   9. [act=7.217]   you i'll get back to you and what do>>> they<<< say to one another when they discover that on the
+  10. [act=7.157]  the exercise of recession they were asking what do>>> we<<< need to rescind the lawn they weren't at any
+  11. [act=6.875]   all these defendants are on this committee and what do>>> we<<< do with mr andrews we decide is
+  12. [act=6.792]  so what do>>> we<<< make of that fact because obviously he thought the value
+  13. [act=6.751]   start i've heard you distinguish nord what do>>> you<<< think is the closest case that the sheriff should have
+  14. [act=6.646]   that's enough to go to the jury what did>>> you<<< mean by
+  15. [act=6.545]   things has settled down this is federal land what do>>> we<<< do here's what we're doing
+  16. [act=6.338]   have had to forfeit this exact amount or what do>>> you<<< have to
+  17. [act=6.229]   in your rainy i'm smuggling case what's it>>>'s<<< all about well it's about what a lot of
+  18. [act=6.186]   i'm sleeping fine and so should you what is>>> it<<< that you told them in person that you're not
+  19. [act=6.092]   your rainy i'm smuggling case what's it's>>> all<<< about well it's about what a lot of people
+  20. [act=5.945]  to know how to plough a field what is>>> it<<< worth for a kid to know how to grease a
+  21. [act=5.913]   understanding and one party just completely ok and what is>>> that<<< understanding that the two parties at the v a being
+  22. [act=5.860]   there was no consideration by the judge well what do>>> we<<< know about what happened in the aftermath of the report
+  23. [act=5.852]   the question becomes once the conflict is over what do>>> we<<< do and the asking a bit more directly than the
+  24. [act=5.678]   of me mr president i don't understand what>>> they<<<'re trying to accomplish what i've heard recently in
+  25. [act=5.402]   there's all the notes the argument about what are>>> we<<< arguing about that you don't
+  26. [act=5.345]   the aisle know what they should do but what are>>> they<<< waiting for we need to do what the american
+  27. [act=5.308]   view your view to bring them before form what do>>> we<<< do then and here's here's what i'm
+  28. [act=5.233]   room which showed the water coming through and what did>>> they<<< do with the videos there's not a single piece
+  29. [act=5.127]   the whole city into a big bar what are we>>> going<<< to do about this and so it's our contention
+  30. [act=5.011]   kid to know how to grease a combine what's>>> it<<< worth for a kids know how to pour cement what
+
+Most frequent activating tokens (top 8): "we", "you", "it", "they", "'s", "all", "that", "going"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Interrogative Pronouns",
+  "explanation": "The feature activates on tokens related to questioning or inquiry, such as 'what', 'we', 'you', and 'they', often in the context of seeking information or clarification",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8
+FEATURE 1858
+USER PROMPT:
+Feature index: 1858
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 7 activating examples (ordered strongest first):
+   1. [act=2.318]   going to take these cars away from you then it>>> shifts<<< to now it's my
+   2. [act=2.064]   over a year she also testified that it wouldn't>>> surprise<<< her that if she didn't get repaid
+   3. [act=1.774]   they could have recovered and the twenty one thousand it>>> clearly<<< adds up to the two point nine eight million dollars
+   4. [act=1.659]   would be an initial the in which it's clearly>>> not<<< there's no new claim here the secretary's duty
+   5. [act=1.593]   to registration now the difference could be you could certainly>>> receive<<< actual damages you could do what has been done in
+   6. [act=1.564]   offered mission the inventory they wanted to purchase it may>>> decline<<<
+   7. [act=1.548]   that would be an initial the in which it's>>> clearly<<< not there's no new claim here the secretary's
+
+Most frequent activating tokens (top 6): "clearly", "shifts", "surprise", "not", "receive", "decline"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Contrast or Change",
+  "explanation": "The feature detects words indicating a shift, surprise, or difference in a situation or expectation.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8
+FEATURE 1859
+USER PROMPT:
+Feature index: 1859
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 30 activating examples (ordered strongest first):
+   1. [act=7.873]   from the school so they can know whether to put>>> down<<< the down payment i think the parents i would agree
+   2. [act=7.309]   and for that the remaining person had would just pick>>> up<<< the gun and use it in self defense or otherwise
+   3. [act=7.270]   that do not take into account the loan guarantee taking>>> up<<< ninety percent of the risk
+   4. [act=7.246]  american workers to pick>>> up<<< the skills that are a condom i needed we attach
+   5. [act=7.175]   short notice he made the decision here not to take>>> up<<< the matter just until just before trial which i think
+   6. [act=6.778]   here in terms of why they decided to stop pick>>> up<<< was that they could see that the driver was
+   7. [act=6.671]  iggins more harshly because he went to trial and used>>> up<<< the court's resources and then finally
+   8. [act=6.557]   still want that i just don't want to hold>>> up<<< the entire set of claims in the patent office for
+   9. [act=6.535]   that the argument seems to be they can just throw>>> up<<< the window when they feel like it that's your
+  10. [act=6.493]   child pornography so why is that different than what putting>>> aside<<< the question of including but not limited to if the
+  11. [act=6.492]   story from congress now reporting that the senate to take>>> up<<< a m t relief this afternoon over on the other
+  12. [act=6.396]   and so it won't be necessarily that we turn>>> over<<< security responsibility to the afghan national army but rather
+  13. [act=6.377]   if they happened and saying wake up you are putting>>> up<<< on top of us a substantial tax mr president
+  14. [act=6.289]   wise to this case i'm not trying to hold>>> up<<< an investment dispute with competing with their health concern the
+  15. [act=6.265]   seven dollars which asked for additional information and then set>>> up<<< a mediation process for every single one of the compliant
+  16. [act=6.259]  show that we can set>>> aside<<< the argument about whether you might ultimately decide if you
+  17. [act=6.231]   been at least asked to appoint a receiver and take>>> over<<< the property and that have been before the federal court
+  18. [act=6.226]   we take a shower before work and then we put>>> on<<< a suit and tie but the family farmers in this
+  19. [act=6.225]  agreement the one setting>>> aside<<< some federal tax returns and sales tax issues as related
+  20. [act=6.199]   the board said yup the people that actually picked>>> up<<< the document were good designers and i want to be
+  21. [act=6.167]   an adversarial system so it and job to fill>>> in<<< the gap and your honor we have eight issues that
+  22. [act=6.143]   far that would get you i guess if you peel>>> back<<< the onion a little
+  23. [act=6.122]   thing three years of additional active duty if you sign>>> up<<< for infantry for example if you want that branch where
+  24. [act=6.092]   require statutory changes are addressed in this bill we set>>> aside<<< a specific amount of funding under title two for non
+  25. [act=6.056]   for the moment your other argument is there something putting>>> aside<<< that argument do you have
+  26. [act=5.932]   a big part in a real estate deal without putting>>> up<<< any money and only putting up sweat equity so her
+  27. [act=5.903]  and between that and signing>>> up<<< for a civic branch of the army you can do
+  28. [act=5.899]   watch president clinton mr president was actually paying>>> down<<< the debt by half a trillion dollars the last three
+  29. [act=5.888]   flew to china went to a showroom picked>>> up<<< the instruction sheet we're
+  30. [act=5.850]   litigation after this all has to be related to winding>>> down<<< the company but you can bring other kinds
+
+Most frequent activating tokens (top 7): "up", "aside", "down", "over", "on", "in", "back"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8
+FEATURE 1860
+USER PROMPT:
+Feature index: 1860
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 30 activating examples (ordered strongest first):
+   1. [act=6.714]  federal government has a>>> responsibility<<< to be their bank or they're big enough to
+   2. [act=6.707]   yes this court has said that district courts have wide>>> latitude<<< when it comes to crafting special conditions of supervised release
+   3. [act=6.603]   actual knowledge of intentional discrimination and that would have the>>> power<<< to institute corrective action why
+   4. [act=6.214]   evidence in the record to show that you had the>>> intent<<< to commit some cr
+   5. [act=6.153]  committee has a>>> responsibility<<< for crafting public policies that support not only farmers but
+   6. [act=6.007]   prosecution as a breach of the treaty you only have>>> standing<<< to step in to to make the argument on behalf
+   7. [act=5.860]   be too narrow and that people were affected have every>>> opportunity<<< to ensure that they remain in their home second make
+   8. [act=5.858]   and officers and directors have certain powers they have voting>>> powers<<<
+   9. [act=5.834]   there is no burden the appellate argues we have a>>> burden<<< to
+  10. [act=5.775]   not mean that all plaintiffs have shown that they have>>> standing<<< to ask this court to issue them some sort of
+  11. [act=5.771]   in fifteen minute increment and because an agent has the>>> discretion<<< in certain circumstances to decide whether they
+  12. [act=5.716]  have the>>> power<<< to modify the injunction for whatever reason this court could
+  13. [act=5.663]   of authority to spend the question is whether he had>>> authority<<< to bind the government under the agreement as it's
+  14. [act=5.655]  ornia to boston so boston defendants had an>>> interest<<< in
+  15. [act=5.578]   you have any reason to doubt that i have no>>> reason<<< to doubt
+  16. [act=5.572]   the institution because shareholders and officers and directors have certain>>> powers<<< they have voting powers
+  17. [act=5.510]   actions and the courts certainly would have to have constitutional>>> standing<<< in order to exercise that kind of authority what about
+  18. [act=5.500]  in somebodies house and he had the>>> authority<<< to be behind the locked door and exclude other people
+  19. [act=5.493]   juror misconduct during the trial a court has an>>> obligation<<< independent of any requests from defense counsel to investigate and
+  20. [act=5.457]   property and that have been before the federal court had>>> jurisdiction<<< it's a rather complicated business to to figure out
+  21. [act=5.436]  ors they say that the prosecutors have a broader public>>> responsibility<<< because they represent and safeguard the public at large their
+  22. [act=5.395]   the failure to state a claim issue the trustee has>>> standing<<< here because he stands in the shoes of not just
+  23. [act=5.381]  the state had the>>> burden<<< to show that he went in there to kidnap somebody
+  24. [act=5.365]   before the district court the district court clearly had the>>> authority<<< to decide it and it's properly before the court
+  25. [act=5.315]  congress might not have the>>> power<<< to stop the president from conducting some surveillance without warrants
+  26. [act=5.299]   what the causes of action are the plaintiff has the>>> obligation<<< to convince us what it is and to demonstrate what
+  27. [act=5.289]  colors the court had>>> jurisdiction<<< by reason of the extraditing order at least to
+  28. [act=5.266]  nell after it came down and the government had ample>>> opportunity<<< to fix this problem it wasn't as if this
+  29. [act=5.218]   the hard realities that those of us who have a>>> responsibility<<< for writing agricultural policy have to cope with those of
+  30. [act=5.140]  substantial proposal that has a real>>> shot<<< at working there's already talk among top democrats
+
+Most frequent activating tokens (top 10): "responsibility", "standing", "power", "authority", "opportunity", "powers", "burden", "obligation", "jurisdiction", "latitude"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 5c58abab-ec6b-487e-b00c-8cd21d0e3fcd
+FEATURE 6068
+USER PROMPT:
+Feature index: 6068
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 8 activating examples (ordered strongest first):
+   1. [act=3.116]   him didn't do anything the plaintiff didn't get>>> upset<<< about anything until his own stepfather posted it to
+   2. [act=2.531]  he did he did approach the passenger st interestingly>>> enough<<< to begin the questioning and he did know that they
+   3. [act=2.505]   expect the defense budget to continue increasing at the same>>> rate<<< as has over the last number of years we should
+   4. [act=2.335]   using were distributing percocet has nothing to>>> do<<< with the conspiracy that was charged here so yes there
+   5. [act=2.162]  ization of new medicines adequate protection of intellectual property both>>> within<<< and outside the us is essential for continued vance
+   6. [act=2.016]   was resolved on direct appeal that we would be back>>> in<<< front of judge darby a resolving these issues
+   7. [act=1.953]  guilt and yet a>>> majority<<< of the jurisdiction have been exposed to a televised interview
+   8. [act=1.558]   a bunch of senators on our committee she was kind>>> enough<<< to allow folks like me that were interested in the
+
+Most frequent activating tokens (top 7): "enough", "upset", "rate", "do", "within", "in", "majority"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Sufficient Condition",
+  "explanation": "The feature detects tokens indicating a sufficient or necessary condition for something to happen or be true, often marked by words like 'enough' or 'within'",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID fb509a64-de66-4936-b6ed-e56d754db702
+FEATURE 2711
+USER PROMPT:
+Feature index: 2711
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 18 activating examples (ordered strongest first):
+   1. [act=18.054]   the business involved included energy including green energy in the>>> united<<< states that's going to be rolled into the transaction
+   2. [act=17.552]   judgment casey is the next attorney general of the>>> united<<<
+   3. [act=17.462]   that conspiracy the defendant being within the jurisdiction of the>>> united<<< states of the time he conspired and at least
+   4. [act=16.327]   is extraordinarily important to the future of farming in the>>> united<<< states
+   5. [act=16.108]  when the>>> united<<< states said it was right even before he got his
+   6. [act=15.477]   subsidies in the world is the europeans the>>> united<<< states this little sliver is the united states one
+   7. [act=15.152]   population who would probably very much like to have the>>> united<<< states army and united
+   8. [act=14.628]  ans the united states this little sliver is the>>> united<<< states one percent european union is outgun
+   9. [act=13.365]  view of this committee we must work to keep the>>> united<<< states a world leader in developing new technologies by ensuring
+  10. [act=11.329]   very much like to have the united states army and>>> united<<<
+  11. [act=3.292]   then we have the ag committee piece that have been>>> joined<<< together we would not have been able to produce the
+  12. [act=2.504]   billion dollars going to military pay and health care when>>> combined<<< with what we plan to devote to upgrading and modern
+  13. [act=2.470]   we have the ag committee piece that have been joined>>> together<<< we would not have been able to produce the ag
+  14. [act=2.202]   wall we need an attorney general who clearly understands the>>> separation<<< of powers
+  15. [act=2.146]  credibility in immigration policy can be>>> summed<<< up in one sentence those who should get in get
+  16. [act=1.923]  difference between a member of the>>> union<<< and someone who supports the union and these five employees
+  17. [act=1.722]   network with funded public private partnerships able to develop the>>> integrated<<< strategies and programs
+  18. [act=1.689]  ies he's entitled under section b of the agreement>>> together<<< with any a political prejudgment and post such an
+
+Most frequent activating tokens (top 8): "united", "together", "joined", "combined", "separation", "summed", "union", "integrated"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 5767acc1-19c9-48ed-b4f4-a5d3d2d74bb1
+FEATURE 1
+USER PROMPT:
+Feature index: 1
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=2.897]   to society's evolving standards of indecency or dev>>>olving<<< standards of decency however one might say but the characterization
+   2. [act=2.771]   you will find no other payment i think any money>>> flowing<<< from anyone to anyone it is a singular
+   3. [act=2.751]   a policy or procedure he knew he could deny the>>> organ<<< by being there for so many years and hearing what
+   4. [act=2.622]   influence yes so you're really relying on the original>>> loan<<< as is being the basis for the insider status aren
+   5. [act=2.616]  future in preserving our natural resources by all>>>ocating<<< four billion dollars in new budget authority for the conservation
+   6. [act=2.287]   eligible for preparedness funding and to ensure that clear>>> channel<<< clear path we have established a new urban area all
+   7. [act=2.253]   it's moot would pertain to your clients their>>> move<<< to long island their future intentions and sadder you
+   8. [act=2.227]   a true willingness at the time that the properties given>>> over<<< when a during a fraud offense the person is believing
+   9. [act=2.212]   turned down in knowing that they would never use a>>> kidney<<< like that
+  10. [act=2.135]  where the court asks is there any>>> forfeiture<<< or anything else in this case and the prosecutor's
+  11. [act=2.071]  to>>> move<<< this matter forward because after that the judge says or
+  12. [act=2.045]  must be>>> recapt<<<ured we cannot agree we've carefully considered nor do
+  13. [act=2.023]  re>>>ferred<<< to the us so it may be perfectly fine once
+  14. [act=1.951]   she's shaking she's scared you know she rel>>>ays<<< this to him on the scene and identifies the perpetrator
+  15. [act=1.796]  budget alloc>>>ates<<< funds to complete the construction of additional wounded warrior complexes
+  16. [act=1.787]   insurance policy if you will a wrap of the bad>>> assets<<< so that losses would not continue to escalate if we
+  17. [act=1.679]  just as important during the>>> alloc<<<ution and during the proceedings for the defendant to understand
+  18. [act=1.662]   didn't have to but that's a good se>>>gue<<< into the immunity argument now i want to start
+  19. [act=1.633]  to assist people in>>> moving<<< yes sure that was it that was what the purpose
+  20. [act=1.593]  by including in the>>> lease<<< based stipulated damages clause that is predicated on
+  21. [act=1.497]  can reasonably>>> infer<<< from the fact that they had a plan to bank
+  22. [act=1.483]   said he wanted to move to withdraw the fact of>>> moving<<< to withdraw soon after learning of the of the
+  23. [act=1.467]   separate requirement that the defendant act corruptly with a>>> corrupt<<< intent and not in the separate requirement that you have
+  24. [act=1.420]   and i have testified we believe this is a good>>> transaction<<< for shareholders there was a time in december in
+  25. [act=1.412]   in the d t however in comparing those two she>>> loses<<< sight of the big picture in this case which is
+
+Most frequent activating tokens (top 10): "move", "moving", "olving", "flowing", "organ", "loan", "ocating", "channel", "over", "kidney"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 5767acc1-19c9-48ed-b4f4-a5d3d2d74bb1
+FEATURE 2
+USER PROMPT:
+Feature index: 2
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=6.920]   judging by them said forty nine percent of the young>>> girls<<< these are girls eighteen years old they're pregnant
+   2. [act=5.851]   twenty two year old man to grab a fourteen year>>> old<<< girl's hands and place them on his sex organ
+   3. [act=5.781]   said forty nine percent of the young girls these are>>> girls<<< eighteen years old they're pregnant
+   4. [act=5.508]  be focusing on educating our own>>> young<<< people and filling those slots rather than going to foreigners
+   5. [act=5.377]   of competition on the field sends an important message to>>> young<<< people that these substances are dangerous and wrong for the
+   6. [act=5.376]   that grabbing the fourteen year for a twenty two year>>> old<<< man to grab a fourteen year old girl's hands
+   7. [act=5.299]   percent of the young girls these are girls eighteen years>>> old<<< they're pregnant
+   8. [act=5.005]   two year old man to grab a fourteen year old>>> girl<<<'s hands and place them on his sex organ is
+   9. [act=4.450]   your question it's more intentional in developmental to help>>> students<<< connect the dots to have more deep learning and effective
+  10. [act=3.937]   get on to the business of passing the state children>>>'s<<< health insurance bill and have a speedy confirmation for judgment
+  11. [act=3.614]   is judging by them said forty nine percent of the>>> young<<< girls these are girls eighteen years old they're pregnant
+  12. [act=3.589]   nine percent of the young girls these are girls eighteen>>> years<<< old they're pregnant
+  13. [act=3.414]   going to foreigners who by the way subsidize their>>> young<<< people they come over here to learn a great deal
+  14. [act=3.188]  went to trial on sexual assault of a>>> child<<< and was convicted by a jury the prosecutor argued effectively
+  15. [act=3.171]   competition on the field sends an important message to young>>> people<<< that these substances are dangerous and wrong for the last
+  16. [act=3.017]  be focusing on educating our own young>>> people<<< and filling those slots rather than going to foreigners who
+  17. [act=2.993]  million hungry people in the world half of them>>> children<<< and april the government accountability office released a study
+  18. [act=2.754]   athletes and we also identify those to go to special>>> developmental<<< programs one of those for example is commander leader enrichment
+  19. [act=2.692]   the prosecutor argued effectively i think that grabbing the fourteen>>> year<<< for a twenty two year old man to grab a
+  20. [act=2.621]   forty nine percent of the young girls these are girls>>> eighteen<<< years old they're pregnant
+  21. [act=2.576]  the children that>>> age<<< out of the texas foster care system are at
+  22. [act=2.550]   a twenty two year old man to grab a fourteen>>> year<<< old girl's hands and place them on his sex
+  23. [act=2.509]  caseworkers can handle physically handle up to fourteen>>> children<<< on average across the system so that's all that
+  24. [act=2.379]   of the estate to pay for the college tuition of>>> adult<<< children and the question before the court is whether or
+  25. [act=2.326]   so to answer your question it's more intentional in>>> developmental<<< to help students connect the dots to have more deep
+
+Most frequent activating tokens (top 10): "young", "old", "girls", "people", "children", "developmental", "year", "girl", "students", "'s"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID de3afceb-3c12-4967-9f49-e7f2396402e4
+FEATURE 1
+USER PROMPT:
+Feature index: 1
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 5 activating examples (ordered strongest first):
+   1. [act=2.181]   eligible for preparedness funding and to ensure that clear>>> channel<<< clear path we have established a new urban area all
+   2. [act=1.026]   conspiracy the other six charges related to a murder that>>> took<<< place in the
+   3. [act=0.452]   and medicaid acts and the regulations provide that the>>> appeals<<< procedures for reviewing determinations by the
+   4. [act=0.438]  detention system that is neither unsafe nor degrading for>>> detainees<<< improved detention management begins with two critical reforms an examination
+   5. [act=0.396]   least one offered act committed by at least one conspir>>>ator<<<
+
+Most frequent activating tokens (top 5): "channel", "took", "appeals", "detainees", "ator"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Legal Procedure",
+  "explanation": "The feature activates on tokens related to legal processes, such as appeals, detainees, and conspirators, indicating a concept related to legal procedures and terminology",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID b8806d97-7d3f-43fb-8506-c2096fab6f7c
+FEATURE 2
+USER PROMPT:
+Feature index: 2
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 5 activating examples (ordered strongest first):
+   1. [act=2.663]   athletes and we also identify those to go to special>>> developmental<<< programs one of those for example is commander leader enrichment
+   2. [act=0.731]   is commander leader enrichment seminar which is an advanced leadership>>> development<<< opportunity for our
+   3. [act=0.647]  detention system that is neither unsafe nor degrading for>>> detainees<<< improved detention management begins with two critical reforms an examination
+   4. [act=0.433]   convicted of count one in the indictment which was a>>> heroin<<< conspiracy the other six charges related to a murder that
+   5. [act=0.267]  was acquitted of six>>> counts<<< however he was convicted of count one in the indictment
+
+Most frequent activating tokens (top 5): "developmental", "development", "detainees", "heroin", "counts"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID b8806d97-7d3f-43fb-8506-c2096fab6f7c
+FEATURE 3
+USER PROMPT:
+Feature index: 3
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 5 activating examples (ordered strongest first):
+   1. [act=1.117]   athletes and we also identify those to go to special>>> developmental<<< programs one of those for example is commander leader enrichment
+   2. [act=1.094]  certified facility isn't in compliance with any>>> of<<< these requirements its authority is to impose remedies under both
+   3. [act=0.902]   the regulations provide that the appeals procedures for reviewing determin>>>ations<<< by the
+   4. [act=0.752]   error that the that the practices were so were so>>> tight<<< as to preclude the possibility of human error when in
+   5. [act=0.610]   convicted of count one in the indictment which was a>>> heroin<<< conspiracy the other six charges related to a murder that
+
+Most frequent activating tokens (top 5): "developmental", "of", "ations", "tight", "heroin"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID fe6ce24d-592b-41bf-ae5e-a4877b4f41dd
+FEATURE 5594
+USER PROMPT:
+Feature index: 5594
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=10.332]   before trial judge davis made a decision even though>>> often<<< he held hearings on short notice he made the decision
+   2. [act=9.846]   affidavit as well when the commander was out which was>>> often<<< he served as the commander again had very very broad
+   3. [act=9.301]   putting it in their pocket or spending it as we>>> often<<< do in connecticut very good prosecco there
+   4. [act=9.271]   from a correctional mentality to one more appropriate to the>>> often<<< vulnerable populations in its custody conditions
+   5. [act=9.207]   household income coming from non farm income and i've>>> often<<< said before what good does it do if we save
+   6. [act=8.826]   the problem when he had his confirmation hearing he said>>> often<<< there are conflicting freedoms and that makes the case difficult
+   7. [act=8.794]   is a dollar taken from capability that we do need>>> often<<< to sustain our men and women in combat and bring
+   8. [act=8.528]  violations or you said it's>>> commonly<<< applied to targets what you've term drug houses that
+   9. [act=8.445]   legal representation get relief that rates that are you know>>> sometimes<<< three to six times higher than those without representation i
+  10. [act=8.377]   black preferred candidate so when we're looking at what>>> usually<<< happened and the patterns there's always going to be
+  11. [act=8.284]  olly the mother has told the officers that levi>>> frequently<<< allows david to use his vehicles that
+  12. [act=8.205]   calling cards in the jury heard evidence that those are>>> often<<< used by drug dealers because it makes the calls more
+  13. [act=8.201]  safe or secure manner and they>>> often<<< escape from their cages or aquarium when pythons
+  14. [act=8.165]  dealers>>> often<<< work in tandem and so you had that piece and
+  15. [act=8.116]   have the financial means to seek specialized treatment she was>>> often<<< on of medicaid when she did have or medic
+  16. [act=8.112]  right to let the court consider we do that>>> sometimes<<< when we don't well we say it's not
+  17. [act=8.081]   under thompson in the circuit hearsay is>>> sometimes<<< permissible because we have relaxed standards of our constitutional standards
+  18. [act=7.920]   majority of the basements in washington county were>>> often<<< if you have a domestic violence dispute people will retreat
+  19. [act=7.889]   better and so he can make sense to a party>>> sometimes<<< to have arbitration done by a non neutral non outside
+  20. [act=7.693]   technical standards and best practices have stated that guidance is>>> often<<< too technical for the average internet user therefore the print
+  21. [act=7.672]   massachusetts trust me that i'm representing but i>>> typically<<< don't bring cases where there is a divorce decree
+  22. [act=7.360]   parties in major league baseball and those in many industries>>> regularly<<< bargain collective bargaining agreements against the backdrop of state was
+  23. [act=7.314]   family that's why we come to the courts because>>> sometimes<<< families can't do that and this is a really
+  24. [act=7.299]   of what's going on with the rest of it>>> sometimes<<< we have a convenient view of history this is not
+  25. [act=7.082]   out the services she just simply ignored them she argued>>> sometimes<<< and ceded that they were needed but she also
+
+Most frequent activating tokens (top 7): "often", "sometimes", "commonly", "usually", "frequently", "typically", "regularly"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID fe6ce24d-592b-41bf-ae5e-a4877b4f41dd
+FEATURE 3138
+USER PROMPT:
+Feature index: 3138
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=14.695]  and our>>> life<<< support off for a while
+   2. [act=13.445]  faced a mandatory>>> life<<< and is insisting upon ten years yeah i mean it
+   3. [act=13.443]  twenty have a>>> life<<< sentences for useful offenders over eighteen years old because of
+   4. [act=13.311]  better capacity stronger twenty percent more>>> life<<< to it and they instead of laying off and perhaps
+   5. [act=13.190]  the>>> life<<< of me mr president i don't understand what
+   6. [act=13.077]   show that he's limited substantially limited in the major>>> life<<< activity of lifting i agree but the
+   7. [act=12.912]   to step back for a moment and walk through the>>> life<<< of a sub prime loan a consumer decides to seek
+   8. [act=12.833]  this statistic raises great concerns for me because these are>>> life<<< threatening type of issues and they're huge ramifications to
+   9. [act=12.385]   happens in the rest of the world trade issues are>>> life<<< or death for us because people do love our products
+  10. [act=11.525]   to the maximum extent practical and in consider and considering>>> life<<< cycle cost appropriate for the geographic area g s a
+  11. [act=11.154]   crook that he wasn't qualified to start a>>> life<<< insurance company but he went ahead and did so anyway
+  12. [act=11.092]   documents that's what the nd circuit said in>>> life<<< receivables and that's what the supreme court
+  13. [act=10.351]   aspect of that is they are completely unprepared for adult>>> life<<< now is there any constitutional right to a driver's
+  14. [act=9.828]   or it can merely be callous disregard for human>>> life<<< so the word willingly in that instruction gives the jury
+  15. [act=9.773]   swelling significant pain interfered with basic aspects of his daily>>> life<<< and ultimately required oral surgery caused him to lose sleep
+  16. [act=9.686]  ous and wanton disregard of the consequences to human>>> life<<< so either way that the element of malice of fore
+  17. [act=9.052]   have never never had a fresh apple in their entire>>> life<<< or in fourth grade
+  18. [act=9.032]   in a callous and wanton disregard of human>>> life<<< has not by that alone committed an act which would
+  19. [act=8.781]   mindset he doesn't know that he can get mandatory>>> life<<< at that
+  20. [act=8.515]   and we'll pay him for the rest of his>>> life<<<
+  21. [act=8.273]   commitment to them must be for the remainder of those>>> lives<<< that's why this
+  22. [act=7.842]   states and communities an opportunity for the good way of>>> life<<< the rest of the way that the rest of americ
+  23. [act=7.786]   matter what happens to me for the rest of my>>> life<<< the proudest thing that i'll ever be able
+  24. [act=7.619]   all know what we should be doing in our own>>> lives<<< to help prevent chronic illnesses so that we can stay
+  25. [act=7.603]   the health care they need to lead full and productive>>> lives<<< and those that have it won't lose it
+
+Most frequent activating tokens (top 2): "life", "lives"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID fe6ce24d-592b-41bf-ae5e-a4877b4f41dd
+FEATURE 923
+USER PROMPT:
+Feature index: 923
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=12.754]  there is any>>> age<<< at which it would be fine not to have the
+   2. [act=12.554]   a showing that all four of those statutory elements under>>> age<<< two have been satisfied in this case i
+   3. [act=11.216]   prohibits the execution of a defendant who is under the>>> age<<< of eighteen now garner the defendant in that case said
+   4. [act=11.174]   me and council provides that on site e s an>>> age<<< was to assume
+   5. [act=11.153]  at the>>> age<<< operation is forty seven percent of of children of females
+   6. [act=10.691]  the children that>>> age<<< out of the texas foster care system are at
+   7. [act=10.580]   have the image so long as the person represents the>>> age<<< because the age is just implausible that they would
+   8. [act=10.401]   other states in terms of the number of people who>>> age<<< out all states have that problem and you may have
+   9. [act=9.985]   offenders over eighteen years old because of factors like chronological>>> age<<< immaturity the failure to appreciate risks and consequences
+  10. [act=9.813]  education and it's not true that they>>> age<<< out totally unprepared you know that that's an over
+  11. [act=9.673]   borders an amendment to provide such funding passed the senate>>> aged<<< nine to one
+  12. [act=9.524]   unable to carry out her duties due to her advanced>>> age<<< and to a misdemeanor pointman in early sept
+  13. [act=9.449]   forty seven percent of of children of females who are>>> aging<<< out but plaintiffs did not say that texas is
+  14. [act=9.342]   of young people getting others to buy who are of>>> age<<< to buy alcohol for them so there's a question
+  15. [act=9.129]   defendant in that case said yeah i'm over the>>> age<<< of eighteen but because of my upbringing and my mental
+  16. [act=9.072]   should either give her permission for him to enlist at>>> age<<< seventeen or he would enlisted soon as he turned eighteen
+  17. [act=8.836]   so long as the person represents the age because the>>> age<<< is just implausible that they would be that off
+  18. [act=8.360]   page seventy nine there's not a single reference de>>> age<<< discrimination
+  19. [act=8.154]   the space shuttle very forward linking activities said and i>>> aged<<<
+  20. [act=8.004]   of a prepaid best and female between four years of>>> age<<< and seven years of age who was engaged in oral
+  21. [act=7.938]   capacity i really only have the intellect of the mental>>> age<<< of a fourteen year old and so i should
+  22. [act=7.843]   judgment was filed they still produced over five hundred dollars>>> ages<<< of additional response at documents as in any case the
+  23. [act=6.311]   female between four years of age and seven years of>>> age<<< who was engaged in oral sex with a canine and
+  24. [act=6.053]   such as bona fide asylum seekers torture survivors the very>>> elderly<<< pregnant and nursing women fourth i should continue to expand
+  25. [act=5.809]   another six or seven years and then when i'm>>> old<<<
+
+Most frequent activating tokens (top 6): "age", "aged", "aging", "ages", "elderly", "old"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID fe6ce24d-592b-41bf-ae5e-a4877b4f41dd
+FEATURE 5908
+USER PROMPT:
+Feature index: 5908
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=17.685]   was saying some very nice things about me i heard>>> most<<< of
+   2. [act=17.023]   now there are different types of crimes and severity and>>> most<<< of these people i agree are more mild mannered
+   3. [act=16.892]   a good deal for our shareholders and our customers but>>> most<<< importantly it turned out to be a good deal for
+   4. [act=16.764]   but i want to under a different set of rules>>> most<<< importantly to protect the american public protect our families
+   5. [act=16.507]   be objectively wrong false imprisonment is the same thing and>>> most<<< of the civil rights violations are nonobjective a
+   6. [act=16.048]  struggling to understand your honor it is not>>> most<<< natural me it is not necessarily the most natural reading
+   7. [act=15.879]  that this court articulated>>> most<<< recently in its march twenty sixth of march twenty eight
+   8. [act=15.380]  to this whole thing>>> most<<< likely you would find it under horror science fiction or
+   9. [act=15.374]   testimony at trial caused by the prosecutors in korea>>> most<<< important
+  10. [act=15.364]   means it generally oversees it among other operations but delegates>>> most<<< of the day to day operation and the day to
+  11. [act=15.045]  this population and others that represent a threat>>> most<<< ice detainees do not have criminal records and many of
+  12. [act=14.912]   regard i appreciate the longtime support of this committee and>>> most<<< recently b
+  13. [act=14.647]   time that this is happening as it turns out although>>> most<<< schools are safe and well maintained this type of incident
+  14. [act=14.555]   here and then we which i agree with the reason>>> most<<< of them are there are one of two things they
+  15. [act=13.732]   and tie but the family farmers in this country in>>> most<<< cases they get up and do chores they say it
+  16. [act=13.564]   event after rodrigues we know that the reason>>> most<<< of a seizure depends on what the police in fact
+  17. [act=13.334]   dependent on an injury to the debtor and cheese me>>> most<<< examples that you have given us you've had a
+  18. [act=13.284]  and some of my congressional district>>> most<<< prominent employers mr goodman probably served as a
+  19. [act=12.853]   to get a hearing though this case is unusual because>>> most<<< disciplinary matters in the eastern district come from the state
+  20. [act=12.808]   at our troops six years of development and testing with>>> most<<< of the more than one billion dollars of funding spent
+  21. [act=12.594]  ivably took no official acts and indeed did not receive>>> most<<< of the payments that mr sewell made to
+  22. [act=12.459]  thing that drives>>> most<<< of their attack the so called commodity programs less than
+  23. [act=12.366]   mean in many industries especially health care and construction and>>> most<<< small businesses will be particularly hard hit
+  24. [act=12.188]   in failure ken lewis was doing what>>> most<<< tough
+  25. [act=11.782]   non criminal actually were arrested on criminal charges the reason>>> most<<< of the time
+
+Most frequent activating tokens (top 1): "most"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID fe6ce24d-592b-41bf-ae5e-a4877b4f41dd
+FEATURE 3655
+USER PROMPT:
+Feature index: 3655
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=15.458]   justice for himself there should have been an analysis about>>> these<<< incidents and whether or not they could have been admitted
+   2. [act=15.452]   difference has to lie and sort of the policy behind>>> these<<< and the reason that there is a discretionary function and
+   3. [act=15.369]   the evidence to sort out what is going on in>>> these<<<
+   4. [act=15.361]  burden to show in>>> these<<< types of cases that the facial claims from their complaint
+   5. [act=15.346]   an accurate characterization to say that she knew nothing about>>> these<<< numbers or that they were completely unsubstantiated when
+   6. [act=15.310]   to ask the court to please take additional notice of>>> these<<< facts of these
+   7. [act=15.204]   there is a lot of coincidence but the problem with>>> these<<< cases and the problem with every insider trading case is
+   8. [act=15.181]  esley really touched on one of the main concerns in>>> these<<< cases and that there are going to be clear and
+   9. [act=15.177]   fires so it is phenomenally important that we put>>> these<<< fires into context and understand what they're all about
+  10. [act=15.107]   and they're huge ramifications to consumers who knowingly purchased>>> these<<< counterfeit drugs and put themselves what
+  11. [act=15.105]  judging about now i agree with you about>>> these<<< you know these circular systems in the problem but everybody
+  12. [act=15.070]   the way in which the ira was to use>>> these<<< definitions to basically serve the population
+  13. [act=15.028]  that everyone has agreed to>>> these<<< terms there are no misunderstandings because the last thing
+  14. [act=14.915]   the record that evidence absolutely establishes that he lied to>>> these<<< federal agents to army see id not once but twice
+  15. [act=14.912]   rule twenty nine motions he seemed to indicate simply downloading>>> these<<< videos was enough i needed to print the videos or
+  16. [act=14.911]   back in front of judge darby a resolving>>> these<<< issues provided that they're properly raised that wait a
+  17. [act=14.898]   find the highest offense so the jury was thinking about>>> these<<< issues but what the difference between the cocaine conspiracy
+  18. [act=14.847]   to clarify after that because there were numerous findings in>>> these<<< two interim awards that affected them and effected the trust
+  19. [act=14.839]  ises of the the the local court with respect to>>> these<<< motions and it's just it's just totally inconsistent
+  20. [act=14.824]  came to>>> these<<< agreements because they're also different but the point is
+  21. [act=14.808]   the fourth circuit's reasoning in so far as analyzing>>> these<<< factors rather than having a requirement of exclusivity and
+  22. [act=14.772]   aware that we have renewed our motion for certification of>>> these<<< questions to the new york court of appeals because
+  23. [act=14.744]   reaching that goal we must stop the further introduction of>>> these<<< snakes while we continue to work to eradicate them from
+  24. [act=14.740]   to show that there was possible bias with regard to>>> these<<< witnesses and i don't want to ignore the second
+  25. [act=14.713]   i'm getting at i know we are looking at>>> these<<< cases to
+
+Most frequent activating tokens (top 1): "these"
+
+
+Based on these examples, what concept does this SAE feature detect?
+

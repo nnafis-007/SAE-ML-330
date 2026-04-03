@@ -129,6 +129,8 @@ export default function App() {
   const [featureMapMode, setFeatureMapMode] = useState('single');
   const [bulkStartFeatureId, setBulkStartFeatureId] = useState('0');
   const [bulkEndFeatureId, setBulkEndFeatureId] = useState('10');
+  const [bulkSelectionMode, setBulkSelectionMode] = useState('range');
+  const [bulkFeatureIdsInput, setBulkFeatureIdsInput] = useState('42');
   const [bulkMaxSentences, setBulkMaxSentences] = useState('200');
   const [bulkLlmSentences, setBulkLlmSentences] = useState('25');
   const [bulkMinActivation, setBulkMinActivation] = useState('0.0');
@@ -338,26 +340,50 @@ export default function App() {
       return;
     }
 
-    const startId = Number(bulkStartFeatureId);
-    const endId = Number(bulkEndFeatureId);
     const maxSentences = Math.max(1, Number(bulkMaxSentences) || 200);
     const llmSentences = Math.max(1, Number(bulkLlmSentences) || 25);
     const minAct = bulkMinActivation.trim() === '' ? 0 : Number(bulkMinActivation);
 
-    if (!Number.isInteger(startId) || startId < 0 || !Number.isInteger(endId) || endId < 0) {
-      setBulkLabelError('Start and end feature IDs must be valid non-negative integers.');
-      return;
+    let startId = null;
+    let endId = null;
+    let selectedFeatureIds = null;
+    let total = 0;
+
+    if (bulkSelectionMode === 'range') {
+      startId = Number(bulkStartFeatureId);
+      endId = Number(bulkEndFeatureId);
+
+      if (!Number.isInteger(startId) || startId < 0 || !Number.isInteger(endId) || endId < 0) {
+        setBulkLabelError('Start and end feature IDs must be valid non-negative integers.');
+        return;
+      }
+      if (endId < startId) {
+        setBulkLabelError('End feature ID must be greater than or equal to start feature ID.');
+        return;
+      }
+      total = (endId - startId) + 1;
+    } else {
+      const parsed = (bulkFeatureIdsInput || '')
+        .split(/[,\s]+/)
+        .map((s) => s.trim())
+        .filter(Boolean)
+        .map((s) => Number(s));
+      if (!parsed.length) {
+        setBulkLabelError('Provide at least one feature ID in individual mode.');
+        return;
+      }
+      if (parsed.some((n) => !Number.isInteger(n) || n < 0)) {
+        setBulkLabelError('Feature IDs must be non-negative integers (comma or space separated).');
+        return;
+      }
+      selectedFeatureIds = [...new Set(parsed)];
+      total = selectedFeatureIds.length;
     }
-    if (endId < startId) {
-      setBulkLabelError('End feature ID must be greater than or equal to start feature ID.');
-      return;
-    }
+
     if (!Number.isFinite(minAct) || minAct < 0) {
       setBulkLabelError('Min activation must be a valid non-negative number.');
       return;
     }
-
-    const total = (endId - startId) + 1;
 
     setBulkLabelLoading(true);
     setBulkLabelError(null);
@@ -371,8 +397,9 @@ export default function App() {
         body: JSON.stringify({
           model_id: selectedModel,
           analyzer: 'sae',
-          feature_start: startId,
-          feature_end: endId,
+          feature_start: bulkSelectionMode === 'range' ? startId : null,
+          feature_end: bulkSelectionMode === 'range' ? endId : null,
+          feature_ids: bulkSelectionMode === 'individual' ? selectedFeatureIds : null,
           num_sentences: maxSentences,
           llm_top_k: llmSentences,
           min_activation: minAct,
@@ -385,11 +412,16 @@ export default function App() {
       }
 
       const payload = await response.json();
-      setBulkLabelProgress({ current: total, total, featureId: endId });
+      const completedFeatureIds = payload.feature_ids || selectedFeatureIds || [];
+      const progressFeatureId = completedFeatureIds.length
+        ? completedFeatureIds[completedFeatureIds.length - 1]
+        : (bulkSelectionMode === 'range' ? endId : null);
+      setBulkLabelProgress({ current: total, total, featureId: progressFeatureId });
       setBulkLabelResults({
         labeled: payload.labeled || [],
         skipped: payload.skipped || [],
         failed: payload.failed || [],
+        feature_ids: completedFeatureIds,
         request_id: payload.request_id,
       });
     } catch (e) {
@@ -938,32 +970,66 @@ export default function App() {
                     <Text style={styles.sectionLabel}>BULK FEATURE LABELING</Text>
                   </View>
                   <Text style={styles.lookupHint}>
-                    Label a range of features with LLM. Each successful feature is written to the model-specific label JSON file.
+                    Label features with LLM using either a range or individual feature IDs. Each successful feature is written to the model-specific label JSON file.
                   </Text>
 
+                  <View style={styles.featureMapModeSwitch}>
+                    <TouchableOpacity
+                      style={[styles.featureMapModeBtn, bulkSelectionMode === 'range' && styles.featureMapModeBtnActive]}
+                      onPress={() => setBulkSelectionMode('range')}
+                    >
+                      <Text style={[styles.featureMapModeText, bulkSelectionMode === 'range' && styles.featureMapModeTextActive]}>
+                        RANGE
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[styles.featureMapModeBtn, bulkSelectionMode === 'individual' && styles.featureMapModeBtnActive]}
+                      onPress={() => setBulkSelectionMode('individual')}
+                    >
+                      <Text style={[styles.featureMapModeText, bulkSelectionMode === 'individual' && styles.featureMapModeTextActive]}>
+                        INDIVIDUAL IDS
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+
                   <View style={styles.lookupGrid}>
-                    <View style={styles.lookupField}>
-                      <Text style={styles.lookupFieldLabel}>START FEATURE ID</Text>
-                      <TextInput
-                        style={styles.lookupInput}
-                        value={bulkStartFeatureId}
-                        onChangeText={(t) => setBulkStartFeatureId((t || '').replace(/[^0-9]/g, ''))}
-                        keyboardType="numeric"
-                        placeholder="0"
-                        placeholderTextColor={C.textMuted}
-                      />
-                    </View>
-                    <View style={styles.lookupField}>
-                      <Text style={styles.lookupFieldLabel}>END FEATURE ID</Text>
-                      <TextInput
-                        style={styles.lookupInput}
-                        value={bulkEndFeatureId}
-                        onChangeText={(t) => setBulkEndFeatureId((t || '').replace(/[^0-9]/g, ''))}
-                        keyboardType="numeric"
-                        placeholder="10"
-                        placeholderTextColor={C.textMuted}
-                      />
-                    </View>
+                    {bulkSelectionMode === 'range' ? (
+                      <>
+                        <View style={styles.lookupField}>
+                          <Text style={styles.lookupFieldLabel}>START FEATURE ID</Text>
+                          <TextInput
+                            style={styles.lookupInput}
+                            value={bulkStartFeatureId}
+                            onChangeText={(t) => setBulkStartFeatureId((t || '').replace(/[^0-9]/g, ''))}
+                            keyboardType="numeric"
+                            placeholder="0"
+                            placeholderTextColor={C.textMuted}
+                          />
+                        </View>
+                        <View style={styles.lookupField}>
+                          <Text style={styles.lookupFieldLabel}>END FEATURE ID</Text>
+                          <TextInput
+                            style={styles.lookupInput}
+                            value={bulkEndFeatureId}
+                            onChangeText={(t) => setBulkEndFeatureId((t || '').replace(/[^0-9]/g, ''))}
+                            keyboardType="numeric"
+                            placeholder="10"
+                            placeholderTextColor={C.textMuted}
+                          />
+                        </View>
+                      </>
+                    ) : (
+                      <View style={styles.lookupField}>
+                        <Text style={styles.lookupFieldLabel}>FEATURE IDS (CSV OR SPACE SEPARATED)</Text>
+                        <TextInput
+                          style={styles.lookupInput}
+                          value={bulkFeatureIdsInput}
+                          onChangeText={setBulkFeatureIdsInput}
+                          placeholder="e.g. 12, 42, 108"
+                          placeholderTextColor={C.textMuted}
+                        />
+                      </View>
+                    )}
                     <View style={styles.lookupField}>
                       <Text style={styles.lookupFieldLabel}>SENTENCES TO SCAN</Text>
                       <TextInput
