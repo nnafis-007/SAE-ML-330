@@ -1,0 +1,504 @@
+{
+  "0": {
+    "feature_idx": 0,
+    "label": "Superlative Degree",
+    "explanation": "This feature detects the concept of something being the greatest or highest in degree, as indicated by the frequent activation on the token 'most'.",
+    "confidence": "high",
+    "top_tokens": [
+      "most"
+    ],
+    "top_contexts": [
+      {
+        "token": "most",
+        "context": "ferior Socket for Paladin PvE Gems for the>>> most<<< part, but Superior for PvP.A side-",
+        "activation_value": 5.504970073699951
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Superlative Degree\",\n  \"explanation\": \"This feature detects the concept of something being the greatest or highest in degree, as indicated by the frequent activation on the token 'most'.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "1": {
+    "feature_idx": 1,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "2": {
+    "feature_idx": 2,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "3": {
+    "feature_idx": 3,
+    "label": "Historical Year Detection",
+    "explanation": "The feature activates on tokens that are years or related to historical events, indicating it detects mentions of specific years or time periods",
+    "confidence": "high",
+    "top_tokens": [
+      "War",
+      "II",
+      "1893",
+      "1939",
+      "2007",
+      "1916",
+      "79",
+      "57",
+      "acial",
+      "1954"
+    ],
+    "top_contexts": [
+      {
+        "token": "War",
+        "context": "\nCareer\nJones was a highly decorated World>>> War<<< II veteran. He played 10 games in the American",
+        "activation_value": 7.904659748077393
+      },
+      {
+        "token": "II",
+        "context": "Career\nJones was a highly decorated World War>>> II<<< veteran. He played 10 games in the American League",
+        "activation_value": 7.404788017272949
+      },
+      {
+        "token": "1893",
+        "context": " international level for England in a single game during the>>> 1893<<< Home Nations Championship. After retiring from playing sport he",
+        "activation_value": 5.620366096496582
+      },
+      {
+        "token": "1939",
+        "context": "\nThe Sand Ridge State Forest largely dates back to>>> 1939<<<, when",
+        "activation_value": 5.57352352142334
+      },
+      {
+        "token": "2007",
+        "context": "\n\n“Following the global financial crisis of>>> 2007<<<–08, it was observed that senior executives and",
+        "activation_value": 5.291174411773682
+      },
+      {
+        "token": "1916",
+        "context": " the fossil Protochrysis Bischoff,>>> 1916<<< (Insecta: Hymenoptera:",
+        "activation_value": 5.268970012664795
+      },
+      {
+        "token": "79",
+        "context": " in Folklore of the Northern Counties (18>>>79<<<), taken from a letter sent by the historian Robert",
+        "activation_value": 5.1754045486450195
+      },
+      {
+        "token": "57",
+        "context": "The Signatures - Their Voices and Instruments (19>>>57<<<) bass, arranger, vocals\nThe Sign",
+        "activation_value": 5.020198822021484
+      },
+      {
+        "token": "acial",
+        "context": " believed to be an artifact of the post-gl>>>acial<<< Kankakee Torrent.\n\nThe Sand",
+        "activation_value": 5.011707305908203
+      },
+      {
+        "token": "1954",
+        "context": "\nThe Kumon Method was founded in Japan in>>> 1954<<<. Toru Kumon, a high school math",
+        "activation_value": 5.001592636108398
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Historical Year Detection\",\n  \"explanation\": \"The feature activates on tokens that are years or related to historical events, indicating it detects mentions of specific years or time periods\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "4": {
+    "feature_idx": 4,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "5": {
+    "feature_idx": 5,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "6": {
+    "feature_idx": 6,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "7": {
+    "feature_idx": 7,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "8": {
+    "feature_idx": 8,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "9": {
+    "feature_idx": 9,
+    "label": "Security Concept",
+    "explanation": "The feature detects mentions of security, safety, and protection in various contexts, including national security, personal security, and digital authentication",
+    "confidence": "high",
+    "top_tokens": [
+      "security",
+      "sec",
+      "authentication"
+    ],
+    "top_contexts": [
+      {
+        "token": "security",
+        "context": ". 22 shootings at Parliament Hill, which exposed numerous>>> security<<< gaps, as well as the",
+        "activation_value": 19.913036346435547
+      },
+      {
+        "token": "security",
+        "context": "-free zones, as they have armed and unarmed>>> security<<< personnel. In addition, several studies show the vast",
+        "activation_value": 17.66098403930664
+      },
+      {
+        "token": "security",
+        "context": " are predominantly socialist and antipathetical to the future>>> security<<< and prosperity of the west”.\n\n",
+        "activation_value": 17.2789363861084
+      },
+      {
+        "token": "security",
+        "context": "The Harper government is looking for>>> security<<< experts to help harden federal buildings in the Ottawa",
+        "activation_value": 17.222911834716797
+      },
+      {
+        "token": "security",
+        "context": "MANILA (Reuters) - Philippine>>> security<<< forces on Saturday killed a foreign national and his female",
+        "activation_value": 16.228755950927734
+      },
+      {
+        "token": "security",
+        "context": " candidates have been lulled into a false sense of>>> security<<<, ignoring or forgetting the benefits that come with",
+        "activation_value": 10.718353271484375
+      },
+      {
+        "token": "security",
+        "context": " go anywhere.\n\nGreene is a maximum>>> security<<< prison, classified as a “Supermax�",
+        "activation_value": 9.259203910827637
+      },
+      {
+        "token": "sec",
+        "context": "Introduction {#>>>sec<<<1}\n============\n\nAcute aort",
+        "activation_value": 5.6789774894714355
+      },
+      {
+        "token": "sec",
+        "context": "Introduction {#>>>sec<<<1-1}\n============\n\nInflix",
+        "activation_value": 5.6789774894714355
+      },
+      {
+        "token": "authentication",
+        "context": "signal processing, acoustical analyses, audio>>> authentication<<< and the examination of methodologies and best practices.",
+        "activation_value": 5.204261779785156
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Security Concept\",\n  \"explanation\": \"The feature detects mentions of security, safety, and protection in various contexts, including national security, personal security, and digital authentication\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "10": {
+    "feature_idx": 10,
+    "label": "Word Sound Similarity",
+    "explanation": "This feature detects instances where words have similar sounds or pronunciation, as seen with 'ribbit' and 'rabbit'",
+    "confidence": "high",
+    "top_tokens": [
+      "bit"
+    ],
+    "top_contexts": [
+      {
+        "token": "bit",
+        "context": "Ever noticed how close “rib>>>bit<<<” and “rabbit” sounded",
+        "activation_value": 5.834659576416016
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Word Sound Similarity\",\n  \"explanation\": \"This feature detects instances where words have similar sounds or pronunciation, as seen with 'ribbit' and 'rabbit'\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "11": {
+    "feature_idx": 11,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "12": {
+    "feature_idx": 12,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "13": {
+    "feature_idx": 13,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "14": {
+    "feature_idx": 14,
+    "label": "Causal Connection",
+    "explanation": "The feature detects the concept of causal connection or reasoning, often introduced by the token 'so'",
+    "confidence": "high",
+    "top_tokens": [
+      "so"
+    ],
+    "top_contexts": [
+      {
+        "token": "so",
+        "context": "v adjusts the bias point of the two transistors>>> so<<< that T1 and T2 are always conducting a",
+        "activation_value": 5.878909587860107
+      },
+      {
+        "token": "so",
+        "context": ". Ducky edited it and made the lines cleaner>>> so<<< it'd look better than before. It's a",
+        "activation_value": 5.408903121948242
+      },
+      {
+        "token": "so",
+        "context": "abbard shared that they had 38,000 donors>>> so<<< far, Daniel Clark shared. Clark is a volunteer",
+        "activation_value": 5.298464775085449
+      },
+      {
+        "token": "so",
+        "context": " la ville cette semaine. Lundi>>> so<<<ir, sa présence à un débat",
+        "activation_value": 5.011773586273193
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Causal Connection\",\n  \"explanation\": \"The feature detects the concept of causal connection or reasoning, often introduced by the token 'so'\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "15": {
+    "feature_idx": 15,
+    "label": "Indicating Possibility",
+    "explanation": "The feature detects phrases that indicate possibility, uncertainty, or inference, often marked by the token 'to' in phrases like 'seems to' or 'appears to'.",
+    "confidence": "high",
+    "top_tokens": [
+      "to"
+    ],
+    "top_contexts": [
+      {
+        "token": "to",
+        "context": "ile strike amid rising tensions with North Korea, seems>>> to<<< have sparked an unusually rapid response on Capitol Hill.",
+        "activation_value": 16.672046661376953
+      },
+      {
+        "token": "to",
+        "context": "r/LEGO, the source of which seems>>> to<<< be early listings on the Mexican version of Amazon.",
+        "activation_value": 14.479252815246582
+      },
+      {
+        "token": "to",
+        "context": " interesting for example.\nHowever Google doesn't appear>>> to<<< allow you to change a property from the classic code",
+        "activation_value": 14.336791038513184
+      },
+      {
+        "token": "to",
+        "context": " of refraction of light water in some places seems>>> to<<< be dark blue, in other - clear and transparent",
+        "activation_value": 13.923551559448242
+      },
+      {
+        "token": "to",
+        "context": " chatbox at the bottom of my page which seems>>> to<<< be inheriting CSS style from bootstrap.min",
+        "activation_value": 13.771621704101562
+      },
+      {
+        "token": "to",
+        "context": "Americans\n\nA record-setting reality show appears>>> to<<< be paddling in the wrong direction as its fifth",
+        "activation_value": 13.156092643737793
+      },
+      {
+        "token": "to",
+        "context": " RichTextEdit?\n\nThere doesn't seem>>> to<<< be a default context menu (with copy, paste",
+        "activation_value": 11.530210494995117
+      },
+      {
+        "token": "to",
+        "context": " are grayed out:\n\n\n\nIt appears>>> to<<< be a cosmetic error but I stil wanted to",
+        "activation_value": 10.301248550415039
+      },
+      {
+        "token": "to",
+        "context": "free compared with synthetic feed additives, and are thought>>> to<<< be ideal feed additives in animal production ([@b",
+        "activation_value": 7.808270454406738
+      },
+      {
+        "token": "to",
+        "context": " hence the name.  The sand ridge is believed>>> to<<< be an artifact of the post-glacial K",
+        "activation_value": 7.7492828369140625
+      },
+      {
+        "token": "to",
+        "context": ".\nNanostructured materials are believed>>> to<<< play a fundamental role in orthopedic research because",
+        "activation_value": 7.5024824142456055
+      },
+      {
+        "token": "to",
+        "context": ". Articulatory suppression during visual input was found>>> to<<< abolish the long-lasting, retroactive effect of",
+        "activation_value": 7.364577770233154
+      },
+      {
+        "token": "to",
+        "context": " replacement throughout life and their turnover rate has been shown>>> to<<< increase with injury",
+        "activation_value": 7.114753246307373
+      },
+      {
+        "token": "to",
+        "context": " parental spleen cells in F1 mice was shown>>> to<<< be T-cell-dependent. GVH",
+        "activation_value": 7.008994102478027
+      },
+      {
+        "token": "to",
+        "context": ". The \"Coulomb log\" is found>>> to<<< be independent of the ion charge (at constant g",
+        "activation_value": 6.970086097717285
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Indicating Possibility\",\n  \"explanation\": \"The feature detects phrases that indicate possibility, uncertainty, or inference, often marked by the token 'to' in phrases like 'seems to' or 'appears to'.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "16": {
+    "feature_idx": 16,
+    "label": "Mild Assumption Concept",
+    "explanation": "This feature detects the presence of mild or general assumptions in a statement or argument.",
+    "confidence": "high",
+    "top_tokens": [
+      "assumption"
+    ],
+    "top_contexts": [
+      {
+        "token": "assumption",
+        "context": " be a counterexample, under the mild>>> assumption<<< that there exists a",
+        "activation_value": 6.232328414916992
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Mild Assumption Concept\",\n  \"explanation\": \"This feature detects the presence of mild or general assumptions in a statement or argument.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "17": {
+    "feature_idx": 17,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "18": {
+    "feature_idx": 18,
+    "label": "Time of Day",
+    "explanation": "The feature activates on words related to evening or nighttime, indicating it detects a specific time of day concept",
+    "confidence": "high",
+    "top_tokens": [
+      "Night",
+      "evening"
+    ],
+    "top_contexts": [
+      {
+        "token": "Night",
+        "context": "...\n\nAWANA...February 21 - Regular>>> Night<<<! Begins at 6:30 p.m.",
+        "activation_value": 12.001788139343262
+      },
+      {
+        "token": "Night",
+        "context": "Kogan's opera roles have included Queen of the>>> Night<<< in Die Zauberflöte, Zer",
+        "activation_value": 11.667924880981445
+      },
+      {
+        "token": "evening",
+        "context": "–A.D. 1185), when the>>> evening<<< was marked with poetry and music by court aristocrats",
+        "activation_value": 5.837738037109375
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Time of Day\",\n  \"explanation\": \"The feature activates on words related to evening or nighttime, indicating it detects a specific time of day concept\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "19": {
+    "feature_idx": 19,
+    "label": "Travel or Visit",
+    "explanation": "The feature activates on words related to traveling or visiting places, such as 'visit', 'tourist', and 'VISUALLY', indicating a concept related to exploration or tourism",
+    "confidence": "high",
+    "top_tokens": [
+      "visit",
+      "VIS",
+      "tourist",
+      "Vis"
+    ],
+    "top_contexts": [
+      {
+        "token": "VIS",
+        "context": "A>>> VIS<<<UALLY STUNNING architectural biography of Minnesota�",
+        "activation_value": 8.799013137817383
+      },
+      {
+        "token": "visit",
+        "context": " rich history and culture, and as anyone planning a>>> visit<<< to the City by the Bay realizes, it can",
+        "activation_value": 8.606249809265137
+      },
+      {
+        "token": "tourist",
+        "context": " thing to do while there. Aside from the usual>>> tourist<<< spots like the Golden Gate Bridge, Alcatraz",
+        "activation_value": 6.723265647888184
+      },
+      {
+        "token": "visit",
+        "context": " can be difficult to narrow down all the places to>>> visit<<< and thing to do while there. Aside from the",
+        "activation_value": 5.840376853942871
+      },
+      {
+        "token": "visit",
+        "context": " a time that suits your schedule, please call or>>> visit<<< our office to schedule an appointment with the next available",
+        "activation_value": 5.8229169845581055
+      },
+      {
+        "token": "visit",
+        "context": " Anyone who want to buy wholesale rear view cameras can>>> visit<<< TVC-Mall.com for",
+        "activation_value": 5.782902717590332
+      },
+      {
+        "token": "Vis",
+        "context": ".detekt.api.Detekt>>>Vis<<<itor\nimport io.gitlab.arturb",
+        "activation_value": 5.778717994689941
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Travel or Visit\",\n  \"explanation\": \"The feature activates on words related to traveling or visiting places, such as 'visit', 'tourist', and 'VISUALLY', indicating a concept related to exploration or tourism\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  }
+}
