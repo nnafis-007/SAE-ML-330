@@ -1,0 +1,213 @@
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 41
+USER PROMPT:
+Feature index: 41
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 20 activating examples (ordered strongest first):
+   1. [act=3.692]   she was complaining of extreme pain her leg we brought>>> her<<< to the hospital
+   2. [act=3.654]  the dog was being>>> held<<< or evidence that would be to a normal person you
+   3. [act=3.300]  the dog was being held>>> or<<< evidence that would be to a normal person you're
+   4. [act=3.287]   private jessica lynch who was captured and>>> rescued<<< in iraq in march and april two thousand
+   5. [act=3.231]   up a fence to separate the two so that she>>> could<<< farm and he could farm with regard to there being
+   6. [act=3.135]   ever reported the incident to anyone else they simply put>>> her<<< back to bed after we went to see her and
+   7. [act=3.123]   that some of these buses will take people essentially drop>>> them<<< off i'm not sure though whether those are the
+   8. [act=3.085]   don't have to separate occasions where the victim was>>> placed<<< in the apprehension of harm and going back to the
+   9. [act=3.060]   if you know you're going to be picked up>>> and<<< and pulled aside you're likely to risk your life
+  10. [act=3.053]   of harm again without requiring the victim to twice be>>> placed<<< in the apprehension of harm
+  11. [act=2.955]   requires at least two separate occasions where the victim is>>> placed<<< in the apprehension of harm again without requiring the victim
+  12. [act=2.735]   know you're going to be picked up and and>>> pulled<<< aside you're likely to risk your life and the
+  13. [act=2.725]   some of these buses will take people essentially drop them>>> off<<< i'm not sure though whether those are the same
+  14. [act=2.655]   and private jessica lynch who was captured>>> and<<< rescued in iraq in march and april two
+  15. [act=2.622]   part of him parking earlier in the day and being>>> dropped<<< off by its buddies
+  16. [act=2.599]  found calm looking up to their sergeant after he lifted>>> their<<< spirits and encourage them to drive on more often than
+  17. [act=2.579]   of him parking earlier in the day and being dropped>>> off<<< by its buddies
+  18. [act=2.456]   two instances when that the victim is amber he was>>> placed<<< under surveillance and the defendant
+  19. [act=2.411]   reported the incident to anyone else they simply put her>>> back<<< to bed after we went to see her and she
+  20. [act=2.401]  children have been dropped>>> off<<< on the street unsupervised 
+
+Most frequent activating tokens (top 13): "placed", "off", "her", "and", "held", "or", "rescued", "could", "them", "pulled", "dropped", "their", "back"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 44
+USER PROMPT:
+Feature index: 44
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 20 activating examples (ordered strongest first):
+   1. [act=9.090]   lighting system you will note that this is a time>>> clock<<< that will tell you how much time you've used
+   2. [act=3.943]   that we are shooting for at the end of the>>> calendar<<< year now what does that translate to
+   3. [act=3.777]   dollars actually doesn't it has no effect on the>>> balance<<< on the highway trust fund and the second is that
+   4. [act=3.622]  and>>> cop<<<iers and you know that kind of thing when there
+   5. [act=2.812]  district in>>> comp<<<as is three hundred miles of eastern long island coastline
+   6. [act=2.705]   has to be done with a citation issued by the>>> clerk<<< in the county where the third party or the defendant
+   7. [act=2.588]   of the telephone company that is designed to maintain some>>> check<<< and balance all the executive because congress has been totally
+   8. [act=2.354]   fiscal policy that we're talking about today and the>>> monetary<<< policy this been followed recently by the
+   9. [act=2.275]   quick extending unemployment it's much quicker than a rebate>>> check<<< and i certainly support the rebate track but it's
+  10. [act=2.258]   order the substitute amendment as amended is agreed to the>>> clerk<<< will read the bill for the third time
+  11. [act=2.230]   he would not appreciate the opportunity to receive a stimulus>>> check<<< and that it would not put it back right back
+  12. [act=2.163]  you make the final>>> check<<< on the ship
+  13. [act=2.148]   who just can't understand and comprehend this type of>>> schedule<<<
+  14. [act=2.133]   the department of defense gave us the hyped up>>> comic<<< book versions of what happened to the soldiers on the
+  15. [act=2.104]   those working americans don't deserve to have a>>> check<<< i want to thank speaker pelosi for fixing that
+  16. [act=1.900]  does her>>> check<<< tested general electric during that six year period a year
+  17. [act=1.797]   anyone there's no forcing anyone it's merely a>>> check<<< and balance that everyone is aware of
+  18. [act=1.744]   state money there's no federal money there's no>>> towel<<< money then it makes a
+  19. [act=1.681]  exempt>>> monetary<<< donations for such plaques as post office post office
+  20. [act=1.630]   funded for that reason i'm going to yield the>>> balance<<< of my time to mr mchugh the
+
+Most frequent activating tokens (top 11): "check", "balance", "clerk", "monetary", "clock", "calendar", "cop", "comp", "schedule", "comic", "towel"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 45
+USER PROMPT:
+Feature index: 45
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 11 activating examples (ordered strongest first):
+   1. [act=3.659]   quotes we we see that north korea has signed>>> a<<< signed on to the six party agreement supposedly getting themselves
+   2. [act=3.044]   within a couple of weeks the president would be signing>>> a<<< bill
+   3. [act=1.903]   see that north korea has signed a signed on>>> to<<< the six party agreement supposedly getting themselves out of the
+   4. [act=1.807]  again the legislature has authorized the council to>>> use<<< this money for public purposes it's public money it
+   5. [act=1.636]  again the legislature has authorized the council>>> to<<< use this money for public purposes it's public money
+   6. [act=1.515]   the highway and transit needs that may be funded from>>> the<<< highway trust fund please consider including significant funding for maintenance
+   7. [act=1.247]   need currently the city is in the process of implementing>>> a<<< hazard mitigation voluntary buyout program to
+   8. [act=1.233]  government the authority>>> to<<< use the resources that we have in order to stay
+   9. [act=1.093]  capture provides grants to states>>> for<<< technical assistance and require states to have laws related to
+  10. [act=1.068]   on the phase one process these two involves approval of>>> the<<< preliminary site plan for the project district the site plan
+  11. [act=1.015]   was it were enacted to protect the businesses who enter>>> into<<< such
+
+Most frequent activating tokens (top 6): "a", "to", "the", "use", "for", "into"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 47
+USER PROMPT:
+Feature index: 47
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 20 activating examples (ordered strongest first):
+   1. [act=2.099]   but the proper care of a loved one the emotional>>> toll<<< and the sense of
+   2. [act=1.776]  that both shores and>>> sting<<< structure their price points it's one affordable for me
+   3. [act=1.727]   your child about this so that you begin to change>>> almost<<< the culture of the neighborhood so that children safety
+   4. [act=1.716]   in and around so that it would kill it and>>> knock<<< it down so it wouldn't even have to be
+   5. [act=1.658]   adding the fact that this man is an addict just>>> shakes<<< the whole thing with a negative connotation to say
+   6. [act=1.642]  osovo or haiti and somalia before they>>>'re<<< vastly more expensive now than it has been in the
+   7. [act=1.634]   and i was glad to hear you explain what some>>> of<<< the suspensions were because for because of being in the
+   8. [act=1.612]  flew the mission in a>>>ri<<<zona from florida simultaneously with the testing and
+   9. [act=1.589]   i do not know i mean i just have this>>> rather<<< disgusting vision of putting up communist
+  10. [act=1.544]   response rate because we get out there we have to>>> knock<<< on doors and these surveys are like thirty minutes long
+  11. [act=1.504]  chair southern a>>>ri<<<zona is i think like most americans expect their
+  12. [act=1.474]   know and i was glad to hear you explain what>>> some<<< of the suspensions were because for because of being in
+  13. [act=1.471]   plan let me try and give you an idea of>>> what<<< iraq today is like compared to iraq one
+  14. [act=1.466]  review before the end and so underway>>> as<<< i think you can take a practical approach and this
+  15. [act=1.422]   a modest amount of restoration but the house was was>>> pretty<<< original start with it didn't it didn't really
+  16. [act=1.413]   the game or do whatever computer wise that is way>>> beyond<<< my educational
+  17. [act=1.400]   was quote talking stuff but it's not just about>>> talking<<<
+  18. [act=1.395]   for that was dismissed it was no prost that had>>> to<<< come from somebody somebody had to realize once mr
+  19. [act=1.394]   and what to expect in terms of that field my>>> gut<<< is that we're going to keep going up like
+  20. [act=1.379]   month long program that basically didn't exist to the>>> degree<<< that it exists today so those are some
+
+Most frequent activating tokens (top 18): "knock", "ri", "toll", "sting", "almost", "shakes", "'re", "of", "rather", "some", "what", "as", "pretty", "beyond", "talking", "to", "gut", "degree"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 48
+USER PROMPT:
+Feature index: 48
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 20 activating examples (ordered strongest first):
+   1. [act=7.317]   torts to the extent of there being a male>>> an<<< insurance policy in place that would cover it which exists
+   2. [act=6.939]   may seek judicial in forstmann of the very>>> was<<< it were enacted to protect the businesses who enter into
+   3. [act=6.905]   replied in the affirmative each witness is now under old>>> we<<< will now he prepared a five minute opening statement from
+   4. [act=6.827]   represent that confidence they make that purchase they buy a>>> was<<<her and dryer they need it they buy the
+   5. [act=6.515]   of the armed services committee we wanted to avoid joint>>> was<<< for all for a number of reasons as it related
+   6. [act=6.247]  filled with shouts of incoming>>> he<<< wrote we took three mortars and close later in
+   7. [act=6.183]   interfere with any kind of evacuation or when a new>>> we<<< go to an evacuation mode if anything the united states
+   8. [act=6.008]   reappointment so the court misconstrued the entire>>> were<<< late and assumed that the whole point of the lawsuit
+   9. [act=6.007]   whether those three arbitration services contracts are in forcible>>> we<<< argued in the court below and the trial court agreed
+  10. [act=5.798]   get one such and unemployment rate should be an acceptable>>> my<<< written testimony i tried to
+  11. [act=5.740]   florida which is situated along the gulf of>>> me<<<xico congresswoman brown weight is serving her third
+  12. [act=5.672]   in south louisiana and in the gulf of>>> me<<<xico that supports oil and gas production has been
+  13. [act=5.602]   to do more of that so it's not a>>> we<<<'re not at the decision now but if it's
+  14. [act=5.265]   keeps coming on to my property whether it be cigarette>>> but<<<ts candy wrappers stuff like that so there's
+  15. [act=5.195]   the impact on the school district with creating these mixed>>> you<<< mixed residential districts and allowing for different types of units
+  16. [act=5.135]  i hope is that we can utilize the>>> we<<< years if you will as a case study to examine
+  17. [act=4.963]   questions heather seller answered that question through fully the>>> my<<< clients would know the condition and be able to make
+  18. [act=4.765]   and the new proposed development as you come down in>>> we<<<'re going to use the open space to help preserve
+  19. [act=4.715]   huge sub prime problem and it's a very big>>> we<<< know that that may lead to further contraction treaded
+  20. [act=4.672]  oids any conflict with the root structure of the copper>>> be<<<ech located between the two properties and protects it from
+
+Most frequent activating tokens (top 10): "we", "was", "my", "me", "an", "he", "were", "but", "you", "be"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 49
+USER PROMPT:
+Feature index: 49
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 20 activating examples (ordered strongest first):
+   1. [act=3.201]  parenting advice enable the williston community to come>>> together<<< in many different ways finally three cheers and a huge
+   2. [act=3.190]   to create that central area for congregation in the community>>> who<<< also had some extensive conversation and so earlier planning meetings
+   3. [act=2.715]   is a group that has been active in the community>>> and<<< they've been here longer
+   4. [act=2.708]   sense of purpose new community their sense of connectivity to>>> their<<< community so each one of those each one of the
+   5. [act=2.696]  inflicted is evident in this community>>> captain<<< c j a provide support for local programs and is
+   6. [act=2.662]   say that you know this is a group that has>>> been<<< active in the community and they've been here longer
+   7. [act=2.611]  ing advice enable the williston community to come together>>> in<<< many different ways finally three cheers and a huge thank
+   8. [act=2.591]   to say that you know this is a group that>>> has<<< been active in the community and they've been here
+   9. [act=2.476]   their sense of purpose new community their sense of connectivity>>> to<<< their community so each one of those each one of
+  10. [act=2.461]   create that central area for congregation in the community who>>> also<<< had some extensive conversation and so earlier planning meetings talking
+  11. [act=2.429]  security their sense of purpose new community>>> their<<< sense of connectivity to their community so each one of
+  12. [act=2.394]  parenting advice enable the williston community>>> to<<< come together in many different ways finally three cheers and
+  13. [act=2.375]   u s should have a strong democratic foundation for communities>>> that<<< rely on each
+  14. [act=2.330]   advice enable the williston community to come together in>>> many<<< different ways finally three cheers and a huge thank you
+  15. [act=2.286]   that central area for congregation in the community who also>>> had<<< some extensive conversation and so earlier planning meetings talking about
+  16. [act=2.250]   enable the williston community to come together in many>>> different<<< ways finally three cheers and a huge thank you to
+  17. [act=2.217]  feel the passions in the community>>> and<<< we all want to do what's best for the
+  18. [act=2.215]   in tiffin ohio a community of about twenty>>> thousand<<< people about an our from toledo in northwest
+  19. [act=2.156]   purpose new community their sense of connectivity to their community>>> so<<< each one of those each one of the programs that
+  20. [act=2.156]  use to get input from from the community we>>>'ve<<< also established a project website and some of you may
+
+Most frequent activating tokens (top 17): "and", "their", "to", "together", "who", "captain", "been", "in", "has", "also", "that", "many", "had", "different", "thousand", "so", "'ve"
+
+
+Based on these examples, what concept does this SAE feature detect?
+

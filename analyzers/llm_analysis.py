@@ -115,6 +115,8 @@ class LabelingConfig:
     min_activation: float = 0.0
     include_global_top_features: bool = False
     top_tokens_k: int = 10  # 0 => none, <0 => all, >0 => top-k
+    max_contexts_per_feature_prompt: int = 40
+    max_prompt_chars: int = 12000
 
 
 # ---------------------------------------------------------------------------
@@ -440,6 +442,7 @@ class FeatureLabeler:
             return []
 
         candidate_vals = feature_activations[valid_row_indices]
+        candidate_count = int(candidate_vals.numel())
 
         if cfg.min_activation > 0:
             mask = candidate_vals >= cfg.min_activation
@@ -449,7 +452,15 @@ class FeatureLabeler:
             rows_subset = valid_row_indices
             vals_subset = candidate_vals
 
+        threshold_count = int(rows_subset.numel())
+
         if rows_subset.numel() == 0:
+            LOGGER.info(
+                "Feature %d filtering | candidates=%d thresholded=0 top_k=%s selected=0 deduped=0",
+                feature_idx,
+                candidate_count,
+                cfg.top_k,
+            )
             return []
 
         if cfg.top_k is None or int(cfg.top_k) <= 0:
@@ -492,6 +503,16 @@ class FeatureLabeler:
                 )
             )
 
+        LOGGER.info(
+            "Feature %d filtering | candidates=%d thresholded=%d top_k=%s selected=%d deduped=%d",
+            feature_idx,
+            candidate_count,
+            threshold_count,
+            cfg.top_k,
+            int(k),
+            len(contexts),
+        )
+
         return contexts
 
     @staticmethod
@@ -525,14 +546,27 @@ class FeatureLabeler:
         contexts: List[TokenContext],
         global_top_features: str = "(not computed)",
     ) -> LabelResult:
+        if not isinstance(feature_idx, int):
+            raise TypeError(f"feature_idx must be an int, got {type(feature_idx).__name__}")
+
+        contexts_for_prompt = list(contexts)
+        if self.cfg.max_contexts_per_feature_prompt > 0 and len(contexts_for_prompt) > self.cfg.max_contexts_per_feature_prompt:
+            LOGGER.warning(
+                "Feature %d contexts truncated before prompt | requested=%d cap=%d",
+                feature_idx,
+                len(contexts_for_prompt),
+                self.cfg.max_contexts_per_feature_prompt,
+            )
+            contexts_for_prompt = contexts_for_prompt[: self.cfg.max_contexts_per_feature_prompt]
+
         LOGGER.info(
             "Calling LLM for feature %d | contexts=%d prompt_logging=%s",
             feature_idx,
-            len(contexts),
+            len(contexts_for_prompt),
             bool(self.cfg.prompt_log_path),
         )
-        examples_block = self._build_examples_block(contexts)
-        top_tokens = self._top_tokens(contexts)
+        examples_block = self._build_examples_block(contexts_for_prompt)
+        top_tokens = self._top_tokens(contexts_for_prompt)
         
         if int(self.cfg.top_tokens_k) == 0:
             top_tokens_block = ""
@@ -543,13 +577,39 @@ class FeatureLabeler:
 
         user_prompt = _USER_PROMPT_TEMPLATE.format(
             feature_idx=feature_idx,
-            n_examples=len(contexts),
+            n_examples=len(contexts_for_prompt),
             examples_block=examples_block,
             top_tokens_block=top_tokens_block,
         )
 
         if self.cfg.include_global_top_features:
             user_prompt += f"\n\nTop activated features corpus-wide:\n{global_top_features}\n"
+
+        while self.cfg.max_prompt_chars > 0 and len(user_prompt) > self.cfg.max_prompt_chars and len(contexts_for_prompt) > 1:
+            new_len = max(1, len(contexts_for_prompt) // 2)
+            contexts_for_prompt = contexts_for_prompt[:new_len]
+            LOGGER.warning(
+                "Feature %d prompt too long (%d chars). Reducing contexts to %d.",
+                feature_idx,
+                len(user_prompt),
+                len(contexts_for_prompt),
+            )
+            examples_block = self._build_examples_block(contexts_for_prompt)
+            top_tokens = self._top_tokens(contexts_for_prompt)
+            if int(self.cfg.top_tokens_k) == 0:
+                top_tokens_block = ""
+            else:
+                label = "all" if int(self.cfg.top_tokens_k) < 0 else f"top {len(top_tokens)}"
+                top_tokens_str = ", ".join(f'"{t}"' for t in top_tokens) if top_tokens else "(none)"
+                top_tokens_block = f"Most frequent activating tokens ({label}): {top_tokens_str}\n"
+            user_prompt = _USER_PROMPT_TEMPLATE.format(
+                feature_idx=feature_idx,
+                n_examples=len(contexts_for_prompt),
+                examples_block=examples_block,
+                top_tokens_block=top_tokens_block,
+            )
+            if self.cfg.include_global_top_features:
+                user_prompt += f"\n\nTop activated features corpus-wide:\n{global_top_features}\n"
 
         raw = ""
         try:
@@ -572,7 +632,7 @@ class FeatureLabeler:
                 explanation=parsed.get("explanation", ""),
                 confidence=parsed.get("confidence", "low"),
                 top_tokens=top_tokens,
-                top_contexts=contexts,
+                top_contexts=contexts_for_prompt,
                 raw_response=raw,
             )
         except Exception as exc:
@@ -583,7 +643,7 @@ class FeatureLabeler:
                 explanation="",
                 confidence="low",
                 top_tokens=[],
-                top_contexts=contexts,
+                top_contexts=contexts_for_prompt,
                 raw_response=raw,
                 error=str(exc),
             )
@@ -725,6 +785,7 @@ class FeatureLabeler:
                     error="no activating examples found",
                 )
             else:
+                print(f"\nLabeling feature {feat_idx} with {len(contexts)} activating contexts...")
                 result = self._call_llm(feat_idx, contexts, global_top_str)
                 time.sleep(self.cfg.request_delay)
 
@@ -1031,14 +1092,13 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     LOGGER.info(
-        "llm_analysis started | dataset=%s split=%s config=%s num_texts=%d batch_size=%d max_length=%d num_features=%d backend=%s model=%s",
+        "llm_analysis started | dataset=%s split=%s config=%s num_texts=%d batch_size=%d max_length=%d backend=%s model=%s",
         args.dataset or "(built-in)",
         args.dataset_split,
         args.dataset_config,
         args.num_texts,
         args.batch_size,
         args.max_length,
-        args.num_features,
         args.backend,
         args.model,
     )
@@ -1074,7 +1134,7 @@ if __name__ == "__main__":
     cache_path = Path(args.activation_cache_path)
     cache_loaded = False
     
-    if cache_path.exists():
+    if (not args.no_cache_load) and cache_path.exists():
         LOGGER.info("Loading activation cache from %s", cache_path)
         try:
             cache = torch.load(str(cache_path))
@@ -1121,19 +1181,20 @@ if __name__ == "__main__":
         token_ids, doc_map, pos_map = build_token_maps(sample_texts, tokenizer, args.max_length)
         
         # Save cache
-        torch.save({
-            "activations": activations.cpu(),
-            "texts": sample_texts,
-            "token_ids": token_ids,
-            "token_doc_map": doc_map,
-            "token_pos_map": pos_map,
-        }, str(cache_path))
-        LOGGER.info(
-            "Saved activation cache | path=%s tokens=%d texts=%d",
-            cache_path,
-            int(activations.shape[0]),
-            len(sample_texts),
-        )
+        if not args.no_cache_save:
+            torch.save({
+                "activations": activations.cpu(),
+                "texts": sample_texts,
+                "token_ids": token_ids,
+                "token_doc_map": doc_map,
+                "token_pos_map": pos_map,
+            }, str(cache_path))
+            LOGGER.info(
+                "Saved activation cache | path=%s tokens=%d texts=%d",
+                cache_path,
+                int(activations.shape[0]),
+                len(sample_texts),
+            )
 
     # 3. Feature Selection
     # We do a quick pass to find alive features
@@ -1154,14 +1215,22 @@ if __name__ == "__main__":
     all_indices = list(range(d_hidden))
     # Pick N random indices for the demo
     import random
-    target_features = random.sample(all_indices, min(args.num_features, d_hidden))
-    LOGGER.info("Selected %d target features: %s", len(target_features), target_features)
+    # target_features = random.sample(all_indices, min(args.num_features, d_hidden))
+    # LOGGER.info("Selected %d target features: %s", len(target_features), target_features)
 
     # 4. Run Labeling
     cfg = LabelingConfig(
         backend=args.backend,
         model=args.model,
         request_delay=args.request_delay,
+        prompt_log_path=args.prompt_log_path,
+        normalize_mode=args.normalize_mode,
+        std_floor=args.std_floor,
+        skip_first_token=(not args.include_first_token),
+        min_activation=args.min_activation,
+        top_k=args.top_k,
+        include_global_top_features=args.include_global_top_features,
+        top_tokens_k=args.top_tokens_k,
     )
     
     labeler = FeatureLabeler(sae, tokenizer, cfg)
@@ -1184,7 +1253,7 @@ if __name__ == "__main__":
 
     n_alive = len(alive_sorted)
     top_n = max(1, min(args.top_feature_count, n_alive))
-    target_features = alive_sorted[:top_n].tolist()
+    target_features = [x for x in range(41,50)]
     print(f"\nAlive features: {n_alive}")
     print(f"Top-{top_n} feature indices by mean activation: {target_features}")
 

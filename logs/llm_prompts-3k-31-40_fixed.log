@@ -1,0 +1,312 @@
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 31
+USER PROMPT:
+Feature index: 31
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=13.511]  honors my name's drew>>> gr<<<iffin and i'm here on behalf of the group
+   2. [act=13.290]   the project before the state and county authorized the permanent>>> gr<<<
+   3. [act=12.666]  and look at this single driveway providing only>>> gr<<<ist to this project as it already does to the
+   4. [act=5.954]  all the development the destruction in many ways of that>>> dist<<<illation of all preceding history there's a chance right
+   5. [act=5.942]   sometimes for similar types of violations and conclusion given substantial>>> gro<<<
+   6. [act=4.345]  levi strauss case that>>> discour<<<agement is equitable right it was not a jury demand
+   7. [act=4.015]   other installations in town that are exterior that are quite>>> uns<<<ightly to promote the interior installation such as the
+   8. [act=2.946]  the word i will not use the>>> prof<<<anity but the f word that went preceded inside that
+   9. [act=2.681]  be king>>> sol<<<omon here but two weeks is a lot i know
+  10. [act=2.591]   get it and if all else fails call roger>>> rye<<< and we'll give it to you personally then you
+  11. [act=2.574]   what are supposed to be two separate remedies damages and>>> discour<<<agement are not the same thing they're listed separately
+  12. [act=2.522]   brother and friend recalling a conversation with her youngest child>>> aud<<<rey tells us what her son dale said upon
+  13. [act=2.482]   mundo for his service this man who his wife>>> aud<<<rey described as a soldier through and through gave everything
+  14. [act=2.411]  while stationed at fort>>> kn<<<ox mike met audrey a student at l
+  15. [act=2.277]  while stationed at fort knox mike met>>> aud<<<rey a student at liz the town community college
+
+Most frequent activating tokens (top 10): "gr", "aud", "discour", "dist", "gro", "uns", "prof", "sol", "rye", "kn"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Proper Noun Prefixes",
+  "explanation": "The feature detects prefixes of proper nouns, such as names and locations, often abbreviated or shortened forms",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 32
+USER PROMPT:
+Feature index: 32
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=17.372]  effort efforts on one specific country or sub region>>> only<<< to see the drug trade quickly move to the next
+   2. [act=17.323]   on tape taking money earmarked for black babies abortion>>> only<<< in other words that they could only earmark this
+   3. [act=16.457]  application they are subject to the news>>> only<<< requirements to say that the conditional use if it was
+   4. [act=16.452]   of a claim under the policy the arbitration panel decided>>> only<<< which is exactly what the district court correctly ruled that
+   5. [act=16.234]   short sighted to look at and forstmann>>> only<<< solution the fact remains that all of it
+   6. [act=16.115]   specific and particularly side effects many of these cognitive principles>>> only<<< few of which i've been
+   7. [act=15.899]  dredging projects however>>> only<<< seven hundred sixty six million dollars of dredging and
+   8. [act=15.145]   to the public we found that f d a reviews>>> only<<< a small portion of the materials it receives and the
+   9. [act=15.039]   some priority of stations and say this is one that>>> only<<< the federal government can do so they federal government has
+  10. [act=14.222]   who are or who are making purchases and the dividends>>> only<<< go to the members really from the benefit of the
+  11. [act=14.211]   small nonprofit agency will qualify to service the direct loans>>> only<<< the big players i wholeheartedly believe that smaller well
+  12. [act=13.953]   a department of resources versus hips the supreme court relied>>> only<<< on the following sources and holding under the congress under
+  13. [act=13.939]   have been diagnosed and of those who have been diagnosed>>> only<<< half have received treatment elevated l d l cholesterol is
+  14. [act=13.936]  hunter that the holdings of a prior decision can reach>>> only<<< as far as the facts and circumstances presented to the
+  15. [act=13.357]   information use of information and physical searches this amendment applies>>> only<<< to non u s persons making these definitional changes
+
+Most frequent activating tokens (top 1): "only"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Exclusive Constraint",
+  "explanation": "The feature detects the concept of exclusivity or limitation, often indicated by the word 'only' in the given context",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 33
+USER PROMPT:
+Feature index: 33
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=8.173]   staff but but i think there's sometimes a characterization>>> that<<< you're here saying no we just want to go
+   2. [act=8.146]   and there was a comment made by the supreme court>>> that<<< the
+   3. [act=8.096]  wholly unrelated evidence>>> that<<< anything that was in that letter that the defendant had
+   4. [act=7.561]  statements>>> that<<< the court makes and leanings of the court the
+   5. [act=7.519]   surge and the corps continues to ignore their own reports>>> that<<< have identified the best options for pursuing the strongest level
+   6. [act=7.360]   least two occasions of reasonable apprehension we have a concession>>> that<<< pointing a gun at her was one occasion but then
+   7. [act=7.359]   patrol agents on the southern border he made a statement>>> that<<< he doubled the number of agents on the northern border
+   8. [act=7.353]   fundamentally defective i think our study raises a warning flag>>> that<<< leaving most americans to rely on private insurance is
+   9. [act=7.333]   to be provided by you know like court of law>>> that<<< is interpreted in both illinois law and anticipating there
+  10. [act=7.322]  conclusion of his trial>>> that<<<'s not consistent with the number i understood where we
+  11. [act=7.242]   say hey we've had a complaint from a citizen>>> that<<< this person is here do you want them here or
+  12. [act=7.077]   because this is if anything the lone piece of evidence>>> that<<< in any way suggest that anthony possibly could have
+  13. [act=6.998]  perception seems to exist>>> that<<< this is another type of affirmative action program or something
+  14. [act=6.986]   afghanistan that while we had had an announcement>>> that<<< we were expanding the number of troops there in the
+  15. [act=6.885]   that was his opinion you know he made an opinion>>> that<<< the current condition and he didn't require the medical
+
+Most frequent activating tokens (top 1): "that"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Subordinating Conjunction",
+  "explanation": "The feature detects the presence of the subordinating conjunction 'that' introducing a dependent clause",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 34
+USER PROMPT:
+Feature index: 34
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=8.853]  then saw the defendant walking>>> toward<<< the car according to the officer at trial the officer
+   2. [act=8.034]  tow>>>ards<<< florida it's not is it in this
+   3. [act=7.625]   forward a very promising first step in our long journey>>> toward<<< reforming our ailing health care system i commend their
+   4. [act=7.605]  started walking back>>> toward<<< the subdivision at that point there's a dispute m
+   5. [act=7.164]   by expressing my gratitude to congress for its continued support>>> towards<<< c b p initiatives among the numerous priorities that were
+   6. [act=6.838]   trees but it would mean moving it you know further>>> towards<<< road and not directly across
+   7. [act=6.766]   below target but not by much and we are heading>>> towards<<< the eighteen thousand three hundred nine thousand border patrol agents
+   8. [act=6.624]   if there is a disagreement from the p c directed>>> towards<<< you by engaging in this you have the authority to
+   9. [act=6.267]   reauthorization they help communities and states make strides>>> toward<<< preventing domestic violence and we think prevention is probably the
+  10. [act=6.162]  are they more related>>> towards<<< the town or are they more related towards that general
+  11. [act=6.016]   chair you talked about the billions of dollars being put>>> toward<<< border security but we have to
+  12. [act=5.680]  injection into the new company which is not counted>>> toward<<< the headline price of the deal so what does that
+  13. [act=5.654]   more related towards the town or are they more related>>> towards<<< that general area because i know we've had a
+  14. [act=5.505]   to say as as caterpillar seems to be gearing>>> towards<<< saying this happened because we're so big and we
+  15. [act=5.367]   act of two thousand and nine is a positive step>>> towards<<< evaluating u s policy i also want to thank chairman
+
+Most frequent activating tokens (top 3): "towards", "toward", "ards"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Direction or Movement",
+  "explanation": "The feature detects words related to direction or movement, such as 'towards' and 'toward', indicating a sense of progression or orientation in a particular direction",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 35
+USER PROMPT:
+Feature index: 35
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=8.386]   committee you know i think what i might do sam>>>mi<<< is take your
+   2. [act=8.323]   cooper was deployed to afghanistan korea the>>> si<<<
+   3. [act=7.675]  neg>>>oti<<<ating table last year closed quotes we we see that
+   4. [act=7.241]   keys got passed but that's not what happened c>>>iti<<< capital wasn't interested in just passing the keys they
+   5. [act=7.036]   humane investigator so all of this is fair to tor>>>i<<< in angelo testified that she had been this humane
+   6. [act=6.804]   the proper standards that apply to this case and whether>>> di<<< should be convicted on several occasions the court went so
+   7. [act=6.592]  chair southern a>>>ri<<<zona is i think like most americans expect their
+   8. [act=6.310]   the testing and other air indiction agents in a>>>ri<<<zona flying the mission in key west florida
+   9. [act=6.193]   this begin turn around it's fifteen hundred feet that>>> radi<<<ates the diameter of this is two
+  10. [act=6.188]  lev>>>i<<< strauss case that discouragement is equitable right it
+  11. [act=5.938]   and ten it defaulted on interest payment to c>>>iti<<< bank joan shannon and others stood up and
+  12. [act=5.884]  flew the mission in a>>>ri<<<zona from florida simultaneously with the testing and
+  13. [act=5.662]  driveways and things going on a>>> medi<<<ately should go in and so this i mean look
+  14. [act=5.392]   know china's trying to herd in bringing t>>>ai<<<wan into the fold hong kong macau
+  15. [act=4.788]  simply a part and aspect of fid>>>uci<<<ary responsibility this is a community resource and we have
+
+Most frequent activating tokens (top 11): "ri", "iti", "i", "mi", "si", "oti", "di", "radi", "medi", "ai", "uci"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Geographic Location",
+  "explanation": "The feature activates on tokens related to place names, such as 'arizona', 'afghanistan', and 'taiwan', indicating it detects geographic locations",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 36
+USER PROMPT:
+Feature index: 36
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=18.881]  case law indicating that>>> there<<< was no duty of an individual was not meant to
+   2. [act=18.171]  without presentation of any proof did not agree that>>> there<<< was any liability so the require of the construction contract
+   3. [act=18.133]   responsibility on the defendant in some way to argue that>>> there<<< was some sort of role retain the hospital the problem
+   4. [act=17.404]  described and found that>>> there<<< were many more wing flaps going on during the
+   5. [act=17.335]   limitation was also intentional addressing first the issue of whether>>> there<<< were two instances when that the victim is amber he
+   6. [act=16.981]   in the court below and the trial court agreed that>>> there<<< was no need to even
+   7. [act=16.977]   one occasion but then we also have the evidence that>>> there<<< was a series of opportunities where
+   8. [act=16.954]   that that the supreme court has made it clear that>>> there<<< was a waiver that took place and what the plaintiff
+   9. [act=16.772]   that the exercise of powers is unlimited it says that>>> there<<< is a limit because the immunity is to the anti
+  10. [act=16.390]   our advertising just sixteen percent of people were aware that>>> there<<< were two sources of cholesterol in the year following our
+  11. [act=16.298]  and prove that>>> there<<< is damage caused by valentine as opposed to
+  12. [act=16.279]   experts themselves had had to render a decision saying that>>> there<<< was
+  13. [act=15.964]   special situation where where you need to be advised that>>> there<<<'s been litigation against the
+  14. [act=15.883]  before we are looking at whether>>> there<<< are ways to assist in instability in the loan fund
+  15. [act=15.794]   which is exactly what the district court correctly ruled that>>> there<<< was not evidence submitted to national union up to
+
+Most frequent activating tokens (top 1): "there"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Existence Indicator",
+  "explanation": "The feature detects the presence or existence of something, as indicated by the frequent activation on the token 'there' in contexts implying the presence of a thing, idea, or situation",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 37
+USER PROMPT:
+Feature index: 37
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=3.031]   thousand dollars micro loans went to an unemployed tribal member>>> who<<< completed our business training class and wanted to start a
+   2. [act=2.721]   unemployed tribal member who completed our business training class and>>> wanted<<< to start a plumbing and heating business he
+   3. [act=2.631]   dollars micro loans went to an unemployed tribal member who>>> completed<<< our business training class and wanted to start a plumbing
+   4. [act=2.551]   who has been diagnosed with alzheimer's was>>> recently<<< placed in turn their sing home and one of the
+   5. [act=2.374]  stability there's a woman who was>>> left<<< for dead and got a new chance at life with
+   6. [act=2.366]   and one of the senators got into a skiff>>> and<<< they
+   7. [act=2.361]  ernie sanders and one of the senators got>>> into<<< a skiff and they
+   8. [act=2.291]   say some things on behalf of a young man who>>> was<<< was facing losing
+   9. [act=2.266]   his children for his bravery and service major mando>>> received<<< numerous medals and awards
+  10. [act=2.184]   has been diagnosed with alzheimer's was recently>>> placed<<< in turn their sing home and one of the last
+  11. [act=2.184]  stability there's a woman who>>> was<<< left for dead and got a new chance at life
+  12. [act=2.141]   things on behalf of a young man who was was>>> facing<<< losing
+  13. [act=2.127]  ias hall in underhill which had an iron fire>>> escape<<< coming down the side of the
+  14. [act=2.123]  ability there's a woman who was left for dead>>> and<<< got a new chance at life with her child there
+  15. [act=2.111]   tribal member who completed our business training class and wanted>>> to<<< start a plumbing and heating business he
+
+Most frequent activating tokens (top 13): "and", "was", "who", "wanted", "completed", "recently", "left", "into", "received", "placed", "facing", "escape", "to"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Past Action Completion",
+  "explanation": "The feature detects tokens that indicate the completion of a past action or a transition from one state to another, often marked by verbs like 'was', 'completed', 'wanted', and 'received'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 39
+USER PROMPT:
+Feature index: 39
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=3.603]   the result of specific requirements by air travel communications air>>> traffic<<< is increasing airports keep right on building and adding run
+   2. [act=3.539]   to weather by using onboard navigation technology and the global>>> positioning<<< system satellite network improve safety
+   3. [act=3.448]   that's what's essential to providing the goods and>>> services<<< in our communities for police and fire and education and
+   4. [act=3.387]  artisan support for a product that the depict director of>>> national<<< intelligence and the leadership of our defense community tell us
+   5. [act=3.001]  making process is must be initiated and coordination with air>>> traffic<<< is needed to ensure that new procedure can be safely
+   6. [act=2.978]  states the director of>>> national<<< intelligence has testified that this practice reversed targeting is a
+   7. [act=2.966]  inese government hesitated they were apparently some decent men and>>> women<<< in the party's leadership would be gone to understand
+   8. [act=2.919]  generated revenue or public>>> private<<< partnership definitely in the current economic maelstrom a
+   9. [act=2.897]   and they are responsible for updating the general plan general>>> plan<<< is what provides legal basis for a lot of the
+  10. [act=2.751]   customized programs for hispanic latino and african>>> americ<<<an
+  11. [act=2.577]  populations and develop public>>> private<<< partnerships to provide services in creative ways captive compliance has
+  12. [act=2.547]  fund generated by the ad>>> val<<<orem harbor maintenance tax for operations and maintenance dredging
+  13. [act=2.473]   because of the high rates of interest of african>>> americ<<<an children in the child welfare system so they began
+  14. [act=2.468]   of action international conference is being held in san an>>>ton<<<io texas i've been there before so
+  15. [act=2.387]   duty would be in fact to protect the life and>>> property<<< of the population within the south texas area we
+
+Most frequent activating tokens (top 11): "traffic", "national", "private", "americ", "positioning", "services", "women", "plan", "val", "ton", "property"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Government Services",
+  "explanation": "The feature activates on tokens related to public administration, infrastructure, and social services, indicating it detects concepts related to government-provided services",
+  "confidence": "high"
+}
+================================================================================

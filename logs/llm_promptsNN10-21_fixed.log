@@ -1,0 +1,293 @@
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 10
+USER PROMPT:
+Feature index: 10
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 1 activating examples (ordered strongest first):
+   1. [act=1.068]   or buddhist into what i call a mar>>>x<<<ist capitalist system china's
+
+Most frequent activating tokens (top 1): "x"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Marxist ideology",
+  "explanation": "The feature detects the concept of Marxist ideology due to strong activation on the token 'x' in the context of 'marxist'",
+  "confidence": "medium"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 12
+USER PROMPT:
+Feature index: 12
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=1.796]   a reasonable thing to do i don't think it>>>'s<<< going to have a
+   2. [act=1.765]   them what about the risks well before i show you>>> how<<< the risks are presented and what the consequences are
+   3. [act=1.622]   it still was something i think we should all feel>>> good<<< about we're
+   4. [act=1.515]   in fact that's why members of congress and short>>> of<<< some procedural small
+   5. [act=1.503]   license to practice most states now grant reciprocity two>>> out<<< of state applicants although only a small percentage of pharmac
+   6. [act=1.370]   think that's a reasonable thing to do i don>>>'t<<< think it's going to have a
+   7. [act=1.369]  at the intersections partly i think from signal timing>>> partly<<< because they're such a high left turn demanded uses
+   8. [act=1.312]   about the educate about education and the importance of education>>> but<<< it is also critical to restoring our economy and our
+   9. [act=1.308]   peter's township on income when we look at>>> comparable<<< communities or comparable areas washington county southwest pennsylvania
+  10. [act=1.298]   of some will be soft and in this process and>>> that<<< they will cast a vote to move in a much
+  11. [act=1.234]   extreme pre term birth and subsequent pregnancies after just one>>> elect<<<ive abortion a woman is two to twelve times more
+  12. [act=1.232]   james has insurance coverage through his employer he isn>>>'t<<< able to work because of his disability he's going
+  13. [act=1.201]  emate he can't be held in contempt i just>>> don<<<'t i can't grasp it i don't
+  14. [act=1.191]   personality of each individual he photographs people want to look>>> their<<< best fact better than they look so the photographer must
+  15. [act=1.186]   economic package let's do the same thing in the>>> long<<< term economic problems let's get energy independence in americ
+
+Most frequent activating tokens (top 14): "'t", "'s", "how", "good", "of", "out", "partly", "but", "comparable", "that", "elect", "don", "their", "long"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Negation or contrast",
+  "explanation": "The feature activates on tokens that indicate negation, contrast, or comparison, such as 'don't', 'isn't', 'but', and 'comparable'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 14
+USER PROMPT:
+Feature index: 14
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=10.802]  motor vehicle traffic>>> so<<< if someone is stepping out into the roadway to receive
+   2. [act=10.789]  ordinance>>> so<<< that's the first issue that's the biggest issue
+   3. [act=10.155]  finance agency>>> so<<< now we have fifty five banks in alabama that
+   4. [act=9.975]  somewhere>>> so<<< right that's a good question when you're doing
+   5. [act=9.394]  ok>>> so<<< now we're on to business item five either and
+   6. [act=9.057]  it>>> so<<< it would have a nice appearance from us mcm
+   7. [act=9.030]  prior meeting>>> so<<< the court felt that you know this doesn't comp
+   8. [act=9.016]  efficient timetable>>> so<<< that this review process can wrap up in the next
+   9. [act=8.936]  school>>> so<<< it kind of raises the challenge of caring and it
+  10. [act=8.576]  on new legislation>>> so<<< that's that's where your role will be and
+  11. [act=8.543]  trying to turn over top of each other>>> so<<< we still have a little bit of work to do
+  12. [act=8.459]  percent of the land area of the town>>> so<<< so so i think there's a lot at stake
+  13. [act=8.364]  by area and compares the plants>>> so<<< i'll leave it at this that see evening because
+  14. [act=8.359]  wait>>> so<<< it wasn't like you know last spring they made
+  15. [act=8.123]  wider area here>>> so<<< that the trucks can make turning movements to come here
+
+Most frequent activating tokens (top 1): "so"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Transition or Continuation",
+  "explanation": "The feature detects the concept of transition or continuation, as indicated by the frequent activation on tokens like 'so' that often mark a shift or connection between ideas or clauses",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 15
+USER PROMPT:
+Feature index: 15
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=20.412]  details seems>>> to<<< be blinding a lot of people to the key details
+   2. [act=19.395]  perception seems>>> to<<< exist that this is another type of affirmative action program
+   3. [act=19.255]  saying that the mother seems>>> to<<< acknowledge that she's not a boy she doesn't
+   4. [act=17.814]   violence and the number of deaths and injuries that seems>>> to<<< indicate that we had just taken those statistics from 
+   5. [act=17.777]  try but in the past these efficiency measures seem>>> to<<< have served to keep calling them growth down to the
+   6. [act=16.759]  that appears>>> to<<< be the type of issue which we may be confronting
+   7. [act=16.287]  but what you have is this you get what seems>>> to<<< be an attempt to boil the lines or carelessness
+   8. [act=15.275]   and it is because of this union loop which appears>>> to<<< be especially vulnerable to all sorts
+   9. [act=14.153]   but we still share it every year because it seems>>> to<<< be a fan favorite and i hope we continue to
+  10. [act=12.844]   now ten years from now didn't matter it seems>>> to<<<
+  11. [act=9.205]  communities that are thought>>> to<<< be such that they can not for loans cannot repay
+  12. [act=5.355]   what has been the historical levels of what is deemed>>> to<<< be a recessionary or significant slowdown which is around
+  13. [act=4.360]   and strategic partner of the united states and has proven>>> to<<< be a dependable key ally in southeast a helpful
+  14. [act=4.040]  that they continue>>> to<<< operate without submitting this application is another violation of the
+  15. [act=3.933]   dispatch and setting up a union municipal district has continued>>> to<<< meet and we are in agreement on the what would
+
+Most frequent activating tokens (top 1): "to"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Indicating Appearance",
+  "explanation": "The feature detects phrases that indicate the appearance or seeming of a situation, often using words like 'seems' or 'appears' in conjunction with 'to'",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 16
+USER PROMPT:
+Feature index: 16
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=6.547]   stimulate the economy where the product is produced and the>>> assumption<<< is that most of these dollars will be spent on
+   2. [act=4.939]   fact that those on the other side have a genuine>>> belief<<< that spending more money is the way they would prefer
+   3. [act=4.737]   the research about the photos is kind of get the>>> impression<<< now adays that back in that era people just
+   4. [act=3.574]   for all our years for our children there's the>>> assurance<<< of a good start up a score of years of
+   5. [act=3.533]   is now paid to family and community engagement and the>>> recognition<<< of strengths that could be used to promote safety and
+   6. [act=3.090]   a few years after graham no one gave any>>> indication<<< that they knew that the that it mattered that eighteen
+   7. [act=3.022]   do whatever we want it thought that some sort of>>> guarantee<<< that he would be considered was necessary and so it
+   8. [act=2.909]  when the cemetery became a reality>>> perception<<< set in that those being commemorated and remembered in
+   9. [act=2.805]   but now you could have a threat or a reasonable>>> apprehension<<< of harm it's one or two following and under
+  10. [act=2.784]   this can be established by if there's a reasonable>>> likelihood<<< that he would have testified and this
+  11. [act=2.684]   the the other question is it is my understanding and>>> observation<<< that the
+  12. [act=2.646]   the fact that there was a break is not an>>> indication<<< that there must be a minimal amount of time and
+  13. [act=2.595]   that effect councillor mason made the motion on the>>> finding<<< is there a second
+  14. [act=2.590]  's consensual in the sense that willingness there's a>>> willingness<<< because of the way the person manipulates the partner
+  15. [act=2.542]   about twenty percent of the population and they support the>>> view<<< that the funds be divided in proportion to the losses
+
+Most frequent activating tokens (top 14): "indication", "assumption", "belief", "impression", "assurance", "recognition", "guarantee", "perception", "apprehension", "likelihood", "observation", "finding", "willingness", "view"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Abstract Mental State",
+  "explanation": "The feature detects tokens related to abstract mental states, such as beliefs, assumptions, and perceptions, that express subjective thoughts or attitudes.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 17
+USER PROMPT:
+Feature index: 17
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=4.352]   just giving people six hundred dollars to go out and>>> spend<<< arbitrarily which they may spend on a product that's
+   2. [act=4.258]   do a breakfast ball where you come in and you>>> get<<< a
+   3. [act=4.096]   actually do a breakfast ball where you come in and>>> you<<< get a
+   4. [act=3.433]   the guise of i'm going up to check and>>> make<<< sure this is not my sister when by that time
+   5. [act=3.396]   with his wife and two or three other couples to>>> get<<< one concept where you can go to same person three
+   6. [act=3.310]   through the mail and people of course refuse to go>>> get<<< it little different thing when the constable shows up
+   7. [act=3.271]  d stopped in my office to visit with me to>>> tell<<< me about his struggles which are the struggles of many
+   8. [act=3.045]   the action and so we need to come in and>>> do<<< that that's what our goal is and underneath that
+   9. [act=3.044]   you know they don't want to go back and>>> do<<< it again it does cost money but i understand exactly
+  10. [act=3.027]   party he can go there with his law firm and>>> have<<< a corporate event business out and then he can go
+  11. [act=2.953]   you can go to same person three different times and>>> have<<< a good time it's
+  12. [act=2.806]   recovering at home the public doesn't come there to>>> come<<< testify but if you are attending from a location say
+  13. [act=2.681]   the late hour we're happy to come back and>>> do<<< it but if you'd like it now we're
+  14. [act=2.679]   where it where engineers and everyone else comes in and>>> starts<<< to attack these problems while the basic research keeps moving
+  15. [act=2.636]   know you came in on your day away yesterday to>>> do<<< this so very very well done thank you
+
+Most frequent activating tokens (top 9): "do", "get", "have", "spend", "you", "make", "tell", "come", "starts"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Action or Acquisition",
+  "explanation": "The feature detects verbs and phrases related to taking action, obtaining, or acquiring something, as seen in the frequent activation on tokens like 'do', 'get', 'have', and 'spend'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 18
+USER PROMPT:
+Feature index: 18
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 10 activating examples (ordered strongest first):
+   1. [act=13.751]   trial court this trial was about to start that the>>> night<<< before defense counsel has informed the state that it wanted
+   2. [act=12.678]   the staff reports the legal opinions leading up to a>>> night<<<'s meeting there is no cited references to where this
+   3. [act=9.339]  agree we should pull those ads during until later at>>> night<<< when it's not affecting young audiences policy on advertising
+   4. [act=6.119]   plants so i'll leave it at this that see>>> evening<<< because i know mark wants to go and listen to
+   5. [act=3.226]   i of that works out well as i indicated last>>> night<<< we had a good bipartisan vote on this would have
+   6. [act=3.186]  the fifteen day extension last>>> night<<< is a man of his word and i know that
+   7. [act=2.143]   have the leverage of going that far without adopting this>>> evening<<< and starting that process you always have the ability to
+   8. [act=1.854]   mcmurry so what i am asking for this>>> evening<<< i'm asking for approval to remove all of the
+   9. [act=1.273]   stone wall on the shared border between us and the>>> day<<<
+  10. [act=1.192]   know the economics of it but would you trade more>>> height<<< for bigger units
+
+Most frequent activating tokens (top 4): "night", "evening", "day", "height"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Time of Day",
+  "explanation": "The feature activates on tokens related to time periods, such as night, evening, and day, indicating it detects temporal concepts",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 19
+USER PROMPT:
+Feature index: 19
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=9.969]   see what it is that they need for the next>>> visit<<< talking to them about what they have is ongoing projects
+   2. [act=9.740]   by transportation security energy greening the new capitol>>> visitor<<< center and the mounting and for structure backlog an urgent
+   3. [act=9.356]  've conducted more than seventy accredited credit ation site>>> visits<<< children's advocacy centers across the country over the past
+   4. [act=7.961]  i think that you know as far as>>> visitors<<< are concerned to the capitol i've i've
+   5. [act=7.217]  ada brant boyd stopped in my office to>>> visit<<< with me to tell me about his struggles which are
+   6. [act=7.139]   union and the european commission bob is a>>> visiting<<< professor at religion and
+   7. [act=7.084]   three years and it's always a consistent flow of>>> visitors<<< and they've always come no matter rain sleet
+   8. [act=6.852]   minute orientation feel that will begin at the beginning capital>>> tour<<< an exhibition that includes a well sure write a selection
+   9. [act=6.765]   daily life in the united states exciting experiences await our>>> visitors<<< a moving thirteen minute orientation feel that will begin at
+  10. [act=5.980]   four hundred clinical trials in over eighty thousand patients with>>> tours<<< and research and development for nearly a decade before coming
+  11. [act=5.413]   defined but it is still the cost of deploying a>>> trip<<< to afghanistan over and above the cost of
+  12. [act=4.104]   his family found out she couldn't go on a>>> trip<<< to the caribbean because she can't get
+  13. [act=3.705]   thousand and ten ms gets a crude sick days and>>> vacation<<<
+  14. [act=3.391]   was was it was definitely in the play on the>>> tour<<< buses can't do this you close it off to
+  15. [act=3.250]   for coming up here he's trying to deal with>>> tourism<<< in the district of columbia as well and
+
+Most frequent activating tokens (top 10): "visitors", "visit", "tour", "trip", "visitor", "visits", "visiting", "tours", "vacation", "tourism"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Travel and Visitation",
+  "explanation": "The feature detects language related to traveling, visiting, or touring places, as evidenced by the frequent activation on words like 'visitors', 'visit', and 'tour'.",
+  "confidence": "high"
+}
+================================================================================

@@ -1,0 +1,300 @@
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 0
+USER PROMPT:
+Feature index: 0
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=5.850]  for the>>> most<<< part were not admissible the united states when they
+   2. [act=3.494]   eighty thousand patients with tours and research and development for>>> nearly<<< a decade before coming to market our commitment to research
+   3. [act=2.981]  no brainer for>>> just<<< a big no thank you
+   4. [act=2.931]  studied for>>> approximately<<< fifteen years and over four hundred clinical trials in over
+   5. [act=2.199]   about any community because nationalism of course can manifest into>>> quite<<< admirable types of activities pride in country
+   6. [act=1.747]  for the most>>> part<<< were not admissible the united states when they came
+   7. [act=1.590]  today's agreement as a veteran for a>>> quarter<<< million disabled veterans no one can question their sacrifice no
+   8. [act=1.357]   the two extreme pre term birth and subsequent pregnancies after>>> just<<< one elective abortion a woman is two to twelve
+   9. [act=1.253]   board we thought we have satisfied the neighbors after a>>> lot<<< of hard work now we want to know how we
+  10. [act=1.057]   patients with tours and research and development for nearly a>>> decade<<< before coming to market our commitment to research did not
+  11. [act=0.983]   then there's also the you cannot receive compensation for>>> any<<< service rendered in behalf of the private interest after termin
+  12. [act=0.949]   transportation find financing has been on jazz high risk for>>> several<<< years and we view it as a topic of considerable
+  13. [act=0.899]  numerous hearings held by our subcommittee since the>>> beginning<<< of the hundred tenth congress which allowed for close evaluation
+  14. [act=0.862]   of health care in america simply too expensive for>>> millions<<< of americans to buy any health insurance at all
+  15. [act=0.640]   thought we have satisfied the neighbors after a lot of>>> hard<<< work now we want to know how we had we
+
+Most frequent activating tokens (top 14): "just", "most", "nearly", "approximately", "quite", "part", "quarter", "lot", "decade", "any", "several", "beginning", "millions", "hard"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Quantitative Modifier",
+  "explanation": "This feature detects words that modify or describe quantities, such as amounts, durations, or extents.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 3
+USER PROMPT:
+Feature index: 3
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=3.524]   may be the greatest environmental threat that we face this>>> century<<< it's a new issue and we have our hands
+   2. [act=3.091]   frontier of a clean energy economy for the twenty first>>> century<<< so
+   3. [act=3.083]   gratitude at our sixteenth president about celebrating the l>>>incoln<<<
+   4. [act=2.997]  china to allow>>> communist<<< chinese agents security agents into guantanamo is
+   5. [act=2.572]  another on the naming of>>> emancipation<<< hall as well as testimony before the full committee by
+   6. [act=2.430]   have served to keep calling them growth down to the>>> historical<<< level rather than to achieve additional savings so budget trade
+   7. [act=2.058]   where over the years not recent not just recently but>>> historically<<< and i'm in the process of putting something together
+   8. [act=1.967]   martial law and on june third the people's>>> liberation<<< army troops were deployed in the square and
+   9. [act=1.731]  that's the roc>>>kefeller<<< bond bipartisan proposal that came out of the committee thirteen
+  10. [act=1.728]   by our subcommittee since the beginning of the hundred tenth>>> congress<<< which allowed for close evaluation of the montgomery g
+  11. [act=1.643]   mr chairman oceans are in very serious trouble climate>>> change<<< will exacerbate
+  12. [act=1.492]  you might imagine that the>>> greatest<<< increase would come here i know not of which i
+  13. [act=1.475]   the deal that all men are created equal two centuries>>> later<<< america looks back with gratitude at our sixteenth
+  14. [act=1.467]   those topics to really master them could be a life>>>'s<<< work
+  15. [act=0.920]   later america looks back with gratitude at our six>>>teenth<<< president about celebrating the lincoln
+
+Most frequent activating tokens (top 14): "century", "incoln", "communist", "emancipation", "historical", "historically", "liberation", "kefeller", "congress", "change", "greatest", "later", "'s", "teenth"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Historical Time Periods",
+  "explanation": "The feature detects tokens related to historical events, time periods, and concepts, such as centuries, historical figures, and social movements.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 4
+USER PROMPT:
+Feature index: 4
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=1.816]   but historically and i'm in the process of putting>>> something<<< together on that
+   2. [act=1.614]   always chuckled when he would say that and i've>>> repeated<<< it myself a few times to audiences back home in
+   3. [act=1.519]   them forward and lay out timelines to see how successful>>> will<<< be actually hitting the targets the
+   4. [act=1.356]   sting essentially where they'll go to a designated place>>> she<<< will tell her x that she will let him
+   5. [act=1.298]   working on a human rights archive database with over two>>> thousand<<< cases of human rights abuses and prisoners of conscience bob
+   6. [act=1.231]   a central health care affordability an access issue and the>>> views<<< of the american public mainly because they touch almost
+   7. [act=1.053]   got call centers around all over the world servicing with>>> technology<<< don't need to be on onsite if you
+   8. [act=1.046]   rights archive database with over two thousand cases of human>>> rights<<< abuses and prisoners of conscience bob fu is one of
+   9. [act=1.034]   across the country it's projected the every body's>>> home<<< is going to decline on average by fourteen percent so
+  10. [act=1.030]   having recently been the executive director of four bands i>>>'d<<< like to share a story to demonstrate the effect of
+  11. [act=0.990]   pharmacy one of the oldest professions known to man and>>> the<<< key figure in
+  12. [act=0.986]   judge is going to have to look pretty hard and>>> find<<< a pretty clear mistake before they can reverse your decision
+  13. [act=0.977]   sobering figure so as we're moving forward my>>> sense<<< is that the person you know i have a great
+  14. [act=0.897]   had to be at least eighteen or older to answer>>> your<<< questions i'm sorry in your
+  15. [act=0.889]   outages that we suffered and it is because of>>> this<<< union loop which appears to be especially vulnerable to all
+
+Most frequent activating tokens (top 15): "something", "repeated", "will", "she", "thousand", "views", "technology", "rights", "home", "'d", "the", "find", "sense", "your", "this"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "General Noun Phrase",
+  "explanation": "The feature activates on a wide range of common nouns and pronouns, indicating it detects general noun phrases in language.",
+  "confidence": "medium"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 5
+USER PROMPT:
+Feature index: 5
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=3.249]   the police and they set up a sting essentially where>>> they<<<'ll go to a designated place she will tell her
+   2. [act=2.665]   we know contain a deadly gas that we told you>>> we<<< were going to track like it was our own nobody
+   3. [act=2.657]   how you provide services outside of geographic boundaries and how>>> you<<< provide services in a regional way to enable people
+   4. [act=2.404]   two sources of cholesterol in the year following our advertising>>> we<<< found a full fifty four percent of
+   5. [act=2.143]   taxes and incentives to small businesses to create new jobs>>> it<<<'s a simple i
+   6. [act=2.108]   court about what the proper legislative course is well if>>> you<<< would feel did we give them
+   7. [act=2.066]   shrubbery in the front of the property and>>> to<<< plant
+   8. [act=2.016]   effects at all in and the very very low and>>> we<<< we were wondering about this it only had five side
+   9. [act=1.985]   at all in and the very very low and we>>> we<<< were wondering about this it only had five side effects
+  10. [act=1.930]   all in and the very very low and we we>>> were<<< wondering about this it only had five side effects and
+  11. [act=1.846]   all more number of people well he did that because>>> he<<< wanted to get noticed to everybody and there may have
+  12. [act=1.829]   performing at different grades more to verbal so last year>>> we<<< had a same task it was a problem with
+  13. [act=1.660]   that's our shoreline setbacks we're doing that>>> we<<< have a
+  14. [act=1.647]   possible you should go in and out quickly and if>>> we<<< can differentiate you from sort of charge card junkies
+  15. [act=1.621]   you should go in and out quickly and if we>>> can<<< differentiate you from sort of charge card junkies then
+
+Most frequent activating tokens (top 8): "we", "you", "they", "it", "to", "were", "he", "can"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "First person pronouns",
+  "explanation": "The feature activates on tokens related to first person pronouns, such as 'we' and 'you', indicating it detects self-referential language",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 6
+USER PROMPT:
+Feature index: 6
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=3.245]   without the airport we become a very much a back>>>water<<< region for economic development frankly the airport needs to grow
+   2. [act=3.059]  the value of the so called tipping>>> point<<< about which we spoke in previous hearings at which the
+   3. [act=2.809]  our ports and harbors or the gate>>>ways<<< to domestic and international trade connecting the united states the
+   4. [act=2.278]   but a major bill like this would require a roll>>> call<<< vote and there's eleven days for that to happen
+   5. [act=2.254]   level rather than to achieve additional savings so budget trade>>>offs<<< over the next ten years look potentially pretty
+   6. [act=2.128]   and if we can differentiate you from sort of charge>>> card<<< junkies then we should try to do that with
+   7. [act=2.029]   in those middle areas manager tree that's our shore>>>line<<< setbacks we're doing that we have a
+   8. [act=1.997]   of the oldest professions known to man and the key>>> figure<<< in
+   9. [act=1.996]  a give me a data>>> point<<< that a condom is estimate that restrictive zoning taken as
+  10. [act=1.983]   four would help address current m t i the short>>>falls<<< along with other important improvements including substantially increasing the amount
+  11. [act=1.883]   a news picture similar to press photography is newsre>>>el<<< work but it is difficult to enter as a camera
+  12. [act=1.804]  the major red>>>raft<<<ing challenge the other married your area of change in
+  13. [act=1.622]   foot pedestrian pathway that was located outside of the stone>>> wall<<< on the shared border between us and the day
+  14. [act=1.609]   about and second of all as we expand the food>>> stamp<<< program we create a very important economic stimulus by definition
+  15. [act=1.569]   the laboratory and we found people were remembering the side>>> effects<<< at all in and the very very low and we
+
+Most frequent activating tokens (top 14): "point", "water", "ways", "call", "offs", "card", "line", "figure", "falls", "el", "raft", "wall", "stamp", "effects"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Geographic Boundary",
+  "explanation": "The feature detects words related to physical or conceptual boundaries, such as geographic locations, borders, or dividing lines",
+  "confidence": "medium"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 7
+USER PROMPT:
+Feature index: 7
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=2.587]   for multiple days so the temperatures are definitely on our>>> side<<< for the residents that don't have power in regards
+   2. [act=2.341]   frontier of a clean energy economy for the twenty first>>> century<<< so
+   3. [act=2.301]   those percentages we will do so that's what endeavor>>> means<<< and well in this agreement i'm curious if the
+   4. [act=2.194]   being the creek so that creek will be within open>>> space<<< here it will run down through the rear
+   5. [act=1.977]   energy legislation that will help us get to that new>>> frontier<<< of a clean energy economy for the twenty first century
+   6. [act=1.964]   but a real blueprint for what steps need to be>>> taken<<<
+   7. [act=1.944]   residents that don't have power in regards to their>>> decisions<<< in our decisions on do we need to relocate them
+   8. [act=1.915]  ies then we should try to do that with bankruptcy>>> legislation<<< i'm sorry not speaking to render health care
+   9. [act=1.862]   ourselves for the next piece of recovery that we can>>> offer<<< a recovery pace that will be
+  10. [act=1.857]   us get to that new frontier of a clean energy>>> economy<<< for the twenty first century so
+  11. [act=1.803]   circumstances are so when data gets presented it really surprises>>> people<<< because this is been kind of an invisible process and
+  12. [act=1.800]   be their independent review of where they think money is>>> sitting<<< in accounts that you know so you know randy
+  13. [act=1.796]   so the temperatures are definitely on our side for the>>> residents<<< that don't have power in regards to their decisions
+  14. [act=1.729]   in their letters of interest that would be a clear>>> win<<< for the city while i do appreciate
+  15. [act=1.728]   starting that process you always have the ability to back>>> off<<< or frankly if you get in the midst of some
+
+Most frequent activating tokens (top 15): "side", "century", "means", "space", "frontier", "taken", "decisions", "legislation", "offer", "economy", "people", "sitting", "residents", "win", "off"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Government Policy Discussion",
+  "explanation": "The feature activates on tokens related to government, policy, and decision-making, indicating it detects discussions about governmental policies and actions",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 8
+USER PROMPT:
+Feature index: 8
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 3 activating examples (ordered strongest first):
+   1. [act=1.285]  this is fear m>>>ong<<<ering it is wrong and it has obscured what is
+   2. [act=1.260]  wa>>>iting<<< period a five month waiting period now although mr
+   3. [act=0.260]  under represented in peter's>>> township<<< on income when we look at comparable communities or comparable
+
+Most frequent activating tokens (top 3): "ong", "iting", "township"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Temporal Duration",
+  "explanation": "The feature detects words related to time periods or durations, such as 'waiting' or suffixes indicating length of time like 'ong' or 'ing'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 9
+USER PROMPT:
+Feature index: 9
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=18.758]  china to allow communist chinese agents>>> security<<< agents into guantanamo is beyond unacceptable and
+   2. [act=13.787]  secure food and fuel>>> security<<< for our country and thirdly that we embrace the
+   3. [act=11.503]  energy>>> security<<< made it in the federal interest to protect this area
+   4. [act=5.671]  whose primary source of income is social>>> security<<< or in my home state of new jersey more than
+   5. [act=4.922]   this bill as well through a bonus in their social>>> security<<< checks so mr president i think we are making
+   6. [act=3.251]   a program that will be there and will be strong>>> secure<<< and will have enough money for them to help them
+   7. [act=2.838]  v>>>ulnerability<<< when moving a loved one into the care of strangers
+   8. [act=2.832]   with this legislation we know that it authorizes unconstitutional>>> surveillance<<< of
+   9. [act=1.814]  nor ever will be>>> secure<<< when the transactions of their rulers may be concealed from
+  10. [act=1.635]   to the hundred tenth congress she serves on the house>>> armed<<< services the science and technology in the foreign affairs committee
+  11. [act=1.216]  china to allow communist chinese agents security>>> agents<<< into guantanamo is beyond unacceptable and
+  12. [act=1.005]   for which they should not be blamed and should receive>>> protection<<< now even if i were to grant the distinction and
+  13. [act=0.729]   and dialogue the chinese government responded by declaring martial>>> law<<< and on june third the people's liberation army
+  14. [act=0.708]   rights archive database with over two thousand cases of human>>> rights<<< abuses and prisoners of conscience bob fu is one of
+  15. [act=0.594]   his organization humanitarian china is working on a human>>> rights<<< archive database with over two thousand cases of human rights
+
+Most frequent activating tokens (top 9): "security", "secure", "rights", "ulnerability", "surveillance", "armed", "agents", "protection", "law"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "National Security Concept",
+  "explanation": "The feature detects language related to national security, including security threats, surveillance, and protection of citizens and countries",
+  "confidence": "high"
+}
+================================================================================

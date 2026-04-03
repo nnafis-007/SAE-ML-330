@@ -1,0 +1,2897 @@
+{
+  "0": {
+    "feature_idx": 0,
+    "label": "Quantity and extent",
+    "explanation": "The feature detects words and phrases related to quantity, duration, and extent, such as 'most', 'long', 'more', and 'lot'.",
+    "confidence": "high",
+    "top_tokens": [
+      "most",
+      "lot",
+      "long",
+      "more",
+      "some",
+      "much",
+      "least",
+      "too",
+      "as",
+      "extended",
+      "certain",
+      "whatever",
+      "approximately",
+      "literally"
+    ],
+    "top_contexts": [
+      {
+        "token": "most",
+        "context": " come out publicly in front of their friends for the>>> most<<< part what we do get our kids coming up to",
+        "activation_value": 7.041930675506592
+      },
+      {
+        "token": "long",
+        "context": " seen that kind of growth john town jobs for a>>> long<<< time this project reverses that we will see a",
+        "activation_value": 6.50986385345459
+      },
+      {
+        "token": "some",
+        "context": " actually was unlawful possession of them if if he for>>> some<<< reason was holding them for any kind of illegal purpose",
+        "activation_value": 6.494304180145264
+      },
+      {
+        "token": "most",
+        "context": "for the>>> most<<< part were not admissible the united states when they",
+        "activation_value": 5.864792346954346
+      },
+      {
+        "token": "much",
+        "context": "for>>> much<<< of life in oceans and in turn for us i",
+        "activation_value": 5.791494369506836
+      },
+      {
+        "token": "least",
+        "context": " supreme court has been reading congress's statutes for the>>> least<<< that they have to be worth as opposed to giving",
+        "activation_value": 5.593537330627441
+      },
+      {
+        "token": "lot",
+        "context": " simple we have a problem with this economy for a>>> lot<<< of reasons i've described some of them on the",
+        "activation_value": 5.503261566162109
+      },
+      {
+        "token": "long",
+        "context": " some conclusions there's currently and has been for a>>> long<<< time an unfair balance between the presentation of the risks",
+        "activation_value": 5.397125244140625
+      },
+      {
+        "token": "too",
+        "context": " spending again in this economy starts charging forward again for>>> too<<< long we have ignored working families and any economic recovery",
+        "activation_value": 5.157524108886719
+      },
+      {
+        "token": "as",
+        "context": " with that now moving the building is for at least>>> as<<< possible also provides that space where if we need to",
+        "activation_value": 4.9219183921813965
+      },
+      {
+        "token": "lot",
+        "context": " and obviously negatively affecting the quality of life for a>>> lot<<< of americans including my constituents back in texas",
+        "activation_value": 4.574827671051025
+      },
+      {
+        "token": "extended",
+        "context": " for those who have been out of work for an>>> extended<<< period of time such benefits are absent from the house",
+        "activation_value": 4.42777156829834
+      },
+      {
+        "token": "certain",
+        "context": "increase that they can live with for a>>> certain<<< amount of time so that right now we're all",
+        "activation_value": 4.426831245422363
+      },
+      {
+        "token": "more",
+        "context": " near denver and englewood colorado for>>> more<<< than seventy five years our company's been the premier",
+        "activation_value": 4.328341007232666
+      },
+      {
+        "token": "lot",
+        "context": " i had to put it in the deed for a>>> lot<<< for that there couldn't be anything in his view",
+        "activation_value": 4.252536296844482
+      },
+      {
+        "token": "most",
+        "context": "so i think for>>> most<<< purposes that you know that the commission commission's decision",
+        "activation_value": 4.242465496063232
+      },
+      {
+        "token": "whatever",
+        "context": " home heating oil have more than doubled he also for>>> whatever<<< reason forgot to tell us that year after year while",
+        "activation_value": 4.159932613372803
+      },
+      {
+        "token": "approximately",
+        "context": " testing invalidation runs that have been going on for>>> approximately<<< a year we",
+        "activation_value": 4.15287446975708
+      },
+      {
+        "token": "more",
+        "context": " percent of workers have been looking for a job for>>> more<<< than twenty six weeks",
+        "activation_value": 4.0682692527771
+      },
+      {
+        "token": "literally",
+        "context": " package these tax credits would essentially not kick in for>>> literally<<< years lenny instances and aren't going to do",
+        "activation_value": 4.037955284118652
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Quantity and extent\",\n  \"explanation\": \"The feature detects words and phrases related to quantity, duration, and extent, such as 'most', 'long', 'more', and 'lot'.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "1": {
+    "feature_idx": 1,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "2": {
+    "feature_idx": 2,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "3": {
+    "feature_idx": 3,
+    "label": "Historical Time Period",
+    "explanation": "The feature activates on tokens related to specific time periods, such as centuries, decades, and historical events, indicating it detects concepts related to time and history",
+    "confidence": "high",
+    "top_tokens": [
+      "communist",
+      "century",
+      "history",
+      "twentieth",
+      "incoln",
+      "war",
+      "emancipation",
+      "era",
+      "decades",
+      "depression",
+      "decade"
+    ],
+    "top_contexts": [
+      {
+        "token": "century",
+        "context": " the example back in the early part of the twentieth>>> century<<< here we are of the early part of the twenty",
+        "activation_value": 4.600648403167725
+      },
+      {
+        "token": "communist",
+        "context": " his active support for clinton era trade policies with>>> communist<<< china policies that have now had a disastrous impact",
+        "activation_value": 4.115232467651367
+      },
+      {
+        "token": "twentieth",
+        "context": " follow the example back in the early part of the>>> twentieth<<< century here we are of the early part of the",
+        "activation_value": 4.049954414367676
+      },
+      {
+        "token": "century",
+        "context": " may be the greatest environmental threat that we face this>>> century<<< it's a new issue and we have our hands",
+        "activation_value": 3.5438034534454346
+      },
+      {
+        "token": "century",
+        "context": " a while it's been growing over the last half>>> century<<< but we still don't take the oceans seriously enough",
+        "activation_value": 3.2588157653808594
+      },
+      {
+        "token": "century",
+        "context": " frontier of a clean energy economy for the twenty first>>> century<<< so",
+        "activation_value": 3.0895283222198486
+      },
+      {
+        "token": "incoln",
+        "context": " gratitude at our sixteenth president about celebrating the l>>>incoln<<<",
+        "activation_value": 3.072070837020874
+      },
+      {
+        "token": "communist",
+        "context": "china to allow>>> communist<<< chinese agents security agents into guantanamo is",
+        "activation_value": 3.013620615005493
+      },
+      {
+        "token": "history",
+        "context": " decade for the longest protracted period of growth in our>>> history<<< so mr president come to florida day",
+        "activation_value": 2.8940820693969727
+      },
+      {
+        "token": "communist",
+        "context": " i just have this rather disgusting vision of putting up>>> communist<<<",
+        "activation_value": 2.8910088539123535
+      },
+      {
+        "token": "war",
+        "context": " on around the time and perhaps somewhat by the civil>>> war<<< of course early in vermont and jericho is",
+        "activation_value": 2.801180839538574
+      },
+      {
+        "token": "communist",
+        "context": " wealth and this basic fact has not been lost on>>> communist<<< party bosses ",
+        "activation_value": 2.7151715755462646
+      },
+      {
+        "token": "history",
+        "context": "programs ever in the>>> history<<< of the world has been our naval vessels powered by",
+        "activation_value": 2.71431303024292
+      },
+      {
+        "token": "communist",
+        "context": "foreign intelligence whether it be chinese>>> communist<<< intelligence in such a way that the results are seriously",
+        "activation_value": 2.674962043762207
+      },
+      {
+        "token": "communist",
+        "context": "'s leadership would be gone to understand what a tragedy>>> communist<<< rule",
+        "activation_value": 2.6439309120178223
+      },
+      {
+        "token": "emancipation",
+        "context": "another on the naming of>>> emancipation<<< hall as well as testimony before the full committee by",
+        "activation_value": 2.5755233764648438
+      },
+      {
+        "token": "era",
+        "context": " were dismayed by his active support for clinton>>> era<<< trade policies with communist china policies that have now",
+        "activation_value": 2.5660247802734375
+      },
+      {
+        "token": "decades",
+        "context": " three to five to six percent over the last few>>> decades<<< cultural land conservation land still has the vast majority of",
+        "activation_value": 2.5021860599517822
+      },
+      {
+        "token": "depression",
+        "context": " when we have had the worst recession since the great>>> depression<<< she has continued to apply for and look for jobs",
+        "activation_value": 2.4971511363983154
+      },
+      {
+        "token": "decade",
+        "context": "consumer this economy has depended on over the last>>> decade<<< for the longest protracted period of growth in our history",
+        "activation_value": 2.4708786010742188
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Historical Time Period\",\n  \"explanation\": \"The feature activates on tokens related to specific time periods, such as centuries, decades, and historical events, indicating it detects concepts related to time and history\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "4": {
+    "feature_idx": 4,
+    "label": "General Movement Action",
+    "explanation": "The feature detects tokens related to movement, action, or transition, such as 'back', 'trying', 'come', and 'take', which indicate a sense of progression or change",
+    "confidence": "medium",
+    "top_tokens": [
+      "back",
+      "bought",
+      "something",
+      "trying",
+      "and",
+      "testifying",
+      "an",
+      "somewhere",
+      "repeated",
+      "regular",
+      "so",
+      "life",
+      "will",
+      "procedures",
+      "places",
+      "come",
+      "of",
+      "take",
+      "years",
+      "proven"
+    ],
+    "top_contexts": [
+      {
+        "token": "back",
+        "context": "would be able to our staff will be walking>>> back<<< and forth will be doing programs together we're going",
+        "activation_value": 2.1831178665161133
+      },
+      {
+        "token": "bought",
+        "context": " on criteria tyria with various committees and the public>>> bought<<< into",
+        "activation_value": 2.0855512619018555
+      },
+      {
+        "token": "something",
+        "context": " but historically and i'm in the process of putting>>> something<<< together on that",
+        "activation_value": 1.8275171518325806
+      },
+      {
+        "token": "trying",
+        "context": " the court of public around for a number of years>>> trying<<< to figure out how to do that and then congress",
+        "activation_value": 1.7403082847595215
+      },
+      {
+        "token": "and",
+        "context": " hundred fifty acres of land in recent years the number>>> and<<<",
+        "activation_value": 1.7254328727722168
+      },
+      {
+        "token": "testifying",
+        "context": "iser family foundation and a representative from the foundation is>>> testifying<<< today",
+        "activation_value": 1.6841111183166504
+      },
+      {
+        "token": "an",
+        "context": " orientation feel that will begin at the beginning capital tour>>> an<<< exhibition that includes a well sure write a selection of",
+        "activation_value": 1.6480169296264648
+      },
+      {
+        "token": "somewhere",
+        "context": " going to keep going up like this will probably be>>> somewhere<<< in between so sort of the average the past ten",
+        "activation_value": 1.6439917087554932
+      },
+      {
+        "token": "repeated",
+        "context": " always chuckled when he would say that and i've>>> repeated<<< it myself a few times to audiences back home in",
+        "activation_value": 1.6369379758834839
+      },
+      {
+        "token": "regular",
+        "context": "t as everyone knows the council as we all have>>> regular<<< jobs this is a volunteer and part of what's",
+        "activation_value": 1.636505126953125
+      },
+      {
+        "token": "so",
+        "context": "'t keep doing it because the only way people live>>> so<<< that at the very least if you want headquarters somebody",
+        "activation_value": 1.5746620893478394
+      },
+      {
+        "token": "life",
+        "context": " particular kind of provider so that we can have the>>> life<<< line program got that certification went through a process with",
+        "activation_value": 1.570603847503662
+      },
+      {
+        "token": "will",
+        "context": " them forward and lay out timelines to see how successful>>> will<<< be actually hitting the targets the",
+        "activation_value": 1.5375635623931885
+      },
+      {
+        "token": "procedures",
+        "context": " from the performance based aviation role making committee to deploy>>> procedures<<< and from the community we're gathering",
+        "activation_value": 1.527217149734497
+      },
+      {
+        "token": "places",
+        "context": " we don't have a lot of infrastructure a key>>> places<<< within the country places like",
+        "activation_value": 1.5027803182601929
+      },
+      {
+        "token": "come",
+        "context": " the database there's a number of databases that will>>> come<<< up and it will show for instance this offline convictions",
+        "activation_value": 1.4525433778762817
+      },
+      {
+        "token": "of",
+        "context": " the united states capitol have to offer a project>>> of<<< this magnitude requires the skills and talents",
+        "activation_value": 1.4429001808166504
+      },
+      {
+        "token": "take",
+        "context": " any neighborhood to have these large houses come in and>>> take<<< over especially in this neighborhood where there are ranches",
+        "activation_value": 1.4312913417816162
+      },
+      {
+        "token": "years",
+        "context": " and the court of public around for a number of>>> years<<< trying to figure out how to do that and then",
+        "activation_value": 1.4250210523605347
+      },
+      {
+        "token": "proven",
+        "context": " the case but i don't think the science has>>> proven<<< it to this point to be the case but certainly",
+        "activation_value": 1.4134066104888916
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"General Movement Action\",\n  \"explanation\": \"The feature detects tokens related to movement, action, or transition, such as 'back', 'trying', 'come', and 'take', which indicate a sense of progression or change\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
+  },
+  "5": {
+    "feature_idx": 5,
+    "label": "First person plural",
+    "explanation": "The feature detects the presence of first-person plural pronouns, such as 'we' and 'they', which are commonly used to refer to groups or parties involved in a conversation or action",
+    "confidence": "high",
+    "top_tokens": [
+      "we",
+      "they",
+      "you",
+      "'ve",
+      "i",
+      "has",
+      "to",
+      "their",
+      "he",
+      "his"
+    ],
+    "top_contexts": [
+      {
+        "token": "we",
+        "context": " we've created around the twin cities areas and how>>> we<<<'ve been able to embed them in their particular locations",
+        "activation_value": 3.3300304412841797
+      },
+      {
+        "token": "they",
+        "context": " the notice on the agenda for the ordinary and then>>> they<<< have the specific location so that if any members of",
+        "activation_value": 3.25895619392395
+      },
+      {
+        "token": "they",
+        "context": " the police and they set up a sting essentially where>>> they<<<'ll go to a designated place she will tell her",
+        "activation_value": 3.232954978942871
+      },
+      {
+        "token": "'ve",
+        "context": "'ve created around the twin cities areas and how we>>>'ve<<< been able to embed them in their particular locations this",
+        "activation_value": 3.1356821060180664
+      },
+      {
+        "token": "we",
+        "context": " everybody can use a refresher course every year because>>> we<<< deal with a lot of issues a lot of different",
+        "activation_value": 2.9826951026916504
+      },
+      {
+        "token": "you",
+        "context": " one without asking you did it you proposing to others>>> you<<<'ve got",
+        "activation_value": 2.773158550262451
+      },
+      {
+        "token": "i",
+        "context": " plain to those people that i represent and those that>>> i<<< don't but still care about this project why i",
+        "activation_value": 2.7539827823638916
+      },
+      {
+        "token": "you",
+        "context": " you and one part you make to claims number one>>> you<<<'re going to flight fight cholesterol number two you're",
+        "activation_value": 2.662522077560425
+      },
+      {
+        "token": "we",
+        "context": " we know contain a deadly gas that we told you>>> we<<< were going to track like it was our own nobody",
+        "activation_value": 2.644103527069092
+      },
+      {
+        "token": "you",
+        "context": " how you provide services outside of geographic boundaries and how>>> you<<< provide services in a regional way to enable people",
+        "activation_value": 2.6322786808013916
+      },
+      {
+        "token": "we",
+        "context": " our working people in the construction industry back to work>>> we<<< should address that issue as well with the president coming",
+        "activation_value": 2.6144487857818604
+      },
+      {
+        "token": "has",
+        "context": "cellently me fused to pay for it the state>>> has<<< refused to or",
+        "activation_value": 2.6102120876312256
+      },
+      {
+        "token": "they",
+        "context": " with this industry that they they take that to heart>>> they<<< are",
+        "activation_value": 2.558680534362793
+      },
+      {
+        "token": "to",
+        "context": " somebody is unemployed you have to punish him you have>>> to<<< pressure them to go back to work",
+        "activation_value": 2.4845263957977295
+      },
+      {
+        "token": "their",
+        "context": " is a collection vehicle and basically what they admit in>>> their<<< brief is the essence we've had difficulty collecting taxes",
+        "activation_value": 2.429896831512451
+      },
+      {
+        "token": "we",
+        "context": " two sources of cholesterol in the year following our advertising>>> we<<< found a full fifty four percent of",
+        "activation_value": 2.372028112411499
+      },
+      {
+        "token": "he",
+        "context": " also social services particularly for service members returning from abroad>>> he<<< reaffirmed increases in army and marine corps and strength",
+        "activation_value": 2.3705601692199707
+      },
+      {
+        "token": "his",
+        "context": " under his command very seriously but that didn't mean>>> his<<< naturally engaging personality",
+        "activation_value": 2.3605666160583496
+      },
+      {
+        "token": "they",
+        "context": " don't think they really want us to settle otherwise>>> they<<< would uphold our rule of law fond du lac has",
+        "activation_value": 2.359588384628296
+      },
+      {
+        "token": "they",
+        "context": " to mobilize the african american community and now>>> they<<<'re beginning to see after a period of three to",
+        "activation_value": 2.3309974670410156
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"First person plural\",\n  \"explanation\": \"The feature detects the presence of first-person plural pronouns, such as 'we' and 'they', which are commonly used to refer to groups or parties involved in a conversation or action\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "6": {
+    "feature_idx": 6,
+    "label": "Geographic Boundary",
+    "explanation": "The feature detects tokens related to physical or conceptual boundaries, such as shorelines, signs, or gates, which demarcate or define spatial limits",
+    "confidence": "high",
+    "top_tokens": [
+      "back",
+      "line",
+      "sign",
+      "water",
+      "table",
+      "point",
+      "mobile",
+      "action",
+      "making",
+      "ways",
+      "gate",
+      "work",
+      "sheet",
+      "stamp",
+      "book",
+      "site",
+      "points",
+      "prime"
+    ],
+    "top_contexts": [
+      {
+        "token": "sign",
+        "context": " a stop sign because i see there was a stop>>> sign<<< there and that means he had to stop the court",
+        "activation_value": 3.324573040008545
+      },
+      {
+        "token": "back",
+        "context": " bulbs with improved c f elves which have a pay>>>back<<< of less than five months our computer services are in",
+        "activation_value": 3.311084032058716
+      },
+      {
+        "token": "water",
+        "context": " without the airport we become a very much a back>>>water<<< region for economic development frankly the airport needs to grow",
+        "activation_value": 3.2424373626708984
+      },
+      {
+        "token": "back",
+        "context": " of the dirksen building but again the pay>>>back<<< period far",
+        "activation_value": 3.157845973968506
+      },
+      {
+        "token": "table",
+        "context": " businesses and we're partnering with every month business round>>>table<<< on the top talent pipeline management have taken responsibility for",
+        "activation_value": 3.0742249488830566
+      },
+      {
+        "token": "line",
+        "context": " the beach processes it errored officially fixes the shore>>>line<<< and ",
+        "activation_value": 3.07150936126709
+      },
+      {
+        "token": "point",
+        "context": "the value of the so called tipping>>> point<<< about which we spoke in previous hearings at which the",
+        "activation_value": 3.067391872406006
+      },
+      {
+        "token": "mobile",
+        "context": "preschools and their book>>>mobile<<< service so she spends time with them by e mail",
+        "activation_value": 2.895193099975586
+      },
+      {
+        "token": "action",
+        "context": " future that address this issue this is not a class>>> action<<< this is one person's case as a practical matter",
+        "activation_value": 2.8351075649261475
+      },
+      {
+        "token": "making",
+        "context": "consideration any needed airspace rule>>>making<<< process is must be initiated and coordination with air traffic",
+        "activation_value": 2.7960259914398193
+      },
+      {
+        "token": "ways",
+        "context": "our ports and harbors or the gate>>>ways<<< to domestic and international trade connecting the united states the",
+        "activation_value": 2.786726236343384
+      },
+      {
+        "token": "gate",
+        "context": " joe and whatever that we heard about during water>>>gate<<< so people think it's not going to happen to",
+        "activation_value": 2.7539803981781006
+      },
+      {
+        "token": "work",
+        "context": "because it's sort of been a patch>>>work<<< of of communications and electrical additions that would give a",
+        "activation_value": 2.7117836475372314
+      },
+      {
+        "token": "sheet",
+        "context": "credit reports and balance>>> sheet<<< you know our view this additional scrutiny could help c",
+        "activation_value": 2.62441086769104
+      },
+      {
+        "token": "line",
+        "context": " which is a separate set of rules so the shore>>>line<<< objectives are defined in the courses on management and i",
+        "activation_value": 2.5102694034576416
+      },
+      {
+        "token": "stamp",
+        "context": "'t get checks if that house bill had been rubber>>> stamp<<< or is rubber stamped by the united states senate during",
+        "activation_value": 2.480306625366211
+      },
+      {
+        "token": "book",
+        "context": " the bill should read the secretary of state the hand>>>book<<< for design at least once every six years the",
+        "activation_value": 2.459327220916748
+      },
+      {
+        "token": "site",
+        "context": " used for staging or construction workers will be parking off>>>site<<< that hasn't been finalized but they are committed to",
+        "activation_value": 2.406792163848877
+      },
+      {
+        "token": "points",
+        "context": "that both shores and sting structure their price>>> points<<< it's one affordable for me i make thirty two",
+        "activation_value": 2.3806283473968506
+      },
+      {
+        "token": "prime",
+        "context": " because of foreclosures because because of a sub>>>prime<<< mortgages but half would still be being foreclosed because",
+        "activation_value": 2.367220640182495
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Geographic Boundary\",\n  \"explanation\": \"The feature detects tokens related to physical or conceptual boundaries, such as shorelines, signs, or gates, which demarcate or define spatial limits\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "7": {
+    "feature_idx": 7,
+    "label": "Government Decision Process",
+    "explanation": "The feature activates on tokens related to official discussions, policies, and decision-making, indicating a focus on government or administrative procedures",
+    "confidence": "high",
+    "top_tokens": [
+      "is",
+      "process",
+      "directly",
+      "side",
+      "available",
+      "ourselves",
+      "cost",
+      "century",
+      "are",
+      "whole",
+      "means",
+      "issues",
+      "be",
+      "making",
+      "done",
+      "increase",
+      "space",
+      "stream"
+    ],
+    "top_contexts": [
+      {
+        "token": "is",
+        "context": " you we will be presenting whatever the new building ordinance>>> is<<< or if there's a special project that needs your",
+        "activation_value": 2.7219948768615723
+      },
+      {
+        "token": "directly",
+        "context": " introduction of it and the opportunity to hear from you>>> directly<<< today thank you i would now like to",
+        "activation_value": 2.654344320297241
+      },
+      {
+        "token": "side",
+        "context": " for multiple days so the temperatures are definitely on our>>> side<<< for the residents that don't have power in regards",
+        "activation_value": 2.6034765243530273
+      },
+      {
+        "token": "available",
+        "context": " to work this out so we make this stuff absolutely>>> available<<< h r thirty three ninety",
+        "activation_value": 2.5095386505126953
+      },
+      {
+        "token": "process",
+        "context": " saying it should have to go through a more rigorous>>> process<<< which makes sense and especially as our town is growing",
+        "activation_value": 2.457124948501587
+      },
+      {
+        "token": "ourselves",
+        "context": " to get so we'd have to become statisticians>>> ourselves<<< to know that",
+        "activation_value": 2.4123077392578125
+      },
+      {
+        "token": "cost",
+        "context": " what needs to be done and how much it will>>> cost<<< in that",
+        "activation_value": 2.3656184673309326
+      },
+      {
+        "token": "century",
+        "context": " frontier of a clean energy economy for the twenty first>>> century<<< so",
+        "activation_value": 2.346813678741455
+      },
+      {
+        "token": "are",
+        "context": " of the budget in terms of what that final numbers>>> are<<< going to be",
+        "activation_value": 2.3400962352752686
+      },
+      {
+        "token": "whole",
+        "context": " now maintaining the organizational integrity of the organization as a>>> whole<<< we cannot skew it too far in any",
+        "activation_value": 2.319021224975586
+      },
+      {
+        "token": "means",
+        "context": " those percentages we will do so that's what endeavor>>> means<<< and well in this agreement i'm curious if the",
+        "activation_value": 2.3024542331695557
+      },
+      {
+        "token": "process",
+        "context": " so that you can fold that into your decision making>>> process<<< during ",
+        "activation_value": 2.2961151599884033
+      },
+      {
+        "token": "issues",
+        "context": " have and we look forward to the debate on those>>> issues<<< and those steps so i want to congratulate the",
+        "activation_value": 2.294361114501953
+      },
+      {
+        "token": "be",
+        "context": " in terms of what that final numbers are going to>>> be<<<",
+        "activation_value": 2.288806676864624
+      },
+      {
+        "token": "making",
+        "context": " that so that you can fold that into your decision>>> making<<< process during ",
+        "activation_value": 2.2836010456085205
+      },
+      {
+        "token": "done",
+        "context": " should be exceptionally grateful for the work that they've>>> done<<< thank you thank you i",
+        "activation_value": 2.2738945484161377
+      },
+      {
+        "token": "increase",
+        "context": " increase this year we're looking at a twelve percent>>> increase<<< in health care insurance that's two hundred seventy five",
+        "activation_value": 2.212127208709717
+      },
+      {
+        "token": "is",
+        "context": " mitigate the amount of disturbance in that stream area there>>> is<<< we have looked at potentially doing thirty five foot setbacks",
+        "activation_value": 2.2119834423065186
+      },
+      {
+        "token": "space",
+        "context": " being the creek so that creek will be within open>>> space<<< here it will run down through the rear",
+        "activation_value": 2.2087085247039795
+      },
+      {
+        "token": "stream",
+        "context": "'re trying to mitigate the amount of disturbance in that>>> stream<<< area there is we have looked at potentially doing thirty",
+        "activation_value": 2.2077784538269043
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Government Decision Process\",\n  \"explanation\": \"The feature activates on tokens related to official discussions, policies, and decision-making, indicating a focus on government or administrative procedures\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "8": {
+    "feature_idx": 8,
+    "label": "Day or Name",
+    "explanation": "The feature detects tokens that resemble days of the week or proper nouns, particularly names and words containing the 'ing' or 'on' suffix",
+    "confidence": "medium",
+    "top_tokens": [
+      "onday",
+      "ington",
+      "ham",
+      "ong",
+      "iting",
+      "ent"
+    ],
+    "top_contexts": [
+      {
+        "token": "onday",
+        "context": " anything that can be done on it tomorrow or m>>>onday<<< i mean it is has the date on all the",
+        "activation_value": 8.352354049682617
+      },
+      {
+        "token": "ington",
+        "context": "twenty eight well>>>ington<<< lane lots believed in the one on the site also",
+        "activation_value": 2.1670854091644287
+      },
+      {
+        "token": "ham",
+        "context": "the trial happened you know a few years after gra>>>ham<<< no one gave any indication that they knew that the",
+        "activation_value": 1.3492169380187988
+      },
+      {
+        "token": "ong",
+        "context": "this is fear m>>>ong<<<ering it is wrong and it has obscured what is",
+        "activation_value": 1.2625364065170288
+      },
+      {
+        "token": "iting",
+        "context": "wa>>>iting<<< period a five month waiting period now although mr",
+        "activation_value": 1.2321302890777588
+      },
+      {
+        "token": "ent",
+        "context": "mom>>>ent<<< of silence for the tragedy that unfolded last night in",
+        "activation_value": 1.1816760301589966
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Day or Name\",\n  \"explanation\": \"The feature detects tokens that resemble days of the week or proper nouns, particularly names and words containing the 'ing' or 'on' suffix\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
+  },
+  "9": {
+    "feature_idx": 9,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "security",
+        "context": " the would be criminal who were trying to change the>>> security<<< to prevent from doing bad things so in that case",
+        "activation_value": 21.087846755981445
+      },
+      {
+        "token": "security",
+        "context": " fenced in area the it would be the same>>> security<<< that currently exists there would be the same",
+        "activation_value": 18.958518981933594
+      },
+      {
+        "token": "security",
+        "context": " we face the collateral doesn't mean they waive their>>> security<<< interest and that funds case address precisely that they said",
+        "activation_value": 18.872865676879883
+      },
+      {
+        "token": "security",
+        "context": "china to allow communist chinese agents>>> security<<< agents into guantanamo is beyond unacceptable and",
+        "activation_value": 18.77806282043457
+      },
+      {
+        "token": "security",
+        "context": " and the s c while faced with many facilities and>>> security<<< issues we have found or have formed a",
+        "activation_value": 18.730403900146484
+      },
+      {
+        "token": "security",
+        "context": " of staffing and infrastructure our ports in order to provide>>> security<<< for our nation being understaffed and underfunded",
+        "activation_value": 18.255971908569336
+      },
+      {
+        "token": "security",
+        "context": " station and our future needs is that we have our>>> security<<< system our video monitoring and recording system which we frequently",
+        "activation_value": 18.213621139526367
+      },
+      {
+        "token": "security",
+        "context": " who do food services and transportation and to some degree>>> security<<< and so on although many of them receive lower pay",
+        "activation_value": 18.04485511779785
+      },
+      {
+        "token": "security",
+        "context": " balance that i talked about into being the balance between>>> security<<<",
+        "activation_value": 17.670812606811523
+      },
+      {
+        "token": "security",
+        "context": " long do they last before they are over with well>>> security<<< vehicles are turned over a lot on a lot faster",
+        "activation_value": 17.608190536499023
+      },
+      {
+        "token": "security",
+        "context": " poses a risk in our maritime environment through our container>>> security<<< initiative we have officers deployed in thirty two countries at",
+        "activation_value": 15.434247970581055
+      },
+      {
+        "token": "security",
+        "context": "liberty versus>>> security<<< on terrorism what they don't like is playpen",
+        "activation_value": 15.426379203796387
+      },
+      {
+        "token": "security",
+        "context": "challenges posed by transportation>>> security<<< energy greening the new capitol visitor center and",
+        "activation_value": 13.908256530761719
+      },
+      {
+        "token": "security",
+        "context": "secure food and fuel>>> security<<< for our country and thirdly that we embrace the",
+        "activation_value": 13.813167572021484
+      },
+      {
+        "token": "security",
+        "context": " to introduce h r fifty five fifty two the border>>> security<<< accountability act madam chair you talked about the billions",
+        "activation_value": 12.940425872802734
+      },
+      {
+        "token": "security",
+        "context": "or border>>> security<<< measures we cannot have local leaders refusing to assist in",
+        "activation_value": 12.851241111755371
+      },
+      {
+        "token": "security",
+        "context": "expanded a ray of challenges in the an international>>> security<<< environment not just traditional state on state conflict with other",
+        "activation_value": 12.558237075805664
+      },
+      {
+        "token": "security",
+        "context": "children that witness abuse have this sense of>>> security<<< trust and safety shaken to the core studies have shown",
+        "activation_value": 12.10495662689209
+      },
+      {
+        "token": "security",
+        "context": " that will completely solve all of our nation's border>>> security<<< challenges everything that happens on our nation's borders and",
+        "activation_value": 11.692819595336914
+      },
+      {
+        "token": "security",
+        "context": " new border patrol agents despite this unprecedented investment in border>>> security<<< more in the mines to be done i have long",
+        "activation_value": 11.56669807434082
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99951, Requested 980. Please try again in 13m24.384s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "10": {
+    "feature_idx": 10,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "bit",
+        "context": "ar>>>bit<<<ration clauses into their emissions materials when legal concerns arise",
+        "activation_value": 17.890151977539062
+      },
+      {
+        "token": "bit",
+        "context": "that would be a requirement of any successful>>> bit<<< or on bt we have what's been known",
+        "activation_value": 6.4236907958984375
+      },
+      {
+        "token": "bit",
+        "context": " through the winter they're not going to provide any>>> bit<<< of privacy whatsoever for these folks at all nothing and",
+        "activation_value": 1.3291847705841064
+      },
+      {
+        "token": "bits",
+        "context": "emotional emotionally charged testimony and also>>> bits<<< of it was played right before the closing argument i",
+        "activation_value": 1.0850563049316406
+      },
+      {
+        "token": "x",
+        "context": " or buddhist into what i call a mar>>>x<<<ist capitalist system china's",
+        "activation_value": 1.0283602476119995
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99951, Requested 475. Please try again in 6m8.063999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "11": {
+    "feature_idx": 11,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "12": {
+    "feature_idx": 12,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "long",
+        "context": " going for short term gains instead of looking at the>>> long<<< term interest of the city but",
+        "activation_value": 1.9479799270629883
+      },
+      {
+        "token": "not",
+        "context": " for the employees for everybody this is a good thing>>> not<<< a bad thing",
+        "activation_value": 1.930756688117981
+      },
+      {
+        "token": "'s",
+        "context": " a reasonable thing to do i don't think it>>>'s<<< going to have a",
+        "activation_value": 1.7912886142730713
+      },
+      {
+        "token": "the",
+        "context": " to keep step with one sometimes often got ahead of>>> the<<< other in two thousand",
+        "activation_value": 1.780300498008728
+      },
+      {
+        "token": "in",
+        "context": " that they are not adding to the traffic problem when>>> in<<< fact of course and each one does increment by increment",
+        "activation_value": 1.777604103088379
+      },
+      {
+        "token": "how",
+        "context": " them what about the risks well before i show you>>> how<<< the risks are presented and what the consequences are",
+        "activation_value": 1.7606842517852783
+      },
+      {
+        "token": "final",
+        "context": " to the county council and the county council is the>>> final<<< authority on conditional permit",
+        "activation_value": 1.693934440612793
+      },
+      {
+        "token": "a",
+        "context": " the employees for everybody this is a good thing not>>> a<<< bad thing",
+        "activation_value": 1.6702361106872559
+      },
+      {
+        "token": "of",
+        "context": " tried to keep step with one sometimes often got ahead>>> of<<< the other in two thousand",
+        "activation_value": 1.6551369428634644
+      },
+      {
+        "token": "little",
+        "context": " yes that's good policy but it will have very>>> little<<< stimulus effect very little stimulus effect on the underlying economy",
+        "activation_value": 1.6459263563156128
+      },
+      {
+        "token": "not",
+        "context": " time from time to time in doing so they have>>> not<<< been affected resolving this by evidence of the fact that",
+        "activation_value": 1.6358740329742432
+      },
+      {
+        "token": "good",
+        "context": " it still was something i think we should all feel>>> good<<< about we're",
+        "activation_value": 1.6160354614257812
+      },
+      {
+        "token": "'t",
+        "context": "'s good those work fairly well for new development doesn>>>'t<<< really help us with all the existing development on the",
+        "activation_value": 1.544715166091919
+      },
+      {
+        "token": "disappointing",
+        "context": " the journey to he goes sometimes difficult often fun occasionally>>> disappointing<<< and always rewarding my time as a boy scout in",
+        "activation_value": 1.5285695791244507
+      },
+      {
+        "token": "of",
+        "context": " in fact that's why members of congress and short>>> of<<< some procedural small",
+        "activation_value": 1.5102999210357666
+      },
+      {
+        "token": "been",
+        "context": " from time to time in doing so they have not>>> been<<< affected resolving this by evidence of the fact that we",
+        "activation_value": 1.4877203702926636
+      },
+      {
+        "token": "out",
+        "context": " license to practice most states now grant reciprocity two>>> out<<< of state applicants although only a small percentage of pharmac",
+        "activation_value": 1.4858160018920898
+      },
+      {
+        "token": "congress",
+        "context": " u s funds that can be withheld from committees of>>> congress<<< exercising oversight function and i believe that would be",
+        "activation_value": 1.4568934440612793
+      },
+      {
+        "token": "is",
+        "context": " gets to see these children every other week so when>>> is<<< he supposed",
+        "activation_value": 1.4334914684295654
+      },
+      {
+        "token": "don",
+        "context": " gets put away for certain things and sometimes you just>>> don<<<'t spend it all and it's there in other",
+        "activation_value": 1.3964922428131104
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99950, Requested 1017. Please try again in 13m55.488s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "13": {
+    "feature_idx": 13,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "14": {
+    "feature_idx": 14,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "so",
+        "context": "bathroom>>> so<<< i would i would choose to have this voted on",
+        "activation_value": 12.651567459106445
+      },
+      {
+        "token": "so",
+        "context": "trees>>> so<<< we can at least start to get things in there",
+        "activation_value": 11.475860595703125
+      },
+      {
+        "token": "so",
+        "context": "infringement>>> so<<< that's not that that is not equitable it's",
+        "activation_value": 10.993339538574219
+      },
+      {
+        "token": "so",
+        "context": "motor vehicle traffic>>> so<<< if someone is stepping out into the roadway to receive",
+        "activation_value": 10.787497520446777
+      },
+      {
+        "token": "so",
+        "context": "ordinance>>> so<<< that's the first issue that's the biggest issue",
+        "activation_value": 10.781139373779297
+      },
+      {
+        "token": "so",
+        "context": "of land>>> so<<< it's a different type of dead zone but changes",
+        "activation_value": 10.578556060791016
+      },
+      {
+        "token": "so",
+        "context": "structures>>> so<<< if it's seventy first in floor a ratio it",
+        "activation_value": 10.556814193725586
+      },
+      {
+        "token": "so",
+        "context": "state>>> so<<< that we move the country forward it's about jobs",
+        "activation_value": 10.158958435058594
+      },
+      {
+        "token": "so",
+        "context": "finance agency>>> so<<< now we have fifty five banks in alabama that",
+        "activation_value": 10.146450996398926
+      },
+      {
+        "token": "so",
+        "context": "somewhere>>> so<<< right that's a good question when you're doing",
+        "activation_value": 9.964803695678711
+      },
+      {
+        "token": "so",
+        "context": "all in nine by eighteen angle space>>> so<<< if you're pulling in there and you want to",
+        "activation_value": 9.676301956176758
+      },
+      {
+        "token": "so",
+        "context": "ok>>> so<<< now we're on to business item five either and",
+        "activation_value": 9.389677047729492
+      },
+      {
+        "token": "so",
+        "context": "chinese communist intelligence>>> so<<< i may even call it propaganda chinese propaganda to",
+        "activation_value": 9.304778099060059
+      },
+      {
+        "token": "so",
+        "context": "it>>> so<<< it would have a nice appearance from us mcm",
+        "activation_value": 9.052267074584961
+      },
+      {
+        "token": "so",
+        "context": "prior meeting>>> so<<< the court felt that you know this doesn't comp",
+        "activation_value": 9.029092788696289
+      },
+      {
+        "token": "so",
+        "context": "efficient timetable>>> so<<< that this review process can wrap up in the next",
+        "activation_value": 9.008913040161133
+      },
+      {
+        "token": "so",
+        "context": "school>>> so<<< it kind of raises the challenge of caring and it",
+        "activation_value": 8.92892074584961
+      },
+      {
+        "token": "so",
+        "context": "the economy>>> so<<< once again you're dealing with the moral issue that",
+        "activation_value": 8.812286376953125
+      },
+      {
+        "token": "so",
+        "context": "on new legislation>>> so<<< that's that's where your role will be and",
+        "activation_value": 8.567695617675781
+      },
+      {
+        "token": "so",
+        "context": "trying to turn over top of each other>>> so<<< we still have a little bit of work to do",
+        "activation_value": 8.525164604187012
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99950, Requested 868. Please try again in 11m46.752s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "15": {
+    "feature_idx": 15,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "to",
+        "context": "details seems>>> to<<< be blinding a lot of people to the key details",
+        "activation_value": 20.413908004760742
+      },
+      {
+        "token": "to",
+        "context": "thing on that is that the court seems>>> to<<< be backtracking even where it has already decided in",
+        "activation_value": 19.877845764160156
+      },
+      {
+        "token": "to",
+        "context": "perception seems>>> to<<< exist that this is another type of affirmative action program",
+        "activation_value": 19.39853286743164
+      },
+      {
+        "token": "to",
+        "context": "saying that the mother seems>>> to<<< acknowledge that she's not a boy she doesn't",
+        "activation_value": 19.26567268371582
+      },
+      {
+        "token": "to",
+        "context": "seems>>> to<<< untangle us here i hope that we can find",
+        "activation_value": 18.45702362060547
+      },
+      {
+        "token": "to",
+        "context": "remember that we seen one another sometimes congress seems>>> to<<< have suffered from this but but it is really quite",
+        "activation_value": 18.346975326538086
+      },
+      {
+        "token": "to",
+        "context": "consuming but the p b t seem>>> to<<< be working well to meet customs dual mission to keep",
+        "activation_value": 18.28472328186035
+      },
+      {
+        "token": "to",
+        "context": " violence and the number of deaths and injuries that seems>>> to<<< indicate that we had just taken those statistics from ",
+        "activation_value": 17.820070266723633
+      },
+      {
+        "token": "to",
+        "context": "try but in the past these efficiency measures seem>>> to<<< have served to keep calling them growth down to the",
+        "activation_value": 17.784160614013672
+      },
+      {
+        "token": "to",
+        "context": " spent on marketing drugs to treat erectile dysfunction seem>>> to<<< me to be disproportionate and i've always considered that",
+        "activation_value": 17.758197784423828
+      },
+      {
+        "token": "to",
+        "context": " car she couldn't identify them by name that seems>>> to<<< suggest some haphazard control of her car and",
+        "activation_value": 17.546409606933594
+      },
+      {
+        "token": "to",
+        "context": "that appears>>> to<<< be the type of issue which we may be confronting",
+        "activation_value": 16.7607479095459
+      },
+      {
+        "token": "to",
+        "context": "but what you have is this you get what seems>>> to<<< be an attempt to boil the lines or carelessness",
+        "activation_value": 16.305282592773438
+      },
+      {
+        "token": "to",
+        "context": " about the plea agreement which are relatively thin that seems>>> to<<< be what it was that the parties were",
+        "activation_value": 16.149831771850586
+      },
+      {
+        "token": "to",
+        "context": " know what we're looking for this mysterious planet seems>>> to<<<",
+        "activation_value": 16.135149002075195
+      },
+      {
+        "token": "to",
+        "context": " and the reason is this that the administration decisions appear>>> to<<< go in the direction of narrowing down the number",
+        "activation_value": 15.427989959716797
+      },
+      {
+        "token": "to",
+        "context": " and it is because of this union loop which appears>>> to<<< be especially vulnerable to all sorts",
+        "activation_value": 15.288036346435547
+      },
+      {
+        "token": "to",
+        "context": " covered the old fashion way they earned and it seems>>> to<<< me that if we did not have the selected covered",
+        "activation_value": 15.218096733093262
+      },
+      {
+        "token": "to",
+        "context": "the it seems>>> to<<< be basically centered around wheelchair accessibility but wheelchair accessibility is",
+        "activation_value": 15.085867881774902
+      },
+      {
+        "token": "to",
+        "context": " be fulfilled and to say as as caterpillar seems>>> to<<< be gearing towards saying this happened because we're so",
+        "activation_value": 14.823375701904297
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99950, Requested 961. Please try again in 13m7.104s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "16": {
+    "feature_idx": 16,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "assumption",
+        "context": " as if you said well there's sort of an>>> assumption<<< that ordinarily that would be in the building and so",
+        "activation_value": 7.723161697387695
+      },
+      {
+        "token": "expectation",
+        "context": " i mentioned was this idea that rio had an>>> expectation<<< of an offense level of thirty now that's something",
+        "activation_value": 7.581203460693359
+      },
+      {
+        "token": "assumption",
+        "context": " stimulate the economy where the product is produced and the>>> assumption<<< is that most of these dollars will be spent on",
+        "activation_value": 6.529236793518066
+      },
+      {
+        "token": "assumption",
+        "context": " with applicants for what happens around the school and my>>> assumption<<< is if i did want to go and say this",
+        "activation_value": 6.522737503051758
+      },
+      {
+        "token": "belief",
+        "context": " fact that those on the other side have a genuine>>> belief<<< that spending more money is the way they would prefer",
+        "activation_value": 4.924957275390625
+      },
+      {
+        "token": "assumption",
+        "context": " actually stepped down which to me was very suspicious my>>> assumption<<< is that this group is professor that there's a",
+        "activation_value": 4.90916109085083
+      },
+      {
+        "token": "impression",
+        "context": " the research about the photos is kind of get the>>> impression<<< now adays that back in that era people just",
+        "activation_value": 4.714293479919434
+      },
+      {
+        "token": "suggestion",
+        "context": " and i don't think there needs to be a>>> suggestion<<< of",
+        "activation_value": 4.392377853393555
+      },
+      {
+        "token": "notion",
+        "context": "in enrollment growth the>>> notion<<< that federal financial aid has promoted college access to the",
+        "activation_value": 4.24525260925293
+      },
+      {
+        "token": "assumptions",
+        "context": " situation here and many of the recommendations are based on>>> assumptions<<< regarding",
+        "activation_value": 4.129923343658447
+      },
+      {
+        "token": "insistence",
+        "context": " their determination and their confidence in the future and their>>> insistence<<< that they would make the future better for their families",
+        "activation_value": 4.066264629364014
+      },
+      {
+        "token": "indication",
+        "context": " no money to hire an attorney and there was no>>> indication<<< that he would even be able to get an attorney",
+        "activation_value": 4.029442310333252
+      },
+      {
+        "token": "suspicion",
+        "context": " even calling and taking steps shows that he had some>>> suspicion<<<",
+        "activation_value": 3.9110426902770996
+      },
+      {
+        "token": "sense",
+        "context": " care of a loved one the emotional toll and the>>> sense<<< of",
+        "activation_value": 3.8799684047698975
+      },
+      {
+        "token": "contention",
+        "context": " right wasn't provided is not is not true the>>> contention<<< is also",
+        "activation_value": 3.8774056434631348
+      },
+      {
+        "token": "suggestion",
+        "context": "the>>> suggestion<<< that she could work or could expect to work thirty",
+        "activation_value": 3.86059832572937
+      },
+      {
+        "token": "impression",
+        "context": "which is i was under the>>> impression<<< that the maximum sentence level here would be a level",
+        "activation_value": 3.8344125747680664
+      },
+      {
+        "token": "assurance",
+        "context": "reasonable>>> assurance<<< that the requirements of the order going to be fulfilled",
+        "activation_value": 3.6217689514160156
+      },
+      {
+        "token": "indication",
+        "context": " i think there are two different numbers there was an>>> indication<<< of a two point five million those are the fees",
+        "activation_value": 3.5603461265563965
+      },
+      {
+        "token": "assurance",
+        "context": " for all our years for our children there's the>>> assurance<<< of a good start up a score of years of",
+        "activation_value": 3.550323486328125
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99949, Requested 1006. Please try again in 13m45.12s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "17": {
+    "feature_idx": 17,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "take",
+        "context": "to go out and>>> take<<< a hundred and fifty billion dollars and sprinkle it around",
+        "activation_value": 4.894162178039551
+      },
+      {
+        "token": "just",
+        "context": " mean it's as if somebody just walked in and>>> just<<< decided to say some things on behalf of a young",
+        "activation_value": 4.70784330368042
+      },
+      {
+        "token": "get",
+        "context": "'re pretty comfortable with physicians decision they may go and>>> get<<< a second opinion or a third opinion which i think",
+        "activation_value": 4.386940956115723
+      },
+      {
+        "token": "spend",
+        "context": " just giving people six hundred dollars to go out and>>> spend<<< arbitrarily which they may spend on a product that's",
+        "activation_value": 4.326068878173828
+      },
+      {
+        "token": "get",
+        "context": " do a breakfast ball where you come in and you>>> get<<< a",
+        "activation_value": 4.238315582275391
+      },
+      {
+        "token": "you",
+        "context": " actually do a breakfast ball where you come in and>>> you<<< get a",
+        "activation_value": 4.067148685455322
+      },
+      {
+        "token": "take",
+        "context": " any neighborhood to have these large houses come in and>>> take<<< over especially in this neighborhood where there are ranches",
+        "activation_value": 3.7564353942871094
+      },
+      {
+        "token": "look",
+        "context": "i think if you like let us go back and>>> look<<< at that sit with paul figure out what can",
+        "activation_value": 3.464765787124634
+      },
+      {
+        "token": "create",
+        "context": " have to happen if they wanted to come in and>>> create<<< two way access through through our lot where you have",
+        "activation_value": 3.424846887588501
+      },
+      {
+        "token": "make",
+        "context": " the guise of i'm going up to check and>>> make<<< sure this is not my sister when by that time",
+        "activation_value": 3.415858268737793
+      },
+      {
+        "token": "get",
+        "context": " with his wife and two or three other couples to>>> get<<< one concept where you can go to same person three",
+        "activation_value": 3.3744778633117676
+      },
+      {
+        "token": "seek",
+        "context": "'t bring it up when you're coming here to>>> seek<<< the boundary which seems ludicrous to me from a judicial",
+        "activation_value": 3.3429794311523438
+      },
+      {
+        "token": "say",
+        "context": "as well the governor would not come in and>>> say<<< i don't care what you agreed to i'm",
+        "activation_value": 3.3362698554992676
+      },
+      {
+        "token": "get",
+        "context": " up and people can still walk out there and eventually>>> get<<< to as patrick points out the quite pa",
+        "activation_value": 3.315852642059326
+      },
+      {
+        "token": "get",
+        "context": " through the mail and people of course refuse to go>>> get<<< it little different thing when the constable shows up",
+        "activation_value": 3.2971582412719727
+      },
+      {
+        "token": "tell",
+        "context": "d stopped in my office to visit with me to>>> tell<<< me about his struggles which are the struggles of many",
+        "activation_value": 3.2533822059631348
+      },
+      {
+        "token": "talk",
+        "context": " the floor last week i came to the floor to>>> talk<<< a little bit about the stimulus package that is before",
+        "activation_value": 3.230717658996582
+      },
+      {
+        "token": "eat",
+        "context": " if he doesn't spend it on going out to>>> eat<<< all the time or go to the movies or whatever",
+        "activation_value": 3.209543228149414
+      },
+      {
+        "token": "go",
+        "context": " n ounce that he would be leaving the office to>>> go<<< to work in the pentagon as the deputy and",
+        "activation_value": 3.142448663711548
+      },
+      {
+        "token": "hurt",
+        "context": " fight them so they couldn't come over here and>>> hurt<<< his children for his bravery and service major mando",
+        "activation_value": 3.140259265899658
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99949, Requested 1045. Please try again in 14m18.815999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "18": {
+    "feature_idx": 18,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "night",
+        "context": " trial court this trial was about to start that the>>> night<<< before defense counsel has informed the state that it wanted",
+        "activation_value": 13.742850303649902
+      },
+      {
+        "token": "night",
+        "context": " the staff reports the legal opinions leading up to a>>> night<<<'s meeting there is no cited references to where this",
+        "activation_value": 12.674238204956055
+      },
+      {
+        "token": "night",
+        "context": " they doing this are all hours of the day and>>> night<<< from the morning until",
+        "activation_value": 10.928186416625977
+      },
+      {
+        "token": "night",
+        "context": "last basketball game is maybe seven thirty at>>> night<<< i guess potentially we have so you know winter you",
+        "activation_value": 10.408304214477539
+      },
+      {
+        "token": "night",
+        "context": " wear and tear on the roads any time day and>>> night<<< fumes",
+        "activation_value": 9.431498527526855
+      },
+      {
+        "token": "night",
+        "context": "agree we should pull those ads during until later at>>> night<<< when it's not affecting young audiences policy on advertising",
+        "activation_value": 9.309112548828125
+      },
+      {
+        "token": "nights",
+        "context": " exactly how this was how this occurred on two separate>>> nights<<< very closely apart by the way they're weak about",
+        "activation_value": 7.766533851623535
+      },
+      {
+        "token": "night",
+        "context": "good>>> night<<< i'm sorry about your wife",
+        "activation_value": 7.722039699554443
+      },
+      {
+        "token": "evening",
+        "context": " plants so i'll leave it at this that see>>> evening<<< because i know mark wants to go and listen to",
+        "activation_value": 6.10890531539917
+      },
+      {
+        "token": "evening",
+        "context": " winter you know i guess maybe three hours in the>>> evening<<< i guess where potentially there's",
+        "activation_value": 5.369080066680908
+      },
+      {
+        "token": "evening",
+        "context": " be might be it might be worthwhile having a separate>>> evening<<< just talking about it because as a board we've",
+        "activation_value": 5.001033306121826
+      },
+      {
+        "token": "evening",
+        "context": " truthfully that deputy hammer walked in that after that>>> evening<<< with intent to shoot anybody",
+        "activation_value": 4.77126407623291
+      },
+      {
+        "token": "dark",
+        "context": " was thinking that you know everyone sitting there in their>>> dark<<< suits and pretty well dressed up for a big location",
+        "activation_value": 4.431002616882324
+      },
+      {
+        "token": "winter",
+        "context": "they have it during the>>> winter<<< months for shelter well that neglects the fact that",
+        "activation_value": 3.4842522144317627
+      },
+      {
+        "token": "night",
+        "context": " i of that works out well as i indicated last>>> night<<< we had a good bipartisan vote on this would have",
+        "activation_value": 3.216073989868164
+      },
+      {
+        "token": "night",
+        "context": "the fifteen day extension last>>> night<<< is a man of his word and i know that",
+        "activation_value": 3.173201084136963
+      },
+      {
+        "token": "night",
+        "context": "moment of silence for the tragedy that unfolded last>>> night<<< in las vegas our sympathies go out to",
+        "activation_value": 2.7514092922210693
+      },
+      {
+        "token": "night",
+        "context": " back into the law the things that were defeated last>>> night<<< by the republicans and more we need an",
+        "activation_value": 2.266386032104492
+      },
+      {
+        "token": "brightness",
+        "context": " this floor that actually show greatness of this body and>>> brightness<<< of individuals i've seen on",
+        "activation_value": 2.219660758972168
+      },
+      {
+        "token": "evening",
+        "context": "good>>> evening<<< my name is peter quinn of peter",
+        "activation_value": 2.1447653770446777
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99949, Requested 978. Please try again in 13m20.928s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "19": {
+    "feature_idx": 19,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "visit",
+        "context": "you know we have one announced>>> visit<<< every year where they come out there walk around they",
+        "activation_value": 11.393634796142578
+      },
+      {
+        "token": "visitor",
+        "context": "americans to come and explore all the>>> visitor<<< center and the united states capitol have to offer",
+        "activation_value": 11.03156852722168
+      },
+      {
+        "token": "visit",
+        "context": " see what it is that they need for the next>>> visit<<< talking to them about what they have is ongoing projects",
+        "activation_value": 9.983697891235352
+      },
+      {
+        "token": "visitors",
+        "context": " trade associations and organizations whose members are engaged in bringing>>> visitors<<< safely to the nation's capital we believe the proposal",
+        "activation_value": 9.847542762756348
+      },
+      {
+        "token": "visitor",
+        "context": "keen professional interest in the national>>> visitor<<< center and all the activities of responsibilities of the office",
+        "activation_value": 9.832269668579102
+      },
+      {
+        "token": "visitor",
+        "context": " by transportation security energy greening the new capitol>>> visitor<<< center and the mounting and for structure backlog an urgent",
+        "activation_value": 9.7384033203125
+      },
+      {
+        "token": "visitor",
+        "context": " the history of the capitol building itself our new>>> visitor<<< center website will be the key to our comprehensive",
+        "activation_value": 9.40383243560791
+      },
+      {
+        "token": "visits",
+        "context": "'ve conducted more than seventy accredited credit ation site>>> visits<<< children's advocacy centers across the country over the past",
+        "activation_value": 9.368555068969727
+      },
+      {
+        "token": "visits",
+        "context": " they critique our operations but we also have unannounced>>> visits<<< as you would suspect and you like ",
+        "activation_value": 9.078554153442383
+      },
+      {
+        "token": "visitor",
+        "context": "with the capitol>>> visitor<<< center as well as providing commercial buses a place to",
+        "activation_value": 9.021567344665527
+      },
+      {
+        "token": "visit",
+        "context": " pharmaceutical products but also a salesman and detail man to>>> visit<<< positions and druggists and to give technical advice",
+        "activation_value": 8.579561233520508
+      },
+      {
+        "token": "visit",
+        "context": " of where they had traveled to germany to>>> visit<<< some of their family some of their",
+        "activation_value": 8.239415168762207
+      },
+      {
+        "token": "visitors",
+        "context": "i think that you know as far as>>> visitors<<< are concerned to the capitol i've i've",
+        "activation_value": 7.968892574310303
+      },
+      {
+        "token": "visit",
+        "context": " and to the to the public will come here to>>> visit<<< this national and international treasure we need a complete picture",
+        "activation_value": 7.520084381103516
+      },
+      {
+        "token": "visitors",
+        "context": " plus the commercial buses that will bring the the the>>> visitors<<< in the first place there that's correct",
+        "activation_value": 7.404997825622559
+      },
+      {
+        "token": "visitors",
+        "context": " since two thousand where we had fewer than two million>>> visitors<<< to the island of maui a significant drop",
+        "activation_value": 7.354402542114258
+      },
+      {
+        "token": "visitation",
+        "context": " who even arranges to come home when he has>>> visitation<<< so she knows to springfield you know she knows",
+        "activation_value": 7.317139625549316
+      },
+      {
+        "token": "visitation",
+        "context": "without clogging columbus circle or just during>>> visitation<<< to the region for limiting the people's ability to",
+        "activation_value": 7.314597129821777
+      },
+      {
+        "token": "visitors",
+        "context": " of their smaller size would be there to meet those>>> visitors<<< disembarking in addition motor coaches are the friendliest",
+        "activation_value": 7.312366485595703
+      },
+      {
+        "token": "visits",
+        "context": "e>>> visits<<< had started back up again as of this month to",
+        "activation_value": 7.3121771812438965
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99948, Requested 1010. Please try again in 13m47.712s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "20": {
+    "feature_idx": 20,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "21": {
+    "feature_idx": 21,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "allowed",
+        "context": " ever weighed it are you saying that she wasn't>>> allowed<<< to consider that at all or",
+        "activation_value": 16.51500129699707
+      },
+      {
+        "token": "allowed",
+        "context": " that there is no actual confusion that she is not>>> allowed<<< to weigh that against us if she had found actual",
+        "activation_value": 16.20928382873535
+      },
+      {
+        "token": "allowed",
+        "context": " his observation which was a proper observation and he was>>> allowed<<< to",
+        "activation_value": 15.729891777038574
+      },
+      {
+        "token": "allowed",
+        "context": "in order to you that you're>>> allowed<<< to have a joint venture to to do a telecom",
+        "activation_value": 15.464641571044922
+      },
+      {
+        "token": "allowed",
+        "context": "if has a fallback position if we're not>>> allowed<<< to have a carried interest in this how will they",
+        "activation_value": 14.018502235412598
+      },
+      {
+        "token": "allowed",
+        "context": "safety that the police are>>> allowed<<< to engage in is a community caretaking function so",
+        "activation_value": 13.799297332763672
+      },
+      {
+        "token": "allowed",
+        "context": " major manufacturers to bid and the suppliers are all still>>> allowed<<< the dealers to continue you have a picture here of",
+        "activation_value": 13.484012603759766
+      },
+      {
+        "token": "allowed",
+        "context": " along those lines and people parties are required to be>>> allowed<<< to present rebuttal evidence and the party initiating the",
+        "activation_value": 12.709427833557129
+      },
+      {
+        "token": "allowed",
+        "context": " or no harm would be done if they law were>>> allowed<<< to be expired well that's simply incorrect the ability",
+        "activation_value": 11.293622016906738
+      },
+      {
+        "token": "allowed",
+        "context": "be like rightly>>> allowed<<< in your zoning district so it's not exactly a",
+        "activation_value": 10.239866256713867
+      },
+      {
+        "token": "allowed",
+        "context": "normally applause is not>>> allowed<<< but for the chairman it's encouraged but well this",
+        "activation_value": 8.659671783447266
+      },
+      {
+        "token": "permitted",
+        "context": " the overall site area and once again the school was>>> permitted<<< under section four four zero six zero",
+        "activation_value": 8.63622760772705
+      },
+      {
+        "token": "allowed",
+        "context": " talking about in terms of when discovery would have been>>> allowed<<< well discovery would have been allowed at a minimum for",
+        "activation_value": 8.627057075500488
+      },
+      {
+        "token": "allowed",
+        "context": " not block public views so those are activities that are>>> allowed<<< there are some things you know we allow paver",
+        "activation_value": 8.054655075073242
+      },
+      {
+        "token": "permitted",
+        "context": " de facto heavy industrial because the vehicle processing is not>>> permitted<<< ",
+        "activation_value": 7.423604965209961
+      },
+      {
+        "token": "allowed",
+        "context": " why the amendment should have been>>> allowed<<< that alone prove them the law it is an amendment",
+        "activation_value": 7.359501838684082
+      },
+      {
+        "token": "allowed",
+        "context": " prove them the law it is an amendment should be>>> allowed<<< when for factors are met the first factor is",
+        "activation_value": 7.263198375701904
+      },
+      {
+        "token": "permitted",
+        "context": " there will be a period of mourning business with senators>>> permitted<<< to speak up to ten minutes each",
+        "activation_value": 6.979114055633545
+      },
+      {
+        "token": "allowed",
+        "context": " discovery would have been allowed well discovery would have been>>> allowed<<< at a minimum for thirteen months",
+        "activation_value": 5.954018592834473
+      },
+      {
+        "token": "allow",
+        "context": "five or several people that she would>>> allow<<< to drive around the car she couldn't identify them",
+        "activation_value": 5.185690879821777
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99948, Requested 975. Please try again in 13m17.472s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "22": {
+    "feature_idx": 22,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "man",
+        "context": "spokes>>>man<<< went on the state we have underscored to r",
+        "activation_value": 4.353759288787842
+      },
+      {
+        "token": "responded",
+        "context": " calling for freedom openness and dialogue the chinese government>>> responded<<< by declaring martial law and on june third the",
+        "activation_value": 4.305345058441162
+      },
+      {
+        "token": "statement",
+        "context": "opening>>> statement<<< and we'll have a couple of hours to get",
+        "activation_value": 4.230047702789307
+      },
+      {
+        "token": "on",
+        "context": "spokesman went>>> on<<< the state we have underscored to russia that",
+        "activation_value": 3.931795120239258
+      },
+      {
+        "token": "but",
+        "context": " said he might do that if he won the motion>>> but<<< he has never moved to suppress this actual evidence which",
+        "activation_value": 3.8221378326416016
+      },
+      {
+        "token": "has",
+        "context": "manager for the short term rental should it be granted>>> has<<< an active stated quite realistic license less than thirty driving",
+        "activation_value": 3.799276351928711
+      },
+      {
+        "token": "he",
+        "context": " he might do that if he won the motion but>>> he<<< has never moved to suppress this actual evidence which is",
+        "activation_value": 3.666926622390747
+      },
+      {
+        "token": "and",
+        "context": "opening statement>>> and<<< we'll have a couple of hours to get through",
+        "activation_value": 3.536269426345825
+      },
+      {
+        "token": "attorney",
+        "context": " it the fact that neither melanie johnson's>>> attorney<<< in the industrial commission or the state's attorney in",
+        "activation_value": 3.3732903003692627
+      },
+      {
+        "token": "and",
+        "context": "he's not questioning that>>> and<<< that's why he doesn't believe it's an",
+        "activation_value": 3.332385540008545
+      },
+      {
+        "token": "responded",
+        "context": "the chinese government>>> responded<<< by systematically incarcerated harassing the brave group of individuals who",
+        "activation_value": 3.2747507095336914
+      },
+      {
+        "token": "by",
+        "context": " for freedom openness and dialogue the chinese government responded>>> by<<< declaring martial law and on june third the people",
+        "activation_value": 3.2683329582214355
+      },
+      {
+        "token": "has",
+        "context": " regionalizing dispatch and setting up a union municipal district>>> has<<< continued to meet and we are in agreement on the",
+        "activation_value": 3.1909468173980713
+      },
+      {
+        "token": "told",
+        "context": "last summer>>> told<<< us that we were missing about two thirds of the",
+        "activation_value": 3.071824550628662
+      },
+      {
+        "token": "spokesperson",
+        "context": "more eloquent>>> spokesperson<<< than mr connor for what happens when the",
+        "activation_value": 3.061255931854248
+      },
+      {
+        "token": "email",
+        "context": " providers as a financial aid person put it in an>>> email<<< to me yesterday the direct lending program is more like",
+        "activation_value": 2.8994996547698975
+      },
+      {
+        "token": "court",
+        "context": " is a statement of current policy but the abate>>> court<<< recognized that the legislature can",
+        "activation_value": 2.8889124393463135
+      },
+      {
+        "token": "responded",
+        "context": "and the attorney>>> responded<<< it would be a waste of time and money because",
+        "activation_value": 2.8650271892547607
+      },
+      {
+        "token": "but",
+        "context": " law an existing law is a statement of current policy>>> but<<< the abate court recognized that the legislature can",
+        "activation_value": 2.864220142364502
+      },
+      {
+        "token": "it",
+        "context": "ered by private providers as a financial aid person put>>> it<<< in an email to me yesterday the direct lending program",
+        "activation_value": 2.8119969367980957
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99947, Requested 1002. Please try again in 13m39.936s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "23": {
+    "feature_idx": 23,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "listen",
+        "context": " but my job i feel as a representative is to>>> listen<<< to all the voices listen to the planning board listen",
+        "activation_value": 3.4451982975006104
+      },
+      {
+        "token": "represented",
+        "context": " employees to exercise their rights to collectively bargain and be>>> represented<<< based on a variety of factors putting other cases before",
+        "activation_value": 3.2884626388549805
+      },
+      {
+        "token": "to",
+        "context": " my job i feel as a representative is to listen>>> to<<< all the voices listen to the planning board listen the",
+        "activation_value": 3.034193992614746
+      },
+      {
+        "token": "work",
+        "context": " pleased to see that the president has been willing to>>> work<<< with us here in congress but i also believe there",
+        "activation_value": 2.9544837474823
+      },
+      {
+        "token": "up",
+        "context": " abdication of this body's duty to stand>>> up<<< for the rule of law we know what's wrong",
+        "activation_value": 2.9435834884643555
+      },
+      {
+        "token": "play",
+        "context": " we would facilitate any kind of evacuation and we would>>> play<<< the",
+        "activation_value": 2.7647104263305664
+      },
+      {
+        "token": "respond",
+        "context": " be most effective because they are nimble and can>>> respond<<< to rapidly",
+        "activation_value": 2.758267641067505
+      },
+      {
+        "token": "work",
+        "context": " that we are capable of functioning as a government and>>> work<<< in bipartisan ways to",
+        "activation_value": 2.733704090118408
+      },
+      {
+        "token": "debate",
+        "context": " all understand that the rules of the senate allow unlimited>>> debate<<< unlimited amendment but this is one case where we need",
+        "activation_value": 2.579906702041626
+      },
+      {
+        "token": "work",
+        "context": " as much as we're trying to be cooperative and>>> work<<< together we've got different interests obviously but we're",
+        "activation_value": 2.514815092086792
+      },
+      {
+        "token": "debate",
+        "context": " legislation gets better when people meet in the open and>>> debate<<<",
+        "activation_value": 2.506946086883545
+      },
+      {
+        "token": "looking",
+        "context": " need to be doing no harm we need to be>>> looking<<< at some of these technological solutions they obviously have a",
+        "activation_value": 2.4914462566375732
+      },
+      {
+        "token": "stand",
+        "context": " an abdication of this body's duty to>>> stand<<< up for the rule of law we know what's",
+        "activation_value": 2.48850679397583
+      },
+      {
+        "token": "looking",
+        "context": " in our neighborhoods we trust that the planning commission is>>> looking<<< out for the current residents first and foremost i hope",
+        "activation_value": 2.4736883640289307
+      },
+      {
+        "token": "ways",
+        "context": " capable of functioning as a government and work in bipartisan>>> ways<<< to",
+        "activation_value": 2.457669258117676
+      },
+      {
+        "token": "prosecute",
+        "context": " the unique role of prosecutors prosecutors have a duty to>>> prosecute<<< and",
+        "activation_value": 2.4382829666137695
+      },
+      {
+        "token": "working",
+        "context": " early on in the year to demonstrate our commitment to>>> working<<<",
+        "activation_value": 2.432839870452881
+      },
+      {
+        "token": "fight",
+        "context": " so you can be sure that i will continue to>>> fight<<< any proposal that changes those provisions but i want to",
+        "activation_value": 2.389089345932007
+      },
+      {
+        "token": "do",
+        "context": " this and this this organization and we're willing to>>> do<<< it in a way that will be transparent and that",
+        "activation_value": 2.3451457023620605
+      },
+      {
+        "token": "try",
+        "context": " square so yes we have a responsibility to react and>>> try<<< to address those pressing immediate safety transportation needs but we",
+        "activation_value": 2.3425235748291016
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99947, Requested 1018. Please try again in 13m53.76s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "24": {
+    "feature_idx": 24,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "on",
+        "context": "'re going to get a clear up or down vote>>> on<<< providing an additional thirteen weeks of unemployment compensation",
+        "activation_value": 6.562886714935303
+      },
+      {
+        "token": "on",
+        "context": " have power in regards to their decisions in our decisions>>> on<<< do we need to relocate them or not i'm",
+        "activation_value": 6.426544189453125
+      },
+      {
+        "token": "on",
+        "context": "decision>>> on<<< our own checks and balances judicial and congressional oversight will",
+        "activation_value": 6.3409881591796875
+      },
+      {
+        "token": "on",
+        "context": "is the final authority>>> on<<< the phase one process these two involves approval of the",
+        "activation_value": 6.1912970542907715
+      },
+      {
+        "token": "on",
+        "context": "in fact it moved it instead of the deadline>>> on<<< february the fifth one week earlier to jan",
+        "activation_value": 6.161945343017578
+      },
+      {
+        "token": "on",
+        "context": " the house of representatives deserve great credit for agreeing quickly>>> on<<< a timely",
+        "activation_value": 6.126112461090088
+      },
+      {
+        "token": "on",
+        "context": " votes scheduled in till the early part of next week>>> on<<< tuesday yesterday the senate",
+        "activation_value": 6.018689155578613
+      },
+      {
+        "token": "on",
+        "context": " utah's health information network are leading the way>>> on<<< this we need as a nation to get behind these",
+        "activation_value": 5.9015936851501465
+      },
+      {
+        "token": "on",
+        "context": " committee and i would hope that we could get agreement>>> on<<< that so i ask therefore madam president",
+        "activation_value": 5.881761074066162
+      },
+      {
+        "token": "on",
+        "context": " we need to do as far as we go forward>>> on<<< the reauthorization we heard the testimony today about",
+        "activation_value": 5.795466899871826
+      },
+      {
+        "token": "on",
+        "context": "very aggressively going out to clear the record>>> on<<< this to make sure that the community understands that the",
+        "activation_value": 5.794488430023193
+      },
+      {
+        "token": "on",
+        "context": "committee to move forward>>> on<<< this important legislation i represent louisiana's first",
+        "activation_value": 5.788548469543457
+      },
+      {
+        "token": "on",
+        "context": " do so they federal government has to be more aggressive>>> on<<< this and i will remind all of us as we",
+        "activation_value": 5.76799201965332
+      },
+      {
+        "token": "on",
+        "context": " county council and the county council is the final authority>>> on<<< conditional permit",
+        "activation_value": 5.7615814208984375
+      },
+      {
+        "token": "on",
+        "context": "trying to pull together to make some progress>>> on<<< these issues and what i am going to do is",
+        "activation_value": 5.741202354431152
+      },
+      {
+        "token": "on",
+        "context": " i indicated last night we had a good bipartisan vote>>> on<<< this would have been better if we'd had one",
+        "activation_value": 5.66243314743042
+      },
+      {
+        "token": "on",
+        "context": " evidenced by the house of representatives and the white house>>> on<<< the economic stimulus course it wasn't limited just to",
+        "activation_value": 5.577643394470215
+      },
+      {
+        "token": "on",
+        "context": " president continues to see the value of working with us>>> on<<< longer term investments that will pay off for years to",
+        "activation_value": 5.5724897384643555
+      },
+      {
+        "token": "on",
+        "context": " is also not changed so we're all still agreement>>> on<<< that point the larger issue i think which is was",
+        "activation_value": 5.538951873779297
+      },
+      {
+        "token": "on",
+        "context": " subcommittee and i think and i appreciate your reciprocity>>> on<<< that point and in ",
+        "activation_value": 5.53427791595459
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99947, Requested 968. Please try again in 13m10.56s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "25": {
+    "feature_idx": 25,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "to",
+        "context": " believe there was any relationship between his going from cops>>> to<<< hoffman is income went down when he was",
+        "activation_value": 6.553830146789551
+      },
+      {
+        "token": "to",
+        "context": " on making things on on everything from making newsprint>>> to<<<",
+        "activation_value": 6.21337890625
+      },
+      {
+        "token": "to",
+        "context": " routes mature the addiction can easily shift from making money>>> to<<< the drugs themselves which",
+        "activation_value": 6.0638837814331055
+      },
+      {
+        "token": "to",
+        "context": "american presidents from george washington>>> to<<< george w bush for us to acquire five trillion",
+        "activation_value": 5.959376335144043
+      },
+      {
+        "token": "to",
+        "context": " envelope from fifteen thousand four hundred fifty seven square feet>>> to<<< seventeen thousand one hundred twenty seven square feet or eighteen",
+        "activation_value": 5.531097888946533
+      },
+      {
+        "token": "to",
+        "context": " competitive bidding that happen from one nine hundred ninety nine>>> to<<< two thousand and two approximately fifty to fifty five",
+        "activation_value": 5.46196985244751
+      },
+      {
+        "token": "to",
+        "context": " community of about twenty thousand people about an our from>>> to<<<ledo in northwest",
+        "activation_value": 5.444271564483643
+      },
+      {
+        "token": "to",
+        "context": " be going down we're going from a combat confrontation>>> to<<< an oversight conference oversight role in terms of helping ",
+        "activation_value": 5.440461158752441
+      },
+      {
+        "token": "to",
+        "context": " be more whole and more full and hopefully from time>>> to<<< time they look to those of us here in washing",
+        "activation_value": 5.287132263183594
+      },
+      {
+        "token": "to",
+        "context": " that colombia went from an almost failed state>>> to<<< a strong democratic nation with an improving economy and reduced",
+        "activation_value": 5.1253132820129395
+      },
+      {
+        "token": "to",
+        "context": "again the total increase was from fifty nine>>> to<<< sixty six with those additional spaces at the array or",
+        "activation_value": 5.062705039978027
+      },
+      {
+        "token": "to",
+        "context": " configuration in the back to change from five parallel spaces>>> to<<< twelve diagonal fifty seven degree angle space which takes their",
+        "activation_value": 4.982247352600098
+      },
+      {
+        "token": "to",
+        "context": "border patrol in one year from october first>>> to<<< about a month ago we had over one hundred eighty",
+        "activation_value": 4.880741119384766
+      },
+      {
+        "token": "to",
+        "context": " legal question so this sale will then go from us>>> to<<< the public utilities commission and i'm wondering if there",
+        "activation_value": 4.675684928894043
+      },
+      {
+        "token": "to",
+        "context": " it's feeding all of those neighborhoods from north over>>> to<<< mechanic street ok so it's a it's a",
+        "activation_value": 4.644969940185547
+      },
+      {
+        "token": "to",
+        "context": " by moving the deepwater channel from the north side>>> to<<< the center of the and let the inlets current",
+        "activation_value": 4.635024547576904
+      },
+      {
+        "token": "to",
+        "context": " may be very effective in time to time from time>>> to<<< time in doing so they have not been affected resolving",
+        "activation_value": 4.624058246612549
+      },
+      {
+        "token": "to",
+        "context": " acres wants to make a similar change from agricultural land>>> to<<< an urban designation this commission will review it and make",
+        "activation_value": 4.569001197814941
+      },
+      {
+        "token": "to",
+        "context": "zone a little time to successfully transition from the military>>> to<<< the civilian sector it's unfair to expect service members",
+        "activation_value": 4.520221710205078
+      },
+      {
+        "token": "to",
+        "context": "pective of urban has increased relatively little from three>>> to<<< five to six percent over the last few decades cultural",
+        "activation_value": 4.458014488220215
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99946, Requested 993. Please try again in 13m31.296s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "26": {
+    "feature_idx": 26,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "a",
+        "context": " totally safe but every day we're becoming safer as>>> a<<< country i think that's important knowledge that i didn",
+        "activation_value": 4.843625545501709
+      },
+      {
+        "token": "single",
+        "context": " all of the forests in north america in a>>> single<<< year unless we change course coral reefs the entire ocean",
+        "activation_value": 4.241097450256348
+      },
+      {
+        "token": "the",
+        "context": " by his buddies the part of him parking earlier in>>> the<<< day and being dropped off by its buddies",
+        "activation_value": 3.9937355518341064
+      },
+      {
+        "token": "half",
+        "context": " stopped counting after this when the first two and a>>> half<<< years that i was living",
+        "activation_value": 3.9895875453948975
+      },
+      {
+        "token": "after",
+        "context": " also for whatever reason forgot to tell us that year>>> after<<< year while americans are paying",
+        "activation_value": 3.5982089042663574
+      },
+      {
+        "token": "as",
+        "context": " be totally safe but every day we're becoming safer>>> as<<< a country i think that's important knowledge that i",
+        "activation_value": 3.511362075805664
+      },
+      {
+        "token": "to",
+        "context": " may be very effective in time to time from time>>> to<<< time in doing so they have not been affected resolving",
+        "activation_value": 3.381011962890625
+      },
+      {
+        "token": "ten",
+        "context": " number in five years and will triple that number in>>> ten<<<",
+        "activation_value": 3.295820951461792
+      },
+      {
+        "token": "my",
+        "context": " says this isn't your time to argue this is>>> my<<< ruling this is not a judge who is giving a",
+        "activation_value": 3.2301554679870605
+      },
+      {
+        "token": "of",
+        "context": " know that i've gone back and forth a number>>> of<<< times in the past week past weeks and this decision",
+        "activation_value": 3.1670548915863037
+      },
+      {
+        "token": "source",
+        "context": " in the finnish drinking water than the raw>>> source<<< water reason that occurs",
+        "activation_value": 3.164340019226074
+      },
+      {
+        "token": "to",
+        "context": " most anything that you know you would require in day>>> to<<< day living because you know today it's no big",
+        "activation_value": 3.1529011726379395
+      },
+      {
+        "token": "'s",
+        "context": " home the brother i try to get home when she>>>'s<<< there we all try to do things i try to",
+        "activation_value": 3.1234660148620605
+      },
+      {
+        "token": "thirty",
+        "context": " grandchildren it's about thirty years ago it's about>>> thirty<<< years from now or fifty years from now",
+        "activation_value": 3.0641560554504395
+      },
+      {
+        "token": "raw",
+        "context": " higher in the finnish drinking water than the>>> raw<<< source water reason that occurs",
+        "activation_value": 3.007838249206543
+      },
+      {
+        "token": "a",
+        "context": " offered or could could get a job for thirty hours>>> a<<< week",
+        "activation_value": 2.87614107131958
+      },
+      {
+        "token": "first",
+        "context": " do easy and to first street northwest to constitution to>>> first<<< treat northeast and then over to independence",
+        "activation_value": 2.8697876930236816
+      },
+      {
+        "token": "to",
+        "context": " be more whole and more full and hopefully from time>>> to<<< time they look to those of us here in washing",
+        "activation_value": 2.864884376525879
+      },
+      {
+        "token": "wall",
+        "context": " debt would get wall street in trouble the government rescued>>> wall<<< street",
+        "activation_value": 2.7711572647094727
+      },
+      {
+        "token": "years",
+        "context": " it's about thirty years ago it's about thirty>>> years<<< from now or fifty years from now",
+        "activation_value": 2.7688865661621094
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99946, Requested 1020. Please try again in 13m54.624s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "27": {
+    "feature_idx": 27,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "com",
+        "context": " sergeant any received numerous medals and awards including the non>>>com<<<missioned officer professional development ribbon the bronze star medal",
+        "activation_value": 18.367321014404297
+      },
+      {
+        "token": "uncom",
+        "context": " from assisting us in the future they intelligence committee will>>> uncom<<<mitted is looked at this review that said that these",
+        "activation_value": 9.447813034057617
+      },
+      {
+        "token": "comp",
+        "context": " and mine was the noncompliance with the coworker>>> comp<<< act and the other was a patient compliance script so",
+        "activation_value": 7.961165428161621
+      },
+      {
+        "token": "comp",
+        "context": "district in>>> comp<<<as is three hundred miles of eastern long island coastline",
+        "activation_value": 7.272923469543457
+      },
+      {
+        "token": "comm",
+        "context": " to testify on various pending legislation we appreciate the sub>>>comm<<<ittees focus on such a broad range of issues in",
+        "activation_value": 7.195303916931152
+      },
+      {
+        "token": "comp",
+        "context": " so the court felt that you know this doesn't>>> comp<<<ort with the spirit of the sunshine law but actually",
+        "activation_value": 6.340789794921875
+      },
+      {
+        "token": "commun",
+        "context": " i consider myself a you know a translator and a>>> commun<<<icator and i represent a constituency of people across the",
+        "activation_value": 4.402676582336426
+      },
+      {
+        "token": "org",
+        "context": " of those tragic loss of life in iraq ge>>>org<<<ia soldiers",
+        "activation_value": 4.096774101257324
+      },
+      {
+        "token": "compos",
+        "context": " districts that are similar to us when you put those>>> compos<<<ites together but that would mean that we would have",
+        "activation_value": 3.8987250328063965
+      },
+      {
+        "token": "res",
+        "context": " researched on our own we went back and asked to>>> res<<<end that resolution because it was to the detriment of",
+        "activation_value": 3.716074228286743
+      },
+      {
+        "token": "org",
+        "context": " puget sound region the strait of ge>>>org<<<ia some big population centers so it's not impossible",
+        "activation_value": 3.605724334716797
+      },
+      {
+        "token": "org",
+        "context": " the constitutionality of that the supreme court of ge>>>org<<<ia upheld that ordinance as constitutional that activity meaning that",
+        "activation_value": 3.5770137310028076
+      },
+      {
+        "token": "org",
+        "context": "impact in ge>>>org<<<ia it's having an impact in california",
+        "activation_value": 3.0985398292541504
+      },
+      {
+        "token": "io",
+        "context": " and the only point i know the senator from oh>>>io<<< came",
+        "activation_value": 2.994763135910034
+      },
+      {
+        "token": "org",
+        "context": "from ge>>>org<<<ia has suggested that we have a one time very",
+        "activation_value": 2.872602939605713
+      },
+      {
+        "token": "io",
+        "context": " mountain native american side in adams county oh>>>io<<< and high school john was active in future farmers of",
+        "activation_value": 2.7300403118133545
+      },
+      {
+        "token": "hus",
+        "context": " was some relationship between al qaeda and saddam>>> hus<<<sein when just a review of the history of the",
+        "activation_value": 2.7096004486083984
+      },
+      {
+        "token": "io",
+        "context": " projects to make it more fair for states like oh>>>io<<< who are separately from what we're doing here today",
+        "activation_value": 2.60617733001709
+      },
+      {
+        "token": "res",
+        "context": " of the customary activities of daily life recently nursing home>>> res<<<iden",
+        "activation_value": 2.132612943649292
+      },
+      {
+        "token": "comp",
+        "context": "you know workers>>> comp<<< a separate and apart from civil so p i cases",
+        "activation_value": 2.112968921661377
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99946, Requested 1004. Please try again in 13m40.8s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "28": {
+    "feature_idx": 28,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "want",
+        "context": " robinson's statement that we can do whatever we>>> want<<< it thought that some sort of guarantee that he would",
+        "activation_value": 14.962808609008789
+      },
+      {
+        "token": "wanted",
+        "context": " deposition and they could have asked them any question they>>> wanted<<< about bias so",
+        "activation_value": 10.477642059326172
+      },
+      {
+        "token": "want",
+        "context": " other words how you file may get you where you>>> want<<< to be in this case but the",
+        "activation_value": 9.609511375427246
+      },
+      {
+        "token": "want",
+        "context": " a block of money for you to decide what we>>> want<<< to raise this year with you is is do you",
+        "activation_value": 9.590078353881836
+      },
+      {
+        "token": "want",
+        "context": "that they could hire who they>>> want<<< but really this is true of course they can not",
+        "activation_value": 9.481857299804688
+      },
+      {
+        "token": "like",
+        "context": "state their concerns make their comment whatever they>>> like<<< so it's really a matter of what the board",
+        "activation_value": 9.072066307067871
+      },
+      {
+        "token": "ases",
+        "context": "undred dollars a month to spend on whatever he ple>>>ases<<< and this can be an accumulation of wealth if he",
+        "activation_value": 8.063340187072754
+      },
+      {
+        "token": "want",
+        "context": " this in a comprehensive way to accomplish what we all>>> want<<< to accomplish and that's really ",
+        "activation_value": 7.0607500076293945
+      },
+      {
+        "token": "want",
+        "context": " to the state the state will benefit from however you>>> want<<< to call it the fact that neither melanie john",
+        "activation_value": 6.721391677856445
+      },
+      {
+        "token": "wants",
+        "context": "this is what the community says it>>> wants<<< to see and of at that point if the plan",
+        "activation_value": 6.669158458709717
+      },
+      {
+        "token": "like",
+        "context": "whatever you'd>>> like<<< whatever your pleasures but this isn't a process that",
+        "activation_value": 6.519528865814209
+      },
+      {
+        "token": "want",
+        "context": " so we we can take our pick on where you>>> want<<< to apply the harmless error but at any rate and",
+        "activation_value": 6.330458164215088
+      },
+      {
+        "token": "want",
+        "context": " the savings is calculated the employee committee decides how they>>> want<<< to spend that",
+        "activation_value": 6.092856407165527
+      },
+      {
+        "token": "wanted",
+        "context": " well it didn't work through the way that i>>> wanted<<< it to work through a lot better than had we",
+        "activation_value": 6.062167644500732
+      },
+      {
+        "token": "want",
+        "context": "always viewed this as your as as however you>>> want<<< to do this is totally up to you we don",
+        "activation_value": 5.734287261962891
+      },
+      {
+        "token": "want",
+        "context": " justices and everybody's approval and that's all we>>> want<<< to continue and hopefully like i said it won't",
+        "activation_value": 5.512134075164795
+      },
+      {
+        "token": "want",
+        "context": " architecture of the landscaping so we think however you>>> want<<< to cast it however you want to characterize that we",
+        "activation_value": 5.504636287689209
+      },
+      {
+        "token": "choose",
+        "context": " case my understanding is obviously you can raise whatever you>>> choose<<< to way to to raise that were already addressed before",
+        "activation_value": 5.154848098754883
+      },
+      {
+        "token": "want",
+        "context": " other thing i>>> want<<< to just make sure that i'm i'm clear",
+        "activation_value": 5.107391357421875
+      },
+      {
+        "token": "wanted",
+        "context": "spent a lot of time looking at what we>>> wanted<<< for criteria and i felt that we did a really",
+        "activation_value": 5.012077808380127
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99945, Requested 995. Please try again in 13m32.16s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "29": {
+    "feature_idx": 29,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "a",
+        "context": " that's all they ask they just say hey wait>>> a<<< minute we got we get this information where you run",
+        "activation_value": 1.864351749420166
+      },
+      {
+        "token": "much",
+        "context": "there are negatives it could be focused>>> much<<< more in a targeted way on the problem and would",
+        "activation_value": 1.8593637943267822
+      },
+      {
+        "token": "leave",
+        "context": " that he has asked these people leave they will not>>> leave<<< me while the smoke is coming in and not only",
+        "activation_value": 1.8126558065414429
+      },
+      {
+        "token": "spice",
+        "context": " if it was set up to alter those videos to>>> spice<<< videos to to recreate things that didn't happen that",
+        "activation_value": 1.7682658433914185
+      },
+      {
+        "token": "on",
+        "context": " rate because we get out there we have to knock>>> on<<< doors and these surveys are like thirty minutes long so",
+        "activation_value": 1.7184019088745117
+      },
+      {
+        "token": "et",
+        "context": "the pug>>>et<<< sound region the strait of georgia some",
+        "activation_value": 1.7085294723510742
+      },
+      {
+        "token": "a",
+        "context": "say wait>>> a<<< minute i think this was a trick to get us",
+        "activation_value": 1.5556936264038086
+      },
+      {
+        "token": "his",
+        "context": "closing on their homes if a veteran loses>>> his<<< or her job has a financial emergency or some other",
+        "activation_value": 1.5507924556732178
+      },
+      {
+        "token": "and",
+        "context": " specifically a written statement on april fourth two thousand>>> and<<< eleven",
+        "activation_value": 1.500480055809021
+      },
+      {
+        "token": "fail",
+        "context": "and should the should this operation>>> fail<<< it would be foreclosed on and it would be",
+        "activation_value": 1.487574577331543
+      },
+      {
+        "token": "by",
+        "context": " me i believe we do need to stimulate the economy>>> by<<< i think we need to focus the dollars on the",
+        "activation_value": 1.4433252811431885
+      },
+      {
+        "token": "deficit",
+        "context": " let spending all the third is to increase the federal>>> deficit<<< by borrowing the difference virtually",
+        "activation_value": 1.4214626550674438
+      },
+      {
+        "token": "that",
+        "context": " exclusive authority for conducting foreign intelligence surveillance now why is>>> that<<< important it's important",
+        "activation_value": 1.387428641319275
+      },
+      {
+        "token": "changed",
+        "context": "'s no indication this record that the court would have>>> changed<<< ",
+        "activation_value": 1.3861479759216309
+      },
+      {
+        "token": "wait",
+        "context": "'s that's all they ask they just say hey>>> wait<<< a minute we got we get this information where you",
+        "activation_value": 1.3683911561965942
+      },
+      {
+        "token": "would",
+        "context": " about but you might imagine that the greatest an influx>>> would<<< come in the warmer weather you might imagine that the",
+        "activation_value": 1.3471801280975342
+      },
+      {
+        "token": "ask",
+        "context": "to look at them let me>>> ask<<< you just took off the wall hypothetical question i don",
+        "activation_value": 1.3381444215774536
+      },
+      {
+        "token": "ask",
+        "context": " questions he could ask of what questions he couldn't>>> ask<<< the court directed what",
+        "activation_value": 1.3224074840545654
+      },
+      {
+        "token": "nearly",
+        "context": " the two higher bidders they don't know>>> nearly<<< as much about our local market area as does",
+        "activation_value": 1.3044884204864502
+      },
+      {
+        "token": "if",
+        "context": " to the child's step they don't know what>>> if<<< anything he did and all the cases i'm continuing",
+        "activation_value": 1.2817816734313965
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99945, Requested 1019. Please try again in 13m52.896s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  "30": {
+    "feature_idx": 30,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "top_tokens": [],
+    "top_contexts": [
+      {
+        "token": "year",
+        "context": " the two and you can see on this detail the>>> year<<< there are these black lines those are checked dams which",
+        "activation_value": 13.639982223510742
+      },
+      {
+        "token": "year",
+        "context": " aware that there were two sources of cholesterol in the>>> year<<< following our advertising we found a full fifty four percent",
+        "activation_value": 12.25706958770752
+      },
+      {
+        "token": "year",
+        "context": "so you should end up with an audit of the>>> year<<< and a very strong financial position as we have with",
+        "activation_value": 12.09419059753418
+      },
+      {
+        "token": "year",
+        "context": " say that this is a good way to begin the>>> year<<< the way this has worked out because the president and",
+        "activation_value": 12.075762748718262
+      },
+      {
+        "token": "year",
+        "context": " he also for whatever reason forgot to tell us that>>> year<<< after year while americans are paying",
+        "activation_value": 11.580085754394531
+      },
+      {
+        "token": "year",
+        "context": " next well as callen explained that was because the>>> year<<< before the county commission given pay raises it didn't",
+        "activation_value": 11.356725692749023
+      },
+      {
+        "token": "year",
+        "context": " all our households entering some state of foreclosure during the>>> year<<<",
+        "activation_value": 11.250509262084961
+      },
+      {
+        "token": "year",
+        "context": " that as the united states of america in the>>> year<<< two thousand and eight we should not tolerate a situation",
+        "activation_value": 11.089818954467773
+      },
+      {
+        "token": "year",
+        "context": " for years economic disruptions like we've seen since the>>> year<<< two thousand and we've had several that could require",
+        "activation_value": 10.753162384033203
+      },
+      {
+        "token": "year",
+        "context": " to the postal service retirees health benefits funds in fiscal>>> year<<< two thousand and nine through two thousand",
+        "activation_value": 10.280518531799316
+      },
+      {
+        "token": "year",
+        "context": " i do think it's important early on in the>>> year<<< to demonstrate our commitment to working",
+        "activation_value": 10.187220573425293
+      },
+      {
+        "token": "year",
+        "context": " will respond to we can't afford to take the>>> year<<< off here in congress because we know we're in",
+        "activation_value": 9.303272247314453
+      },
+      {
+        "token": "year",
+        "context": " we are shooting for at the end of the calendar>>> year<<< now what does that translate to",
+        "activation_value": 8.911547660827637
+      },
+      {
+        "token": "year",
+        "context": " two billion dollars in the first two quarters of fiscal>>> year<<< two thousand and nine and",
+        "activation_value": 8.471454620361328
+      },
+      {
+        "token": "year",
+        "context": " for whatever reason forgot to tell us that year after>>> year<<< while americans are paying",
+        "activation_value": 8.4027738571167
+      },
+      {
+        "token": "year",
+        "context": " not mean that we can take the rest of the>>> year<<< off or we don't have to be responsi",
+        "activation_value": 7.232343673706055
+      },
+      {
+        "token": "year",
+        "context": " the needs of the teachers in those preschools every>>> year<<< they",
+        "activation_value": 7.074432373046875
+      },
+      {
+        "token": "year",
+        "context": " be insured and is ready to go to work this>>> year<<< to help make that possible the president",
+        "activation_value": 7.052552223205566
+      },
+      {
+        "token": "year",
+        "context": "'t really know what but we still share it every>>> year<<< because it seems to be a fan favorite and i",
+        "activation_value": 7.0325927734375
+      },
+      {
+        "token": "year",
+        "context": "amount as the amount for social services every>>> year<<< and that sort of puts in place the no dollar",
+        "activation_value": 7.021100997924805
+      }
+    ],
+    "raw_response": "",
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99945, Requested 977. Please try again in 13m16.608s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  }
+}

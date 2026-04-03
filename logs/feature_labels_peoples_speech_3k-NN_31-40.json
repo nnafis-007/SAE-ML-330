@@ -1,0 +1,759 @@
+{
+  "31": {
+    "feature_idx": 31,
+    "label": "Proper Noun Prefixes",
+    "explanation": "The feature detects prefixes of proper nouns, such as names and locations, often abbreviated or shortened forms",
+    "confidence": "high",
+    "top_tokens": [
+      "gr",
+      "aud",
+      "discour",
+      "dist",
+      "gro",
+      "uns",
+      "prof",
+      "sol",
+      "rye",
+      "kn"
+    ],
+    "top_contexts": [
+      {
+        "token": "gr",
+        "context": "honors my name's drew>>> gr<<<iffin and i'm here on behalf of the group",
+        "activation_value": 13.511428833007812
+      },
+      {
+        "token": "gr",
+        "context": " the project before the state and county authorized the permanent>>> gr<<<",
+        "activation_value": 13.289548873901367
+      },
+      {
+        "token": "gr",
+        "context": "and look at this single driveway providing only>>> gr<<<ist to this project as it already does to the",
+        "activation_value": 12.666470527648926
+      },
+      {
+        "token": "dist",
+        "context": "all the development the destruction in many ways of that>>> dist<<<illation of all preceding history there's a chance right",
+        "activation_value": 5.953625679016113
+      },
+      {
+        "token": "gro",
+        "context": " sometimes for similar types of violations and conclusion given substantial>>> gro<<<",
+        "activation_value": 5.941544532775879
+      },
+      {
+        "token": "discour",
+        "context": "levi strauss case that>>> discour<<<agement is equitable right it was not a jury demand",
+        "activation_value": 4.344558238983154
+      },
+      {
+        "token": "uns",
+        "context": " other installations in town that are exterior that are quite>>> uns<<<ightly to promote the interior installation such as the",
+        "activation_value": 4.015070915222168
+      },
+      {
+        "token": "prof",
+        "context": "the word i will not use the>>> prof<<<anity but the f word that went preceded inside that",
+        "activation_value": 2.945711135864258
+      },
+      {
+        "token": "sol",
+        "context": "be king>>> sol<<<omon here but two weeks is a lot i know",
+        "activation_value": 2.6810169219970703
+      },
+      {
+        "token": "rye",
+        "context": " get it and if all else fails call roger>>> rye<<< and we'll give it to you personally then you",
+        "activation_value": 2.5908701419830322
+      },
+      {
+        "token": "discour",
+        "context": " what are supposed to be two separate remedies damages and>>> discour<<<agement are not the same thing they're listed separately",
+        "activation_value": 2.574331521987915
+      },
+      {
+        "token": "aud",
+        "context": " brother and friend recalling a conversation with her youngest child>>> aud<<<rey tells us what her son dale said upon",
+        "activation_value": 2.522472858428955
+      },
+      {
+        "token": "aud",
+        "context": " mundo for his service this man who his wife>>> aud<<<rey described as a soldier through and through gave everything",
+        "activation_value": 2.482074022293091
+      },
+      {
+        "token": "kn",
+        "context": "while stationed at fort>>> kn<<<ox mike met audrey a student at l",
+        "activation_value": 2.410968065261841
+      },
+      {
+        "token": "aud",
+        "context": "while stationed at fort knox mike met>>> aud<<<rey a student at liz the town community college",
+        "activation_value": 2.276864767074585
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Proper Noun Prefixes\",\n  \"explanation\": \"The feature detects prefixes of proper nouns, such as names and locations, often abbreviated or shortened forms\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "32": {
+    "feature_idx": 32,
+    "label": "Exclusive Constraint",
+    "explanation": "The feature detects the concept of exclusivity or limitation, often indicated by the word 'only' in the given context",
+    "confidence": "high",
+    "top_tokens": [
+      "only"
+    ],
+    "top_contexts": [
+      {
+        "token": "only",
+        "context": "effort efforts on one specific country or sub region>>> only<<< to see the drug trade quickly move to the next",
+        "activation_value": 17.372344970703125
+      },
+      {
+        "token": "only",
+        "context": " on tape taking money earmarked for black babies abortion>>> only<<< in other words that they could only earmark this",
+        "activation_value": 17.32297134399414
+      },
+      {
+        "token": "only",
+        "context": "application they are subject to the news>>> only<<< requirements to say that the conditional use if it was",
+        "activation_value": 16.456527709960938
+      },
+      {
+        "token": "only",
+        "context": " of a claim under the policy the arbitration panel decided>>> only<<< which is exactly what the district court correctly ruled that",
+        "activation_value": 16.452234268188477
+      },
+      {
+        "token": "only",
+        "context": " short sighted to look at and forstmann>>> only<<< solution the fact remains that all of it",
+        "activation_value": 16.23394775390625
+      },
+      {
+        "token": "only",
+        "context": " specific and particularly side effects many of these cognitive principles>>> only<<< few of which i've been",
+        "activation_value": 16.115280151367188
+      },
+      {
+        "token": "only",
+        "context": "dredging projects however>>> only<<< seven hundred sixty six million dollars of dredging and",
+        "activation_value": 15.89879035949707
+      },
+      {
+        "token": "only",
+        "context": " to the public we found that f d a reviews>>> only<<< a small portion of the materials it receives and the",
+        "activation_value": 15.144757270812988
+      },
+      {
+        "token": "only",
+        "context": " some priority of stations and say this is one that>>> only<<< the federal government can do so they federal government has",
+        "activation_value": 15.03948974609375
+      },
+      {
+        "token": "only",
+        "context": " who are or who are making purchases and the dividends>>> only<<< go to the members really from the benefit of the",
+        "activation_value": 14.221918106079102
+      },
+      {
+        "token": "only",
+        "context": " small nonprofit agency will qualify to service the direct loans>>> only<<< the big players i wholeheartedly believe that smaller well",
+        "activation_value": 14.210947036743164
+      },
+      {
+        "token": "only",
+        "context": " a department of resources versus hips the supreme court relied>>> only<<< on the following sources and holding under the congress under",
+        "activation_value": 13.953156471252441
+      },
+      {
+        "token": "only",
+        "context": " have been diagnosed and of those who have been diagnosed>>> only<<< half have received treatment elevated l d l cholesterol is",
+        "activation_value": 13.93911361694336
+      },
+      {
+        "token": "only",
+        "context": "hunter that the holdings of a prior decision can reach>>> only<<< as far as the facts and circumstances presented to the",
+        "activation_value": 13.936439514160156
+      },
+      {
+        "token": "only",
+        "context": " information use of information and physical searches this amendment applies>>> only<<< to non u s persons making these definitional changes",
+        "activation_value": 13.357389450073242
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Exclusive Constraint\",\n  \"explanation\": \"The feature detects the concept of exclusivity or limitation, often indicated by the word 'only' in the given context\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "33": {
+    "feature_idx": 33,
+    "label": "Subordinating Conjunction",
+    "explanation": "The feature detects the presence of the subordinating conjunction 'that' introducing a dependent clause",
+    "confidence": "high",
+    "top_tokens": [
+      "that"
+    ],
+    "top_contexts": [
+      {
+        "token": "that",
+        "context": " staff but but i think there's sometimes a characterization>>> that<<< you're here saying no we just want to go",
+        "activation_value": 8.172704696655273
+      },
+      {
+        "token": "that",
+        "context": " and there was a comment made by the supreme court>>> that<<< the",
+        "activation_value": 8.146376609802246
+      },
+      {
+        "token": "that",
+        "context": "wholly unrelated evidence>>> that<<< anything that was in that letter that the defendant had",
+        "activation_value": 8.096324920654297
+      },
+      {
+        "token": "that",
+        "context": "statements>>> that<<< the court makes and leanings of the court the",
+        "activation_value": 7.561134338378906
+      },
+      {
+        "token": "that",
+        "context": " surge and the corps continues to ignore their own reports>>> that<<< have identified the best options for pursuing the strongest level",
+        "activation_value": 7.518546104431152
+      },
+      {
+        "token": "that",
+        "context": " least two occasions of reasonable apprehension we have a concession>>> that<<< pointing a gun at her was one occasion but then",
+        "activation_value": 7.359959125518799
+      },
+      {
+        "token": "that",
+        "context": " patrol agents on the southern border he made a statement>>> that<<< he doubled the number of agents on the northern border",
+        "activation_value": 7.359124183654785
+      },
+      {
+        "token": "that",
+        "context": " fundamentally defective i think our study raises a warning flag>>> that<<< leaving most americans to rely on private insurance is",
+        "activation_value": 7.353302001953125
+      },
+      {
+        "token": "that",
+        "context": " to be provided by you know like court of law>>> that<<< is interpreted in both illinois law and anticipating there",
+        "activation_value": 7.332777976989746
+      },
+      {
+        "token": "that",
+        "context": "conclusion of his trial>>> that<<<'s not consistent with the number i understood where we",
+        "activation_value": 7.321565628051758
+      },
+      {
+        "token": "that",
+        "context": " say hey we've had a complaint from a citizen>>> that<<< this person is here do you want them here or",
+        "activation_value": 7.2416276931762695
+      },
+      {
+        "token": "that",
+        "context": " because this is if anything the lone piece of evidence>>> that<<< in any way suggest that anthony possibly could have",
+        "activation_value": 7.07724666595459
+      },
+      {
+        "token": "that",
+        "context": "perception seems to exist>>> that<<< this is another type of affirmative action program or something",
+        "activation_value": 6.997511863708496
+      },
+      {
+        "token": "that",
+        "context": " afghanistan that while we had had an announcement>>> that<<< we were expanding the number of troops there in the",
+        "activation_value": 6.985653877258301
+      },
+      {
+        "token": "that",
+        "context": " that was his opinion you know he made an opinion>>> that<<< the current condition and he didn't require the medical",
+        "activation_value": 6.885325908660889
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Subordinating Conjunction\",\n  \"explanation\": \"The feature detects the presence of the subordinating conjunction 'that' introducing a dependent clause\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "34": {
+    "feature_idx": 34,
+    "label": "Direction or Movement",
+    "explanation": "The feature detects words related to direction or movement, such as 'towards' and 'toward', indicating a sense of progression or orientation in a particular direction",
+    "confidence": "high",
+    "top_tokens": [
+      "towards",
+      "toward",
+      "ards"
+    ],
+    "top_contexts": [
+      {
+        "token": "toward",
+        "context": "then saw the defendant walking>>> toward<<< the car according to the officer at trial the officer",
+        "activation_value": 8.85301399230957
+      },
+      {
+        "token": "ards",
+        "context": "tow>>>ards<<< florida it's not is it in this",
+        "activation_value": 8.033835411071777
+      },
+      {
+        "token": "toward",
+        "context": " forward a very promising first step in our long journey>>> toward<<< reforming our ailing health care system i commend their",
+        "activation_value": 7.625185489654541
+      },
+      {
+        "token": "toward",
+        "context": "started walking back>>> toward<<< the subdivision at that point there's a dispute m",
+        "activation_value": 7.605391502380371
+      },
+      {
+        "token": "towards",
+        "context": " by expressing my gratitude to congress for its continued support>>> towards<<< c b p initiatives among the numerous priorities that were",
+        "activation_value": 7.164214134216309
+      },
+      {
+        "token": "towards",
+        "context": " trees but it would mean moving it you know further>>> towards<<< road and not directly across",
+        "activation_value": 6.837746620178223
+      },
+      {
+        "token": "towards",
+        "context": " below target but not by much and we are heading>>> towards<<< the eighteen thousand three hundred nine thousand border patrol agents",
+        "activation_value": 6.76649808883667
+      },
+      {
+        "token": "towards",
+        "context": " if there is a disagreement from the p c directed>>> towards<<< you by engaging in this you have the authority to",
+        "activation_value": 6.624400615692139
+      },
+      {
+        "token": "toward",
+        "context": " reauthorization they help communities and states make strides>>> toward<<< preventing domestic violence and we think prevention is probably the",
+        "activation_value": 6.266605854034424
+      },
+      {
+        "token": "towards",
+        "context": "are they more related>>> towards<<< the town or are they more related towards that general",
+        "activation_value": 6.161848545074463
+      },
+      {
+        "token": "toward",
+        "context": " chair you talked about the billions of dollars being put>>> toward<<< border security but we have to",
+        "activation_value": 6.016119003295898
+      },
+      {
+        "token": "toward",
+        "context": "injection into the new company which is not counted>>> toward<<< the headline price of the deal so what does that",
+        "activation_value": 5.680059432983398
+      },
+      {
+        "token": "towards",
+        "context": " more related towards the town or are they more related>>> towards<<< that general area because i know we've had a",
+        "activation_value": 5.653883457183838
+      },
+      {
+        "token": "towards",
+        "context": " to say as as caterpillar seems to be gearing>>> towards<<< saying this happened because we're so big and we",
+        "activation_value": 5.504912376403809
+      },
+      {
+        "token": "towards",
+        "context": " act of two thousand and nine is a positive step>>> towards<<< evaluating u s policy i also want to thank chairman",
+        "activation_value": 5.366756439208984
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Direction or Movement\",\n  \"explanation\": \"The feature detects words related to direction or movement, such as 'towards' and 'toward', indicating a sense of progression or orientation in a particular direction\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "35": {
+    "feature_idx": 35,
+    "label": "Geographic Location",
+    "explanation": "The feature activates on tokens related to place names, such as 'arizona', 'afghanistan', and 'taiwan', indicating it detects geographic locations",
+    "confidence": "high",
+    "top_tokens": [
+      "ri",
+      "iti",
+      "i",
+      "mi",
+      "si",
+      "oti",
+      "di",
+      "radi",
+      "medi",
+      "ai",
+      "uci"
+    ],
+    "top_contexts": [
+      {
+        "token": "mi",
+        "context": " committee you know i think what i might do sam>>>mi<<< is take your",
+        "activation_value": 8.38569164276123
+      },
+      {
+        "token": "si",
+        "context": " cooper was deployed to afghanistan korea the>>> si<<<",
+        "activation_value": 8.322802543640137
+      },
+      {
+        "token": "oti",
+        "context": "neg>>>oti<<<ating table last year closed quotes we we see that",
+        "activation_value": 7.675122261047363
+      },
+      {
+        "token": "iti",
+        "context": " keys got passed but that's not what happened c>>>iti<<< capital wasn't interested in just passing the keys they",
+        "activation_value": 7.240518569946289
+      },
+      {
+        "token": "i",
+        "context": " humane investigator so all of this is fair to tor>>>i<<< in angelo testified that she had been this humane",
+        "activation_value": 7.036142349243164
+      },
+      {
+        "token": "di",
+        "context": " the proper standards that apply to this case and whether>>> di<<< should be convicted on several occasions the court went so",
+        "activation_value": 6.80402946472168
+      },
+      {
+        "token": "ri",
+        "context": "chair southern a>>>ri<<<zona is i think like most americans expect their",
+        "activation_value": 6.591978073120117
+      },
+      {
+        "token": "ri",
+        "context": " the testing and other air indiction agents in a>>>ri<<<zona flying the mission in key west florida",
+        "activation_value": 6.3104119300842285
+      },
+      {
+        "token": "radi",
+        "context": " this begin turn around it's fifteen hundred feet that>>> radi<<<ates the diameter of this is two",
+        "activation_value": 6.193292140960693
+      },
+      {
+        "token": "i",
+        "context": "lev>>>i<<< strauss case that discouragement is equitable right it",
+        "activation_value": 6.187589645385742
+      },
+      {
+        "token": "iti",
+        "context": " and ten it defaulted on interest payment to c>>>iti<<< bank joan shannon and others stood up and",
+        "activation_value": 5.938352584838867
+      },
+      {
+        "token": "ri",
+        "context": "flew the mission in a>>>ri<<<zona from florida simultaneously with the testing and",
+        "activation_value": 5.883658409118652
+      },
+      {
+        "token": "medi",
+        "context": "driveways and things going on a>>> medi<<<ately should go in and so this i mean look",
+        "activation_value": 5.662441253662109
+      },
+      {
+        "token": "ai",
+        "context": " know china's trying to herd in bringing t>>>ai<<<wan into the fold hong kong macau",
+        "activation_value": 5.391552925109863
+      },
+      {
+        "token": "uci",
+        "context": "simply a part and aspect of fid>>>uci<<<ary responsibility this is a community resource and we have",
+        "activation_value": 4.788382530212402
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Geographic Location\",\n  \"explanation\": \"The feature activates on tokens related to place names, such as 'arizona', 'afghanistan', and 'taiwan', indicating it detects geographic locations\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "36": {
+    "feature_idx": 36,
+    "label": "Existence Indicator",
+    "explanation": "The feature detects the presence or existence of something, as indicated by the frequent activation on the token 'there' in contexts implying the presence of a thing, idea, or situation",
+    "confidence": "high",
+    "top_tokens": [
+      "there"
+    ],
+    "top_contexts": [
+      {
+        "token": "there",
+        "context": "case law indicating that>>> there<<< was no duty of an individual was not meant to",
+        "activation_value": 18.88086700439453
+      },
+      {
+        "token": "there",
+        "context": "without presentation of any proof did not agree that>>> there<<< was any liability so the require of the construction contract",
+        "activation_value": 18.171466827392578
+      },
+      {
+        "token": "there",
+        "context": " responsibility on the defendant in some way to argue that>>> there<<< was some sort of role retain the hospital the problem",
+        "activation_value": 18.13283920288086
+      },
+      {
+        "token": "there",
+        "context": "described and found that>>> there<<< were many more wing flaps going on during the",
+        "activation_value": 17.40358543395996
+      },
+      {
+        "token": "there",
+        "context": " limitation was also intentional addressing first the issue of whether>>> there<<< were two instances when that the victim is amber he",
+        "activation_value": 17.334627151489258
+      },
+      {
+        "token": "there",
+        "context": " in the court below and the trial court agreed that>>> there<<< was no need to even",
+        "activation_value": 16.981430053710938
+      },
+      {
+        "token": "there",
+        "context": " one occasion but then we also have the evidence that>>> there<<< was a series of opportunities where",
+        "activation_value": 16.977062225341797
+      },
+      {
+        "token": "there",
+        "context": " that that the supreme court has made it clear that>>> there<<< was a waiver that took place and what the plaintiff",
+        "activation_value": 16.954336166381836
+      },
+      {
+        "token": "there",
+        "context": " that the exercise of powers is unlimited it says that>>> there<<< is a limit because the immunity is to the anti",
+        "activation_value": 16.772438049316406
+      },
+      {
+        "token": "there",
+        "context": " our advertising just sixteen percent of people were aware that>>> there<<< were two sources of cholesterol in the year following our",
+        "activation_value": 16.389984130859375
+      },
+      {
+        "token": "there",
+        "context": "and prove that>>> there<<< is damage caused by valentine as opposed to",
+        "activation_value": 16.298425674438477
+      },
+      {
+        "token": "there",
+        "context": " experts themselves had had to render a decision saying that>>> there<<< was",
+        "activation_value": 16.279111862182617
+      },
+      {
+        "token": "there",
+        "context": " special situation where where you need to be advised that>>> there<<<'s been litigation against the",
+        "activation_value": 15.963861465454102
+      },
+      {
+        "token": "there",
+        "context": "before we are looking at whether>>> there<<< are ways to assist in instability in the loan fund",
+        "activation_value": 15.883428573608398
+      },
+      {
+        "token": "there",
+        "context": " which is exactly what the district court correctly ruled that>>> there<<< was not evidence submitted to national union up to",
+        "activation_value": 15.794424057006836
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Existence Indicator\",\n  \"explanation\": \"The feature detects the presence or existence of something, as indicated by the frequent activation on the token 'there' in contexts implying the presence of a thing, idea, or situation\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "37": {
+    "feature_idx": 37,
+    "label": "Past Action Completion",
+    "explanation": "The feature detects tokens that indicate the completion of a past action or a transition from one state to another, often marked by verbs like 'was', 'completed', 'wanted', and 'received'.",
+    "confidence": "high",
+    "top_tokens": [
+      "and",
+      "was",
+      "who",
+      "wanted",
+      "completed",
+      "recently",
+      "left",
+      "into",
+      "received",
+      "placed",
+      "facing",
+      "escape",
+      "to"
+    ],
+    "top_contexts": [
+      {
+        "token": "who",
+        "context": " thousand dollars micro loans went to an unemployed tribal member>>> who<<< completed our business training class and wanted to start a",
+        "activation_value": 3.0311319828033447
+      },
+      {
+        "token": "wanted",
+        "context": " unemployed tribal member who completed our business training class and>>> wanted<<< to start a plumbing and heating business he",
+        "activation_value": 2.720531940460205
+      },
+      {
+        "token": "completed",
+        "context": " dollars micro loans went to an unemployed tribal member who>>> completed<<< our business training class and wanted to start a plumbing",
+        "activation_value": 2.631326198577881
+      },
+      {
+        "token": "recently",
+        "context": " who has been diagnosed with alzheimer's was>>> recently<<< placed in turn their sing home and one of the",
+        "activation_value": 2.5507071018218994
+      },
+      {
+        "token": "left",
+        "context": "stability there's a woman who was>>> left<<< for dead and got a new chance at life with",
+        "activation_value": 2.3735811710357666
+      },
+      {
+        "token": "and",
+        "context": " and one of the senators got into a skiff>>> and<<< they",
+        "activation_value": 2.3658359050750732
+      },
+      {
+        "token": "into",
+        "context": "ernie sanders and one of the senators got>>> into<<< a skiff and they",
+        "activation_value": 2.3612637519836426
+      },
+      {
+        "token": "was",
+        "context": " say some things on behalf of a young man who>>> was<<< was facing losing",
+        "activation_value": 2.2914202213287354
+      },
+      {
+        "token": "received",
+        "context": " his children for his bravery and service major mando>>> received<<< numerous medals and awards",
+        "activation_value": 2.266251564025879
+      },
+      {
+        "token": "placed",
+        "context": " has been diagnosed with alzheimer's was recently>>> placed<<< in turn their sing home and one of the last",
+        "activation_value": 2.1842970848083496
+      },
+      {
+        "token": "was",
+        "context": "stability there's a woman who>>> was<<< left for dead and got a new chance at life",
+        "activation_value": 2.1837270259857178
+      },
+      {
+        "token": "facing",
+        "context": " things on behalf of a young man who was was>>> facing<<< losing",
+        "activation_value": 2.140660285949707
+      },
+      {
+        "token": "escape",
+        "context": "ias hall in underhill which had an iron fire>>> escape<<< coming down the side of the",
+        "activation_value": 2.127122163772583
+      },
+      {
+        "token": "and",
+        "context": "ability there's a woman who was left for dead>>> and<<< got a new chance at life with her child there",
+        "activation_value": 2.1234543323516846
+      },
+      {
+        "token": "to",
+        "context": " tribal member who completed our business training class and wanted>>> to<<< start a plumbing and heating business he",
+        "activation_value": 2.1112141609191895
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Past Action Completion\",\n  \"explanation\": \"The feature detects tokens that indicate the completion of a past action or a transition from one state to another, often marked by verbs like 'was', 'completed', 'wanted', and 'received'.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "38": {
+    "feature_idx": 38,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "39": {
+    "feature_idx": 39,
+    "label": "Government Services",
+    "explanation": "The feature activates on tokens related to public administration, infrastructure, and social services, indicating it detects concepts related to government-provided services",
+    "confidence": "high",
+    "top_tokens": [
+      "traffic",
+      "national",
+      "private",
+      "americ",
+      "positioning",
+      "services",
+      "women",
+      "plan",
+      "val",
+      "ton",
+      "property"
+    ],
+    "top_contexts": [
+      {
+        "token": "traffic",
+        "context": " the result of specific requirements by air travel communications air>>> traffic<<< is increasing airports keep right on building and adding run",
+        "activation_value": 3.6027064323425293
+      },
+      {
+        "token": "positioning",
+        "context": " to weather by using onboard navigation technology and the global>>> positioning<<< system satellite network improve safety",
+        "activation_value": 3.538541793823242
+      },
+      {
+        "token": "services",
+        "context": " that's what's essential to providing the goods and>>> services<<< in our communities for police and fire and education and",
+        "activation_value": 3.448416233062744
+      },
+      {
+        "token": "national",
+        "context": "artisan support for a product that the depict director of>>> national<<< intelligence and the leadership of our defense community tell us",
+        "activation_value": 3.3865621089935303
+      },
+      {
+        "token": "traffic",
+        "context": "making process is must be initiated and coordination with air>>> traffic<<< is needed to ensure that new procedure can be safely",
+        "activation_value": 3.0008082389831543
+      },
+      {
+        "token": "national",
+        "context": "states the director of>>> national<<< intelligence has testified that this practice reversed targeting is a",
+        "activation_value": 2.977609395980835
+      },
+      {
+        "token": "women",
+        "context": "inese government hesitated they were apparently some decent men and>>> women<<< in the party's leadership would be gone to understand",
+        "activation_value": 2.965705394744873
+      },
+      {
+        "token": "private",
+        "context": "generated revenue or public>>> private<<< partnership definitely in the current economic maelstrom a",
+        "activation_value": 2.9189515113830566
+      },
+      {
+        "token": "plan",
+        "context": " and they are responsible for updating the general plan general>>> plan<<< is what provides legal basis for a lot of the",
+        "activation_value": 2.896615982055664
+      },
+      {
+        "token": "americ",
+        "context": " customized programs for hispanic latino and african>>> americ<<<an",
+        "activation_value": 2.7506484985351562
+      },
+      {
+        "token": "private",
+        "context": "populations and develop public>>> private<<< partnerships to provide services in creative ways captive compliance has",
+        "activation_value": 2.577345371246338
+      },
+      {
+        "token": "val",
+        "context": "fund generated by the ad>>> val<<<orem harbor maintenance tax for operations and maintenance dredging",
+        "activation_value": 2.547079563140869
+      },
+      {
+        "token": "americ",
+        "context": " because of the high rates of interest of african>>> americ<<<an children in the child welfare system so they began",
+        "activation_value": 2.4729738235473633
+      },
+      {
+        "token": "ton",
+        "context": " of action international conference is being held in san an>>>ton<<<io texas i've been there before so",
+        "activation_value": 2.4678821563720703
+      },
+      {
+        "token": "property",
+        "context": " duty would be in fact to protect the life and>>> property<<< of the population within the south texas area we",
+        "activation_value": 2.3870961666107178
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Government Services\",\n  \"explanation\": \"The feature activates on tokens related to public administration, infrastructure, and social services, indicating it detects concepts related to government-provided services\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  }
+}

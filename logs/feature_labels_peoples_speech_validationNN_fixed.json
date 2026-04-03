@@ -1,0 +1,742 @@
+{
+  "0": {
+    "feature_idx": 0,
+    "label": "Quantity or extent",
+    "explanation": "The feature detects words and phrases that indicate amount, degree, or duration, such as 'most', 'many', 'much', and 'extended'.",
+    "confidence": "high",
+    "top_tokens": [
+      "most",
+      "many",
+      "of",
+      "much",
+      "extended",
+      "lot",
+      "nearly",
+      "about",
+      "period",
+      "number",
+      "just",
+      "approximately"
+    ],
+    "top_contexts": [
+      {
+        "token": "most",
+        "context": " come out publicly in front of their friends for the>>> most<<< part what we do get our kids coming up to",
+        "activation_value": 7.0629353523254395
+      },
+      {
+        "token": "most",
+        "context": "for the>>> most<<< part were not admissible the united states when they",
+        "activation_value": 5.884614944458008
+      },
+      {
+        "token": "much",
+        "context": "for>>> much<<< of life in oceans and in turn for us i",
+        "activation_value": 5.804265975952148
+      },
+      {
+        "token": "extended",
+        "context": " for those who have been out of work for an>>> extended<<< period of time such benefits are absent from the house",
+        "activation_value": 4.447175025939941
+      },
+      {
+        "token": "lot",
+        "context": " lot of universal design concepts that are good for a>>> lot<<< of disabilities furthermore the accessibility recommended in the ",
+        "activation_value": 3.6752829551696777
+      },
+      {
+        "token": "nearly",
+        "context": " eighty thousand patients with tours and research and development for>>> nearly<<< a decade before coming to market our commitment to research",
+        "activation_value": 3.5158722400665283
+      },
+      {
+        "token": "about",
+        "context": " i've i've been a police officer here for>>> about<<< twenty three years and it's always a consistent flow",
+        "activation_value": 3.218188762664795
+      },
+      {
+        "token": "many",
+        "context": " i close this one permit that's been open for>>> many<<< years so the more we try to educate folks",
+        "activation_value": 3.1243908405303955
+      },
+      {
+        "token": "many",
+        "context": "just laid out for>>> many<<< veterans attending schools and high cost urban areas this benefit",
+        "activation_value": 3.1154205799102783
+      },
+      {
+        "token": "period",
+        "context": " fund for the tribes my understanding is that for a>>> period<<<",
+        "activation_value": 3.0594804286956787
+      },
+      {
+        "token": "number",
+        "context": " have that and the court of public around for a>>> number<<< of years trying to figure out how to do that",
+        "activation_value": 3.034252166748047
+      },
+      {
+        "token": "just",
+        "context": "no brainer for>>> just<<< a big no thank you",
+        "activation_value": 3.0066967010498047
+      },
+      {
+        "token": "approximately",
+        "context": "studied for>>> approximately<<< fifteen years and over four hundred clinical trials in over",
+        "activation_value": 2.952486038208008
+      },
+      {
+        "token": "of",
+        "context": "for much>>> of<<< life in oceans and in turn for us i also",
+        "activation_value": 2.7937402725219727
+      },
+      {
+        "token": "of",
+        "context": " who have been out of work for an extended period>>> of<<< time such benefits are absent from the house bill there",
+        "activation_value": 2.5948686599731445
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Quantity or extent\",\n  \"explanation\": \"The feature detects words and phrases that indicate amount, degree, or duration, such as 'most', 'many', 'much', and 'extended'.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "1": {
+    "feature_idx": 1,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "2": {
+    "feature_idx": 2,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "3": {
+    "feature_idx": 3,
+    "label": "Historical Time Period",
+    "explanation": "The feature detects mentions of specific time periods, such as centuries, eras, and historical events, in the given text snippets.",
+    "confidence": "high",
+    "top_tokens": [
+      "communist",
+      "century",
+      "era",
+      "historical",
+      "twentieth",
+      "incoln",
+      "emancipation",
+      "historically"
+    ],
+    "top_contexts": [
+      {
+        "token": "century",
+        "context": " the example back in the early part of the twentieth>>> century<<< here we are of the early part of the twenty",
+        "activation_value": 4.5918145179748535
+      },
+      {
+        "token": "communist",
+        "context": " his active support for clinton era trade policies with>>> communist<<< china policies that have now had a disastrous impact",
+        "activation_value": 4.1055803298950195
+      },
+      {
+        "token": "twentieth",
+        "context": " follow the example back in the early part of the>>> twentieth<<< century here we are of the early part of the",
+        "activation_value": 4.042367935180664
+      },
+      {
+        "token": "century",
+        "context": " may be the greatest environmental threat that we face this>>> century<<< it's a new issue and we have our hands",
+        "activation_value": 3.5267210006713867
+      },
+      {
+        "token": "century",
+        "context": " frontier of a clean energy economy for the twenty first>>> century<<< so",
+        "activation_value": 3.082451581954956
+      },
+      {
+        "token": "incoln",
+        "context": " gratitude at our sixteenth president about celebrating the l>>>incoln<<<",
+        "activation_value": 3.069929599761963
+      },
+      {
+        "token": "communist",
+        "context": "china to allow>>> communist<<< chinese agents security agents into guantanamo is",
+        "activation_value": 3.0062613487243652
+      },
+      {
+        "token": "communist",
+        "context": " wealth and this basic fact has not been lost on>>> communist<<< party bosses ",
+        "activation_value": 2.7104408740997314
+      },
+      {
+        "token": "emancipation",
+        "context": "another on the naming of>>> emancipation<<< hall as well as testimony before the full committee by",
+        "activation_value": 2.5676138401031494
+      },
+      {
+        "token": "era",
+        "context": " were dismayed by his active support for clinton>>> era<<< trade policies with communist china policies that have now",
+        "activation_value": 2.5512192249298096
+      },
+      {
+        "token": "historical",
+        "context": " have served to keep calling them growth down to the>>> historical<<< level rather than to achieve additional savings so budget trade",
+        "activation_value": 2.4208366870880127
+      },
+      {
+        "token": "communist",
+        "context": "'m wrong but i'm sure that it wasn't>>> communist<<< chinese aircraft military aircraft that landed at guant",
+        "activation_value": 2.3527891635894775
+      },
+      {
+        "token": "era",
+        "context": " get the impression now adays that back in that>>> era<<< people just kind of lived on their little",
+        "activation_value": 2.092562437057495
+      },
+      {
+        "token": "historical",
+        "context": " that trigger should be set at what has been the>>> historical<<< levels of what is deemed to be a recessionary",
+        "activation_value": 2.086423873901367
+      },
+      {
+        "token": "historically",
+        "context": " where over the years not recent not just recently but>>> historically<<< and i'm in the process of putting something together",
+        "activation_value": 2.060075283050537
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Historical Time Period\",\n  \"explanation\": \"The feature detects mentions of specific time periods, such as centuries, eras, and historical events, in the given text snippets.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "4": {
+    "feature_idx": 4,
+    "label": "Future Planning Actions",
+    "explanation": "The feature detects words related to planning, attempting, and anticipating future events or actions.",
+    "confidence": "high",
+    "top_tokens": [
+      "something",
+      "trying",
+      "an",
+      "repeated",
+      "will",
+      "years",
+      "active",
+      "proven",
+      "she",
+      "commemor",
+      "would",
+      "infrastructure",
+      "thousand",
+      "enthusiasm",
+      "views"
+    ],
+    "top_contexts": [
+      {
+        "token": "something",
+        "context": " but historically and i'm in the process of putting>>> something<<< together on that",
+        "activation_value": 1.8123366832733154
+      },
+      {
+        "token": "trying",
+        "context": " the court of public around for a number of years>>> trying<<< to figure out how to do that and then congress",
+        "activation_value": 1.7300968170166016
+      },
+      {
+        "token": "an",
+        "context": " orientation feel that will begin at the beginning capital tour>>> an<<< exhibition that includes a well sure write a selection of",
+        "activation_value": 1.6306483745574951
+      },
+      {
+        "token": "repeated",
+        "context": " always chuckled when he would say that and i've>>> repeated<<< it myself a few times to audiences back home in",
+        "activation_value": 1.6239607334136963
+      },
+      {
+        "token": "will",
+        "context": " them forward and lay out timelines to see how successful>>> will<<< be actually hitting the targets the",
+        "activation_value": 1.526363730430603
+      },
+      {
+        "token": "years",
+        "context": " and the court of public around for a number of>>> years<<< trying to figure out how to do that and then",
+        "activation_value": 1.4109749794006348
+      },
+      {
+        "token": "active",
+        "context": " issues that members want answers to our colleagues should be>>> active<<< in this kind of format i think it is good",
+        "activation_value": 1.403857946395874
+      },
+      {
+        "token": "proven",
+        "context": " the case but i don't think the science has>>> proven<<< it to this point to be the case but certainly",
+        "activation_value": 1.4009172916412354
+      },
+      {
+        "token": "she",
+        "context": " sting essentially where they'll go to a designated place>>> she<<< will tell her x that she will let him",
+        "activation_value": 1.3651690483093262
+      },
+      {
+        "token": "commemor",
+        "context": " cemetery became a reality perception set in that those being>>> commemor<<<ated and remembered in the new cemetery were known to",
+        "activation_value": 1.3527946472167969
+      },
+      {
+        "token": "would",
+        "context": " do that but i think that would be all that>>> would<<< take and i hope we can get that done and",
+        "activation_value": 1.328262448310852
+      },
+      {
+        "token": "infrastructure",
+        "context": " cost a certain amount just to have the infrastructure support>>> infrastructure<<< established in the region build the bases have the transport",
+        "activation_value": 1.307053804397583
+      },
+      {
+        "token": "thousand",
+        "context": " working on a human rights archive database with over two>>> thousand<<< cases of human rights abuses and prisoners of conscience bob",
+        "activation_value": 1.2969913482666016
+      },
+      {
+        "token": "enthusiasm",
+        "context": " the commission itself there's a been a lot of>>> enthusiasm<<<",
+        "activation_value": 1.28770911693573
+      },
+      {
+        "token": "views",
+        "context": " a central health care affordability an access issue and the>>> views<<< of the american public mainly because they touch almost",
+        "activation_value": 1.2389858961105347
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Future Planning Actions\",\n  \"explanation\": \"The feature detects words related to planning, attempting, and anticipating future events or actions.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "5": {
+    "feature_idx": 5,
+    "label": "First person plural",
+    "explanation": "The feature detects the presence of first-person plural pronouns, particularly 'we', indicating the speaker's involvement or reference to a group",
+    "confidence": "high",
+    "top_tokens": [
+      "we",
+      "they",
+      "'ve",
+      "you",
+      "has",
+      "he"
+    ],
+    "top_contexts": [
+      {
+        "token": "we",
+        "context": " we've created around the twin cities areas and how>>> we<<<'ve been able to embed them in their particular locations",
+        "activation_value": 3.3352231979370117
+      },
+      {
+        "token": "they",
+        "context": " the police and they set up a sting essentially where>>> they<<<'ll go to a designated place she will tell her",
+        "activation_value": 3.2310361862182617
+      },
+      {
+        "token": "'ve",
+        "context": "'ve created around the twin cities areas and how we>>>'ve<<< been able to embed them in their particular locations this",
+        "activation_value": 3.141510009765625
+      },
+      {
+        "token": "we",
+        "context": " everybody can use a refresher course every year because>>> we<<< deal with a lot of issues a lot of different",
+        "activation_value": 2.97979474067688
+      },
+      {
+        "token": "we",
+        "context": " we know contain a deadly gas that we told you>>> we<<< were going to track like it was our own nobody",
+        "activation_value": 2.6428658962249756
+      },
+      {
+        "token": "you",
+        "context": " how you provide services outside of geographic boundaries and how>>> you<<< provide services in a regional way to enable people",
+        "activation_value": 2.6358370780944824
+      },
+      {
+        "token": "we",
+        "context": " our working people in the construction industry back to work>>> we<<< should address that issue as well with the president coming",
+        "activation_value": 2.616238594055176
+      },
+      {
+        "token": "has",
+        "context": "cellently me fused to pay for it the state>>> has<<< refused to or",
+        "activation_value": 2.614881992340088
+      },
+      {
+        "token": "they",
+        "context": " with this industry that they they take that to heart>>> they<<< are",
+        "activation_value": 2.561302423477173
+      },
+      {
+        "token": "he",
+        "context": " also social services particularly for service members returning from abroad>>> he<<< reaffirmed increases in army and marine corps and strength",
+        "activation_value": 2.3748598098754883
+      },
+      {
+        "token": "we",
+        "context": " two sources of cholesterol in the year following our advertising>>> we<<< found a full fifty four percent of",
+        "activation_value": 2.3732311725616455
+      },
+      {
+        "token": "they",
+        "context": " to mobilize the african american community and now>>> they<<<'re beginning to see after a period of three to",
+        "activation_value": 2.3337979316711426
+      },
+      {
+        "token": "they",
+        "context": " you know continuing to do the landscaping like like>>> they<<< did it very little and i would hope that we",
+        "activation_value": 2.1964993476867676
+      },
+      {
+        "token": "'ve",
+        "context": " centers across the country over the past seven years i>>>'ve<<< met many dedicated professionals community members and staff",
+        "activation_value": 2.189211130142212
+      },
+      {
+        "token": "we",
+        "context": " this process from the public we establish that criteria and>>> we<<<",
+        "activation_value": 2.1809661388397217
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"First person plural\",\n  \"explanation\": \"The feature detects the presence of first-person plural pronouns, particularly 'we', indicating the speaker's involvement or reference to a group\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "6": {
+    "feature_idx": 6,
+    "label": "Financial Terms",
+    "explanation": "The feature detects words related to financial concepts, such as payback, investment, and tradeoffs, indicating a focus on economic terminology.",
+    "confidence": "high",
+    "top_tokens": [
+      "back",
+      "offs",
+      "water",
+      "line",
+      "point",
+      "mobile",
+      "ways",
+      "book",
+      "site",
+      "prime",
+      "call",
+      "card",
+      "mark"
+    ],
+    "top_contexts": [
+      {
+        "token": "back",
+        "context": " bulbs with improved c f elves which have a pay>>>back<<< of less than five months our computer services are in",
+        "activation_value": 3.308795928955078
+      },
+      {
+        "token": "water",
+        "context": " without the airport we become a very much a back>>>water<<< region for economic development frankly the airport needs to grow",
+        "activation_value": 3.2452332973480225
+      },
+      {
+        "token": "back",
+        "context": " of the dirksen building but again the pay>>>back<<< period far",
+        "activation_value": 3.153438091278076
+      },
+      {
+        "token": "line",
+        "context": " the beach processes it errored officially fixes the shore>>>line<<< and ",
+        "activation_value": 3.079263687133789
+      },
+      {
+        "token": "point",
+        "context": "the value of the so called tipping>>> point<<< about which we spoke in previous hearings at which the",
+        "activation_value": 3.067533254623413
+      },
+      {
+        "token": "mobile",
+        "context": "preschools and their book>>>mobile<<< service so she spends time with them by e mail",
+        "activation_value": 2.8959908485412598
+      },
+      {
+        "token": "ways",
+        "context": "our ports and harbors or the gate>>>ways<<< to domestic and international trade connecting the united states the",
+        "activation_value": 2.7908310890197754
+      },
+      {
+        "token": "book",
+        "context": " the bill should read the secretary of state the hand>>>book<<< for design at least once every six years the",
+        "activation_value": 2.4667134284973145
+      },
+      {
+        "token": "site",
+        "context": " used for staging or construction workers will be parking off>>>site<<< that hasn't been finalized but they are committed to",
+        "activation_value": 2.414682149887085
+      },
+      {
+        "token": "prime",
+        "context": " because of foreclosures because because of a sub>>>prime<<< mortgages but half would still be being foreclosed because",
+        "activation_value": 2.3646135330200195
+      },
+      {
+        "token": "call",
+        "context": " but a major bill like this would require a roll>>> call<<< vote and there's eleven days for that to happen",
+        "activation_value": 2.278571128845215
+      },
+      {
+        "token": "offs",
+        "context": " level rather than to achieve additional savings so budget trade>>>offs<<< over the next ten years look potentially pretty",
+        "activation_value": 2.257026195526123
+      },
+      {
+        "token": "card",
+        "context": " and if we can differentiate you from sort of charge>>> card<<< junkies then we should try to do that with",
+        "activation_value": 2.1235265731811523
+      },
+      {
+        "token": "mark",
+        "context": " abortion only in other words that they could only ear>>>mark<<< this money to abort a black child by racist donors",
+        "activation_value": 2.0840835571289062
+      },
+      {
+        "token": "offs",
+        "context": " one is you know i've been concerned about trade>>>offs<<< that we make and one of the tradeoffs is",
+        "activation_value": 2.0454092025756836
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Financial Terms\",\n  \"explanation\": \"The feature detects words related to financial concepts, such as payback, investment, and tradeoffs, indicating a focus on economic terminology.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "7": {
+    "feature_idx": 7,
+    "label": "Government Decision Process",
+    "explanation": "The feature detects language related to official procedures, policies, and decision-making in a governmental or administrative context",
+    "confidence": "high",
+    "top_tokens": [
+      "process",
+      "is",
+      "side",
+      "available",
+      "century",
+      "means",
+      "making",
+      "space",
+      "practical",
+      "neglect",
+      "well",
+      "does",
+      "challenge",
+      "story"
+    ],
+    "top_contexts": [
+      {
+        "token": "is",
+        "context": " you we will be presenting whatever the new building ordinance>>> is<<< or if there's a special project that needs your",
+        "activation_value": 2.7056822776794434
+      },
+      {
+        "token": "side",
+        "context": " for multiple days so the temperatures are definitely on our>>> side<<< for the residents that don't have power in regards",
+        "activation_value": 2.588428258895874
+      },
+      {
+        "token": "available",
+        "context": " to work this out so we make this stuff absolutely>>> available<<< h r thirty three ninety",
+        "activation_value": 2.492831230163574
+      },
+      {
+        "token": "process",
+        "context": " saying it should have to go through a more rigorous>>> process<<< which makes sense and especially as our town is growing",
+        "activation_value": 2.442244529724121
+      },
+      {
+        "token": "century",
+        "context": " frontier of a clean energy economy for the twenty first>>> century<<< so",
+        "activation_value": 2.3330888748168945
+      },
+      {
+        "token": "means",
+        "context": " those percentages we will do so that's what endeavor>>> means<<< and well in this agreement i'm curious if the",
+        "activation_value": 2.2935404777526855
+      },
+      {
+        "token": "process",
+        "context": " so that you can fold that into your decision making>>> process<<< during ",
+        "activation_value": 2.281463861465454
+      },
+      {
+        "token": "making",
+        "context": " that so that you can fold that into your decision>>> making<<< process during ",
+        "activation_value": 2.2718114852905273
+      },
+      {
+        "token": "space",
+        "context": " being the creek so that creek will be within open>>> space<<< here it will run down through the rear",
+        "activation_value": 2.1907663345336914
+      },
+      {
+        "token": "practical",
+        "context": " we haven't advanced that concept enough to make it>>> practical<<< yeah i think it would be",
+        "activation_value": 2.1558265686035156
+      },
+      {
+        "token": "neglect",
+        "context": " with the greatest vulnerability in terms of child abuse and>>> neglect<<<",
+        "activation_value": 2.0746121406555176
+      },
+      {
+        "token": "well",
+        "context": " industry back to work we should address that issue as>>> well<<< with the president coming from a cold weather state",
+        "activation_value": 2.0483031272888184
+      },
+      {
+        "token": "does",
+        "context": " a policy that is even tougher than what the town>>> does<<< they have to sign off on it so we are",
+        "activation_value": 2.031844139099121
+      },
+      {
+        "token": "challenge",
+        "context": " look at to how do we deal with this impending>>> challenge<<< with regard to our",
+        "activation_value": 2.019819974899292
+      },
+      {
+        "token": "story",
+        "context": "'s done and that has been a fairly nice success>>> story<<< this is stable road on the north shore of m",
+        "activation_value": 2.0152366161346436
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Government Decision Process\",\n  \"explanation\": \"The feature detects language related to official procedures, policies, and decision-making in a governmental or administrative context\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "8": {
+    "feature_idx": 8,
+    "label": "Day or Month",
+    "explanation": "The feature activates on tokens related to days of the week or months, such as 'monday', 'wellington', 'graham', and 'waiting', which are often associated with time periods or dates",
+    "confidence": "high",
+    "top_tokens": [
+      "onday",
+      "ington",
+      "ham",
+      "ong",
+      "iting"
+    ],
+    "top_contexts": [
+      {
+        "token": "onday",
+        "context": " anything that can be done on it tomorrow or m>>>onday<<< i mean it is has the date on all the",
+        "activation_value": 8.351495742797852
+      },
+      {
+        "token": "ington",
+        "context": "twenty eight well>>>ington<<< lane lots believed in the one on the site also",
+        "activation_value": 2.168917655944824
+      },
+      {
+        "token": "ham",
+        "context": "the trial happened you know a few years after gra>>>ham<<< no one gave any indication that they knew that the",
+        "activation_value": 1.3435388803482056
+      },
+      {
+        "token": "ong",
+        "context": "this is fear m>>>ong<<<ering it is wrong and it has obscured what is",
+        "activation_value": 1.2740390300750732
+      },
+      {
+        "token": "iting",
+        "context": "wa>>>iting<<< period a five month waiting period now although mr",
+        "activation_value": 1.2378872632980347
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Day or Month\",\n  \"explanation\": \"The feature activates on tokens related to days of the week or months, such as 'monday', 'wellington', 'graham', and 'waiting', which are often associated with time periods or dates\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "9": {
+    "feature_idx": 9,
+    "label": "National Security Concept",
+    "explanation": "The feature detects mentions of security in the context of national interests, borders, and protection, indicating a focus on national security concepts.",
+    "confidence": "high",
+    "top_tokens": [
+      "security"
+    ],
+    "top_contexts": [
+      {
+        "token": "security",
+        "context": " we face the collateral doesn't mean they waive their>>> security<<< interest and that funds case address precisely that they said",
+        "activation_value": 18.86410903930664
+      },
+      {
+        "token": "security",
+        "context": "china to allow communist chinese agents>>> security<<< agents into guantanamo is beyond unacceptable and",
+        "activation_value": 18.76753807067871
+      },
+      {
+        "token": "security",
+        "context": "liberty versus>>> security<<< on terrorism what they don't like is playpen",
+        "activation_value": 15.429027557373047
+      },
+      {
+        "token": "security",
+        "context": "challenges posed by transportation>>> security<<< energy greening the new capitol visitor center and",
+        "activation_value": 13.909170150756836
+      },
+      {
+        "token": "security",
+        "context": "secure food and fuel>>> security<<< for our country and thirdly that we embrace the",
+        "activation_value": 13.811956405639648
+      },
+      {
+        "token": "security",
+        "context": " that will completely solve all of our nation's border>>> security<<< challenges everything that happens on our nation's borders and",
+        "activation_value": 11.701681137084961
+      },
+      {
+        "token": "security",
+        "context": " new border patrol agents despite this unprecedented investment in border>>> security<<< more in the mines to be done i have long",
+        "activation_value": 11.580000877380371
+      },
+      {
+        "token": "security",
+        "context": "aining their previous financial stability and with it their emotional>>> security<<< unfortunately the inclusion of arbitration clauses in long term care",
+        "activation_value": 11.529268264770508
+      },
+      {
+        "token": "security",
+        "context": "energy>>> security<<< made it in the federal interest to protect this area",
+        "activation_value": 11.522294044494629
+      },
+      {
+        "token": "security",
+        "context": " proposals to enhance and respond to america's border>>> security<<< challenge and our second panel will give the subcommittee a",
+        "activation_value": 11.084837913513184
+      },
+      {
+        "token": "security",
+        "context": " seven years especially since the creation of the department homeland>>> security<<< a great deal has been done to increase resources and",
+        "activation_value": 10.309025764465332
+      },
+      {
+        "token": "security",
+        "context": " investments in energy can help create jobs while improving energy>>> security<<< and saving consumers",
+        "activation_value": 10.157596588134766
+      },
+      {
+        "token": "security",
+        "context": " said that the department needs a comprehensive strategy for border>>> security<<< the",
+        "activation_value": 10.0012788772583
+      },
+      {
+        "token": "security",
+        "context": "whose primary source of income is social>>> security<<< or in my home state of new jersey more than",
+        "activation_value": 5.6627197265625
+      },
+      {
+        "token": "security",
+        "context": " this bill as well through a bonus in their social>>> security<<< checks so mr president i think we are making",
+        "activation_value": 4.92065954208374
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"National Security Concept\",\n  \"explanation\": \"The feature detects mentions of security in the context of national interests, borders, and protection, indicating a focus on national security concepts.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  }
+}

@@ -1,0 +1,687 @@
+{
+  "10": {
+    "feature_idx": 10,
+    "label": "Marxist ideology",
+    "explanation": "The feature detects the concept of Marxist ideology due to strong activation on the token 'x' in the context of 'marxist'",
+    "confidence": "medium",
+    "top_tokens": [
+      "x"
+    ],
+    "top_contexts": [
+      {
+        "token": "x",
+        "context": " or buddhist into what i call a mar>>>x<<<ist capitalist system china's",
+        "activation_value": 1.0675263404846191
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Marxist ideology\",\n  \"explanation\": \"The feature detects the concept of Marxist ideology due to strong activation on the token 'x' in the context of 'marxist'\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
+  },
+  "11": {
+    "feature_idx": 11,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "12": {
+    "feature_idx": 12,
+    "label": "Negation or contrast",
+    "explanation": "The feature activates on tokens that indicate negation, contrast, or comparison, such as 'don't', 'isn't', 'but', and 'comparable'.",
+    "confidence": "high",
+    "top_tokens": [
+      "'t",
+      "'s",
+      "how",
+      "good",
+      "of",
+      "out",
+      "partly",
+      "but",
+      "comparable",
+      "that",
+      "elect",
+      "don",
+      "their",
+      "long"
+    ],
+    "top_contexts": [
+      {
+        "token": "'s",
+        "context": " a reasonable thing to do i don't think it>>>'s<<< going to have a",
+        "activation_value": 1.7962511777877808
+      },
+      {
+        "token": "how",
+        "context": " them what about the risks well before i show you>>> how<<< the risks are presented and what the consequences are",
+        "activation_value": 1.765261173248291
+      },
+      {
+        "token": "good",
+        "context": " it still was something i think we should all feel>>> good<<< about we're",
+        "activation_value": 1.6216439008712769
+      },
+      {
+        "token": "of",
+        "context": " in fact that's why members of congress and short>>> of<<< some procedural small",
+        "activation_value": 1.5147367715835571
+      },
+      {
+        "token": "out",
+        "context": " license to practice most states now grant reciprocity two>>> out<<< of state applicants although only a small percentage of pharmac",
+        "activation_value": 1.5034286975860596
+      },
+      {
+        "token": "'t",
+        "context": " think that's a reasonable thing to do i don>>>'t<<< think it's going to have a",
+        "activation_value": 1.3701084852218628
+      },
+      {
+        "token": "partly",
+        "context": "at the intersections partly i think from signal timing>>> partly<<< because they're such a high left turn demanded uses",
+        "activation_value": 1.3687574863433838
+      },
+      {
+        "token": "but",
+        "context": " about the educate about education and the importance of education>>> but<<< it is also critical to restoring our economy and our",
+        "activation_value": 1.3116048574447632
+      },
+      {
+        "token": "comparable",
+        "context": " peter's township on income when we look at>>> comparable<<< communities or comparable areas washington county southwest pennsylvania",
+        "activation_value": 1.3075056076049805
+      },
+      {
+        "token": "that",
+        "context": " of some will be soft and in this process and>>> that<<< they will cast a vote to move in a much",
+        "activation_value": 1.2977755069732666
+      },
+      {
+        "token": "elect",
+        "context": " extreme pre term birth and subsequent pregnancies after just one>>> elect<<<ive abortion a woman is two to twelve times more",
+        "activation_value": 1.2336416244506836
+      },
+      {
+        "token": "'t",
+        "context": " james has insurance coverage through his employer he isn>>>'t<<< able to work because of his disability he's going",
+        "activation_value": 1.2319320440292358
+      },
+      {
+        "token": "don",
+        "context": "emate he can't be held in contempt i just>>> don<<<'t i can't grasp it i don't",
+        "activation_value": 1.2007440328598022
+      },
+      {
+        "token": "their",
+        "context": " personality of each individual he photographs people want to look>>> their<<< best fact better than they look so the photographer must",
+        "activation_value": 1.190749168395996
+      },
+      {
+        "token": "long",
+        "context": " economic package let's do the same thing in the>>> long<<< term economic problems let's get energy independence in americ",
+        "activation_value": 1.186079978942871
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Negation or contrast\",\n  \"explanation\": \"The feature activates on tokens that indicate negation, contrast, or comparison, such as 'don't', 'isn't', 'but', and 'comparable'.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "13": {
+    "feature_idx": 13,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  },
+  "14": {
+    "feature_idx": 14,
+    "label": "Transition or Continuation",
+    "explanation": "The feature detects the concept of transition or continuation, as indicated by the frequent activation on tokens like 'so' that often mark a shift or connection between ideas or clauses",
+    "confidence": "high",
+    "top_tokens": [
+      "so"
+    ],
+    "top_contexts": [
+      {
+        "token": "so",
+        "context": "motor vehicle traffic>>> so<<< if someone is stepping out into the roadway to receive",
+        "activation_value": 10.80183219909668
+      },
+      {
+        "token": "so",
+        "context": "ordinance>>> so<<< that's the first issue that's the biggest issue",
+        "activation_value": 10.789083480834961
+      },
+      {
+        "token": "so",
+        "context": "finance agency>>> so<<< now we have fifty five banks in alabama that",
+        "activation_value": 10.155119895935059
+      },
+      {
+        "token": "so",
+        "context": "somewhere>>> so<<< right that's a good question when you're doing",
+        "activation_value": 9.975366592407227
+      },
+      {
+        "token": "so",
+        "context": "ok>>> so<<< now we're on to business item five either and",
+        "activation_value": 9.394142150878906
+      },
+      {
+        "token": "so",
+        "context": "it>>> so<<< it would have a nice appearance from us mcm",
+        "activation_value": 9.057144165039062
+      },
+      {
+        "token": "so",
+        "context": "prior meeting>>> so<<< the court felt that you know this doesn't comp",
+        "activation_value": 9.029882431030273
+      },
+      {
+        "token": "so",
+        "context": "efficient timetable>>> so<<< that this review process can wrap up in the next",
+        "activation_value": 9.015837669372559
+      },
+      {
+        "token": "so",
+        "context": "school>>> so<<< it kind of raises the challenge of caring and it",
+        "activation_value": 8.93587875366211
+      },
+      {
+        "token": "so",
+        "context": "on new legislation>>> so<<< that's that's where your role will be and",
+        "activation_value": 8.576398849487305
+      },
+      {
+        "token": "so",
+        "context": "trying to turn over top of each other>>> so<<< we still have a little bit of work to do",
+        "activation_value": 8.542678833007812
+      },
+      {
+        "token": "so",
+        "context": "percent of the land area of the town>>> so<<< so so i think there's a lot at stake",
+        "activation_value": 8.459218978881836
+      },
+      {
+        "token": "so",
+        "context": "by area and compares the plants>>> so<<< i'll leave it at this that see evening because",
+        "activation_value": 8.364093780517578
+      },
+      {
+        "token": "so",
+        "context": "wait>>> so<<< it wasn't like you know last spring they made",
+        "activation_value": 8.359296798706055
+      },
+      {
+        "token": "so",
+        "context": "wider area here>>> so<<< that the trucks can make turning movements to come here",
+        "activation_value": 8.123366355895996
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Transition or Continuation\",\n  \"explanation\": \"The feature detects the concept of transition or continuation, as indicated by the frequent activation on tokens like 'so' that often mark a shift or connection between ideas or clauses\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "15": {
+    "feature_idx": 15,
+    "label": "Indicating Appearance",
+    "explanation": "The feature detects phrases that indicate the appearance or seeming of a situation, often using words like 'seems' or 'appears' in conjunction with 'to'",
+    "confidence": "high",
+    "top_tokens": [
+      "to"
+    ],
+    "top_contexts": [
+      {
+        "token": "to",
+        "context": "details seems>>> to<<< be blinding a lot of people to the key details",
+        "activation_value": 20.412172317504883
+      },
+      {
+        "token": "to",
+        "context": "perception seems>>> to<<< exist that this is another type of affirmative action program",
+        "activation_value": 19.39531898498535
+      },
+      {
+        "token": "to",
+        "context": "saying that the mother seems>>> to<<< acknowledge that she's not a boy she doesn't",
+        "activation_value": 19.255104064941406
+      },
+      {
+        "token": "to",
+        "context": " violence and the number of deaths and injuries that seems>>> to<<< indicate that we had just taken those statistics from ",
+        "activation_value": 17.8137264251709
+      },
+      {
+        "token": "to",
+        "context": "try but in the past these efficiency measures seem>>> to<<< have served to keep calling them growth down to the",
+        "activation_value": 17.77657699584961
+      },
+      {
+        "token": "to",
+        "context": "that appears>>> to<<< be the type of issue which we may be confronting",
+        "activation_value": 16.758705139160156
+      },
+      {
+        "token": "to",
+        "context": "but what you have is this you get what seems>>> to<<< be an attempt to boil the lines or carelessness",
+        "activation_value": 16.287395477294922
+      },
+      {
+        "token": "to",
+        "context": " and it is because of this union loop which appears>>> to<<< be especially vulnerable to all sorts",
+        "activation_value": 15.2746000289917
+      },
+      {
+        "token": "to",
+        "context": " but we still share it every year because it seems>>> to<<< be a fan favorite and i hope we continue to",
+        "activation_value": 14.152791976928711
+      },
+      {
+        "token": "to",
+        "context": " now ten years from now didn't matter it seems>>> to<<<",
+        "activation_value": 12.84427261352539
+      },
+      {
+        "token": "to",
+        "context": "communities that are thought>>> to<<< be such that they can not for loans cannot repay",
+        "activation_value": 9.204561233520508
+      },
+      {
+        "token": "to",
+        "context": " what has been the historical levels of what is deemed>>> to<<< be a recessionary or significant slowdown which is around",
+        "activation_value": 5.35526704788208
+      },
+      {
+        "token": "to",
+        "context": " and strategic partner of the united states and has proven>>> to<<< be a dependable key ally in southeast a helpful",
+        "activation_value": 4.360464572906494
+      },
+      {
+        "token": "to",
+        "context": "that they continue>>> to<<< operate without submitting this application is another violation of the",
+        "activation_value": 4.039731025695801
+      },
+      {
+        "token": "to",
+        "context": " dispatch and setting up a union municipal district has continued>>> to<<< meet and we are in agreement on the what would",
+        "activation_value": 3.9330906867980957
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Indicating Appearance\",\n  \"explanation\": \"The feature detects phrases that indicate the appearance or seeming of a situation, often using words like 'seems' or 'appears' in conjunction with 'to'\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "16": {
+    "feature_idx": 16,
+    "label": "Abstract Mental State",
+    "explanation": "The feature detects tokens related to abstract mental states, such as beliefs, assumptions, and perceptions, that express subjective thoughts or attitudes.",
+    "confidence": "high",
+    "top_tokens": [
+      "indication",
+      "assumption",
+      "belief",
+      "impression",
+      "assurance",
+      "recognition",
+      "guarantee",
+      "perception",
+      "apprehension",
+      "likelihood",
+      "observation",
+      "finding",
+      "willingness",
+      "view"
+    ],
+    "top_contexts": [
+      {
+        "token": "assumption",
+        "context": " stimulate the economy where the product is produced and the>>> assumption<<< is that most of these dollars will be spent on",
+        "activation_value": 6.546630859375
+      },
+      {
+        "token": "belief",
+        "context": " fact that those on the other side have a genuine>>> belief<<< that spending more money is the way they would prefer",
+        "activation_value": 4.938632011413574
+      },
+      {
+        "token": "impression",
+        "context": " the research about the photos is kind of get the>>> impression<<< now adays that back in that era people just",
+        "activation_value": 4.736794471740723
+      },
+      {
+        "token": "assurance",
+        "context": " for all our years for our children there's the>>> assurance<<< of a good start up a score of years of",
+        "activation_value": 3.5735514163970947
+      },
+      {
+        "token": "recognition",
+        "context": " is now paid to family and community engagement and the>>> recognition<<< of strengths that could be used to promote safety and",
+        "activation_value": 3.5327792167663574
+      },
+      {
+        "token": "indication",
+        "context": " a few years after graham no one gave any>>> indication<<< that they knew that the that it mattered that eighteen",
+        "activation_value": 3.0900139808654785
+      },
+      {
+        "token": "guarantee",
+        "context": " do whatever we want it thought that some sort of>>> guarantee<<< that he would be considered was necessary and so it",
+        "activation_value": 3.0224127769470215
+      },
+      {
+        "token": "perception",
+        "context": "when the cemetery became a reality>>> perception<<< set in that those being commemorated and remembered in",
+        "activation_value": 2.909402370452881
+      },
+      {
+        "token": "apprehension",
+        "context": " but now you could have a threat or a reasonable>>> apprehension<<< of harm it's one or two following and under",
+        "activation_value": 2.805384397506714
+      },
+      {
+        "token": "likelihood",
+        "context": " this can be established by if there's a reasonable>>> likelihood<<< that he would have testified and this",
+        "activation_value": 2.7842154502868652
+      },
+      {
+        "token": "observation",
+        "context": " the the other question is it is my understanding and>>> observation<<< that the",
+        "activation_value": 2.683823823928833
+      },
+      {
+        "token": "indication",
+        "context": " the fact that there was a break is not an>>> indication<<< that there must be a minimal amount of time and",
+        "activation_value": 2.6462364196777344
+      },
+      {
+        "token": "finding",
+        "context": " that effect councillor mason made the motion on the>>> finding<<< is there a second",
+        "activation_value": 2.595345973968506
+      },
+      {
+        "token": "willingness",
+        "context": "'s consensual in the sense that willingness there's a>>> willingness<<< because of the way the person manipulates the partner",
+        "activation_value": 2.5899486541748047
+      },
+      {
+        "token": "view",
+        "context": " about twenty percent of the population and they support the>>> view<<< that the funds be divided in proportion to the losses",
+        "activation_value": 2.5416107177734375
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Abstract Mental State\",\n  \"explanation\": \"The feature detects tokens related to abstract mental states, such as beliefs, assumptions, and perceptions, that express subjective thoughts or attitudes.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "17": {
+    "feature_idx": 17,
+    "label": "Action or Acquisition",
+    "explanation": "The feature detects verbs and phrases related to taking action, obtaining, or acquiring something, as seen in the frequent activation on tokens like 'do', 'get', 'have', and 'spend'.",
+    "confidence": "high",
+    "top_tokens": [
+      "do",
+      "get",
+      "have",
+      "spend",
+      "you",
+      "make",
+      "tell",
+      "come",
+      "starts"
+    ],
+    "top_contexts": [
+      {
+        "token": "spend",
+        "context": " just giving people six hundred dollars to go out and>>> spend<<< arbitrarily which they may spend on a product that's",
+        "activation_value": 4.351591110229492
+      },
+      {
+        "token": "get",
+        "context": " do a breakfast ball where you come in and you>>> get<<< a",
+        "activation_value": 4.258477210998535
+      },
+      {
+        "token": "you",
+        "context": " actually do a breakfast ball where you come in and>>> you<<< get a",
+        "activation_value": 4.095943450927734
+      },
+      {
+        "token": "make",
+        "context": " the guise of i'm going up to check and>>> make<<< sure this is not my sister when by that time",
+        "activation_value": 3.4328906536102295
+      },
+      {
+        "token": "get",
+        "context": " with his wife and two or three other couples to>>> get<<< one concept where you can go to same person three",
+        "activation_value": 3.396336078643799
+      },
+      {
+        "token": "get",
+        "context": " through the mail and people of course refuse to go>>> get<<< it little different thing when the constable shows up",
+        "activation_value": 3.3096790313720703
+      },
+      {
+        "token": "tell",
+        "context": "d stopped in my office to visit with me to>>> tell<<< me about his struggles which are the struggles of many",
+        "activation_value": 3.271441698074341
+      },
+      {
+        "token": "do",
+        "context": " the action and so we need to come in and>>> do<<< that that's what our goal is and underneath that",
+        "activation_value": 3.0447840690612793
+      },
+      {
+        "token": "do",
+        "context": " you know they don't want to go back and>>> do<<< it again it does cost money but i understand exactly",
+        "activation_value": 3.044065237045288
+      },
+      {
+        "token": "have",
+        "context": " party he can go there with his law firm and>>> have<<< a corporate event business out and then he can go",
+        "activation_value": 3.0273313522338867
+      },
+      {
+        "token": "have",
+        "context": " you can go to same person three different times and>>> have<<< a good time it's",
+        "activation_value": 2.953171730041504
+      },
+      {
+        "token": "come",
+        "context": " recovering at home the public doesn't come there to>>> come<<< testify but if you are attending from a location say",
+        "activation_value": 2.806086778640747
+      },
+      {
+        "token": "do",
+        "context": " the late hour we're happy to come back and>>> do<<< it but if you'd like it now we're",
+        "activation_value": 2.6811323165893555
+      },
+      {
+        "token": "starts",
+        "context": " where it where engineers and everyone else comes in and>>> starts<<< to attack these problems while the basic research keeps moving",
+        "activation_value": 2.6789259910583496
+      },
+      {
+        "token": "do",
+        "context": " know you came in on your day away yesterday to>>> do<<< this so very very well done thank you",
+        "activation_value": 2.635610818862915
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Action or Acquisition\",\n  \"explanation\": \"The feature detects verbs and phrases related to taking action, obtaining, or acquiring something, as seen in the frequent activation on tokens like 'do', 'get', 'have', and 'spend'.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "18": {
+    "feature_idx": 18,
+    "label": "Time of Day",
+    "explanation": "The feature activates on tokens related to time periods, such as night, evening, and day, indicating it detects temporal concepts",
+    "confidence": "high",
+    "top_tokens": [
+      "night",
+      "evening",
+      "day",
+      "height"
+    ],
+    "top_contexts": [
+      {
+        "token": "night",
+        "context": " trial court this trial was about to start that the>>> night<<< before defense counsel has informed the state that it wanted",
+        "activation_value": 13.750664710998535
+      },
+      {
+        "token": "night",
+        "context": " the staff reports the legal opinions leading up to a>>> night<<<'s meeting there is no cited references to where this",
+        "activation_value": 12.677937507629395
+      },
+      {
+        "token": "night",
+        "context": "agree we should pull those ads during until later at>>> night<<< when it's not affecting young audiences policy on advertising",
+        "activation_value": 9.339095115661621
+      },
+      {
+        "token": "evening",
+        "context": " plants so i'll leave it at this that see>>> evening<<< because i know mark wants to go and listen to",
+        "activation_value": 6.118760585784912
+      },
+      {
+        "token": "night",
+        "context": " i of that works out well as i indicated last>>> night<<< we had a good bipartisan vote on this would have",
+        "activation_value": 3.2259256839752197
+      },
+      {
+        "token": "night",
+        "context": "the fifteen day extension last>>> night<<< is a man of his word and i know that",
+        "activation_value": 3.185983180999756
+      },
+      {
+        "token": "evening",
+        "context": " have the leverage of going that far without adopting this>>> evening<<< and starting that process you always have the ability to",
+        "activation_value": 2.143064498901367
+      },
+      {
+        "token": "evening",
+        "context": " mcmurry so what i am asking for this>>> evening<<< i'm asking for approval to remove all of the",
+        "activation_value": 1.8537349700927734
+      },
+      {
+        "token": "day",
+        "context": " stone wall on the shared border between us and the>>> day<<<",
+        "activation_value": 1.273147463798523
+      },
+      {
+        "token": "height",
+        "context": " know the economics of it but would you trade more>>> height<<< for bigger units",
+        "activation_value": 1.1921855211257935
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Time of Day\",\n  \"explanation\": \"The feature activates on tokens related to time periods, such as night, evening, and day, indicating it detects temporal concepts\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "19": {
+    "feature_idx": 19,
+    "label": "Travel and Visitation",
+    "explanation": "The feature detects language related to traveling, visiting, or touring places, as evidenced by the frequent activation on words like 'visitors', 'visit', and 'tour'.",
+    "confidence": "high",
+    "top_tokens": [
+      "visitors",
+      "visit",
+      "tour",
+      "trip",
+      "visitor",
+      "visits",
+      "visiting",
+      "tours",
+      "vacation",
+      "tourism"
+    ],
+    "top_contexts": [
+      {
+        "token": "visit",
+        "context": " see what it is that they need for the next>>> visit<<< talking to them about what they have is ongoing projects",
+        "activation_value": 9.968949317932129
+      },
+      {
+        "token": "visitor",
+        "context": " by transportation security energy greening the new capitol>>> visitor<<< center and the mounting and for structure backlog an urgent",
+        "activation_value": 9.740409851074219
+      },
+      {
+        "token": "visits",
+        "context": "'ve conducted more than seventy accredited credit ation site>>> visits<<< children's advocacy centers across the country over the past",
+        "activation_value": 9.3561372756958
+      },
+      {
+        "token": "visitors",
+        "context": "i think that you know as far as>>> visitors<<< are concerned to the capitol i've i've",
+        "activation_value": 7.960912704467773
+      },
+      {
+        "token": "visit",
+        "context": "ada brant boyd stopped in my office to>>> visit<<< with me to tell me about his struggles which are",
+        "activation_value": 7.217313289642334
+      },
+      {
+        "token": "visiting",
+        "context": " union and the european commission bob is a>>> visiting<<< professor at religion and",
+        "activation_value": 7.139395236968994
+      },
+      {
+        "token": "visitors",
+        "context": " three years and it's always a consistent flow of>>> visitors<<< and they've always come no matter rain sleet",
+        "activation_value": 7.083568096160889
+      },
+      {
+        "token": "tour",
+        "context": " minute orientation feel that will begin at the beginning capital>>> tour<<< an exhibition that includes a well sure write a selection",
+        "activation_value": 6.852163314819336
+      },
+      {
+        "token": "visitors",
+        "context": " daily life in the united states exciting experiences await our>>> visitors<<< a moving thirteen minute orientation feel that will begin at",
+        "activation_value": 6.7651472091674805
+      },
+      {
+        "token": "tours",
+        "context": " four hundred clinical trials in over eighty thousand patients with>>> tours<<< and research and development for nearly a decade before coming",
+        "activation_value": 5.980454444885254
+      },
+      {
+        "token": "trip",
+        "context": " defined but it is still the cost of deploying a>>> trip<<< to afghanistan over and above the cost of",
+        "activation_value": 5.412511348724365
+      },
+      {
+        "token": "trip",
+        "context": " his family found out she couldn't go on a>>> trip<<< to the caribbean because she can't get",
+        "activation_value": 4.103736877441406
+      },
+      {
+        "token": "vacation",
+        "context": " thousand and ten ms gets a crude sick days and>>> vacation<<<",
+        "activation_value": 3.7046821117401123
+      },
+      {
+        "token": "tour",
+        "context": " was was it was definitely in the play on the>>> tour<<< buses can't do this you close it off to",
+        "activation_value": 3.3905272483825684
+      },
+      {
+        "token": "tourism",
+        "context": " for coming up here he's trying to deal with>>> tourism<<< in the district of columbia as well and",
+        "activation_value": 3.250244140625
+      }
+    ],
+    "raw_response": "{\n  \"label\": \"Travel and Visitation\",\n  \"explanation\": \"The feature detects language related to traveling, visiting, or touring places, as evidenced by the frequent activation on words like 'visitors', 'visit', and 'tour'.\",\n  \"confidence\": \"high\"\n}",
+    "error": null
+  },
+  "20": {
+    "feature_idx": 20,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "top_tokens": [],
+    "top_contexts": [],
+    "raw_response": "",
+    "error": "no activating examples found"
+  }
+}
