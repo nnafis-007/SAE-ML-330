@@ -329,6 +329,12 @@ Most frequent activating tokens (top 1): "security"
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Security and protection",
+  "explanation": "The feature activates on the token 'security' across contexts like border security, facility security, and security interests, indicating it detects concepts related to safety, protection, and security.",
+  "confidence": "high"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -351,6 +357,12 @@ Most frequent activating tokens (top 3): "bit", "bits", "x"
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Subword fragment: bit",
+  "explanation": "The feature activates on the subword fragment 'bit' both as a standalone token and within words like 'arbitration' and 'bits', suggesting it primarily detects this tokenization fragment rather than a specific semantic concept.",
+  "confidence": "medium"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -388,6 +400,12 @@ Most frequent activating tokens (top 18): "not", "of", "long", "'s", "the", "in"
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Negation and contrast",
+  "explanation": "The feature activates on negation/contrast constructions (e.g., 'not', 'don't', 'doesn't') and evaluative phrases like 'not a bad thing', indicating it detects negation and contrastive phrasing.",
+  "confidence": "high"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -425,6 +443,12 @@ Most frequent activating tokens (top 1): "so"
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Discourse marker: so",
+  "explanation": "The feature strongly activates on the connective/discourse marker 'so', commonly used to transition, summarize, or continue reasoning in speech.",
+  "confidence": "high"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -462,6 +486,12 @@ Most frequent activating tokens (top 1): "to"
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Infinitive/preposition: to",
+  "explanation": "The feature activates on the token 'to', especially in constructions like 'seems to' and other infinitival/prepositional uses, indicating it detects this grammatical marker.",
+  "confidence": "high"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -499,6 +529,12 @@ Most frequent activating tokens (top 13): "assumption", "impression", "suggestio
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Assumptions and expectations",
+  "explanation": "The feature activates on epistemic stance words like 'assumption', 'belief', 'expectation', and 'notion', indicating it detects language about beliefs, assumptions, and expectations.",
+  "confidence": "high"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -536,6 +572,12 @@ Most frequent activating tokens (top 15): "get", "take", "just", "spend", "you",
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Getting and spending actions",
+  "explanation": "The feature activates on common action/transaction verbs such as 'get', 'take', and 'spend', often describing obtaining things or using resources.",
+  "confidence": "medium"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -573,6 +615,12 @@ Most frequent activating tokens (top 6): "night", "evening", "nights", "dark", "
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Night and evening time",
+  "explanation": "The feature activates on words and contexts referring to nighttime (e.g., 'night', 'evening', 'dark'), indicating it detects references to night/evening.",
+  "confidence": "high"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -610,6 +658,12 @@ Most frequent activating tokens (top 5): "visit", "visitor", "visitors", "visits
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Visits and visitors",
+  "explanation": "The feature activates on words like 'visit' and 'visitor' and related contexts (e.g., visitor centers), indicating it detects the concept of visits/visitors.",
+  "confidence": "high"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -647,6 +701,12 @@ Most frequent activating tokens (top 3): "allowed", "permitted", "allow"
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Permission and allowance",
+  "explanation": "The feature activates on tokens like 'allowed', 'permitted', and 'allow', indicating it detects language about granting or denying permission/authorization.",
+  "confidence": "high"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -684,6 +744,12 @@ Most frequent activating tokens (top 15): "responded", "but", "has", "and", "man
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Statements and responses",
+  "explanation": "The feature activates on communication/reporting terms such as 'spokesman', 'statement', and 'responded', indicating it detects language around public statements and responses.",
+  "confidence": "medium"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -721,6 +787,12 @@ Most frequent activating tokens (top 16): "work", "debate", "looking", "listen",
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Representation and advocacy",
+  "explanation": "The feature activates on tokens like 'listen', 'represented', 'work', and 'stand up', often in civic/political contexts, suggesting it detects language about representation, advocacy, and engagement.",
+  "confidence": "medium"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -758,6 +830,12 @@ Most frequent activating tokens (top 1): "on"
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Topic/reference marker: on",
+  "explanation": "The feature strongly activates on the preposition 'on' in phrases like 'vote on', 'decision on', and 'authority on', indicating it detects this common topic/reference marker.",
+  "confidence": "high"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -795,6 +873,12 @@ Most frequent activating tokens (top 1): "to"
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Transition marker: from ... to ...",
+  "explanation": "The feature activates on 'to' in range/transition constructions such as 'from X to Y' and 'shift from ... to ...', indicating it detects transitions between states, values, or locations.",
+  "confidence": "high"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -832,6 +916,12 @@ Most frequent activating tokens (top 17): "to", "a", "single", "the", "half", "a
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Time spans and quantities",
+  "explanation": "The feature activates on quantity/time-span language such as 'single', 'half', 'ten', 'thirty', and 'years' (including phrases like 'year after year'), indicating it detects numerical quantities and temporal spans.",
+  "confidence": "medium"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -869,6 +959,12 @@ Most frequent activating tokens (top 10): "org", "comp", "io", "res", "com", "un
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Subword fragments: com/org",
+  "explanation": "The feature activates on token fragments like 'com', 'comm', and 'org' inside longer words (e.g., 'noncommissioned', 'committee', 'Georgia'), suggesting it primarily detects subword/tokenization fragments rather than a semantic concept.",
+  "confidence": "medium"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -906,6 +1002,12 @@ Most frequent activating tokens (top 6): "want", "wanted", "like", "ases", "want
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Wants and preferences",
+  "explanation": "The feature activates on words like 'want', 'wanted', and 'choose', indicating it detects language expressing desire, preference, or choice.",
+  "confidence": "high"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -943,6 +1045,12 @@ Most frequent activating tokens (top 18): "a", "ask", "much", "leave", "spice", 
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Requests and emphasis phrases",
+  "explanation": "The feature activates on fragments often used in asking or emphasizing points (e.g., 'ask', 'wait a minute'), but the pattern is fairly noisy and mixes in other high-frequency fragments.",
+  "confidence": "low"
+}
 
 ================================================================================
 REQUEST_ID n/a
@@ -979,4 +1087,12 @@ Most frequent activating tokens (top 1): "year"
 
 
 Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Year references",
+  "explanation": "The feature strongly activates on the token 'year' in contexts like calendar year, fiscal year, and 'year after year', indicating it detects year/annual time references.",
+  "confidence": "high"
+}
+================================================================================
 

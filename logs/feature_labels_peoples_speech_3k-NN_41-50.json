@@ -1,9 +1,9 @@
 {
   "41": {
     "feature_idx": 41,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Physical handling and placement",
+    "explanation": "The feature activates on contexts involving someone being moved or handled (e.g., 'placed', 'dropped off', 'pulled aside', 'held', 'rescued'), suggesting it detects physical handling/placement events.",
+    "confidence": "medium",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -107,8 +107,8 @@
         "activation_value": 2.4008889198303223
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99811, Requested 1018. Please try again in 11m56.256s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Physical handling and placement\",\n  \"explanation\": \"The feature activates on contexts involving someone being moved or handled (e.g., 'placed', 'dropped off', 'pulled aside', 'held', 'rescued'), suggesting it detects physical handling/placement events.\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
   },
   "42": {
     "feature_idx": 42,
@@ -132,9 +132,9 @@
   },
   "44": {
     "feature_idx": 44,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Checks, balances, and accounting",
+    "explanation": "The feature activates on terms like 'check', 'balance', 'clerk', 'monetary', 'clock', and 'calendar', indicating it detects language around checks/balances, accounting/finance, and timekeeping.",
+    "confidence": "medium",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -238,13 +238,13 @@
         "activation_value": 1.6301422119140625
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99810, Requested 983. Please try again in 11m25.151999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Checks, balances, and accounting\",\n  \"explanation\": \"The feature activates on terms like 'check', 'balance', 'clerk', 'monetary', 'clock', and 'calendar', indicating it detects language around checks/balances, accounting/finance, and timekeeping.\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
   },
   "45": {
     "feature_idx": 45,
-    "label": "error",
-    "explanation": "",
+    "label": "Common function words",
+    "explanation": "The feature activates on very high-frequency function words (e.g., 'a', 'to', 'the') and generic grammatical scaffolding, so it does not correspond to a clear semantic concept.",
     "confidence": "low",
     "top_tokens": [],
     "top_contexts": [
@@ -304,8 +304,8 @@
         "activation_value": 1.0147866010665894
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99810, Requested 673. Please try again in 6m57.312s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Common function words\",\n  \"explanation\": \"The feature activates on very high-frequency function words (e.g., 'a', 'to', 'the') and generic grammatical scaffolding, so it does not correspond to a clear semantic concept.\",\n  \"confidence\": \"low\"\n}",
+    "error": null
   },
   "46": {
     "feature_idx": 46,
@@ -319,8 +319,8 @@
   },
   "47": {
     "feature_idx": 47,
-    "label": "error",
-    "explanation": "",
+    "label": "Emotional impact and emphasis",
+    "explanation": "The feature activates on tokens like 'toll', 'shakes', 'gut', 'beyond', and other colloquial emphasis words; the pattern is noisy but often reflects emotional impact/intensity in speech.",
     "confidence": "low",
     "top_tokens": [],
     "top_contexts": [
@@ -425,14 +425,14 @@
         "activation_value": 1.3789172172546387
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99810, Requested 1038. Please try again in 12m12.672s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Emotional impact and emphasis\",\n  \"explanation\": \"The feature activates on tokens like 'toll', 'shakes', 'gut', 'beyond', and other colloquial emphasis words; the pattern is noisy but often reflects emotional impact/intensity in speech.\",\n  \"confidence\": \"low\"\n}",
+    "error": null
   },
   "48": {
     "feature_idx": 48,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Pronouns and auxiliaries",
+    "explanation": "The feature activates on pronouns and auxiliary/copula forms (e.g., 'we', 'my', 'me', 'he', 'was', 'were', 'you'), indicating it detects grammatical person/tense scaffolding.",
+    "confidence": "medium",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -536,14 +536,14 @@
         "activation_value": 4.672355651855469
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99809, Requested 1037. Please try again in 12m10.944s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Pronouns and auxiliaries\",\n  \"explanation\": \"The feature activates on pronouns and auxiliary/copula forms (e.g., 'we', 'my', 'me', 'he', 'was', 'were', 'you'), indicating it detects grammatical person/tense scaffolding.\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
   },
   "49": {
     "feature_idx": 49,
-    "label": "error",
-    "explanation": "",
-    "confidence": "low",
+    "label": "Community and togetherness",
+    "explanation": "The feature activates on 'together' and community-oriented contexts (congregation, community groups, programs), indicating it detects language about community cohesion and coming together.",
+    "confidence": "medium",
     "top_tokens": [],
     "top_contexts": [
       {
@@ -647,7 +647,7 @@
         "activation_value": 2.1555418968200684
       }
     ],
-    "raw_response": "",
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99809, Requested 1046. Please try again in 12m18.72s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "raw_response": "{\n  \"label\": \"Community and togetherness\",\n  \"explanation\": \"The feature activates on 'together' and community-oriented contexts (congregation, community groups, programs), indicating it detects language about community cohesion and coming together.\",\n  \"confidence\": \"medium\"\n}",
+    "error": null
   }
 }
