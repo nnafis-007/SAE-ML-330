@@ -931,6 +931,71 @@ def build_token_maps(
     return token_ids, token_doc_map, token_pos_map
 
 
+def parse_indexed_corpus(
+    corpus_path: str,
+    max_entries: Optional[int] = None,
+    skip_header: bool = True,
+) -> List[str]:
+    """
+    Parse a local text corpus in indexed-line format:
+      [0] first text
+      [1] second text
+    """
+    corpus_file = Path(corpus_path)
+    if not corpus_file.exists():
+        raise FileNotFoundError(f"Corpus file not found: {corpus_path}")
+
+    texts: List[str] = []
+    expected_idx = 0
+
+    try:
+        with open(corpus_file, "r", encoding="utf-8") as f:
+            for line_num, line in enumerate(f, start=1):
+                line = line.rstrip("\n")
+                if not line.strip():
+                    continue
+
+                if skip_header and line.lstrip().startswith("#"):
+                    continue
+
+                m = re.match(r"^\s*\[(\d+)\]\s*(.*)$", line)
+                if not m:
+                    LOGGER.warning("Skipping malformed corpus line %d: %s", line_num, line[:120])
+                    continue
+
+                idx = int(m.group(1))
+                text = m.group(2).strip()
+
+                if idx != expected_idx:
+                    LOGGER.warning(
+                        "Corpus index jump at line %d: expected [%d], found [%d]",
+                        line_num,
+                        expected_idx,
+                        idx,
+                    )
+                expected_idx = idx + 1
+
+                texts.append(text)
+
+                if max_entries is not None and max_entries > 0 and len(texts) >= max_entries:
+                    LOGGER.info("Reached corpus entry cap: %d", max_entries)
+                    break
+    except UnicodeDecodeError as exc:
+        raise ValueError(f"Corpus file is not valid UTF-8: {corpus_path}") from exc
+
+    valid_count = sum(1 for t in texts if t.strip())
+    if valid_count == 0:
+        raise ValueError(f"No valid indexed entries were parsed from: {corpus_path}")
+
+    LOGGER.info(
+        "Corpus parsed | path=%s entries=%d non_empty=%d",
+        corpus_file,
+        len(texts),
+        valid_count,
+    )
+    return texts
+
+
 # ---------------------------------------------------------------------------
 # Main Execution
 # ---------------------------------------------------------------------------
@@ -982,6 +1047,23 @@ if __name__ == "__main__":
         type=int,
         default=0,
         help="Random seed for streaming dataset shuffle.",
+    )
+    parser.add_argument(
+        "--corpus-path",
+        type=str,
+        default=None,
+        help="Path to local .txt corpus with indexed lines like '[0] text'. If provided, this takes priority over --dataset.",
+    )
+    parser.add_argument(
+        "--corpus-max-entries",
+        type=int,
+        default=None,
+        help="Optional cap on number of entries to read from --corpus-path.",
+    )
+    parser.add_argument(
+        "--corpus-no-skip-header",
+        action="store_true",
+        help="Do not skip header/comment lines starting with '#'.",
     )
     parser.add_argument(
         "--batch-size",
@@ -1096,7 +1178,8 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     LOGGER.info(
-        "llm_analysis started | dataset=%s split=%s config=%s num_texts=%d batch_size=%d max_length=%d backend=%s model=%s",
+        "llm_analysis started | corpus=%s dataset=%s split=%s config=%s num_texts=%d batch_size=%d max_length=%d backend=%s model=%s",
+        args.corpus_path or "(none)",
         args.dataset or "(built-in)",
         args.dataset_split,
         args.dataset_config,
@@ -1109,6 +1192,7 @@ if __name__ == "__main__":
 
     # 1. Load SAE
     LOGGER.info("Loading SAE checkpoint...")
+    # ckpt_path = PROJECT_ROOT / "checkpoints" / "best_model_fc_sae_m32_layer10.pt"
     ckpt_path = PROJECT_ROOT / "checkpoints" / "FC_SAE_Best.pt"
     if not ckpt_path.exists():
         # Fallback for different naming conventions
@@ -1134,14 +1218,36 @@ if __name__ == "__main__":
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
     tokenizer.pad_token = tokenizer.eos_token
     
-    use_dataset = bool(args.dataset and args.dataset.strip())
+    use_corpus = bool(args.corpus_path and args.corpus_path.strip())
+    use_dataset = bool(args.dataset and args.dataset.strip()) and not use_corpus
     cache_path = Path(args.activation_cache_path)
     cache_loaded = False
+
+    if use_corpus:
+        corpus_abs = str(Path(args.corpus_path).expanduser().resolve())
+        source_signature = f"corpus|{corpus_abs}|max_entries={args.corpus_max_entries}|max_length={args.max_length}|skip_header={not args.corpus_no_skip_header}"
+        source_label = f"local_corpus:{corpus_abs}"
+    elif use_dataset:
+        source_signature = f"dataset|{args.dataset}|config={args.dataset_config}|split={args.dataset_split}|num_texts={args.num_texts}|max_length={args.max_length}"
+        source_label = f"huggingface:{args.dataset}"
+    else:
+        source_signature = f"builtin|max_length={args.max_length}"
+        source_label = "built_in_samples"
+
+    LOGGER.info("Selected data source | mode=%s", source_label)
     
     if (not args.no_cache_load) and cache_path.exists():
         LOGGER.info("Loading activation cache from %s", cache_path)
         try:
             cache = torch.load(str(cache_path))
+            cached_signature = cache.get("source_signature")
+            if cached_signature != source_signature:
+                LOGGER.info(
+                    "Ignoring activation cache due to source mismatch | cached=%s current=%s",
+                    cached_signature,
+                    source_signature,
+                )
+                raise ValueError("activation cache source mismatch")
             activations = cache["activations"].float()
             sample_texts = cache["texts"]
             token_ids = cache["token_ids"]
@@ -1159,7 +1265,25 @@ if __name__ == "__main__":
             LOGGER.warning("Cache load failed (%s). Recollecting activations.", e)
 
     if not cache_loaded:
-        if use_dataset:
+        if use_corpus:
+             LOGGER.info("Collecting activations from local corpus: %s", args.corpus_path)
+             try:
+                 sample_texts = parse_indexed_corpus(
+                     args.corpus_path,
+                     max_entries=args.corpus_max_entries,
+                     skip_header=(not args.corpus_no_skip_header),
+                 )
+             except (FileNotFoundError, ValueError) as exc:
+                 LOGGER.error("Failed to parse local corpus: %s", exc)
+                 sys.exit(1)
+
+             collector = GPT2ActivationCollector(layer_index=layer_index)
+             activations = collector.collect_activations(
+                 sample_texts,
+                 batch_size=args.batch_size,
+                 max_length=args.max_length,
+             )
+        elif use_dataset:
              LOGGER.info("Collecting activations from dataset %s", args.dataset)
              collector = GPT2ActivationCollector(layer_index=layer_index)
              activations, sample_texts = collector.collect_from_dataset_with_texts(
@@ -1186,12 +1310,14 @@ if __name__ == "__main__":
         
         # Save cache
         if not args.no_cache_save:
+            cache_path.parent.mkdir(parents=True, exist_ok=True)
             torch.save({
                 "activations": activations.cpu(),
                 "texts": sample_texts,
                 "token_ids": token_ids,
                 "token_doc_map": doc_map,
                 "token_pos_map": pos_map,
+                "source_signature": source_signature,
             }, str(cache_path))
             LOGGER.info(
                 "Saved activation cache | path=%s tokens=%d texts=%d",
@@ -1257,7 +1383,7 @@ if __name__ == "__main__":
 
     n_alive = len(alive_sorted)
     top_n = max(1, min(args.top_feature_count, n_alive))
-    target_features = [x for x in range(41,50)]
+    target_features = [x for x in range(1068,1071)]
     print(f"\nAlive features: {n_alive}")
     print(f"Top-{top_n} feature indices by mean activation: {target_features}")
 
