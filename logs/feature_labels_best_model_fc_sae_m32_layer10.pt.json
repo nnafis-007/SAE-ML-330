@@ -350,5 +350,605 @@
     "confidence": "high",
     "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
     "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "58": {
+    "feature_idx": 58,
+    "label": "Change or Outcome",
+    "explanation": "The feature detects language related to changes, outcomes, or results of events or decisions, often indicated by words like 'turned', 'out', 'to', and 'became'.",
+    "confidence": "high",
+    "request_id": "5b72bbe8-1499-4405-9637-47fae8ca653a",
+    "updated_at": "2026-04-03T18:43:43Z"
+  },
+  "280": {
+    "feature_idx": 280,
+    "label": "Possession or Attribute",
+    "explanation": "The feature detects verbs and verb forms indicating possession, attribute, or relation, such as 'have', 'has', and 'had'.",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "updated_at": "2026-04-03T18:55:08Z"
+  },
+  "281": {
+    "feature_idx": 281,
+    "label": "Logical Consistency",
+    "explanation": "The feature detects instances where the text discusses whether something makes logical sense or is reasonable",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "updated_at": "2026-04-03T18:55:08Z"
+  },
+  "282": {
+    "feature_idx": 282,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "updated_at": "2026-04-03T18:55:08Z"
+  },
+  "283": {
+    "feature_idx": 283,
+    "label": "Product or Situation Quality",
+    "explanation": "The feature detects the concept of quality or condition, often referring to the standard or characteristics of a product, situation, or environment",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "updated_at": "2026-04-03T18:55:08Z"
+  },
+  "284": {
+    "feature_idx": 284,
+    "label": "Expression of Agreement",
+    "explanation": "The feature detects phrases that express agreement, disagreement, or understanding, often in a conversational or debate setting",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "updated_at": "2026-04-03T18:55:08Z"
+  },
+  "285": {
+    "feature_idx": 285,
+    "label": "Clarity of Meaning",
+    "explanation": "The feature detects instances where the word 'clear' is used to convey a sense of unmistakable or unambiguous meaning or intention.",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "updated_at": "2026-04-03T18:55:08Z"
+  },
+  "286": {
+    "feature_idx": 286,
+    "label": "General Objects",
+    "explanation": "The feature detects the token 'things', which is often used to refer to general or unspecified objects, concepts, or ideas in a broad sense.",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "updated_at": "2026-04-03T18:55:08Z"
+  },
+  "287": {
+    "feature_idx": 287,
+    "label": "Geographic Location",
+    "explanation": "The feature strongly activates on tokens that are abbreviations or names of cities, states, or countries, indicating it detects geographic locations",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "updated_at": "2026-04-03T18:55:08Z"
+  },
+  "288": {
+    "feature_idx": 288,
+    "label": "Causal Relationship",
+    "explanation": "The feature detects phrases indicating a causal relationship between events or entities, often marked by words like 'cause', 'reason', 'responsible', and 'rise'",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "updated_at": "2026-04-03T18:55:08Z"
+  },
+  "289": {
+    "feature_idx": 289,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "updated_at": "2026-04-03T18:55:08Z"
+  },
+  "1989": {
+    "feature_idx": 1989,
+    "label": "Inquiry or Question",
+    "explanation": "The feature detects the token 'how' which is often used to introduce a question or inquiry about a particular topic or process",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "1409": {
+    "feature_idx": 1409,
+    "label": "Concept of Change",
+    "explanation": "The feature detects the concept of change, including modifications, alterations, or shifts in various contexts, such as behavior, policies, or circumstances",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "3470": {
+    "feature_idx": 3470,
+    "label": "Identifying Requirements",
+    "explanation": "The feature detects instances where the text discusses recognizing, meeting, or addressing various needs or requirements in different contexts",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "2858": {
+    "feature_idx": 2858,
+    "label": "Legal Case Concept",
+    "explanation": "The feature detects the concept of a legal case or lawsuit, often related to court proceedings, law, and judicial decisions.",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "3276": {
+    "feature_idx": 3276,
+    "label": "Comparison Concept",
+    "explanation": "This feature detects text snippets that involve comparing or contrasting ideas, objects, or situations, often using words like 'compare', 'contrast', and 'analogous'",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "4128": {
+    "feature_idx": 4128,
+    "label": "Identifying Issues",
+    "explanation": "The feature detects text where the word 'problem' is used to highlight a difficulty, challenge, or concern in a given situation or context.",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "2258": {
+    "feature_idx": 2258,
+    "label": "Attempt or Effort",
+    "explanation": "The feature detects the concept of attempting or making an effort to do something, as indicated by the frequent activation on the token 'try' in various contexts",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "906": {
+    "feature_idx": 906,
+    "label": "Intent or Purpose",
+    "explanation": "The feature detects the concept of intent or purpose, as indicated by the frequent activation on the token 'trying' in contexts where goals, objectives, or motivations are being discussed",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "6039": {
+    "feature_idx": 6039,
+    "label": "Problem Solving Effort",
+    "explanation": "The feature detects language related to attempting to understand, resolve, or find a solution to a problem or situation",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "3425": {
+    "feature_idx": 3425,
+    "label": "Legal Court Reference",
+    "explanation": "The feature detects mentions of a court in a legal context, often with parties asking the court to take a specific action or make a decision",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "4021": {
+    "feature_idx": 4021,
+    "label": "Legal Court Context",
+    "explanation": "The feature detects text snippets related to legal proceedings, judicial decisions, and court-related matters, as evidenced by the frequent appearance of the word 'court' in the activating examples",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "895": {
+    "feature_idx": 895,
+    "label": "Family Unit Concept",
+    "explanation": "The feature detects the concept of a family unit, including its members, relationships, and social implications, as evidenced by the frequent activation on the token 'family' in various contexts",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "2563": {
+    "feature_idx": 2563,
+    "label": "Consequence or Next Step",
+    "explanation": "The feature detects the concept of consequence or next step, often indicated by the word 'follow' and its variants, which implies a subsequent action or outcome",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "3083": {
+    "feature_idx": 3083,
+    "label": "Recurring Event Concept",
+    "explanation": "The feature detects language related to repeated or sequential events, such as patterns, chains, or cycles, indicating a semantic concept of recurring or connected happenings",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "3913": {
+    "feature_idx": 3913,
+    "label": "Relative Clause Indicator",
+    "explanation": "The feature detects the presence of the word 'which' introducing a relative clause, often used to provide additional information or clarify a preceding noun or phrase",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "899": {
+    "feature_idx": 899,
+    "label": "Cooperation Concept",
+    "explanation": "The feature detects the concept of cooperation, unity, or collaboration, as indicated by the frequent activation on the token 'together' in various contexts suggesting joint effort or collective action",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "updated_at": "2026-04-03T18:56:30Z"
+  },
+  "6118": {
+    "feature_idx": 6118,
+    "label": "Family Relationship",
+    "explanation": "The feature activates on tokens related to family members, such as mother, brother, sister, and father, indicating it detects concepts related to family relationships",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "3593": {
+    "feature_idx": 3593,
+    "label": "Leadership Position",
+    "explanation": "The feature detects tokens related to leadership or high-ranking positions, such as 'head' or 'heads', often in contexts referring to executives, directors, or other authoritative roles",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "4567": {
+    "feature_idx": 4567,
+    "label": "Residence Location",
+    "explanation": "The feature detects the concept of where someone resides or lives, as indicated by the frequent activation on tokens related to living, such as 'live', 'living', and 'lives'",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "6088": {
+    "feature_idx": 6088,
+    "label": "American Context",
+    "explanation": "The feature detects text related to America, including its people, policies, and geography",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "3094": {
+    "feature_idx": 3094,
+    "label": "Response to situation",
+    "explanation": "The feature detects language related to reacting or answering to a situation, event, or stimulus, as evidenced by the frequent activation on tokens such as 'respond', 'responded', and 'response'",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "1351": {
+    "feature_idx": 1351,
+    "label": "Concession Indicator",
+    "explanation": "The feature detects phrases that indicate a concession or acknowledgement of an obvious fact, often introduced by the token 'of course'.",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "5157": {
+    "feature_idx": 5157,
+    "label": "Indefinite Quantity",
+    "explanation": "The feature detects the presence of the word 'some', which is often used to indicate an indefinite or unspecified quantity or amount.",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "2064": {
+    "feature_idx": 2064,
+    "label": "Time and Duration",
+    "explanation": "The feature detects phrases related to time, duration, and the concept of something taking or requiring a certain amount of time",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "1189": {
+    "feature_idx": 1189,
+    "label": "Introduction of Evidence",
+    "explanation": "The feature detects the introduction or presentation of information, ideas, or evidence in a formal or official context, often in a legal or governmental setting",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "5765": {
+    "feature_idx": 5765,
+    "label": "Action of placement",
+    "explanation": "The feature detects the concept of placing or positioning something, as indicated by the frequent activation on the token 'put' in various contexts",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "519": {
+    "feature_idx": 519,
+    "label": "Degree or extent",
+    "explanation": "The feature detects the concept of degree or extent, as the word 'little' is used to modify various nouns and phrases to indicate a small or limited amount",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "1739": {
+    "feature_idx": 1739,
+    "label": "Reference to prior statement",
+    "explanation": "The feature detects phrases that reference or reiterate a previous statement or claim, often using words like 'said', 'mentioned', or 'indicated'",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "2341": {
+    "feature_idx": 2341,
+    "label": "Affirmative Response",
+    "explanation": "The feature detects the presence of affirmative responses, such as 'yes', in a given context, often indicating agreement or confirmation",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "updated_at": "2026-04-03T19:01:04Z"
+  },
+  "5461": {
+    "feature_idx": 5461,
+    "label": "Legal Appeal Terms",
+    "explanation": "The feature detects tokens related to legal appeals, such as 'reversed', 'judgment', and 'respectfully', which are commonly used in legal motions and arguments.",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "updated_at": "2026-04-03T19:03:32Z"
+  },
+  "5463": {
+    "feature_idx": 5463,
+    "label": "Direct Address",
+    "explanation": "The feature detects instances of direct address or communication between individuals, often indicated by pronouns such as 'me', 'him', 'us', 'you', 'them', and 'her'.",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "updated_at": "2026-04-03T19:03:32Z"
+  },
+  "5464": {
+    "feature_idx": 5464,
+    "label": "Court Findings",
+    "explanation": "The feature detects language related to court decisions, judgments, and findings, often involving the words 'found' and 'find'",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "updated_at": "2026-04-03T19:03:32Z"
+  },
+  "5465": {
+    "feature_idx": 5465,
+    "label": "Transition to action",
+    "explanation": "The feature detects phrases that indicate a transition or start of a new action, process, or phase, often marked by words like 'begin', 'start', or 'to'",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "updated_at": "2026-04-03T19:03:32Z"
+  },
+  "5466": {
+    "feature_idx": 5466,
+    "label": "Reference to Context",
+    "explanation": "The feature detects the token 'the' when it is used to reference a specific context, concept, or entity previously mentioned in the text",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "updated_at": "2026-04-03T19:03:32Z"
+  },
+  "5467": {
+    "feature_idx": 5467,
+    "label": "Picking Up Objects",
+    "explanation": "The feature detects instances where an object or person is being lifted, retrieved, or collected, often in a physical sense, as indicated by the frequent activation on words like 'pick', 'up', and 'collect'.",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "updated_at": "2026-04-03T19:03:32Z"
+  },
+  "5468": {
+    "feature_idx": 5468,
+    "label": "Discovery or Realization",
+    "explanation": "The feature detects tokens that imply the act of finding, noticing, or becoming aware of something, often in a formal or investigative context",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "updated_at": "2026-04-03T19:03:32Z"
+  },
+  "5469": {
+    "feature_idx": 5469,
+    "label": "First person reference",
+    "explanation": "The feature detects the presence of the word 'my', indicating a first-person perspective or possession in the text",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "updated_at": "2026-04-03T19:03:32Z"
+  },
+  "2456": {
+    "feature_idx": 2456,
+    "label": "Color Reference",
+    "explanation": "This feature detects text snippets that mention or reference colors, coloring, or related concepts such as race or character, often in the context of descriptions, attributes, or categorizations.",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "5976": {
+    "feature_idx": 5976,
+    "label": "Color Mention",
+    "explanation": "The feature activates on text snippets containing color-related words such as 'red', 'blue', 'yellow', and 'green'.",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "1864": {
+    "feature_idx": 1864,
+    "label": "Social Relationship",
+    "explanation": "The feature detects mentions of personal relationships, particularly friendships, in the given text snippets",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "4731": {
+    "feature_idx": 4731,
+    "label": "Human Consumption",
+    "explanation": "The feature activates on tokens related to consuming food, drinks, or substances, indicating it detects concepts of human consumption and intake",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "1274": {
+    "feature_idx": 1274,
+    "label": "Sports and Games",
+    "explanation": "The feature activates on tokens related to various sports, games, and balls, indicating it detects concepts related to sports and games",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "5196": {
+    "feature_idx": 5196,
+    "label": "Color Reference",
+    "explanation": "The feature detects mentions of colors, particularly green, in the given text snippets",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "4838": {
+    "feature_idx": 4838,
+    "label": "Existence or Identity",
+    "explanation": "The feature detects phrases that introduce or clarify the existence, identity, or classification of entities, concepts, or ideas, often using linking verbs like 'are' or 'were'",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "5775": {
+    "feature_idx": 5775,
+    "label": "Referring to previous items",
+    "explanation": "The feature detects the token 'those' which is often used to refer to previously mentioned items or concepts in a sentence or context",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "807": {
+    "feature_idx": 807,
+    "label": "Year mention",
+    "explanation": "The feature activates on text snippets containing the token 'two' which is often part of a year mention, such as 'two thousand and ten'",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "3186": {
+    "feature_idx": 3186,
+    "label": "Small Numerical Values",
+    "explanation": "The feature activates on text snippets containing small numerical values, particularly 'two', indicating it detects mentions of specific quantities",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "4030": {
+    "feature_idx": 4030,
+    "label": "Number Ten",
+    "explanation": "The feature detects the presence of the number ten in the input text, often indicating a quantity, duration, or percentage.",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "759": {
+    "feature_idx": 759,
+    "label": "Digit Nine",
+    "explanation": "The feature activates on the token 'nine' in various numerical and contextual settings, indicating it detects the concept of the digit nine",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "1653": {
+    "feature_idx": 1653,
+    "label": "Number Eight",
+    "explanation": "The feature detects the presence of the number eight in various contexts, including numerical values, time periods, and quantities.",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "955": {
+    "feature_idx": 955,
+    "label": "Number Four",
+    "explanation": "The feature detects the presence of the number four in various contexts, including numerical values, time periods, and ordinal numbers",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "716": {
+    "feature_idx": 716,
+    "label": "Number Six",
+    "explanation": "The feature detects the presence of the number six in the input text, often in numerical values or time periods.",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "updated_at": "2026-04-03T19:08:05Z"
+  },
+  "4040": {
+    "feature_idx": 4040,
+    "label": "Abstract Social Values",
+    "explanation": "This feature detects tokens related to fundamental social and political concepts, such as liberty, hope, and truth, which are core to societal values and ideals.",
+    "confidence": "high",
+    "request_id": "853bfdde-e843-4ecb-b97f-ebc78c512594",
+    "updated_at": "2026-04-03T19:18:36Z"
+  },
+  "4044": {
+    "feature_idx": 4044,
+    "label": "Job Termination",
+    "explanation": "The feature detects language related to the concept of being fired, let go, or having one's employment ended.",
+    "confidence": "high",
+    "request_id": "853bfdde-e843-4ecb-b97f-ebc78c512594",
+    "updated_at": "2026-04-03T19:18:36Z"
+  },
+  "4045": {
+    "feature_idx": 4045,
+    "label": "First person speech",
+    "explanation": "The feature activates on tokens where the speaker is expressing themselves in the first person, often using the contraction 'I'm'",
+    "confidence": "high",
+    "request_id": "853bfdde-e843-4ecb-b97f-ebc78c512594",
+    "updated_at": "2026-04-03T19:18:36Z"
+  },
+  "4047": {
+    "feature_idx": 4047,
+    "label": "Degree or Extent",
+    "explanation": "The feature detects words and phrases that indicate a degree, extent, or comparison of quantities, such as 'much', 'times', 'far', and 'significantly'.",
+    "confidence": "high",
+    "request_id": "853bfdde-e843-4ecb-b97f-ebc78c512594",
+    "updated_at": "2026-04-03T19:18:36Z"
+  },
+  "4050": {
+    "feature_idx": 4050,
+    "label": "Existence or Presence",
+    "explanation": "The feature detects the concept of existence or presence, as indicated by the frequent activation on tokens like 'there' and 'be' in contexts implying something's existence or lack thereof",
+    "confidence": "high",
+    "request_id": "853bfdde-e843-4ecb-b97f-ebc78c512594",
+    "updated_at": "2026-04-03T19:18:36Z"
+  },
+  "4055": {
+    "feature_idx": 4055,
+    "label": "Definite Article Detection",
+    "explanation": "This feature detects the presence of the definite article 'the' in a given context, which is the most frequent activating token across the examples",
+    "confidence": "high",
+    "request_id": "853bfdde-e843-4ecb-b97f-ebc78c512594",
+    "updated_at": "2026-04-03T19:18:36Z"
+  },
+  "1681": {
+    "feature_idx": 1681,
+    "label": "Temporal Reference",
+    "explanation": "The feature detects the concept of temporal reference, specifically the word 'once' indicating a point in time or a repeated action",
+    "confidence": "high",
+    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
+    "updated_at": "2026-04-03T19:30:14Z"
+  },
+  "4029": {
+    "feature_idx": 4029,
+    "label": "Formal Request Submission",
+    "explanation": "The feature detects the concept of submitting or filing a formal request, such as an application, which is a common theme across the activating examples",
+    "confidence": "high",
+    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
+    "updated_at": "2026-04-03T19:30:14Z"
+  },
+  "443": {
+    "feature_idx": 443,
+    "label": "Tree or Wood Concept",
+    "explanation": "The feature detects words related to trees, wood, or forest, indicating a semantic concept focused on these environmental elements",
+    "confidence": "high",
+    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
+    "updated_at": "2026-04-03T19:30:14Z"
+  },
+  "2068": {
+    "feature_idx": 2068,
+    "label": "Education Setting",
+    "explanation": "The feature activates on tokens related to educational institutions, students, and faculty, indicating it detects concepts related to education settings",
+    "confidence": "high",
+    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
+    "updated_at": "2026-04-03T19:30:14Z"
+  },
+  "859": {
+    "feature_idx": 859,
+    "label": "Conjunction Detection",
+    "explanation": "The feature detects the presence of the conjunction 'and' in a sentence, indicating a connection between two clauses or ideas.",
+    "confidence": "high",
+    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
+    "updated_at": "2026-04-03T19:30:14Z"
+  },
+  "946": {
+    "feature_idx": 946,
+    "label": "Food and cuisine",
+    "explanation": "The feature activates on various food-related tokens, such as 'fried', 'meat', 'burger', 'seafood', 'chicken', and 'fruits', indicating it detects concepts related to food and cuisine",
+    "confidence": "high",
+    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
+    "updated_at": "2026-04-03T19:30:14Z"
   }
 }

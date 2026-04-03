@@ -999,5 +999,1148 @@
       "top_k": 25,
       "min_activation": 3.5
     }
+  },
+  {
+    "timestamp": "2026-04-03T18:43:43.650686+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 58,
+    "label": "Change or Outcome",
+    "explanation": "The feature detects language related to changes, outcomes, or results of events or decisions, often indicated by words like 'turned', 'out', 'to', and 'became'.",
+    "confidence": "high",
+    "request_id": "5b72bbe8-1499-4405-9637-47fae8ca653a",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "to",
+      "out",
+      "turned",
+      "became",
+      "turns",
+      "up",
+      "summed",
+      "rog",
+      "evolved",
+      "bat"
+    ],
+    "prompt_examples_count": 25,
+    "corpus_texts_count": 25,
+    "labeling_config": {
+      "top_k": 25,
+      "skip_first_token": true,
+      "min_activation": 1.5,
+      "num_sentences": 2500
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T18:55:08.241860+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 280,
+    "label": "Possession or Attribute",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:55:08.243916+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 281,
+    "label": "Logical Consistency",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:55:08.244664+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 283,
+    "label": "Product or Situation Quality",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:55:08.245344+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 284,
+    "label": "Expression of Agreement",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:55:08.246020+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 285,
+    "label": "Clarity of Meaning",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:55:08.246719+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 286,
+    "label": "General Objects",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:55:08.247415+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 287,
+    "label": "Geographic Location",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:55:08.248552+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 288,
+    "label": "Causal Relationship",
+    "confidence": "high",
+    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.315314+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1989,
+    "label": "Inquiry or Question",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.316785+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1409,
+    "label": "Concept of Change",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.317719+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3470,
+    "label": "Identifying Requirements",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.318712+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2858,
+    "label": "Legal Case Concept",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.319489+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3276,
+    "label": "Comparison Concept",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.320235+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4128,
+    "label": "Identifying Issues",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.321002+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2258,
+    "label": "Attempt or Effort",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.321758+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 906,
+    "label": "Intent or Purpose",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.322490+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 6039,
+    "label": "Problem Solving Effort",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.323214+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3425,
+    "label": "Legal Court Reference",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.323978+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4021,
+    "label": "Legal Court Context",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.324779+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 895,
+    "label": "Family Unit Concept",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.325535+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2563,
+    "label": "Consequence or Next Step",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.326273+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3083,
+    "label": "Recurring Event Concept",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.327037+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3913,
+    "label": "Relative Clause Indicator",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:56:30.327808+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 899,
+    "label": "Cooperation Concept",
+    "confidence": "high",
+    "request_id": "7ddeba00-a5df-411f-9c4c-76a5d87c19ef",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.481233+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 6118,
+    "label": "Family Relationship",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.482569+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3593,
+    "label": "Leadership Position",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.483489+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4567,
+    "label": "Residence Location",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.484351+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 6088,
+    "label": "American Context",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.485157+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2563,
+    "label": "Consequence or Next Step",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.485964+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3083,
+    "label": "Recurring Event Concept",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.486913+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3094,
+    "label": "Response to situation",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.487746+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1351,
+    "label": "Concession Indicator",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.488573+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5157,
+    "label": "Indefinite Quantity",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.489377+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2064,
+    "label": "Time and Duration",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.490233+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1189,
+    "label": "Introduction of Evidence",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.491076+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5765,
+    "label": "Action of placement",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.491918+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 519,
+    "label": "Degree or extent",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.492752+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1739,
+    "label": "Reference to prior statement",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:01:04.493582+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2341,
+    "label": "Affirmative Response",
+    "confidence": "high",
+    "request_id": "4b02c415-a499-4527-9b28-4786c069e209",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:03:33.039698+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5461,
+    "label": "Legal Appeal Terms",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:03:33.041236+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5463,
+    "label": "Direct Address",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:03:33.042287+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5464,
+    "label": "Court Findings",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:03:33.043245+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5465,
+    "label": "Transition to action",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:03:33.044175+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5466,
+    "label": "Reference to Context",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:03:33.045108+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5467,
+    "label": "Picking Up Objects",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:03:33.046042+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5468,
+    "label": "Discovery or Realization",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:03:33.046979+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5469,
+    "label": "First person reference",
+    "confidence": "high",
+    "request_id": "6415590e-c912-477b-80ec-cab57f4bd3b9",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.578983+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2456,
+    "label": "Color Reference",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.580547+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5976,
+    "label": "Color Mention",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.581559+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1864,
+    "label": "Social Relationship",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.582525+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4731,
+    "label": "Human Consumption",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.583514+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1274,
+    "label": "Sports and Games",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.584491+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5196,
+    "label": "Color Reference",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.585545+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4838,
+    "label": "Existence or Identity",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.586556+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5775,
+    "label": "Referring to previous items",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.587515+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 807,
+    "label": "Year mention",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.588479+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3186,
+    "label": "Small Numerical Values",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.589472+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4030,
+    "label": "Number Ten",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.590470+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 759,
+    "label": "Digit Nine",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.591436+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1653,
+    "label": "Number Eight",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.592455+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 955,
+    "label": "Number Four",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:08:05.593459+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 716,
+    "label": "Number Six",
+    "confidence": "high",
+    "request_id": "1c47e304-861b-409d-b187-56c2b2217203",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:18:36.076592+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4040,
+    "label": "Abstract Social Values",
+    "confidence": "high",
+    "request_id": "853bfdde-e843-4ecb-b97f-ebc78c512594",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:18:36.078454+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4044,
+    "label": "Job Termination",
+    "confidence": "high",
+    "request_id": "853bfdde-e843-4ecb-b97f-ebc78c512594",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:18:36.079595+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4045,
+    "label": "First person speech",
+    "confidence": "high",
+    "request_id": "853bfdde-e843-4ecb-b97f-ebc78c512594",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:18:36.080677+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4047,
+    "label": "Degree or Extent",
+    "confidence": "high",
+    "request_id": "853bfdde-e843-4ecb-b97f-ebc78c512594",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:18:36.082451+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4050,
+    "label": "Existence or Presence",
+    "confidence": "high",
+    "request_id": "853bfdde-e843-4ecb-b97f-ebc78c512594",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:18:36.083545+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4055,
+    "label": "Definite Article Detection",
+    "confidence": "high",
+    "request_id": "853bfdde-e843-4ecb-b97f-ebc78c512594",
+    "labeling_config": {
+      "num_sentences": 5000,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:30:14.404203+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1681,
+    "label": "Temporal Reference",
+    "confidence": "high",
+    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:30:14.405430+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4029,
+    "label": "Formal Request Submission",
+    "confidence": "high",
+    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:30:14.406590+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 443,
+    "label": "Tree or Wood Concept",
+    "confidence": "high",
+    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:30:14.407654+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2068,
+    "label": "Education Setting",
+    "confidence": "high",
+    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:30:14.408699+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 859,
+    "label": "Conjunction Detection",
+    "confidence": "high",
+    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:30:14.409775+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 946,
+    "label": "Food and cuisine",
+    "confidence": "high",
+    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
   }
 ]
