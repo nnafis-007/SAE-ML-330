@@ -30,6 +30,15 @@ from analyzers import BaseAnalyzer, register  # noqa: E402
 
 CHECKPOINTS_DIR = _SAE_ROOT / "checkpoints"
 
+
+def _move_module_to_device(module: torch.nn.Module, device: str) -> torch.nn.Module:
+    """Move *module* to *device*, handling meta-initialized parameters safely."""
+    target = torch.device(device)
+    has_meta = any(p.is_meta for p in module.parameters()) or any(b.is_meta for b in module.buffers())
+    if has_meta:
+        return module.to_empty(device=target)
+    return module.to(target)
+
 # ---------------------------------------------------------------------------
 # Import caps test helpers from the test script
 # ---------------------------------------------------------------------------
@@ -269,8 +278,9 @@ class CapsAnalyzer(BaseAnalyzer):
         layer_index = hp.get("layer_index", 8)
 
         sae = SparseAutoencoder(d_model=d_model, d_hidden=d_hidden, l1_coeff=l1_coeff)
+        sae = _move_module_to_device(sae, self._device)
         sae.load_state_dict(state, strict=False)
-        sae.to(self._device).eval()
+        sae.eval()
 
         entry = {"sae": sae, "layer_index": layer_index, "d_model": d_model, "d_hidden": d_hidden}
         self._sae_cache[checkpoint_path] = entry

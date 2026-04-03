@@ -46,6 +46,18 @@ from analyzers import BaseAnalyzer, register                           # noqa: E
 # ---------------------------------------------------------------------------
 CHECKPOINTS_DIR = _SAE_ROOT / "checkpoints"
 
+# Keep activation normalization consistent with LLM labeling path.
+_ACTIVATION_STD_FLOOR = 1e-3
+
+
+def _move_module_to_device(module: torch.nn.Module, device: str) -> torch.nn.Module:
+    """Move *module* to *device*, handling meta-initialized parameters safely."""
+    target = torch.device(device)
+    has_meta = any(p.is_meta for p in module.parameters()) or any(b.is_meta for b in module.buffers())
+    if has_meta:
+        return module.to_empty(device=target)
+    return module.to(target)
+
 
 # ---------------------------------------------------------------------------
 # SAEAnalyzer
@@ -70,7 +82,7 @@ class SAEAnalyzer(BaseAnalyzer):
         # Caches (populated lazily)
         self._sae_cache: Dict[str, Dict[str, Any]] = {}
         self._collector_cache: Dict[int, Any] = {}
-        self._labels_cache: Dict[str, Dict[int, str]] = {}
+        self._labels_cache: Dict[str, Dict[int, Dict[str, str]]] = {}
         self._model_list_cache: Optional[List[Dict[str, Any]]] = None
         self._feature_activation_cache: Dict[str, Dict[str, Any]] = {}
         self._text_corpus_cache: Dict[str, List[str]] = {}
@@ -158,6 +170,7 @@ class SAEAnalyzer(BaseAnalyzer):
             # hidden_states: (embedding, layer0, layer1, …)
             hidden_states = outputs.hidden_states[layer_index + 1]
             activations = hidden_states[0]           # (seq_len, d_model)
+            activations = self._standardize_hidden_states(activations)
 
         # ---- SAE encode ------------------------------------------------------
         with torch.no_grad():
@@ -192,7 +205,8 @@ class SAEAnalyzer(BaseAnalyzer):
                     feat_list.append({
                         "id": feat_id,
                         "activation": round(val, 4),
-                        "description": labels.get(feat_id, f"Feature {feat_id}"),
+                        "name": labels.get(feat_id, {}).get("name", f"Feature {feat_id}"),
+                        "description": labels.get(feat_id, {}).get("description", f"Feature {feat_id}"),
                     })
 
             tokens_data.append({"text": token_str, "features": feat_list})
@@ -202,6 +216,77 @@ class SAEAnalyzer(BaseAnalyzer):
             "layer_index": layer_index,
             "d_hidden": info["d_hidden"],
             "tokens": tokens_data,
+        }
+
+    def trace_feature_in_sentence(
+        self,
+        text: str,
+        model_id: str,
+        feature_id: int,
+        min_activation: float = 0.0,
+        max_length: int = 512,
+    ) -> Dict[str, Any]:
+        """Return per-token activation values for one SAE feature on one sentence."""
+        checkpoint_path = str(self._checkpoints_dir / model_id)
+        info = self._load_sae(checkpoint_path)
+        sae: SparseAutoencoder = info["sae"]
+        layer_index: int = info["layer_index"]
+        d_hidden: int = int(info["d_hidden"])
+
+        if feature_id < 0 or feature_id >= d_hidden:
+            raise ValueError(f"feature_id must be in [0, {d_hidden - 1}]")
+
+        collector = self._get_collector(layer_index)
+        tokenizer = collector.tokenizer
+        labels = self._load_feature_labels(checkpoint_path)
+
+        encoding = tokenizer(
+            text,
+            return_tensors="pt",
+            truncation=True,
+            max_length=max_length,
+            add_special_tokens=False,
+        )
+        input_ids = encoding["input_ids"].to(collector.device)
+        token_id_list = input_ids[0].tolist()
+
+        with torch.no_grad():
+            outputs = collector.model(input_ids)
+            hidden_states = outputs.hidden_states[layer_index + 1]
+            activations = hidden_states[0]
+            activations = self._standardize_hidden_states(activations)
+            feature_values = sae.encode(activations.to(self._device))[:, feature_id].cpu()
+
+        token_rows: List[Dict[str, Any]] = []
+        max_activation = 0.0
+        active_count = 0
+        for i, tid in enumerate(token_id_list):
+            token_text = tokenizer.decode([tid])
+            activation = float(feature_values[i].item()) if i < feature_values.shape[0] else 0.0
+            is_active = activation > float(min_activation)
+            if is_active:
+                active_count += 1
+                max_activation = max(max_activation, activation)
+
+            token_rows.append({
+                "index": i,
+                "text": token_text,
+                "activation": round(activation, 6),
+                "is_active": is_active,
+            })
+
+        return {
+            "model": model_id,
+            "layer_index": layer_index,
+            "d_hidden": d_hidden,
+            "feature_id": feature_id,
+            "feature_name": labels.get(feature_id, {}).get("name", f"Feature {feature_id}"),
+            "feature_description": labels.get(feature_id, {}).get("description", f"Feature {feature_id}"),
+            "active_token_count": active_count,
+            "token_count": len(token_rows),
+            "max_activation": round(max_activation, 6),
+            "min_activation": float(min_activation),
+            "tokens": token_rows,
         }
 
     # -- On-demand feature labeling (uses analyzers.llm_analysis.FeatureLabeler) --------
@@ -310,6 +395,9 @@ class SAEAnalyzer(BaseAnalyzer):
             if ignored:
                 print(f"[SAEAnalyzer] Ignoring unsupported labeling_config keys: {ignored}")
             cfg_kwargs.update(filtered)
+
+        # Enforce one activation scale across SAE + LLM paths for UI consistency.
+        cfg_kwargs["normalize_mode"] = "standardize"
         cfg = LabelingConfig(**cfg_kwargs)
 
         # Guardrail for API responsiveness: unbounded context prompts can become
@@ -376,8 +464,7 @@ class SAEAnalyzer(BaseAnalyzer):
         layer_index: int = info["layer_index"]
         d_hidden: int = int(info["d_hidden"])
 
-        # This endpoint currently uses raw GPT-2 hidden states (no mean/std normalization).
-        normalization_mode = "none"
+        normalization_mode = "standardize"
 
         print(
             "[SAEAnalyzer] Feature activation lookup started | "
@@ -385,7 +472,7 @@ class SAEAnalyzer(BaseAnalyzer):
             f"dataset={dataset_name}/{dataset_config}:{split} max_sentences={max_sentences} "
             f"target_activating_examples={target_activating_examples} page={page} page_size={page_size} "
             f"min_activation={min_activation} "
-            f"normalization={normalization_mode} filter='activation >= min_activation'"
+            f"normalization={normalization_mode} filter='activation > min_activation'"
         )
 
         page = max(1, int(page))
@@ -437,7 +524,7 @@ class SAEAnalyzer(BaseAnalyzer):
                 "raw_examples_scanned": cached["raw_examples_scanned"],
                 "scanned_tokens": cached["scanned_tokens"],
                 "min_activation": min_activation,
-                "activation_filter": "activation >= min_activation",
+                "activation_filter": "activation > min_activation",
                 "normalization_mode": normalization_mode,
                 "target_activating_examples": target_activating_examples,
                 "activating_sentences": cached["activating_sentences"],
@@ -524,11 +611,12 @@ class SAEAnalyzer(BaseAnalyzer):
                 texts_scanned += 1
 
                 hidden_states = hidden_batch[row_idx][token_mask]
+                hidden_states = self._standardize_hidden_states(hidden_states)
                 feature_mat = sae.encode(hidden_states.to(self._device)).cpu()
 
                 feat_col = feature_mat[:, feature_id]
                 active_positions = torch.nonzero(
-                    feat_col >= float(min_activation), as_tuple=False
+                    feat_col > float(min_activation), as_tuple=False
                 ).flatten().tolist()
                 # Skip first token to avoid GPT-2 attention sink effects.
                 active_positions = [p for p in active_positions if p > 0]
@@ -612,7 +700,7 @@ class SAEAnalyzer(BaseAnalyzer):
             self._feature_activation_cache.pop(oldest_key, None)
         self._feature_activation_cache[cache_key] = {
             "hits": hits,
-            "feature_description": labels.get(feature_id, f"Feature {feature_id}"),
+            "feature_description": labels.get(feature_id, {}).get("name", f"Feature {feature_id}"),
             "text_fields_checked": selected_text_fields or candidate_fields,
             "scanned_sentences": texts_scanned,
             "raw_examples_scanned": examples_scanned,
@@ -623,7 +711,7 @@ class SAEAnalyzer(BaseAnalyzer):
         return {
             "model": model_id,
             "feature_id": feature_id,
-            "feature_description": labels.get(feature_id, f"Feature {feature_id}"),
+            "feature_description": labels.get(feature_id, {}).get("name", f"Feature {feature_id}"),
             "dataset": dataset_name,
             "dataset_config": dataset_config,
             "split": split,
@@ -632,7 +720,7 @@ class SAEAnalyzer(BaseAnalyzer):
             "raw_examples_scanned": examples_scanned,
             "scanned_tokens": total_tokens_scanned,
             "min_activation": min_activation,
-            "activation_filter": "activation >= min_activation",
+            "activation_filter": "activation > min_activation",
             "normalization_mode": normalization_mode,
             "target_activating_examples": target_activating_examples,
             "activating_sentences": activating_sentences,
@@ -645,6 +733,14 @@ class SAEAnalyzer(BaseAnalyzer):
             "matches": paged_hits,
             "total_matches": total_matches,
         }
+
+    @staticmethod
+    def _standardize_hidden_states(hidden_states: torch.Tensor) -> torch.Tensor:
+        """Standardize hidden states over token rows to keep activation scale consistent."""
+        mean = hidden_states.mean(dim=0, keepdim=True)
+        std = hidden_states.std(dim=0, keepdim=True)
+        std = std.clamp_min(_ACTIVATION_STD_FLOOR)
+        return (hidden_states - mean) / (std + 1e-8)
 
     def _load_dataset_texts(
         self,
@@ -826,8 +922,9 @@ class SAEAnalyzer(BaseAnalyzer):
         layer_index = hp.get("layer_index", 8)
 
         sae = SparseAutoencoder(d_model=d_model, d_hidden=d_hidden, l1_coeff=l1_coeff)
+        sae = _move_module_to_device(sae, self._device)
         sae.load_state_dict(state, strict=False)
-        sae.to(self._device).eval()
+        sae.eval()
 
         entry = {
             "sae": sae,
@@ -854,22 +951,75 @@ class SAEAnalyzer(BaseAnalyzer):
             )
         return self._collector_cache[layer_index]
 
-    def _load_feature_labels(self, checkpoint_path: str) -> Dict[int, str]:
-        """Load pre-computed feature labels from JSON if available."""
+    def _load_feature_labels(self, checkpoint_path: str) -> Dict[int, Dict[str, str]]:
+        """Load feature label metadata from checkpoint + logs JSON files.
+
+        Output shape:
+            {feature_id: {"name": <label>, "description": <explanation-or-label>}}
+        """
         if checkpoint_path in self._labels_cache:
             return self._labels_cache[checkpoint_path]
 
-        labels: Dict[int, str] = {}
-        # Look for feature_labels.json next to the checkpoint
+        labels: Dict[int, Dict[str, str]] = {}
+
+        def _assign(feature_id: int, label: Any, explanation: Any = None) -> None:
+            # Keep first assignment when duplicates exist across files.
+            if feature_id in labels:
+                return
+            label_text = str(label).strip() if label is not None else ""
+            if not label_text:
+                return
+            desc_text = str(explanation).strip() if explanation is not None else ""
+            labels[feature_id] = {
+                "name": label_text,
+                "description": desc_text or label_text,
+            }
+
+        # 1) checkpoint-adjacent feature_labels.json
         labels_path = Path(checkpoint_path).parent / "feature_labels.json"
         if labels_path.exists():
-            with open(labels_path, encoding="utf-8") as f:
-                data = json.load(f)
-            for key, val in data.items():
-                if isinstance(val, dict):
-                    labels[int(key)] = val.get("label", f"Feature {key}")
-                else:
-                    labels[int(key)] = str(val)
+            try:
+                with open(labels_path, encoding="utf-8") as f:
+                    data = json.load(f)
+                if isinstance(data, dict):
+                    for key, val in data.items():
+                        if not str(key).isdigit():
+                            continue
+                        feature_id = int(key)
+                        if isinstance(val, dict):
+                            _assign(feature_id, val.get("label", f"Feature {feature_id}"), val.get("explanation"))
+                        else:
+                            _assign(feature_id, str(val))
+            except Exception:
+                pass
+
+        # 2) logs/feature_labels*.json files
+        logs_dir = _SAE_ROOT / "logs"
+        if logs_dir.exists():
+            for json_path in sorted(logs_dir.glob("*.json")):
+                try:
+                    with open(json_path, encoding="utf-8") as f:
+                        data = json.load(f)
+                except Exception:
+                    continue
+
+                if not isinstance(data, dict):
+                    continue
+
+                for key, val in data.items():
+                    feature_id: Optional[int] = None
+                    if str(key).isdigit():
+                        feature_id = int(key)
+                    elif isinstance(val, dict) and isinstance(val.get("feature_idx"), int):
+                        feature_id = int(val["feature_idx"])
+
+                    if feature_id is None:
+                        continue
+
+                    if isinstance(val, dict):
+                        _assign(feature_id, val.get("label", f"Feature {feature_id}"), val.get("explanation"))
+                    elif isinstance(val, str):
+                        _assign(feature_id, val)
 
         self._labels_cache[checkpoint_path] = labels
         return labels

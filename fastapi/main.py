@@ -13,7 +13,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional, List, Dict, Any
 
 # Ensure project-root packages (e.g., analyzers/) are importable regardless
@@ -88,6 +88,35 @@ class FeatureActivationsRequest(BaseModel):
     text_field: Optional[str] = None
     max_length: int = 128
     seed: int = 0
+
+
+class SentenceFeatureTraceRequest(BaseModel):
+    text: str = Field(..., min_length=1)
+    model_id: str
+    feature_id: int = Field(..., ge=0)
+    min_activation: float = Field(0.0, ge=0.0)
+    max_length: int = Field(512, ge=1, le=1024)
+
+
+class SentenceFeatureToken(BaseModel):
+    index: int
+    text: str
+    activation: float
+    is_active: bool
+
+
+class SentenceFeatureTraceResponse(BaseModel):
+    model: str
+    layer_index: int
+    d_hidden: int
+    feature_id: int
+    feature_name: str
+    feature_description: str
+    active_token_count: int
+    token_count: int
+    max_activation: float
+    min_activation: float
+    tokens: List[SentenceFeatureToken]
 
 
 # ---------------------------------------------------------------------------
@@ -286,3 +315,31 @@ def feature_activations(request: FeatureActivationsRequest):
         raise HTTPException(400, str(exc))
     except Exception as exc:
         raise HTTPException(500, f"Feature activation lookup failed: {exc}")
+
+
+@app.post('/sentence-feature-trace', response_model=SentenceFeatureTraceResponse)
+def sentence_feature_trace(req: SentenceFeatureTraceRequest):
+    """Trace a single feature across all tokens in an input sentence."""
+    try:
+        a = get_analyzer("sae")
+    except KeyError:
+        raise HTTPException(404, "SAE analyzer not registered")
+
+    if not hasattr(a, "trace_feature_in_sentence"):
+        raise HTTPException(400, "SAE analyzer does not support sentence feature tracing")
+
+    try:
+        result = a.trace_feature_in_sentence(
+            text=req.text,
+            model_id=req.model_id,
+            feature_id=req.feature_id,
+            min_activation=req.min_activation,
+            max_length=req.max_length,
+        )
+        return SentenceFeatureTraceResponse(**result)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc))
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Internal error: {exc}")

@@ -1,17 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useMemo, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, useWindowDimensions, TouchableOpacity, ActivityIndicator, TextInput, Platform, Modal } from 'react-native';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import {
+  StyleSheet, Text, View, ScrollView, useWindowDimensions,
+  TouchableOpacity, ActivityIndicator, TextInput, Platform, Modal
+} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import FeatureDetails from './FeatureDetails';
 
 const DEFAULT_TEXT = "Did you know that pineapples were a symbol of hospitality in colonial America? This exotic fruit, once a rare delicacy, was often displayed at gatherings to impress guests.";
 const API_BASE = 'http://localhost:8000';
 
-// Tab constants
 const TAB_SAE = 'sae';
-const TAB_SYNONYM = 'synonym';
-const TAB_CAPS = 'caps';
 const TAB_FEATURE_MAP = 'feature-map';
+const TAB_FEATURE_TRACE = 'feature-trace';
 
 function sanitizeDecimalInput(value) {
   const cleaned = (value || '').replace(/[^0-9.]/g, '');
@@ -20,42 +21,98 @@ function sanitizeDecimalInput(value) {
   return cleaned.slice(0, firstDotIndex + 1) + cleaned.slice(firstDotIndex + 1).replace(/\./g, '');
 }
 
-export default function App() {
-  const [activeTab, setActiveTab] = useState(TAB_SAE);
+// Hover-aware feature chip component
+function FeatureChip({ feature, onPress, compact = false, styles }) {
+  const [hovered, setHovered] = useState(false);
+  const featureName = feature.name || feature.label || `Feature ${feature.id}`;
+  const featureDescription = feature.description || featureName;
+  const truncated = featureName.length > 55
+    ? featureName.slice(0, 55) + '…'
+    : featureName;
 
+  return (
+    <View style={{ position: 'relative' }}>
+      <TouchableOpacity
+        style={[styles.featureCard, compact && styles.featureCardCompact, hovered && styles.featureCardHovered]}
+        onPress={onPress}
+        {...(Platform.OS === 'web' ? {
+          onMouseEnter: () => setHovered(true),
+          onMouseLeave: () => setHovered(false),
+        } : {})}
+      >
+        <View style={styles.featureCardTop}>
+          <View style={styles.featureIdBadge}>
+            <Text style={styles.featureIdText}>#{feature.id}</Text>
+          </View>
+          <View style={styles.activationPill}>
+            <Text style={styles.activationValue}>{feature.activation?.toFixed(3) ?? '—'}</Text>
+            <Text style={styles.activationUnit}>ACT</Text>
+          </View>
+        </View>
+        <Text style={styles.featureLabel} numberOfLines={2}>{truncated}</Text>
+      </TouchableOpacity>
+
+      {hovered && Platform.OS === 'web' && (
+        <View style={styles.tooltipLeft}>
+          <Text style={styles.tooltipTitle}>Feature #{feature.id}</Text>
+          <Text style={styles.tooltipDesc}>{featureDescription}</Text>
+          <Text style={styles.tooltipHint}>Click to open full analysis ↗</Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
+// Small chip for feature map tab
+function SmallFeatureChip({ feat, onPress, styles }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <View style={{ position: 'relative' }}>
+      <TouchableOpacity
+        style={[styles.smallChip, hovered && styles.smallChipHovered]}
+        onPress={onPress}
+        {...(Platform.OS === 'web' ? {
+          onMouseEnter: () => setHovered(true),
+          onMouseLeave: () => setHovered(false),
+        } : {})}
+      >
+        <Text style={styles.smallChipId}>#{feat.id}</Text>
+        <Text style={styles.smallChipLabel} numberOfLines={1}>
+          {feat.label || feat.description || `Feature ${feat.id}`}
+        </Text>
+      </TouchableOpacity>
+      {hovered && Platform.OS === 'web' && (
+        <View style={[styles.tooltipLeft, { zIndex: 999 }]}>
+          <Text style={styles.tooltipTitle}>Feature #{feat.id}</Text>
+          <Text style={styles.tooltipDesc}>{feat.description || feat.label}</Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
+export default function App() {
+  const [themeMode, setThemeMode] = useState('dark');
+  const C = themeMode === 'light' ? LIGHT_THEME : DARK_THEME;
+  const styles = useMemo(() => createStyles(C), [C]);
+
+  const [activeTab, setActiveTab] = useState(TAB_SAE);
   const [tokens, setTokens] = useState([]);
   const [inputText, setInputText] = useState(DEFAULT_TEXT);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Model selection
   const [models, setModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState('');
   const [modelsLoading, setModelsLoading] = useState(true);
-  
-  // Selection State
+
   const [activeTokenIndex, setActiveTokenIndex] = useState(null);
   const [hoveredTokenIndex, setHoveredTokenIndex] = useState(null);
-  const [topK, setTopK] = useState(0); // 0 = all active features for selected token
-  const [selectedFeature, setSelectedFeature] = useState(null); // Feature for details modal
+  const [topK, setTopK] = useState(0);
+  const [selectedFeature, setSelectedFeature] = useState(null);
+  const hoverClearTimerRef = useRef(null);
 
-  // Synonym test state
-  const [synonymClusters, setSynonymClusters] = useState([]);
-  const [synonymClusterDetails, setSynonymClusterDetails] = useState({});
-  const [selectedSynonymClusters, setSelectedSynonymClusters] = useState([]);
-  const [synonymResults, setSynonymResults] = useState(null);
-  const [synonymLoading, setSynonymLoading] = useState(false);
-  const [customSynonymWords, setCustomSynonymWords] = useState('');
-  const [synonymMode, setSynonymMode] = useState('custom'); // 'custom' or 'preset'
-  const [synonymTopK, setSynonymTopK] = useState(30);
-
-  // Caps test state
-  const [capsWords, setCapsWords] = useState([]);
-  const [selectedCapsWords, setSelectedCapsWords] = useState([]);
-  const [capsResults, setCapsResults] = useState(null);
-  const [capsLoading, setCapsLoading] = useState(false);
-
-  // Feature lookup state (feature -> sentences/tokens from dataset)
+  // Feature lookup state
   const [lookupFeatureId, setLookupFeatureId] = useState('');
   const [lookupMaxSentences, setLookupMaxSentences] = useState('200');
   const [lookupMaxResults, setLookupMaxResults] = useState('100');
@@ -63,36 +120,35 @@ export default function App() {
   const [featureLookupLoading, setFeatureLookupLoading] = useState(false);
   const [featureLookupError, setFeatureLookupError] = useState(null);
   const [featureLookupResults, setFeatureLookupResults] = useState(null);
+  const [traceText, setTraceText] = useState('');
+  const [traceFeatureId, setTraceFeatureId] = useState('');
+  const [traceMinActivation, setTraceMinActivation] = useState('0.0');
+  const [traceLoading, setTraceLoading] = useState(false);
+  const [traceError, setTraceError] = useState(null);
+  const [traceResult, setTraceResult] = useState(null);
+  const [traceHoveredIndex, setTraceHoveredIndex] = useState(null);
 
   const { width } = useWindowDimensions();
   const isLargeScreen = width > 768;
 
-  // Fetch available models on mount
   useEffect(() => {
     const fetchModels = async (retries = 3) => {
       for (let attempt = 1; attempt <= retries; attempt++) {
         try {
           const controller = new AbortController();
-          const timeout = setTimeout(() => controller.abort(), 60000); // 60s timeout
-          const res = await fetch(`${API_BASE}/models?analyzer=sae`, {
-            signal: controller.signal,
-          });
+          const timeout = setTimeout(() => controller.abort(), 60000);
+          const res = await fetch(`${API_BASE}/models?analyzer=sae`, { signal: controller.signal });
           clearTimeout(timeout);
           const data = await res.json();
           const available = (data.models || []).filter(m => !m.error);
           setModels(available);
-          if (available.length > 0) {
-            setSelectedModel(available[0].id);
-          }
+          if (available.length > 0) setSelectedModel(available[0].id);
           setError(null);
           setModelsLoading(false);
-          return; // success
+          return;
         } catch (err) {
-          console.error(`Attempt ${attempt}/${retries} failed:`, err);
-          if (attempt < retries) {
-            // Wait before retrying (backend may still be loading models)
-            await new Promise(r => setTimeout(r, 3000));
-          } else {
+          if (attempt < retries) await new Promise(r => setTimeout(r, 3000));
+          else {
             setError('Could not load models from backend. Is the server running on localhost:8000?');
             setModelsLoading(false);
           }
@@ -102,170 +158,58 @@ export default function App() {
     fetchModels();
   }, []);
 
-  // Auto-analyze when model is first set
   useEffect(() => {
-    if (selectedModel) {
-      analyzeText(inputText);
-    }
+    if (selectedModel) analyzeText(inputText);
   }, [selectedModel]);
 
-  // Refresh analysis whenever Top K changes so backend returns matching feature count.
   useEffect(() => {
     if (!selectedModel || activeTab !== TAB_SAE) return;
-    const timer = setTimeout(() => {
-      analyzeText(inputText);
-    }, 250);
+    const timer = setTimeout(() => analyzeText(inputText), 250);
     return () => clearTimeout(timer);
   }, [topK, selectedModel, activeTab]);
 
-  // Fetch synonym clusters and caps words metadata
   useEffect(() => {
-    const fetchMeta = async () => {
-      try {
-        const [synRes, capsRes] = await Promise.all([
-          fetch(`${API_BASE}/synonym-clusters`).then(r => r.json()).catch(() => null),
-          fetch(`${API_BASE}/caps-words`).then(r => r.json()).catch(() => null),
-        ]);
-        if (synRes?.clusters) setSynonymClusters(synRes.clusters);
-        if (synRes?.details) setSynonymClusterDetails(synRes.details);
-        if (capsRes?.words) setCapsWords(capsRes.words);
-      } catch (e) {
-        console.error('Failed to fetch test metadata:', e);
-      }
+    return () => {
+      if (hoverClearTimerRef.current) clearTimeout(hoverClearTimerRef.current);
     };
-    fetchMeta();
   }, []);
 
   const analyzeText = async (textToAnalyze) => {
-    if (!selectedModel) {
-      setError('Please select a model first');
-      return;
-    }
+    if (!selectedModel) { setError('Please select a model first'); return; }
     setLoading(true);
     setError(null);
-    setActiveTokenIndex(null); // Reset selection
+    setActiveTokenIndex(null);
     try {
       const response = await fetch(`${API_BASE}/analyze`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          text: textToAnalyze,
-          model_id: selectedModel,
-          analyzer: 'sae',
-          // 0 means "all active features" (handled in backend analyzer).
-          top_k: topK,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: textToAnalyze, model_id: selectedModel, analyzer: 'sae', top_k: topK }),
       });
-      
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
         throw new Error(errData.detail || 'Network response was not ok');
       }
-      
       const data = await response.json();
       setTokens(data.tokens);
     } catch (err) {
-      console.error("Fetch error:", err);
       setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
-  // ----------- Synonym Test Runner -----------
-  const runSynonymTest = async () => {
-    if (!selectedModel) { setError('Please select a model first'); return; }
-    setSynonymLoading(true);
-    setError(null);
-    try {
-      let body;
-      if (synonymMode === 'custom') {
-        const words = customSynonymWords.split(',').map(w => w.trim()).filter(Boolean);
-        if (words.length < 2) {
-          setError('Please enter at least 2 comma-separated words to compare.');
-          setSynonymLoading(false);
-          return;
-        }
-        body = {
-          model_id: selectedModel,
-          custom_words: words,
-          top_k: synonymTopK,
-        };
-      } else {
-        body = {
-          model_id: selectedModel,
-          clusters: selectedSynonymClusters.length > 0 ? selectedSynonymClusters : null,
-          top_k: synonymTopK,
-        };
-      }
-      const res = await fetch(`${API_BASE}/synonym-test`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.detail || 'Context-similarity test failed');
-      }
-      const data = await res.json();
-      setSynonymResults(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setSynonymLoading(false);
-    }
-  };
-
-  // ----------- Caps Test Runner -----------
-  const runCapsTest = async () => {
-    if (!selectedModel) { setError('Please select a model first'); return; }
-    setCapsLoading(true);
-    setError(null);
-    try {
-      const body = {
-        model_id: selectedModel,
-        words: selectedCapsWords.length > 0 ? selectedCapsWords : null,
-        top_k: 30,
-      };
-      const res = await fetch(`${API_BASE}/caps-test`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.detail || 'Caps test failed');
-      }
-      const data = await res.json();
-      setCapsResults(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setCapsLoading(false);
-    }
-  };
-
   const runFeatureLookup = async () => {
-    if (!selectedModel) {
-      setFeatureLookupError('Please select a model first.');
-      return;
-    }
-
+    if (!selectedModel) { setFeatureLookupError('Please select a model first.'); return; }
     const parsedFeatureId = Number(lookupFeatureId);
     if (!Number.isInteger(parsedFeatureId) || parsedFeatureId < 0) {
       setFeatureLookupError('Enter a valid non-negative feature ID.');
       return;
     }
-
-    const minActivationInput = lookupMinActivation.trim();
-    const parsedMinActivation = minActivationInput === '' ? 0 : Number(minActivationInput);
+    const parsedMinActivation = lookupMinActivation.trim() === '' ? 0 : Number(lookupMinActivation);
     if (!Number.isFinite(parsedMinActivation) || parsedMinActivation < 0) {
-      setFeatureLookupError('Min activation must be a valid non-negative number (example: 0.25).');
+      setFeatureLookupError('Min activation must be a valid non-negative number.');
       return;
     }
-
     setFeatureLookupLoading(true);
     setFeatureLookupError(null);
     try {
@@ -283,14 +227,11 @@ export default function App() {
           min_activation: parsedMinActivation,
         }),
       });
-
       if (!response.ok) {
         const err = await response.json().catch(() => ({}));
         throw new Error(err.detail || 'Feature activation lookup failed');
       }
-
-      const data = await response.json();
-      setFeatureLookupResults(data);
+      setFeatureLookupResults(await response.json());
     } catch (e) {
       setFeatureLookupError(e.message);
     } finally {
@@ -299,20 +240,36 @@ export default function App() {
   };
 
   const handleTokenClick = (index) => {
-    if (activeTokenIndex === index) {
-      setActiveTokenIndex(null); // Deselect if clicked again
-    } else {
-      setActiveTokenIndex(index);
+    if (hoverClearTimerRef.current) {
+      clearTimeout(hoverClearTimerRef.current);
+      hoverClearTimerRef.current = null;
     }
+    setHoveredTokenIndex(null);
+    setActiveTokenIndex(prev => prev === index ? null : index);
+  };
+
+  const handleTokenMouseEnter = (index) => {
+    if (activeTokenIndex !== null) return;
+    if (hoverClearTimerRef.current) {
+      clearTimeout(hoverClearTimerRef.current);
+      hoverClearTimerRef.current = null;
+    }
+    setHoveredTokenIndex(index);
+  };
+
+  const handleTokenMouseLeave = () => {
+    if (activeTokenIndex !== null) return;
+    if (hoverClearTimerRef.current) clearTimeout(hoverClearTimerRef.current);
+    // Small delay avoids hover thrashing when pointer sits on token borders.
+    hoverClearTimerRef.current = setTimeout(() => {
+      setHoveredTokenIndex(null);
+      hoverClearTimerRef.current = null;
+    }, 60);
   };
 
   const getActiveToken = () => {
-    if (hoveredTokenIndex !== null && tokens[hoveredTokenIndex]) {
-      return tokens[hoveredTokenIndex];
-    }
-    if (activeTokenIndex !== null && tokens[activeTokenIndex]) {
-      return tokens[activeTokenIndex];
-    }
+    if (hoveredTokenIndex !== null && tokens[hoveredTokenIndex]) return tokens[hoveredTokenIndex];
+    if (activeTokenIndex !== null && tokens[activeTokenIndex]) return tokens[activeTokenIndex];
     return null;
   };
 
@@ -322,1532 +279,1502 @@ export default function App() {
     ? (visibleFeatureCount ? activeToken.features.slice(0, visibleFeatureCount) : activeToken.features)
     : [];
 
-  const activatedTokenRows = useMemo(() => {
-    return tokens
-      .map((token, tokenIndex) => ({ token, tokenIndex }))
-      .filter(({ token }) => (token.features || []).length > 0)
-      .map(({ token, tokenIndex }) => {
-        const features = visibleFeatureCount ? token.features.slice(0, visibleFeatureCount) : token.features;
-        const start = Math.max(0, tokenIndex - 5);
-        const end = Math.min(tokens.length, tokenIndex + 6);
-        const before = tokens.slice(start, tokenIndex).map(t => t.text).join('');
-        const after = tokens.slice(tokenIndex + 1, end).map(t => t.text).join('');
-        return {
-          tokenIndex,
-          tokenText: token.text,
-          before,
-          after,
-          totalFeatures: token.features.length,
-          features,
-        };
+  const runSentenceFeatureTrace = async () => {
+    if (!selectedModel) {
+      setTraceError('Please select a model first.');
+      return;
+    }
+    if (!traceText.trim()) {
+      setTraceError('Enter a sentence to trace.');
+      return;
+    }
+
+    const parsedFeatureId = Number(traceFeatureId);
+    if (!Number.isInteger(parsedFeatureId) || parsedFeatureId < 0) {
+      setTraceError('Enter a valid non-negative feature ID.');
+      return;
+    }
+
+    const parsedMinActivation = traceMinActivation.trim() === '' ? 0 : Number(traceMinActivation);
+    if (!Number.isFinite(parsedMinActivation) || parsedMinActivation < 0) {
+      setTraceError('Min activation must be a valid non-negative number.');
+      return;
+    }
+
+    setTraceLoading(true);
+    setTraceError(null);
+    setTraceHoveredIndex(null);
+    try {
+      const response = await fetch(`${API_BASE}/sentence-feature-trace`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          text: traceText,
+          model_id: selectedModel,
+          feature_id: parsedFeatureId,
+          min_activation: parsedMinActivation,
+          max_length: 512,
+        }),
       });
-  }, [tokens, visibleFeatureCount]);
 
-  const featureToTokensRows = useMemo(() => {
-    const featureMap = new Map();
-    activatedTokenRows.forEach((row) => {
-      row.features.forEach((feature) => {
-        if (!featureMap.has(feature.id)) {
-          featureMap.set(feature.id, {
-            id: feature.id,
-            description: feature.description,
-            tokens: [],
-          });
-        }
-        featureMap.get(feature.id).tokens.push({
-          tokenText: row.tokenText,
-          tokenIndex: row.tokenIndex,
-          activation: feature.activation,
-        });
-      });
-    });
-    return Array.from(featureMap.values()).sort((a, b) => b.tokens.length - a.tokens.length);
-  }, [activatedTokenRows]);
-
-  // Helper: signal badge color
-  const signalColor = (interpretation) => {
-    if (!interpretation) return '#9ca3af';
-    if (interpretation.includes('STRONG') || interpretation.includes('INVARIANT')) return '#16a34a';
-    if (interpretation.includes('MODERATE') || interpretation.includes('PARTIAL')) return '#d97706';
-    return '#dc2626';
-  };
-
-  // Helper: toggle item in array
-  const toggleInArray = (arr, item) =>
-    arr.includes(item) ? arr.filter(x => x !== item) : [...arr, item];
-
-  // ---------- Synonym Results View ----------
-  const renderSynonymResults = () => {
-    if (!synonymResults) return null;
-    return (
-      <View style={{ marginTop: 15 }}>
-        <View style={styles.resultsSummaryCard}>
-          <Text style={styles.summaryTitle}>Overall Mean Jaccard</Text>
-          <Text style={styles.summaryValue}>{synonymResults.overall_mean_jaccard?.toFixed(4)}</Text>
-        </View>
-        {synonymResults.clusters?.map((cluster, ci) => (
-          <View key={ci} style={styles.clusterCard}>
-            <View style={styles.clusterHeader}>
-              <Text style={styles.clusterName}>{cluster.cluster}</Text>
-              <View style={[styles.signalBadge, { backgroundColor: signalColor(cluster.interpretation) }]}>  
-                <Text style={styles.signalBadgeText}>{cluster.interpretation}</Text>
-              </View>
-            </View>
-            <Text style={styles.clusterWords}>Words: {cluster.words?.join(', ')}</Text>
-            <View style={styles.metricsRow}>
-              <View style={styles.metricBox}>
-                <Text style={styles.metricLabel}>Mean Jaccard</Text>
-                <Text style={styles.metricValue}>{cluster.mean_jaccard?.toFixed(4)}</Text>
-              </View>
-              <View style={styles.metricBox}>
-                <Text style={styles.metricLabel}>Mean Cosine</Text>
-                <Text style={styles.metricValue}>{cluster.mean_cosine_sim?.toFixed(4)}</Text>
-              </View>
-              <View style={styles.metricBox}>
-                <Text style={styles.metricLabel}>All-shared</Text>
-                <Text style={styles.metricValue}>{cluster.universal_shared_features?.length ?? 0}</Text>
-              </View>
-            </View>
-
-            {/* Universal Shared Features */}
-            {cluster.universal_shared_features?.length > 0 && (
-              <View style={{ marginBottom: 15 }}>
-                <Text style={styles.pairwiseTitle}>Universal Shared Features (all words)</Text>
-                <View style={styles.featureChipList}>
-                  {cluster.universal_shared_features.map(feat => (
-                    <TouchableOpacity 
-                      key={feat.id} 
-                      style={styles.smallFeatureChip}
-                      onPress={() => setSelectedFeature(feat)}
-                    >
-                      <Text style={styles.featureChipText}>{feat.label || `Feature ${feat.id}`}</Text>
-                      <Text style={styles.featureChipId}>#{feat.id}</Text>
-                    </TouchableOpacity>
-                  ))}
-                </View>
-              </View>
-            )}
-
-            {/* Pairwise detail */}
-            <Text style={styles.pairwiseTitle}>Pairwise Comparison</Text>
-            {cluster.pairwise?.map((pw, pi) => (
-              <View key={pi} style={styles.pairCard}>
-                <View style={styles.pairRow}>
-                  <Text style={styles.pairWords}>{pw.word_a} ↔ {pw.word_b}</Text>
-                  <Text style={styles.pairStat}>J={pw.jaccard?.toFixed(3)}</Text>
-                  <Text style={styles.pairStat}>cos={pw.cosine_sim?.toFixed(3)}</Text>
-                  <Text style={styles.pairStat}>shared={pw.shared_feature_count}</Text>
-                </View>
-                {pw.shared_features?.length > 0 && (
-                  <View style={styles.featureChipList}>
-                    {pw.shared_features.map(feat => (
-                      <TouchableOpacity 
-                        key={feat.id} 
-                        style={styles.smallFeatureChip}
-                        onPress={() => setSelectedFeature(feat)}
-                      >
-                        <Text style={styles.featureChipText}>{feat.label || `Feature ${feat.id}`}</Text>
-                        <Text style={styles.featureChipId}>#{feat.id}</Text>
-                      </TouchableOpacity>
-                    ))}
-                  </View>
-                )}
-              </View>
-            ))}
-          </View>
-        ))}
-      </View>
-    );
-  };
-
-  // ---------- Caps Results View ----------
-  const renderCapsResults = () => {
-    if (!capsResults) return null;
-    return (
-      <View style={{ marginTop: 15 }}>
-        <View style={styles.resultsSummaryCard}>
-          <View style={styles.metricsRow}>
-            <View style={styles.metricBox}>
-              <Text style={styles.summaryTitle}>Overall Mean Jaccard</Text>
-              <Text style={styles.summaryValue}>{capsResults.overall_mean_jaccard?.toFixed(4)}</Text>
-            </View>
-            <View style={styles.metricBox}>
-              <Text style={styles.summaryTitle}>Overall Mean Cosine</Text>
-              <Text style={styles.summaryValue}>{capsResults.overall_mean_cosine?.toFixed(4)}</Text>
-            </View>
-          </View>
-        </View>
-        {capsResults.words?.map((wordResult, wi) => (
-          <View key={wi} style={styles.clusterCard}>
-            <View style={styles.clusterHeader}>
-              <Text style={styles.clusterName}>"{wordResult.word}"</Text>
-              <View style={[styles.signalBadge, { backgroundColor: signalColor(wordResult.interpretation) }]}>
-                <Text style={styles.signalBadgeText}>{wordResult.interpretation}</Text>
-              </View>
-            </View>
-            <Text style={styles.clusterWords}>
-              Variants: {wordResult.variants?.map(v => v.form).join(', ')}
-            </Text>
-            <View style={styles.metricsRow}>
-              <View style={styles.metricBox}>
-                <Text style={styles.metricLabel}>Mean Jaccard</Text>
-                <Text style={styles.metricValue}>{wordResult.mean_jaccard?.toFixed(4)}</Text>
-              </View>
-              <View style={styles.metricBox}>
-                <Text style={styles.metricLabel}>Mean Cosine</Text>
-                <Text style={styles.metricValue}>{wordResult.mean_cosine_sim?.toFixed(4)}</Text>
-              </View>
-              {wordResult.lower_vs_upper && (
-                <View style={styles.metricBox}>
-                  <Text style={styles.metricLabel}>lower↔UPPER Jaccard</Text>
-                  <Text style={styles.metricValue}>{wordResult.lower_vs_upper.jaccard?.toFixed(4)}</Text>
-                </View>
-              )}
-              <View style={styles.metricBox}>
-                <Text style={styles.metricLabel}>All-shared</Text>
-                <Text style={styles.metricValue}>{wordResult.universal_shared_features?.length ?? 0}</Text>
-              </View>
-            </View>
-            <Text style={styles.pairwiseTitle}>Pairwise Comparison</Text>
-            {wordResult.pairwise?.map((pw, pi) => (
-              <View key={pi} style={styles.pairRow}>
-                <Text style={styles.pairWords}>{pw.variant_a} ↔ {pw.variant_b}</Text>
-                <Text style={styles.pairStat}>J={pw.jaccard?.toFixed(3)}</Text>
-                <Text style={styles.pairStat}>cos={pw.cosine_sim?.toFixed(3)}</Text>
-                <Text style={styles.pairStat}>shared={pw.shared_feature_count}</Text>
-              </View>
-            ))}
-          </View>
-        ))}
-      </View>
-    );
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.detail || 'Sentence feature trace failed');
+      }
+      setTraceResult(await response.json());
+    } catch (e) {
+      setTraceError(e.message);
+      setTraceResult(null);
+    } finally {
+      setTraceLoading(false);
+    }
   };
 
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.scrollContainer}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>Feature Interpretation using SAE by ANTLR</Text>
-      </View>
-
-      {/* Tab Bar */}
-      <View style={styles.tabBar}>
-        <TouchableOpacity
-          style={[styles.tabItem, activeTab === TAB_SAE && styles.tabItemActive]}
-          onPress={() => setActiveTab(TAB_SAE)}
-        >
-          <Text style={[styles.tabText, activeTab === TAB_SAE && styles.tabTextActive]}>SAE Analysis</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tabItem, activeTab === TAB_SYNONYM && styles.tabItemActive]}
-          onPress={() => setActiveTab(TAB_SYNONYM)}
-        >
-          <Text style={[styles.tabText, activeTab === TAB_SYNONYM && styles.tabTextActive]}>Context-Similarity Test</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tabItem, activeTab === TAB_CAPS && styles.tabItemActive]}
-          onPress={() => setActiveTab(TAB_CAPS)}
-        >
-          <Text style={[styles.tabText, activeTab === TAB_CAPS && styles.tabTextActive]}>Caps Test</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.tabItem, activeTab === TAB_FEATURE_MAP && styles.tabItemActive]}
-          onPress={() => setActiveTab(TAB_FEATURE_MAP)}
-        >
-          <Text style={[styles.tabText, activeTab === TAB_FEATURE_MAP && styles.tabTextActive]}>Feature Map</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* ===================== SAE TAB ===================== */}
-      {activeTab === TAB_SAE && (
-      <View style={[styles.contentContainer, isLargeScreen ? styles.row : styles.column]}>
-        {/* Left Panel: Input and Interactive Text */}
-        <View style={[styles.panel, styles.leftPanel, isLargeScreen && styles.leftPanelLarge]}>
-          <View style={styles.layerSelectorContainer}>
-            <Text style={styles.layerSelectorLabel}>SAE Checkpoint</Text>
-            <View style={styles.layerPickerWrapper}>
-              {modelsLoading ? (
-                <ActivityIndicator size="small" style={{ padding: 10 }} />
-              ) : (
-                <Picker
-                  selectedValue={selectedModel}
-                  onValueChange={(value) => setSelectedModel(value)}
-                  style={styles.layerPicker}
-                >
-                  {models.map((m) => (
-                    <Picker.Item
-                      key={m.id}
-                      label={`${m.name}  (${m.d_hidden || '?'} features)`}
-                      value={m.id}
-                    />
-                  ))}
-                </Picker>
-              )}
-            </View>
-          </View>
-
-          <Text style={styles.sectionTitle}>Input Text</Text>
-          <View style={styles.inputCard}>
-            <TextInput
-              style={styles.textInput}
-              multiline
-              value={inputText}
-              onChangeText={setInputText}
-              placeholder="Type text to analyze..."
-            />
-          </View>
-          <TouchableOpacity 
-            style={styles.button} 
-            onPress={() => analyzeText(inputText)}
-            disabled={loading}
-          >
-            <Text style={styles.buttonText}>{loading ? "ANALYZING..." : "ANALYZE"}</Text>
-          </TouchableOpacity>
-
-          <Text style={styles.instructionText}>Click on any token to see its activated SAE features.</Text>
-          
-          <View style={styles.tokenContainer}>
-             <Text style={styles.tokenWrapper}>
-              {tokens.map((token, index) => (
-                <Text
-                  key={index}
-                  style={[
-                    styles.tokenText,
-                    (activeTokenIndex === index || hoveredTokenIndex === index) && styles.tokenActive
-                  ]}
-                  onPress={() => handleTokenClick(index)}
-                  {...(Platform.OS === 'web' ? {
-                    onMouseEnter: () => {
-                      if (activeTokenIndex === null) {
-                        setHoveredTokenIndex(index);
-                      }
-                    },
-                    onMouseLeave: () => setHoveredTokenIndex(null)
-                  } : {})}
-                >
-                  {token.text}
-                </Text>
-              ))}
-            </Text>
-          </View>
-        </View>
-
-        {/* Right Panel: Activated Feature */}
-        <View style={[styles.panel, styles.rightPanel, isLargeScreen && styles.rightPanelLarge]}>
-          <View style={styles.featuresHeaderRow}>
-             <Text style={styles.sectionTitle}>Activated Features</Text>
-             
-             {/* K Selector */}
-             <View style={styles.kSelector}>
-               <Text style={styles.kLabel}>Top K:</Text>
-               <TextInput 
-                 style={styles.kInput}
-                 value={String(topK)}
-                 onChangeText={(text) => {
-                   const digitsOnly = text.replace(/[^0-9]/g, '');
-                   if (digitsOnly === '') {
-                     setTopK(0);
-                   } else {
-                     setTopK(Number(digitsOnly));
-                   }
-                 }}
-                 keyboardType="numeric"
-                 maxLength={4}
-               />
-             </View>
-          </View>
-          <Text style={styles.kHint}>Set Top K to 0 to show all active features and scroll down the page.</Text>
-          
-          {activeToken ? (
-             <View>
-                 <View style={styles.activeTokenChip}>
-                   <Text style={styles.activeTokenText}>{activeToken.text.trim()}</Text>
-                   <TouchableOpacity onPress={() => setActiveTokenIndex(null)}>
-                      <Text style={styles.closeButton}>✕ SHOW ALL</Text>
-                   </TouchableOpacity>
-                 </View>
-
-                 <Text style={styles.featureCountText}>
-                   Showing {visibleActiveFeatures.length} of {activeToken.features.length} active features
-                 </Text>
-
-                 <View>
-                 {visibleActiveFeatures.map((feature) => (
-                    <View key={feature.id} style={styles.featureCard}>
-                        <View style={styles.featureHeader}>
-                        <View style={styles.dot} />
-                        <Text style={styles.featureDescription}>{feature.description}</Text>
-                        
-                        <TouchableOpacity style={styles.idBox} onPress={() => setSelectedFeature(feature)}>
-                            <Text style={styles.idText}>ID {feature.id} ↗</Text>
-                        </TouchableOpacity>
-                        </View>
-                        <View style={styles.featureStats}>
-                        <Text style={styles.tokenCount}>{feature.activation?.toFixed(2) ?? feature.tokens}</Text>
-                        <Text style={styles.tokenLabel}>ACTIVATION</Text>
-                        </View>
-                    </View>
-                 ))}
-                     </View>
-                 {activeToken.features.length === 0 && (
-                     <Text>No active features for this token.</Text>
-                 )}
-            </View>
-          ) : (
-             <View style={styles.placeholderCard}>
-               <Text style={styles.placeholderText}>
-                 Click on a word on the left to inspect its features!
-               </Text>
-               <Text style={styles.placeholderSubText}>
-                 Each token shows which SAE features activate most strongly.
-               </Text>
-             </View>
-          )}
-
-          {error && (
-             <View style={styles.errorBox}>
-               <Text style={styles.errorText}>Backend Error: {error}</Text>
-             </View>
-          )}
-        </View>
-      </View>
+      {/* Scanline overlay for cyberpunk effect */}
+      {Platform.OS === 'web' && themeMode === 'dark' && (
+        <View style={styles.scanlineOverlay} pointerEvents="none" />
       )}
 
-      {/* ===================== SYNONYM TAB ===================== */}
-      {activeTab === TAB_SYNONYM && (
-      <View style={styles.contentContainer}>
-        <View style={styles.panel}>
-          {/* Model selector (shared) */}
-          <View style={styles.layerSelectorContainer}>
-            <Text style={styles.layerSelectorLabel}>SAE Checkpoint</Text>
-            <View style={styles.layerPickerWrapper}>
-              {modelsLoading ? (
-                <ActivityIndicator size="small" style={{ padding: 10 }} />
-              ) : (
-                <Picker
-                  selectedValue={selectedModel}
-                  onValueChange={(value) => setSelectedModel(value)}
-                  style={styles.layerPicker}
-                >
-                  {models.map((m) => (
-                    <Picker.Item key={m.id} label={`${m.name}  (${m.d_hidden || '?'} features)`} value={m.id} />
-                  ))}
-                </Picker>
-              )}
-            </View>
+      <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+        {/* HEADER */}
+        <View style={styles.header}>
+          <View style={styles.headerAccent} />
+          <View style={styles.headerContent}>
+            {/* <Text style={styles.headerEyebrow}>//</Text> */}
+            <Text style={styles.headerTitle}>Feature Interpretation using SAE</Text>
+            <Text style={styles.headerSub}>by ANTLR</Text>
           </View>
-
-          <Text style={styles.sectionTitle}>Context-Similarity Test</Text>
-          <Text style={styles.instructionText}>
-            Tests whether SAE features respond to meaning rather than surface form by
-            comparing feature overlap between words you believe are related.
-          </Text>
-
-          {/* Mode toggle */}
-          <View style={styles.modeToggleRow}>
+          <View style={styles.themeSwitchWrap}>
             <TouchableOpacity
-              style={[styles.modeButton, synonymMode === 'custom' && styles.modeButtonActive]}
-              onPress={() => setSynonymMode('custom')}
+              style={[styles.themeSwitchBtn, themeMode === 'dark' && styles.themeSwitchBtnActive]}
+              onPress={() => setThemeMode('dark')}
             >
-              <Text style={[styles.modeButtonText, synonymMode === 'custom' && styles.modeButtonTextActive]}>Custom Words</Text>
+              <Text style={[styles.themeSwitchText, themeMode === 'dark' && styles.themeSwitchTextActive]}>DARK</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.modeButton, synonymMode === 'preset' && styles.modeButtonActive]}
-              onPress={() => setSynonymMode('preset')}
+              style={[styles.themeSwitchBtn, themeMode === 'light' && styles.themeSwitchBtnActive]}
+              onPress={() => setThemeMode('light')}
             >
-              <Text style={[styles.modeButtonText, synonymMode === 'preset' && styles.modeButtonTextActive]}>Preset Clusters</Text>
+              <Text style={[styles.themeSwitchText, themeMode === 'light' && styles.themeSwitchTextActive]}>WHITE</Text>
             </TouchableOpacity>
           </View>
-
-          {synonymMode === 'custom' ? (
-            <View>
-              <Text style={styles.inputLabel}>Enter words to compare (comma-separated, min 2):</Text>
-              <View style={styles.inputCard}>
-                <TextInput
-                  style={styles.textInput}
-                  value={customSynonymWords}
-                  onChangeText={setCustomSynonymWords}
-                  placeholder="e.g. happy, joyful, elated, cheerful"
-                  multiline={false}
-                />
-              </View>
-              <Text style={styles.hintText}>
-                Sentences are generated automatically for each word. The model extracts features
-                at each word's position and compares overlap via Jaccard similarity.
-              </Text>
-            </View>
-          ) : (
-            <View>
-              <Text style={styles.inputLabel}>Select predefined clusters:</Text>
-              <View style={styles.chipContainer}>
-                {synonymClusters.map((c) => (
-                  <TouchableOpacity
-                    key={c}
-                    style={[styles.chip, selectedSynonymClusters.includes(c) && styles.chipSelected]}
-                    onPress={() => setSelectedSynonymClusters(toggleInArray(selectedSynonymClusters, c))}
-                  >
-                    <Text style={[styles.chipText, selectedSynonymClusters.includes(c) && styles.chipTextSelected]}>
-                      {c} {synonymClusterDetails[c] ? `(${synonymClusterDetails[c].join(', ')})` : ''}
-                    </Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
-            </View>
-          )}
-
-          <View style={styles.featuresHeaderRow}>
-            <TouchableOpacity
-              style={[styles.button, synonymLoading && { opacity: 0.6 }]}
-              onPress={runSynonymTest}
-              disabled={synonymLoading}
-            >
-              <Text style={styles.buttonText}>
-                {synonymLoading ? 'RUNNING...' : 'RUN CONTEXT-SIMILARITY TEST'}
-              </Text>
-            </TouchableOpacity>
-            <View style={styles.kSelector}>
-              <Text style={styles.kLabel}>Top K:</Text>
-              <TextInput
-                style={styles.kInput}
-                value={String(synonymTopK)}
-                onChangeText={(t) => setSynonymTopK(Number(t.replace(/[^0-9]/g, '')) || 1)}
-                keyboardType="numeric"
-                maxLength={3}
-              />
-            </View>
-          </View>
-
-          {synonymLoading && <ActivityIndicator size="large" style={{ marginTop: 20 }} />}
-
-          {renderSynonymResults()}
-
-          {error && !synonymLoading && (
-            <View style={styles.errorBox}>
-              <Text style={styles.errorText}>Error: {error}</Text>
-            </View>
-          )}
         </View>
-      </View>
-      )}
 
-      {/* ===================== CAPS TAB ===================== */}
-      {activeTab === TAB_CAPS && (
-      <View style={styles.contentContainer}>
-        <View style={styles.panel}>
-          <View style={styles.layerSelectorContainer}>
-            <Text style={styles.layerSelectorLabel}>SAE Checkpoint</Text>
-            <View style={styles.layerPickerWrapper}>
-              {modelsLoading ? (
-                <ActivityIndicator size="small" style={{ padding: 10 }} />
-              ) : (
-                <Picker
-                  selectedValue={selectedModel}
-                  onValueChange={(value) => setSelectedModel(value)}
-                  style={styles.layerPicker}
-                >
-                  {models.map((m) => (
-                    <Picker.Item key={m.id} label={`${m.name}  (${m.d_hidden || '?'} features)`} value={m.id} />
-                  ))}
-                </Picker>
-              )}
-            </View>
-          </View>
-
-          <Text style={styles.sectionTitle}>Capitalisation Invariance Test</Text>
-          <Text style={styles.instructionText}>
-            Tests whether SAE features are stable across capitalisation variants (e.g. cat / Cat / CAT).
-            Select words below or leave empty to test all.
-          </Text>
-
-          {/* Word chips */}
-          <View style={styles.chipContainer}>
-            {capsWords.map((w) => (
-              <TouchableOpacity
-                key={w}
-                style={[styles.chip, selectedCapsWords.includes(w) && styles.chipSelected]}
-                onPress={() => setSelectedCapsWords(toggleInArray(selectedCapsWords, w))}
-              >
-                <Text style={[styles.chipText, selectedCapsWords.includes(w) && styles.chipTextSelected]}>{w}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-
-          <TouchableOpacity
-            style={[styles.button, capsLoading && { opacity: 0.6 }]}
-            onPress={runCapsTest}
-            disabled={capsLoading}
-          >
-            <Text style={styles.buttonText}>
-              {capsLoading ? 'RUNNING CAPS TEST...' : 'RUN CAPS TEST'}
-            </Text>
-          </TouchableOpacity>
-
-          {capsLoading && <ActivityIndicator size="large" style={{ marginTop: 20 }} />}
-
-          {renderCapsResults()}
-
-          {error && !capsLoading && (
-            <View style={styles.errorBox}>
-              <Text style={styles.errorText}>Error: {error}</Text>
-            </View>
-          )}
+        {/* TAB BAR */}
+        <View style={styles.tabBar}>
+          {[
+            { id: TAB_SAE, label: 'SAE ANALYSIS', icon: '⬡' },
+            { id: TAB_FEATURE_MAP, label: 'FEATURE MAP', icon: '◎' },
+            { id: TAB_FEATURE_TRACE, label: 'FEATURE TRACE', icon: '◍' },
+          ].map(tab => (
+            <TouchableOpacity
+              key={tab.id}
+              style={[styles.tabItem, activeTab === tab.id && styles.tabItemActive]}
+              onPress={() => setActiveTab(tab.id)}
+            >
+              <Text style={styles.tabIcon}>{tab.icon}</Text>
+              <Text style={[styles.tabText, activeTab === tab.id && styles.tabTextActive]}>{tab.label}</Text>
+              {activeTab === tab.id && <View style={styles.tabUnderline} />}
+            </TouchableOpacity>
+          ))}
         </View>
-      </View>
-      )}
 
-      {/* ===================== FEATURE MAP TAB ===================== */}
-      {activeTab === TAB_FEATURE_MAP && (
-      <View style={styles.contentContainer}>
-        <View style={styles.panel}>
-          <Text style={styles.sectionTitle}>Feature Map (Human-Readable)</Text>
-          <Text style={styles.instructionText}>
-            Maps activated tokens to their features with local sentence context.
-            Use this view to understand what each feature is responding to.
-          </Text>
+        {/* ===================== SAE TAB ===================== */}
+        {activeTab === TAB_SAE && (
+          <View style={[styles.contentContainer, isLargeScreen ? styles.row : styles.column]}>
 
-          <View style={styles.inputCard}>
-            <Text style={styles.featureMapSentenceLabel}>Current Sentence</Text>
-            <Text style={styles.featureMapSentence}>{inputText}</Text>
-          </View>
-
-          <View style={styles.featureMapMetaRow}>
-            <Text style={styles.featureMapMetaText}>Activated tokens: {activatedTokenRows.length}</Text>
-            <Text style={styles.featureMapMetaText}>Top K per token: {topK === 0 ? 'All' : topK}</Text>
-          </View>
-
-          <Text style={styles.subSectionTitle}>{'Feature -> All Dataset Activations'}</Text>
-          <View style={styles.featureLookupCard}>
-            <Text style={styles.instructionText}>
-              Select any feature ID and fetch sentences (+tokens) from MLCommons/peoples_speech where it activates.
-            </Text>
-
-            <View style={styles.featureLookupRow}>
-              <View style={styles.featureLookupField}>
-                <Text style={styles.inputLabel}>Feature ID</Text>
-                <TextInput
-                  style={styles.featureLookupInput}
-                  value={lookupFeatureId}
-                  onChangeText={(t) => setLookupFeatureId(t.replace(/[^0-9]/g, ''))}
-                  keyboardType="numeric"
-                  placeholder="e.g. 42"
-                />
-              </View>
-              <View style={styles.featureLookupField}>
-                <Text style={styles.inputLabel}>Max Sentences</Text>
-                <TextInput
-                  style={styles.featureLookupInput}
-                  value={lookupMaxSentences}
-                  onChangeText={(t) => setLookupMaxSentences(t.replace(/[^0-9]/g, ''))}
-                  keyboardType="numeric"
-                  placeholder="200"
-                />
-              </View>
-              <View style={styles.featureLookupField}>
-                <Text style={styles.inputLabel}>Maximum Matches to Return</Text>
-                <TextInput
-                  style={styles.featureLookupInput}
-                  value={lookupMaxResults}
-                  onChangeText={(t) => setLookupMaxResults(t.replace(/[^0-9]/g, ''))}
-                  keyboardType="numeric"
-                  placeholder="100"
-                />
-              </View>
-              <View style={styles.featureLookupField}>
-                <Text style={styles.inputLabel}>Minimum Activation Threshold</Text>
-                <TextInput
-                  style={styles.featureLookupInput}
-                  value={lookupMinActivation}
-                  onChangeText={(t) => setLookupMinActivation(sanitizeDecimalInput(t))}
-                  keyboardType="numeric"
-                  placeholder="0.0"
-                />
-              </View>
-            </View>
-            <Text style={styles.hintText}>
-              Maximum Matches to Return: caps how many highest-activation token matches are shown after filtering.
-            </Text>
-            <Text style={styles.hintText}>
-              Minimum Activation Threshold uses inclusive filtering (activation {'>='} threshold).
-            </Text>
-
-            <View style={styles.featureLookupActionsRow}>
-              <TouchableOpacity
-                style={[styles.button, featureLookupLoading && { opacity: 0.6 }]}
-                onPress={runFeatureLookup}
-                disabled={featureLookupLoading}
-              >
-                <Text style={styles.buttonText}>{featureLookupLoading ? 'SEARCHING...' : 'FIND ACTIVATIONS'}</Text>
-              </TouchableOpacity>
-              {!!selectedFeature?.id && (
-                <TouchableOpacity
-                  style={styles.secondaryButton}
-                  onPress={() => setLookupFeatureId(String(selectedFeature.id))}
-                >
-                  <Text style={styles.secondaryButtonText}>Use Selected Feature #{selectedFeature.id}</Text>
-                </TouchableOpacity>
-              )}
-            </View>
-
-            {featureLookupError && (
-              <View style={styles.errorBox}>
-                <Text style={styles.errorText}>{featureLookupError}</Text>
-              </View>
-            )}
-
-            {featureLookupResults && (
-              <View style={styles.featureLookupResultsWrap}>
-                <View style={styles.resultsSummaryCard}>
-                  <Text style={styles.summaryTitle}>Feature</Text>
-                  <Text style={styles.summaryValue}>#{featureLookupResults.feature_id}</Text>
-                  <Text style={styles.clusterWords}>{featureLookupResults.feature_description}</Text>
-                  <Text style={styles.clusterWords}>
-                    Dataset: {featureLookupResults.dataset} [{featureLookupResults.split}] | Scanned {featureLookupResults.scanned_sentences} sentences / {featureLookupResults.scanned_tokens} tokens
-                  </Text>
-                  <Text style={styles.clusterWords}>
-                    Raw examples scanned: {featureLookupResults.raw_examples_scanned ?? 'N/A'} | Filter: {featureLookupResults.activation_filter || 'activation >= min_activation'}
-                  </Text>
-                  <Text style={styles.clusterWords}>
-                    Min threshold: {featureLookupResults.min_activation} | Normalization: {featureLookupResults.normalization_mode || 'none'}
-                  </Text>
-                  <Text style={styles.clusterWords}>
-                    Matches: {featureLookupResults.matches?.length ?? 0} shown ({featureLookupResults.total_matches ?? 0} total)
-                  </Text>
+            {/* LEFT PANEL */}
+            <View style={[styles.panel, isLargeScreen && styles.leftPanelLarge]}>
+              {/* Model Selector */}
+              <View style={styles.sectionBlock}>
+                <View style={styles.sectionLabelRow}>
+                  <View style={styles.sectionDot} />
+                  <Text style={styles.sectionLabel}>SAE CHECKPOINT</Text>
                 </View>
-
-                {(featureLookupResults.matches || []).map((match, idx) => (
-                  <View key={`lookup-match-${idx}`} style={styles.featureLookupMatchCard}>
-                    <View style={styles.featureMapTokenHeader}>
-                      <Text style={styles.featureMapTokenIndex}>Sentence #{match.sentence_index} | Token #{match.token_index}</Text>
-                      <Text style={styles.featureMapTokenCount}>Activation {match.activation?.toFixed?.(4) ?? match.activation}</Text>
-                    </View>
-                    <Text style={styles.featureMapContextText}>
-                      {match.left_context}
-                      <Text style={styles.featureMapContextToken}>{match.token}</Text>
-                      {match.right_context}
-                    </Text>
-                    <Text style={styles.featureLookupSentence}>{match.sentence}</Text>
-                  </View>
-                ))}
-              </View>
-            )}
-          </View>
-
-          {tokens.length === 0 && (
-            <View style={styles.placeholderCard}>
-              <Text style={styles.placeholderText}>No analysis found yet.</Text>
-              <Text style={styles.placeholderSubText}>Run ANALYZE in SAE Analysis tab first.</Text>
-            </View>
-          )}
-
-          {tokens.length > 0 && activatedTokenRows.length === 0 && (
-            <View style={styles.placeholderCard}>
-              <Text style={styles.placeholderText}>No activated tokens in current result.</Text>
-              <Text style={styles.placeholderSubText}>Try a different sentence or model checkpoint.</Text>
-            </View>
-          )}
-
-          {activatedTokenRows.length > 0 && (
-            <View>
-              <Text style={styles.subSectionTitle}>{'Token -> Features'}</Text>
-              {activatedTokenRows.map((row) => (
-                <View key={`token-${row.tokenIndex}`} style={styles.featureMapTokenCard}>
-                  <View style={styles.featureMapTokenHeader}>
-                    <Text style={styles.featureMapTokenIndex}>Token #{row.tokenIndex}</Text>
-                    <Text style={styles.featureMapTokenCount}>Features {row.features.length}/{row.totalFeatures}</Text>
-                  </View>
-                  <Text style={styles.featureMapContextText}>
-                    {row.before}
-                    <Text style={styles.featureMapContextToken}>{row.tokenText}</Text>
-                    {row.after}
-                  </Text>
-                  {row.features.map((feature) => (
-                    <TouchableOpacity
-                      key={`token-${row.tokenIndex}-feature-${feature.id}`}
-                      style={styles.featureMapFeatureRow}
-                      onPress={() => setSelectedFeature(feature)}
+                <View style={styles.pickerWrapper}>
+                  {modelsLoading ? (
+                    <ActivityIndicator color="#00ffcc" style={{ padding: 12 }} />
+                  ) : (
+                    <Picker
+                      selectedValue={selectedModel}
+                      onValueChange={setSelectedModel}
+                      style={styles.picker}
+                      itemStyle={styles.pickerItem}
                     >
-                      <Text style={styles.featureMapFeatureId}>#{feature.id}</Text>
-                      <Text style={styles.featureMapFeatureDesc}>{feature.description}</Text>
-                      <Text style={styles.featureMapFeatureActivation}>
-                        {feature.activation?.toFixed(2) ?? 'n/a'}
-                      </Text>
-                    </TouchableOpacity>
+                      {models.map((m) => (
+                        <Picker.Item key={m.id} label={`${m.name}  [${m.d_hidden || '?'} features]`} value={m.id} />
+                      ))}
+                    </Picker>
+                  )}
+                </View>
+              </View>
+
+              {/* Input */}
+              <View style={styles.sectionBlock}>
+                <View style={styles.sectionLabelRow}>
+                  <View style={styles.sectionDot} />
+                  <Text style={styles.sectionLabel}>INPUT CORPUS</Text>
+                </View>
+                <View style={styles.inputCard}>
+                  <TextInput
+                    style={styles.textInput}
+                    multiline
+                    value={inputText}
+                    onChangeText={setInputText}
+                    placeholder="// enter text to analyze..."
+                    placeholderTextColor={C.textMuted}
+                  />
+                </View>
+
+                <View style={styles.analyzeRow}>
+                  <TouchableOpacity
+                    style={[styles.analyzeButton, loading && styles.analyzeButtonDisabled]}
+                    onPress={() => analyzeText(inputText)}
+                    disabled={loading}
+                  >
+                    {loading
+                      ? <ActivityIndicator color="#000" size="small" />
+                      : <Text style={styles.analyzeButtonText}>▶ ANALYZE</Text>
+                    }
+                  </TouchableOpacity>
+                  <View style={styles.topKRow}>
+                    <Text style={styles.topKLabel}>TOP K</Text>
+                    <TextInput
+                      style={styles.topKInput}
+                      value={String(topK)}
+                      onChangeText={(t) => {
+                        const d = t.replace(/[^0-9]/g, '');
+                        setTopK(d === '' ? 0 : Number(d));
+                      }}
+                      keyboardType="numeric"
+                      maxLength={4}
+                    />
+                    <Text style={styles.topKHint}>{topK === 0 ? 'ALL' : `features`}</Text>
+                  </View>
+                </View>
+              </View>
+
+              {/* Token Display */}
+              <View style={styles.sectionBlock}>
+                <View style={styles.sectionLabelRow}>
+                  <View style={styles.sectionDot} />
+                  <Text style={styles.sectionLabel}>TOKEN VIEW</Text>
+                  <Text style={styles.sectionSub}>— hover or tap a token to inspect</Text>
+                </View>
+                <View style={styles.tokenContainer}>
+                  <Text style={styles.tokenWrapper}>
+                    {tokens.length === 0
+                      ? <Text style={styles.tokenPlaceholder}>{'// awaiting input...'}</Text>
+                      : tokens.map((token, index) => {
+                          const isActive = activeTokenIndex === index || hoveredTokenIndex === index;
+                          const hasFeatures = (token.features || []).length > 0;
+                          return (
+                            <Text
+                              key={index}
+                              style={[
+                                styles.tokenText,
+                                hasFeatures && styles.tokenHasFeatures,
+                                isActive && styles.tokenActive,
+                              ]}
+                              onPress={() => handleTokenClick(index)}
+                              {...(Platform.OS === 'web' ? {
+                                onMouseEnter: () => handleTokenMouseEnter(index),
+                                onMouseLeave: () => handleTokenMouseLeave(),
+                              } : {})}
+                            >
+                              {token.text}
+                            </Text>
+                          );
+                        })}
+                  </Text>
+                </View>
+              </View>
+            </View>
+
+            {/* RIGHT PANEL */}
+            <View style={[styles.panel, isLargeScreen && styles.rightPanelLarge]}>
+              <View style={styles.sectionLabelRow}>
+                <View style={[styles.sectionDot, { backgroundColor: '#ff00cc' }]} />
+                <Text style={styles.sectionLabel}>ACTIVATED FEATURES</Text>
+                {activeToken && (
+                  <TouchableOpacity style={styles.clearBtn} onPress={() => setActiveTokenIndex(null)}>
+                    <Text style={styles.clearBtnText}>✕ CLEAR</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+
+              {activeToken ? (
+                <View>
+                  <View style={styles.selectedTokenChip}>
+                    <Text style={styles.selectedTokenGlyph}>◈</Text>
+                    <Text style={styles.selectedTokenText}>{activeToken.text.trim() || '(space)'}</Text>
+                    <Text style={styles.selectedTokenCount}>{visibleActiveFeatures.length} / {activeToken.features.length} features</Text>
+                  </View>
+
+                  {visibleActiveFeatures.length === 0 ? (
+                    <View style={styles.emptyState}>
+                      <Text style={styles.emptyStateText}>No active features for this token.</Text>
+                    </View>
+                  ) : (
+                    <View>
+                      {visibleActiveFeatures.map((feature) => (
+                        <FeatureChip
+                          key={feature.id}
+                          feature={feature}
+                          styles={styles}
+                          onPress={() => setSelectedFeature(feature)}
+                        />
+                      ))}
+                    </View>
+                  )}
+                </View>
+              ) : (
+                <View style={styles.rightPanelPlaceholder}>
+                  <Text style={styles.placeholderGlyph}>◎</Text>
+                  <Text style={styles.placeholderTitle}>SELECT A TOKEN</Text>
+                  <Text style={styles.placeholderSub}>
+                    Tap any highlighted word in the token view to inspect its activated SAE features.
+                  </Text>
+                </View>
+              )}
+
+              {error && (
+                <View style={styles.errorBox}>
+                  <Text style={styles.errorLabel}>⚠ BACKEND ERROR</Text>
+                  <Text style={styles.errorText}>{error}</Text>
+                </View>
+              )}
+            </View>
+          </View>
+        )}
+
+        {/* ===================== FEATURE MAP TAB ===================== */}
+        {activeTab === TAB_FEATURE_MAP && (
+          <View style={styles.contentContainer}>
+            <View style={styles.panel}>
+
+              {/* Feature Lookup */}
+              <View style={styles.sectionBlock}>
+                <View style={styles.sectionLabelRow}>
+                  <View style={[styles.sectionDot, { backgroundColor: '#ffcc00' }]} />
+                  <Text style={styles.sectionLabel}>DATASET ACTIVATION SEARCH</Text>
+                </View>
+                <Text style={styles.lookupHint}>
+                  Find sentences in MLCommons/peoples_speech where a specific feature activates.
+                </Text>
+
+                <View style={styles.lookupGrid}>
+                  {[
+                    { label: 'FEATURE ID', value: lookupFeatureId, onChange: (t) => setLookupFeatureId(t.replace(/[^0-9]/g, '')), placeholder: 'e.g. 42' },
+                    { label: 'MAX SENTENCES', value: lookupMaxSentences, onChange: (t) => setLookupMaxSentences(t.replace(/[^0-9]/g, '')), placeholder: '200' },
+                    { label: 'MAX RESULTS', value: lookupMaxResults, onChange: (t) => setLookupMaxResults(t.replace(/[^0-9]/g, '')), placeholder: '100' },
+                    { label: 'MIN ACTIVATION', value: lookupMinActivation, onChange: (t) => setLookupMinActivation(sanitizeDecimalInput(t)), placeholder: '0.0' },
+                  ].map(field => (
+                    <View key={field.label} style={styles.lookupField}>
+                      <Text style={styles.lookupFieldLabel}>{field.label}</Text>
+                      <TextInput
+                        style={styles.lookupInput}
+                        value={field.value}
+                        onChangeText={field.onChange}
+                        keyboardType="numeric"
+                        placeholder={field.placeholder}
+                        placeholderTextColor={C.textMuted}
+                      />
+                    </View>
                   ))}
                 </View>
-              ))}
 
-              <Text style={styles.subSectionTitle}>{'Feature -> Activated Tokens'}</Text>
-              {featureToTokensRows.map((featureRow) => (
-                <View key={`feature-${featureRow.id}`} style={styles.featureMapFeatureCard}>
-                  <Text style={styles.featureMapFeatureCardTitle}>#{featureRow.id} {featureRow.description}</Text>
-                  <Text style={styles.featureMapFeatureCardMeta}>Activated by {featureRow.tokens.length} token(s)</Text>
-                  <View style={styles.featureMapTokenChips}>
-                    {featureRow.tokens.map((entry, idx) => (
-                      <View key={`feature-${featureRow.id}-token-${idx}`} style={styles.featureMapTokenChip}>
-                        <Text style={styles.featureMapTokenChipText}>
-                          {entry.tokenText.trim() || '(space)'} @ {entry.tokenIndex}
+                <View style={styles.lookupActionsRow}>
+                  <TouchableOpacity
+                    style={[styles.analyzeButton, featureLookupLoading && styles.analyzeButtonDisabled]}
+                    onPress={runFeatureLookup}
+                    disabled={featureLookupLoading}
+                  >
+                    {featureLookupLoading
+                      ? <ActivityIndicator color="#000" size="small" />
+                      : <Text style={styles.analyzeButtonText}>▶ FIND ACTIVATIONS</Text>
+                    }
+                  </TouchableOpacity>
+
+                  {!!selectedFeature?.id && (
+                    <TouchableOpacity
+                      style={styles.secondaryButton}
+                      onPress={() => setLookupFeatureId(String(selectedFeature.id))}
+                    >
+                      <Text style={styles.secondaryButtonText}>USE FEATURE #{selectedFeature.id}</Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
+
+                {featureLookupError && (
+                  <View style={styles.errorBox}>
+                    <Text style={styles.errorLabel}>⚠ ERROR</Text>
+                    <Text style={styles.errorText}>{featureLookupError}</Text>
+                  </View>
+                )}
+
+                {featureLookupResults && (
+                  <View style={styles.lookupResults}>
+                    <View style={styles.lookupResultsHeader}>
+                      <Text style={styles.lookupResultsTitle}>FEATURE #{featureLookupResults.feature_id}</Text>
+                      <Text style={styles.lookupResultsDesc}>{featureLookupResults.feature_description}</Text>
+                      <View style={styles.lookupResultsMeta}>
+                        <Text style={styles.lookupResultsMetaText}>
+                          Scanned {featureLookupResults.scanned_sentences} sentences · {featureLookupResults.matches?.length ?? 0} matches shown
+                        </Text>
+                      </View>
+                    </View>
+
+                    {(featureLookupResults.matches || []).map((match, idx) => (
+                      <View key={idx} style={styles.matchCard}>
+                        <View style={styles.matchCardHeader}>
+                          <Text style={styles.matchCardMeta}>
+                            Sentence #{match.sentence_index} · Token #{match.token_index}
+                          </Text>
+                          <View style={styles.matchActivationBadge}>
+                            <Text style={styles.matchActivationText}>{match.activation?.toFixed(4)}</Text>
+                          </View>
+                        </View>
+                        <Text style={styles.matchContext}>
+                          {match.left_context}
+                          <Text style={styles.matchToken}>{match.token}</Text>
+                          {match.right_context}
                         </Text>
                       </View>
                     ))}
                   </View>
-                </View>
-              ))}
+                )}
+              </View>
+
             </View>
-          )}
+          </View>
+        )}
+
+        {/* ===================== FEATURE TRACE TAB ===================== */}
+        {activeTab === TAB_FEATURE_TRACE && (
+          <View style={styles.contentContainer}>
+            <View style={[styles.traceGrid, isLargeScreen ? styles.row : styles.column]}>
+              <View style={[styles.panel, isLargeScreen && styles.leftPanelLarge]}>
+                <View style={styles.sectionBlock}>
+                  <View style={styles.sectionLabelRow}>
+                    <View style={[styles.sectionDot, { backgroundColor: C.cyan }]} />
+                    <Text style={styles.sectionLabel}>TRACE INPUT</Text>
+                  </View>
+
+                  <View style={styles.inputCard}>
+                    <TextInput
+                      style={styles.textInput}
+                      multiline
+                      value={traceText}
+                      onChangeText={setTraceText}
+                      placeholder="// enter sentence to trace..."
+                      placeholderTextColor={C.textMuted}
+                    />
+                  </View>
+
+                  <View style={styles.lookupGrid}>
+                    <View style={styles.lookupField}>
+                      <Text style={styles.lookupFieldLabel}>FEATURE ID</Text>
+                      <TextInput
+                        style={styles.lookupInput}
+                        value={traceFeatureId}
+                        onChangeText={(t) => setTraceFeatureId(t.replace(/[^0-9]/g, ''))}
+                        keyboardType="numeric"
+                        placeholder="e.g. 42"
+                        placeholderTextColor={C.textMuted}
+                      />
+                    </View>
+                    <View style={styles.lookupField}>
+                      <Text style={styles.lookupFieldLabel}>MIN ACTIVATION</Text>
+                      <TextInput
+                        style={styles.lookupInput}
+                        value={traceMinActivation}
+                        onChangeText={(t) => setTraceMinActivation(sanitizeDecimalInput(t))}
+                        keyboardType="numeric"
+                        placeholder="0.0"
+                        placeholderTextColor={C.textMuted}
+                      />
+                    </View>
+                  </View>
+
+                  <View style={styles.lookupActionsRow}>
+                    <TouchableOpacity
+                      style={[styles.analyzeButton, traceLoading && styles.analyzeButtonDisabled]}
+                      onPress={runSentenceFeatureTrace}
+                      disabled={traceLoading}
+                    >
+                      {traceLoading
+                        ? <ActivityIndicator color="#000" size="small" />
+                        : <Text style={styles.analyzeButtonText}>▶ TRACE FEATURE</Text>
+                      }
+                    </TouchableOpacity>
+                  </View>
+                </View>
+
+                {traceError && (
+                  <View style={styles.errorBox}>
+                    <Text style={styles.errorLabel}>⚠ ERROR</Text>
+                    <Text style={styles.errorText}>{traceError}</Text>
+                  </View>
+                )}
+
+                {traceResult && (
+                  <View style={styles.sectionBlock}>
+                    <View style={styles.lookupResultsHeader}>
+                      <Text style={styles.lookupResultsTitle}>FEATURE #{traceResult.feature_id}</Text>
+                      <Text style={styles.lookupResultsDesc}>{traceResult.feature_name}</Text>
+                      <Text style={styles.lookupResultsMetaText}>{traceResult.feature_description}</Text>
+                    </View>
+                    <View style={styles.traceStatsRow}>
+                      <View style={styles.metaChip}>
+                        <Text style={styles.metaChipLabel}>ACTIVE TOKENS</Text>
+                        <Text style={styles.metaChipValue}>{traceResult.active_token_count}</Text>
+                      </View>
+                      <View style={styles.metaChip}>
+                        <Text style={styles.metaChipLabel}>TOKEN COUNT</Text>
+                        <Text style={styles.metaChipValue}>{traceResult.token_count}</Text>
+                      </View>
+                      <View style={styles.metaChip}>
+                        <Text style={styles.metaChipLabel}>MAX ACT</Text>
+                        <Text style={styles.metaChipValue}>{Number(traceResult.max_activation || 0).toFixed(3)}</Text>
+                      </View>
+                      <View style={styles.metaChip}>
+                        <Text style={styles.metaChipLabel}>THRESHOLD</Text>
+                        <Text style={styles.metaChipValue}>{Number(traceResult.min_activation || 0).toFixed(3)}</Text>
+                      </View>
+                    </View>
+                  </View>
+                )}
+              </View>
+
+              <View style={[styles.panel, isLargeScreen && styles.rightPanelLarge]}>
+                <View style={styles.sectionLabelRow}>
+                  <View style={[styles.sectionDot, { backgroundColor: '#ff00cc' }]} />
+                  <Text style={styles.sectionLabel}>TOKEN ACTIVATION MAP</Text>
+                </View>
+
+                {!traceResult ? (
+                  <View style={styles.emptyState}>
+                    <Text style={styles.placeholderGlyph}>◎</Text>
+                    <Text style={styles.emptyStateText}>Run a trace to view token-level activations for the selected feature.</Text>
+                  </View>
+                ) : (
+                  <View style={styles.traceSentenceCard}>
+                    <Text style={styles.traceSentenceText}>
+                      {(traceResult.tokens || []).map((tok, idx) => {
+                        const isHovered = traceHoveredIndex === idx;
+                        return (
+                          <Text
+                            key={`${idx}-${tok.index}`}
+                            style={[
+                              styles.traceToken,
+                              tok.is_active && styles.traceTokenActive,
+                              isHovered && styles.traceTokenHovered,
+                            ]}
+                            onPress={() => setTraceHoveredIndex(isHovered ? null : idx)}
+                            {...(Platform.OS === 'web' ? {
+                              onMouseEnter: () => setTraceHoveredIndex(idx),
+                              onMouseLeave: () => setTraceHoveredIndex(null),
+                            } : {})}
+                          >
+                            {tok.text}
+                          </Text>
+                        );
+                      })}
+                    </Text>
+                  </View>
+                )}
+
+                {traceResult && traceHoveredIndex !== null && traceResult.tokens?.[traceHoveredIndex] && (
+                  <View style={styles.traceHoverCard}>
+                    <Text style={styles.traceHoverTitle}>TOKEN #{traceResult.tokens[traceHoveredIndex].index}</Text>
+                    <Text style={styles.traceHoverMeta}>
+                      Activation: {Number(traceResult.tokens[traceHoveredIndex].activation || 0).toFixed(6)}
+                    </Text>
+                    <Text style={styles.traceHoverMeta}>
+                      Active: {traceResult.tokens[traceHoveredIndex].is_active ? 'yes' : 'no'}
+                    </Text>
+                  </View>
+                )}
+              </View>
+            </View>
+          </View>
+        )}
+      </ScrollView>
+
+      {/* FOOTER */}
+      <View style={styles.footer}>
+        <View style={styles.footerInner}>
+          <Text style={styles.footerGlyph}>◈</Text>
+          <Text style={styles.footerText}>Nafis Nahian · Arnob Biswas · Tanvir Liaquat Uday</Text>
+          <Text style={styles.footerGlyph}>◈</Text>
         </View>
       </View>
-      )}
 
-      </ScrollView>
-      
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>Created by: Nafis Nahian, Arnob Biswas, Tanvir Liaquat Uday</Text>
-      </View>
-      
+      {/* Feature Details Modal */}
       <Modal
         animationType="slide"
         transparent={false}
         visible={!!selectedFeature}
         onRequestClose={() => setSelectedFeature(null)}
       >
-        <FeatureDetails 
-            feature={selectedFeature} 
-            onClose={() => setSelectedFeature(null)}
-            modelId={selectedModel}
+        <FeatureDetails
+          feature={selectedFeature}
+          onClose={() => setSelectedFeature(null)}
+          modelId={selectedModel}
+          themeMode={themeMode}
         />
       </Modal>
 
-      <StatusBar style="auto" />
+      <StatusBar style={themeMode === 'light' ? 'dark' : 'light'} />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+// ─── CYBERPUNK COLOR TOKENS ───────────────────────────────────────────────────
+const DARK_THEME = {
+  bg:          '#06090f',
+  bgPanel:     '#0d1117',
+  bgCard:      '#111827',
+  bgCardHover: '#1a2435',
+  border:      '#1e2d3d',
+  borderAccent:'#00ffcc',
+  borderPink:  '#ff00cc',
+  borderYellow:'#ffcc00',
+  cyan:        '#00ffcc',
+  pink:        '#ff00cc',
+  yellow:      '#ffcc00',
+  blue:        '#00aaff',
+  textPrimary: '#e0f0ff',
+  textSecond:  '#9ab3cc',
+  textMuted:   '#7e95ad',
+  error:       '#ff3355',
+  errorBg:     '#1a0010',
+};
+
+const LIGHT_THEME = {
+  bg:          '#f1f1f1',
+  bgPanel:     '#ffffff',
+  bgCard:      '#fbfbfb',
+  bgCardHover: '#f2f2f2',
+  border:      '#d8d8d8',
+  borderAccent:'#e3a55d',
+  borderPink:  '#5f79c9',
+  borderYellow:'#e3a55d',
+  cyan:        '#d89b54',
+  pink:        '#5f79c9',
+  yellow:      '#d89b54',
+  blue:        '#4a67bf',
+  textPrimary: '#101317',
+  textSecond:  '#1c222a',
+  textMuted:   '#383f49',
+  error:       '#c54141',
+  errorBg:     '#fff1f1',
+};
+
+const createStyles = (C) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: C.bg,
   },
-  scrollContainer: {
-    flex: 1,
+  scanlineOverlay: {
+    position: 'absolute',
+    top: 0, left: 0, right: 0, bottom: 0,
+    backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,204,0.015) 2px, rgba(0,255,204,0.015) 4px)',
+    pointerEvents: 'none',
+    zIndex: 9999,
   },
-  footer: {
-    padding: 20,
-    backgroundColor: '#f8f9fa',
-    borderTopWidth: 1,
-    borderTopColor: '#eee',
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  footerText: {
-    fontSize: 12,
-    color: '#666',
-    marginBottom: 5,
-  },
-  footerCredits: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#333',
-  },
+  scrollContainer: { flex: 1 },
+
+  // Header
   header: {
-    padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  contentContainer: {
-    padding: 20,
-  },
-  row: {
+    borderBottomColor: C.borderAccent,
+    padding: 24,
+    backgroundColor: C.bgPanel,
     flexDirection: 'row',
-    alignItems: 'flex-start',
-  },
-  column: {
-    flexDirection: 'column',
-  },
-  panel: {
-    padding: 10,
-    marginBottom: 20,
-  },
-  leftPanel: {
-    flex: 1, // Takes up more space on large screens usually
-  },
-  leftPanelLarge: {
-    flex: 6, // 60%
-    marginRight: 20,
-  },
-  rightPanel: {
-    flex: 1,
-  },
-  rightPanelLarge: {
-    flex: 4, // 40%
-    marginLeft: 20,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#333',
-  },
-  layerSelectorContainer: {
-    marginBottom: 14,
-  },
-  layerSelectorLabel: {
-    fontSize: 14,
-    color: '#555',
-    marginBottom: 6,
-    fontWeight: '600',
-  },
-  layerPickerWrapper: {
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    backgroundColor: '#fff',
+    alignItems: 'center',
+    position: 'relative',
     overflow: 'hidden',
   },
-  layerPicker: {
-    height: 44,
-    width: '100%',
+  headerAccent: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: 4,
+    height: '100%',
+    backgroundColor: C.cyan,
   },
-  instructionText: {
-    fontSize: 12,
-    color: '#666',
-    marginBottom: 10,
-    fontStyle: 'italic',
-  },
-  inputCard: {
-    backgroundColor: '#fff',
+  headerContent: { flex: 1, paddingLeft: 12 },
+  themeSwitchWrap: {
+    flexDirection: 'row',
     borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    padding: 10,
-    marginBottom: 15,
+    borderColor: C.border,
+    borderRadius: 4,
+    overflow: 'hidden',
+    marginRight: 16,
+    backgroundColor: C.bgCard,
+  },
+  themeSwitchBtn: {
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+  },
+  themeSwitchBtnActive: {
+    backgroundColor: C.cyan,
+  },
+  themeSwitchText: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 9,
+    letterSpacing: 1,
+    fontWeight: '700',
+    color: C.textMuted,
+  },
+  themeSwitchTextActive: {
+    color: '#000',
+  },
+  headerEyebrow: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    color: C.cyan,
+    letterSpacing: 3,
+    marginBottom: 4,
+  },
+  headerTitle: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 26,
+    fontWeight: '900',
+    color: C.textPrimary,
+    letterSpacing: 4,
+    marginBottom: 4,
+  },
+  headerSub: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 11,
+    color: C.textSecond,
+    letterSpacing: 2,
+  },
+  // Tab bar
+  tabBar: {
+    flexDirection: 'row',
+    backgroundColor: C.bgPanel,
+    borderBottomWidth: 1,
+    borderBottomColor: C.border,
+  },
+  tabItem: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 14,
+    gap: 8,
+    position: 'relative',
+  },
+  tabItemActive: {},
+  tabIcon: { fontSize: 14, color: C.textSecond },
+  tabText: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 11,
+    fontWeight: '700',
+    color: C.textSecond,
+    letterSpacing: 2,
+  },
+  tabTextActive: { color: C.cyan },
+  tabUnderline: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 2,
+    backgroundColor: C.cyan,
+  },
+
+  // Layout
+  contentContainer: { padding: 20 },
+  row: { flexDirection: 'row', alignItems: 'flex-start' },
+  column: { flexDirection: 'column' },
+  panel: { flex: 1 },
+  leftPanelLarge: { flex: 6, marginRight: 16 },
+  rightPanelLarge: { flex: 4, marginLeft: 16 },
+
+  // Section blocks
+  sectionBlock: { marginBottom: 20 },
+  sectionLabelRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+    gap: 8,
+  },
+  sectionDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: C.cyan,
+  },
+  sectionLabel: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    fontWeight: '700',
+    color: C.cyan,
+    letterSpacing: 3,
+  },
+  sectionSub: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    color: C.textMuted,
+  },
+
+  // Picker
+  pickerWrapper: {
+    borderWidth: 1,
+    borderColor: C.border,
+    borderRadius: 4,
+    backgroundColor: C.bgCard,
+    overflow: 'hidden',
+  },
+  picker: {
+    height: 44,
+    color: C.textPrimary,
+    backgroundColor: 'transparent',
+  },
+  pickerItem: {
+    color: C.textPrimary,
+    backgroundColor: C.bgCard,
+    fontFamily: 'monospace',
+    fontSize: 13,
+  },
+
+  // Input
+  inputCard: {
+    backgroundColor: C.bgCard,
+    borderWidth: 1,
+    borderColor: C.border,
+    borderRadius: 4,
+    padding: 12,
+    marginBottom: 10,
   },
   textInput: {
     minHeight: 80,
-    fontSize: 16,
-    color: '#333',
-    textAlignVertical: 'top',
-    outlineStyle: 'none',
-  },
-  button: {
-    backgroundColor: '#4285F4',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 4,
-    alignSelf: 'flex-start',
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
     fontSize: 14,
+    color: C.textPrimary,
+    textAlignVertical: 'top',
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    outlineStyle: 'none',
+    lineHeight: 22,
   },
-  tokenContainer: {
-    backgroundColor: '#fff', // White background as per screenshot
-    padding: 20,
-    borderRadius: 8,
-    minHeight: 100,
+  corpusDisplayText: {
+    fontSize: 14,
+    color: C.textSecond,
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    lineHeight: 22,
   },
-  tokenWrapper: {
-    flexDirection: 'row', 
+
+  // Analyze row
+  analyzeRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 16,
     flexWrap: 'wrap',
   },
-  tokenText: {
-    fontSize: 18,
-    lineHeight: 32,
-    color: '#444',
-    paddingHorizontal: 2,
-    paddingVertical: 2,
-    borderRadius: 4,
-  },
-  tokenActive: {
-    backgroundColor: '#00897b', // Dark green selection
-    color: '#fff', // White text on selection
-    fontWeight: 'bold',
-  },
-  
-  // Right Panel specific
-  featuresHeaderRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-  kSelector: {
+  analyzeButton: {
+    backgroundColor: C.cyan,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 2,
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 6,
   },
-  kLabel: {
-    fontSize: 14,
-    marginRight: 5,
-    color: '#555',
+  analyzeButtonDisabled: { opacity: 0.5 },
+  analyzeButtonText: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontWeight: '900',
+    fontSize: 12,
+    color: '#000',
+    letterSpacing: 2,
   },
-  kInput: {
+  topKRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  topKLabel: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    color: C.textSecond,
+    letterSpacing: 2,
+  },
+  topKInput: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
-    padding: 5,
+    borderColor: C.border,
+    borderRadius: 2,
+    backgroundColor: C.bgCard,
+    color: C.cyan,
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 14,
     width: 56,
     textAlign: 'center',
+    paddingVertical: 6,
   },
-  kHint: {
-    fontSize: 12,
-    color: '#6b7280',
-    marginBottom: 10,
+  topKHint: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    color: C.textMuted,
   },
 
-  activeTokenChip: {
+  // Token display
+  tokenContainer: {
+    backgroundColor: C.bgCard,
+    borderWidth: 1,
+    borderColor: C.border,
+    borderRadius: 4,
+    padding: 16,
+    minHeight: 80,
+  },
+  tokenWrapper: { flexDirection: 'row', flexWrap: 'wrap' },
+  tokenPlaceholder: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 13,
+    color: C.textMuted,
+  },
+  tokenText: {
+    fontSize: 16,
+    lineHeight: 30,
+    color: C.textSecond,
+    paddingHorizontal: 1,
+    paddingVertical: 2,
+    borderRadius: 2,
+    fontFamily: Platform.OS === 'web' ? 'Georgia, serif' : undefined,
+  },
+  tokenHasFeatures: {
+    color: C.textPrimary,
+    borderBottomWidth: 2,
+    borderBottomColor: C.borderAccent + '66',
+  },
+  tokenActive: {
+    backgroundColor: C.cyan,
+    color: '#000',
+    fontWeight: '700',
+    borderBottomWidth: 0,
+  },
+
+  // Right panel
+  clearBtn: {
+    marginLeft: 'auto',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderWidth: 1,
+    borderColor: C.error,
+    borderRadius: 2,
+  },
+  clearBtnText: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 9,
+    color: C.error,
+    letterSpacing: 1,
+  },
+  selectedTokenChip: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#a7f3d0', // Light green
+    backgroundColor: C.bgCard,
+    borderWidth: 1,
+    borderColor: C.cyan,
+    borderRadius: 2,
     paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 16,
-    alignSelf: 'flex-start',
-    marginBottom: 20,
+    paddingVertical: 8,
+    marginBottom: 16,
+    gap: 10,
   },
-  activeTokenText: {
-    fontWeight: 'bold',
-    color: '#064e3b',
-    marginRight: 10,
+  selectedTokenGlyph: {
+    fontSize: 14,
+    color: C.cyan,
   },
-  closeButton: {
+  selectedTokenText: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 16,
+    fontWeight: '700',
+    color: C.textPrimary,
+    flex: 1,
+  },
+  selectedTokenCount: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
     fontSize: 10,
-    color: '#ef4444', // Red-ish for close/clear
-    fontWeight: 'bold',
-  },
-
-  featureCountText: {
-    fontSize: 12,
-    color: '#4b5563',
-    marginBottom: 10,
+    color: C.textSecond,
   },
 
   // Feature Card
   featureCard: {
-    backgroundColor: '#e6fcf5',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 10,
+    backgroundColor: C.bgCard,
+    borderWidth: 1,
+    borderColor: C.border,
+    borderLeftWidth: 3,
+    borderLeftColor: C.cyan,
+    borderRadius: 4,
+    padding: 12,
+    marginBottom: 8,
   },
-  featureHeader: {
+  featureCardHovered: {
+    backgroundColor: C.bgCardHover,
+    borderColor: C.cyan + '88',
+    borderLeftColor: C.pink,
+  },
+  featureCardCompact: {
+    padding: 8,
+  },
+  featureCardTop: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
     justifyContent: 'space-between',
-    marginBottom: 5,
+    alignItems: 'center',
+    marginBottom: 8,
   },
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#00897b',
-    marginTop: 6,
-    marginRight: 10,
+  featureIdBadge: {
+    backgroundColor: C.cyan + '22',
+    borderWidth: 1,
+    borderColor: C.cyan + '55',
+    borderRadius: 2,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
   },
-  featureDescription: {
-    flex: 1,
-    fontSize: 14,
-    lineHeight: 20,
-    color: '#004d40',
-    marginRight: 10,
-  },
-  idBox: {
-    // borderWidth: 1,
-    // borderColor: '#00cc66',
-    // borderRadius: 4,
-    // padding: 2,
-  },
-  idText: {
+  featureIdText: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
     fontSize: 10,
-    color: '#00897b',
-    textDecorationLine: 'underline',
+    fontWeight: '700',
+    color: C.cyan,
+    letterSpacing: 1,
   },
-  featureStats: {
+  activationPill: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    gap: 3,
+  },
+  activationValue: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 14,
+    fontWeight: '700',
+    color: C.yellow,
+  },
+  activationUnit: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 8,
+    color: C.textMuted,
+    letterSpacing: 1,
+  },
+  featureLabel: {
+    fontSize: 13,
+    color: C.textSecond,
+    lineHeight: 18,
+    fontFamily: Platform.OS === 'web' ? 'Georgia, serif' : undefined,
+  },
+
+  // Tooltip
+  tooltipLeft: {
+    position: 'absolute',
+    top: 0,
+    right: '100%',
+    width: 280,
+    backgroundColor: C.bgCard,
+    borderWidth: 1,
+    borderColor: C.cyan,
+    borderRadius: 4,
+    padding: 12,
+    zIndex: 100,
+    shadowColor: C.cyan,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
+    marginRight: 8,
+  },
+  tooltipTitle: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    fontWeight: '700',
+    color: C.cyan,
+    letterSpacing: 2,
+    marginBottom: 6,
+  },
+  tooltipDesc: {
+    fontSize: 13,
+    color: C.textPrimary,
+    lineHeight: 20,
+    marginBottom: 6,
+    fontFamily: Platform.OS === 'web' ? 'Georgia, serif' : undefined,
+  },
+  tooltipHint: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 9,
+    color: C.pink,
+    letterSpacing: 1,
+  },
+
+  // Small chips
+  smallChip: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    marginTop: 5,
+    backgroundColor: C.bgCard,
+    borderWidth: 1,
+    borderColor: C.border,
+    borderRadius: 2,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    gap: 6,
   },
-  tokenCount: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#004d40',
-    marginRight: 4,
+  smallChipHovered: {
+    borderColor: C.cyan,
+    backgroundColor: C.bgCardHover,
   },
-  tokenLabel: {
-    fontSize: 8,
-    color: '#004d40',
-    fontWeight: 'bold',
+  smallChipId: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 9,
+    fontWeight: '700',
+    color: C.cyan,
   },
-  
-  placeholderCard: {
-    padding: 30,
-    backgroundColor: '#f9fafb',
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
+  smallChipLabel: {
+    fontSize: 11,
+    color: C.textSecond,
+    maxWidth: 120,
+  },
+
+  // Right panel placeholder
+  rightPanelPlaceholder: {
+    borderWidth: 1,
+    borderColor: C.border,
     borderStyle: 'dashed',
-    borderWidth: 2,
-    borderColor: '#e5e7eb',
+    borderRadius: 4,
+    padding: 40,
+    alignItems: 'center',
+    marginTop: 10,
   },
-  placeholderText: {
-    textAlign: 'center',
-    fontSize: 16,
-    color: '#6b7280',
+  placeholderGlyph: {
+    fontSize: 36,
+    color: C.textMuted,
+    marginBottom: 12,
+  },
+  placeholderTitle: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 12,
+    fontWeight: '700',
+    color: C.textSecond,
+    letterSpacing: 3,
     marginBottom: 10,
   },
-  placeholderSubText: {
+  placeholderSub: {
+    fontSize: 13,
+    color: C.textMuted,
     textAlign: 'center',
-    fontSize: 14,
-    color: '#9ca3af',
+    lineHeight: 20,
+    maxWidth: 280,
   },
+  emptyState: {
+    padding: 30,
+    alignItems: 'center',
+  },
+  emptyStateText: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 12,
+    color: C.textMuted,
+    textAlign: 'center',
+  },
+
+  // Error
   errorBox: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: '#ffebee',
+    backgroundColor: C.errorBg,
+    borderWidth: 1,
+    borderColor: C.error + '66',
     borderRadius: 4,
+    padding: 12,
+    marginTop: 12,
+  },
+  errorLabel: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 9,
+    fontWeight: '700',
+    color: C.error,
+    letterSpacing: 2,
+    marginBottom: 4,
   },
   errorText: {
-    color: '#c62828',
+    fontSize: 13,
+    color: C.error + 'cc',
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
   },
 
-  // ── Tab Bar ──────────────────────────────────────────────────────────────
-  tabBar: {
+  // Feature Map
+  metaChipsRow: {
     flexDirection: 'row',
-    borderBottomWidth: 2,
-    borderBottomColor: '#e5e7eb',
-    backgroundColor: '#fff',
+    gap: 10,
+    marginTop: 10,
   },
-  tabItem: {
-    flex: 1,
-    paddingVertical: 12,
+  metaChip: {
+    backgroundColor: C.bgCard,
+    borderWidth: 1,
+    borderColor: C.border,
+    borderRadius: 2,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
     alignItems: 'center',
-    borderBottomWidth: 3,
-    borderBottomColor: 'transparent',
   },
-  tabItemActive: {
-    borderBottomColor: '#4285F4',
-  },
-  tabText: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#6b7280',
-  },
-  tabTextActive: {
-    color: '#4285F4',
-  },
-
-  // ── Chip selector ────────────────────────────────────────────────────────
-  chipContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginBottom: 15,
-    gap: 8,
-  },
-  chip: {
-    paddingHorizontal: 14,
-    paddingVertical: 7,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#d1d5db',
-    backgroundColor: '#f9fafb',
-  },
-  chipSelected: {
-    backgroundColor: '#4285F4',
-    borderColor: '#4285F4',
-  },
-  chipText: {
-    fontSize: 13,
-    color: '#374151',
-    fontWeight: '500',
-  },
-  chipTextSelected: {
-    color: '#fff',
-  },
-
-  // ── Test result cards ────────────────────────────────────────────────────
-  resultsSummaryCard: {
-    backgroundColor: '#f0f9ff',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 15,
-    borderWidth: 1,
-    borderColor: '#bfdbfe',
-  },
-  summaryTitle: {
-    fontSize: 13,
-    color: '#64748b',
-    fontWeight: '600',
-    marginBottom: 4,
-  },
-  summaryValue: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#1e40af',
-  },
-  clusterCard: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-  },
-  clusterHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  clusterName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#1f2937',
-    textTransform: 'capitalize',
-  },
-  signalBadge: {
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  signalBadgeText: {
-    fontSize: 11,
-    fontWeight: 'bold',
-    color: '#fff',
-  },
-  clusterWords: {
-    fontSize: 13,
-    color: '#6b7280',
-    marginBottom: 10,
-  },
-  metricsRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-    marginBottom: 12,
-  },
-  metricBox: {
-    backgroundColor: '#f8fafc',
-    borderRadius: 8,
-    padding: 10,
-    minWidth: 120,
-    borderWidth: 1,
-    borderColor: '#e2e8f0',
-  },
-  metricLabel: {
-    fontSize: 11,
-    color: '#64748b',
-    fontWeight: '600',
+  metaChipLabel: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 8,
+    color: C.textMuted,
+    letterSpacing: 2,
     marginBottom: 2,
   },
-  metricValue: {
+  metaChipValue: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#0f172a',
+    fontWeight: '700',
+    color: C.cyan,
   },
-  pairwiseTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#374151',
-    marginTop: 6,
-    marginBottom: 6,
-  },
-  pairRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
-    gap: 12,
-  },
-  pairWords: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: '#334155',
-    minWidth: 160,
-  },
-  pairStat: {
-    fontSize: 12,
-    color: '#64748b',
-    fontFamily: Platform.OS === 'web' ? 'monospace' : undefined,
-  },
-  pairCard: {
-    borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
-    paddingBottom: 8,
-    marginBottom: 4,
-  },
-  featureChipList: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 6,
-    paddingHorizontal: 8,
-    marginTop: 4,
-  },
-  smallFeatureChip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#f1f5f9',
-    borderRadius: 6,
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderWidth: 1,
-    borderColor: '#e2e8f0',
-  },
-  featureChipText: {
+
+  // Lookup
+  lookupHint: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
     fontSize: 11,
-    color: '#334155',
-    fontWeight: '500',
-    marginRight: 4,
-  },
-  featureChipId: {
-    fontSize: 10,
-    color: '#64748b',
-    fontWeight: 'bold',
-  },
-
-  // ── Mode toggle ──────────────────────────────────────────────────────────
-  modeToggleRow: {
-    flexDirection: 'row',
-    marginBottom: 15,
-    gap: 8,
-  },
-  modeButton: {
-    flex: 1,
-    paddingVertical: 10,
-    alignItems: 'center',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#d1d5db',
-    backgroundColor: '#f9fafb',
-  },
-  modeButtonActive: {
-    backgroundColor: '#4285F4',
-    borderColor: '#4285F4',
-  },
-  modeButtonText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#374151',
-  },
-  modeButtonTextActive: {
-    color: '#fff',
-  },
-
-  // ── Input helpers ────────────────────────────────────────────────────────
-  inputLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#374151',
-    marginBottom: 6,
-  },
-  hintText: {
-    fontSize: 12,
-    color: '#9ca3af',
-    fontStyle: 'italic',
-    marginBottom: 14,
+    color: C.textSecond,
+    marginBottom: 12,
     lineHeight: 18,
   },
-
-  // Feature map tab
-  subSectionTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#1f2937',
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  featureMapSentenceLabel: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: '#6b7280',
-    marginBottom: 6,
-  },
-  featureMapSentence: {
-    fontSize: 14,
-    color: '#111827',
-    lineHeight: 22,
-  },
-  featureMapMetaRow: {
+  lookupGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
+    gap: 10,
     marginBottom: 12,
   },
-  featureMapMetaText: {
-    fontSize: 12,
-    color: '#4b5563',
-    fontWeight: '600',
-  },
-  featureMapTokenCard: {
-    backgroundColor: '#ffffff',
-    borderWidth: 1,
-    borderColor: '#e5e7eb',
-    borderRadius: 10,
-    padding: 12,
-    marginBottom: 10,
-  },
-  featureMapTokenHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 6,
-  },
-  featureMapTokenIndex: {
-    fontSize: 12,
-    color: '#374151',
-    fontWeight: '700',
-  },
-  featureMapTokenCount: {
-    fontSize: 12,
-    color: '#6b7280',
-    fontWeight: '600',
-  },
-  featureMapContextText: {
-    fontSize: 14,
-    color: '#374151',
-    lineHeight: 22,
-    marginBottom: 8,
-  },
-  featureMapContextToken: {
-    backgroundColor: '#d1fae5',
-    color: '#065f46',
-    fontWeight: '700',
-    borderRadius: 4,
-  },
-  featureMapFeatureRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ecfeff',
-    backgroundColor: '#f0fdfa',
-    borderRadius: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    marginBottom: 6,
-    gap: 8,
-  },
-  featureMapFeatureId: {
-    fontSize: 11,
-    fontWeight: '700',
-    color: '#0f766e',
-    minWidth: 42,
-  },
-  featureMapFeatureDesc: {
+  lookupField: {
+    minWidth: 140,
     flex: 1,
-    fontSize: 13,
-    color: '#134e4a',
   },
-  featureMapFeatureActivation: {
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#0f766e',
-    minWidth: 36,
-    textAlign: 'right',
+  lookupFieldLabel: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 9,
+    color: C.textSecond,
+    letterSpacing: 2,
+    marginBottom: 6,
   },
-  featureMapFeatureCard: {
-    backgroundColor: '#f8fafc',
+  lookupInput: {
+    backgroundColor: C.bgCard,
     borderWidth: 1,
-    borderColor: '#e2e8f0',
-    borderRadius: 10,
-    padding: 12,
-    marginBottom: 10,
-  },
-  featureMapFeatureCardTitle: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#1e293b',
-    marginBottom: 4,
-  },
-  featureMapFeatureCardMeta: {
-    fontSize: 12,
-    color: '#64748b',
-    marginBottom: 8,
-  },
-  featureMapTokenChips: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  featureMapTokenChip: {
-    backgroundColor: '#e2e8f0',
-    borderRadius: 14,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  featureMapTokenChipText: {
-    fontSize: 12,
-    color: '#334155',
-    fontWeight: '600',
-  },
-  featureLookupCard: {
-    backgroundColor: '#ffffff',
-    borderWidth: 1,
-    borderColor: '#dbeafe',
-    borderRadius: 10,
-    padding: 12,
-    marginBottom: 14,
-  },
-  featureLookupRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 10,
-  },
-  featureLookupField: {
-    minWidth: 120,
-    flexGrow: 1,
-  },
-  featureLookupInput: {
-    borderWidth: 1,
-    borderColor: '#cbd5e1',
-    borderRadius: 8,
+    borderColor: C.border,
+    borderRadius: 2,
     paddingHorizontal: 10,
     paddingVertical: 8,
     fontSize: 14,
-    color: '#111827',
+    color: C.cyan,
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
     outlineStyle: 'none',
   },
-  featureLookupActionsRow: {
+  lookupActionsRow: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     gap: 10,
     alignItems: 'center',
+    flexWrap: 'wrap',
+    marginBottom: 12,
+  },
+  traceGrid: {
+    gap: 16,
+  },
+  traceStatsRow: {
+    flexDirection: 'row',
+    gap: 10,
+    flexWrap: 'wrap',
+    marginTop: 10,
+  },
+  traceSentenceCard: {
+    backgroundColor: C.bgCard,
+    borderWidth: 1,
+    borderColor: C.border,
+    borderRadius: 4,
+    padding: 14,
+  },
+  traceSentenceText: {
+    fontSize: 17,
+    lineHeight: 30,
+    color: C.textSecond,
+    fontFamily: Platform.OS === 'web' ? 'Georgia, serif' : undefined,
+  },
+  traceToken: {
+    color: C.textSecond,
+    borderRadius: 2,
+    paddingHorizontal: 1,
+    paddingVertical: 2,
+  },
+  traceTokenActive: {
+    color: C.textPrimary,
+    backgroundColor: C.cyan + '22',
+    borderBottomWidth: 2,
+    borderBottomColor: C.cyan + '88',
+  },
+  traceTokenHovered: {
+    backgroundColor: C.yellow + '33',
+    color: C.yellow,
+  },
+  traceHoverCard: {
     marginTop: 12,
+    backgroundColor: C.bgCard,
+    borderWidth: 1,
+    borderColor: C.yellow + '88',
+    borderRadius: 4,
+    padding: 12,
+  },
+  traceHoverTitle: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    color: C.yellow,
+    letterSpacing: 2,
     marginBottom: 6,
+  },
+  traceHoverMeta: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 12,
+    color: C.textPrimary,
+    lineHeight: 18,
   },
   secondaryButton: {
     borderWidth: 1,
-    borderColor: '#93c5fd',
-    backgroundColor: '#eff6ff',
-    borderRadius: 6,
+    borderColor: C.yellow + '88',
+    backgroundColor: C.yellow + '11',
+    borderRadius: 2,
     paddingVertical: 9,
     paddingHorizontal: 12,
   },
   secondaryButtonText: {
-    color: '#1d4ed8',
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
     fontWeight: '700',
-    fontSize: 12,
+    color: C.yellow,
+    letterSpacing: 1,
   },
-  featureLookupResultsWrap: {
-    marginTop: 12,
-  },
-  featureLookupMatchCard: {
-    backgroundColor: '#ffffff',
+  lookupResults: {
     borderWidth: 1,
-    borderColor: '#e2e8f0',
-    borderRadius: 10,
+    borderColor: C.border,
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  lookupResultsHeader: {
+    backgroundColor: C.bgCard,
+    padding: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: C.border,
+  },
+  lookupResultsTitle: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 14,
+    fontWeight: '700',
+    color: C.cyan,
+    marginBottom: 4,
+  },
+  lookupResultsDesc: {
+    fontSize: 13,
+    color: C.textPrimary,
+    lineHeight: 20,
+    marginBottom: 6,
+  },
+  lookupResultsMeta: {},
+  lookupResultsMetaText: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    color: C.textMuted,
+  },
+  matchCard: {
+    backgroundColor: C.bgPanel,
+    padding: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: C.border,
+  },
+  matchCardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  matchCardMeta: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    color: C.textMuted,
+  },
+  matchActivationBadge: {
+    backgroundColor: C.yellow + '22',
+    borderWidth: 1,
+    borderColor: C.yellow + '55',
+    borderRadius: 2,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+  },
+  matchActivationText: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    fontWeight: '700',
+    color: C.yellow,
+  },
+  matchContext: {
+    fontSize: 14,
+    color: C.textSecond,
+    lineHeight: 22,
+  },
+  matchToken: {
+    backgroundColor: C.cyan + '33',
+    color: C.cyan,
+    fontWeight: '700',
+  },
+
+  // Map token cards
+  mapTokenCard: {
+    backgroundColor: C.bgCard,
+    borderWidth: 1,
+    borderColor: C.border,
+    borderLeftWidth: 3,
+    borderLeftColor: C.cyan,
+    borderRadius: 4,
     padding: 12,
     marginBottom: 10,
   },
-  featureLookupSentence: {
+  mapTokenCardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  mapTokenBadge: {
+    backgroundColor: C.cyan + '22',
+    borderRadius: 2,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+  },
+  mapTokenBadgeText: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 9,
+    fontWeight: '700',
+    color: C.cyan,
+    letterSpacing: 1,
+  },
+  mapTokenFeatureCount: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    color: C.textMuted,
+  },
+  mapContextText: {
+    fontSize: 14,
+    color: C.textSecond,
+    lineHeight: 22,
+    marginBottom: 10,
+  },
+  mapContextHighlight: {
+    backgroundColor: C.cyan + '33',
+    color: C.cyan,
+    fontWeight: '700',
+  },
+  mapFeatureList: { gap: 4 },
+  mapFeatureRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: C.bgPanel,
+    borderWidth: 1,
+    borderColor: C.border,
+    borderRadius: 2,
+    paddingVertical: 7,
+    paddingHorizontal: 10,
+    gap: 10,
+  },
+  mapFeatureId: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    fontWeight: '700',
+    color: C.cyan,
+    minWidth: 44,
+  },
+  mapFeatureDesc: {
+    flex: 1,
+    fontSize: 12,
+    color: C.textSecond,
+  },
+  mapFeatureAct: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 11,
+    fontWeight: '700',
+    color: C.yellow,
+  },
+
+  // Feature cards in map
+  mapFeatureCard: {
+    backgroundColor: C.bgCard,
+    borderWidth: 1,
+    borderColor: C.border,
+    borderLeftWidth: 3,
+    borderLeftColor: C.pink,
+    borderRadius: 4,
+    padding: 12,
+    marginBottom: 10,
+  },
+  mapFeatureCardHeader: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 10,
+    marginBottom: 6,
+  },
+  mapFeatureCardId: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 12,
+    fontWeight: '700',
+    color: C.pink,
+    minWidth: 44,
+  },
+  mapFeatureCardDesc: {
+    flex: 1,
     fontSize: 13,
-    color: '#475569',
+    color: C.textPrimary,
     lineHeight: 20,
-    marginTop: 4,
+  },
+  mapFeatureCardMeta: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 9,
+    color: C.textMuted,
+    letterSpacing: 1,
+    marginBottom: 8,
+  },
+  tokenChipRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 6,
+  },
+  tokenChip: {
+    backgroundColor: C.pink + '22',
+    borderWidth: 1,
+    borderColor: C.pink + '55',
+    borderRadius: 2,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+  },
+  tokenChipText: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    fontWeight: '700',
+    color: C.pink,
+  },
+
+  // Footer
+  footer: {
+    borderTopWidth: 1,
+    borderTopColor: C.border,
+    backgroundColor: C.bgPanel,
+    padding: 16,
+  },
+  footerInner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12,
+  },
+  footerGlyph: {
+    fontSize: 12,
+    color: C.cyan,
+    opacity: 0.5,
+  },
+  footerText: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    color: C.textMuted,
+    letterSpacing: 2,
   },
 });

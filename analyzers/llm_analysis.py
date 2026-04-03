@@ -301,7 +301,11 @@ class FeatureLabeler:
         self.tokenizer = tokenizer
         self.cfg = cfg
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
-        self.sae.to(self.device).eval()
+        has_meta = any(p.is_meta for p in self.sae.parameters()) or any(b.is_meta for b in self.sae.buffers())
+        if has_meta:
+            self.sae.to_empty(device=torch.device(self.device)).eval()
+        else:
+            self.sae.to(self.device).eval()
         self._backend = _build_backend(cfg)
         LOGGER.info(
             "FeatureLabeler initialized | backend=%s model=%s device=%s top_k=%s min_activation=%s normalize_mode=%s",
@@ -445,7 +449,7 @@ class FeatureLabeler:
         candidate_count = int(candidate_vals.numel())
 
         if cfg.min_activation > 0:
-            mask = candidate_vals >= cfg.min_activation
+            mask = candidate_vals > cfg.min_activation
             rows_subset = valid_row_indices[mask]
             vals_subset = candidate_vals[mask]
         else:
