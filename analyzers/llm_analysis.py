@@ -44,6 +44,7 @@ from __future__ import annotations
 
 import json
 import argparse
+import hashlib
 import logging
 import os
 import re
@@ -996,6 +997,27 @@ def parse_indexed_corpus(
     return texts
 
 
+def save_texts_jsonl(
+    texts: List[str],
+    cache_dir: Path,
+    source_signature: str,
+) -> Path:
+    """Persist text corpus as JSONL in cache directory for reproducibility."""
+    digest = hashlib.blake2b(source_signature.encode("utf-8"), digest_size=8).hexdigest()
+    out_path = cache_dir / f"hf_texts_{digest}.jsonl"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+
+    if not out_path.exists():
+        with open(out_path, "w", encoding="utf-8") as f:
+            for text in texts:
+                f.write(json.dumps({"text": text}, ensure_ascii=False) + "\n")
+        LOGGER.info("Saved text corpus JSONL | path=%s entries=%d", out_path, len(texts))
+    else:
+        LOGGER.info("Text corpus JSONL already exists | path=%s", out_path)
+
+    return out_path
+
+
 # ---------------------------------------------------------------------------
 # Main Execution
 # ---------------------------------------------------------------------------
@@ -1140,7 +1162,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--activation-cache-path",
         type=str,
-        default="checkpoints/llm_analysis_activation_cache.pt",
+        default=".cache/llm_analysis_activation_cache.pt",
         help="Path to activation/token-map cache (.pt).",
     )
     parser.add_argument(
@@ -1221,7 +1243,11 @@ if __name__ == "__main__":
     use_corpus = bool(args.corpus_path and args.corpus_path.strip())
     use_dataset = bool(args.dataset and args.dataset.strip()) and not use_corpus
     cache_path = Path(args.activation_cache_path)
+    if not cache_path.is_absolute():
+        cache_path = PROJECT_ROOT / cache_path
+    cache_dir = PROJECT_ROOT / ".cache"
     cache_loaded = False
+    texts_jsonl_path: Optional[Path] = None
 
     if use_corpus:
         corpus_abs = str(Path(args.corpus_path).expanduser().resolve())
@@ -1253,6 +1279,11 @@ if __name__ == "__main__":
             token_ids = cache["token_ids"]
             doc_map = cache["token_doc_map"]
             pos_map = cache["token_pos_map"]
+            cached_jsonl_path = cache.get("texts_jsonl_path")
+            if cached_jsonl_path and Path(cached_jsonl_path).exists():
+                texts_jsonl_path = Path(cached_jsonl_path)
+            else:
+                texts_jsonl_path = save_texts_jsonl(sample_texts, cache_dir, source_signature)
             # Verify integrity
             assert len(doc_map) == activations.shape[0], "Cache size mismatch"
             LOGGER.info(
@@ -1307,6 +1338,7 @@ if __name__ == "__main__":
              activations = collector.collect_activations(sample_texts, batch_size=args.batch_size, max_length=args.max_length)
 
         token_ids, doc_map, pos_map = build_token_maps(sample_texts, tokenizer, args.max_length)
+        texts_jsonl_path = save_texts_jsonl(sample_texts, cache_dir, source_signature)
         
         # Save cache
         if not args.no_cache_save:
@@ -1318,6 +1350,7 @@ if __name__ == "__main__":
                 "token_doc_map": doc_map,
                 "token_pos_map": pos_map,
                 "source_signature": source_signature,
+                "texts_jsonl_path": str(texts_jsonl_path) if texts_jsonl_path is not None else None,
             }, str(cache_path))
             LOGGER.info(
                 "Saved activation cache | path=%s tokens=%d texts=%d",
