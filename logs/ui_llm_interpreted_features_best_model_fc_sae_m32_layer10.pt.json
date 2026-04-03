@@ -262,5 +262,62 @@
       "num_sentences": 2000
     },
     "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:18:45.289704+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1822,
+    "label": "Emotional Positivity",
+    "explanation": "The feature detects words and phrases that convey positive emotions, such as happiness, pleasure, and satisfaction, in the given text snippets",
+    "confidence": "high",
+    "request_id": "285e1dc8-2fc5-46ca-b9b6-859acdc78e61",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "happy",
+      "pleased",
+      "comfortable",
+      "satisfaction",
+      "pleasure",
+      "to",
+      "better",
+      "fun",
+      "miserable",
+      "compelling"
+    ],
+    "prompt_examples_count": 15,
+    "corpus_texts_count": 20,
+    "labeling_config": {
+      "top_k": 20,
+      "skip_first_token": true,
+      "min_activation": 1.5,
+      "num_sentences": 3500
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:20:18.065527+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2620,
+    "label": "Second Person Reference",
+    "explanation": "The feature detects the presence of the word 'you' in the input text, indicating a second-person reference or address",
+    "confidence": "high",
+    "request_id": "ea3ff243-018f-44ac-8048-69760c2c90fd",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "you"
+    ],
+    "prompt_examples_count": 25,
+    "corpus_texts_count": 25,
+    "labeling_config": {
+      "top_k": 25,
+      "skip_first_token": true,
+      "min_activation": 0.1,
+      "num_sentences": 120
+    },
+    "error": null
   }
 ]

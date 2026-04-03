@@ -54,5 +54,21 @@
     "confidence": "high",
     "request_id": "23d6f803-258b-4ea0-859d-96244e1cd5cf",
     "updated_at": "2026-04-03T16:14:58Z"
+  },
+  "1822": {
+    "feature_idx": 1822,
+    "label": "Emotional Positivity",
+    "explanation": "The feature detects words and phrases that convey positive emotions, such as happiness, pleasure, and satisfaction, in the given text snippets",
+    "confidence": "high",
+    "request_id": "285e1dc8-2fc5-46ca-b9b6-859acdc78e61",
+    "updated_at": "2026-04-03T17:18:45Z"
+  },
+  "2620": {
+    "feature_idx": 2620,
+    "label": "Second Person Reference",
+    "explanation": "The feature detects the presence of the word 'you' in the input text, indicating a second-person reference or address",
+    "confidence": "high",
+    "request_id": "ea3ff243-018f-44ac-8048-69760c2c90fd",
+    "updated_at": "2026-04-03T17:20:18Z"
   }
 }

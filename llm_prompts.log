@@ -1986,3 +1986,91 @@ RESPONSE:
   "confidence": "high"
 }
 ================================================================================
+
+================================================================================
+REQUEST_ID 285e1dc8-2fc5-46ca-b9b6-859acdc78e61
+FEATURE 1822
+USER PROMPT:
+Feature index: 1822
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=12.728]  i'm>>> happy<<< to make the motion to implement that
+   2. [act=9.390]   the requests regarding the kahawai street in>>> happy<<< valley
+   3. [act=6.148]  i'm very>>> pleased<<< to be here today to speak briefly about some exciting
+   4. [act=5.993]  the city manager's office is>>> pleased<<< to report the following gifts
+   5. [act=4.793]   teachers take a look at and say yes i'm>>> comfortable<<< with this student signing off
+   6. [act=4.059]   we could have complimentary online platforms that people would feel>>> comfortable<<< with but that could engage a vast greater number of
+   7. [act=3.375]   economic opportunities offered by careers in manufacturing but this true>>> satisfaction<<< that comes from making something
+   8. [act=3.212]   i think when you said that education should be a>>> pleasure<<< and not a pain in the head
+   9. [act=2.151]  i'm happy>>> to<<< make the motion to implement that
+  10. [act=2.103]  so if that feels a little bit>>> better<<< to people
+  11. [act=1.997]  and what what about you it was it was>>> fun<<< in its own way
+  12. [act=1.913]  yeah it's gonna be a>>> miserable<<< rainy whole day but hopefully we play well in the
+  13. [act=1.847]   working myself with two concepts that i find personally very>>> compelling<<<
+  14. [act=1.763]   said that education should be a pleasure and not a>>> pain<<< in the head
+  15. [act=1.525]  we don't take this statistics imply everything's>>> cool<<< now we can forget about it
+
+Most frequent activating tokens (top 10): "happy", "pleased", "comfortable", "satisfaction", "pleasure", "to", "better", "fun", "miserable", "compelling"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Emotional Positivity",
+  "explanation": "The feature detects words and phrases that convey positive emotions, such as happiness, pleasure, and satisfaction, in the given text snippets",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID ea3ff243-018f-44ac-8048-69760c2c90fd
+FEATURE 2620
+USER PROMPT:
+Feature index: 2620
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=10.634]   at the same time like i want to hear from>>> you<<< and and feel free to you know surface questions or
+   2. [act=9.883]  deb as the superintendent what months are best for>>> you<<< administratively and your staff we're busy all year
+   3. [act=9.321]   listen critically to the information that speakers will share with>>> you<<<
+   4. [act=8.879]  but what happens when the community starts to revolt against>>> you<<< know the fittest people on earth then what happens
+   5. [act=8.641]  and listen i understand>>> you<<<'re contrite and you understand the mistake but we
+   6. [act=8.157]   evidence came in when the bank well i could tell>>> you<<< i'm sued over the contract just a really good
+   7. [act=7.429]   want to hear from you and and feel free to>>> you<<< know surface questions or thoughts or any relevant examples as
+   8. [act=7.346]  i also want to give>>> you<<< an update on the calendar conversation that was held at
+   9. [act=7.093]   of these talks but i'm gonna focus on like>>> you<<< know i think one of the advantages that tes
+  10. [act=5.046]   level two charging or they had or they had a>>> you<<< know like chargepoint chargers in the area
+  11. [act=4.870]  so it's teslas>>> you<<< know charging system for level two charging or they had
+  12. [act=3.955]   stipulates that except for previously recorded lots of record>>> you<<<'re not allowed to create new lots with direct access
+  13. [act=3.379]   surveying should have a role in that process or>>> you<<< know whatever the case
+  14. [act=3.373]  thank>>> you<<< thank you mr kucinich
+  15. [act=3.011]   you have an economic crisis in the family what are>>> you<<< gonna do you're going to drop out
+  16. [act=2.851]  thank you thank>>> you<<< mr kucinich
+  17. [act=2.717]  so gary nothing i take it that>>> you<<< have no comments to the written reports and they can
+  18. [act=2.265]  as>>> you<<< know arlene gruber on october 1st
+  19. [act=2.041]   entire day and night are prohibited because in the original>>> you<<<'re actually have hours set between seven hundred am and
+  20. [act=1.841]   economic crisis in the family what are you gonna do>>> you<<<'re going to drop out
+  21. [act=1.705]  you know that in the legislature>>> you<<<'re looking at privacy and for data not only for
+  22. [act=1.593]  so>>> you<<< can't have a sale on cigarettes
+  23. [act=1.593]  so>>> you<<< don't have to smell up your house or anything
+  24. [act=1.417]   i've heard all of that and low retention rates>>> you<<< know however we need to look at that also with
+  25. [act=0.818]   need to look at that also with the economic situation>>> you<<< know if you in school and then you have an
+
+Most frequent activating tokens (top 1): "you"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Second Person Reference",
+  "explanation": "The feature detects the presence of the word 'you' in the input text, indicating a second-person reference or address",
+  "confidence": "high"
+}
+================================================================================
