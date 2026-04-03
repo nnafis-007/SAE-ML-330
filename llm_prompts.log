@@ -8475,3 +8475,1294 @@ Most frequent activating tokens (top 1): "an"
 
 Based on these examples, what concept does this SAE feature detect?
 
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 1681
+USER PROMPT:
+Feature index: 1681
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=18.460]   well beyond this moment in time american leadership is>>> once<<< again being called on
+   2. [act=18.216]  so the question becomes>>> once<<< the conflict is over what do we do and the
+   3. [act=17.900]  over again will try to>>> once<<< you bring one of these cases and one of the
+   4. [act=17.682]  aho the smoke is gone and the skies are clear>>> once<<< again at the same time the damage is real and
+   5. [act=17.314]   relationship between the commonwealth and the federal government and>>> once<<< you make that finding that funny is important for not
+   6. [act=17.194]   the test i'm afraid i'm going to expose>>> once<<< again my academic background i do a lot of inc
+   7. [act=17.149]   have to ask why and i feel compelled to voice>>> once<<< again the question of any creasing number of my
+   8. [act=17.093]  vital importance to our home state economy>>> once<<< again i want to thank our panelists for joining
+   9. [act=17.023]   look at facts beyond the scope of the robbery itself>>> once<<<
+  10. [act=16.956]   of the sun's heat coming in and cannot escape>>> once<<< inside that's exactly how these greenhouse gases work and
+  11. [act=16.867]  yes so>>> once<<< he once he did meet that test like i said
+  12. [act=16.832]   war taliban ruled areas could in short order become>>> once<<< again a sanctuary for al qaida as well as
+  13. [act=16.770]  relationship>>> once<<< the vassal was on site the contract itself
+  14. [act=16.768]  deferred to the court at that moment however>>> once<<< it became and parents of the trial judge intended to
+  15. [act=16.601]   but our expectation all along was that once this issue>>> once<<< this case was resolved on direct appeal that we would
+  16. [act=16.595]   that will probably also be the lowest in history so>>> once<<< again i come before this committee to ask my colleagues
+  17. [act=16.557]  ations of canada's law enforcement or diplomatic personnel>>> once<<< surrendered the extradite t is not allowed to have
+  18. [act=16.219]   men and women in combat and bring them home safely>>> once<<< again i
+  19. [act=15.677]  ferred to the us so it may be perfectly fine>>> once<<< the issue has been timely raised to say the district
+  20. [act=15.435]  to develop a plan not only to end hunger>>> once<<< and for all the united states but also require proper
+  21. [act=15.297]   that are proof that a producer can agree to arbitration>>> once<<< a dispute arises in fact
+  22. [act=15.167]   not communicating and being silent on a material fact so>>> once<<< again just in terms of general experience
+  23. [act=14.950]   it's also an important fact in this case that>>> once<<< the central office reviewed that that he was fired as
+  24. [act=14.701]   completion is scheduled for august two thousand and ten>>> once<<< we acquire the site we will begin developing the solicitation
+  25. [act=14.687]  brief but our expectation all along was that>>> once<<< this issue once this case was resolved on direct appeal
+
+Most frequent activating tokens (top 1): "once"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Temporal Reference",
+  "explanation": "The feature detects the concept of temporal reference, specifically the word 'once' indicating a point in time or a repeated action",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 4029
+USER PROMPT:
+Feature index: 4029
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=13.742]  all a large portion of the>>> application<<< form is devoted to pedigree information which the department uses
+   2. [act=13.469]  we have bigger asli opposed the>>> application<<< of state law to our anti steroids program and will
+   3. [act=13.199]  and if there was no one else well the>>> application<<< well the application says that this search is to include
+   4. [act=12.229]   it up and configure it in turn it into an>>> application<<< server then you have won then you have to decide
+   5. [act=12.164]   so when judge argento is permit presented with the>>> application<<< and specifically
+   6. [act=12.157]   agency records indicate that he has indeed file a subsequent>>> application<<< thank you
+   7. [act=12.080]   they were just part of a blanket search for every>>> application<<< that was bathed that had certain repetitive
+   8. [act=11.956]   aware of informing them of the necessity to file the>>> application<<<
+   9. [act=11.921]  community based alternative and>>> application<<< the operation of detention facilities was delegated to county sheriff
+  10. [act=11.856]  approve a waiver>>> application<<< and so if you think of it in terms of
+  11. [act=11.674]   a crime in a federal statute requires more than the>>> application<<< of legal imagination to a state's state statutes language
+  12. [act=11.481]  an>>> application<<< for those technologies and finding a way to protect the
+  13. [act=11.464]  's arguing a point on one twelve for the fifth>>> application<<< was that was not at issue as stated by the
+  14. [act=11.424]   my question is how is evidence that somebody thought an>>> application<<< for asylum was being prepared for them and filed for
+  15. [act=11.389]   hospital which recently where i saw a copy of the>>> application<<< form for medicaid in s chip and it reminded
+  16. [act=11.163]   to institutional security but tomorrow the director could eliminate the>>> application<<< form
+  17. [act=11.128]   economic interest group legal title this appeal rests on the>>> application<<< of those regulations to a standard investment management agreement between
+  18. [act=10.539]   be so all of her discussion about how the six>>> application<<< wasn't supported was
+  19. [act=10.497]  significant workload in terms of johnson related first>>> applications<<< the numbers are staggering and the courts the chief judges
+  20. [act=10.472]   that maria and brittany had filed separate>>> applications<<< and that is daughters of sandra and nie
+  21. [act=10.220]   the entire personnel record but i asked for all the>>> applications<<< the the warnings the performance evaluations those kind of things
+  22. [act=9.546]   it means by definition that the rule upon which the>>> application<<< is base
+  23. [act=9.470]   there was no one else well the application well the>>> application<<< says that this search is to include it indicates the
+  24. [act=9.446]   here concern the summary judgment motion and the court's>>> application<<<
+  25. [act=9.386]   were approved by the medical executive community committee and the>>> applicant<<< would send some sort of
+
+Most frequent activating tokens (top 3): "application", "applications", "applicant"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Formal Request Process",
+  "explanation": "The feature detects the concept of formal requests or submissions, typically in a legal or administrative context, as evidenced by the frequent activation on words like 'application' and 'applicant'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 443
+USER PROMPT:
+Feature index: 443
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 17 activating examples (ordered strongest first):
+   1. [act=13.014]  facts of this case the>>> tree<<< was already he wasn't there there are no facts
+   2. [act=11.290]   no evidence that he was protesting any certain or specific>>> tree<<< he came back later after making calls and emails according
+   3. [act=9.095]   anal sex he remembered that it took place in a>>> wood<<<ed vacant lot near his home that he was bent
+   4. [act=9.081]   according to him he came back and saw that this>>> tree<<< was hot
+   5. [act=9.017]   of that's going to be the additional expenses the>>> forest<<< service and the b l m and many of our
+   6. [act=8.903]   there have there is no use of the of the>>> oak<<<ridge process currently commercially so they're doing
+   7. [act=8.506]  called healthy>>> forest<<< and others i'll be back to talk on this
+   8. [act=8.491]   of what we do sequesters our carbon keeps our>>> forest<<< healthy and young and vibrant as a part
+   9. [act=8.381]   year yet last year along with ten million acres of>>> forest<<< land burned by conservative estimate that means that sixty million
+  10. [act=8.095]   parent had not really made the decision yet now in>>> forest<<< grove the supreme court
+  11. [act=6.900]  factors as judge lynch pointed out judge>>> wood<<<cock never mentioned the word rehabilitation in his sentencing analysis
+  12. [act=6.897]   atmosphere our management practices ought to be to keep our>>> forests<<< as young and vibrant and alive as they possibly can
+  13. [act=6.617]  another iowan from c>>>edar<<< falls wrote in support of our review of the h
+  14. [act=5.967]  that could have happened because the knife was in the>>> trunk<<< with her so in light of the fact question that
+  15. [act=4.684]   we're really talking about a third bite of the>>> apple<<< here let's let's change the facts just a
+  16. [act=4.634]  go forward it basically says that any>>> fruit<<< or juice that's currently sold in the grocery store
+  17. [act=4.515]   made sure that if you're going to use a>>> limb<<< fell it's got to be
+
+Most frequent activating tokens (top 10): "forest", "tree", "wood", "oak", "forests", "edar", "trunk", "apple", "fruit", "limb"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 2068
+USER PROMPT:
+Feature index: 2068
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=11.046]   for operation enduring freedom combat veterans i anticipate that the>>> student<<< body for next month's incoming class will be some
+   2. [act=10.051]  companies where they are currently on>>> campus<<< they are moving from basic research to applied research to
+   3. [act=9.530]   are going to make sixty five percent more than a>>> student<<< with her children with only a high school
+   4. [act=8.912]  i heard the argument that was just presented about>>> students<<< being call to the office a lawsuit doesn't say
+   5. [act=8.476]   remote site located about thirty miles from maxwell edition>>> students<<< spend a week building a working knowledge of officer in
+   6. [act=8.177]   there have been a number of studies done on this>>> campus<<< and on this project
+   7. [act=7.565]  innovators investors and>>> university<<< and nonprofit leaders the department of commerce is also putting
+   8. [act=7.429]   working knowledge of officer in most relationships through interaction with>>> students<<< from our senior noncommissioned officer academy
+   9. [act=7.385]   and technical programs are aligned with industry recognized certifications>>> students<<< can demonstrate and transfer their skills throughout the country and
+  10. [act=7.229]  't say who said after all african american>>> students<<< to the office it does not
+  11. [act=7.206]  ac>>>ademic<<< who's declared under oath that they're faulty advertised
+  12. [act=7.196]   your question it's more intentional in developmental to help>>> students<<< connect the dots to have more deep learning and effective
+  13. [act=7.177]   that that shouldn't necessarily be limited to only brown>>> university<<< students but that may be for another day we're
+  14. [act=7.173]   to a level of commercialization where many of the>>> students<<< involved in that research many it festers involved in
+  15. [act=7.133]  strengths we have the best>>> universities<<< and research facilities in the world we have many outstanding
+  16. [act=7.111]  one hundred percent of the>>> faculty<<< advisors and division heads or highly experienced combat veterans with
+  17. [act=7.068]  field our>>> faculty<<< also includes six endowed chairs seven distinguished visiting professors eight
+  18. [act=6.907]  'm afraid i'm going to expose once again my>>> academic<<< background i do a lot of incurable work and
+  19. [act=6.845]  attributes from a chairman outside the normal>>> academic<<< environment this integrated character and leadership development program is the
+  20. [act=6.843]   maneuver warfare dr the curriculum contains approximately eighty percent of>>> academic<<< education and twenty percent dedicated to training the marine corps
+  21. [act=6.601]  and about a third of those>>> faculty<<< are retired military we've we've tried to hire
+  22. [act=6.495]   different parts of the country with our national labs and>>> universities<<< how they bring companies and partners and from the beginning
+  23. [act=6.464]   with their case is there rely on the testimony from>>> college<<< team or was he personally handed out a few copies
+  24. [act=6.460]   sciences humanities basic sciences and engineering several courses from the>>> academic<<< core curriculum focused directly on the areas of strategy military
+  25. [act=6.363]   that shouldn't necessarily be limited to only brown university>>> students<<< but that may be for another day we're not
+
+Most frequent activating tokens (top 9): "students", "academic", "faculty", "student", "campus", "university", "universities", "ademic", "college"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 859
+USER PROMPT:
+Feature index: 859
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 8 activating examples (ordered strongest first):
+   1. [act=6.584]  that when i drive as a restaurant>>> and<<< there's no one on hand to take possession of
+   2. [act=6.406]   i mean you know i used to be a prosecutor>>> and<<< i don't think that it
+   3. [act=6.074]   trying to say i've been here all this time>>> and<<< so what i did at the very end when i
+   4. [act=5.734]   about how difficult things are i live it every day>>> and<<< my constituents and that's why i'm out there
+   5. [act=5.518]   the premis because we're here on discretionary review>>> and<<< so the issue is not is this court
+   6. [act=5.037]   in afghanistan as we increase our presence there>>> and<<< refocus our efforts with a new
+   7. [act=5.016]   academic background i do a lot of incurable work>>> and<<< one of the most important things that you want to
+   8. [act=4.664]   objective as i could be when i watched the video>>> and<<< i replayed it and what i saw
+
+Most frequent activating tokens (top 1): "and"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 707
+USER PROMPT:
+Feature index: 707
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=8.407]   same situation as rosemont in which there was no>>> instruction<<< that you intended for there to be a gun
+   2. [act=8.218]   because i think that's one thing we don't>>> teach<<< our children or our members of congress enough about the
+   3. [act=8.217]   china went to a showroom picked up the>>> instruction<<< sheet we're
+   4. [act=8.181]  instruction that was an>>> instruction<<< that merely told the jury that it should consider all
+   5. [act=8.142]   the constructive amendment issue goes hand in glove with the>>> instructional<<< air because it's not simply that the government pursued
+   6. [act=8.126]   again reaffirming the jury instruction used by the model>>> instruction<<< used by the eighth circuit that the jury can make
+   7. [act=8.055]  ably chose against seeking a double edged lesser included offense>>> instruction<<< and the state court found no prejudice in that decision
+   8. [act=7.967]   same passage on this same cal didn't the judge>>> instruct<<< the jury correctly that you would have to find that
+   9. [act=7.886]  misrepresentation>>> instruction<<< and the reason why we did your arse that
+  10. [act=7.831]   the knife was a deadly weapon and there was an>>> instructional<<< robbery there's a reasonable probability they would have convicted
+  11. [act=7.721]  a period of>>> instruction<<< reviewed it with counsel and counsel specifically agreed to this
+  12. [act=7.521]   disregard for human life so the word willingly in that>>> instruction<<< gives the jury nothing and doesn't cure the problem
+  13. [act=7.503]   committing rather than complete in the aiding and abetting>>> instruction<<< and inferring that you shouldn't really the jury
+  14. [act=7.457]  full jury gave a curative>>> instruction<<< that he was aware of the incident and said it
+  15. [act=7.408]   in this in these times the second part of the>>> instruction<<< tells the jury only that to commit to this is
+  16. [act=7.378]   couple of economists now i've indicated i've previously>>> taught<<< economics in college but i was able to
+  17. [act=7.243]   and i could have provided much more detail i have>>> taught<<< economics at newman university but i wanted to keep
+  18. [act=7.218]   what the modifications would be he was looking at the>>> teaching<<< of the references of the whole and that a person
+  19. [act=7.107]  's it worth for a kid to know how to>>> teach<<< a calf to suck
+  20. [act=7.082]   not to do this knowledge as he disregarded that>>> instruction<<< during the three months he was still employed during this
+  21. [act=6.954]   world or a blueprint world you're looking at the>>> teaching<<< as a whole but it is easy to visualize that
+  22. [act=6.933]   big deal here this is essentially a boiler plate circuit>>> instruction<<< as a dress and my reply brief it's not
+  23. [act=6.917]   providing a suggestion and motivation to modify wilson's>>> teaching<<< so as to repeat the process of figure three when
+  24. [act=6.664]  displayed or used again reaffirming the jury>>> instruction<<< used by the model instruction used by the eighth circuit
+  25. [act=6.623]   reviewed it with counsel and counsel specifically agreed to this>>> instruction<<< that it would take care of it he did and
+
+Most frequent activating tokens (top 6): "instruction", "teaching", "teach", "instructional", "taught", "instruct"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 946
+USER PROMPT:
+Feature index: 946
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 8 activating examples (ordered strongest first):
+   1. [act=6.639]   providing fresh fruits and vegetables for free i might add>>> fried<<< fresh fruits and vegetables to
+   2. [act=4.997]  is specific to this case it's like gator>>> meat<<< in this case and it's heroin it's that
+   3. [act=4.925]   it is difficult you don't always get three meals>>> a<<< day but this is
+   4. [act=4.849]   they want they can have them if they want water>>> burger<<< i will get him what a burger granted his style
+   5. [act=4.806]   and that whole foods doesn't leave its cheese on>>> the<<< shelf long enough for appreciable moisture loss the question
+   6. [act=4.721]  texas gulf>>> seafood<<< the independent judgment that needs to be exercised is in
+   7. [act=4.580]  so>>> chicken<<< bottom what it means is if you if you don
+   8. [act=4.502]   fruits and vegetables for free i might add fried fresh>>> fruits<<< and vegetables to
+
+Most frequent activating tokens (top 8): "fried", "meat", "a", "burger", "the", "seafood", "chicken", "fruits"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 2
+USER PROMPT:
+Feature index: 2
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=10.195]   their attack the so called commodity programs less than forty>>> teen<<< percent less than one in every seven dollars in this
+   2. [act=8.886]   but not limited to if the november th>>> teen<<< warrant is interpreted as limited to evidence of
+   3. [act=8.542]   can remember being in one where fourth grade kids fourth>>> grade<<< kids some of these kids have never never had a
+   4. [act=8.527]   brother carlos outside their parents home then three year>>> old<<< three
+   5. [act=8.347]   sector companies become a twenty billion dollars b as in>>> boy<<< federal bailout bailout after four days of hearings hours of
+   6. [act=8.272]   what to do with prisoners like forensic laboratories at risk>>> youth<<< well well that narrows it right so we can
+   7. [act=8.183]   the intellect of the mental age of a fourteen year>>> old<<< and so i should
+   8. [act=8.092]  work we can prove it because our>>> boys<<< are walking are taking this drug and they're walking
+   9. [act=7.978]   vegetable program i can remember being in one where fourth>>> grade<<< kids fourth grade kids some of these kids have never
+  10. [act=7.969]   let's call this person a victim was indeed a>>> boy<<< or a girl that's not ludicrous it's part
+  11. [act=7.421]   skills certification by broad industry partners and implemented in high>>> school<<< and local two and in some cases four year colleges
+  12. [act=7.108]   plough a field what is it worth for a>>> kid<<< to know how to grease a combine what's it
+  13. [act=7.072]  very brave little>>> girl<<< and i hope that this story will give people a
+  14. [act=6.906]   judging by them said forty nine percent of the young>>> girls<<< these are girls eighteen years old they're pregnant
+  15. [act=6.779]  puted fact he just said confronted by a reportedly suicidal>>> boy<<< who shakily move the arm in which he
+  16. [act=6.715]   heard the tragic news news reports of a two year>>> old<<< who was strangled in her crib while she slept
+  17. [act=6.116]  in rolling a>>> kid<<< in a private schools a very expensive proposition they need
+  18. [act=5.981]   a fresh apple in their entire life or in fourth>>> grade<<<
+  19. [act=5.972]   talk to other witnesses before they talk to mr>>> boy<<<d if you let other people in on the investigation
+  20. [act=5.965]   the to the lunches and the stacks that our>>> kids<<< get in school to their systems to a family down
+  21. [act=5.891]   program i can remember being in one where fourth grade>>> kids<<< fourth grade kids some of these kids have never never
+  22. [act=5.855]  system or minor or close to being a>>> minor<<< being railroaded in this process moreover again he
+  23. [act=5.837]   twenty two year old man to grab a fourteen year>>> old<<< girl's hands and place them on his sex organ
+  24. [act=5.822]   what we're going to do is are our twelve>>> kids<<< that are actually receiving the stroke we're going to
+  25. [act=5.803]   have a life sentences for useful offenders over eighteen years>>> old<<< because of factors like chronological age immaturity the
+
+Most frequent activating tokens (top 10): "old", "boy", "grade", "kids", "teen", "kid", "youth", "boys", "school", "girl"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 2104
+USER PROMPT:
+Feature index: 2104
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=17.391]   rural counties and states and communities an opportunity for the>>> good<<< way of life the rest of the way that the
+   2. [act=17.149]   is more than markham to check it and the>>> good<<< news about this video is it's been the very
+   3. [act=17.136]  's tough to turn that whole into a pile of>>> good<<< news while it
+   4. [act=16.735]   deal for the taxpayers who presided assistance we acted in>>> good<<< faith in the best interest of our shareholders and the
+   5. [act=16.182]   is the most important thing and in fact in the>>> good<<< not that case they do say the fellow was not
+   6. [act=15.856]   we paid two hundred thousand dollars which shows both our>>> good<<< faith and the arms and nature of the negotiations the
+   7. [act=15.659]   assure the committee that at all times i acted in>>> good<<< faith to provide legal advice that i believe to be
+   8. [act=15.381]  thank you judge>>> good<<< morning mr callahan andrew for ish
+   9. [act=15.288]   occurs it wipes the slate clean before and there's>>> good<<< reason why it's wipes the slate clean before and
+  10. [act=14.682]   then that gets us to the problem of why why>>> good<<< for the issue of why good faith
+  11. [act=14.391]   no idea whether the sibling separations are occurring for>>> good<<< reasons or not for good reasons and there was no
+  12. [act=14.287]   for the interest of national security to put away the>>> bad<<< guys in one form or another we need to have
+  13. [act=14.230]   some of my congressional district most prominent employers mr>>> good<<<man probably served as a member of congress from the
+  14. [act=14.138]   here but that doesn't mean it's not in>>> good<<< faith they also argue will doing a trademark search was
+  15. [act=13.994]   can't label your way around immunity when you have>>> good<<< lawyers like this if you labeled your
+  16. [act=13.990]  chosen that constitutes interference i think that's just>>> good<<< wrong that's not what interference means interference is ordinarily
+  17. [act=13.824]   would challenge a criminal forfeiture order if there was a>>> good<<< substantive challenge to the criminal forfeiture order to be had
+  18. [act=13.793]  's your response to the fact that as mr>>> good<<<ell had mentioned players were warned that the substance may
+  19. [act=13.774]  case the court heard earlier this morning we have>>> good<<< audio and video evidence of this and my recollection of
+  20. [act=13.616]   committed to helping at risk children in use have become>>> good<<< citizens those are the only two adverse actions my second
+  21. [act=13.567]   this case based on the testimony of one of his>>> good<<< friends
+  22. [act=13.447]  bar bipartisan approach we'll be able to produce>>> good<<< legislation for the american people and i look forward
+  23. [act=13.416]   means that i'm going to be stuck with those>>> good<<<
+  24. [act=13.402]   the american people and i look forward to continuing>>> good<<< counsel with my friend ralph hall and the republican
+  25. [act=13.395]   were in the weren't the officers were operating in>>> good<<< faith because they had a basis to believe that it
+
+Most frequent activating tokens (top 2): "good", "bad"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 2860
+USER PROMPT:
+Feature index: 2860
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=6.789]   about the chevy roaster you know that it>>> is<<< now obsolete and they had twenty five
+   2. [act=6.600]   filed in the name of the dead person yes i>>> am<<< saying the state can't substitute in the state has
+   3. [act=6.423]   aggressive argument we're not making it here but it>>> is<<< completely wrong to say that is the only argument that
+   4. [act=6.249]   that was a remedy phase piece of evidence but it>>> is<<< absolutely consistent with what the the liability phase of this
+   5. [act=6.205]   it one hundred percent natural one hundred percent pure it>>> is<<< with all respect to
+   6. [act=6.128]   if we take this course decision and grow and that>>> is<<< enough to
+   7. [act=6.065]  senate yes it>>> is<<< and ranking member jordan my name is tom may
+   8. [act=6.043]   it's talking about facts not in evidence and it>>> is<<<
+   9. [act=5.867]  what you>>> are<<< arguing today well of your honor's are aware that
+  10. [act=5.833]  and it>>> is<<< overseen by the same regulators that we have had in
+  11. [act=5.817]   had been briefed ahead of trial and it's it>>> is<<< extremely
+  12. [act=5.744]   facts of this case that isn't so but you>>> are<<< saying it just cannot be that the dominance of trade
+  13. [act=5.642]   of the character that expression meaning or message what we>>> are<<< now talking about is not the meaning or message that
+  14. [act=5.610]  thank you very much at this point it>>> is<<< in order to open our first round of questions and
+  15. [act=5.599]   things that it can't be the case that we>>> are<<< allowed to overstate from having to start working on
+  16. [act=5.598]   been doing for the last year and a half it>>> is<<< wrong and it needs to stop and this example in
+  17. [act=5.543]   of the procedure he wasn't doing the transplant he>>> is<<< not the medical team
+  18. [act=5.543]  're looking at the teaching as a whole but it>>> is<<< easy to visualize that you would take at a minimum
+  19. [act=5.522]   they are anti tax they're anti government but it>>> is<<< also the case
+  20. [act=5.466]  r rule is that correct that's correct and what>>> is<<< your best case as to what he should have
+  21. [act=5.445]   answer is but just pushing your own your argument it>>> is<<< a notice pleading requirement in the federal rules right and
+  22. [act=5.438]   know is the truth is and the fact that we>>> are<<< stuck with is that the court didn't do that
+  23. [act=5.428]   what you can call act on this work that we>>> are<<<
+  24. [act=5.428]   don't know how else to say it but what>>> is<<< your best case well it is my best case and
+  25. [act=5.411]  admit and it>>> is<<< so stated in the plea agreement that we would not
+
+Most frequent activating tokens (top 3): "is", "are", "am"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 3230
+USER PROMPT:
+Feature index: 3230
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=11.858]  fghan>>>istan<<< would put more pressure on a pakistani government
+   2. [act=11.507]  the reality is failure in afghan>>>istan<<< would be a huge setback for the united states tal
+   3. [act=11.467]  in afghan>>>istan<<< i'd like to know where you think our involvement
+   4. [act=11.089]  reflecting lessons learned in iraq and afghan>>>istan<<< yet also addressing the range of other potential threats around
+   5. [act=11.067]  states marine corps stay in afghan>>>istan<<< indefinitely they live in a rough neighborhood we need to
+   6. [act=10.781]   of people have in congress about events in afghan>>>istan<<< and pakistan i think that virtually all of
+   7. [act=10.668]  pak>>>istan<<< he was already headed for india and we prevailed
+   8. [act=10.668]  pak>>>istan<<< a country with nuclear weapons could be a disaster for
+   9. [act=10.515]   even on the table to change leadership in afghan>>>istan<<<
+  10. [act=10.464]   congress about events in afghanistan and pak>>>istan<<< i think that virtually all of us understand the des
+  11. [act=10.333]   withdrawal as more of a commitment to leave afghan>>>istan<<< than a declaration that al qaeda will be defeated
+  12. [act=10.311]   that's the same thing would happen in afghan>>>istan<<< which is one of the reasons there is money in
+  13. [act=10.266]   our military personnel serving in iraq and afghan>>>istan<<< could be vulnerable because of a lack of
+  14. [act=10.211]   our renewed commitment and more focused strategy for afghan>>>istan<<< and pakistan i would like to provide an
+  15. [act=10.133]   as quickly as possible there are some in afghan>>>istan<<< perhaps in the government perhaps in the elites or whatever
+  16. [act=10.043]   resolve to both our partners and adversaries in afghan>>>istan<<< and pakistan when this buildup is complete total
+  17. [act=9.991]   november two thousand and nine in afghan>>>istan<<< we need to do what we support fully and without
+  18. [act=9.914]   security and defense arena the real challenge in afghan>>>istan<<< is finding the right balance the prompt dispatch of thirty
+  19. [act=9.874]  'm glad that the president did go to pak>>>istan<<< president clinton but things haven't worked out the
+  20. [act=9.841]   york times reads afghans and pak>>>istan<<<is concerned over u s plan all americans want
+  21. [act=9.840]   extra constitutional rights we talk about detainees in afghan>>>istan<<< and detainees
+  22. [act=9.669]   to know where you think our involvement in afghan>>>istan<<< is going obviously we're going to be supportive of
+  23. [act=9.644]   key partner for the united states people in pak>>>istan<<< are increasingly coming to the view that we share a
+  24. [act=9.636]   track to triple the number of civilians in afghan>>>istan<<< to nine hundred seventy four by early next year
+  25. [act=9.585]   americans want to see our troops leave afghan>>>istan<<< as soon as possible but only after successfully completing their
+
+Most frequent activating tokens (top 1): "istan"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 2534
+USER PROMPT:
+Feature index: 2534
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=12.637]   with your power help our senators to please you by>>> living<<< blameless holy and
+   2. [act=12.146]  with it and so therefore we're not>>> living<<< in a world where we have nothing more than m
+   3. [act=11.823]   now you can follow the house on c span or>>> live<<< senate coverage here on c span to
+   4. [act=11.698]   kind of a comment on space unless you kind of>>> live<<< in this world but what that is is essentially a
+   5. [act=11.660]   that as part of his privileges he's required to>>> live<<< in a within a certain distance of the hospital because
+   6. [act=11.351]   themselves there's sole proprietor running their own business>>> living<<< under a yard light hoping things go well so they
+   7. [act=10.972]   the core of the items which shine a had not>>> lived<<< up to their responsibility
+   8. [act=10.759]   you look at the numbers what happens is they they>>> live<<< maybe a year i have a percentage of all of
+   9. [act=10.703]  security and reasonably safe>>> living<<< conditions as the quarter to the way that in her
+  10. [act=10.399]   that even mean that that means that he's still>>> living<<< at what we refer to a slip break st lou
+  11. [act=10.265]   disposition of this case at the time the defendant was>>> living<<< in new york and there is no evidence to
+  12. [act=9.956]  states marine corps stay in afghanistan indefinitely they>>> live<<< in a rough neighborhood we need to signal that's
+  13. [act=9.785]   in the buffalo creek treaty that they could continue to>>> live<<< on the family estate wherever if they chose to do
+  14. [act=9.781]   one set of constitutional rights personal security and recently safe>>> living<<< conditions number two was there culpability deliberate indifference
+  15. [act=9.777]  lectured about how difficult things are i>>> live<<< it every day and my constituents and that's why
+  16. [act=9.316]   same standard both of simply personal security and reasonably safe>>> living<<< conditions applies to children the
+  17. [act=9.302]   if it is it was not safe for her to>>> live<<< somewhere else in guatemala the gang problem is
+  18. [act=9.204]   that they are not required to redo like a>>> live<<< appeal the analysis and conduct
+  19. [act=8.624]   her signature card and she did say i don't>>> live<<< here but i thought you conceded that there were no
+  20. [act=8.561]   suction it was a miraculous miraculous gift that she>>> lives<<< she actually sat up and moved away from the su
+  21. [act=8.362]   was ransacked show that an individual did indeed>>> live<<< there there were pictures there was there were clothes everywhere
+  22. [act=8.177]   dots on the map up here where all the smell>>> live<<< so the same people that voted to help the
+  23. [act=8.036]  and if you>>> live<<< in a state as i do a land we call
+  24. [act=7.815]   support not only farmers but all of our citizens who>>> live<<< in small towns and rural communities rural america confronts
+  25. [act=7.601]   national median that's eleven thousand dollars lower if you>>> live<<< in a rural community that means that you're going
+
+Most frequent activating tokens (top 4): "live", "living", "lived", "lives"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 3726
+USER PROMPT:
+Feature index: 3726
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 23 activating examples (ordered strongest first):
+   1. [act=12.919]  that over a forty year full time work life that>>> college<<< educated children are going to make sixty five percent more
+   2. [act=12.626]   with their case is there rely on the testimony from>>> college<<< team or was he personally handed out a few copies
+   3. [act=11.411]   the limited resources of the estate to pay for the>>> college<<< tuition of adult children and the question before the court
+   4. [act=10.217]   than a student with her children with only a high>>> school<<<
+   5. [act=9.767]   and staff experience seven hold masters degrees from command staff>>> college<<< as well to more hold masters degrees from civilian universities
+   6. [act=9.736]  am a product of a community>>> college<<< probably so i know that we need community colleges i
+   7. [act=9.569]   skills certification by broad industry partners and implemented in high>>> school<<< and local two and in some cases four year colleges
+   8. [act=9.478]   now i've indicated i've previously taught economics in>>> college<<< but i was able to
+   9. [act=9.027]  years ago we supported the effort of of the community>>> college<<< of philadelphia at that time with the with star
+  10. [act=8.084]   training biomedical technicians that started with training at the community>>> college<<< and then
+  11. [act=7.731]   school and local two and in some cases four year>>> colleges<<< the national association of manufacturers that are manufacturing
+  12. [act=7.373]  about the community>>> colleges<<< more and more people and this is another pressure on
+  13. [act=6.671]  innovators investors and>>> university<<< and nonprofit leaders the department of commerce is also putting
+  14. [act=6.475]   that that shouldn't necessarily be limited to only brown>>> university<<< students but that may be for another day we're
+  15. [act=6.007]  word and now it's hard in high>>> schools<<< and many high schools to convince people they ought to
+  16. [act=5.775]   community college probably so i know that we need community>>> colleges<<< i know that nebraska has literally thousands of automotive
+  17. [act=5.762]   education and twenty percent dedicated to training the marine corps>>> university<<< provides oversight of the curriculum through its curriculum review board
+  18. [act=5.538]   much more detail i have taught economics at newman>>> university<<< but i wanted to keep this very brief you see
+  19. [act=5.279]   once heard a talk by a stanford business>>> school<<< professor
+  20. [act=5.032]   the court is whether or not who should suffer the>>> university<<< or the
+  21. [act=4.955]  strengths we have the best>>> universities<<< and research facilities in the world we have many outstanding
+  22. [act=4.946]   brought people to the united states to train at our>>> universities<<< from countries around the world and then after they became
+  23. [act=4.711]   vegetable program i can remember being in one where fourth>>> grade<<< kids fourth grade kids some of these kids have never
+
+Most frequent activating tokens (top 7): "college", "university", "school", "colleges", "universities", "schools", "grade"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 3190
+USER PROMPT:
+Feature index: 3190
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=15.611]   columbus that's where the district and was>>> read<<< and met with the
+   2. [act=14.863]   the health care center because their general counsel didn't>>> read<<< the manual right and didn't figure out a way
+   3. [act=14.007]   an effort to gain a strategic advantage also you cannot>>> read<<< the motion to clarify and the order denying the motion
+   4. [act=13.853]  she didn't>>> read<<< all the provisions contained within it as a whole to
+   5. [act=13.820]   effort to actually link it up to the defendant having>>> read<<< the article i mean otherwise my gosh you could
+   6. [act=13.684]   do for ours washington post why don't you>>> read<<< this story european union
+   7. [act=13.665]  ly at town meetings and partly at individual meetings or>>> read<<< their letters i listen to my back home at all
+   8. [act=13.450]   guilty to that charge there is no other way to>>> read<<< this record this court hasn't poor district courts to
+   9. [act=13.445]   is the harm caused to victims so hard not to>>> read<<< the government's brief here without thinking there's something
+  10. [act=13.423]  to>>> read<<< professor feldman is written testimony and we agree
+  11. [act=13.037]  and at least as i>>> read<<< the record was completely compliant and did exactly what the
+  12. [act=12.942]   the office rather than compromising his views let me just>>> read<<< three
+  13. [act=12.924]   rule first we think that the court and if you>>> read<<< the transcript of when we presented that motion
+  14. [act=12.858]  resolutions and i'll>>> read<<< it because it's common to many of them it
+  15. [act=12.757]   effect of american foreign policy i'd like to>>> read<<< from just one paragraph from wall street journal article from
+  16. [act=12.671]  context again miss thomas would like us to>>> read<<< the reasoning level of three in isolation but when reading
+  17. [act=12.599]  i>>> read<<< this law review article i think it's a great
+  18. [act=12.532]   york city police department so i think if you>>> read<<<
+  19. [act=12.515]  's all they have so to say that i can>>> read<<< the first ten sentences but ignore the eleven i don
+  20. [act=12.513]  do>>> read<<< the district court opinion as growing up on article three
+  21. [act=12.503]  penalty and it seems as i>>> read<<< it that you have been to alternative reading this one
+  22. [act=12.495]   so anderson has two points as i as i>>> read<<< the case and the st point is about the burden
+  23. [act=12.485]   his cabinet this tells you exactly how well this worked>>> read<<< it one more time after eight years this
+  24. [act=12.476]  many many jurors would>>> read<<< it that way in this in these times the second
+  25. [act=12.466]   and i don't think that it's fair to>>> read<<< into that that the july fourteenth absence alone
+
+Most frequent activating tokens (top 1): "read"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 4be580d5-8e01-42e5-bf9c-fc571d5384d1
+FEATURE 5924
+USER PROMPT:
+Feature index: 5924
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=16.192]  d circuit finds that when you allege manipulative acts with>>> an<<< intent to drive down the price of the stock that
+   2. [act=16.142]   develop the necessary competencies as early as possible in>>> an<<< officer's career we're proud of our team effort
+   3. [act=15.648]   we have a case here that comes on appeal in>>> an<<< unusual posture where we have a private securities class action
+   4. [act=15.593]   also to defraud the district court and then in>>> an<<< attempt to avoid personal liability for herself it goes to
+   5. [act=15.566]   accessible to contract guards and this type of misconduct in>>> an<<< attempt to provide better oversight in the facilities the agency
+   6. [act=15.283]   dissolved corporation breaks down because in just the way than>>> an<<< assignment or contract might pass the proceeds from a corporate
+   7. [act=15.124]   this case certainly not a case where he arrived in>>> an<<< opinion
+   8. [act=14.658]   doing it on a rural road and doing it in>>> an<<< urban neighborhood from the standpoint of your argument that there
+   9. [act=14.652]   of prejudice and those sorts of significant errors that require>>> an<<< outright reversal in other words that are structural now i
+  10. [act=14.523]   step process has nothing to do with whether or not>>> an<<< invention is that it is abstract or simply an abstract
+  11. [act=14.402]   a bribe is paid in exchange for official action or>>> an<<< official act and then it proceeds repeatedly to refer to
+  12. [act=14.385]   time period and one of the key ways in which>>> an<<< off label
+  13. [act=14.385]  forethought can be proven by the prosecution by>>> an<<< intent again an intentional act to willfully act in call
+  14. [act=14.288]   also says that they cannot continue in the employment of>>> an<<< institution and the regulations of the the amount of pronounce
+  15. [act=14.228]   resolved by the district court the parties could not reach>>> an<<< agreement on we could
+  16. [act=14.213]   judge correctly charged the jury here on the requirement of>>> an<<< ongoing arcata conspiracy and
+  17. [act=14.175]   economy unless we act there is no point in letting>>> an<<< invisible hand guide this destruction if we have any sense
+  18. [act=14.143]   court was rejecting the majority rule amongst the states that>>> an<<< armed robbery has to
+  19. [act=14.109]   would have to pay the costs of sending but someone>>> an<<< expert round trip to the dominican republic and you
+  20. [act=14.106]   stated to shareholders for them to be able to take>>> an<<< action to buy the securities of the new company since
+  21. [act=14.105]   in the themes pleading in bermuda paragraph sixteen>>> an<<< extensive
+  22. [act=14.023]  here by>>> an<<< informal invitation who
+  23. [act=14.018]  performance evaluations that wells fargo conducted on>>> an<<< annual basis that included assessments about both honesty and integrity
+  24. [act=14.015]   only way to ensure that illegal aliens actually appear before>>> an<<< immigration court is to physically
+  25. [act=13.992]  for its actual liabilities which if allowing>>> an<<< expert to come back years to five ten years after
+
+Most frequent activating tokens (top 1): "an"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 1681
+USER PROMPT:
+Feature index: 1681
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=18.460]   well beyond this moment in time american leadership is>>> once<<< again being called on
+   2. [act=18.216]  so the question becomes>>> once<<< the conflict is over what do we do and the
+   3. [act=17.900]  over again will try to>>> once<<< you bring one of these cases and one of the
+   4. [act=17.682]  aho the smoke is gone and the skies are clear>>> once<<< again at the same time the damage is real and
+   5. [act=17.314]   relationship between the commonwealth and the federal government and>>> once<<< you make that finding that funny is important for not
+   6. [act=17.194]   the test i'm afraid i'm going to expose>>> once<<< again my academic background i do a lot of inc
+   7. [act=17.149]   have to ask why and i feel compelled to voice>>> once<<< again the question of any creasing number of my
+   8. [act=17.093]  vital importance to our home state economy>>> once<<< again i want to thank our panelists for joining
+   9. [act=17.023]   look at facts beyond the scope of the robbery itself>>> once<<<
+  10. [act=16.956]   of the sun's heat coming in and cannot escape>>> once<<< inside that's exactly how these greenhouse gases work and
+  11. [act=16.867]  yes so>>> once<<< he once he did meet that test like i said
+  12. [act=16.832]   war taliban ruled areas could in short order become>>> once<<< again a sanctuary for al qaida as well as
+  13. [act=16.770]  relationship>>> once<<< the vassal was on site the contract itself
+  14. [act=16.768]  deferred to the court at that moment however>>> once<<< it became and parents of the trial judge intended to
+  15. [act=16.601]   but our expectation all along was that once this issue>>> once<<< this case was resolved on direct appeal that we would
+  16. [act=16.595]   that will probably also be the lowest in history so>>> once<<< again i come before this committee to ask my colleagues
+  17. [act=16.557]  ations of canada's law enforcement or diplomatic personnel>>> once<<< surrendered the extradite t is not allowed to have
+  18. [act=16.219]   men and women in combat and bring them home safely>>> once<<< again i
+  19. [act=15.677]  ferred to the us so it may be perfectly fine>>> once<<< the issue has been timely raised to say the district
+  20. [act=15.435]  to develop a plan not only to end hunger>>> once<<< and for all the united states but also require proper
+  21. [act=15.297]   that are proof that a producer can agree to arbitration>>> once<<< a dispute arises in fact
+  22. [act=15.167]   not communicating and being silent on a material fact so>>> once<<< again just in terms of general experience
+  23. [act=14.950]   it's also an important fact in this case that>>> once<<< the central office reviewed that that he was fired as
+  24. [act=14.701]   completion is scheduled for august two thousand and ten>>> once<<< we acquire the site we will begin developing the solicitation
+  25. [act=14.687]  brief but our expectation all along was that>>> once<<< this issue once this case was resolved on direct appeal
+
+Most frequent activating tokens (top 1): "once"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Temporal Reference",
+  "explanation": "The feature detects the concept of temporal reference, specifically the word 'once' indicating a point in time or a repeated action",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 4029
+USER PROMPT:
+Feature index: 4029
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=13.742]  all a large portion of the>>> application<<< form is devoted to pedigree information which the department uses
+   2. [act=13.469]  we have bigger asli opposed the>>> application<<< of state law to our anti steroids program and will
+   3. [act=13.199]  and if there was no one else well the>>> application<<< well the application says that this search is to include
+   4. [act=12.229]   it up and configure it in turn it into an>>> application<<< server then you have won then you have to decide
+   5. [act=12.164]   so when judge argento is permit presented with the>>> application<<< and specifically
+   6. [act=12.157]   agency records indicate that he has indeed file a subsequent>>> application<<< thank you
+   7. [act=12.080]   they were just part of a blanket search for every>>> application<<< that was bathed that had certain repetitive
+   8. [act=11.956]   aware of informing them of the necessity to file the>>> application<<<
+   9. [act=11.921]  community based alternative and>>> application<<< the operation of detention facilities was delegated to county sheriff
+  10. [act=11.856]  approve a waiver>>> application<<< and so if you think of it in terms of
+  11. [act=11.674]   a crime in a federal statute requires more than the>>> application<<< of legal imagination to a state's state statutes language
+  12. [act=11.481]  an>>> application<<< for those technologies and finding a way to protect the
+  13. [act=11.464]  's arguing a point on one twelve for the fifth>>> application<<< was that was not at issue as stated by the
+  14. [act=11.424]   my question is how is evidence that somebody thought an>>> application<<< for asylum was being prepared for them and filed for
+  15. [act=11.389]   hospital which recently where i saw a copy of the>>> application<<< form for medicaid in s chip and it reminded
+  16. [act=11.163]   to institutional security but tomorrow the director could eliminate the>>> application<<< form
+  17. [act=11.128]   economic interest group legal title this appeal rests on the>>> application<<< of those regulations to a standard investment management agreement between
+  18. [act=10.539]   be so all of her discussion about how the six>>> application<<< wasn't supported was
+  19. [act=10.497]  significant workload in terms of johnson related first>>> applications<<< the numbers are staggering and the courts the chief judges
+  20. [act=10.472]   that maria and brittany had filed separate>>> applications<<< and that is daughters of sandra and nie
+  21. [act=10.220]   the entire personnel record but i asked for all the>>> applications<<< the the warnings the performance evaluations those kind of things
+  22. [act=9.546]   it means by definition that the rule upon which the>>> application<<< is base
+  23. [act=9.470]   there was no one else well the application well the>>> application<<< says that this search is to include it indicates the
+  24. [act=9.446]   here concern the summary judgment motion and the court's>>> application<<<
+  25. [act=9.386]   were approved by the medical executive community committee and the>>> applicant<<< would send some sort of
+
+Most frequent activating tokens (top 3): "application", "applications", "applicant"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Formal Request Process",
+  "explanation": "The feature detects the concept of submitting or handling formal requests, such as applications, which is evident from the frequent appearance of 'application' and related tokens in the activating examples",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 443
+USER PROMPT:
+Feature index: 443
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 17 activating examples (ordered strongest first):
+   1. [act=13.014]  facts of this case the>>> tree<<< was already he wasn't there there are no facts
+   2. [act=11.290]   no evidence that he was protesting any certain or specific>>> tree<<< he came back later after making calls and emails according
+   3. [act=9.095]   anal sex he remembered that it took place in a>>> wood<<<ed vacant lot near his home that he was bent
+   4. [act=9.081]   according to him he came back and saw that this>>> tree<<< was hot
+   5. [act=9.017]   of that's going to be the additional expenses the>>> forest<<< service and the b l m and many of our
+   6. [act=8.903]   there have there is no use of the of the>>> oak<<<ridge process currently commercially so they're doing
+   7. [act=8.506]  called healthy>>> forest<<< and others i'll be back to talk on this
+   8. [act=8.491]   of what we do sequesters our carbon keeps our>>> forest<<< healthy and young and vibrant as a part
+   9. [act=8.381]   year yet last year along with ten million acres of>>> forest<<< land burned by conservative estimate that means that sixty million
+  10. [act=8.095]   parent had not really made the decision yet now in>>> forest<<< grove the supreme court
+  11. [act=6.900]  factors as judge lynch pointed out judge>>> wood<<<cock never mentioned the word rehabilitation in his sentencing analysis
+  12. [act=6.897]   atmosphere our management practices ought to be to keep our>>> forests<<< as young and vibrant and alive as they possibly can
+  13. [act=6.617]  another iowan from c>>>edar<<< falls wrote in support of our review of the h
+  14. [act=5.967]  that could have happened because the knife was in the>>> trunk<<< with her so in light of the fact question that
+  15. [act=4.684]   we're really talking about a third bite of the>>> apple<<< here let's let's change the facts just a
+  16. [act=4.634]  go forward it basically says that any>>> fruit<<< or juice that's currently sold in the grocery store
+  17. [act=4.515]   made sure that if you're going to use a>>> limb<<< fell it's got to be
+
+Most frequent activating tokens (top 10): "forest", "tree", "wood", "oak", "forests", "edar", "trunk", "apple", "fruit", "limb"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Tree or Wood Concept",
+  "explanation": "The feature detects tokens related to trees, wood, or forest, indicating a semantic concept related to these natural elements",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 2068
+USER PROMPT:
+Feature index: 2068
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=11.046]   for operation enduring freedom combat veterans i anticipate that the>>> student<<< body for next month's incoming class will be some
+   2. [act=10.051]  companies where they are currently on>>> campus<<< they are moving from basic research to applied research to
+   3. [act=9.530]   are going to make sixty five percent more than a>>> student<<< with her children with only a high school
+   4. [act=8.912]  i heard the argument that was just presented about>>> students<<< being call to the office a lawsuit doesn't say
+   5. [act=8.476]   remote site located about thirty miles from maxwell edition>>> students<<< spend a week building a working knowledge of officer in
+   6. [act=8.177]   there have been a number of studies done on this>>> campus<<< and on this project
+   7. [act=7.565]  innovators investors and>>> university<<< and nonprofit leaders the department of commerce is also putting
+   8. [act=7.429]   working knowledge of officer in most relationships through interaction with>>> students<<< from our senior noncommissioned officer academy
+   9. [act=7.385]   and technical programs are aligned with industry recognized certifications>>> students<<< can demonstrate and transfer their skills throughout the country and
+  10. [act=7.229]  't say who said after all african american>>> students<<< to the office it does not
+  11. [act=7.206]  ac>>>ademic<<< who's declared under oath that they're faulty advertised
+  12. [act=7.196]   your question it's more intentional in developmental to help>>> students<<< connect the dots to have more deep learning and effective
+  13. [act=7.177]   that that shouldn't necessarily be limited to only brown>>> university<<< students but that may be for another day we're
+  14. [act=7.173]   to a level of commercialization where many of the>>> students<<< involved in that research many it festers involved in
+  15. [act=7.133]  strengths we have the best>>> universities<<< and research facilities in the world we have many outstanding
+  16. [act=7.111]  one hundred percent of the>>> faculty<<< advisors and division heads or highly experienced combat veterans with
+  17. [act=7.068]  field our>>> faculty<<< also includes six endowed chairs seven distinguished visiting professors eight
+  18. [act=6.907]  'm afraid i'm going to expose once again my>>> academic<<< background i do a lot of incurable work and
+  19. [act=6.845]  attributes from a chairman outside the normal>>> academic<<< environment this integrated character and leadership development program is the
+  20. [act=6.843]   maneuver warfare dr the curriculum contains approximately eighty percent of>>> academic<<< education and twenty percent dedicated to training the marine corps
+  21. [act=6.601]  and about a third of those>>> faculty<<< are retired military we've we've tried to hire
+  22. [act=6.495]   different parts of the country with our national labs and>>> universities<<< how they bring companies and partners and from the beginning
+  23. [act=6.464]   with their case is there rely on the testimony from>>> college<<< team or was he personally handed out a few copies
+  24. [act=6.460]   sciences humanities basic sciences and engineering several courses from the>>> academic<<< core curriculum focused directly on the areas of strategy military
+  25. [act=6.363]   that shouldn't necessarily be limited to only brown university>>> students<<< but that may be for another day we're not
+
+Most frequent activating tokens (top 9): "students", "academic", "faculty", "student", "campus", "university", "universities", "ademic", "college"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Education Setting",
+  "explanation": "The feature activates on tokens related to educational institutions, students, and faculty, indicating it detects concepts related to education settings",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 859
+USER PROMPT:
+Feature index: 859
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 8 activating examples (ordered strongest first):
+   1. [act=6.584]  that when i drive as a restaurant>>> and<<< there's no one on hand to take possession of
+   2. [act=6.406]   i mean you know i used to be a prosecutor>>> and<<< i don't think that it
+   3. [act=6.074]   trying to say i've been here all this time>>> and<<< so what i did at the very end when i
+   4. [act=5.734]   about how difficult things are i live it every day>>> and<<< my constituents and that's why i'm out there
+   5. [act=5.518]   the premis because we're here on discretionary review>>> and<<< so the issue is not is this court
+   6. [act=5.037]   in afghanistan as we increase our presence there>>> and<<< refocus our efforts with a new
+   7. [act=5.016]   academic background i do a lot of incurable work>>> and<<< one of the most important things that you want to
+   8. [act=4.664]   objective as i could be when i watched the video>>> and<<< i replayed it and what i saw
+
+Most frequent activating tokens (top 1): "and"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Conjunction Detection",
+  "explanation": "The feature detects the presence of the conjunction 'and' in a sentence, indicating a connection between two clauses or ideas.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 707
+USER PROMPT:
+Feature index: 707
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=8.407]   same situation as rosemont in which there was no>>> instruction<<< that you intended for there to be a gun
+   2. [act=8.218]   because i think that's one thing we don't>>> teach<<< our children or our members of congress enough about the
+   3. [act=8.217]   china went to a showroom picked up the>>> instruction<<< sheet we're
+   4. [act=8.181]  instruction that was an>>> instruction<<< that merely told the jury that it should consider all
+   5. [act=8.142]   the constructive amendment issue goes hand in glove with the>>> instructional<<< air because it's not simply that the government pursued
+   6. [act=8.126]   again reaffirming the jury instruction used by the model>>> instruction<<< used by the eighth circuit that the jury can make
+   7. [act=8.055]  ably chose against seeking a double edged lesser included offense>>> instruction<<< and the state court found no prejudice in that decision
+   8. [act=7.967]   same passage on this same cal didn't the judge>>> instruct<<< the jury correctly that you would have to find that
+   9. [act=7.886]  misrepresentation>>> instruction<<< and the reason why we did your arse that
+  10. [act=7.831]   the knife was a deadly weapon and there was an>>> instructional<<< robbery there's a reasonable probability they would have convicted
+  11. [act=7.721]  a period of>>> instruction<<< reviewed it with counsel and counsel specifically agreed to this
+  12. [act=7.521]   disregard for human life so the word willingly in that>>> instruction<<< gives the jury nothing and doesn't cure the problem
+  13. [act=7.503]   committing rather than complete in the aiding and abetting>>> instruction<<< and inferring that you shouldn't really the jury
+  14. [act=7.457]  full jury gave a curative>>> instruction<<< that he was aware of the incident and said it
+  15. [act=7.408]   in this in these times the second part of the>>> instruction<<< tells the jury only that to commit to this is
+  16. [act=7.378]   couple of economists now i've indicated i've previously>>> taught<<< economics in college but i was able to
+  17. [act=7.243]   and i could have provided much more detail i have>>> taught<<< economics at newman university but i wanted to keep
+  18. [act=7.218]   what the modifications would be he was looking at the>>> teaching<<< of the references of the whole and that a person
+  19. [act=7.107]  's it worth for a kid to know how to>>> teach<<< a calf to suck
+  20. [act=7.082]   not to do this knowledge as he disregarded that>>> instruction<<< during the three months he was still employed during this
+  21. [act=6.954]   world or a blueprint world you're looking at the>>> teaching<<< as a whole but it is easy to visualize that
+  22. [act=6.933]   big deal here this is essentially a boiler plate circuit>>> instruction<<< as a dress and my reply brief it's not
+  23. [act=6.917]   providing a suggestion and motivation to modify wilson's>>> teaching<<< so as to repeat the process of figure three when
+  24. [act=6.664]  displayed or used again reaffirming the jury>>> instruction<<< used by the model instruction used by the eighth circuit
+  25. [act=6.623]   reviewed it with counsel and counsel specifically agreed to this>>> instruction<<< that it would take care of it he did and
+
+Most frequent activating tokens (top 6): "instruction", "teaching", "teach", "instructional", "taught", "instruct"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Legal Instruction Concept",
+  "explanation": "The feature detects language related to giving or receiving guidance, particularly in a legal or educational context, as evidenced by the frequent appearance of words like 'instruction', 'teaching', and 'instruct'",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 946
+USER PROMPT:
+Feature index: 946
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 8 activating examples (ordered strongest first):
+   1. [act=6.639]   providing fresh fruits and vegetables for free i might add>>> fried<<< fresh fruits and vegetables to
+   2. [act=4.997]  is specific to this case it's like gator>>> meat<<< in this case and it's heroin it's that
+   3. [act=4.925]   it is difficult you don't always get three meals>>> a<<< day but this is
+   4. [act=4.849]   they want they can have them if they want water>>> burger<<< i will get him what a burger granted his style
+   5. [act=4.806]   and that whole foods doesn't leave its cheese on>>> the<<< shelf long enough for appreciable moisture loss the question
+   6. [act=4.721]  texas gulf>>> seafood<<< the independent judgment that needs to be exercised is in
+   7. [act=4.580]  so>>> chicken<<< bottom what it means is if you if you don
+   8. [act=4.502]   fruits and vegetables for free i might add fried fresh>>> fruits<<< and vegetables to
+
+Most frequent activating tokens (top 8): "fried", "meat", "a", "burger", "the", "seafood", "chicken", "fruits"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Food and ingredients",
+  "explanation": "The feature activates on various food-related tokens, including types of meat, produce, and prepared dishes, indicating it detects culinary concepts.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 2
+USER PROMPT:
+Feature index: 2
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=10.195]   their attack the so called commodity programs less than forty>>> teen<<< percent less than one in every seven dollars in this
+   2. [act=8.886]   but not limited to if the november th>>> teen<<< warrant is interpreted as limited to evidence of
+   3. [act=8.542]   can remember being in one where fourth grade kids fourth>>> grade<<< kids some of these kids have never never had a
+   4. [act=8.527]   brother carlos outside their parents home then three year>>> old<<< three
+   5. [act=8.347]   sector companies become a twenty billion dollars b as in>>> boy<<< federal bailout bailout after four days of hearings hours of
+   6. [act=8.272]   what to do with prisoners like forensic laboratories at risk>>> youth<<< well well that narrows it right so we can
+   7. [act=8.183]   the intellect of the mental age of a fourteen year>>> old<<< and so i should
+   8. [act=8.092]  work we can prove it because our>>> boys<<< are walking are taking this drug and they're walking
+   9. [act=7.978]   vegetable program i can remember being in one where fourth>>> grade<<< kids fourth grade kids some of these kids have never
+  10. [act=7.969]   let's call this person a victim was indeed a>>> boy<<< or a girl that's not ludicrous it's part
+  11. [act=7.421]   skills certification by broad industry partners and implemented in high>>> school<<< and local two and in some cases four year colleges
+  12. [act=7.108]   plough a field what is it worth for a>>> kid<<< to know how to grease a combine what's it
+  13. [act=7.072]  very brave little>>> girl<<< and i hope that this story will give people a
+  14. [act=6.906]   judging by them said forty nine percent of the young>>> girls<<< these are girls eighteen years old they're pregnant
+  15. [act=6.779]  puted fact he just said confronted by a reportedly suicidal>>> boy<<< who shakily move the arm in which he
+  16. [act=6.715]   heard the tragic news news reports of a two year>>> old<<< who was strangled in her crib while she slept
+  17. [act=6.116]  in rolling a>>> kid<<< in a private schools a very expensive proposition they need
+  18. [act=5.981]   a fresh apple in their entire life or in fourth>>> grade<<<
+  19. [act=5.972]   talk to other witnesses before they talk to mr>>> boy<<<d if you let other people in on the investigation
+  20. [act=5.965]   the to the lunches and the stacks that our>>> kids<<< get in school to their systems to a family down
+  21. [act=5.891]   program i can remember being in one where fourth grade>>> kids<<< fourth grade kids some of these kids have never never
+  22. [act=5.855]  system or minor or close to being a>>> minor<<< being railroaded in this process moreover again he
+  23. [act=5.837]   twenty two year old man to grab a fourteen year>>> old<<< girl's hands and place them on his sex organ
+  24. [act=5.822]   what we're going to do is are our twelve>>> kids<<< that are actually receiving the stroke we're going to
+  25. [act=5.803]   have a life sentences for useful offenders over eighteen years>>> old<<< because of factors like chronological age immaturity the
+
+Most frequent activating tokens (top 10): "old", "boy", "grade", "kids", "teen", "kid", "youth", "boys", "school", "girl"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Age or Youth",
+  "explanation": "The feature activates on tokens related to age, youth, or stages of childhood, such as 'teen', 'old', 'grade', 'kid', and 'boy'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 2104
+USER PROMPT:
+Feature index: 2104
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=17.391]   rural counties and states and communities an opportunity for the>>> good<<< way of life the rest of the way that the
+   2. [act=17.149]   is more than markham to check it and the>>> good<<< news about this video is it's been the very
+   3. [act=17.136]  's tough to turn that whole into a pile of>>> good<<< news while it
+   4. [act=16.735]   deal for the taxpayers who presided assistance we acted in>>> good<<< faith in the best interest of our shareholders and the
+   5. [act=16.182]   is the most important thing and in fact in the>>> good<<< not that case they do say the fellow was not
+   6. [act=15.856]   we paid two hundred thousand dollars which shows both our>>> good<<< faith and the arms and nature of the negotiations the
+   7. [act=15.659]   assure the committee that at all times i acted in>>> good<<< faith to provide legal advice that i believe to be
+   8. [act=15.381]  thank you judge>>> good<<< morning mr callahan andrew for ish
+   9. [act=15.288]   occurs it wipes the slate clean before and there's>>> good<<< reason why it's wipes the slate clean before and
+  10. [act=14.682]   then that gets us to the problem of why why>>> good<<< for the issue of why good faith
+  11. [act=14.391]   no idea whether the sibling separations are occurring for>>> good<<< reasons or not for good reasons and there was no
+  12. [act=14.287]   for the interest of national security to put away the>>> bad<<< guys in one form or another we need to have
+  13. [act=14.230]   some of my congressional district most prominent employers mr>>> good<<<man probably served as a member of congress from the
+  14. [act=14.138]   here but that doesn't mean it's not in>>> good<<< faith they also argue will doing a trademark search was
+  15. [act=13.994]   can't label your way around immunity when you have>>> good<<< lawyers like this if you labeled your
+  16. [act=13.990]  chosen that constitutes interference i think that's just>>> good<<< wrong that's not what interference means interference is ordinarily
+  17. [act=13.824]   would challenge a criminal forfeiture order if there was a>>> good<<< substantive challenge to the criminal forfeiture order to be had
+  18. [act=13.793]  's your response to the fact that as mr>>> good<<<ell had mentioned players were warned that the substance may
+  19. [act=13.774]  case the court heard earlier this morning we have>>> good<<< audio and video evidence of this and my recollection of
+  20. [act=13.616]   committed to helping at risk children in use have become>>> good<<< citizens those are the only two adverse actions my second
+  21. [act=13.567]   this case based on the testimony of one of his>>> good<<< friends
+  22. [act=13.447]  bar bipartisan approach we'll be able to produce>>> good<<< legislation for the american people and i look forward
+  23. [act=13.416]   means that i'm going to be stuck with those>>> good<<<
+  24. [act=13.402]   the american people and i look forward to continuing>>> good<<< counsel with my friend ralph hall and the republican
+  25. [act=13.395]   were in the weren't the officers were operating in>>> good<<< faith because they had a basis to believe that it
+
+Most frequent activating tokens (top 2): "good", "bad"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Moral Evaluation",
+  "explanation": "The feature detects the concept of moral evaluation, as it strongly activates on the token 'good' in various contexts, indicating a positive or favorable assessment or intention",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 2860
+USER PROMPT:
+Feature index: 2860
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=6.789]   about the chevy roaster you know that it>>> is<<< now obsolete and they had twenty five
+   2. [act=6.600]   filed in the name of the dead person yes i>>> am<<< saying the state can't substitute in the state has
+   3. [act=6.423]   aggressive argument we're not making it here but it>>> is<<< completely wrong to say that is the only argument that
+   4. [act=6.249]   that was a remedy phase piece of evidence but it>>> is<<< absolutely consistent with what the the liability phase of this
+   5. [act=6.205]   it one hundred percent natural one hundred percent pure it>>> is<<< with all respect to
+   6. [act=6.128]   if we take this course decision and grow and that>>> is<<< enough to
+   7. [act=6.065]  senate yes it>>> is<<< and ranking member jordan my name is tom may
+   8. [act=6.043]   it's talking about facts not in evidence and it>>> is<<<
+   9. [act=5.867]  what you>>> are<<< arguing today well of your honor's are aware that
+  10. [act=5.833]  and it>>> is<<< overseen by the same regulators that we have had in
+  11. [act=5.817]   had been briefed ahead of trial and it's it>>> is<<< extremely
+  12. [act=5.744]   facts of this case that isn't so but you>>> are<<< saying it just cannot be that the dominance of trade
+  13. [act=5.642]   of the character that expression meaning or message what we>>> are<<< now talking about is not the meaning or message that
+  14. [act=5.610]  thank you very much at this point it>>> is<<< in order to open our first round of questions and
+  15. [act=5.599]   things that it can't be the case that we>>> are<<< allowed to overstate from having to start working on
+  16. [act=5.598]   been doing for the last year and a half it>>> is<<< wrong and it needs to stop and this example in
+  17. [act=5.543]   of the procedure he wasn't doing the transplant he>>> is<<< not the medical team
+  18. [act=5.543]  're looking at the teaching as a whole but it>>> is<<< easy to visualize that you would take at a minimum
+  19. [act=5.522]   they are anti tax they're anti government but it>>> is<<< also the case
+  20. [act=5.466]  r rule is that correct that's correct and what>>> is<<< your best case as to what he should have
+  21. [act=5.445]   answer is but just pushing your own your argument it>>> is<<< a notice pleading requirement in the federal rules right and
+  22. [act=5.438]   know is the truth is and the fact that we>>> are<<< stuck with is that the court didn't do that
+  23. [act=5.428]   what you can call act on this work that we>>> are<<<
+  24. [act=5.428]   don't know how else to say it but what>>> is<<< your best case well it is my best case and
+  25. [act=5.411]  admit and it>>> is<<< so stated in the plea agreement that we would not
+
+Most frequent activating tokens (top 3): "is", "are", "am"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Existence Confirmation",
+  "explanation": "The feature detects phrases that confirm or assert the existence of something, often using linking verbs like 'is' or 'are'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 3230
+USER PROMPT:
+Feature index: 3230
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=11.858]  fghan>>>istan<<< would put more pressure on a pakistani government
+   2. [act=11.507]  the reality is failure in afghan>>>istan<<< would be a huge setback for the united states tal
+   3. [act=11.467]  in afghan>>>istan<<< i'd like to know where you think our involvement
+   4. [act=11.089]  reflecting lessons learned in iraq and afghan>>>istan<<< yet also addressing the range of other potential threats around
+   5. [act=11.067]  states marine corps stay in afghan>>>istan<<< indefinitely they live in a rough neighborhood we need to
+   6. [act=10.781]   of people have in congress about events in afghan>>>istan<<< and pakistan i think that virtually all of
+   7. [act=10.668]  pak>>>istan<<< he was already headed for india and we prevailed
+   8. [act=10.668]  pak>>>istan<<< a country with nuclear weapons could be a disaster for
+   9. [act=10.515]   even on the table to change leadership in afghan>>>istan<<<
+  10. [act=10.464]   congress about events in afghanistan and pak>>>istan<<< i think that virtually all of us understand the des
+  11. [act=10.333]   withdrawal as more of a commitment to leave afghan>>>istan<<< than a declaration that al qaeda will be defeated
+  12. [act=10.311]   that's the same thing would happen in afghan>>>istan<<< which is one of the reasons there is money in
+  13. [act=10.266]   our military personnel serving in iraq and afghan>>>istan<<< could be vulnerable because of a lack of
+  14. [act=10.211]   our renewed commitment and more focused strategy for afghan>>>istan<<< and pakistan i would like to provide an
+  15. [act=10.133]   as quickly as possible there are some in afghan>>>istan<<< perhaps in the government perhaps in the elites or whatever
+  16. [act=10.043]   resolve to both our partners and adversaries in afghan>>>istan<<< and pakistan when this buildup is complete total
+  17. [act=9.991]   november two thousand and nine in afghan>>>istan<<< we need to do what we support fully and without
+  18. [act=9.914]   security and defense arena the real challenge in afghan>>>istan<<< is finding the right balance the prompt dispatch of thirty
+  19. [act=9.874]  'm glad that the president did go to pak>>>istan<<< president clinton but things haven't worked out the
+  20. [act=9.841]   york times reads afghans and pak>>>istan<<<is concerned over u s plan all americans want
+  21. [act=9.840]   extra constitutional rights we talk about detainees in afghan>>>istan<<< and detainees
+  22. [act=9.669]   to know where you think our involvement in afghan>>>istan<<< is going obviously we're going to be supportive of
+  23. [act=9.644]   key partner for the united states people in pak>>>istan<<< are increasingly coming to the view that we share a
+  24. [act=9.636]   track to triple the number of civilians in afghan>>>istan<<< to nine hundred seventy four by early next year
+  25. [act=9.585]   americans want to see our troops leave afghan>>>istan<<< as soon as possible but only after successfully completing their
+
+Most frequent activating tokens (top 1): "istan"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Geopolitical Location",
+  "explanation": "The feature activates on tokens related to countries, specifically 'Afghanistan' and 'Pakistan', indicating a focus on geopolitical locations.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 2534
+USER PROMPT:
+Feature index: 2534
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=12.637]   with your power help our senators to please you by>>> living<<< blameless holy and
+   2. [act=12.146]  with it and so therefore we're not>>> living<<< in a world where we have nothing more than m
+   3. [act=11.823]   now you can follow the house on c span or>>> live<<< senate coverage here on c span to
+   4. [act=11.698]   kind of a comment on space unless you kind of>>> live<<< in this world but what that is is essentially a
+   5. [act=11.660]   that as part of his privileges he's required to>>> live<<< in a within a certain distance of the hospital because
+   6. [act=11.351]   themselves there's sole proprietor running their own business>>> living<<< under a yard light hoping things go well so they
+   7. [act=10.972]   the core of the items which shine a had not>>> lived<<< up to their responsibility
+   8. [act=10.759]   you look at the numbers what happens is they they>>> live<<< maybe a year i have a percentage of all of
+   9. [act=10.703]  security and reasonably safe>>> living<<< conditions as the quarter to the way that in her
+  10. [act=10.399]   that even mean that that means that he's still>>> living<<< at what we refer to a slip break st lou
+  11. [act=10.265]   disposition of this case at the time the defendant was>>> living<<< in new york and there is no evidence to
+  12. [act=9.956]  states marine corps stay in afghanistan indefinitely they>>> live<<< in a rough neighborhood we need to signal that's
+  13. [act=9.785]   in the buffalo creek treaty that they could continue to>>> live<<< on the family estate wherever if they chose to do
+  14. [act=9.781]   one set of constitutional rights personal security and recently safe>>> living<<< conditions number two was there culpability deliberate indifference
+  15. [act=9.777]  lectured about how difficult things are i>>> live<<< it every day and my constituents and that's why
+  16. [act=9.316]   same standard both of simply personal security and reasonably safe>>> living<<< conditions applies to children the
+  17. [act=9.302]   if it is it was not safe for her to>>> live<<< somewhere else in guatemala the gang problem is
+  18. [act=9.204]   that they are not required to redo like a>>> live<<< appeal the analysis and conduct
+  19. [act=8.624]   her signature card and she did say i don't>>> live<<< here but i thought you conceded that there were no
+  20. [act=8.561]   suction it was a miraculous miraculous gift that she>>> lives<<< she actually sat up and moved away from the su
+  21. [act=8.362]   was ransacked show that an individual did indeed>>> live<<< there there were pictures there was there were clothes everywhere
+  22. [act=8.177]   dots on the map up here where all the smell>>> live<<< so the same people that voted to help the
+  23. [act=8.036]  and if you>>> live<<< in a state as i do a land we call
+  24. [act=7.815]   support not only farmers but all of our citizens who>>> live<<< in small towns and rural communities rural america confronts
+  25. [act=7.601]   national median that's eleven thousand dollars lower if you>>> live<<< in a rural community that means that you're going
+
+Most frequent activating tokens (top 4): "live", "living", "lived", "lives"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Residence or Existence",
+  "explanation": "The feature detects the concept of living or residing in a place, or the state of being alive, as indicated by the frequent activation on tokens related to living, existing, or residing",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 3726
+USER PROMPT:
+Feature index: 3726
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 23 activating examples (ordered strongest first):
+   1. [act=12.919]  that over a forty year full time work life that>>> college<<< educated children are going to make sixty five percent more
+   2. [act=12.626]   with their case is there rely on the testimony from>>> college<<< team or was he personally handed out a few copies
+   3. [act=11.411]   the limited resources of the estate to pay for the>>> college<<< tuition of adult children and the question before the court
+   4. [act=10.217]   than a student with her children with only a high>>> school<<<
+   5. [act=9.767]   and staff experience seven hold masters degrees from command staff>>> college<<< as well to more hold masters degrees from civilian universities
+   6. [act=9.736]  am a product of a community>>> college<<< probably so i know that we need community colleges i
+   7. [act=9.569]   skills certification by broad industry partners and implemented in high>>> school<<< and local two and in some cases four year colleges
+   8. [act=9.478]   now i've indicated i've previously taught economics in>>> college<<< but i was able to
+   9. [act=9.027]  years ago we supported the effort of of the community>>> college<<< of philadelphia at that time with the with star
+  10. [act=8.084]   training biomedical technicians that started with training at the community>>> college<<< and then
+  11. [act=7.731]   school and local two and in some cases four year>>> colleges<<< the national association of manufacturers that are manufacturing
+  12. [act=7.373]  about the community>>> colleges<<< more and more people and this is another pressure on
+  13. [act=6.671]  innovators investors and>>> university<<< and nonprofit leaders the department of commerce is also putting
+  14. [act=6.475]   that that shouldn't necessarily be limited to only brown>>> university<<< students but that may be for another day we're
+  15. [act=6.007]  word and now it's hard in high>>> schools<<< and many high schools to convince people they ought to
+  16. [act=5.775]   community college probably so i know that we need community>>> colleges<<< i know that nebraska has literally thousands of automotive
+  17. [act=5.762]   education and twenty percent dedicated to training the marine corps>>> university<<< provides oversight of the curriculum through its curriculum review board
+  18. [act=5.538]   much more detail i have taught economics at newman>>> university<<< but i wanted to keep this very brief you see
+  19. [act=5.279]   once heard a talk by a stanford business>>> school<<< professor
+  20. [act=5.032]   the court is whether or not who should suffer the>>> university<<< or the
+  21. [act=4.955]  strengths we have the best>>> universities<<< and research facilities in the world we have many outstanding
+  22. [act=4.946]   brought people to the united states to train at our>>> universities<<< from countries around the world and then after they became
+  23. [act=4.711]   vegetable program i can remember being in one where fourth>>> grade<<< kids fourth grade kids some of these kids have never
+
+Most frequent activating tokens (top 7): "college", "university", "school", "colleges", "universities", "schools", "grade"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Education Institution",
+  "explanation": "The feature activates on tokens related to educational institutions such as colleges, universities, and schools, indicating it detects concepts related to these entities",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 3190
+USER PROMPT:
+Feature index: 3190
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=15.611]   columbus that's where the district and was>>> read<<< and met with the
+   2. [act=14.863]   the health care center because their general counsel didn't>>> read<<< the manual right and didn't figure out a way
+   3. [act=14.007]   an effort to gain a strategic advantage also you cannot>>> read<<< the motion to clarify and the order denying the motion
+   4. [act=13.853]  she didn't>>> read<<< all the provisions contained within it as a whole to
+   5. [act=13.820]   effort to actually link it up to the defendant having>>> read<<< the article i mean otherwise my gosh you could
+   6. [act=13.684]   do for ours washington post why don't you>>> read<<< this story european union
+   7. [act=13.665]  ly at town meetings and partly at individual meetings or>>> read<<< their letters i listen to my back home at all
+   8. [act=13.450]   guilty to that charge there is no other way to>>> read<<< this record this court hasn't poor district courts to
+   9. [act=13.445]   is the harm caused to victims so hard not to>>> read<<< the government's brief here without thinking there's something
+  10. [act=13.423]  to>>> read<<< professor feldman is written testimony and we agree
+  11. [act=13.037]  and at least as i>>> read<<< the record was completely compliant and did exactly what the
+  12. [act=12.942]   the office rather than compromising his views let me just>>> read<<< three
+  13. [act=12.924]   rule first we think that the court and if you>>> read<<< the transcript of when we presented that motion
+  14. [act=12.858]  resolutions and i'll>>> read<<< it because it's common to many of them it
+  15. [act=12.757]   effect of american foreign policy i'd like to>>> read<<< from just one paragraph from wall street journal article from
+  16. [act=12.671]  context again miss thomas would like us to>>> read<<< the reasoning level of three in isolation but when reading
+  17. [act=12.599]  i>>> read<<< this law review article i think it's a great
+  18. [act=12.532]   york city police department so i think if you>>> read<<<
+  19. [act=12.515]  's all they have so to say that i can>>> read<<< the first ten sentences but ignore the eleven i don
+  20. [act=12.513]  do>>> read<<< the district court opinion as growing up on article three
+  21. [act=12.503]  penalty and it seems as i>>> read<<< it that you have been to alternative reading this one
+  22. [act=12.495]   so anderson has two points as i as i>>> read<<< the case and the st point is about the burden
+  23. [act=12.485]   his cabinet this tells you exactly how well this worked>>> read<<< it one more time after eight years this
+  24. [act=12.476]  many many jurors would>>> read<<< it that way in this in these times the second
+  25. [act=12.466]   and i don't think that it's fair to>>> read<<< into that that the july fourteenth absence alone
+
+Most frequent activating tokens (top 1): "read"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Reading Action",
+  "explanation": "The feature detects instances where the token 'read' is used in the context of understanding or interpreting text, often in formal or official settings",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c84561f9-feaa-4393-a843-573a7c824522
+FEATURE 5924
+USER PROMPT:
+Feature index: 5924
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=16.192]  d circuit finds that when you allege manipulative acts with>>> an<<< intent to drive down the price of the stock that
+   2. [act=16.142]   develop the necessary competencies as early as possible in>>> an<<< officer's career we're proud of our team effort
+   3. [act=15.648]   we have a case here that comes on appeal in>>> an<<< unusual posture where we have a private securities class action
+   4. [act=15.593]   also to defraud the district court and then in>>> an<<< attempt to avoid personal liability for herself it goes to
+   5. [act=15.566]   accessible to contract guards and this type of misconduct in>>> an<<< attempt to provide better oversight in the facilities the agency
+   6. [act=15.283]   dissolved corporation breaks down because in just the way than>>> an<<< assignment or contract might pass the proceeds from a corporate
+   7. [act=15.124]   this case certainly not a case where he arrived in>>> an<<< opinion
+   8. [act=14.658]   doing it on a rural road and doing it in>>> an<<< urban neighborhood from the standpoint of your argument that there
+   9. [act=14.652]   of prejudice and those sorts of significant errors that require>>> an<<< outright reversal in other words that are structural now i
+  10. [act=14.523]   step process has nothing to do with whether or not>>> an<<< invention is that it is abstract or simply an abstract
+  11. [act=14.402]   a bribe is paid in exchange for official action or>>> an<<< official act and then it proceeds repeatedly to refer to
+  12. [act=14.385]   time period and one of the key ways in which>>> an<<< off label
+  13. [act=14.385]  forethought can be proven by the prosecution by>>> an<<< intent again an intentional act to willfully act in call
+  14. [act=14.288]   also says that they cannot continue in the employment of>>> an<<< institution and the regulations of the the amount of pronounce
+  15. [act=14.228]   resolved by the district court the parties could not reach>>> an<<< agreement on we could
+  16. [act=14.213]   judge correctly charged the jury here on the requirement of>>> an<<< ongoing arcata conspiracy and
+  17. [act=14.175]   economy unless we act there is no point in letting>>> an<<< invisible hand guide this destruction if we have any sense
+  18. [act=14.143]   court was rejecting the majority rule amongst the states that>>> an<<< armed robbery has to
+  19. [act=14.109]   would have to pay the costs of sending but someone>>> an<<< expert round trip to the dominican republic and you
+  20. [act=14.106]   stated to shareholders for them to be able to take>>> an<<< action to buy the securities of the new company since
+  21. [act=14.105]   in the themes pleading in bermuda paragraph sixteen>>> an<<< extensive
+  22. [act=14.023]  here by>>> an<<< informal invitation who
+  23. [act=14.018]  performance evaluations that wells fargo conducted on>>> an<<< annual basis that included assessments about both honesty and integrity
+  24. [act=14.015]   only way to ensure that illegal aliens actually appear before>>> an<<< immigration court is to physically
+  25. [act=13.992]  for its actual liabilities which if allowing>>> an<<< expert to come back years to five ten years after
+
+Most frequent activating tokens (top 1): "an"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Indefinite Article",
+  "explanation": "The feature detects the presence of the indefinite article 'an' in the given text snippets, which is the most frequent activating token across all examples",
+  "confidence": "high"
+}
+================================================================================

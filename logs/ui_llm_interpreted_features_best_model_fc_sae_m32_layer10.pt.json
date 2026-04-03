@@ -2142,5 +2142,260 @@
       "top_k": 25,
       "min_activation": 4.5
     }
+  },
+  {
+    "timestamp": "2026-04-03T19:53:41.532285+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1681,
+    "label": "Temporal Reference",
+    "confidence": "high",
+    "request_id": "4be580d5-8e01-42e5-bf9c-fc571d5384d1",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T19:53:41.534798+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4029,
+    "label": "Formal Request Process",
+    "confidence": "high",
+    "request_id": "4be580d5-8e01-42e5-bf9c-fc571d5384d1",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.547604+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1681,
+    "label": "Temporal Reference",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.550887+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4029,
+    "label": "Formal Request Process",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.553393+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 443,
+    "label": "Tree or Wood Concept",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.555498+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2068,
+    "label": "Education Setting",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.557536+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 859,
+    "label": "Conjunction Detection",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.559553+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 707,
+    "label": "Legal Instruction Concept",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.561538+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 946,
+    "label": "Food and ingredients",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.563569+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2,
+    "label": "Age or Youth",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.565586+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2104,
+    "label": "Moral Evaluation",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.567624+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2860,
+    "label": "Existence Confirmation",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.569590+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3230,
+    "label": "Geopolitical Location",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.571715+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2534,
+    "label": "Residence or Existence",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.573872+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3726,
+    "label": "Education Institution",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.575903+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3190,
+    "label": "Reading Action",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:20:09.578015+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5924,
+    "label": "Indefinite Article",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 4.5
+    }
   }
 ]

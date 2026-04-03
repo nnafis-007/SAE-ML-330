@@ -375,14 +375,6 @@
     "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
     "updated_at": "2026-04-03T18:55:08Z"
   },
-  "282": {
-    "feature_idx": 282,
-    "label": "dead feature",
-    "explanation": "Feature never activates on this corpus.",
-    "confidence": "high",
-    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
-    "updated_at": "2026-04-03T18:55:08Z"
-  },
   "283": {
     "feature_idx": 283,
     "label": "Product or Situation Quality",
@@ -427,14 +419,6 @@
     "feature_idx": 288,
     "label": "Causal Relationship",
     "explanation": "The feature detects phrases indicating a causal relationship between events or entities, often marked by words like 'cause', 'reason', 'responsible', and 'rise'",
-    "confidence": "high",
-    "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
-    "updated_at": "2026-04-03T18:55:08Z"
-  },
-  "289": {
-    "feature_idx": 289,
-    "label": "dead feature",
-    "explanation": "Feature never activates on this corpus.",
     "confidence": "high",
     "request_id": "119c8416-9821-4f1d-b9ee-a131c039f3f4",
     "updated_at": "2026-04-03T18:55:08Z"
@@ -908,47 +892,127 @@
     "label": "Temporal Reference",
     "explanation": "The feature detects the concept of temporal reference, specifically the word 'once' indicating a point in time or a repeated action",
     "confidence": "high",
-    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
-    "updated_at": "2026-04-03T19:30:14Z"
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
   },
   "4029": {
     "feature_idx": 4029,
-    "label": "Formal Request Submission",
-    "explanation": "The feature detects the concept of submitting or filing a formal request, such as an application, which is a common theme across the activating examples",
+    "label": "Formal Request Process",
+    "explanation": "The feature detects the concept of submitting or handling formal requests, such as applications, which is evident from the frequent appearance of 'application' and related tokens in the activating examples",
     "confidence": "high",
-    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
-    "updated_at": "2026-04-03T19:30:14Z"
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
   },
   "443": {
     "feature_idx": 443,
     "label": "Tree or Wood Concept",
-    "explanation": "The feature detects words related to trees, wood, or forest, indicating a semantic concept focused on these environmental elements",
+    "explanation": "The feature detects tokens related to trees, wood, or forest, indicating a semantic concept related to these natural elements",
     "confidence": "high",
-    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
-    "updated_at": "2026-04-03T19:30:14Z"
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
   },
   "2068": {
     "feature_idx": 2068,
     "label": "Education Setting",
     "explanation": "The feature activates on tokens related to educational institutions, students, and faculty, indicating it detects concepts related to education settings",
     "confidence": "high",
-    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
-    "updated_at": "2026-04-03T19:30:14Z"
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
   },
   "859": {
     "feature_idx": 859,
     "label": "Conjunction Detection",
     "explanation": "The feature detects the presence of the conjunction 'and' in a sentence, indicating a connection between two clauses or ideas.",
     "confidence": "high",
-    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
-    "updated_at": "2026-04-03T19:30:14Z"
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
   },
   "946": {
     "feature_idx": 946,
-    "label": "Food and cuisine",
-    "explanation": "The feature activates on various food-related tokens, such as 'fried', 'meat', 'burger', 'seafood', 'chicken', and 'fruits', indicating it detects concepts related to food and cuisine",
+    "label": "Food and ingredients",
+    "explanation": "The feature activates on various food-related tokens, including types of meat, produce, and prepared dishes, indicating it detects culinary concepts.",
     "confidence": "high",
-    "request_id": "b3087675-343c-4d41-83b7-63c11e161a01",
-    "updated_at": "2026-04-03T19:30:14Z"
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
+  },
+  "707": {
+    "feature_idx": 707,
+    "label": "Legal Instruction Concept",
+    "explanation": "The feature detects language related to giving or receiving guidance, particularly in a legal or educational context, as evidenced by the frequent appearance of words like 'instruction', 'teaching', and 'instruct'",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
+  },
+  "5460": {
+    "feature_idx": 5460,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
+  },
+  "2": {
+    "feature_idx": 2,
+    "label": "Age or Youth",
+    "explanation": "The feature activates on tokens related to age, youth, or stages of childhood, such as 'teen', 'old', 'grade', 'kid', and 'boy'.",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
+  },
+  "2104": {
+    "feature_idx": 2104,
+    "label": "Moral Evaluation",
+    "explanation": "The feature detects the concept of moral evaluation, as it strongly activates on the token 'good' in various contexts, indicating a positive or favorable assessment or intention",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
+  },
+  "2860": {
+    "feature_idx": 2860,
+    "label": "Existence Confirmation",
+    "explanation": "The feature detects phrases that confirm or assert the existence of something, often using linking verbs like 'is' or 'are'.",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
+  },
+  "3230": {
+    "feature_idx": 3230,
+    "label": "Geopolitical Location",
+    "explanation": "The feature activates on tokens related to countries, specifically 'Afghanistan' and 'Pakistan', indicating a focus on geopolitical locations.",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
+  },
+  "2534": {
+    "feature_idx": 2534,
+    "label": "Residence or Existence",
+    "explanation": "The feature detects the concept of living or residing in a place, or the state of being alive, as indicated by the frequent activation on tokens related to living, existing, or residing",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
+  },
+  "3726": {
+    "feature_idx": 3726,
+    "label": "Education Institution",
+    "explanation": "The feature activates on tokens related to educational institutions such as colleges, universities, and schools, indicating it detects concepts related to these entities",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
+  },
+  "3190": {
+    "feature_idx": 3190,
+    "label": "Reading Action",
+    "explanation": "The feature detects instances where the token 'read' is used in the context of understanding or interpreting text, often in formal or official settings",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
+  },
+  "5924": {
+    "feature_idx": 5924,
+    "label": "Indefinite Article",
+    "explanation": "The feature detects the presence of the indefinite article 'an' in the given text snippets, which is the most frequent activating token across all examples",
+    "confidence": "high",
+    "request_id": "c84561f9-feaa-4393-a843-573a7c824522",
+    "updated_at": "2026-04-03T20:20:09Z"
   }
 }
