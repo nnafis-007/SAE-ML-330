@@ -184,15 +184,6 @@ class SAEAnalyzer(BaseAnalyzer):
         for i, tid in enumerate(token_id_list):
             token_str = tokenizer.decode([tid])
             
-            # Skip features for the first token (often an attention sink/BOS)
-            if i == 0:
-                tokens_data.append({
-                    "text": token_str,
-                    "features": [],
-                    "info": "First token (attention sink) skipped"
-                })
-                continue
-                
             feat_vec = features[i].cpu()
             active = int((feat_vec > 0).sum().item())
             k = min(top_k, max(active, 1))

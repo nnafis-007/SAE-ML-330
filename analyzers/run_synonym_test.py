@@ -21,9 +21,11 @@ What the script does
 4.  Extracts SAE feature activations at those specific positions (NOT the
     whole sentence) and averages them across sentences for that word.
 5.  For each word, records the top-K most active features.
-6.  Computes pairwise Jaccard similarity between synonym feature sets:
-        Jaccard(A, B) = |A ∩ B| / |A ∪ B|
-    Higher Jaccard → more shared features → more "synonym-aware" features.
+6.  Computes pairwise activation-weighted Jaccard between synonym top-K sets:
+        WeightedJaccard(A, B) = sum_i min(a_i, b_i) / sum_i max(a_i, b_i)
+    where i ranges over the union of top-K features from both words.
+    Higher weighted Jaccard → more shared/high-magnitude features → more
+    "synonym-aware" features.
 7.  Also records the raw mean activation value of every shared feature, so
     you can inspect what the shared features look like in
     interpretation_reports.json.
@@ -45,7 +47,7 @@ from itertools import combinations
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-sys.path.append(str(Path(__file__).parent / "src"))
+sys.path.append(str(Path(__file__).resolve().parent.parent / "src"))
 
 import torch
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
@@ -280,6 +282,170 @@ SYNONYM_CLUSTERS: Dict[str, Dict[str, List[str]]] = {
             "She was livid, pacing back and forth across the room.",
         ],
     },
+
+    # ── control group: unrelated words (non-synonyms) ───────────────────────
+    "non_synonyms": {
+        "banana": [
+            "He peeled a banana before the workout.",
+            "A ripe banana sat on the kitchen counter.",
+            "She sliced a banana into her cereal bowl.",
+            "The child carried a banana to school.",
+            "They bought a banana at the market.",
+            "A banana fell from the fruit basket.",
+            "He added banana to the smoothie recipe.",
+            "The monkey reached for a banana quickly.",
+            "She packed a banana for the train ride.",
+            "A banana can bruise if dropped.",
+        ],
+        "democracy": [
+            "Democracy depends on informed citizens.",
+            "They studied the history of democracy in class.",
+            "A healthy democracy needs free debate.",
+            "Democracy can be fragile during crises.",
+            "The speaker defended democracy in her address.",
+            "Many activists fought to protect democracy.",
+            "Democracy requires trust in public institutions.",
+            "The article explained how democracy evolved.",
+            "Students discussed democracy and representation.",
+            "Democracy benefits from transparent elections.",
+        ],
+        "quantum": [
+            "Quantum theory changed modern physics.",
+            "The lecture introduced quantum measurement.",
+            "Researchers built a quantum simulation.",
+            "She read a paper on quantum entanglement.",
+            "Quantum effects appear at tiny scales.",
+            "The course covered quantum mechanics basics.",
+            "Engineers are exploring quantum computing.",
+            "A quantum model predicted the outcome.",
+            "He asked a question about quantum states.",
+            "Quantum devices require careful calibration.",
+        ],
+        "guitar": [
+            "She tuned the guitar before rehearsal.",
+            "A vintage guitar hung on the wall.",
+            "He practiced guitar for an hour.",
+            "The guitarist replaced a broken string on the guitar.",
+            "They carried a guitar onto the stage.",
+            "The shop repaired my guitar yesterday.",
+            "She bought a new case for her guitar.",
+            "A guitar solo closed the concert.",
+            "He learned a chord progression on guitar.",
+            "The teacher demonstrated rhythm on the guitar.",
+        ],
+    },
+
+    # ── HF People's Speech derived checks: synonyms ─────────────────────────
+    # Vocabulary chosen from frequent transcript terms in the local corpus
+    # derived from MLCommons/peoples_speech.
+    "hf_syn_issue_problem": {
+        "issue": [
+            "The committee discussed the issue during the meeting.",
+            "They raised an issue about access to healthcare.",
+            "Our team documented the issue for legal review.",
+            "The chair acknowledged the issue before voting.",
+            "She explained the issue in very clear terms.",
+            "The report focused on the issue of public safety.",
+            "Several witnesses mentioned the issue in testimony.",
+            "The article frames the issue as a policy question.",
+            "He returned to the issue near the end of the hearing.",
+            "The panel treated the issue as urgent.",
+        ],
+        "problem": [
+            "The committee discussed the problem during the meeting.",
+            "They raised a problem about access to healthcare.",
+            "Our team documented the problem for legal review.",
+            "The chair acknowledged the problem before voting.",
+            "She explained the problem in very clear terms.",
+            "The report focused on the problem of public safety.",
+            "Several witnesses mentioned the problem in testimony.",
+            "The article frames the problem as a policy question.",
+            "He returned to the problem near the end of the hearing.",
+            "The panel treated the problem as urgent.",
+        ],
+    },
+
+    "hf_syn_help_support": {
+        "help": [
+            "The policy should help families in rural areas.",
+            "They hope the funding will help local schools.",
+            "A trained mediator can help both parties communicate.",
+            "The new programme may help small businesses grow.",
+            "Better data will help judges make fair decisions.",
+            "This process can help communities recover faster.",
+            "The proposal aims to help patients find care.",
+            "Clear rules help everyone understand the system.",
+            "The hotline is meant to help people in crisis.",
+            "Public guidance can help reduce confusion.",
+        ],
+        "support": [
+            "The policy should support families in rural areas.",
+            "They hope the funding will support local schools.",
+            "A trained mediator can support both parties communicating.",
+            "The new programme may support small businesses in growing.",
+            "Better data will support judges in making fair decisions.",
+            "This process can support communities in recovering faster.",
+            "The proposal aims to support patients in finding care.",
+            "Clear rules support everyone in understanding the system.",
+            "The hotline is meant to support people in crisis.",
+            "Public guidance can support reducing confusion.",
+        ],
+    },
+
+    # ── HF People's Speech derived checks: antonyms ─────────────────────────
+    "hf_ant_first_last": {
+        "first": [
+            "The first witness spoke before the court recessed.",
+            "They reviewed the first draft during the hearing.",
+            "Our team filed the first motion this morning.",
+            "The first question focused on policy details.",
+            "She read the first paragraph into the record.",
+            "The first vote showed broad support.",
+            "He addressed the first concern from the panel.",
+            "The first version of the bill was shorter.",
+            "They completed the first phase in June.",
+            "The first speaker opened with a brief summary.",
+        ],
+        "last": [
+            "The last witness spoke before the court recessed.",
+            "They reviewed the last draft during the hearing.",
+            "Our team filed the last motion this morning.",
+            "The last question focused on policy details.",
+            "She read the last paragraph into the record.",
+            "The last vote showed broad support.",
+            "He addressed the last concern from the panel.",
+            "The last version of the bill was shorter.",
+            "They completed the last phase in June.",
+            "The last speaker opened with a brief summary.",
+        ],
+    },
+
+    "hf_ant_before_after": {
+        "before": [
+            "The judge spoke before the jury entered the room.",
+            "They met before the committee session started.",
+            "We filed the appeal before the deadline.",
+            "She reviewed the evidence before giving testimony.",
+            "The team voted before the final announcement.",
+            "He arrived before the morning briefing.",
+            "They paused before the next question.",
+            "The board met before publishing the report.",
+            "Our office called before the hearing began.",
+            "The witness signed before leaving the stand.",
+        ],
+        "after": [
+            "The judge spoke after the jury entered the room.",
+            "They met after the committee session started.",
+            "We filed the appeal after the deadline.",
+            "She reviewed the evidence after giving testimony.",
+            "The team voted after the final announcement.",
+            "He arrived after the morning briefing.",
+            "They paused after the next question.",
+            "The board met after publishing the report.",
+            "Our office called after the hearing began.",
+            "The witness signed after leaving the stand.",
+        ],
+    },
 }
 
 
@@ -303,6 +469,14 @@ def find_target_token_positions(
     for any tokenisation of target_word (with/without a leading space,
     which GPT-2 adds for mid-sentence words).
     """
+    # Avoid sentence-initial target tokens: prepend a short neutral prefix
+    # when the target appears as the first word to reduce attention-sink effects.
+    sentence_stripped = sentence.lstrip()
+    if sentence_stripped:
+        first_word = sentence_stripped.split(maxsplit=1)[0].strip(".,!?;:'\"()[]{}")
+        if first_word.lower() == target_word.lower():
+            sentence = f"In context, {sentence_stripped[0].lower()}{sentence_stripped[1:]}"
+
     enc = tokenizer(
         sentence,
         return_tensors="pt",
@@ -439,6 +613,15 @@ def weighted_jaccard(
     return float(numer / denom)
 
 
+def move_module_to_device(module: torch.nn.Module, device: str) -> torch.nn.Module:
+    """Move a module to device, handling meta-initialized parameters safely."""
+    target = torch.device(device)
+    has_meta = any(p.is_meta for p in module.parameters()) or any(b.is_meta for b in module.buffers())
+    if has_meta:
+        return module.to_empty(device=target)
+    return module.to(target)
+
+
 def cosine_sim(a: torch.Tensor, b: torch.Tensor) -> float:
     denom = a.norm() * b.norm()
     if denom == 0:
@@ -482,21 +665,22 @@ def analyse_cluster(
         w: top_k_features(v, top_k) for w, v in profiles.items()
     }
 
-    # Pairwise Jaccard + weighted Jaccard + cosine
+    # Pairwise weighted Jaccard (primary) + binary Jaccard (diagnostic) + cosine
     words = list(profiles.keys())
     pairwise = []
     for w1, w2 in combinations(words, 2):
         s1 = set(top_features[w1])
         s2 = set(top_features[w2])
         shared = sorted(s1 & s2)
-        j = jaccard(s1, s2)
+        binary_j = jaccard(s1, s2)
         union = sorted(s1 | s2)
         wj = weighted_jaccard(profiles[w1], profiles[w2], indices=union)
         cos = cosine_sim(profiles[w1], profiles[w2])
         pairwise.append({
             "word_a": w1,
             "word_b": w2,
-            "jaccard": round(j, 4),
+            "jaccard": round(wj, 4),
+            "binary_jaccard": round(binary_j, 4),
             "weighted_jaccard": round(wj, 4),
             "cosine_sim": round(cos, 4),
             "shared_feature_count": len(shared),
@@ -513,7 +697,7 @@ def analyse_cluster(
         others = set.union(*(set(top_features[x]) for x in words if x != w))
         unique_to[w] = sorted(set(top_features[w]) - others)
 
-    # Mean Jaccard across all pairs (summary score)
+    # Mean weighted Jaccard across all pairs (summary score)
     mean_jaccard = (
         sum(p["jaccard"] for p in pairwise) / len(pairwise) if pairwise else 0.0
     )
@@ -525,8 +709,7 @@ def analyse_cluster(
     )
 
     print(
-        f"    → Mean Jaccard: {mean_jaccard:.3f}  |  "
-        f"Mean weighted Jaccard: {mean_weighted_jaccard:.3f}  |  "
+        f"    → Mean weighted Jaccard: {mean_jaccard:.3f}  |  "
         f"Mean cosine: {mean_cosine:.3f}"
     )
     print(f"    → Features shared by ALL {len(words)} words: {len(universal_shared)}")
@@ -618,7 +801,8 @@ def main():
     print(f"\n[2/3] Loading GPT-2...")
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
     tokenizer.pad_token = tokenizer.eos_token
-    gpt2 = GPT2LMHeadModel.from_pretrained("gpt2", output_hidden_states=True).to(device)
+    gpt2 = GPT2LMHeadModel.from_pretrained("gpt2", output_hidden_states=True)
+    gpt2 = move_module_to_device(gpt2, device)
     gpt2.eval()
     print(f"  GPT-2 ready on {device}")
 
@@ -665,7 +849,7 @@ def main():
     print("\n" + "=" * 70)
     print("RESULTS SUMMARY")
     print("=" * 70)
-    print(f"\n{'Cluster':<10}  {'Words':<34}  {'Jaccard':>7}  {'Cosine':>7}  "
+    print(f"\n{'Cluster':<10}  {'Words':<34}  {'W-Jacc':>7}  {'Cosine':>7}  "
           f"{'All-shared':>10}  Signal")
     print("-" * 80)
     for r in all_results:
@@ -677,11 +861,11 @@ def main():
         )
 
     print("\n" + "-" * 80)
-    print(f"Overall mean Jaccard: {report['overall_mean_jaccard']:.3f}")
+    print(f"Overall mean weighted Jaccard: {report['overall_mean_jaccard']:.3f}")
     print(
-        "\nJaccard guide:  > 0.40 → synonyms share features strongly\n"
-        "                0.20–0.40 → moderate overlap\n"
-        "                < 0.20 → the SAE does not group these synonyms"
+        "\nWeighted Jaccard guide:  > 0.40 → synonyms share features strongly\n"
+        "                        0.20–0.40 → moderate overlap\n"
+        "                        < 0.20 → the SAE does not group these synonyms"
     )
     print(f"\nFull report saved to: {args.output}")
 

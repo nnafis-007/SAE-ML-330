@@ -50,3 +50,38 @@ RESPONSE:
   "confidence": "medium"
 }
 ================================================================================
+
+================================================================================
+REQUEST_ID 1ebaf03b-a963-440d-8100-173e96ab9766
+FEATURE 8762
+USER PROMPT:
+Feature index: 8762
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 11 activating examples (ordered strongest first):
+   1. [act=10.520]  but we you>>> know<<< we grow lettuce and the beans and the carrots and
+   2. [act=10.167]   need to focus on now well i think you you>>> know<<< and i've said this and we had a lot
+   3. [act=7.761]  and as you say police chief fire chief you>>> know<<< whoever it is we have a number of other you
+   4. [act=7.719]  so you>>> know<<< and another advantage of prius's originally had right
+   5. [act=7.719]  so you>>> know<<< we've been in town you know a lot of
+   6. [act=7.182]  comes from meijers you>>> know<<<
+   7. [act=6.157]  you>>> know<<< that's one of these connected things
+   8. [act=6.157]  you>>> know<<< we had our girls hockey team come back on board
+   9. [act=6.157]  you>>> know<<< i've never seen cacti growing out of
+  10. [act=6.157]  you>>> know<<< we ran a really hard campaign
+  11. [act=5.192]   had a lot of questions during the campaign but you>>> know<<< i think jack i think the the challenges were remained
+
+Most frequent activating tokens (top 1): "know"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Colloquial discourse marker",
+  "explanation": "The feature detects the token 'know' used as a casual, conversational phrase to express familiarity or shared knowledge",
+  "confidence": "high"
+}
+================================================================================

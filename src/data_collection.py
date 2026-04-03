@@ -21,6 +21,15 @@ from tqdm.auto import tqdm
 import numpy as np
 
 
+def _move_module_to_device(module: nn.Module, device: str) -> nn.Module:
+    """Move a module to device, handling meta-initialized parameters safely."""
+    target = torch.device(device)
+    has_meta = any(p.is_meta for p in module.parameters()) or any(b.is_meta for b in module.buffers())
+    if has_meta:
+        return module.to_empty(device=target)
+    return module.to(target)
+
+
 def _extract_text_from_example(example: Dict, explicit_field: Optional[str] = None) -> str:
     """Best-effort extraction of text/transcript content from heterogeneous datasets."""
     if explicit_field:
@@ -137,7 +146,8 @@ class GPT2ActivationCollector:
         self.tokenizer.pad_token = self.tokenizer.eos_token
         # Use GPT2Model since we only need hidden states, not LM logits.
         # This avoids lm_head-related checkpoint load warnings.
-        self.model = GPT2Model.from_pretrained(model_name).to(device)
+        self.model = GPT2Model.from_pretrained(model_name)
+        self.model = _move_module_to_device(self.model, device)
         self.model.config.output_hidden_states = True
         
         # Set model to evaluation mode (disables dropout, etc.)

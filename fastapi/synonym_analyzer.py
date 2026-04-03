@@ -269,13 +269,14 @@ class SynonymAnalyzer(BaseAnalyzer):
                 for fid in shared_ids
             ]
             
-            j = jaccard(s1, s2)
+            binary_j = jaccard(s1, s2)
             wj = weighted_jaccard(profiles[w1], profiles[w2], indices=union_ids)
             cos = cosine_sim(profiles[w1], profiles[w2])
             pairwise.append({
                 "word_a": w1,
                 "word_b": w2,
-                "jaccard": round(j, 4),
+                "jaccard": round(wj, 4),
+                "binary_jaccard": round(binary_j, 4),
                 "weighted_jaccard": round(wj, 4),
                 "cosine_sim": round(cos, 4),
                 "shared_feature_count": len(shared_ids),
@@ -400,7 +401,8 @@ class SynonymAnalyzer(BaseAnalyzer):
             from transformers import GPT2Model, GPT2Tokenizer
             tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
             tokenizer.pad_token = tokenizer.eos_token
-            gpt2 = GPT2Model.from_pretrained("gpt2").to(self._device)
+            gpt2 = GPT2Model.from_pretrained("gpt2")
+            gpt2 = _move_module_to_device(gpt2, self._device)
             gpt2.config.output_hidden_states = True
             gpt2.eval()
             self._gpt2_cache["tokenizer"] = tokenizer

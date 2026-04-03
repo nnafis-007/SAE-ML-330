@@ -855,6 +855,14 @@ def find_target_token_positions(
     max_length: int = 128,
 ) -> Tuple[torch.Tensor, List[int]]:
     """Return (input_ids, list_of_positions) for target_word in sentence."""
+    # Avoid sentence-initial target tokens: prepend a short neutral prefix
+    # when the target appears as the first word to reduce attention-sink effects.
+    sentence_stripped = sentence.lstrip()
+    if sentence_stripped:
+        first_word = sentence_stripped.split(maxsplit=1)[0].strip(".,!?;:'\"()[]{}")
+        if first_word.lower() == target_word.lower():
+            sentence = f"In context, {sentence_stripped[0].lower()}{sentence_stripped[1:]}"
+
     enc = tokenizer(
         sentence,
         return_tensors="pt",
