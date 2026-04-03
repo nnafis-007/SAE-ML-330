@@ -169,11 +169,11 @@
   },
   "2711": {
     "feature_idx": 2711,
-    "label": "error",
-    "explanation": "error",
-    "confidence": "low",
-    "request_id": "fb509a64-de66-4936-b6ed-e56d754db702",
-    "updated_at": "2026-04-03T18:02:35Z"
+    "label": "Geopolitical Entity",
+    "explanation": "The feature detects mentions of the United States or concepts related to unity and integration, suggesting a focus on geopolitical entities or organizations",
+    "confidence": "high",
+    "request_id": "a8bbeb26-a695-4ae9-b9ca-9f400003df9f",
+    "updated_at": "2026-04-03T18:26:39Z"
   },
   "1": {
     "feature_idx": 1,
@@ -182,5 +182,173 @@
     "confidence": "high",
     "request_id": "de3afceb-3c12-4967-9f49-e7f2396402e4",
     "updated_at": "2026-04-03T18:08:59Z"
+  },
+  "5594": {
+    "feature_idx": 5594,
+    "label": "Frequency Adverbs",
+    "explanation": "The feature detects words that indicate the frequency or regularity of an event or action, such as 'often', 'sometimes', and 'usually'.",
+    "confidence": "high",
+    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
+    "updated_at": "2026-04-03T18:23:39Z"
+  },
+  "3138": {
+    "feature_idx": 3138,
+    "label": "Human Life Concept",
+    "explanation": "This feature detects the concept of human life, including its value, duration, and quality, as well as related ideas like lifespan, lifestyle, and life-threatening issues.",
+    "confidence": "high",
+    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
+    "updated_at": "2026-04-03T18:23:39Z"
+  },
+  "923": {
+    "feature_idx": 923,
+    "label": "Age or Maturity",
+    "explanation": "The feature detects mentions of age, maturity, or related concepts, such as being over or under a certain age, in various contexts",
+    "confidence": "high",
+    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
+    "updated_at": "2026-04-03T18:23:39Z"
+  },
+  "5908": {
+    "feature_idx": 5908,
+    "label": "Superlative concept",
+    "explanation": "The feature detects the concept of something being the greatest or highest in degree, as indicated by the frequent activation on the word 'most'",
+    "confidence": "high",
+    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
+    "updated_at": "2026-04-03T18:23:39Z"
+  },
+  "3655": {
+    "feature_idx": 3655,
+    "label": "Referring to multiple items",
+    "explanation": "The feature detects the token 'these' which is often used to refer to multiple items or cases in a legal context",
+    "confidence": "high",
+    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
+    "updated_at": "2026-04-03T18:23:39Z"
+  },
+  "5183": {
+    "feature_idx": 5183,
+    "label": "Physical Connection Concept",
+    "explanation": "The feature detects tokens related to physical or metaphorical connections, such as bridges, cords, or wires, as well as words like 'connect' and 'connection'",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "179": {
+    "feature_idx": 179,
+    "label": "Conceptual Connection",
+    "explanation": "This feature detects language related to establishing or describing relationships between ideas, events, or entities.",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "5592": {
+    "feature_idx": 5592,
+    "label": "Financial Resources",
+    "explanation": "The feature detects mentions of resources, particularly in the context of financial, economic, or material assets",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "1321": {
+    "feature_idx": 1321,
+    "label": "Medical Condition",
+    "explanation": "The feature activates on tokens related to various medical conditions, disabilities, and disorders, indicating it detects concepts related to health and wellness.",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "4098": {
+    "feature_idx": 4098,
+    "label": "Task Completion Concept",
+    "explanation": "The feature detects language related to finishing or completing tasks, projects, or activities, as evidenced by the frequent activation on words like 'complete', 'finished', and 'completion'.",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "5509": {
+    "feature_idx": 5509,
+    "label": "National Concept",
+    "explanation": "The feature detects the concept of something being related to a nation or country, often in the context of security, policy, or institutions",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "1275": {
+    "feature_idx": 1275,
+    "label": "Official Approval Concept",
+    "explanation": "The feature detects language related to formal consent, validation, or sanction from authorities or governing bodies",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "4513": {
+    "feature_idx": 4513,
+    "label": "Act of Giving",
+    "explanation": "The feature detects the concept of providing or offering something, whether tangible or intangible, to someone or something, as evidenced by the frequent activation on tokens related to giving",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "3653": {
+    "feature_idx": 3653,
+    "label": "Occupational Role",
+    "explanation": "The feature activates on tokens related to various professions, titles, and roles, indicating it detects occupational or job-related concepts",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "3614": {
+    "feature_idx": 3614,
+    "label": "Degree or Extent",
+    "explanation": "The feature detects words and phrases that describe the degree or extent of a particular quality, property, or situation, such as size, strength, or speed.",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "3028": {
+    "feature_idx": 3028,
+    "label": "Memory Recall Concept",
+    "explanation": "The feature detects instances where the text mentions remembering, recalling, or forgetting information, indicating a semantic concept related to memory and recollection",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "5993": {
+    "feature_idx": 5993,
+    "label": "Expert Opinion",
+    "explanation": "The feature detects instances where a professional or authoritative opinion is being expressed or referenced in the text",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "712": {
+    "feature_idx": 712,
+    "label": "Child Welfare",
+    "explanation": "The feature detects text related to the well-being, care, and protection of children, including topics such as custody, health insurance, and abuse.",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "4708": {
+    "feature_idx": 4708,
+    "label": "Political Affiliation",
+    "explanation": "The feature detects text related to political concepts, such as political affiliation, politics, and ideologies, often in the context of government, elections, or social issues",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "1164": {
+    "feature_idx": 1164,
+    "label": "Counterfactual Situation",
+    "explanation": "The feature detects situations where an alternative outcome or action could have occurred, often indicated by the presence of 'have' in a counterfactual context",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
+  },
+  "997": {
+    "feature_idx": 997,
+    "label": "Obligation or Necessity",
+    "explanation": "The feature detects the concept of obligation or necessity, as indicated by the frequent activation on the word 'should' in contexts where something is deemed necessary or required",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "updated_at": "2026-04-03T18:33:48Z"
   }
 }

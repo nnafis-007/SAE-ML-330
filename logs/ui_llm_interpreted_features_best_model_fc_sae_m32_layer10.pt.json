@@ -653,5 +653,351 @@
       "num_sentences": 2000
     },
     "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99536, Requested 912. Please try again in 6m27.071999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+  },
+  {
+    "timestamp": "2026-04-03T18:23:39.832042+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5594,
+    "label": "Frequency Adverbs",
+    "confidence": "high",
+    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
+    "labeling_config": {
+      "num_sentences": 3000,
+      "top_k": 25,
+      "min_activation": 2.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:23:39.834936+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3138,
+    "label": "Human Life Concept",
+    "confidence": "high",
+    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
+    "labeling_config": {
+      "num_sentences": 3000,
+      "top_k": 25,
+      "min_activation": 2.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:23:39.836779+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 923,
+    "label": "Age or Maturity",
+    "confidence": "high",
+    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
+    "labeling_config": {
+      "num_sentences": 3000,
+      "top_k": 25,
+      "min_activation": 2.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:23:39.838192+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5908,
+    "label": "Superlative concept",
+    "confidence": "high",
+    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
+    "labeling_config": {
+      "num_sentences": 3000,
+      "top_k": 25,
+      "min_activation": 2.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:23:39.839463+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3655,
+    "label": "Referring to multiple items",
+    "confidence": "high",
+    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
+    "labeling_config": {
+      "num_sentences": 3000,
+      "top_k": 25,
+      "min_activation": 2.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:26:39.512226+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2711,
+    "label": "Geopolitical Entity",
+    "explanation": "The feature detects mentions of the United States or concepts related to unity and integration, suggesting a focus on geopolitical entities or organizations",
+    "confidence": "high",
+    "request_id": "a8bbeb26-a695-4ae9-b9ca-9f400003df9f",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "united",
+      "together",
+      "joined",
+      "combined",
+      "separation",
+      "summed",
+      "union",
+      "integrated"
+    ],
+    "prompt_examples_count": 18,
+    "corpus_texts_count": 25,
+    "labeling_config": {
+      "top_k": 25,
+      "skip_first_token": true,
+      "min_activation": 1.5,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.634145+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5183,
+    "label": "Physical Connection Concept",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.635742+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 179,
+    "label": "Conceptual Connection",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.636884+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5592,
+    "label": "Financial Resources",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.638000+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1321,
+    "label": "Medical Condition",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.639036+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4098,
+    "label": "Task Completion Concept",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.639986+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5509,
+    "label": "National Concept",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.640903+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1275,
+    "label": "Official Approval Concept",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.641813+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4513,
+    "label": "Act of Giving",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.642784+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3653,
+    "label": "Occupational Role",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.643782+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3614,
+    "label": "Degree or Extent",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.644699+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3028,
+    "label": "Memory Recall Concept",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.645627+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5993,
+    "label": "Expert Opinion",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.646629+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 712,
+    "label": "Child Welfare",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.647588+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4708,
+    "label": "Political Affiliation",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.648540+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1164,
+    "label": "Counterfactual Situation",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T18:33:48.649492+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 997,
+    "label": "Obligation or Necessity",
+    "confidence": "high",
+    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "labeling_config": {
+      "num_sentences": 3500,
+      "top_k": 25,
+      "min_activation": 3.5
+    }
   }
 ]
