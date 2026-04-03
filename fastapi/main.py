@@ -79,7 +79,7 @@ from analyzers import get_analyzer, list_analyzers, get_all_models  # noqa: E402
 # ---------------------------------------------------------------------------
 
 class AnalyzeRequest(BaseModel):
-    text: str
+    text: str = Field(..., min_length=1)
     model_id: str
     analyzer: str = "sae"
     top_k: int = 10
@@ -103,6 +103,7 @@ class LabelFeatureRequest(BaseModel):
     feature_idx: int
     analyzer: str = "sae"
     corpus_texts: Optional[List[str]] = None
+    corpus_path: Optional[str] = None
     labeling_config: Optional[Dict[str, Any]] = None
     groq_api_key: Optional[str] = None  # falls back to GROQ_API_KEY env var
 
@@ -115,6 +116,7 @@ class BulkLabelFeaturesRequest(BaseModel):
     llm_top_k: int = Field(25, ge=1)
     min_activation: float = Field(0.0, ge=0.0)
     analyzer: str = "sae"
+    corpus_path: Optional[str] = None
     labeling_config: Optional[Dict[str, Any]] = None
     groq_api_key: Optional[str] = None
 
@@ -122,9 +124,10 @@ class BulkLabelFeaturesRequest(BaseModel):
 class FeatureActivationsRequest(BaseModel):
     model_id: str
     feature_id: int
-    dataset_name: str = "MLCommons/peoples_speech"
-    dataset_config: str = "validation"
-    split: str = "validation"
+    corpus_path: Optional[str] = None
+    dataset_name: Optional[str] = None
+    dataset_config: str = "local"
+    split: str = "local"
     max_sentences: Optional[int] = None
     target_activating_examples: Optional[int] = None
     page: int = 1
@@ -209,6 +212,9 @@ def analyze(request: AnalyzeRequest):
     except KeyError:
         raise HTTPException(404, f"Analyzer '{request.analyzer}' not found")
 
+    if not request.text.strip():
+        raise HTTPException(400, "Input text is empty. Please provide non-empty text for analysis.")
+
     try:
         result = a.analyze(
             text=request.text,
@@ -218,6 +224,8 @@ def analyze(request: AnalyzeRequest):
         return result
     except FileNotFoundError as exc:
         raise HTTPException(404, f"Model not found: {exc}")
+    except ValueError as exc:
+        raise HTTPException(400, str(exc))
     except Exception as exc:
         raise HTTPException(500, f"Analysis failed: {exc}")
 
@@ -331,6 +339,7 @@ def label_feature(request: LabelFeatureRequest):
             model_id=request.model_id,
             feature_idx=request.feature_idx,
             corpus_texts=request.corpus_texts,
+            corpus_path=request.corpus_path,
             labeling_config=request.labeling_config,
             groq_api_key=request.groq_api_key,
         )
@@ -382,6 +391,7 @@ def bulk_label_features(request: BulkLabelFeaturesRequest):
             num_sentences=request.num_sentences,
             llm_top_k=request.llm_top_k,
             min_activation=request.min_activation,
+            corpus_path=request.corpus_path,
             labeling_config=request.labeling_config,
             groq_api_key=request.groq_api_key,
         )
@@ -434,6 +444,7 @@ def feature_activations(request: FeatureActivationsRequest):
             dataset_name=request.dataset_name,
             dataset_config=request.dataset_config,
             split=request.split,
+            corpus_path=request.corpus_path,
             max_sentences=request.max_sentences,
             target_activating_examples=request.target_activating_examples,
             page=request.page,

@@ -46,6 +46,8 @@ from analyzers import BaseAnalyzer, register                           # noqa: E
 # Checkpoints directory
 # ---------------------------------------------------------------------------
 CHECKPOINTS_DIR = _SAE_ROOT / "checkpoints"
+DEFAULT_CORPUS_PATH = _SAE_ROOT / "corpus.txt"
+CACHE_DIR = _SAE_ROOT / ".cache"
 
 # Keep activation normalization consistent with LLM labeling path.
 _ACTIVATION_STD_FLOOR = 1e-3
@@ -87,8 +89,12 @@ class SAEAnalyzer(BaseAnalyzer):
         self._model_list_cache: Optional[List[Dict[str, Any]]] = None
         self._feature_activation_cache: Dict[str, Dict[str, Any]] = {}
         self._text_corpus_cache: Dict[str, List[str]] = {}
-        self._dataset_cache_dir = _SAE_ROOT / ".cache" / "dataset_texts"
-        self._dataset_cache_dir.mkdir(parents=True, exist_ok=True)
+        self._cache_dir = CACHE_DIR
+        self._corpus_cache_dir = self._cache_dir / "dataset_texts"
+        self._activation_cache_dir = self._cache_dir / "feature_label_inputs"
+        self._cache_dir.mkdir(parents=True, exist_ok=True)
+        self._corpus_cache_dir.mkdir(parents=True, exist_ok=True)
+        self._activation_cache_dir.mkdir(parents=True, exist_ok=True)
 
     # -- BaseAnalyzer interface ------------------------------------------------
 
@@ -146,10 +152,17 @@ class SAEAnalyzer(BaseAnalyzer):
                 ]
             }
         """
+        if not isinstance(text, str) or not text.strip():
+            raise ValueError("Input text is empty. Please provide non-empty text for analysis.")
+
         checkpoint_path = str(self._checkpoints_dir / model_id)
         info = self._load_sae(checkpoint_path)
         sae: SparseAutoencoder = info["sae"]
         layer_index: int = info["layer_index"]
+        d_hidden: int = int(info.get("d_hidden", 0))
+        if d_hidden <= 0:
+            raise ValueError(f"Selected SAE checkpoint has invalid hidden size (d_hidden={d_hidden}).")
+        top_k = max(1, int(top_k))
 
         collector = self._get_collector(layer_index)
         tokenizer = collector.tokenizer
@@ -164,6 +177,8 @@ class SAEAnalyzer(BaseAnalyzer):
         )
         input_ids = encoding["input_ids"].to(collector.device)
         token_id_list = input_ids[0].tolist()
+        if not token_id_list:
+            raise ValueError("Tokenizer produced no tokens from input text. Provide at least one non-whitespace character.")
 
         # ---- GPT-2 hidden states ---------------------------------------------
         with torch.no_grad():
@@ -206,7 +221,7 @@ class SAEAnalyzer(BaseAnalyzer):
         return {
             "model": model_id,
             "layer_index": layer_index,
-            "d_hidden": info["d_hidden"],
+            "d_hidden": d_hidden,
             "tokens": tokens_data,
         }
 
@@ -313,6 +328,7 @@ class SAEAnalyzer(BaseAnalyzer):
         model_id: str,
         feature_idx: int,
         corpus_texts: Optional[List[str]] = None,
+        corpus_path: Optional[str] = None,
         labeling_config: Optional[Dict[str, Any]] = None,
         groq_api_key: Optional[str] = None,
     ) -> Dict[str, Any]:
@@ -347,46 +363,26 @@ class SAEAnalyzer(BaseAnalyzer):
 
         # Corpus
         if corpus_texts is None:
-            # Default to Hugging Face People's Speech so feature interpretation
-            # uses a consistent dataset when UI doesn't provide sentence samples.
-            dataset_name = "MLCommons/peoples_speech"
-            dataset_config = "validation"
-            split = "validation"
             sentence_budget = 200
             if labeling_config:
                 sentence_budget = max(1, int(labeling_config.get("num_sentences", sentence_budget)))
 
-            try:
-                corpus_texts = self._load_dataset_texts(
-                    dataset_name=dataset_name,
-                    dataset_config=dataset_config,
-                    split=split,
-                    sentence_budget=sentence_budget,
-                    text_field=None,
-                    seed=0,
-                )
-
-                print(
-                    "[SAEAnalyzer] label_feature corpus source | "
-                    f"dataset={dataset_name}/{dataset_config}:{split} collected_sentences={len(corpus_texts)}"
-                )
-            except Exception as exc:
-                print(f"[SAEAnalyzer] Failed to load People's Speech for label_feature ({exc}); using fallback corpus.")
-                corpus_texts = [
-                    "The quick brown fox jumps over the lazy dog.",
-                    "Machine learning enables computers to learn from data.",
-                    "Neural networks have transformed natural language processing.",
-                ]
-
-        # Collect activations for this corpus
-        activations = collector.collect_activations(
-            texts=corpus_texts, batch_size=8, max_length=128,
+        corpus_path = corpus_path or str(DEFAULT_CORPUS_PATH)
+        corpus_texts, activations, token_ids, doc_map, pos_map, source_signature = self._get_cached_label_inputs(
+            model_id=model_id,
+            layer_index=layer_index,
+            collector=collector,
+            tokenizer=tokenizer,
+            corpus_texts=corpus_texts,
+            corpus_path=corpus_path,
+            sentence_budget=max(1, len(corpus_texts)) if corpus_texts else sentence_budget,
+            max_length=128,
+            request_tag="label_feature",
         )
 
-        from analyzers.llm_analysis import build_token_maps  # lazy import
-
-        token_ids, doc_map, pos_map = build_token_maps(
-            corpus_texts, tokenizer, max_length=128,
+        print(
+            "[SAEAnalyzer] label_feature corpus source | "
+            f"path={corpus_path} collected_sentences={len(corpus_texts)} signature={source_signature[:16]}"
         )
 
         # Labeling config (lazy imports)
@@ -466,9 +462,10 @@ class SAEAnalyzer(BaseAnalyzer):
         self,
         model_id: str,
         feature_id: int,
-        dataset_name: str = "MLCommons/peoples_speech",
-        dataset_config: str = "validation",
-        split: str = "validation",
+        dataset_name: Optional[str] = None,
+        dataset_config: str = "local",
+        split: str = "local",
+        corpus_path: Optional[str] = None,
         max_sentences: Optional[int] = None,
         target_activating_examples: Optional[int] = None,
         page: int = 1,
@@ -493,11 +490,12 @@ class SAEAnalyzer(BaseAnalyzer):
         d_hidden: int = int(info["d_hidden"])
 
         normalization_mode = "standardize"
+        corpus_path = corpus_path or str(DEFAULT_CORPUS_PATH)
 
         print(
             "[SAEAnalyzer] Feature activation lookup started | "
             f"model={model_id} feature_id={feature_id} layer={layer_index} "
-            f"dataset={dataset_name}/{dataset_config}:{split} max_sentences={max_sentences} "
+            f"corpus_path={corpus_path} max_sentences={max_sentences} "
             f"target_activating_examples={target_activating_examples} page={page} page_size={page_size} "
             f"min_activation={min_activation} "
             f"normalization={normalization_mode} filter='activation > min_activation'"
@@ -510,13 +508,25 @@ class SAEAnalyzer(BaseAnalyzer):
         if target_activating_examples is not None:
             target_activating_examples = max(1, int(target_activating_examples))
 
+        sentence_budget = (
+            max_sentences
+            if max_sentences is not None
+            else max(1000, int(target_activating_examples or 50) * 50)
+        )
+        source_signature = self._build_source_signature(
+            corpus_path=corpus_path,
+            sentence_budget=sentence_budget,
+            max_length=max_length,
+            model_id=model_id,
+            layer_index=layer_index,
+            request_tag="feature_activations",
+        )
+
         cache_key = json.dumps(
             {
                 "model_id": model_id,
                 "feature_id": feature_id,
-                "dataset_name": dataset_name,
-                "dataset_config": dataset_config,
-                "split": split,
+                "source_signature": source_signature,
                 "max_sentences": max_sentences,
                 "target_activating_examples": target_activating_examples,
                 "min_activation": float(min_activation),
@@ -564,6 +574,8 @@ class SAEAnalyzer(BaseAnalyzer):
                 "has_prev_page": page > 1,
                 "matches": paged_hits,
                 "total_matches": total_matches,
+                "source_signature": source_signature,
+                "corpus_path": corpus_path,
             }
 
         if feature_id < 0 or feature_id >= d_hidden:
@@ -573,32 +585,11 @@ class SAEAnalyzer(BaseAnalyzer):
         tokenizer = collector.tokenizer
         labels = self._load_feature_labels(checkpoint_path)
 
-        candidate_fields = [
-            text_field,
-            "text",
-            "sentence",
-            "transcript",
-            "content",
-            "article",
-            "document",
-        ]
-        candidate_fields = [f for f in candidate_fields if f]
-
-        sentence_budget = (
-            max_sentences
-            if max_sentences is not None
-            else max(1000, int(target_activating_examples or 50) * 50)
-        )
-
-        corpus_texts = self._load_dataset_texts(
-            dataset_name=dataset_name,
-            dataset_config=dataset_config,
-            split=split,
+        corpus_texts = self._load_local_corpus_texts(
+            corpus_path=corpus_path,
             sentence_budget=sentence_budget,
-            text_field=text_field,
-            seed=seed,
         )
-        selected_text_fields = candidate_fields
+        selected_text_fields = ["indexed_corpus"]
 
         texts_scanned = 0
         examples_scanned = 0
@@ -740,10 +731,10 @@ class SAEAnalyzer(BaseAnalyzer):
             "model": model_id,
             "feature_id": feature_id,
             "feature_description": labels.get(feature_id, {}).get("name", f"Feature {feature_id}"),
-            "dataset": dataset_name,
+            "dataset": dataset_name or "local_corpus",
             "dataset_config": dataset_config,
             "split": split,
-            "text_fields_checked": selected_text_fields or candidate_fields,
+            "text_fields_checked": selected_text_fields,
             "scanned_sentences": texts_scanned,
             "raw_examples_scanned": examples_scanned,
             "scanned_tokens": total_tokens_scanned,
@@ -760,6 +751,8 @@ class SAEAnalyzer(BaseAnalyzer):
             "has_prev_page": page > 1,
             "matches": paged_hits,
             "total_matches": total_matches,
+            "source_signature": source_signature,
+            "corpus_path": corpus_path,
         }
 
     def bulk_label_features(
@@ -770,6 +763,7 @@ class SAEAnalyzer(BaseAnalyzer):
         num_sentences: int = 200,
         llm_top_k: int = 25,
         min_activation: float = 0.0,
+        corpus_path: Optional[str] = None,
         labeling_config: Optional[Dict[str, Any]] = None,
         groq_api_key: Optional[str] = None,
     ) -> Dict[str, Any]:
@@ -788,26 +782,24 @@ class SAEAnalyzer(BaseAnalyzer):
         collector = self._get_collector(layer_index)
         tokenizer = collector.tokenizer
 
-        # Use one shared corpus for the entire range, then one labeler run.
-        corpus_texts = self._load_dataset_texts(
-            dataset_name="MLCommons/peoples_speech",
-            dataset_config="validation",
-            split="validation",
+        corpus_path = corpus_path or str(DEFAULT_CORPUS_PATH)
+        corpus_texts, activations, token_ids, doc_map, pos_map, source_signature = self._get_cached_label_inputs(
+            model_id=model_id,
+            layer_index=layer_index,
+            collector=collector,
+            tokenizer=tokenizer,
+            corpus_texts=None,
+            corpus_path=corpus_path,
             sentence_budget=max(1, int(num_sentences)),
-            text_field=None,
-            seed=0,
-        )
-
-        activations = collector.collect_activations(
-            texts=corpus_texts,
-            batch_size=8,
             max_length=128,
+            request_tag="bulk_label_features",
         )
-
-        from analyzers.llm_analysis import build_token_maps  # lazy import
         from analyzers.llm_analysis import FeatureLabeler, LabelingConfig
 
-        token_ids, doc_map, pos_map = build_token_maps(corpus_texts, tokenizer, max_length=128)
+        print(
+            "[SAEAnalyzer] bulk_label_features corpus source | "
+            f"path={corpus_path} collected_sentences={len(corpus_texts)} signature={source_signature[:16]}"
+        )
 
         resolved_api_key = groq_api_key or os.environ.get("GROQ_API_KEY")
         request_id = str(uuid.uuid4())
@@ -901,6 +893,8 @@ class SAEAnalyzer(BaseAnalyzer):
             "sentences_used": len(corpus_texts),
             "llm_top_k": int(cfg.top_k),
             "min_activation": float(cfg.min_activation),
+            "source_signature": source_signature,
+            "corpus_path": corpus_path,
             "labeled": labeled,
             "skipped": skipped,
             "failed": failed,
@@ -914,25 +908,51 @@ class SAEAnalyzer(BaseAnalyzer):
         std = std.clamp_min(_ACTIVATION_STD_FLOOR)
         return (hidden_states - mean) / (std + 1e-8)
 
-    def _load_dataset_texts(
+    def _build_source_signature(
         self,
-        dataset_name: str,
-        dataset_config: str,
-        split: str,
+        corpus_path: str,
         sentence_budget: int,
-        text_field: Optional[str],
-        seed: int,
+        max_length: int,
+        model_id: str,
+        layer_index: int,
+        request_tag: str,
+    ) -> str:
+        corpus_file = Path(corpus_path)
+        if not corpus_file.exists():
+            raise FileNotFoundError(f"Local corpus file not found: {corpus_file}")
+        stats = corpus_file.stat()
+        signature = (
+            f"corpus|{corpus_file.resolve()}|size={stats.st_size}|mtime_ns={stats.st_mtime_ns}|"
+            f"budget={int(sentence_budget)}|max_length={int(max_length)}|model={model_id}|"
+            f"layer={int(layer_index)}|tag={request_tag}"
+        )
+        return signature
+
+    def _save_texts_jsonl(self, texts: List[str], source_signature: str) -> str:
+        digest = hashlib.blake2b(source_signature.encode("utf-8"), digest_size=8).hexdigest()
+        out_path = self._cache_dir / f"hf_texts_{digest}.jsonl"
+        with out_path.open("w", encoding="utf-8") as f:
+            for idx, text in enumerate(texts):
+                row = {"idx": idx, "text": text}
+                f.write(json.dumps(row, ensure_ascii=False) + "\n")
+        return str(out_path)
+
+    def _load_local_corpus_texts(
+        self,
+        corpus_path: str,
+        sentence_budget: int,
     ) -> List[str]:
-        """Load dataset texts once and reuse from memory/disk cache across requests."""
+        """Load local indexed corpus and reuse from memory/disk cache."""
         sentence_budget = max(1, int(sentence_budget))
-        cache_payload = {
-            "dataset_name": dataset_name,
-            "dataset_config": dataset_config,
-            "split": split,
-            "text_field": text_field,
-            "seed": int(seed),
-        }
-        key_base = json.dumps(cache_payload, sort_keys=True)
+        source_signature = self._build_source_signature(
+            corpus_path=corpus_path,
+            sentence_budget=sentence_budget,
+            max_length=128,
+            model_id="local_corpus",
+            layer_index=-1,
+            request_tag="corpus_texts",
+        )
+        key_base = source_signature
         mem_key = f"{key_base}|budget={sentence_budget}"
 
         cached = self._text_corpus_cache.get(mem_key)
@@ -940,7 +960,7 @@ class SAEAnalyzer(BaseAnalyzer):
             return cached[:sentence_budget]
 
         digest = hashlib.sha1(key_base.encode("utf-8")).hexdigest()[:16]
-        disk_cache_path = self._dataset_cache_dir / f"{digest}.json"
+        disk_cache_path = self._corpus_cache_dir / f"{digest}.json"
 
         texts: List[str] = []
         if disk_cache_path.exists():
@@ -951,63 +971,24 @@ class SAEAnalyzer(BaseAnalyzer):
                 if len(texts) >= sentence_budget:
                     self._text_corpus_cache[mem_key] = texts[:sentence_budget]
                     print(
-                        "[SAEAnalyzer] Dataset text cache hit (disk) | "
-                        f"dataset={dataset_name}/{dataset_config}:{split} texts={len(texts[:sentence_budget])}"
+                        "[SAEAnalyzer] Local corpus text cache hit (disk) | "
+                        f"path={corpus_path} texts={len(texts[:sentence_budget])}"
                     )
                     return texts[:sentence_budget]
             except Exception:
                 texts = []
 
-        from datasets import Audio, load_dataset  # noqa: E402
-
-        print(
-            "[SAEAnalyzer] Preparing dataset text cache | "
-            f"dataset={dataset_name}/{dataset_config}:{split} budget={sentence_budget}"
+        from analyzers.llm_analysis import parse_indexed_corpus  # lazy import
+        texts = parse_indexed_corpus(
+            corpus_path=corpus_path,
+            max_entries=sentence_budget,
+            skip_header=True,
         )
-
-        ds = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
-
-        # Keep audio columns undecoded so text extraction does not require torchcodec.
-        try:
-            features = getattr(ds, "features", None) or {}
-            for col, feat in features.items():
-                if isinstance(feat, Audio):
-                    ds = ds.cast_column(col, Audio(decode=False))
-        except Exception:
-            pass
-
-        try:
-            ds = ds.shuffle(seed=seed, buffer_size=max(1000, sentence_budget * 4))
-        except Exception:
-            pass
-
-        candidate_fields = [
-            text_field,
-            "text",
-            "sentence",
-            "transcript",
-            "content",
-            "article",
-            "document",
-        ]
-        candidate_fields = [f for f in candidate_fields if f]
-
-        for example in ds:
-            sentence = ""
-            for field in candidate_fields:
-                raw = example.get(field)
-                if isinstance(raw, str) and raw.strip():
-                    sentence = raw.strip()
-                    break
-            if sentence:
-                texts.append(sentence)
-            if len(texts) >= sentence_budget:
-                break
 
         if texts:
             try:
                 disk_cache_path.write_text(
-                    json.dumps({"texts": texts}, ensure_ascii=False),
+                    json.dumps({"texts": texts, "source_signature": source_signature}, ensure_ascii=False),
                     encoding="utf-8",
                 )
             except Exception:
@@ -1015,10 +996,108 @@ class SAEAnalyzer(BaseAnalyzer):
 
         self._text_corpus_cache[mem_key] = texts[:sentence_budget]
         print(
-            "[SAEAnalyzer] Dataset text cache ready | "
-            f"dataset={dataset_name}/{dataset_config}:{split} texts={len(texts[:sentence_budget])}"
+            "[SAEAnalyzer] Local corpus text cache ready | "
+            f"path={corpus_path} texts={len(texts[:sentence_budget])}"
         )
         return texts[:sentence_budget]
+
+    def _get_cached_label_inputs(
+        self,
+        model_id: str,
+        layer_index: int,
+        collector: Any,
+        tokenizer: Any,
+        corpus_texts: Optional[List[str]],
+        corpus_path: str,
+        sentence_budget: int,
+        max_length: int,
+        request_tag: str,
+    ) -> tuple[List[str], torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, str]:
+        """Build or load cached activations/token maps with source-signature validation."""
+        from analyzers.llm_analysis import build_token_maps  # lazy import
+
+        sentence_budget = max(1, int(sentence_budget))
+        max_length = max(1, int(max_length))
+
+        if corpus_texts is None:
+            corpus_texts = self._load_local_corpus_texts(
+                corpus_path=corpus_path,
+                sentence_budget=sentence_budget,
+            )
+            source_signature = self._build_source_signature(
+                corpus_path=corpus_path,
+                sentence_budget=sentence_budget,
+                max_length=max_length,
+                model_id=model_id,
+                layer_index=layer_index,
+                request_tag=request_tag,
+            )
+        else:
+            corpus_texts = [str(t).strip() for t in corpus_texts if isinstance(t, str) and str(t).strip()]
+            explicit_hash = hashlib.blake2b(
+                "\n".join(corpus_texts).encode("utf-8"), digest_size=12
+            ).hexdigest()
+            source_signature = (
+                f"inline_texts|count={len(corpus_texts)}|hash={explicit_hash}|"
+                f"max_length={max_length}|model={model_id}|layer={layer_index}|tag={request_tag}"
+            )
+
+        digest = hashlib.blake2b(source_signature.encode("utf-8"), digest_size=8).hexdigest()
+        cache_path = self._activation_cache_dir / f"label_inputs_{digest}.pt"
+
+        if cache_path.exists():
+            try:
+                cache = torch.load(cache_path, map_location="cpu", weights_only=False)
+                cached_signature = cache.get("source_signature")
+                if cached_signature == source_signature:
+                    print(
+                        "[SAEAnalyzer] Label input cache hit | "
+                        f"path={cache_path.name} signature={source_signature[:16]}"
+                    )
+                    return (
+                        corpus_texts,
+                        cache["activations"],
+                        cache["token_ids"],
+                        cache["token_doc_map"],
+                        cache["token_pos_map"],
+                        source_signature,
+                    )
+                print(
+                    "[SAEAnalyzer] Label input cache signature mismatch | "
+                    f"cached={str(cached_signature)[:16]} current={source_signature[:16]}"
+                )
+            except Exception as exc:
+                print(f"[SAEAnalyzer] Failed to load label input cache ({cache_path.name}): {exc}")
+
+        activations = collector.collect_activations(
+            texts=corpus_texts,
+            batch_size=8,
+            max_length=max_length,
+        )
+        token_ids, token_doc_map, token_pos_map = build_token_maps(
+            corpus_texts,
+            tokenizer,
+            max_length=max_length,
+        )
+        texts_jsonl_path = self._save_texts_jsonl(corpus_texts, source_signature)
+
+        torch.save(
+            {
+                "version": 1,
+                "source_signature": source_signature,
+                "texts_jsonl_path": texts_jsonl_path,
+                "activations": activations,
+                "token_ids": token_ids,
+                "token_doc_map": token_doc_map,
+                "token_pos_map": token_pos_map,
+            },
+            cache_path,
+        )
+        print(
+            "[SAEAnalyzer] Label input cache saved | "
+            f"path={cache_path.name} signature={source_signature[:16]}"
+        )
+        return corpus_texts, activations, token_ids, token_doc_map, token_pos_map, source_signature
 
     # -- Internal helpers ------------------------------------------------------
 

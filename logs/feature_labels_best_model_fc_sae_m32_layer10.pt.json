@@ -25,11 +25,11 @@
   },
   "6068": {
     "feature_idx": 6068,
-    "label": "Emphasis or extent",
-    "explanation": "The feature detects words that indicate degree, emphasis, or extent, such as 'enough', 'detail', 'excited', and 'thrilled'.",
+    "label": "Preposition Usage",
+    "explanation": "The feature detects the usage of prepositions such as 'in', 'to', and 'with' in various contexts",
     "confidence": "high",
-    "request_id": "387a0e65-d0ab-440a-84d0-a99b0e6d40ae",
-    "updated_at": "2026-04-03T15:54:10Z"
+    "request_id": "13831d3d-865c-475c-88f0-e36b370d9db5",
+    "updated_at": "2026-04-03T16:51:35Z"
   },
   "4212": {
     "feature_idx": 4212,
@@ -70,5 +70,29 @@
     "confidence": "high",
     "request_id": "ea3ff243-018f-44ac-8048-69760c2c90fd",
     "updated_at": "2026-04-03T17:20:18Z"
+  },
+  "1968": {
+    "feature_idx": 1968,
+    "label": "Location or Position",
+    "explanation": "The feature detects the concept of location or position, as indicated by the frequent activation on tokens such as 'at' and 'this' in contexts that describe physical or metaphorical locations",
+    "confidence": "high",
+    "request_id": "6b59b0f8-ffdd-422f-9151-622101b97f01",
+    "updated_at": "2026-04-03T16:55:52Z"
+  },
+  "426": {
+    "feature_idx": 426,
+    "label": "Person or Human",
+    "explanation": "The feature activates on tokens related to individuals, such as 'man', 'woman', 'guy', and 'human', indicating it detects references to people or persons",
+    "confidence": "high",
+    "request_id": "453f539d-a382-4ad7-ab2e-d9977bfcbe11",
+    "updated_at": "2026-04-03T17:40:16Z"
+  },
+  "949": {
+    "feature_idx": 949,
+    "label": "Expression of sentiment",
+    "explanation": "The feature detects tokens that convey emotions, preferences, or attitudes, such as liking, appreciating, or opposing something",
+    "confidence": "high",
+    "request_id": "f0447e36-2308-4e20-86a5-51fb81099023",
+    "updated_at": "2026-04-03T17:47:09Z"
   }
 }

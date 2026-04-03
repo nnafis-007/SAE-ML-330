@@ -5,9 +5,7 @@ import {
 } from 'react-native';
 
 const API_BASE = 'http://localhost:8000';
-const PEOPLE_SPEECH_DATASET = 'MLCommons/peoples_speech';
-const PEOPLE_SPEECH_CONFIG = 'validation';
-const PEOPLE_SPEECH_SPLIT = 'validation';
+const DEFAULT_CORPUS_PATH = 'corpus.txt';
 
 function sanitizeDecimalInput(value) {
   const cleaned = (value || '').replace(/[^0-9.]/g, '');
@@ -125,9 +123,7 @@ export default function FeatureDetails({ feature, onClose, modelId, themeMode = 
       const activationQuery = {
         model_id: modelId,
         feature_id: feature.id,
-        dataset_name: PEOPLE_SPEECH_DATASET,
-        dataset_config: PEOPLE_SPEECH_CONFIG,
-        split: PEOPLE_SPEECH_SPLIT,
+        corpus_path: DEFAULT_CORPUS_PATH,
         max_sentences: hasExplicitSentenceLimit ? effectiveSentenceLimit : null,
         target_activating_examples: !hasExplicitSentenceLimit ? activatingExamplesLimit : null,
         min_activation: minAct,
@@ -179,7 +175,7 @@ export default function FeatureDetails({ feature, onClose, modelId, themeMode = 
         corpusSentencesUsed: corpusForLlm.length,
         totalMatches: activationData.total_matches || 0,
         totalPages: activationData.total_pages || 1,
-        dataset: `${PEOPLE_SPEECH_DATASET} [${PEOPLE_SPEECH_SPLIT}]`,
+        dataset: `Local corpus (${DEFAULT_CORPUS_PATH})`,
       });
     } catch (e) {
       setLlmError(e.message);
@@ -232,7 +228,7 @@ export default function FeatureDetails({ feature, onClose, modelId, themeMode = 
               <Text style={styles.sectionLabel}>ANALYSIS PARAMETERS</Text>
             </View>
             <Text style={styles.configHint}>
-              Dataset: MLCommons/peoples_speech · Scans sentences to find activating contexts, then sends them to LLM for labeling.
+              Source: local corpus.txt · Scans sentences to find activating contexts, then sends them to LLM for labeling.
             </Text>
 
             <View style={styles.inputGrid}>

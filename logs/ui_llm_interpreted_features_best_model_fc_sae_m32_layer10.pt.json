@@ -264,6 +264,87 @@
     "error": null
   },
   {
+    "timestamp": "2026-04-03T16:50:31.749679+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 6068,
+    "label": "Preposition or Conjunction",
+    "explanation": "The feature activates on common prepositions and conjunctions that indicate relationships between words or phrases in a sentence",
+    "confidence": "high",
+    "request_id": "0b879a28-264a-4833-8158-e554aaab49f2",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "returned",
+      "in",
+      "used",
+      "okay",
+      "to"
+    ],
+    "prompt_examples_count": 5,
+    "corpus_texts_count": 10,
+    "labeling_config": {
+      "top_k": 25,
+      "skip_first_token": true,
+      "min_activation": 1.5,
+      "num_sentences": 3500
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T16:51:35.853477+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 6068,
+    "label": "Preposition Usage",
+    "explanation": "The feature detects the usage of prepositions such as 'in', 'to', and 'with' in various contexts",
+    "confidence": "high",
+    "request_id": "13831d3d-865c-475c-88f0-e36b370d9db5",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "returned",
+      "in",
+      "used",
+      "okay",
+      "to"
+    ],
+    "prompt_examples_count": 5,
+    "corpus_texts_count": 10,
+    "labeling_config": {
+      "top_k": 30,
+      "skip_first_token": true,
+      "min_activation": 1.5,
+      "num_sentences": 3500
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T16:55:52.306858+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1968,
+    "label": "Location or Position",
+    "explanation": "The feature detects the concept of location or position, as indicated by the frequent activation on tokens such as 'at' and 'this' in contexts that describe physical or metaphorical locations",
+    "confidence": "high",
+    "request_id": "6b59b0f8-ffdd-422f-9151-622101b97f01",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "at",
+      "this"
+    ],
+    "prompt_examples_count": 23,
+    "corpus_texts_count": 25,
+    "labeling_config": {
+      "top_k": 25,
+      "skip_first_token": true,
+      "min_activation": 1.5,
+      "num_sentences": 3500
+    },
+    "error": null
+  },
+  {
     "timestamp": "2026-04-03T17:18:45.289704+00:00",
     "source": "ui",
     "analyzer": "sae",
@@ -317,6 +398,72 @@
       "skip_first_token": true,
       "min_activation": 0.1,
       "num_sentences": 120
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:40:16.353145+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 426,
+    "label": "Person or Human",
+    "explanation": "The feature activates on tokens related to individuals, such as 'man', 'woman', 'guy', and 'human', indicating it detects references to people or persons",
+    "confidence": "high",
+    "request_id": "453f539d-a382-4ad7-ab2e-d9977bfcbe11",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "human",
+      "guy",
+      "man",
+      "men",
+      "woman",
+      "machine",
+      "eman",
+      "suspect",
+      "driver",
+      "nation"
+    ],
+    "prompt_examples_count": 19,
+    "corpus_texts_count": 25,
+    "labeling_config": {
+      "top_k": 25,
+      "skip_first_token": true,
+      "min_activation": 1.5,
+      "num_sentences": 3500
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:47:09.394200+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 949,
+    "label": "Expression of sentiment",
+    "explanation": "The feature detects tokens that convey emotions, preferences, or attitudes, such as liking, appreciating, or opposing something",
+    "confidence": "high",
+    "request_id": "f0447e36-2308-4e20-86a5-51fb81099023",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "like",
+      "appreciate",
+      "to",
+      "miss",
+      "for",
+      "missed",
+      "oppose",
+      "wants",
+      "welcome",
+      "with"
+    ],
+    "prompt_examples_count": 20,
+    "corpus_texts_count": 30,
+    "labeling_config": {
+      "top_k": 30,
+      "skip_first_token": true,
+      "min_activation": 2,
+      "num_sentences": 3750
     },
     "error": null
   }

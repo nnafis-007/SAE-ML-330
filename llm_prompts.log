@@ -2074,3 +2074,90 @@ RESPONSE:
   "confidence": "high"
 }
 ================================================================================
+
+================================================================================
+REQUEST_ID 453f539d-a382-4ad7-ab2e-d9977bfcbe11
+FEATURE 426
+USER PROMPT:
+Feature index: 426
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 19 activating examples (ordered strongest first):
+   1. [act=8.974]   grabbing the fourteen year for a twenty two year old>>> man<<< to grab a fourteen year old girl's hands and
+   2. [act=7.869]   isolated and these these characteristics are unfortunately typical characteristics of>>> men<<< act
+   3. [act=4.903]  this>>> woman<<< was clearly unhappy with the relationship she had just given
+   4. [act=3.964]   succession and that somebody might have mistaken that for a>>> machine<<< gun that's all i'm suggesting syria any
+   5. [act=3.668]   don't need to get behind why mr fre>>>eman<<< said he wanted to move to withdraw the fact of
+   6. [act=3.193]   a mole around the world we're talking about one>>> guy<<< with a computer
+   7. [act=2.569]   standard such as a motion for summary judgment the sick>>> guy<<< a case from the eastern district of new york
+   8. [act=2.528]   so were so tight as to preclude the possibility of>>> human<<< error when in fact you
+   9. [act=2.447]   you know you haven't shown that there's no>>> human<<< error that the that the practices were so were so
+  10. [act=2.378]   really the only characteristic that matched the description of the>>> suspect<<< here in terms of why they decided to stop pick
+  11. [act=1.987]   in crashes involving a distracted or inattentive>>> driver<<< and more than a million were injured while the most
+  12. [act=1.830]   to protect and enforce the intellectual property rights of our>>> nation<<<'s industrial base throughout the domestic and
+  13. [act=1.808]   on this appeal is whether the defendant's evidence of>>> human<<< error and the rapidity with which its cheeses
+  14. [act=1.751]   two year old man to grab a fourteen year old>>> girl<<<'s hands and place them on his sex organ is
+  15. [act=1.716]  then there is a sanction or a>>> stick<<< for not complying the pervasive unwillingness of illegal aliens to
+  16. [act=1.694]   handshake deals true they occurred after mr buy a>>> cow<<< was in the process
+  17. [act=1.648]   was here if the jury if the jury believed the>>> wife<<< it would acquit she gave testimony fully supporting the
+  18. [act=1.595]   substitute the same party you can't substitute the same>>> person<<< that was originally named so the substitution mechanism is in
+  19. [act=1.570]   the company by issuing new shares of stock so from>>> day<<< one the
+
+Most frequent activating tokens (top 10): "human", "guy", "man", "men", "woman", "machine", "eman", "suspect", "driver", "nation"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Person or Human",
+  "explanation": "The feature activates on tokens related to individuals, such as 'man', 'woman', 'guy', and 'human', indicating it detects references to people or persons",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID f0447e36-2308-4e20-86a5-51fb81099023
+FEATURE 949
+USER PROMPT:
+Feature index: 949
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 20 activating examples (ordered strongest first):
+   1. [act=8.117]  keeper of the brother and i>>> like<<< some of my colleagues find it very difficult to
+   2. [act=5.618]   probably not the general population who would probably very much>>> like<<< to have the united states army and united
+   3. [act=3.757]   and struggling u s manufacturing sector in that regard i>>> appreciate<<< the longtime support of this committee and most recently b
+   4. [act=3.333]   for developing bipartisan solutions that address critical issues we will>>> miss<<< that leadership we look forward to the remainder of your
+   5. [act=3.297]   to stop and this example in these hearings and i>>> appreciate<<< the chairman having these hearings these hearings highlight what's
+   6. [act=3.256]  and affection>>> for<<< everyone here because this truly is the people's house
+   7. [act=3.162]   now i understand that they're alleging diversity jurisdiction i>>> appreciate<<< that but the decision in bank homan says other
+   8. [act=2.732]   said they wanted to organize maritime i'm sorry i>>> missed<<< the last part
+   9. [act=2.610]   here will because of some of some folks are new>>> to<<< the to the committee and so on but for those
+  10. [act=2.570]   they're more circumstantially maybe than you would>>> like<<< to prove their case but nonetheless that was still the
+  11. [act=2.479]   i am well if steadfastly enforce the law i>>> oppose<<< torture
+  12. [act=2.462]   as long as they can i don't think anyone>>> wants<<< to stay in jail i think every one of these
+  13. [act=2.428]   week as some of you probably will recall so i>>> welcome<<< our distinguished witnesses especially those who have had to rearr
+  14. [act=2.196]  't know the name but other coworkers who were partial>>> to<<< t j and perhaps shelley pratt as you
+  15. [act=2.147]   testimony that she never objected never indicated her unhappiness>>> with<<< the relationship and as a result again she admits that
+  16. [act=2.121]   special relationship and would use that relationship to bypass or>>> prefer<<< themselves in
+  17. [act=2.068]   his job was to check out the avionics and>>> like<<< electrical equipment of the jet before the jet was delivered
+  18. [act=2.050]   first of all or well i guess what i'd>>> like<<< to step back and talk about the facts of this
+  19. [act=2.022]   the large number of black candidates who are not black>>> preferred<<< is not relevant to the
+  20. [act=2.022]   here and i'm not i don't know enough>>> about<<< the
+
+Most frequent activating tokens (top 10): "like", "appreciate", "to", "miss", "for", "missed", "oppose", "wants", "welcome", "with"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Expression of sentiment",
+  "explanation": "The feature detects tokens that convey emotions, preferences, or attitudes, such as liking, appreciating, or opposing something",
+  "confidence": "high"
+}
+================================================================================

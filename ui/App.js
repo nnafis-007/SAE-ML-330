@@ -190,10 +190,10 @@ export default function App() {
   useEffect(() => {
     const digitsOnly = (topKInput || '').replace(/[^0-9]/g, '');
     if (digitsOnly === '') {
-      setTopK(0);
+      setTopK(10);
       return;
     }
-    setTopK(Number(digitsOnly));
+    setTopK(Math.max(1, Number(digitsOnly) || 1));
   }, [topKInput]);
 
   useEffect(() => {
@@ -204,6 +204,10 @@ export default function App() {
 
   const analyzeText = async (textToAnalyze) => {
     if (!selectedModel) { setError('Please select a model first'); return; }
+    if (!textToAnalyze || !textToAnalyze.trim()) {
+      setError('Please enter non-empty text before running analysis.');
+      return;
+    }
     setLoading(true);
     setError(null);
     setActiveTokenIndex(null);
@@ -211,7 +215,7 @@ export default function App() {
       const response = await fetch(`${API_BASE}/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: textToAnalyze, model_id: selectedModel, analyzer: 'sae', top_k: topK }),
+        body: JSON.stringify({ text: textToAnalyze, model_id: selectedModel, analyzer: 'sae', top_k: Math.max(1, Number(topK) || 10) }),
       });
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
@@ -249,9 +253,7 @@ export default function App() {
         body: JSON.stringify({
           model_id: selectedModel,
           feature_id: parsedFeatureId,
-          dataset_name: 'MLCommons/peoples_speech',
-          dataset_config: 'validation',
-          split: 'validation',
+          corpus_path: 'corpus.txt',
           max_sentences: Math.max(1, Number(lookupMaxSentences) || 200),
           target_activating_examples: Math.max(1, Number(lookupMaxResults) || 100),
           min_activation: parsedMinActivation,
@@ -777,7 +779,7 @@ export default function App() {
                   <Text style={styles.sectionLabel}>DATASET ACTIVATION SEARCH</Text>
                 </View>
                 <Text style={styles.lookupHint}>
-                  Find sentences in MLCommons/peoples_speech where a specific feature activates.
+                  Find sentences in local corpus.txt where a specific feature activates.
                 </Text>
 
                 <View style={styles.lookupGrid}>
