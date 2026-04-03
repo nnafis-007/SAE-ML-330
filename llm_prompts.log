@@ -1502,3 +1502,126 @@ RESPONSE:
   "confidence": "high"
 }
 ================================================================================
+
+================================================================================
+REQUEST_ID 7c2c5140-b48f-46ae-891b-62be31434e70
+FEATURE 11083
+USER PROMPT:
+Feature index: 11083
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 20 activating examples (ordered strongest first):
+   1. [act=3.509]  absolutely it puts holland on the>>> map<<< now
+   2. [act=3.247]  absolutely it puts holland on the map>>> now<<<
+   3. [act=2.297]  absolutely it>>> puts<<< holland on the map now
+   4. [act=2.160]  absolutely it puts holland>>> on<<< the map now
+   5. [act=1.850]  absolutely>>> it<<< puts holland on the map now
+   6. [act=1.728]   probably what your mom is used to in peru>>> right<<< yeah we have our markets and we get fresh things
+   7. [act=1.700]  got>>> ready<<< got downstairs car's nice and toasty you know
+   8. [act=1.253]   had they got cooked and that they did the batteries>>> didn<<<'t like that
+   9. [act=0.858]   got cooked and that they did the batteries didn't>>> like<<< that
+  10. [act=0.641]  absolutely it puts holland on>>> the<<< map now
+  11. [act=0.540]  is>>> that<<< to keep em moist that's to keep the weeds
+  12. [act=0.453]   these were caused in new mexico and they>>> simply<<< had they got cooked and that they did the batteries
+  13. [act=0.417]  and i at the point>>> of<<< it i was my efficiency they they measured it in
+  14. [act=0.409]   in new mexico and they simply had they>>> got<<< cooked and that they did the batteries didn't like
+  15. [act=0.404]  absolutely it puts holl>>>and<<< on the map now
+  16. [act=0.376]  and i at the point of>>> it<<< i was my efficiency they they measured it in watt
+  17. [act=0.319]  and i mean actually>>> been<<< going all over
+  18. [act=0.306]   really nice to bring my mom to armenian>>> church<<< and you know sure enough we got there and she
+  19. [act=0.185]  car and fumigate your>>> garage<<<
+  20. [act=0.110]   simply had they got cooked and that they did the>>> batteries<<< didn't like that
+
+Most frequent activating tokens (top 10): "it", "map", "now", "puts", "on", "right", "ready", "didn", "like", "the"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Location Reference",
+  "explanation": "The feature detects tokens that are part of phrases referencing locations or placing something on a map, often with words like 'holland', 'map', and 'now'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 18c8b1f8-1999-4795-83dc-b05c66542f32
+FEATURE 11083
+USER PROMPT:
+Feature index: 11083
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 20 activating examples (ordered strongest first):
+   1. [act=3.509]  absolutely it puts holland on the>>> map<<< now
+   2. [act=3.247]  absolutely it puts holland on the map>>> now<<<
+   3. [act=2.297]  absolutely it>>> puts<<< holland on the map now
+   4. [act=2.160]  absolutely it puts holland>>> on<<< the map now
+   5. [act=1.850]  absolutely>>> it<<< puts holland on the map now
+   6. [act=1.728]   probably what your mom is used to in peru>>> right<<< yeah we have our markets and we get fresh things
+   7. [act=1.700]  got>>> ready<<< got downstairs car's nice and toasty you know
+   8. [act=1.253]   had they got cooked and that they did the batteries>>> didn<<<'t like that
+   9. [act=0.858]   got cooked and that they did the batteries didn't>>> like<<< that
+  10. [act=0.641]  absolutely it puts holland on>>> the<<< map now
+  11. [act=0.540]  is>>> that<<< to keep em moist that's to keep the weeds
+  12. [act=0.453]   these were caused in new mexico and they>>> simply<<< had they got cooked and that they did the batteries
+  13. [act=0.417]  and i at the point>>> of<<< it i was my efficiency they they measured it in
+  14. [act=0.409]   in new mexico and they simply had they>>> got<<< cooked and that they did the batteries didn't like
+  15. [act=0.404]  absolutely it puts holl>>>and<<< on the map now
+  16. [act=0.376]  and i at the point of>>> it<<< i was my efficiency they they measured it in watt
+  17. [act=0.319]  and i mean actually>>> been<<< going all over
+  18. [act=0.306]   really nice to bring my mom to armenian>>> church<<< and you know sure enough we got there and she
+  19. [act=0.185]  car and fumigate your>>> garage<<<
+  20. [act=0.110]   simply had they got cooked and that they did the>>> batteries<<< didn't like that
+
+Most frequent activating tokens (top 10): "it", "map", "now", "puts", "on", "right", "ready", "didn", "like", "the"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Location Reference",
+  "explanation": "The feature detects tokens that are part of phrases referencing specific locations or placing something on a map.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID ae0f9432-aafd-4a64-ae56-b45c23eb2c6a
+FEATURE 2051
+USER PROMPT:
+Feature index: 2051
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 11 activating examples (ordered strongest first):
+   1. [act=3.462]   they're kind of an artistic choices here for the>>> pots<<<
+   2. [act=3.084]   used to in peru right yeah we have our>>> markets<<< and we get fresh things every day
+   3. [act=2.182]   simply had they got cooked and that they did the>>> batteries<<< didn't like that
+   4. [act=1.750]  it looks like they're kind of an artistic>>> choices<<< here for the pots
+   5. [act=1.741]  got ready got downstairs car>>>'s<<< nice and toasty you know pulling that off of
+   6. [act=0.713]   i was my efficiency they they measured it in watt>>> hours<<< per mile but it was negative
+   7. [act=0.603]  but the mer>>>cedes<<< is coming off and they've just accelerated their program
+   8. [act=0.554]  'll set you back anywhere from a couple of hundred>>> bucks<<< for for one that you can buy on ebay
+   9. [act=0.474]   we had a lot of people yesterday like my bean>>> plants<<< aren't looking very good no more
+  10. [act=0.328]   green bean day that you can come and pick green>>> beans<<<
+  11. [act=0.280]   buy one outright new and that's like four hundred>>> bucks<<< to get
+
+Most frequent activating tokens (top 10): "bucks", "pots", "markets", "batteries", "choices", "'s", "hours", "cedes", "plants", "beans"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Common Household Items",
+  "explanation": "The feature activates on tokens related to everyday objects and products, such as pots, markets, batteries, and plants, indicating a concept focused on common household items",
+  "confidence": "high"
+}
+================================================================================

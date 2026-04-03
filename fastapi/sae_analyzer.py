@@ -655,7 +655,12 @@ class SAEAnalyzer(BaseAnalyzer):
         text_field: Optional[str],
         seed: int,
     ) -> List[str]:
-        """Load dataset texts once and reuse from memory/disk cache across requests."""
+        """Load dataset texts once and reuse from memory/disk cache across requests.
+
+        For UI responsiveness, return any cached texts immediately (even if fewer
+        than the current sentence budget) instead of blocking on remote dataset
+        resolution.
+        """
         sentence_budget = max(1, int(sentence_budget))
         cache_payload = {
             "dataset_name": dataset_name,
@@ -665,10 +670,9 @@ class SAEAnalyzer(BaseAnalyzer):
             "seed": int(seed),
         }
         key_base = json.dumps(cache_payload, sort_keys=True)
-        mem_key = f"{key_base}|budget={sentence_budget}"
 
-        cached = self._text_corpus_cache.get(mem_key)
-        if cached is not None:
+        cached = self._text_corpus_cache.get(key_base)
+        if cached:
             return cached[:sentence_budget]
 
         digest = hashlib.sha1(key_base.encode("utf-8")).hexdigest()[:16]
@@ -680,13 +684,14 @@ class SAEAnalyzer(BaseAnalyzer):
                 payload = json.loads(disk_cache_path.read_text(encoding="utf-8"))
                 if isinstance(payload, dict) and isinstance(payload.get("texts"), list):
                     texts = [str(t) for t in payload["texts"] if isinstance(t, str) and t.strip()]
-                if len(texts) >= sentence_budget:
-                    self._text_corpus_cache[mem_key] = texts[:sentence_budget]
+                if texts:
+                    self._text_corpus_cache[key_base] = texts
+                    returned = texts[:sentence_budget]
                     print(
                         "[SAEAnalyzer] Dataset text cache hit (disk) | "
-                        f"dataset={dataset_name}/{dataset_config}:{split} texts={len(texts[:sentence_budget])}"
+                        f"dataset={dataset_name}/{dataset_config}:{split} texts={len(returned)}"
                     )
-                    return texts[:sentence_budget]
+                    return returned
             except Exception:
                 texts = []
 
@@ -697,7 +702,26 @@ class SAEAnalyzer(BaseAnalyzer):
             f"dataset={dataset_name}/{dataset_config}:{split} budget={sentence_budget}"
         )
 
-        ds = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
+        ds = None
+        try:
+            # Fast path: avoid hub/network metadata calls when local HF cache exists.
+            ds = load_dataset(
+                dataset_name,
+                dataset_config,
+                split=split,
+                streaming=True,
+                local_files_only=True,
+            )
+            print(
+                "[SAEAnalyzer] Dataset load mode | "
+                f"dataset={dataset_name}/{dataset_config}:{split} mode=local-cache"
+            )
+        except Exception:
+            ds = load_dataset(dataset_name, dataset_config, split=split, streaming=True)
+            print(
+                "[SAEAnalyzer] Dataset load mode | "
+                f"dataset={dataset_name}/{dataset_config}:{split} mode=remote-resolve"
+            )
 
         # Keep audio columns undecoded so text extraction does not require torchcodec.
         try:
@@ -745,7 +769,7 @@ class SAEAnalyzer(BaseAnalyzer):
             except Exception:
                 pass
 
-        self._text_corpus_cache[mem_key] = texts[:sentence_budget]
+        self._text_corpus_cache[key_base] = texts
         print(
             "[SAEAnalyzer] Dataset text cache ready | "
             f"dataset={dataset_name}/{dataset_config}:{split} texts={len(texts[:sentence_budget])}"
