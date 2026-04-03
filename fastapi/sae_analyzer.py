@@ -281,6 +281,31 @@ class SAEAnalyzer(BaseAnalyzer):
             "tokens": token_rows,
         }
 
+    def get_feature_info(
+        self,
+        model_id: str,
+        feature_id: int,
+    ) -> Dict[str, Any]:
+        """Return feature label/description metadata without scanning sentences."""
+        checkpoint_path = str(self._checkpoints_dir / model_id)
+        info = self._load_sae(checkpoint_path)
+        d_hidden: int = int(info["d_hidden"])
+        layer_index: int = int(info["layer_index"])
+
+        if feature_id < 0 or feature_id >= d_hidden:
+            raise ValueError(f"feature_id must be in [0, {d_hidden - 1}]")
+
+        labels = self._load_feature_labels(checkpoint_path)
+        feature_meta = labels.get(feature_id, {})
+        return {
+            "model": model_id,
+            "layer_index": layer_index,
+            "d_hidden": d_hidden,
+            "feature_id": int(feature_id),
+            "feature_name": feature_meta.get("name", f"Feature {feature_id}"),
+            "feature_description": feature_meta.get("description", f"Feature {feature_id}"),
+        }
+
     # -- On-demand feature labeling (uses analyzers.llm_analysis.FeatureLabeler) --------
 
     def label_feature(

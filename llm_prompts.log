@@ -513,3 +513,735 @@ Most frequent activating tokens (top 7): "church", "christ", "service", "churche
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Christian Religion",
+  "explanation": "The feature activates on tokens related to Christian institutions, figures, and practices, indicating it detects concepts related to Christianity",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 3c322742-34d1-4821-adba-b3c3807393c5
+FEATURE 1003
+USER PROMPT:
+Feature index: 1003
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 11 activating examples (ordered strongest first):
+   1. [act=5.043]  it's the art of topiary>>> and<<< i start everything from cuttings
+   2. [act=4.749]  and to get into that toaster>>> and<<< yeah
+   3. [act=4.617]  sugar shacks and fudge>>> and<<< smoked fish here
+   4. [act=4.510]   related to the kind of would from eversource>>> and<<< the elimination of eversource charges
+   5. [act=4.216]   the argument is is is based on korte>>> or<<< korte k o r t e is where
+   6. [act=3.601]  we were talking about the liemba>>> and<<< he had spent time in africa in the 80
+   7. [act=3.447]   how do you manage both your responsibilities as selectman>>> or<<< any townwide office and your day job well you
+   8. [act=3.257]  we also do a csa>>> and<<< that's community supported agriculture
+   9. [act=3.165]   used as an end for weary travelers between stillwater>>> and<<< saint paul
+  10. [act=3.137]  then we'll hear from klaus>>> and<<< addie two belmont residents who were very happy
+  11. [act=3.113]  mont light the belmont energy committee sustainable belmont>>> and<<< just a number of electric vehicle enthusiasts here in bel
+
+Most frequent activating tokens (top 2): "and", "or"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Conjunctions and Connections",
+  "explanation": "This feature detects the presence of conjunctions and connecting words that link ideas or phrases in a sentence.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 3c322742-34d1-4821-adba-b3c3807393c5
+FEATURE 1004
+USER PROMPT:
+Feature index: 1004
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 11 activating examples (ordered strongest first):
+   1. [act=9.682]  we were talking about the li>>>em<<<ba and he had spent time in africa in
+   2. [act=9.258]  and just to talk about li>>>em<<<ba to start with cause while i recently saw the
+   3. [act=9.131]   a case from the court of appeals city of be>>>aum<<<ont and texas court of appeals
+   4. [act=8.347]  so this project li>>>em<<<ba the ship is just an amazing story
+   5. [act=6.517]  when was that brought to am>>>fam<<<'s attention the first time i remember it your honor
+   6. [act=6.441]  we had to compel am>>>fam<<< to name its appraiser but we went to court
+   7. [act=6.083]  with am>>>fam<<< waving its reported bonafide dispute and coverage issue
+   8. [act=4.778]   brought in one thousand nine hundred and thirteen by the>>> germ<<<ans to the coast of africa in pieces in
+   9. [act=4.769]   the fca is not the same thing as f>>>cm<<< fca is a charge fcm
+  10. [act=4.666]   says an agreement to agree cannot support a claim for>>> prom<<<issory estoppel
+  11. [act=4.296]   hopefully by the end of that week there will be>>> semif<<<inalist's names sent to me
+
+Most frequent activating tokens (top 7): "em", "fam", "aum", "germ", "cm", "prom", "semif"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Proper Noun Abbreviation",
+  "explanation": "The feature detects abbreviations or shortened forms of proper nouns, such as country or organization names",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 3c322742-34d1-4821-adba-b3c3807393c5
+FEATURE 1005
+USER PROMPT:
+Feature index: 1005
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 4 activating examples (ordered strongest first):
+   1. [act=4.525]  that's included>>> in<<< the packet
+   2. [act=3.953]  that's included in>>> the<<< packet
+   3. [act=3.775]   in with the ppta memo that's also included>>> in<<< the packet it's somewhat of a retroactive approach
+   4. [act=3.344]   do the background investigation and be able to add them>>> to<<< fill up potential vacancy that we would have
+
+Most frequent activating tokens (top 3): "in", "the", "to"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Preposition Relations",
+  "explanation": "This feature detects the usage of prepositions to indicate location or direction in a sentence.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 44d8f095-931e-43f6-ae24-b21a3646d413
+FEATURE 37
+USER PROMPT:
+Feature index: 37
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 40 activating examples (ordered strongest first):
+   1. [act=nan]   that was that was in an accident or something with>>> it<<< where you can buy the the charger and you can
+   2. [act=nan]   the charger and you can buy one outright new and>>> that<<<'s like four hundred bucks to get
+   3. [act=nan]   buy a faster charging station they'll set you back>>> anywhere<<< from a couple of hundred bucks for for one that
+   4. [act=nan]   on ebay typically from a a car that was>>> that<<< was in an accident or something with it where you
+   5. [act=nan]   you back anywhere from a couple of hundred bucks for>>> for<<< one that you can buy on ebay typically from
+   6. [act=nan]  so charging stations if you want to buy a>>> faster<<< charging station they'll set you back anywhere from a
+   7. [act=nan]   something with it where you can buy the the charger>>> and<<< you can buy one outright new and that's like
+   8. [act=nan]  and right now the the equivalent cost of a gallon>>> of<<< gas is like one hundred and fifty
+   9. [act=nan]   station they'll set you back anywhere from a couple>>> of<<< hundred bucks for for one that you can buy on
+  10. [act=nan]   the equivalent cost of a gallon of gas is like>>> one<<< hundred and fifty
+  11. [act=nan]   that you can buy on ebay typically from a>>> a<<< car that was that was in an accident or something
+  12. [act=nan]   a couple of hundred bucks for for one that you>>> can<<< buy on ebay typically from a a car that
+  13. [act=nan]  so charging stations if you>>> want<<< to buy a faster charging station they'll set you
+  14. [act=nan]   from a a car that was that was in an>>> accident<<< or something with it where you can buy the the
+  15. [act=nan]  and right now the the equivalent>>> cost<<< of a gallon of gas is like one hundred and
+  16. [act=nan]   in an accident or something with it where you can>>> buy<<< the the charger and you can buy one outright new
+  17. [act=nan]   if you want to buy a faster charging station they>>>'ll<<< set you back anywhere from a couple of hundred bucks
+  18. [act=nan]   you can buy the the charger and you can buy>>> one<<< outright new and that's like four hundred bucks to
+  19. [act=nan]   looks like they're kind of an artistic choices here>>> for<<< the pots
+  20. [act=nan]   can buy one outright new and that's like four>>> hundred<<< bucks to get
+  21. [act=nan]   now the the equivalent cost of a gallon of gas>>> is<<< like one hundred and fifty
+  22. [act=nan]  'll set you back anywhere from a couple of hundred>>> bucks<<< for for one that you can buy on ebay
+  23. [act=nan]   they're kind of an artistic choices here for the>>> pots<<<
+  24. [act=nan]   anywhere from a couple of hundred bucks for for one>>> that<<< you can buy on ebay typically from a a
+  25. [act=nan]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+  26. [act=nan]   for one that you can buy on ebay typically>>> from<<< a a car that was that was in an accident
+  27. [act=nan]   of hundred bucks for for one that you can buy>>> on<<< ebay typically from a a car that was that
+  28. [act=nan]  so charging stations>>> if<<< you want to buy a faster charging station they'll
+  29. [act=nan]   can buy on ebay typically from a a car>>> that<<< was that was in an accident or something with it
+  30. [act=nan]  and right now the>>> the<<< equivalent cost of a gallon of gas is like one
+  31. [act=nan]  bay typically from a a car that was that was>>> in<<< an accident or something with it where you can buy
+  32. [act=nan]  so charging stations if you want to>>> buy<<< a faster charging station they'll set you back anywhere
+  33. [act=nan]   a car that was that was in an accident or>>> something<<< with it where you can buy the the charger and
+  34. [act=nan]  it looks like they're kind of an artistic>>> choices<<< here for the pots
+  35. [act=nan]   that was in an accident or something with it where>>> you<<< can buy the the charger and you can buy one
+  36. [act=nan]   charging stations if you want to buy a faster charging>>> station<<< they'll set you back anywhere from a couple of
+  37. [act=nan]   accident or something with it where you can buy the>>> the<<< charger and you can buy one outright new and that
+  38. [act=nan]  and right now the the equivalent cost of>>> a<<< gallon of gas is like one hundred and fifty
+  39. [act=nan]   it where you can buy the the charger and you>>> can<<< buy one outright new and that's like four hundred
+  40. [act=nan]   want to buy a faster charging station they'll set>>> you<<< back anywhere from a couple of hundred bucks for for
+
+Most frequent activating tokens (top 10): "that", "for", "and", "of", "one", "a", "can", "buy", "the", "you"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 44d8f095-931e-43f6-ae24-b21a3646d413
+FEATURE 38
+USER PROMPT:
+Feature index: 38
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 40 activating examples (ordered strongest first):
+   1. [act=nan]   that was that was in an accident or something with>>> it<<< where you can buy the the charger and you can
+   2. [act=nan]   the charger and you can buy one outright new and>>> that<<<'s like four hundred bucks to get
+   3. [act=nan]   buy a faster charging station they'll set you back>>> anywhere<<< from a couple of hundred bucks for for one that
+   4. [act=nan]   on ebay typically from a a car that was>>> that<<< was in an accident or something with it where you
+   5. [act=nan]   you back anywhere from a couple of hundred bucks for>>> for<<< one that you can buy on ebay typically from
+   6. [act=nan]  so charging stations if you want to buy a>>> faster<<< charging station they'll set you back anywhere from a
+   7. [act=nan]   something with it where you can buy the the charger>>> and<<< you can buy one outright new and that's like
+   8. [act=nan]  and right now the the equivalent cost of a gallon>>> of<<< gas is like one hundred and fifty
+   9. [act=nan]   station they'll set you back anywhere from a couple>>> of<<< hundred bucks for for one that you can buy on
+  10. [act=nan]   the equivalent cost of a gallon of gas is like>>> one<<< hundred and fifty
+  11. [act=nan]   that you can buy on ebay typically from a>>> a<<< car that was that was in an accident or something
+  12. [act=nan]   a couple of hundred bucks for for one that you>>> can<<< buy on ebay typically from a a car that
+  13. [act=nan]  so charging stations if you>>> want<<< to buy a faster charging station they'll set you
+  14. [act=nan]   from a a car that was that was in an>>> accident<<< or something with it where you can buy the the
+  15. [act=nan]  and right now the the equivalent>>> cost<<< of a gallon of gas is like one hundred and
+  16. [act=nan]   in an accident or something with it where you can>>> buy<<< the the charger and you can buy one outright new
+  17. [act=nan]   if you want to buy a faster charging station they>>>'ll<<< set you back anywhere from a couple of hundred bucks
+  18. [act=nan]   you can buy the the charger and you can buy>>> one<<< outright new and that's like four hundred bucks to
+  19. [act=nan]   looks like they're kind of an artistic choices here>>> for<<< the pots
+  20. [act=nan]   can buy one outright new and that's like four>>> hundred<<< bucks to get
+  21. [act=nan]   now the the equivalent cost of a gallon of gas>>> is<<< like one hundred and fifty
+  22. [act=nan]  'll set you back anywhere from a couple of hundred>>> bucks<<< for for one that you can buy on ebay
+  23. [act=nan]   they're kind of an artistic choices here for the>>> pots<<<
+  24. [act=nan]   anywhere from a couple of hundred bucks for for one>>> that<<< you can buy on ebay typically from a a
+  25. [act=nan]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+  26. [act=nan]   for one that you can buy on ebay typically>>> from<<< a a car that was that was in an accident
+  27. [act=nan]   of hundred bucks for for one that you can buy>>> on<<< ebay typically from a a car that was that
+  28. [act=nan]  so charging stations>>> if<<< you want to buy a faster charging station they'll
+  29. [act=nan]   can buy on ebay typically from a a car>>> that<<< was that was in an accident or something with it
+  30. [act=nan]  and right now the>>> the<<< equivalent cost of a gallon of gas is like one
+  31. [act=nan]  bay typically from a a car that was that was>>> in<<< an accident or something with it where you can buy
+  32. [act=nan]  so charging stations if you want to>>> buy<<< a faster charging station they'll set you back anywhere
+  33. [act=nan]   a car that was that was in an accident or>>> something<<< with it where you can buy the the charger and
+  34. [act=nan]  it looks like they're kind of an artistic>>> choices<<< here for the pots
+  35. [act=nan]   that was in an accident or something with it where>>> you<<< can buy the the charger and you can buy one
+  36. [act=nan]   charging stations if you want to buy a faster charging>>> station<<< they'll set you back anywhere from a couple of
+  37. [act=nan]   accident or something with it where you can buy the>>> the<<< charger and you can buy one outright new and that
+  38. [act=nan]  and right now the the equivalent cost of>>> a<<< gallon of gas is like one hundred and fifty
+  39. [act=nan]   it where you can buy the the charger and you>>> can<<< buy one outright new and that's like four hundred
+  40. [act=nan]   want to buy a faster charging station they'll set>>> you<<< back anywhere from a couple of hundred bucks for for
+
+Most frequent activating tokens (top 10): "that", "for", "and", "of", "one", "a", "can", "buy", "the", "you"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 44d8f095-931e-43f6-ae24-b21a3646d413
+FEATURE 39
+USER PROMPT:
+Feature index: 39
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 40 activating examples (ordered strongest first):
+   1. [act=nan]   that was that was in an accident or something with>>> it<<< where you can buy the the charger and you can
+   2. [act=nan]   the charger and you can buy one outright new and>>> that<<<'s like four hundred bucks to get
+   3. [act=nan]   buy a faster charging station they'll set you back>>> anywhere<<< from a couple of hundred bucks for for one that
+   4. [act=nan]   on ebay typically from a a car that was>>> that<<< was in an accident or something with it where you
+   5. [act=nan]   you back anywhere from a couple of hundred bucks for>>> for<<< one that you can buy on ebay typically from
+   6. [act=nan]  so charging stations if you want to buy a>>> faster<<< charging station they'll set you back anywhere from a
+   7. [act=nan]   something with it where you can buy the the charger>>> and<<< you can buy one outright new and that's like
+   8. [act=nan]  and right now the the equivalent cost of a gallon>>> of<<< gas is like one hundred and fifty
+   9. [act=nan]   station they'll set you back anywhere from a couple>>> of<<< hundred bucks for for one that you can buy on
+  10. [act=nan]   the equivalent cost of a gallon of gas is like>>> one<<< hundred and fifty
+  11. [act=nan]   that you can buy on ebay typically from a>>> a<<< car that was that was in an accident or something
+  12. [act=nan]   a couple of hundred bucks for for one that you>>> can<<< buy on ebay typically from a a car that
+  13. [act=nan]  so charging stations if you>>> want<<< to buy a faster charging station they'll set you
+  14. [act=nan]   from a a car that was that was in an>>> accident<<< or something with it where you can buy the the
+  15. [act=nan]  and right now the the equivalent>>> cost<<< of a gallon of gas is like one hundred and
+  16. [act=nan]   in an accident or something with it where you can>>> buy<<< the the charger and you can buy one outright new
+  17. [act=nan]   if you want to buy a faster charging station they>>>'ll<<< set you back anywhere from a couple of hundred bucks
+  18. [act=nan]   you can buy the the charger and you can buy>>> one<<< outright new and that's like four hundred bucks to
+  19. [act=nan]   looks like they're kind of an artistic choices here>>> for<<< the pots
+  20. [act=nan]   can buy one outright new and that's like four>>> hundred<<< bucks to get
+  21. [act=nan]   now the the equivalent cost of a gallon of gas>>> is<<< like one hundred and fifty
+  22. [act=nan]  'll set you back anywhere from a couple of hundred>>> bucks<<< for for one that you can buy on ebay
+  23. [act=nan]   they're kind of an artistic choices here for the>>> pots<<<
+  24. [act=nan]   anywhere from a couple of hundred bucks for for one>>> that<<< you can buy on ebay typically from a a
+  25. [act=nan]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+  26. [act=nan]   for one that you can buy on ebay typically>>> from<<< a a car that was that was in an accident
+  27. [act=nan]   of hundred bucks for for one that you can buy>>> on<<< ebay typically from a a car that was that
+  28. [act=nan]  so charging stations>>> if<<< you want to buy a faster charging station they'll
+  29. [act=nan]   can buy on ebay typically from a a car>>> that<<< was that was in an accident or something with it
+  30. [act=nan]  and right now the>>> the<<< equivalent cost of a gallon of gas is like one
+  31. [act=nan]  bay typically from a a car that was that was>>> in<<< an accident or something with it where you can buy
+  32. [act=nan]  so charging stations if you want to>>> buy<<< a faster charging station they'll set you back anywhere
+  33. [act=nan]   a car that was that was in an accident or>>> something<<< with it where you can buy the the charger and
+  34. [act=nan]  it looks like they're kind of an artistic>>> choices<<< here for the pots
+  35. [act=nan]   that was in an accident or something with it where>>> you<<< can buy the the charger and you can buy one
+  36. [act=nan]   charging stations if you want to buy a faster charging>>> station<<< they'll set you back anywhere from a couple of
+  37. [act=nan]   accident or something with it where you can buy the>>> the<<< charger and you can buy one outright new and that
+  38. [act=nan]  and right now the the equivalent cost of>>> a<<< gallon of gas is like one hundred and fifty
+  39. [act=nan]   it where you can buy the the charger and you>>> can<<< buy one outright new and that's like four hundred
+  40. [act=nan]   want to buy a faster charging station they'll set>>> you<<< back anywhere from a couple of hundred bucks for for
+
+Most frequent activating tokens (top 10): "that", "for", "and", "of", "one", "a", "can", "buy", "the", "you"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 44d8f095-931e-43f6-ae24-b21a3646d413
+FEATURE 40
+USER PROMPT:
+Feature index: 40
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 40 activating examples (ordered strongest first):
+   1. [act=nan]   that was that was in an accident or something with>>> it<<< where you can buy the the charger and you can
+   2. [act=nan]   the charger and you can buy one outright new and>>> that<<<'s like four hundred bucks to get
+   3. [act=nan]   buy a faster charging station they'll set you back>>> anywhere<<< from a couple of hundred bucks for for one that
+   4. [act=nan]   on ebay typically from a a car that was>>> that<<< was in an accident or something with it where you
+   5. [act=nan]   you back anywhere from a couple of hundred bucks for>>> for<<< one that you can buy on ebay typically from
+   6. [act=nan]  so charging stations if you want to buy a>>> faster<<< charging station they'll set you back anywhere from a
+   7. [act=nan]   something with it where you can buy the the charger>>> and<<< you can buy one outright new and that's like
+   8. [act=nan]  and right now the the equivalent cost of a gallon>>> of<<< gas is like one hundred and fifty
+   9. [act=nan]   station they'll set you back anywhere from a couple>>> of<<< hundred bucks for for one that you can buy on
+  10. [act=nan]   the equivalent cost of a gallon of gas is like>>> one<<< hundred and fifty
+  11. [act=nan]   that you can buy on ebay typically from a>>> a<<< car that was that was in an accident or something
+  12. [act=nan]   a couple of hundred bucks for for one that you>>> can<<< buy on ebay typically from a a car that
+  13. [act=nan]  so charging stations if you>>> want<<< to buy a faster charging station they'll set you
+  14. [act=nan]   from a a car that was that was in an>>> accident<<< or something with it where you can buy the the
+  15. [act=nan]  and right now the the equivalent>>> cost<<< of a gallon of gas is like one hundred and
+  16. [act=nan]   in an accident or something with it where you can>>> buy<<< the the charger and you can buy one outright new
+  17. [act=nan]   if you want to buy a faster charging station they>>>'ll<<< set you back anywhere from a couple of hundred bucks
+  18. [act=nan]   you can buy the the charger and you can buy>>> one<<< outright new and that's like four hundred bucks to
+  19. [act=nan]   looks like they're kind of an artistic choices here>>> for<<< the pots
+  20. [act=nan]   can buy one outright new and that's like four>>> hundred<<< bucks to get
+  21. [act=nan]   now the the equivalent cost of a gallon of gas>>> is<<< like one hundred and fifty
+  22. [act=nan]  'll set you back anywhere from a couple of hundred>>> bucks<<< for for one that you can buy on ebay
+  23. [act=nan]   they're kind of an artistic choices here for the>>> pots<<<
+  24. [act=nan]   anywhere from a couple of hundred bucks for for one>>> that<<< you can buy on ebay typically from a a
+  25. [act=nan]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+  26. [act=nan]   for one that you can buy on ebay typically>>> from<<< a a car that was that was in an accident
+  27. [act=nan]   of hundred bucks for for one that you can buy>>> on<<< ebay typically from a a car that was that
+  28. [act=nan]  so charging stations>>> if<<< you want to buy a faster charging station they'll
+  29. [act=nan]   can buy on ebay typically from a a car>>> that<<< was that was in an accident or something with it
+  30. [act=nan]  and right now the>>> the<<< equivalent cost of a gallon of gas is like one
+  31. [act=nan]  bay typically from a a car that was that was>>> in<<< an accident or something with it where you can buy
+  32. [act=nan]  so charging stations if you want to>>> buy<<< a faster charging station they'll set you back anywhere
+  33. [act=nan]   a car that was that was in an accident or>>> something<<< with it where you can buy the the charger and
+  34. [act=nan]  it looks like they're kind of an artistic>>> choices<<< here for the pots
+  35. [act=nan]   that was in an accident or something with it where>>> you<<< can buy the the charger and you can buy one
+  36. [act=nan]   charging stations if you want to buy a faster charging>>> station<<< they'll set you back anywhere from a couple of
+  37. [act=nan]   accident or something with it where you can buy the>>> the<<< charger and you can buy one outright new and that
+  38. [act=nan]  and right now the the equivalent cost of>>> a<<< gallon of gas is like one hundred and fifty
+  39. [act=nan]   it where you can buy the the charger and you>>> can<<< buy one outright new and that's like four hundred
+  40. [act=nan]   want to buy a faster charging station they'll set>>> you<<< back anywhere from a couple of hundred bucks for for
+
+Most frequent activating tokens (top 10): "that", "for", "and", "of", "one", "a", "can", "buy", "the", "you"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 44d8f095-931e-43f6-ae24-b21a3646d413
+FEATURE 41
+USER PROMPT:
+Feature index: 41
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 40 activating examples (ordered strongest first):
+   1. [act=nan]   that was that was in an accident or something with>>> it<<< where you can buy the the charger and you can
+   2. [act=nan]   the charger and you can buy one outright new and>>> that<<<'s like four hundred bucks to get
+   3. [act=nan]   buy a faster charging station they'll set you back>>> anywhere<<< from a couple of hundred bucks for for one that
+   4. [act=nan]   on ebay typically from a a car that was>>> that<<< was in an accident or something with it where you
+   5. [act=nan]   you back anywhere from a couple of hundred bucks for>>> for<<< one that you can buy on ebay typically from
+   6. [act=nan]  so charging stations if you want to buy a>>> faster<<< charging station they'll set you back anywhere from a
+   7. [act=nan]   something with it where you can buy the the charger>>> and<<< you can buy one outright new and that's like
+   8. [act=nan]  and right now the the equivalent cost of a gallon>>> of<<< gas is like one hundred and fifty
+   9. [act=nan]   station they'll set you back anywhere from a couple>>> of<<< hundred bucks for for one that you can buy on
+  10. [act=nan]   the equivalent cost of a gallon of gas is like>>> one<<< hundred and fifty
+  11. [act=nan]   that you can buy on ebay typically from a>>> a<<< car that was that was in an accident or something
+  12. [act=nan]   a couple of hundred bucks for for one that you>>> can<<< buy on ebay typically from a a car that
+  13. [act=nan]  so charging stations if you>>> want<<< to buy a faster charging station they'll set you
+  14. [act=nan]   from a a car that was that was in an>>> accident<<< or something with it where you can buy the the
+  15. [act=nan]  and right now the the equivalent>>> cost<<< of a gallon of gas is like one hundred and
+  16. [act=nan]   in an accident or something with it where you can>>> buy<<< the the charger and you can buy one outright new
+  17. [act=nan]   if you want to buy a faster charging station they>>>'ll<<< set you back anywhere from a couple of hundred bucks
+  18. [act=nan]   you can buy the the charger and you can buy>>> one<<< outright new and that's like four hundred bucks to
+  19. [act=nan]   looks like they're kind of an artistic choices here>>> for<<< the pots
+  20. [act=nan]   can buy one outright new and that's like four>>> hundred<<< bucks to get
+  21. [act=nan]   now the the equivalent cost of a gallon of gas>>> is<<< like one hundred and fifty
+  22. [act=nan]  'll set you back anywhere from a couple of hundred>>> bucks<<< for for one that you can buy on ebay
+  23. [act=nan]   they're kind of an artistic choices here for the>>> pots<<<
+  24. [act=nan]   anywhere from a couple of hundred bucks for for one>>> that<<< you can buy on ebay typically from a a
+  25. [act=nan]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+  26. [act=nan]   for one that you can buy on ebay typically>>> from<<< a a car that was that was in an accident
+  27. [act=nan]   of hundred bucks for for one that you can buy>>> on<<< ebay typically from a a car that was that
+  28. [act=nan]  so charging stations>>> if<<< you want to buy a faster charging station they'll
+  29. [act=nan]   can buy on ebay typically from a a car>>> that<<< was that was in an accident or something with it
+  30. [act=nan]  and right now the>>> the<<< equivalent cost of a gallon of gas is like one
+  31. [act=nan]  bay typically from a a car that was that was>>> in<<< an accident or something with it where you can buy
+  32. [act=nan]  so charging stations if you want to>>> buy<<< a faster charging station they'll set you back anywhere
+  33. [act=nan]   a car that was that was in an accident or>>> something<<< with it where you can buy the the charger and
+  34. [act=nan]  it looks like they're kind of an artistic>>> choices<<< here for the pots
+  35. [act=nan]   that was in an accident or something with it where>>> you<<< can buy the the charger and you can buy one
+  36. [act=nan]   charging stations if you want to buy a faster charging>>> station<<< they'll set you back anywhere from a couple of
+  37. [act=nan]   accident or something with it where you can buy the>>> the<<< charger and you can buy one outright new and that
+  38. [act=nan]  and right now the the equivalent cost of>>> a<<< gallon of gas is like one hundred and fifty
+  39. [act=nan]   it where you can buy the the charger and you>>> can<<< buy one outright new and that's like four hundred
+  40. [act=nan]   want to buy a faster charging station they'll set>>> you<<< back anywhere from a couple of hundred bucks for for
+
+Most frequent activating tokens (top 10): "that", "for", "and", "of", "one", "a", "can", "buy", "the", "you"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 44d8f095-931e-43f6-ae24-b21a3646d413
+FEATURE 42
+USER PROMPT:
+Feature index: 42
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 40 activating examples (ordered strongest first):
+   1. [act=nan]   that was that was in an accident or something with>>> it<<< where you can buy the the charger and you can
+   2. [act=nan]   the charger and you can buy one outright new and>>> that<<<'s like four hundred bucks to get
+   3. [act=nan]   buy a faster charging station they'll set you back>>> anywhere<<< from a couple of hundred bucks for for one that
+   4. [act=nan]   on ebay typically from a a car that was>>> that<<< was in an accident or something with it where you
+   5. [act=nan]   you back anywhere from a couple of hundred bucks for>>> for<<< one that you can buy on ebay typically from
+   6. [act=nan]  so charging stations if you want to buy a>>> faster<<< charging station they'll set you back anywhere from a
+   7. [act=nan]   something with it where you can buy the the charger>>> and<<< you can buy one outright new and that's like
+   8. [act=nan]  and right now the the equivalent cost of a gallon>>> of<<< gas is like one hundred and fifty
+   9. [act=nan]   station they'll set you back anywhere from a couple>>> of<<< hundred bucks for for one that you can buy on
+  10. [act=nan]   the equivalent cost of a gallon of gas is like>>> one<<< hundred and fifty
+  11. [act=nan]   that you can buy on ebay typically from a>>> a<<< car that was that was in an accident or something
+  12. [act=nan]   a couple of hundred bucks for for one that you>>> can<<< buy on ebay typically from a a car that
+  13. [act=nan]  so charging stations if you>>> want<<< to buy a faster charging station they'll set you
+  14. [act=nan]   from a a car that was that was in an>>> accident<<< or something with it where you can buy the the
+  15. [act=nan]  and right now the the equivalent>>> cost<<< of a gallon of gas is like one hundred and
+  16. [act=nan]   in an accident or something with it where you can>>> buy<<< the the charger and you can buy one outright new
+  17. [act=nan]   if you want to buy a faster charging station they>>>'ll<<< set you back anywhere from a couple of hundred bucks
+  18. [act=nan]   you can buy the the charger and you can buy>>> one<<< outright new and that's like four hundred bucks to
+  19. [act=nan]   looks like they're kind of an artistic choices here>>> for<<< the pots
+  20. [act=nan]   can buy one outright new and that's like four>>> hundred<<< bucks to get
+  21. [act=nan]   now the the equivalent cost of a gallon of gas>>> is<<< like one hundred and fifty
+  22. [act=nan]  'll set you back anywhere from a couple of hundred>>> bucks<<< for for one that you can buy on ebay
+  23. [act=nan]   they're kind of an artistic choices here for the>>> pots<<<
+  24. [act=nan]   anywhere from a couple of hundred bucks for for one>>> that<<< you can buy on ebay typically from a a
+  25. [act=nan]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+  26. [act=nan]   for one that you can buy on ebay typically>>> from<<< a a car that was that was in an accident
+  27. [act=nan]   of hundred bucks for for one that you can buy>>> on<<< ebay typically from a a car that was that
+  28. [act=nan]  so charging stations>>> if<<< you want to buy a faster charging station they'll
+  29. [act=nan]   can buy on ebay typically from a a car>>> that<<< was that was in an accident or something with it
+  30. [act=nan]  and right now the>>> the<<< equivalent cost of a gallon of gas is like one
+  31. [act=nan]  bay typically from a a car that was that was>>> in<<< an accident or something with it where you can buy
+  32. [act=nan]  so charging stations if you want to>>> buy<<< a faster charging station they'll set you back anywhere
+  33. [act=nan]   a car that was that was in an accident or>>> something<<< with it where you can buy the the charger and
+  34. [act=nan]  it looks like they're kind of an artistic>>> choices<<< here for the pots
+  35. [act=nan]   that was in an accident or something with it where>>> you<<< can buy the the charger and you can buy one
+  36. [act=nan]   charging stations if you want to buy a faster charging>>> station<<< they'll set you back anywhere from a couple of
+  37. [act=nan]   accident or something with it where you can buy the>>> the<<< charger and you can buy one outright new and that
+  38. [act=nan]  and right now the the equivalent cost of>>> a<<< gallon of gas is like one hundred and fifty
+  39. [act=nan]   it where you can buy the the charger and you>>> can<<< buy one outright new and that's like four hundred
+  40. [act=nan]   want to buy a faster charging station they'll set>>> you<<< back anywhere from a couple of hundred bucks for for
+
+Most frequent activating tokens (top 10): "that", "for", "and", "of", "one", "a", "can", "buy", "the", "you"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 44d8f095-931e-43f6-ae24-b21a3646d413
+FEATURE 43
+USER PROMPT:
+Feature index: 43
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 40 activating examples (ordered strongest first):
+   1. [act=nan]   that was that was in an accident or something with>>> it<<< where you can buy the the charger and you can
+   2. [act=nan]   the charger and you can buy one outright new and>>> that<<<'s like four hundred bucks to get
+   3. [act=nan]   buy a faster charging station they'll set you back>>> anywhere<<< from a couple of hundred bucks for for one that
+   4. [act=nan]   on ebay typically from a a car that was>>> that<<< was in an accident or something with it where you
+   5. [act=nan]   you back anywhere from a couple of hundred bucks for>>> for<<< one that you can buy on ebay typically from
+   6. [act=nan]  so charging stations if you want to buy a>>> faster<<< charging station they'll set you back anywhere from a
+   7. [act=nan]   something with it where you can buy the the charger>>> and<<< you can buy one outright new and that's like
+   8. [act=nan]  and right now the the equivalent cost of a gallon>>> of<<< gas is like one hundred and fifty
+   9. [act=nan]   station they'll set you back anywhere from a couple>>> of<<< hundred bucks for for one that you can buy on
+  10. [act=nan]   the equivalent cost of a gallon of gas is like>>> one<<< hundred and fifty
+  11. [act=nan]   that you can buy on ebay typically from a>>> a<<< car that was that was in an accident or something
+  12. [act=nan]   a couple of hundred bucks for for one that you>>> can<<< buy on ebay typically from a a car that
+  13. [act=nan]  so charging stations if you>>> want<<< to buy a faster charging station they'll set you
+  14. [act=nan]   from a a car that was that was in an>>> accident<<< or something with it where you can buy the the
+  15. [act=nan]  and right now the the equivalent>>> cost<<< of a gallon of gas is like one hundred and
+  16. [act=nan]   in an accident or something with it where you can>>> buy<<< the the charger and you can buy one outright new
+  17. [act=nan]   if you want to buy a faster charging station they>>>'ll<<< set you back anywhere from a couple of hundred bucks
+  18. [act=nan]   you can buy the the charger and you can buy>>> one<<< outright new and that's like four hundred bucks to
+  19. [act=nan]   looks like they're kind of an artistic choices here>>> for<<< the pots
+  20. [act=nan]   can buy one outright new and that's like four>>> hundred<<< bucks to get
+  21. [act=nan]   now the the equivalent cost of a gallon of gas>>> is<<< like one hundred and fifty
+  22. [act=nan]  'll set you back anywhere from a couple of hundred>>> bucks<<< for for one that you can buy on ebay
+  23. [act=nan]   they're kind of an artistic choices here for the>>> pots<<<
+  24. [act=nan]   anywhere from a couple of hundred bucks for for one>>> that<<< you can buy on ebay typically from a a
+  25. [act=nan]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+  26. [act=nan]   for one that you can buy on ebay typically>>> from<<< a a car that was that was in an accident
+  27. [act=nan]   of hundred bucks for for one that you can buy>>> on<<< ebay typically from a a car that was that
+  28. [act=nan]  so charging stations>>> if<<< you want to buy a faster charging station they'll
+  29. [act=nan]   can buy on ebay typically from a a car>>> that<<< was that was in an accident or something with it
+  30. [act=nan]  and right now the>>> the<<< equivalent cost of a gallon of gas is like one
+  31. [act=nan]  bay typically from a a car that was that was>>> in<<< an accident or something with it where you can buy
+  32. [act=nan]  so charging stations if you want to>>> buy<<< a faster charging station they'll set you back anywhere
+  33. [act=nan]   a car that was that was in an accident or>>> something<<< with it where you can buy the the charger and
+  34. [act=nan]  it looks like they're kind of an artistic>>> choices<<< here for the pots
+  35. [act=nan]   that was in an accident or something with it where>>> you<<< can buy the the charger and you can buy one
+  36. [act=nan]   charging stations if you want to buy a faster charging>>> station<<< they'll set you back anywhere from a couple of
+  37. [act=nan]   accident or something with it where you can buy the>>> the<<< charger and you can buy one outright new and that
+  38. [act=nan]  and right now the the equivalent cost of>>> a<<< gallon of gas is like one hundred and fifty
+  39. [act=nan]   it where you can buy the the charger and you>>> can<<< buy one outright new and that's like four hundred
+  40. [act=nan]   want to buy a faster charging station they'll set>>> you<<< back anywhere from a couple of hundred bucks for for
+
+Most frequent activating tokens (top 10): "that", "for", "and", "of", "one", "a", "can", "buy", "the", "you"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 44d8f095-931e-43f6-ae24-b21a3646d413
+FEATURE 44
+USER PROMPT:
+Feature index: 44
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 40 activating examples (ordered strongest first):
+   1. [act=nan]   that was that was in an accident or something with>>> it<<< where you can buy the the charger and you can
+   2. [act=nan]   the charger and you can buy one outright new and>>> that<<<'s like four hundred bucks to get
+   3. [act=nan]   buy a faster charging station they'll set you back>>> anywhere<<< from a couple of hundred bucks for for one that
+   4. [act=nan]   on ebay typically from a a car that was>>> that<<< was in an accident or something with it where you
+   5. [act=nan]   you back anywhere from a couple of hundred bucks for>>> for<<< one that you can buy on ebay typically from
+   6. [act=nan]  so charging stations if you want to buy a>>> faster<<< charging station they'll set you back anywhere from a
+   7. [act=nan]   something with it where you can buy the the charger>>> and<<< you can buy one outright new and that's like
+   8. [act=nan]  and right now the the equivalent cost of a gallon>>> of<<< gas is like one hundred and fifty
+   9. [act=nan]   station they'll set you back anywhere from a couple>>> of<<< hundred bucks for for one that you can buy on
+  10. [act=nan]   the equivalent cost of a gallon of gas is like>>> one<<< hundred and fifty
+  11. [act=nan]   that you can buy on ebay typically from a>>> a<<< car that was that was in an accident or something
+  12. [act=nan]   a couple of hundred bucks for for one that you>>> can<<< buy on ebay typically from a a car that
+  13. [act=nan]  so charging stations if you>>> want<<< to buy a faster charging station they'll set you
+  14. [act=nan]   from a a car that was that was in an>>> accident<<< or something with it where you can buy the the
+  15. [act=nan]  and right now the the equivalent>>> cost<<< of a gallon of gas is like one hundred and
+  16. [act=nan]   in an accident or something with it where you can>>> buy<<< the the charger and you can buy one outright new
+  17. [act=nan]   if you want to buy a faster charging station they>>>'ll<<< set you back anywhere from a couple of hundred bucks
+  18. [act=nan]   you can buy the the charger and you can buy>>> one<<< outright new and that's like four hundred bucks to
+  19. [act=nan]   looks like they're kind of an artistic choices here>>> for<<< the pots
+  20. [act=nan]   can buy one outright new and that's like four>>> hundred<<< bucks to get
+  21. [act=nan]   now the the equivalent cost of a gallon of gas>>> is<<< like one hundred and fifty
+  22. [act=nan]  'll set you back anywhere from a couple of hundred>>> bucks<<< for for one that you can buy on ebay
+  23. [act=nan]   they're kind of an artistic choices here for the>>> pots<<<
+  24. [act=nan]   anywhere from a couple of hundred bucks for for one>>> that<<< you can buy on ebay typically from a a
+  25. [act=nan]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+  26. [act=nan]   for one that you can buy on ebay typically>>> from<<< a a car that was that was in an accident
+  27. [act=nan]   of hundred bucks for for one that you can buy>>> on<<< ebay typically from a a car that was that
+  28. [act=nan]  so charging stations>>> if<<< you want to buy a faster charging station they'll
+  29. [act=nan]   can buy on ebay typically from a a car>>> that<<< was that was in an accident or something with it
+  30. [act=nan]  and right now the>>> the<<< equivalent cost of a gallon of gas is like one
+  31. [act=nan]  bay typically from a a car that was that was>>> in<<< an accident or something with it where you can buy
+  32. [act=nan]  so charging stations if you want to>>> buy<<< a faster charging station they'll set you back anywhere
+  33. [act=nan]   a car that was that was in an accident or>>> something<<< with it where you can buy the the charger and
+  34. [act=nan]  it looks like they're kind of an artistic>>> choices<<< here for the pots
+  35. [act=nan]   that was in an accident or something with it where>>> you<<< can buy the the charger and you can buy one
+  36. [act=nan]   charging stations if you want to buy a faster charging>>> station<<< they'll set you back anywhere from a couple of
+  37. [act=nan]   accident or something with it where you can buy the>>> the<<< charger and you can buy one outright new and that
+  38. [act=nan]  and right now the the equivalent cost of>>> a<<< gallon of gas is like one hundred and fifty
+  39. [act=nan]   it where you can buy the the charger and you>>> can<<< buy one outright new and that's like four hundred
+  40. [act=nan]   want to buy a faster charging station they'll set>>> you<<< back anywhere from a couple of hundred bucks for for
+
+Most frequent activating tokens (top 10): "that", "for", "and", "of", "one", "a", "can", "buy", "the", "you"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 44d8f095-931e-43f6-ae24-b21a3646d413
+FEATURE 45
+USER PROMPT:
+Feature index: 45
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 40 activating examples (ordered strongest first):
+   1. [act=nan]   that was that was in an accident or something with>>> it<<< where you can buy the the charger and you can
+   2. [act=nan]   the charger and you can buy one outright new and>>> that<<<'s like four hundred bucks to get
+   3. [act=nan]   buy a faster charging station they'll set you back>>> anywhere<<< from a couple of hundred bucks for for one that
+   4. [act=nan]   on ebay typically from a a car that was>>> that<<< was in an accident or something with it where you
+   5. [act=nan]   you back anywhere from a couple of hundred bucks for>>> for<<< one that you can buy on ebay typically from
+   6. [act=nan]  so charging stations if you want to buy a>>> faster<<< charging station they'll set you back anywhere from a
+   7. [act=nan]   something with it where you can buy the the charger>>> and<<< you can buy one outright new and that's like
+   8. [act=nan]  and right now the the equivalent cost of a gallon>>> of<<< gas is like one hundred and fifty
+   9. [act=nan]   station they'll set you back anywhere from a couple>>> of<<< hundred bucks for for one that you can buy on
+  10. [act=nan]   the equivalent cost of a gallon of gas is like>>> one<<< hundred and fifty
+  11. [act=nan]   that you can buy on ebay typically from a>>> a<<< car that was that was in an accident or something
+  12. [act=nan]   a couple of hundred bucks for for one that you>>> can<<< buy on ebay typically from a a car that
+  13. [act=nan]  so charging stations if you>>> want<<< to buy a faster charging station they'll set you
+  14. [act=nan]   from a a car that was that was in an>>> accident<<< or something with it where you can buy the the
+  15. [act=nan]  and right now the the equivalent>>> cost<<< of a gallon of gas is like one hundred and
+  16. [act=nan]   in an accident or something with it where you can>>> buy<<< the the charger and you can buy one outright new
+  17. [act=nan]   if you want to buy a faster charging station they>>>'ll<<< set you back anywhere from a couple of hundred bucks
+  18. [act=nan]   you can buy the the charger and you can buy>>> one<<< outright new and that's like four hundred bucks to
+  19. [act=nan]   looks like they're kind of an artistic choices here>>> for<<< the pots
+  20. [act=nan]   can buy one outright new and that's like four>>> hundred<<< bucks to get
+  21. [act=nan]   now the the equivalent cost of a gallon of gas>>> is<<< like one hundred and fifty
+  22. [act=nan]  'll set you back anywhere from a couple of hundred>>> bucks<<< for for one that you can buy on ebay
+  23. [act=nan]   they're kind of an artistic choices here for the>>> pots<<<
+  24. [act=nan]   anywhere from a couple of hundred bucks for for one>>> that<<< you can buy on ebay typically from a a
+  25. [act=nan]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+  26. [act=nan]   for one that you can buy on ebay typically>>> from<<< a a car that was that was in an accident
+  27. [act=nan]   of hundred bucks for for one that you can buy>>> on<<< ebay typically from a a car that was that
+  28. [act=nan]  so charging stations>>> if<<< you want to buy a faster charging station they'll
+  29. [act=nan]   can buy on ebay typically from a a car>>> that<<< was that was in an accident or something with it
+  30. [act=nan]  and right now the>>> the<<< equivalent cost of a gallon of gas is like one
+  31. [act=nan]  bay typically from a a car that was that was>>> in<<< an accident or something with it where you can buy
+  32. [act=nan]  so charging stations if you want to>>> buy<<< a faster charging station they'll set you back anywhere
+  33. [act=nan]   a car that was that was in an accident or>>> something<<< with it where you can buy the the charger and
+  34. [act=nan]  it looks like they're kind of an artistic>>> choices<<< here for the pots
+  35. [act=nan]   that was in an accident or something with it where>>> you<<< can buy the the charger and you can buy one
+  36. [act=nan]   charging stations if you want to buy a faster charging>>> station<<< they'll set you back anywhere from a couple of
+  37. [act=nan]   accident or something with it where you can buy the>>> the<<< charger and you can buy one outright new and that
+  38. [act=nan]  and right now the the equivalent cost of>>> a<<< gallon of gas is like one hundred and fifty
+  39. [act=nan]   it where you can buy the the charger and you>>> can<<< buy one outright new and that's like four hundred
+  40. [act=nan]   want to buy a faster charging station they'll set>>> you<<< back anywhere from a couple of hundred bucks for for
+
+Most frequent activating tokens (top 10): "that", "for", "and", "of", "one", "a", "can", "buy", "the", "you"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 44d8f095-931e-43f6-ae24-b21a3646d413
+FEATURE 46
+USER PROMPT:
+Feature index: 46
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 40 activating examples (ordered strongest first):
+   1. [act=nan]   that was that was in an accident or something with>>> it<<< where you can buy the the charger and you can
+   2. [act=nan]   the charger and you can buy one outright new and>>> that<<<'s like four hundred bucks to get
+   3. [act=nan]   buy a faster charging station they'll set you back>>> anywhere<<< from a couple of hundred bucks for for one that
+   4. [act=nan]   on ebay typically from a a car that was>>> that<<< was in an accident or something with it where you
+   5. [act=nan]   you back anywhere from a couple of hundred bucks for>>> for<<< one that you can buy on ebay typically from
+   6. [act=nan]  so charging stations if you want to buy a>>> faster<<< charging station they'll set you back anywhere from a
+   7. [act=nan]   something with it where you can buy the the charger>>> and<<< you can buy one outright new and that's like
+   8. [act=nan]  and right now the the equivalent cost of a gallon>>> of<<< gas is like one hundred and fifty
+   9. [act=nan]   station they'll set you back anywhere from a couple>>> of<<< hundred bucks for for one that you can buy on
+  10. [act=nan]   the equivalent cost of a gallon of gas is like>>> one<<< hundred and fifty
+  11. [act=nan]   that you can buy on ebay typically from a>>> a<<< car that was that was in an accident or something
+  12. [act=nan]   a couple of hundred bucks for for one that you>>> can<<< buy on ebay typically from a a car that
+  13. [act=nan]  so charging stations if you>>> want<<< to buy a faster charging station they'll set you
+  14. [act=nan]   from a a car that was that was in an>>> accident<<< or something with it where you can buy the the
+  15. [act=nan]  and right now the the equivalent>>> cost<<< of a gallon of gas is like one hundred and
+  16. [act=nan]   in an accident or something with it where you can>>> buy<<< the the charger and you can buy one outright new
+  17. [act=nan]   if you want to buy a faster charging station they>>>'ll<<< set you back anywhere from a couple of hundred bucks
+  18. [act=nan]   you can buy the the charger and you can buy>>> one<<< outright new and that's like four hundred bucks to
+  19. [act=nan]   looks like they're kind of an artistic choices here>>> for<<< the pots
+  20. [act=nan]   can buy one outright new and that's like four>>> hundred<<< bucks to get
+  21. [act=nan]   now the the equivalent cost of a gallon of gas>>> is<<< like one hundred and fifty
+  22. [act=nan]  'll set you back anywhere from a couple of hundred>>> bucks<<< for for one that you can buy on ebay
+  23. [act=nan]   they're kind of an artistic choices here for the>>> pots<<<
+  24. [act=nan]   anywhere from a couple of hundred bucks for for one>>> that<<< you can buy on ebay typically from a a
+  25. [act=nan]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+  26. [act=nan]   for one that you can buy on ebay typically>>> from<<< a a car that was that was in an accident
+  27. [act=nan]   of hundred bucks for for one that you can buy>>> on<<< ebay typically from a a car that was that
+  28. [act=nan]  so charging stations>>> if<<< you want to buy a faster charging station they'll
+  29. [act=nan]   can buy on ebay typically from a a car>>> that<<< was that was in an accident or something with it
+  30. [act=nan]  and right now the>>> the<<< equivalent cost of a gallon of gas is like one
+  31. [act=nan]  bay typically from a a car that was that was>>> in<<< an accident or something with it where you can buy
+  32. [act=nan]  so charging stations if you want to>>> buy<<< a faster charging station they'll set you back anywhere
+  33. [act=nan]   a car that was that was in an accident or>>> something<<< with it where you can buy the the charger and
+  34. [act=nan]  it looks like they're kind of an artistic>>> choices<<< here for the pots
+  35. [act=nan]   that was in an accident or something with it where>>> you<<< can buy the the charger and you can buy one
+  36. [act=nan]   charging stations if you want to buy a faster charging>>> station<<< they'll set you back anywhere from a couple of
+  37. [act=nan]   accident or something with it where you can buy the>>> the<<< charger and you can buy one outright new and that
+  38. [act=nan]  and right now the the equivalent cost of>>> a<<< gallon of gas is like one hundred and fifty
+  39. [act=nan]   it where you can buy the the charger and you>>> can<<< buy one outright new and that's like four hundred
+  40. [act=nan]   want to buy a faster charging station they'll set>>> you<<< back anywhere from a couple of hundred bucks for for
+
+Most frequent activating tokens (top 10): "that", "for", "and", "of", "one", "a", "can", "buy", "the", "you"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+
+================================================================================
+REQUEST_ID 44d8f095-931e-43f6-ae24-b21a3646d413
+FEATURE 47
+USER PROMPT:
+Feature index: 47
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 40 activating examples (ordered strongest first):
+   1. [act=nan]   that was that was in an accident or something with>>> it<<< where you can buy the the charger and you can
+   2. [act=nan]   the charger and you can buy one outright new and>>> that<<<'s like four hundred bucks to get
+   3. [act=nan]   buy a faster charging station they'll set you back>>> anywhere<<< from a couple of hundred bucks for for one that
+   4. [act=nan]   on ebay typically from a a car that was>>> that<<< was in an accident or something with it where you
+   5. [act=nan]   you back anywhere from a couple of hundred bucks for>>> for<<< one that you can buy on ebay typically from
+   6. [act=nan]  so charging stations if you want to buy a>>> faster<<< charging station they'll set you back anywhere from a
+   7. [act=nan]   something with it where you can buy the the charger>>> and<<< you can buy one outright new and that's like
+   8. [act=nan]  and right now the the equivalent cost of a gallon>>> of<<< gas is like one hundred and fifty
+   9. [act=nan]   station they'll set you back anywhere from a couple>>> of<<< hundred bucks for for one that you can buy on
+  10. [act=nan]   the equivalent cost of a gallon of gas is like>>> one<<< hundred and fifty
+  11. [act=nan]   that you can buy on ebay typically from a>>> a<<< car that was that was in an accident or something
+  12. [act=nan]   a couple of hundred bucks for for one that you>>> can<<< buy on ebay typically from a a car that
+  13. [act=nan]  so charging stations if you>>> want<<< to buy a faster charging station they'll set you
+  14. [act=nan]   from a a car that was that was in an>>> accident<<< or something with it where you can buy the the
+  15. [act=nan]  and right now the the equivalent>>> cost<<< of a gallon of gas is like one hundred and
+  16. [act=nan]   in an accident or something with it where you can>>> buy<<< the the charger and you can buy one outright new
+  17. [act=nan]   if you want to buy a faster charging station they>>>'ll<<< set you back anywhere from a couple of hundred bucks
+  18. [act=nan]   you can buy the the charger and you can buy>>> one<<< outright new and that's like four hundred bucks to
+  19. [act=nan]   looks like they're kind of an artistic choices here>>> for<<< the pots
+  20. [act=nan]   can buy one outright new and that's like four>>> hundred<<< bucks to get
+  21. [act=nan]   now the the equivalent cost of a gallon of gas>>> is<<< like one hundred and fifty
+  22. [act=nan]  'll set you back anywhere from a couple of hundred>>> bucks<<< for for one that you can buy on ebay
+  23. [act=nan]   they're kind of an artistic choices here for the>>> pots<<<
+  24. [act=nan]   anywhere from a couple of hundred bucks for for one>>> that<<< you can buy on ebay typically from a a
+  25. [act=nan]   cost of a gallon of gas is like one hundred>>> and<<< fifty
+  26. [act=nan]   for one that you can buy on ebay typically>>> from<<< a a car that was that was in an accident
+  27. [act=nan]   of hundred bucks for for one that you can buy>>> on<<< ebay typically from a a car that was that
+  28. [act=nan]  so charging stations>>> if<<< you want to buy a faster charging station they'll
+  29. [act=nan]   can buy on ebay typically from a a car>>> that<<< was that was in an accident or something with it
+  30. [act=nan]  and right now the>>> the<<< equivalent cost of a gallon of gas is like one
+  31. [act=nan]  bay typically from a a car that was that was>>> in<<< an accident or something with it where you can buy
+  32. [act=nan]  so charging stations if you want to>>> buy<<< a faster charging station they'll set you back anywhere
+  33. [act=nan]   a car that was that was in an accident or>>> something<<< with it where you can buy the the charger and
+  34. [act=nan]  it looks like they're kind of an artistic>>> choices<<< here for the pots
+  35. [act=nan]   that was in an accident or something with it where>>> you<<< can buy the the charger and you can buy one
+  36. [act=nan]   charging stations if you want to buy a faster charging>>> station<<< they'll set you back anywhere from a couple of
+  37. [act=nan]   accident or something with it where you can buy the>>> the<<< charger and you can buy one outright new and that
+  38. [act=nan]  and right now the the equivalent cost of>>> a<<< gallon of gas is like one hundred and fifty
+  39. [act=nan]   it where you can buy the the charger and you>>> can<<< buy one outright new and that's like four hundred
+  40. [act=nan]   want to buy a faster charging station they'll set>>> you<<< back anywhere from a couple of hundred bucks for for
+
+Most frequent activating tokens (top 10): "that", "for", "and", "of", "one", "a", "can", "buy", "the", "you"
+
+
+Based on these examples, what concept does this SAE feature detect?
+

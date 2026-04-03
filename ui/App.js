@@ -139,6 +139,9 @@ export default function App() {
   const [traceText, setTraceText] = useState('');
   const [traceFeatureId, setTraceFeatureId] = useState('');
   const [traceMinActivation, setTraceMinActivation] = useState('0.0');
+  const [traceFeatureInfoLoading, setTraceFeatureInfoLoading] = useState(false);
+  const [traceFeatureInfoError, setTraceFeatureInfoError] = useState(null);
+  const [traceFeatureInfo, setTraceFeatureInfo] = useState(null);
   const [traceLoading, setTraceLoading] = useState(false);
   const [traceError, setTraceError] = useState(null);
   const [traceResult, setTraceResult] = useState(null);
@@ -250,7 +253,7 @@ export default function App() {
           dataset_config: 'validation',
           split: 'validation',
           max_sentences: Math.max(1, Number(lookupMaxSentences) || 200),
-          max_results: Math.max(1, Number(lookupMaxResults) || 100),
+          target_activating_examples: Math.max(1, Number(lookupMaxResults) || 100),
           min_activation: parsedMinActivation,
         }),
       });
@@ -482,6 +485,45 @@ export default function App() {
       setTraceResult(null);
     } finally {
       setTraceLoading(false);
+    }
+  };
+
+  const lookupTraceFeatureInfo = async () => {
+    if (!selectedModel) {
+      setTraceFeatureInfoError('Please select a model first.');
+      return;
+    }
+
+    const parsedFeatureId = Number(traceFeatureId);
+    if (!Number.isInteger(parsedFeatureId) || parsedFeatureId < 0) {
+      setTraceFeatureInfoError('Enter a valid non-negative feature ID.');
+      return;
+    }
+
+    setTraceFeatureInfoLoading(true);
+    setTraceFeatureInfoError(null);
+    try {
+      const response = await fetch(`${API_BASE}/feature-info`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model_id: selectedModel,
+          feature_id: parsedFeatureId,
+          analyzer: 'sae',
+        }),
+      });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.detail || 'Feature lookup failed');
+      }
+
+      setTraceFeatureInfo(await response.json());
+    } catch (e) {
+      setTraceFeatureInfoError(e.message);
+      setTraceFeatureInfo(null);
+    } finally {
+      setTraceFeatureInfoLoading(false);
     }
   };
 
@@ -1073,6 +1115,16 @@ export default function App() {
 
                   <View style={styles.lookupActionsRow}>
                     <TouchableOpacity
+                      style={[styles.secondaryButton, traceFeatureInfoLoading && styles.analyzeButtonDisabled]}
+                      onPress={lookupTraceFeatureInfo}
+                      disabled={traceFeatureInfoLoading}
+                    >
+                      {traceFeatureInfoLoading
+                        ? <Text style={styles.secondaryButtonText}>LOOKING UP...</Text>
+                        : <Text style={styles.secondaryButtonText}>LOOKUP FEATURE INFO</Text>
+                      }
+                    </TouchableOpacity>
+                    <TouchableOpacity
                       style={[styles.analyzeButton, traceLoading && styles.analyzeButtonDisabled]}
                       onPress={runSentenceFeatureTrace}
                       disabled={traceLoading}
@@ -1089,6 +1141,23 @@ export default function App() {
                   <View style={styles.errorBox}>
                     <Text style={styles.errorLabel}>⚠ ERROR</Text>
                     <Text style={styles.errorText}>{traceError}</Text>
+                  </View>
+                )}
+
+                {traceFeatureInfoError && (
+                  <View style={styles.errorBox}>
+                    <Text style={styles.errorLabel}>⚠ FEATURE LOOKUP ERROR</Text>
+                    <Text style={styles.errorText}>{traceFeatureInfoError}</Text>
+                  </View>
+                )}
+
+                {traceFeatureInfo && (
+                  <View style={styles.sectionBlock}>
+                    <View style={styles.lookupResultsHeader}>
+                      <Text style={styles.lookupResultsTitle}>FEATURE #{traceFeatureInfo.feature_id}</Text>
+                      <Text style={styles.lookupResultsDesc}>{traceFeatureInfo.feature_name}</Text>
+                      <Text style={styles.lookupResultsMetaText}>{traceFeatureInfo.feature_description}</Text>
+                    </View>
                   </View>
                 )}
 

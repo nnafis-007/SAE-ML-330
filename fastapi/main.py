@@ -135,6 +135,12 @@ class FeatureActivationsRequest(BaseModel):
     seed: int = 0
 
 
+class FeatureInfoRequest(BaseModel):
+    model_id: str
+    feature_id: int = Field(..., ge=0)
+    analyzer: str = "sae"
+
+
 class SentenceFeatureTraceRequest(BaseModel):
     text: str = Field(..., min_length=1)
     model_id: str
@@ -162,6 +168,15 @@ class SentenceFeatureTraceResponse(BaseModel):
     max_activation: float
     min_activation: float
     tokens: List[SentenceFeatureToken]
+
+
+class FeatureInfoResponse(BaseModel):
+    model: str
+    layer_index: int
+    d_hidden: int
+    feature_id: int
+    feature_name: str
+    feature_description: str
 
 
 # ---------------------------------------------------------------------------
@@ -457,6 +472,28 @@ def sentence_feature_trace(req: SentenceFeatureTraceRequest):
             max_length=req.max_length,
         )
         return SentenceFeatureTraceResponse(**result)
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc))
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Internal error: {exc}")
+
+
+@app.post('/feature-info', response_model=FeatureInfoResponse)
+def feature_info(req: FeatureInfoRequest):
+    """Return label/description metadata for one feature ID."""
+    try:
+        a = get_analyzer(req.analyzer)
+    except KeyError:
+        raise HTTPException(404, f"Analyzer '{req.analyzer}' not found")
+
+    if not hasattr(a, "get_feature_info"):
+        raise HTTPException(400, f"Analyzer '{req.analyzer}' does not support feature metadata lookup")
+
+    try:
+        result = a.get_feature_info(model_id=req.model_id, feature_id=req.feature_id)
+        return FeatureInfoResponse(**result)
     except FileNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc))
     except ValueError as exc:

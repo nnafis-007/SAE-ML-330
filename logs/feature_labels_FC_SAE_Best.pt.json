@@ -62,5 +62,565 @@
     "confidence": "high",
     "request_id": "3285bce6-77e2-4e92-a432-e8612ea86395",
     "updated_at": "2026-04-03T15:09:30Z"
+  },
+  "1000": {
+    "feature_idx": 1000,
+    "label": "Christian Religion",
+    "explanation": "The feature activates on tokens related to Christian institutions, figures, and practices, indicating it detects concepts related to Christianity",
+    "confidence": "high",
+    "request_id": "3c322742-34d1-4821-adba-b3c3807393c5",
+    "updated_at": "2026-04-03T15:22:11Z"
+  },
+  "1001": {
+    "feature_idx": 1001,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "3c322742-34d1-4821-adba-b3c3807393c5",
+    "updated_at": "2026-04-03T15:22:11Z"
+  },
+  "1002": {
+    "feature_idx": 1002,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "3c322742-34d1-4821-adba-b3c3807393c5",
+    "updated_at": "2026-04-03T15:22:12Z"
+  },
+  "1003": {
+    "feature_idx": 1003,
+    "label": "Conjunctions and Connections",
+    "explanation": "This feature detects the presence of conjunctions and connecting words that link ideas or phrases in a sentence.",
+    "confidence": "high",
+    "request_id": "3c322742-34d1-4821-adba-b3c3807393c5",
+    "updated_at": "2026-04-03T15:22:12Z"
+  },
+  "1004": {
+    "feature_idx": 1004,
+    "label": "Proper Noun Abbreviation",
+    "explanation": "The feature detects abbreviations or shortened forms of proper nouns, such as country or organization names",
+    "confidence": "high",
+    "request_id": "3c322742-34d1-4821-adba-b3c3807393c5",
+    "updated_at": "2026-04-03T15:22:13Z"
+  },
+  "1005": {
+    "feature_idx": 1005,
+    "label": "Preposition Relations",
+    "explanation": "This feature detects the usage of prepositions to indicate location or direction in a sentence.",
+    "confidence": "high",
+    "request_id": "3c322742-34d1-4821-adba-b3c3807393c5",
+    "updated_at": "2026-04-03T15:22:13Z"
+  },
+  "37": {
+    "feature_idx": 37,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "38": {
+    "feature_idx": 38,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "39": {
+    "feature_idx": 39,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "40": {
+    "feature_idx": 40,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "41": {
+    "feature_idx": 41,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "42": {
+    "feature_idx": 42,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "43": {
+    "feature_idx": 43,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "44": {
+    "feature_idx": 44,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "45": {
+    "feature_idx": 45,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "46": {
+    "feature_idx": 46,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "47": {
+    "feature_idx": 47,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "48": {
+    "feature_idx": 48,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "49": {
+    "feature_idx": 49,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "50": {
+    "feature_idx": 50,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "51": {
+    "feature_idx": 51,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "52": {
+    "feature_idx": 52,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "53": {
+    "feature_idx": 53,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "54": {
+    "feature_idx": 54,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "55": {
+    "feature_idx": 55,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "56": {
+    "feature_idx": 56,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "57": {
+    "feature_idx": 57,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "58": {
+    "feature_idx": 58,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "59": {
+    "feature_idx": 59,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "60": {
+    "feature_idx": 60,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "61": {
+    "feature_idx": 61,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "62": {
+    "feature_idx": 62,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "63": {
+    "feature_idx": 63,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "64": {
+    "feature_idx": 64,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "65": {
+    "feature_idx": 65,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "66": {
+    "feature_idx": 66,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "67": {
+    "feature_idx": 67,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "68": {
+    "feature_idx": 68,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "69": {
+    "feature_idx": 69,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "70": {
+    "feature_idx": 70,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "71": {
+    "feature_idx": 71,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "72": {
+    "feature_idx": 72,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "73": {
+    "feature_idx": 73,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "74": {
+    "feature_idx": 74,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "75": {
+    "feature_idx": 75,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "76": {
+    "feature_idx": 76,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "77": {
+    "feature_idx": 77,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "78": {
+    "feature_idx": 78,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "79": {
+    "feature_idx": 79,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "80": {
+    "feature_idx": 80,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "81": {
+    "feature_idx": 81,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "82": {
+    "feature_idx": 82,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "83": {
+    "feature_idx": 83,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "84": {
+    "feature_idx": 84,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "85": {
+    "feature_idx": 85,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "86": {
+    "feature_idx": 86,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "87": {
+    "feature_idx": 87,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "88": {
+    "feature_idx": 88,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "89": {
+    "feature_idx": 89,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "90": {
+    "feature_idx": 90,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "91": {
+    "feature_idx": 91,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "92": {
+    "feature_idx": 92,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "93": {
+    "feature_idx": 93,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "94": {
+    "feature_idx": 94,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "95": {
+    "feature_idx": 95,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "96": {
+    "feature_idx": 96,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "97": {
+    "feature_idx": 97,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "98": {
+    "feature_idx": 98,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "99": {
+    "feature_idx": 99,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
+  },
+  "100": {
+    "feature_idx": 100,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "f9fa5728-2635-4fa8-8c61-b0b2521a2d83",
+    "updated_at": "2026-04-03T15:52:35Z"
   }
 }

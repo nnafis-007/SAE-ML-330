@@ -272,5 +272,65 @@
       "num_sentences": 1001
     },
     "error": null
+  },
+  {
+    "timestamp": "2026-04-03T15:22:13.448336+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 1000,
+    "label": "Christian Religion",
+    "confidence": "high",
+    "request_id": "3c322742-34d1-4821-adba-b3c3807393c5",
+    "labeling_config": {
+      "num_sentences": 1000,
+      "top_k": 50,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T15:22:13.722196+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 1003,
+    "label": "Conjunctions and Connections",
+    "confidence": "high",
+    "request_id": "3c322742-34d1-4821-adba-b3c3807393c5",
+    "labeling_config": {
+      "num_sentences": 1000,
+      "top_k": 50,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T15:22:14.127780+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 1004,
+    "label": "Proper Noun Abbreviation",
+    "confidence": "high",
+    "request_id": "3c322742-34d1-4821-adba-b3c3807393c5",
+    "labeling_config": {
+      "num_sentences": 1000,
+      "top_k": 50,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T15:22:14.553403+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 1005,
+    "label": "Preposition Relations",
+    "confidence": "high",
+    "request_id": "3c322742-34d1-4821-adba-b3c3807393c5",
+    "labeling_config": {
+      "num_sentences": 1000,
+      "top_k": 50,
+      "min_activation": 3.0
+    }
   }
 ]
