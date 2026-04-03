@@ -1,0 +1,66 @@
+{
+  "1666": {
+    "feature_idx": 1666,
+    "label": "Preposition and Conjunction",
+    "explanation": "The feature detects tokens that are prepositions or conjunctions, often indicating relationships between entities or actions in a sentence",
+    "confidence": "high",
+    "request_id": "eb3b59d3-c546-48d0-b716-3a1f3dd9ca66",
+    "updated_at": "2026-04-03T14:43:27Z"
+  },
+  "7620": {
+    "feature_idx": 7620,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "7f30122a-1d11-4e83-aced-ba52db5bab70",
+    "updated_at": "2026-04-03T14:45:48Z"
+  },
+  "3989": {
+    "feature_idx": 3989,
+    "label": "Affection or Love",
+    "explanation": "This feature detects the concept of affection or love, as it strongly activates on tokens related to loving or having a strong liking for something",
+    "confidence": "high",
+    "request_id": "440a149f-9fcf-406e-8b00-4715d109e115",
+    "updated_at": "2026-04-03T14:49:21Z"
+  },
+  "4893": {
+    "feature_idx": 4893,
+    "label": "Positive Sentiment",
+    "explanation": "The feature detects tokens related to expressing fondness or affection, such as 'like' and 'love', indicating a positive sentiment or preference",
+    "confidence": "high",
+    "request_id": "987aba36-711b-4f0d-9df9-6266f3a23a14",
+    "updated_at": "2026-04-03T14:51:23Z"
+  },
+  "0": {
+    "feature_idx": 0,
+    "label": "Quantity or extent",
+    "explanation": "The feature detects words related to amount, degree, or duration, such as 'some', 'almost', 'lot', and 'long'.",
+    "confidence": "high",
+    "request_id": "a4a5b752-b690-4235-9237-854b5d5ed16f",
+    "updated_at": "2026-04-03T15:01:49Z"
+  },
+  "3": {
+    "feature_idx": 3,
+    "label": "War and Conflict",
+    "explanation": "The feature detects mentions of war, indicating a semantic concept related to military conflict and violence.",
+    "confidence": "high",
+    "request_id": "c54f24b6-dc06-4749-ab38-ae573e6b760b",
+    "updated_at": "2026-04-03T15:04:49Z"
+  },
+  "6": {
+    "feature_idx": 6,
+    "label": "Outdoor Public Spaces",
+    "explanation": "The feature detects words related to outdoor public areas or significant moments, such as markets or tipping points, that are often associated with community gatherings or events.",
+    "confidence": "medium",
+    "request_id": "3bc9fe24-41e3-47eb-b126-e70ed456c505",
+    "updated_at": "2026-04-03T15:07:52Z"
+  },
+  "8": {
+    "feature_idx": 8,
+    "label": "Day of Week",
+    "explanation": "The feature detects mentions of specific days of the week, particularly Monday, in the given context",
+    "confidence": "high",
+    "request_id": "3285bce6-77e2-4e92-a432-e8612ea86395",
+    "updated_at": "2026-04-03T15:09:30Z"
+  }
+}

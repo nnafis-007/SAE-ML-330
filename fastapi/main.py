@@ -9,6 +9,10 @@ Provides:
 """
 
 import sys
+import json
+import threading
+import re
+from datetime import datetime, timezone
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
@@ -23,6 +27,35 @@ if str(_SAE_ROOT) not in sys.path:
     sys.path.insert(0, str(_SAE_ROOT))
 
 app = FastAPI(title="SAE Interpretability API")
+
+_INTERPRETED_FEATURES_LOCK = threading.Lock()
+
+
+def _safe_model_file_stem(model_id: str) -> str:
+    stem = re.sub(r"[^A-Za-z0-9._-]+", "_", model_id).strip("._")
+    return stem or "unknown_model"
+
+
+def _append_interpreted_feature_log(model_id: str, entry: Dict[str, Any]) -> None:
+    """Append one interpreted-feature record to a JSON list on disk."""
+    log_path = _SAE_ROOT / "logs" / f"ui_llm_interpreted_features_{_safe_model_file_stem(model_id)}.json"
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with _INTERPRETED_FEATURES_LOCK:
+        payload: List[Dict[str, Any]] = []
+        if log_path.exists():
+            try:
+                existing = json.loads(log_path.read_text(encoding="utf-8"))
+                if isinstance(existing, list):
+                    payload = existing
+            except Exception:
+                payload = []
+
+        payload.append(entry)
+        log_path.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
 
 app.add_middleware(
     CORSMiddleware,
@@ -72,6 +105,18 @@ class LabelFeatureRequest(BaseModel):
     corpus_texts: Optional[List[str]] = None
     labeling_config: Optional[Dict[str, Any]] = None
     groq_api_key: Optional[str] = None  # falls back to GROQ_API_KEY env var
+
+
+class BulkLabelFeaturesRequest(BaseModel):
+    model_id: str
+    feature_start: int = Field(..., ge=0)
+    feature_end: int = Field(..., ge=0)
+    num_sentences: int = Field(200, ge=1)
+    llm_top_k: int = Field(25, ge=1)
+    min_activation: float = Field(0.0, ge=0.0)
+    analyzer: str = "sae"
+    labeling_config: Optional[Dict[str, Any]] = None
+    groq_api_key: Optional[str] = None
 
 
 class FeatureActivationsRequest(BaseModel):
@@ -274,9 +319,84 @@ def label_feature(request: LabelFeatureRequest):
             labeling_config=request.labeling_config,
             groq_api_key=request.groq_api_key,
         )
+
+        # Persist successful UI-triggered interpretation output for audit/history.
+        log_entry = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "source": "ui",
+            "analyzer": request.analyzer,
+            "model_id": request.model_id,
+            "feature_idx": request.feature_idx,
+            "label": result.get("label"),
+            "explanation": result.get("explanation"),
+            "confidence": result.get("confidence"),
+            "request_id": result.get("request_id"),
+            "llm_activation_mode": result.get("llm_activation_mode"),
+            "top_tokens": result.get("top_tokens") or [],
+            "prompt_examples_count": len(result.get("llm_prompt_examples") or []),
+            "corpus_texts_count": len(request.corpus_texts or []),
+            "labeling_config": request.labeling_config or {},
+            "error": result.get("error"),
+        }
+        try:
+            _append_interpreted_feature_log(request.model_id, log_entry)
+        except Exception as log_exc:
+            print(f"[label_feature] Failed to append interpreted feature log: {log_exc}")
+
         return result
     except Exception as exc:
         raise HTTPException(500, f"Labeling failed: {exc}")
+
+
+@app.post("/bulk-label-features")
+def bulk_label_features(request: BulkLabelFeaturesRequest):
+    """Bulk label a contiguous feature range in one backend run."""
+    try:
+        a = get_analyzer(request.analyzer)
+    except KeyError:
+        raise HTTPException(404, f"Analyzer '{request.analyzer}' not found")
+
+    if not hasattr(a, "bulk_label_features"):
+        raise HTTPException(400, f"Analyzer '{request.analyzer}' does not support bulk feature labeling")
+
+    try:
+        result = a.bulk_label_features(
+            model_id=request.model_id,
+            feature_start=request.feature_start,
+            feature_end=request.feature_end,
+            num_sentences=request.num_sentences,
+            llm_top_k=request.llm_top_k,
+            min_activation=request.min_activation,
+            labeling_config=request.labeling_config,
+            groq_api_key=request.groq_api_key,
+        )
+
+        for item in result.get("labeled", []):
+            entry = {
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "source": "ui-bulk",
+                "analyzer": request.analyzer,
+                "model_id": request.model_id,
+                "feature_idx": item.get("feature_id"),
+                "label": item.get("label"),
+                "confidence": item.get("confidence"),
+                "request_id": item.get("request_id") or result.get("request_id"),
+                "labeling_config": {
+                    "num_sentences": request.num_sentences,
+                    "top_k": request.llm_top_k,
+                    "min_activation": request.min_activation,
+                },
+            }
+            try:
+                _append_interpreted_feature_log(request.model_id, entry)
+            except Exception as log_exc:
+                print(f"[bulk_label_features] Failed to append interpreted feature log: {log_exc}")
+
+        return result
+    except ValueError as exc:
+        raise HTTPException(400, str(exc))
+    except Exception as exc:
+        raise HTTPException(500, f"Bulk labeling failed: {exc}")
 
 
 @app.post("/feature-activations")

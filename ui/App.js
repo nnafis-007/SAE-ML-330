@@ -92,7 +92,7 @@ function SmallFeatureChip({ feat, onPress, styles }) {
 }
 
 export default function App() {
-  const [themeMode, setThemeMode] = useState('dark');
+  const [themeMode, setThemeMode] = useState('light');
   const C = themeMode === 'light' ? LIGHT_THEME : DARK_THEME;
   const styles = useMemo(() => createStyles(C), [C]);
 
@@ -108,7 +108,8 @@ export default function App() {
 
   const [activeTokenIndex, setActiveTokenIndex] = useState(null);
   const [hoveredTokenIndex, setHoveredTokenIndex] = useState(null);
-  const [topK, setTopK] = useState(0);
+  const [topK, setTopK] = useState(10);
+  const [topKInput, setTopKInput] = useState('10');
   const [selectedFeature, setSelectedFeature] = useState(null);
   const hoverClearTimerRef = useRef(null);
 
@@ -120,6 +121,21 @@ export default function App() {
   const [featureLookupLoading, setFeatureLookupLoading] = useState(false);
   const [featureLookupError, setFeatureLookupError] = useState(null);
   const [featureLookupResults, setFeatureLookupResults] = useState(null);
+  const [featureMapLlmLoading, setFeatureMapLlmLoading] = useState(false);
+  const [featureMapLlmError, setFeatureMapLlmError] = useState(null);
+  const [featureMapLlmResult, setFeatureMapLlmResult] = useState(null);
+  const [featureMapLlmSentences, setFeatureMapLlmSentences] = useState('25');
+  const [featureMapLlmMinActivation, setFeatureMapLlmMinActivation] = useState('0.0');
+  const [featureMapMode, setFeatureMapMode] = useState('single');
+  const [bulkStartFeatureId, setBulkStartFeatureId] = useState('0');
+  const [bulkEndFeatureId, setBulkEndFeatureId] = useState('10');
+  const [bulkMaxSentences, setBulkMaxSentences] = useState('200');
+  const [bulkLlmSentences, setBulkLlmSentences] = useState('25');
+  const [bulkMinActivation, setBulkMinActivation] = useState('0.0');
+  const [bulkLabelLoading, setBulkLabelLoading] = useState(false);
+  const [bulkLabelError, setBulkLabelError] = useState(null);
+  const [bulkLabelProgress, setBulkLabelProgress] = useState({ current: 0, total: 0, featureId: null });
+  const [bulkLabelResults, setBulkLabelResults] = useState(null);
   const [traceText, setTraceText] = useState('');
   const [traceFeatureId, setTraceFeatureId] = useState('');
   const [traceMinActivation, setTraceMinActivation] = useState('0.0');
@@ -169,6 +185,15 @@ export default function App() {
   }, [topK, selectedModel, activeTab]);
 
   useEffect(() => {
+    const digitsOnly = (topKInput || '').replace(/[^0-9]/g, '');
+    if (digitsOnly === '') {
+      setTopK(0);
+      return;
+    }
+    setTopK(Number(digitsOnly));
+  }, [topKInput]);
+
+  useEffect(() => {
     return () => {
       if (hoverClearTimerRef.current) clearTimeout(hoverClearTimerRef.current);
     };
@@ -212,6 +237,8 @@ export default function App() {
     }
     setFeatureLookupLoading(true);
     setFeatureLookupError(null);
+    setFeatureMapLlmError(null);
+    setFeatureMapLlmResult(null);
     try {
       const response = await fetch(`${API_BASE}/feature-activations`, {
         method: 'POST',
@@ -236,6 +263,134 @@ export default function App() {
       setFeatureLookupError(e.message);
     } finally {
       setFeatureLookupLoading(false);
+    }
+  };
+
+  const runFeatureMapLlmAnalysis = async () => {
+    if (!selectedModel) {
+      setFeatureMapLlmError('Please select a model first.');
+      return;
+    }
+    const featureId = Number(featureLookupResults?.feature_id ?? lookupFeatureId);
+    if (!Number.isInteger(featureId) || featureId < 0) {
+      setFeatureMapLlmError('Run a valid feature lookup first.');
+      return;
+    }
+
+    const activatingSentences = featureLookupResults?.activating_sentences || [];
+    if (activatingSentences.length === 0) {
+      setFeatureMapLlmError('No activating contexts found to send to LLM. Lower min activation or scan more sentences.');
+      return;
+    }
+
+    const minAct = featureMapLlmMinActivation.trim() === '' ? 0 : Number(featureMapLlmMinActivation);
+    if (!Number.isFinite(minAct) || minAct < 0) {
+      setFeatureMapLlmError('LLM min activation must be a valid non-negative number.');
+      return;
+    }
+
+    const llmSentenceCount = Math.max(1, Number(featureMapLlmSentences) || 25);
+    const corpusForLlm = activatingSentences.slice(0, llmSentenceCount);
+
+    setFeatureMapLlmLoading(true);
+    setFeatureMapLlmError(null);
+    setFeatureMapLlmResult(null);
+
+    try {
+      const response = await fetch(`${API_BASE}/label-feature`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model_id: selectedModel,
+          feature_idx: featureId,
+          analyzer: 'sae',
+          corpus_texts: corpusForLlm,
+          labeling_config: {
+            top_k: corpusForLlm.length,
+            skip_first_token: true,
+            min_activation: minAct,
+            num_sentences: Math.max(1, Number(lookupMaxSentences) || 200),
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.detail || 'LLM analysis failed');
+      }
+
+      setFeatureMapLlmResult(await response.json());
+    } catch (e) {
+      setFeatureMapLlmError(e.message);
+    } finally {
+      setFeatureMapLlmLoading(false);
+    }
+  };
+
+  const runBulkFeatureLabeling = async () => {
+    if (!selectedModel) {
+      setBulkLabelError('Please select a model first.');
+      return;
+    }
+
+    const startId = Number(bulkStartFeatureId);
+    const endId = Number(bulkEndFeatureId);
+    const maxSentences = Math.max(1, Number(bulkMaxSentences) || 200);
+    const llmSentences = Math.max(1, Number(bulkLlmSentences) || 25);
+    const minAct = bulkMinActivation.trim() === '' ? 0 : Number(bulkMinActivation);
+
+    if (!Number.isInteger(startId) || startId < 0 || !Number.isInteger(endId) || endId < 0) {
+      setBulkLabelError('Start and end feature IDs must be valid non-negative integers.');
+      return;
+    }
+    if (endId < startId) {
+      setBulkLabelError('End feature ID must be greater than or equal to start feature ID.');
+      return;
+    }
+    if (!Number.isFinite(minAct) || minAct < 0) {
+      setBulkLabelError('Min activation must be a valid non-negative number.');
+      return;
+    }
+
+    const total = (endId - startId) + 1;
+
+    setBulkLabelLoading(true);
+    setBulkLabelError(null);
+    setBulkLabelResults(null);
+    setBulkLabelProgress({ current: 0, total, featureId: null });
+
+    try {
+      const response = await fetch(`${API_BASE}/bulk-label-features`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model_id: selectedModel,
+          analyzer: 'sae',
+          feature_start: startId,
+          feature_end: endId,
+          num_sentences: maxSentences,
+          llm_top_k: llmSentences,
+          min_activation: minAct,
+        }),
+      });
+
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.detail || 'Bulk labeling failed');
+      }
+
+      const payload = await response.json();
+      setBulkLabelProgress({ current: total, total, featureId: endId });
+      setBulkLabelResults({
+        labeled: payload.labeled || [],
+        skipped: payload.skipped || [],
+        failed: payload.failed || [],
+        request_id: payload.request_id,
+      });
+    } catch (e) {
+      setBulkLabelError(e.message);
+    } finally {
+      setBulkLabelLoading(false);
     }
   };
 
@@ -443,10 +598,9 @@ export default function App() {
                     <Text style={styles.topKLabel}>TOP K</Text>
                     <TextInput
                       style={styles.topKInput}
-                      value={String(topK)}
+                      value={topKInput}
                       onChangeText={(t) => {
-                        const d = t.replace(/[^0-9]/g, '');
-                        setTopK(d === '' ? 0 : Number(d));
+                        setTopKInput((t || '').replace(/[^0-9]/g, ''));
                       }}
                       keyboardType="numeric"
                       maxLength={4}
@@ -555,8 +709,27 @@ export default function App() {
           <View style={styles.contentContainer}>
             <View style={styles.panel}>
 
+              <View style={styles.featureMapModeRow}>
+                <TouchableOpacity
+                  style={[styles.featureMapModeBtn, featureMapMode === 'single' && styles.featureMapModeBtnActive]}
+                  onPress={() => setFeatureMapMode('single')}
+                >
+                  <Text style={[styles.featureMapModeText, featureMapMode === 'single' && styles.featureMapModeTextActive]}>
+                    SINGLE FEATURE
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.featureMapModeBtn, featureMapMode === 'bulk' && styles.featureMapModeBtnActive]}
+                  onPress={() => setFeatureMapMode('bulk')}
+                >
+                  <Text style={[styles.featureMapModeText, featureMapMode === 'bulk' && styles.featureMapModeTextActive]}>
+                    BULK LABEL
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
               {/* Feature Lookup */}
-              <View style={styles.sectionBlock}>
+              {featureMapMode === 'single' && <View style={styles.sectionBlock}>
                 <View style={styles.sectionLabelRow}>
                   <View style={[styles.sectionDot, { backgroundColor: '#ffcc00' }]} />
                   <Text style={styles.sectionLabel}>DATASET ACTIVATION SEARCH</Text>
@@ -625,6 +798,72 @@ export default function App() {
                           Scanned {featureLookupResults.scanned_sentences} sentences · {featureLookupResults.matches?.length ?? 0} matches shown
                         </Text>
                       </View>
+
+                      <View style={styles.featureMapLlmActionsRow}>
+                        <View style={styles.lookupField}>
+                          <Text style={styles.lookupFieldLabel}>LLM SENTENCES</Text>
+                          <TextInput
+                            style={styles.lookupInput}
+                            value={featureMapLlmSentences}
+                            onChangeText={(t) => setFeatureMapLlmSentences((t || '').replace(/[^0-9]/g, ''))}
+                            keyboardType="numeric"
+                            placeholder="25"
+                            placeholderTextColor={C.textMuted}
+                          />
+                        </View>
+                        <View style={styles.lookupField}>
+                          <Text style={styles.lookupFieldLabel}>LLM MIN ACTIVATION</Text>
+                          <TextInput
+                            style={styles.lookupInput}
+                            value={featureMapLlmMinActivation}
+                            onChangeText={(t) => setFeatureMapLlmMinActivation(sanitizeDecimalInput(t))}
+                            keyboardType="numeric"
+                            placeholder="0.0"
+                            placeholderTextColor={C.textMuted}
+                          />
+                        </View>
+                        <TouchableOpacity
+                          style={[styles.secondaryButton, featureMapLlmLoading && styles.analyzeButtonDisabled]}
+                          onPress={runFeatureMapLlmAnalysis}
+                          disabled={featureMapLlmLoading}
+                        >
+                          {featureMapLlmLoading
+                            ? <Text style={styles.secondaryButtonText}>RUNNING LLM...</Text>
+                            : <Text style={styles.secondaryButtonText}>RUN LLM ANALYSIS</Text>
+                          }
+                        </TouchableOpacity>
+                      </View>
+
+                      {featureMapLlmError && (
+                        <View style={styles.errorBox}>
+                          <Text style={styles.errorLabel}>⚠ LLM ERROR</Text>
+                          <Text style={styles.errorText}>{featureMapLlmError}</Text>
+                        </View>
+                      )}
+
+                      {featureMapLlmResult && (
+                        <View style={styles.mapLlmPanel}>
+                          <View style={styles.sectionLabelRow}>
+                            <View style={[styles.sectionDot, { backgroundColor: C.pink }]} />
+                            <Text style={[styles.sectionLabel, { color: C.pink }]}>LLM ANALYSIS</Text>
+                          </View>
+                          <Text style={styles.mapLlmLabel}>{featureMapLlmResult.label || '(no label returned)'}</Text>
+                          <Text style={styles.mapLlmExplanation}>{featureMapLlmResult.explanation || 'No explanation returned.'}</Text>
+                          <Text style={styles.lookupResultsMetaText}>
+                            Confidence: {String(featureMapLlmResult.confidence || 'unknown').toUpperCase()} · Request ID: {featureMapLlmResult.request_id || 'n/a'}
+                          </Text>
+
+                          {!!featureMapLlmResult.top_tokens?.length && (
+                            <View style={styles.tokenChipRow}>
+                              {featureMapLlmResult.top_tokens.slice(0, 12).map((tok, idx) => (
+                                <View key={`${tok}-${idx}`} style={styles.tokenChip}>
+                                  <Text style={styles.tokenChipText}>{tok}</Text>
+                                </View>
+                              ))}
+                            </View>
+                          )}
+                        </View>
+                      )}
                     </View>
 
                     {(featureLookupResults.matches || []).map((match, idx) => (
@@ -646,7 +885,140 @@ export default function App() {
                     ))}
                   </View>
                 )}
-              </View>
+              </View>}
+
+              {featureMapMode === 'bulk' && (
+                <View style={styles.sectionBlock}>
+                  <View style={styles.sectionLabelRow}>
+                    <View style={[styles.sectionDot, { backgroundColor: C.pink }]} />
+                    <Text style={styles.sectionLabel}>BULK FEATURE LABELING</Text>
+                  </View>
+                  <Text style={styles.lookupHint}>
+                    Label a range of features with LLM. Each successful feature is written to the model-specific label JSON file.
+                  </Text>
+
+                  <View style={styles.lookupGrid}>
+                    <View style={styles.lookupField}>
+                      <Text style={styles.lookupFieldLabel}>START FEATURE ID</Text>
+                      <TextInput
+                        style={styles.lookupInput}
+                        value={bulkStartFeatureId}
+                        onChangeText={(t) => setBulkStartFeatureId((t || '').replace(/[^0-9]/g, ''))}
+                        keyboardType="numeric"
+                        placeholder="0"
+                        placeholderTextColor={C.textMuted}
+                      />
+                    </View>
+                    <View style={styles.lookupField}>
+                      <Text style={styles.lookupFieldLabel}>END FEATURE ID</Text>
+                      <TextInput
+                        style={styles.lookupInput}
+                        value={bulkEndFeatureId}
+                        onChangeText={(t) => setBulkEndFeatureId((t || '').replace(/[^0-9]/g, ''))}
+                        keyboardType="numeric"
+                        placeholder="10"
+                        placeholderTextColor={C.textMuted}
+                      />
+                    </View>
+                    <View style={styles.lookupField}>
+                      <Text style={styles.lookupFieldLabel}>SENTENCES TO SCAN</Text>
+                      <TextInput
+                        style={styles.lookupInput}
+                        value={bulkMaxSentences}
+                        onChangeText={(t) => setBulkMaxSentences((t || '').replace(/[^0-9]/g, ''))}
+                        keyboardType="numeric"
+                        placeholder="200"
+                        placeholderTextColor={C.textMuted}
+                      />
+                    </View>
+                    <View style={styles.lookupField}>
+                      <Text style={styles.lookupFieldLabel}>SENTENCES TO LLM</Text>
+                      <TextInput
+                        style={styles.lookupInput}
+                        value={bulkLlmSentences}
+                        onChangeText={(t) => setBulkLlmSentences((t || '').replace(/[^0-9]/g, ''))}
+                        keyboardType="numeric"
+                        placeholder="25"
+                        placeholderTextColor={C.textMuted}
+                      />
+                    </View>
+                    <View style={styles.lookupField}>
+                      <Text style={styles.lookupFieldLabel}>MIN ACTIVATION</Text>
+                      <TextInput
+                        style={styles.lookupInput}
+                        value={bulkMinActivation}
+                        onChangeText={(t) => setBulkMinActivation(sanitizeDecimalInput(t))}
+                        keyboardType="numeric"
+                        placeholder="0.0"
+                        placeholderTextColor={C.textMuted}
+                      />
+                    </View>
+                  </View>
+
+                  <View style={styles.lookupActionsRow}>
+                    <TouchableOpacity
+                      style={[styles.analyzeButton, bulkLabelLoading && styles.analyzeButtonDisabled]}
+                      onPress={runBulkFeatureLabeling}
+                      disabled={bulkLabelLoading}
+                    >
+                      {bulkLabelLoading
+                        ? <Text style={styles.analyzeButtonText}>RUNNING BULK LABEL...</Text>
+                        : <Text style={styles.analyzeButtonText}>▶ RUN BULK LABEL</Text>
+                      }
+                    </TouchableOpacity>
+                  </View>
+
+                  {bulkLabelLoading && (
+                    <View style={styles.lookupResultsMeta}>
+                      <Text style={styles.lookupResultsMetaText}>
+                        Processing {bulkLabelProgress.current}/{bulkLabelProgress.total}
+                        {bulkLabelProgress.featureId !== null ? ` · Feature #${bulkLabelProgress.featureId}` : ''}
+                      </Text>
+                    </View>
+                  )}
+
+                  {bulkLabelError && (
+                    <View style={styles.errorBox}>
+                      <Text style={styles.errorLabel}>⚠ BULK LABEL ERROR</Text>
+                      <Text style={styles.errorText}>{bulkLabelError}</Text>
+                    </View>
+                  )}
+
+                  {bulkLabelResults && (
+                    <View style={styles.lookupResults}>
+                      <View style={styles.lookupResultsHeader}>
+                        <Text style={styles.lookupResultsTitle}>BULK LABEL SUMMARY</Text>
+                        <Text style={styles.lookupResultsMetaText}>
+                          Labeled: {bulkLabelResults.labeled.length} · Skipped: {bulkLabelResults.skipped.length} · Failed: {bulkLabelResults.failed.length}
+                        </Text>
+                      </View>
+
+                      {(bulkLabelResults.labeled || []).map((row, idx) => (
+                        <View key={`labeled-${row.feature_id}-${idx}`} style={styles.matchCard}>
+                          <Text style={styles.matchCardMeta}>
+                            Feature #{row.feature_id} · {String(row.confidence || 'unknown').toUpperCase()} · sent_to_llm={row.sent_to_llm}
+                          </Text>
+                          <Text style={styles.lookupResultsDesc}>{row.label || '(no label)'}</Text>
+                        </View>
+                      ))}
+
+                      {(bulkLabelResults.skipped || []).map((row, idx) => (
+                        <View key={`skipped-${row.feature_id}-${idx}`} style={styles.matchCard}>
+                          <Text style={styles.matchCardMeta}>Feature #{row.feature_id} · SKIPPED</Text>
+                          <Text style={styles.lookupResultsMetaText}>{row.reason}</Text>
+                        </View>
+                      ))}
+
+                      {(bulkLabelResults.failed || []).map((row, idx) => (
+                        <View key={`failed-${row.feature_id}-${idx}`} style={styles.matchCard}>
+                          <Text style={styles.matchCardMeta}>Feature #{row.feature_id} · FAILED</Text>
+                          <Text style={styles.errorText}>{row.error}</Text>
+                        </View>
+                      ))}
+                    </View>
+                  )}
+                </View>
+              )}
 
             </View>
           </View>
@@ -1472,6 +1844,42 @@ const createStyles = (C) => StyleSheet.create({
     flexWrap: 'wrap',
     marginBottom: 12,
   },
+  featureMapLlmActionsRow: {
+    flexDirection: 'row',
+    gap: 10,
+    alignItems: 'flex-end',
+    flexWrap: 'wrap',
+    marginTop: 10,
+    marginBottom: 12,
+  },
+  featureMapModeRow: {
+    flexDirection: 'row',
+    gap: 10,
+    marginBottom: 14,
+    flexWrap: 'wrap',
+  },
+  featureMapModeBtn: {
+    backgroundColor: C.bgCard,
+    borderWidth: 1,
+    borderColor: C.border,
+    borderRadius: 2,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+  },
+  featureMapModeBtnActive: {
+    borderColor: C.cyan,
+    backgroundColor: C.cyan + '22',
+  },
+  featureMapModeText: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 1,
+    color: C.textSecond,
+  },
+  featureMapModeTextActive: {
+    color: C.cyan,
+  },
   traceGrid: {
     gap: 16,
   },
@@ -1617,6 +2025,28 @@ const createStyles = (C) => StyleSheet.create({
     backgroundColor: C.cyan + '33',
     color: C.cyan,
     fontWeight: '700',
+  },
+  mapLlmPanel: {
+    marginTop: 12,
+    backgroundColor: C.bgPanel,
+    borderWidth: 1,
+    borderColor: C.pink + '66',
+    borderRadius: 4,
+    padding: 12,
+    gap: 8,
+  },
+  mapLlmLabel: {
+    fontFamily: Platform.OS === 'web' ? 'Georgia, serif' : undefined,
+    fontSize: 16,
+    lineHeight: 24,
+    color: C.textPrimary,
+    fontWeight: '700',
+  },
+  mapLlmExplanation: {
+    fontSize: 13,
+    lineHeight: 21,
+    color: C.textSecond,
+    marginBottom: 2,
   },
 
   // Map token cards

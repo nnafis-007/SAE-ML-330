@@ -1,0 +1,276 @@
+[
+  {
+    "timestamp": "2026-04-03T14:43:27.930007+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 1666,
+    "label": "Preposition and Conjunction",
+    "explanation": "The feature detects tokens that are prepositions or conjunctions, often indicating relationships between entities or actions in a sentence",
+    "confidence": "high",
+    "request_id": "eb3b59d3-c546-48d0-b716-3a1f3dd9ca66",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "the",
+      "to",
+      "'re",
+      "per",
+      "keep",
+      "want",
+      "have",
+      "seventy",
+      "for",
+      "ever"
+    ],
+    "prompt_examples_count": 25,
+    "corpus_texts_count": 25,
+    "labeling_config": {
+      "top_k": 25,
+      "skip_first_token": true,
+      "min_activation": 0,
+      "num_sentences": 1000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T14:45:48.712069+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 7620,
+    "label": "dead feature",
+    "explanation": "Feature never activates on this corpus.",
+    "confidence": "high",
+    "request_id": "7f30122a-1d11-4e83-aced-ba52db5bab70",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [],
+    "prompt_examples_count": 0,
+    "corpus_texts_count": 2,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 0.1,
+      "num_sentences": 1000
+    },
+    "error": "no activating examples found"
+  },
+  {
+    "timestamp": "2026-04-03T14:49:21.642850+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 3989,
+    "label": "Affection or Love",
+    "explanation": "This feature detects the concept of affection or love, as it strongly activates on tokens related to loving or having a strong liking for something",
+    "confidence": "high",
+    "request_id": "440a149f-9fcf-406e-8b00-4715d109e115",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "love",
+      "loved"
+    ],
+    "prompt_examples_count": 4,
+    "corpus_texts_count": 4,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 5,
+      "num_sentences": 1000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T14:50:04.052744+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 4893,
+    "label": "Positive Sentiment",
+    "explanation": "The feature activates on tokens indicating affection or approval, such as 'like', 'love', and 'enjoy', suggesting it detects positive sentiment in text",
+    "confidence": "high",
+    "request_id": "392ad2e4-8397-4b3b-bbb7-29e92c9a7102",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "like",
+      "love",
+      "to",
+      "enjoy",
+      "of",
+      "that",
+      "taking",
+      "this"
+    ],
+    "prompt_examples_count": 10,
+    "corpus_texts_count": 14,
+    "labeling_config": {
+      "top_k": 25,
+      "skip_first_token": true,
+      "min_activation": 0.1,
+      "num_sentences": 120
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T14:51:23.591358+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 4893,
+    "label": "Positive Sentiment",
+    "explanation": "The feature detects tokens related to expressing fondness or affection, such as 'like' and 'love', indicating a positive sentiment or preference",
+    "confidence": "high",
+    "request_id": "987aba36-711b-4f0d-9df9-6266f3a23a14",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "like",
+      "love",
+      "liked",
+      "loved"
+    ],
+    "prompt_examples_count": 9,
+    "corpus_texts_count": 10,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 5,
+      "num_sentences": 1000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T14:54:38.739412+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 0,
+    "label": "Quantity or extent",
+    "explanation": "The feature activates on tokens indicating amounts, durations, or degrees, such as 'some', 'lot', 'almost', and 'long'.",
+    "confidence": "high",
+    "request_id": "4083a936-d21e-4d1a-81fc-b244ee594e80",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "some",
+      "lot",
+      "almost",
+      "long",
+      "of",
+      "many",
+      "so",
+      "all",
+      "about",
+      "whatever"
+    ],
+    "prompt_examples_count": 29,
+    "corpus_texts_count": 29,
+    "labeling_config": {
+      "top_k": 29,
+      "skip_first_token": true,
+      "min_activation": 0,
+      "num_sentences": 1000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T15:01:49.147930+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 0,
+    "label": "Quantity or extent",
+    "explanation": "The feature detects words related to amount, degree, or duration, such as 'some', 'almost', 'lot', and 'long'.",
+    "confidence": "high",
+    "request_id": "a4a5b752-b690-4235-9237-854b5d5ed16f",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "some",
+      "almost",
+      "lot",
+      "long",
+      "about",
+      "little",
+      "whatever"
+    ],
+    "prompt_examples_count": 7,
+    "corpus_texts_count": 9,
+    "labeling_config": {
+      "top_k": 9,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 1001
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T15:04:49.230498+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 3,
+    "label": "War and Conflict",
+    "explanation": "The feature detects mentions of war, indicating a semantic concept related to military conflict and violence.",
+    "confidence": "high",
+    "request_id": "c54f24b6-dc06-4749-ab38-ae573e6b760b",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "war"
+    ],
+    "prompt_examples_count": 2,
+    "corpus_texts_count": 3,
+    "labeling_config": {
+      "top_k": 3,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 1001
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T15:07:52.315085+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 6,
+    "label": "Outdoor Public Spaces",
+    "explanation": "The feature detects words related to outdoor public areas or significant moments, such as markets or tipping points, that are often associated with community gatherings or events.",
+    "confidence": "medium",
+    "request_id": "3bc9fe24-41e3-47eb-b126-e70ed456c505",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "air",
+      "point"
+    ],
+    "prompt_examples_count": 2,
+    "corpus_texts_count": 2,
+    "labeling_config": {
+      "top_k": 2,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 1001
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T15:09:30.852739+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "FC_SAE_Best.pt",
+    "feature_idx": 8,
+    "label": "Day of Week",
+    "explanation": "The feature detects mentions of specific days of the week, particularly Monday, in the given context",
+    "confidence": "high",
+    "request_id": "3285bce6-77e2-4e92-a432-e8612ea86395",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "onday"
+    ],
+    "prompt_examples_count": 2,
+    "corpus_texts_count": 2,
+    "labeling_config": {
+      "top_k": 2,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 1001
+    },
+    "error": null
+  }
+]

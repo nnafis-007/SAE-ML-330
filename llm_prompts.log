@@ -85,3 +85,431 @@ RESPONSE:
   "confidence": "high"
 }
 ================================================================================
+
+================================================================================
+REQUEST_ID 3970bd2c-1610-4087-a6d1-d0e0cd32d8d8
+FEATURE 1069
+USER PROMPT:
+Feature index: 1069
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=6.733]   affecting future auctions is there anything that can be done>>> or<<< is this just anyone who is in new england
+   2. [act=1.825]  and you help them with how to prepare>>> or<<< are they pretty much it's fully cooked ready to
+   3. [act=1.805]   ii and that there were soldiers around the house and>>> or<<< she'd think that we were eating dog meat for
+   4. [act=1.666]  i thought we drew that down to reserve that we>>> or<<< you or i think the board you presented to the
+   5. [act=1.469]  's as to any claims injury or loss arising from>>> or<<< in connection with this agreement to recover damages over the
+   6. [act=1.362]   we drew that down to reserve that we or you>>> or<<< i think the board you presented to the board and
+   7. [act=1.269]   counter some popular misconceptions of things you might have heard>>> and<<< say how why they they love driving electric
+   8. [act=0.855]  tell me how important and how valuable the parents are>>> and<<< the friends of groups and the boosters are to the
+   9. [act=0.790]   future auctions is there anything that can be done or>>> is<<< this just anyone who is in new england is
+  10. [act=0.743]   driving when you figure in the leasing or purchase costs>>> or<<< and the cost of fueling
+  11. [act=0.666]   upon their frequently stated intent to consummate the agreement>>> and<<< enter into the ground lease and other contracts that we
+  12. [act=0.498]   me how important and how valuable the parents are and>>> the<<< friends of groups and the boosters are to the programming
+  13. [act=0.243]  as courts have made clear that that arising from or>>> in<<< connection with language is indeed as broad as it sounds
+  14. [act=0.219]   glad you're all able to see where i live>>> and<<< what we do
+  15. [act=0.150]   so glad you're here and i'm glad you>>>'re<<< all able to see where i live and what we
+  16. [act=0.046]   stated intent to consummate the agreement and enter into>>> the<<< ground lease and other contracts that we north presid
+  17. [act=0.012]  middelburg with more stores>>> and<<< outlets than you can ever see you can get everything
+  18. [act=0.000]   do to protect ourselves against this affecting future auctions is>>> there<<< anything that can be done or is this just anyone
+  19. [act=0.000]   that can be done or is this just anyone who>>> is<<< in new england is dealing with the same exact
+  20. [act=0.000]   against this affecting future auctions is there anything that can>>> be<<< done or is this just anyone who is in new
+  21. [act=0.000]   ourselves against this affecting future auctions is there anything that>>> can<<< be done or is this just anyone who is in
+  22. [act=0.000]   protect ourselves against this affecting future auctions is there anything>>> that<<< can be done or is this just anyone who is
+  23. [act=0.000]   to protect ourselves against this affecting future auctions is there>>> anything<<< that can be done or is this just anyone who
+  24. [act=0.000]   auctions is there anything that can be done or is>>> this<<< just anyone who is in new england is dealing
+  25. [act=0.000]   this affecting future auctions is there anything that can be>>> done<<< or is this just anyone who is in new eng
+
+Most frequent activating tokens (top 10): "or", "and", "is", "the", "in", "'re", "there", "be", "can", "that"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Alternative or Addition",
+  "explanation": "The feature detects phrases indicating a choice or addition between two options, often marked by 'or' or 'and' conjunctions",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 28fffc9f-6284-4092-9d99-ae378da2ceff
+FEATURE 1069
+USER PROMPT:
+Feature index: 1069
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 17 activating examples (ordered strongest first):
+   1. [act=6.788]   affecting future auctions is there anything that can be done>>> or<<< is this just anyone who is in new england
+   2. [act=1.882]  and you help them with how to prepare>>> or<<< are they pretty much it's fully cooked ready to
+   3. [act=1.867]   ii and that there were soldiers around the house and>>> or<<< she'd think that we were eating dog meat for
+   4. [act=1.709]  i thought we drew that down to reserve that we>>> or<<< you or i think the board you presented to the
+   5. [act=1.513]  's as to any claims injury or loss arising from>>> or<<< in connection with this agreement to recover damages over the
+   6. [act=1.398]   we drew that down to reserve that we or you>>> or<<< i think the board you presented to the board and
+   7. [act=1.317]   counter some popular misconceptions of things you might have heard>>> and<<< say how why they they love driving electric
+   8. [act=0.995]   brand new with all the software that allows the children>>> or<<< the students to basically do video editing with the work
+   9. [act=0.897]  tell me how important and how valuable the parents are>>> and<<< the friends of groups and the boosters are to the
+  10. [act=0.839]   future auctions is there anything that can be done or>>> is<<< this just anyone who is in new england is
+  11. [act=0.813]   driving when you figure in the leasing or purchase costs>>> or<<< and the cost of fueling
+  12. [act=0.699]   upon their frequently stated intent to consummate the agreement>>> and<<< enter into the ground lease and other contracts that we
+  13. [act=0.528]   me how important and how valuable the parents are and>>> the<<< friends of groups and the boosters are to the programming
+  14. [act=0.276]  as courts have made clear that that arising from or>>> in<<< connection with language is indeed as broad as it sounds
+  15. [act=0.264]   glad you're all able to see where i live>>> and<<< what we do
+  16. [act=0.213]   so glad you're here and i'm glad you>>>'re<<< all able to see where i live and what we
+  17. [act=0.191]   all of the different groups and families that we have>>> and<<< that represent the belmont community
+
+Most frequent activating tokens (top 6): "or", "and", "is", "the", "in", "'re"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Conjunctions and Connectors",
+  "explanation": "The feature detects the presence of conjunctions and connecting words that link ideas or clauses in a sentence",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID eb3b59d3-c546-48d0-b716-3a1f3dd9ca66
+FEATURE 1666
+USER PROMPT:
+Feature index: 1666
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=2.932]   where you want to live a city where you want>>> to<<< enjoy life and a city that must be yours mine
+   2. [act=2.599]  is that to keep em moist that's to>>> keep<<< the weeds out
+   3. [act=1.615]  again how to freeze it how>>> to<<< can it how long to blanch it if there
+   4. [act=1.395]   city where you want to live a city where you>>> want<<< to enjoy life and a city that must be yours
+   5. [act=1.278]   ready and available and sometimes we're short and we>>> have<<< to scramble
+   6. [act=1.260]   it'll be the equivalent of getting seventy cents gallon>>> seventy<<< cent gas
+   7. [act=1.250]   like everybody else but you don't have to pay>>> for<<< the electricity
+   8. [act=1.209]   battery out of that that has ever had that's>>> ever<<< lost charge
+   9. [act=1.070]   so glad you're here and i'm glad you>>>'re<<< all able to see where i live and what we
+  10. [act=1.012]   enough ready and available and sometimes we're short and>>> we<<< have to scramble
+  11. [act=0.825]   live a city where you want to enjoy life and>>> a<<< city that must be yours mine
+  12. [act=0.701]   a city where you want to live a city where>>> you<<< want to enjoy life and a city that must be
+  13. [act=0.683]  're going to have a information session first and then>>> the<<< ride and drive event that test drives various vehicles out
+  14. [act=0.593]   this market because the people are so nice and they>>>'re<<< willing to try new things which is what i'm
+  15. [act=0.423]  sometimes we have more than enough ready and available and>>> sometimes<<< we're short and we have to scramble
+  16. [act=0.376]   everybody else but you don't have to pay for>>> the<<< electricity
+  17. [act=0.351]  again how to freeze it how to can it>>> how<<< long to blanch it if there's better ways
+  18. [act=0.335]  backs those are they they have room for a lot>>> of<<< stuff in them you can get some that are you
+  19. [act=0.330]  one of the biggest things>>> is<<< that physicians view hallucinations always as something that we need
+  20. [act=0.284]   you can get some that are you know very fast>>> some<<< that will park anywhere
+  21. [act=0.262]  again how to freeze it how to can>>> it<<< how long to blanch it if there's better
+  22. [act=0.249]  is that to keep em moist that's to keep>>> the<<< weeds out
+  23. [act=0.248]   was my efficiency they they measured it in watt hours>>> per<<< mile but it was negative
+  24. [act=0.231]   i'm so glad you're here and i'm>>> glad<<< you're all able to see where i live and
+  25. [act=0.209]   leasing these as a as an approach then the cost>>> per<<< mile that you would get for leasing a volt when
+
+Most frequent activating tokens (top 10): "the", "to", "'re", "per", "keep", "want", "have", "seventy", "for", "ever"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Preposition and Conjunction",
+  "explanation": "The feature detects tokens that are prepositions or conjunctions, often indicating relationships between entities or actions in a sentence",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 440a149f-9fcf-406e-8b00-4715d109e115
+FEATURE 3989
+USER PROMPT:
+Feature index: 3989
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 4 activating examples (ordered strongest first):
+   1. [act=10.041]  we have a lot of people that>>> love<<< to eat out but i'm sure that we will
+   2. [act=9.927]  and i>>> love<<< this market because the people are so nice and they
+   3. [act=9.715]  and so i because she>>> loved<<< the medium so much i knew that when i wanted
+   4. [act=9.383]   you might have heard and say how why they they>>> love<<< driving electric
+
+Most frequent activating tokens (top 2): "love", "loved"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Affection or Love",
+  "explanation": "This feature detects the concept of affection or love, as it strongly activates on tokens related to loving or having a strong liking for something",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 392ad2e4-8397-4b3b-bbb7-29e92c9a7102
+FEATURE 4893
+USER PROMPT:
+Feature index: 4893
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 10 activating examples (ordered strongest first):
+   1. [act=10.540]  if if you>>> like<<< that kind of stuff
+   2. [act=9.688]   got cooked and that they did the batteries didn't>>> like<<< that
+   3. [act=9.477]  and i>>> love<<< this market because the people are so nice and they
+   4. [act=2.914]  it's probably what your mom is used>>> to<<< in peru right yeah we have our markets and
+   5. [act=0.901]   you want to live a city where you want to>>> enjoy<<< life and a city that must be yours mine
+   6. [act=0.811]  cause we had a lot of people yesterday>>> like<<< my bean plants aren't looking very good no more
+   7. [act=0.497]  so you know and another advantage>>> of<<< prius's originally had right you're you're
+   8. [act=0.204]  if if you like>>> that<<< kind of stuff
+   9. [act=0.178]  and that way i'm not up>>> taking<<< up are the spaces pretty wide there yes
+  10. [act=0.102]  and i love>>> this<<< market because the people are so nice and they're
+
+Most frequent activating tokens (top 8): "like", "love", "to", "enjoy", "of", "that", "taking", "this"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Positive Sentiment",
+  "explanation": "The feature activates on tokens indicating affection or approval, such as 'like', 'love', and 'enjoy', suggesting it detects positive sentiment in text",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 987aba36-711b-4f0d-9df9-6266f3a23a14
+FEATURE 4893
+USER PROMPT:
+Feature index: 4893
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 9 activating examples (ordered strongest first):
+   1. [act=12.044]  and so yeah we>>> like<<< to stop here
+   2. [act=10.235]  and at least that's how i>>> like<<< to try to figure it out
+   3. [act=9.703]  if if you>>> like<<< that kind of stuff
+   4. [act=9.150]   got cooked and that they did the batteries didn't>>> like<<< that
+   5. [act=9.070]  something they've always>>> liked<<<
+   6. [act=8.666]  and i>>> love<<< this market because the people are so nice and they
+   7. [act=8.618]  and so i because she>>> loved<<< the medium so much i knew that when i wanted
+   8. [act=7.788]   you might have heard and say how why they they>>> love<<< driving electric
+   9. [act=7.399]  we have a lot of people that>>> love<<< to eat out but i'm sure that we will
+
+Most frequent activating tokens (top 4): "like", "love", "liked", "loved"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Positive Sentiment",
+  "explanation": "The feature detects tokens related to expressing fondness or affection, such as 'like' and 'love', indicating a positive sentiment or preference",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 4083a936-d21e-4d1a-81fc-b244ee594e80
+FEATURE 0
+USER PROMPT:
+Feature index: 0
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 29 activating examples (ordered strongest first):
+   1. [act=4.621]   the electricity prices is lowest but you can also for>>> some<<< charges you can ask it to charge when the power
+   2. [act=4.504]  yeah for a>>> lot<<< of kids this is their opportunity to connect to the
+   3. [act=4.494]   can plug in your electric car that works great for>>> almost<<< every person with normal with normal driving habits you will
+   4. [act=4.156]   car it you shouldn't be idling for a>>> long<<< times before you go right
+   5. [act=4.025]   was at one stretch i was on autopilot for>>> about<<< you know about ninety five of the time on the
+   6. [act=3.740]  he has served for a>>> long<<< time on many committees
+   7. [act=3.560]   than you can ever see you can get everything for>>> whatever<<< price you want but we have cheap buns for
+   8. [act=3.559]   you could just go to bed and sleep for a>>> little<<< bit
+   9. [act=3.190]  yeah for a lot>>> of<<< kids this is their opportunity to connect to the school
+  10. [act=3.160]  't work for me but actually eighty miles works for>>> almost<<< all
+  11. [act=3.093]   don't pull down from the rate stabilization fund for>>> at<<< the end of the year perhaps
+  12. [act=1.938]  so again it'll depend on the household but for>>> many<<< households simply changing what vehicle you're driving can be
+  13. [act=1.856]   do know that i probably will be putting in for>>> some<<< funding for this to be able to continue as we
+  14. [act=1.801]   twenty thousand additional cost to us to do it for>>> nothing<<<
+  15. [act=1.765]  they make a great first car for>>> some<<< for someone in college
+  16. [act=1.723]   established a community then they they did get together for>>> many<<< different things
+  17. [act=1.561]  and so you have gone through>>> quite<<< a few transformations since then i bet
+  18. [act=1.224]   could just go to bed and sleep for a little>>> bit<<<
+  19. [act=0.936]   hatchbacks those are they they have room for a>>> lot<<< of stuff in them you can get some that are
+  20. [act=0.931]   we're just laying out a very general framework for>>> some<<< contracts that that was essentially to come into effect if
+  21. [act=0.930]   you can ever see you can get everything for whatever>>> price<<< you want but we have cheap buns for you
+  22. [act=0.777]   well this is what the rate stabilization fund is for>>> so<<< i don't have a particular issue with using this
+  23. [act=0.771]   a story about his devotion towards ringing the bell for>>> all<<< the wedding services
+  24. [act=0.680]   work for me but actually eighty miles works for almost>>> all<<<
+  25. [act=0.532]   we met once a week we met probably for a>>> couple<<< of hours seven to nine we had our agenda we
+  26. [act=0.368]  so how do you do your produce how>>> do<<< you pick it we have a crew
+  27. [act=0.175]   this position of special ed director is so important to>>> so<<< many of our parents
+  28. [act=0.136]   met once a week we met probably for a couple>>> of<<< hours seven to nine we had our agenda we'd
+  29. [act=0.042]   and other contracts that we north presidio spent>>> substantial<<< funds and resources to develop the property in a manner
+
+Most frequent activating tokens (top 10): "some", "lot", "almost", "long", "of", "many", "so", "all", "about", "whatever"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Quantity or extent",
+  "explanation": "The feature activates on tokens indicating amounts, durations, or degrees, such as 'some', 'lot', 'almost', and 'long'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID a4a5b752-b690-4235-9237-854b5d5ed16f
+FEATURE 0
+USER PROMPT:
+Feature index: 0
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 7 activating examples (ordered strongest first):
+   1. [act=4.231]   the electricity prices is lowest but you can also for>>> some<<< charges you can ask it to charge when the power
+   2. [act=4.222]   can plug in your electric car that works great for>>> almost<<< every person with normal with normal driving habits you will
+   3. [act=4.209]  yeah for a>>> lot<<< of kids this is their opportunity to connect to the
+   4. [act=3.913]   car it you shouldn't be idling for a>>> long<<< times before you go right
+   5. [act=3.806]   was at one stretch i was on autopilot for>>> about<<< you know about ninety five of the time on the
+   6. [act=3.341]   you could just go to bed and sleep for a>>> little<<< bit
+   7. [act=3.232]   than you can ever see you can get everything for>>> whatever<<< price you want but we have cheap buns for
+
+Most frequent activating tokens (top 7): "some", "almost", "lot", "long", "about", "little", "whatever"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Quantity or extent",
+  "explanation": "The feature detects words related to amount, degree, or duration, such as 'some', 'almost', 'lot', and 'long'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c54f24b6-dc06-4749-ab38-ae573e6b760b
+FEATURE 3
+USER PROMPT:
+Feature index: 3
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 2 activating examples (ordered strongest first):
+   1. [act=5.293]   lot of that she would think she was around world>>> war<<< ii and that there were soldiers around the house and
+   2. [act=4.165]  it was scuttled at the end of the>>> war<<<
+
+Most frequent activating tokens (top 1): "war"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "War and Conflict",
+  "explanation": "The feature detects mentions of war, indicating a semantic concept related to military conflict and violence.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 3bc9fe24-41e3-47eb-b126-e70ed456c505
+FEATURE 6
+USER PROMPT:
+Feature index: 6
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 2 activating examples (ordered strongest first):
+   1. [act=3.183]   have that hometown feeling down here right and the open>>>air<<< market that's kind of special
+   2. [act=3.035]  're hoping that that helps other communities reach their tipping>>> point<<<
+
+Most frequent activating tokens (top 2): "air", "point"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Outdoor Public Spaces",
+  "explanation": "The feature detects words related to outdoor public areas or significant moments, such as markets or tipping points, that are often associated with community gatherings or events.",
+  "confidence": "medium"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 3285bce6-77e2-4e92-a432-e8612ea86395
+FEATURE 8
+USER PROMPT:
+Feature index: 8
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 2 activating examples (ordered strongest first):
+   1. [act=8.462]  and last week on m>>>onday<<< we had administrative retreat and that is a day where
+   2. [act=7.190]   of manufacturing week we will open our doors on m>>>onday<<< to the students of mohonasen school
+
+Most frequent activating tokens (top 1): "onday"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Day of Week",
+  "explanation": "The feature detects mentions of specific days of the week, particularly Monday, in the given context",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 3c322742-34d1-4821-adba-b3c3807393c5
+FEATURE 1000
+USER PROMPT:
+Feature index: 1000
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=12.558]  we sat down for the interview here in the>>> church<<< and that was an hour plus of just everything just
+   2. [act=11.368]  une as synods to encourage the people in their>>> church<<< minnesotans to vote against this amendment
+   3. [act=11.218]   really nice to bring my mom to armenian>>> church<<< and you know sure enough we got there and she
+   4. [act=11.048]  so the>>> church<<< is protected from fire whereas it hadn't been in
+   5. [act=9.635]  five different>>> churches<<< came together and it was volunteers
+   6. [act=9.499]   interest about the building they always call it a round>>> church<<< for instance but in the film you go into some
+   7. [act=9.381]   hour plus of just everything just detailed information about the>>> church<<<
+   8. [act=9.011]   you know it might be helpful to bring her to>>> church<<< someday and sure enough after the service the priest came
+   9. [act=7.327]   as an end for weary travelers between stillwater and>>> saint<<< paul
+  10. [act=5.938]   to church someday and sure enough after the service the>>> priest<<< came up to her and asked her what was her
+  11. [act=4.792]   may or in the beginning of june as syn>>>ods<<< to encourage the people in their church minnesot
+  12. [act=4.364]  nikolaidis back to>>> christ<<<ofori
+  13. [act=3.788]  's call has to get it in she does to>>> christ<<<ofori
+  14. [act=3.525]   got there and she just kind of got into the>>> service<<< and standing up and down and and started kind of
+  15. [act=3.177]   bring her to church someday and sure enough after the>>> service<<< the priest came up to her and asked her what
+
+Most frequent activating tokens (top 7): "church", "christ", "service", "churches", "saint", "priest", "ods"
+
+
+Based on these examples, what concept does this SAE feature detect?
+

@@ -20,6 +20,7 @@ import time
 import math
 import uuid
 import hashlib
+import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -406,7 +407,9 @@ class SAEAnalyzer(BaseAnalyzer):
             token_pos_map=pos_map,
         )
 
-        return {
+        # Persist runtime label updates in a model-specific file so edits can
+        # be tracked per checkpoint and immediately reflected in subsequent UI calls.
+        response_payload = {
             "request_id": request_id,
             "feature_idx": result.feature_idx,
             "label": result.label,
@@ -424,6 +427,15 @@ class SAEAnalyzer(BaseAnalyzer):
             ],
             "error": result.error,
         }
+
+        self._save_runtime_feature_label(
+            model_id=model_id,
+            checkpoint_path=checkpoint_path,
+            feature_idx=int(result.feature_idx),
+            label_result=response_payload,
+        )
+
+        return response_payload
 
     def find_feature_activations(
         self,
@@ -725,6 +737,150 @@ class SAEAnalyzer(BaseAnalyzer):
             "total_matches": total_matches,
         }
 
+    def bulk_label_features(
+        self,
+        model_id: str,
+        feature_start: int,
+        feature_end: int,
+        num_sentences: int = 200,
+        llm_top_k: int = 25,
+        min_activation: float = 0.0,
+        labeling_config: Optional[Dict[str, Any]] = None,
+        groq_api_key: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        """Bulk-label a contiguous feature range using one LLM-analysis run."""
+        checkpoint_path = str(self._checkpoints_dir / model_id)
+        info = self._load_sae(checkpoint_path)
+        sae: SparseAutoencoder = info["sae"]
+        layer_index: int = int(info["layer_index"])
+        d_hidden: int = int(info["d_hidden"])
+
+        if feature_start < 0 or feature_end < 0 or feature_end < feature_start:
+            raise ValueError("feature range must satisfy 0 <= start <= end")
+        if feature_end >= d_hidden:
+            raise ValueError(f"feature_end must be <= {d_hidden - 1}")
+
+        collector = self._get_collector(layer_index)
+        tokenizer = collector.tokenizer
+
+        # Use one shared corpus for the entire range, then one labeler run.
+        corpus_texts = self._load_dataset_texts(
+            dataset_name="MLCommons/peoples_speech",
+            dataset_config="validation",
+            split="validation",
+            sentence_budget=max(1, int(num_sentences)),
+            text_field=None,
+            seed=0,
+        )
+
+        activations = collector.collect_activations(
+            texts=corpus_texts,
+            batch_size=8,
+            max_length=128,
+        )
+
+        from analyzers.llm_analysis import build_token_maps  # lazy import
+        from analyzers.llm_analysis import FeatureLabeler, LabelingConfig
+
+        token_ids, doc_map, pos_map = build_token_maps(corpus_texts, tokenizer, max_length=128)
+
+        resolved_api_key = groq_api_key or os.environ.get("GROQ_API_KEY")
+        request_id = str(uuid.uuid4())
+        cfg_kwargs: Dict[str, Any] = {
+            "backend": "groq",
+            "model": "llama-3.3-70b-versatile",
+            "top_k": max(1, int(llm_top_k)),
+            "request_delay": 0.2,
+            "groq_api_key": resolved_api_key,
+            "skip_first_token": True,
+            "request_id": request_id,
+            "min_activation": float(max(0.0, min_activation)),
+            "normalize_mode": "standardize",
+        }
+        if labeling_config:
+            allowed = set(LabelingConfig.__dataclass_fields__.keys())
+            cfg_kwargs.update({k: v for k, v in labeling_config.items() if k in allowed})
+
+        cfg = LabelingConfig(**cfg_kwargs)
+        labeler = FeatureLabeler(sae=sae, tokenizer=tokenizer, cfg=cfg, device=self._device)
+
+        feature_indices = list(range(int(feature_start), int(feature_end) + 1))
+        results = labeler.label_features_from_activations(
+            feature_indices=feature_indices,
+            activations=activations,
+            token_ids=token_ids,
+            token_doc_map=doc_map,
+            token_pos_map=pos_map,
+            save_path=None,
+            resume=False,
+        )
+
+        labeled: List[Dict[str, Any]] = []
+        skipped: List[Dict[str, Any]] = []
+        failed: List[Dict[str, Any]] = []
+
+        for feat_idx in feature_indices:
+            r = results.get(feat_idx)
+            if r is None:
+                failed.append({"feature_id": feat_idx, "error": "No result returned"})
+                continue
+
+            response_payload = {
+                "request_id": request_id,
+                "feature_idx": int(r.feature_idx),
+                "label": r.label,
+                "explanation": r.explanation,
+                "confidence": r.confidence,
+                "top_tokens": r.top_tokens,
+                "llm_activation_mode": cfg.normalize_mode,
+                "llm_prompt_examples": [
+                    {
+                        "token": ctx.token,
+                        "context": ctx.context,
+                        "activation": round(float(ctx.activation_value), 4),
+                    }
+                    for ctx in r.top_contexts
+                ],
+                "error": r.error,
+            }
+
+            # Persist each feature label to model-specific JSON for runtime use.
+            self._save_runtime_feature_label(
+                model_id=model_id,
+                checkpoint_path=checkpoint_path,
+                feature_idx=int(r.feature_idx),
+                label_result=response_payload,
+            )
+
+            if r.error:
+                msg = str(r.error)
+                if "no activating examples" in msg.lower():
+                    skipped.append({"feature_id": feat_idx, "reason": msg})
+                else:
+                    failed.append({"feature_id": feat_idx, "error": msg})
+            else:
+                labeled.append({
+                    "feature_id": feat_idx,
+                    "label": r.label,
+                    "confidence": r.confidence,
+                    "request_id": request_id,
+                    "sent_to_llm": int(cfg.top_k),
+                })
+
+        return {
+            "model_id": model_id,
+            "feature_start": int(feature_start),
+            "feature_end": int(feature_end),
+            "request_id": request_id,
+            "num_sentences": int(num_sentences),
+            "sentences_used": len(corpus_texts),
+            "llm_top_k": int(cfg.top_k),
+            "min_activation": float(cfg.min_activation),
+            "labeled": labeled,
+            "skipped": skipped,
+            "failed": failed,
+        }
+
     @staticmethod
     def _standardize_hidden_states(hidden_states: torch.Tensor) -> torch.Tensor:
         """Standardize hidden states over token rows to keep activation scale consistent."""
@@ -953,6 +1109,9 @@ class SAEAnalyzer(BaseAnalyzer):
 
         labels: Dict[int, Dict[str, str]] = {}
 
+        checkpoint_rel = Path(checkpoint_path).relative_to(self._checkpoints_dir)
+        model_id = str(checkpoint_rel).replace("\\", "/")
+
         def _assign(feature_id: int, label: Any, explanation: Any = None) -> None:
             # Keep first assignment when duplicates exist across files.
             if feature_id in labels:
@@ -984,10 +1143,30 @@ class SAEAnalyzer(BaseAnalyzer):
             except Exception:
                 pass
 
-        # 2) logs/feature_labels*.json files
+        # 2) model-specific runtime labels in logs/feature_labels_<model>.json
+        model_labels_path = self._get_model_labels_path(model_id)
+        if model_labels_path.exists():
+            try:
+                with open(model_labels_path, encoding="utf-8") as f:
+                    data = json.load(f)
+                if isinstance(data, dict):
+                    for key, val in data.items():
+                        if not str(key).isdigit():
+                            continue
+                        feature_id = int(key)
+                        if isinstance(val, dict):
+                            _assign(feature_id, val.get("label", f"Feature {feature_id}"), val.get("explanation"))
+                        elif isinstance(val, str):
+                            _assign(feature_id, val)
+            except Exception:
+                pass
+
+        # 3) legacy logs/feature_labels*.json files (fallback)
         logs_dir = _SAE_ROOT / "logs"
         if logs_dir.exists():
             for json_path in sorted(logs_dir.glob("*.json")):
+                if json_path.name == model_labels_path.name:
+                    continue
                 try:
                     with open(json_path, encoding="utf-8") as f:
                         data = json.load(f)
@@ -1014,6 +1193,47 @@ class SAEAnalyzer(BaseAnalyzer):
 
         self._labels_cache[checkpoint_path] = labels
         return labels
+
+    def _get_model_labels_path(self, model_id: str) -> Path:
+        """Return model-specific feature-label file path under logs/."""
+        safe = re.sub(r"[^A-Za-z0-9._-]+", "_", model_id).strip("._")
+        if not safe:
+            safe = "unknown_model"
+        return _SAE_ROOT / "logs" / f"feature_labels_{safe}.json"
+
+    def _save_runtime_feature_label(
+        self,
+        model_id: str,
+        checkpoint_path: str,
+        feature_idx: int,
+        label_result: Dict[str, Any],
+    ) -> None:
+        """Persist one feature label update and invalidate cache for live UI refresh."""
+        path = self._get_model_labels_path(model_id)
+        path.parent.mkdir(parents=True, exist_ok=True)
+
+        payload: Dict[str, Any] = {}
+        if path.exists():
+            try:
+                existing = json.loads(path.read_text(encoding="utf-8"))
+                if isinstance(existing, dict):
+                    payload = existing
+            except Exception:
+                payload = {}
+
+        payload[str(feature_idx)] = {
+            "feature_idx": feature_idx,
+            "label": (label_result.get("label") or f"Feature {feature_idx}"),
+            "explanation": (label_result.get("explanation") or label_result.get("label") or f"Feature {feature_idx}"),
+            "confidence": label_result.get("confidence"),
+            "request_id": label_result.get("request_id"),
+            "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        }
+
+        path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+
+        # Drop cached labels so /analyze picks the latest labels immediately.
+        self._labels_cache.pop(checkpoint_path, None)
 
 
 # ---------------------------------------------------------------------------
