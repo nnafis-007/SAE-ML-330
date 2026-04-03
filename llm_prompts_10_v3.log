@@ -1,0 +1,1062 @@
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 0
+USER PROMPT:
+Feature index: 0
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 5 activating examples (ordered strongest first):
+   1. [act=6.549]   precincts of economic and political life, and for the>>> most<<< part they have succeeded. They can lead companies,
+   2. [act=6.059]  ’t know how this dish has survived for>>> so<<< long,
+   3. [act=6.057]  . Yet the sad reality is that, for the>>> most<<< part, zoo animals have become, as the art
+   4. [act=5.512]  ferior Socket for Paladin PvE Gems for the>>> most<<< part, but Superior for PvP.A side-
+   5. [act=5.459]   tie a noose. These two boys, for>>> whatever<<< reason, tied nooses on opposite ends of a
+
+Most frequent activating tokens (top 3): "most", "so", "whatever"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Degree or Extent",
+  "explanation": "The feature detects words and phrases that indicate the level or amount of something, such as 'most', 'so', and 'whatever'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 3
+USER PROMPT:
+Feature index: 3
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=7.890]  
+Career
+Jones was a highly decorated World>>> War<<< II veteran. He played 10 games in the American
+   2. [act=7.387]  Career
+Jones was a highly decorated World War>>> II<<< veteran. He played 10 games in the American League
+   3. [act=6.079]   and Karl Liebknecht on 15 January>>> 1919<<<
+   4. [act=5.955]   a Facebook post on his fan page. The Vietnam>>> War<<< veteran had been ailing for some time.
+
+   5. [act=5.604]   international level for England in a single game during the>>> 1893<<< Home Nations Championship. After retiring from playing sport he
+   6. [act=5.557]  
+The Sand Ridge State Forest largely dates back to>>> 1939<<<, when
+   7. [act=5.285]  
+
+“Following the global financial crisis of>>> 2007<<<–08, it was observed that senior executives and
+   8. [act=5.254]   the fossil Protochrysis Bischoff,>>> 1916<<< (Insecta: Hymenoptera:
+   9. [act=5.225]   at the University of Iowa as an independent during the>>> 1942<<< college football season. The team compiled a 7–
+  10. [act=5.173]   the building of the Boston Opera House, completed in>>> 1909<<<, supplying steelworks used in the construction of the
+  11. [act=5.161]   in Folklore of the Northern Counties (18>>>79<<<), taken from a letter sent by the historian Robert
+  12. [act=5.151]  stedt, Germany.
+
+It was opened>>> 1953<<< as a stop of the Alster Northern Railway (
+  13. [act=5.142]  support free peoples,” he proclaimed in March>>> 1947<<<, “who are resisting attempted subjugation by
+  14. [act=5.125]   authorities erected numerous concentration camps in Croatia between 1941 and>>> 1945<<<. These camps were used to isolate and murder Jews
+  15. [act=5.102]   the inhabitants of the area near Llanelli between>>> 1909<<< and 1953 and was one of several basic halts
+
+Most frequent activating tokens (top 13): "War", "1909", "II", "1919", "1893", "1939", "2007", "1916", "1942", "79", "1953", "1947", "1945"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Historical Year Detection",
+  "explanation": "The feature detects mentions of specific historical years or time periods, often in the context of significant events or eras",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 9
+USER PROMPT:
+Feature index: 9
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=19.899]  . 22 shootings at Parliament Hill, which exposed numerous>>> security<<< gaps, as well as the
+   2. [act=17.660]  -free zones, as they have armed and unarmed>>> security<<< personnel. In addition, several studies show the vast
+   3. [act=17.353]   is only an interim measure designed to address the current>>> security<<< challenges and will be resumed as soon as normalcy
+   4. [act=17.251]   are predominantly socialist and antipathetical to the future>>> security<<< and prosperity of the west”.
+
+
+   5. [act=17.215]  The Harper government is looking for>>> security<<< experts to help harden federal buildings in the Ottawa
+   6. [act=16.211]  MANILA (Reuters) - Philippine>>> security<<< forces on Saturday killed a foreign national and his female
+   7. [act=13.837]   IT department is responsible for upkeep, maintenance, and>>> security<<< of networks. This may include analyzing the computer and
+   8. [act=13.464]   risk of hitting a bug that would somehow compromise system>>> security<<< is very low.
+So can someone please point
+   9. [act=10.715]   candidates have been lulled into a false sense of>>> security<<<, ignoring or forgetting the benefits that come with
+  10. [act=9.237]   go anywhere.
+
+Greene is a maximum>>> security<<< prison, classified as a “Supermax�
+  11. [act=5.827]  Introduction {#>>>Sec<<<1}
+============
+
+Small heat-shock
+  12. [act=5.827]  Introduction {#>>>Sec<<<1}
+============
+
+Alcohol use disorders
+  13. [act=5.685]  Introduction {#>>>sec<<<1}
+============
+
+Acute aort
+  14. [act=5.685]  Introduction {#>>>sec<<<1-1}
+============
+
+Inflix
+  15. [act=5.301]  1. Introduction {#>>>sec<<<1}
+===============
+
+Stroke
+
+Most frequent activating tokens (top 3): "security", "sec", "Sec"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Security Concept",
+  "explanation": "The feature detects mentions of security, safety, and protection in various contexts, including national security, computer security, and personal safety",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 10
+USER PROMPT:
+Feature index: 10
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 3 activating examples (ordered strongest first):
+   1. [act=5.810]  Ever noticed how close “rib>>>bit<<<” and “rabbit” sounded
+   2. [act=5.791]  D may be used for a word line driving,>>> bit<<< line driving
+   3. [act=5.744]   that $m$ is a multiset of>>> bit<<<strings where all bitstrings have the same length,
+
+Most frequent activating tokens (top 1): "bit"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Binary Data Reference",
+  "explanation": "The feature detects mentions of binary data or bits in the input text, often related to computing or information theory concepts",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 14
+USER PROMPT:
+Feature index: 14
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 6 activating examples (ordered strongest first):
+   1. [act=5.948]   last night and at one point, the long was>>> so<<< long, it actually wrapped around the building.1
+   2. [act=5.880]  v adjusts the bias point of the two transistors>>> so<<< that T1 and T2 are always conducting a
+   3. [act=5.860]   fans using blockchain technology.
+
+We built it>>> so<<< that everyone can have an easy and secure way to
+   4. [act=5.433]  . Ducky edited it and made the lines cleaner>>> so<<< it'd look better than before. It's a
+   5. [act=5.314]  abbard shared that they had 38,000 donors>>> so<<< far, Daniel Clark shared. Clark is a volunteer
+   6. [act=5.025]   la ville cette semaine. Lundi>>> so<<<ir, sa présence à un débat
+
+Most frequent activating tokens (top 1): "so"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Causal Indicator",
+  "explanation": "The feature detects the token 'so' which often indicates a causal or explanatory relationship between clauses or ideas.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 15
+USER PROMPT:
+Feature index: 15
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=17.126]   another dog, one that didn’t seem>>> to<<< mind really, but the gaze from the stud that
+   2. [act=16.665]  ile strike amid rising tensions with North Korea, seems>>> to<<< have sparked an unusually rapid response on Capitol Hill.
+   3. [act=16.312]   strongly interact with light. The latest observed characteristic seems>>> to<<< confirm a long-held theory that dark matter can
+   4. [act=14.481]  r/LEGO, the source of which seems>>> to<<< be early listings on the Mexican version of Amazon.
+   5. [act=14.328]   interesting for example.
+However Google doesn't appear>>> to<<< allow you to change a property from the classic code
+   6. [act=13.924]   of refraction of light water in some places seems>>> to<<< be dark blue, in other - clear and transparent
+   7. [act=13.785]   chatbox at the bottom of my page which seems>>> to<<< be inheriting CSS style from bootstrap.min
+   8. [act=13.568]   thought it was reflecting the light, but it appears>>> to<<< be painted on.
+   9. [act=13.461]   facelift - when?
+
+Up seems>>> to<<< be forgotten model in VW structure. Hey VW we
+  10. [act=13.140]  Americans
+
+A record-setting reality show appears>>> to<<< be paddling in the wrong direction as its fifth
+  11. [act=12.757]   frequently contains thinly myelinated axons which appear>>> to<<< conduct signals abnormally, although it is uncertain whether
+  12. [act=12.369]   Hurricanes, Tornadoes and more. Sometimes he appears>>> to<<< be
+  13. [act=12.276]   growth and a dominant position within Europe, everything seemed>>> to<<< be going well for the German ruling class. However
+  14. [act=11.532]   RichTextEdit?
+
+There doesn't seem>>> to<<< be a default context menu (with copy, paste
+  15. [act=11.352]   which traverse the site of spinal cord injury, appears>>> to<<< contribute to post-traumatic neurological deficits, although the
+
+Most frequent activating tokens (top 1): "to"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Seems To Indicate Uncertainty",
+  "explanation": "The feature detects phrases that express uncertainty or possibility, often introduced by 'seems' or 'appears' followed by 'to'",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 16
+USER PROMPT:
+Feature index: 16
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 1 activating examples (ordered strongest first):
+   1. [act=6.210]   be a counterexample, under the mild>>> assumption<<< that there exists a
+
+Most frequent activating tokens (top 1): "assumption"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Mild Assumption Concept",
+  "explanation": "This feature detects the presence of mild or general assumptions in a statement or argument.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 18
+USER PROMPT:
+Feature index: 18
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 13 activating examples (ordered strongest first):
+   1. [act=13.789]  Q:
+
+How do airline pilots maintain>>> night<<< currency?
+
+Does flying as an airline pilot
+   2. [act=13.223]  There is no denying the fact that>>> night<<< shift workers are fast losing on their health. Long
+   3. [act=12.085]   he's looking quite snazzy.
+
+>>>Night<<<wing stands about 10' tall (via Toyark
+   4. [act=11.956]  ...
+
+AWANA...February 21 - Regular>>> Night<<<! Begins at 6:30 p.m.
+   5. [act=11.636]  Kogan's opera roles have included Queen of the>>> Night<<< in Die Zauberflöte, Zer
+   6. [act=10.565]   around this?
+
+A:
+
+The>>> night<<< currency requirements are in 14 CFR 61.57,
+   7. [act=8.760]   pilot under 14 CFR 121 provide different ways to maintain>>> night<<< currency? Suppose a pilot were to bid only day
+   8. [act=7.528]  Club>>> night<<< 7:30pm Prevention Of Obesity Club. Every
+   9. [act=7.028]   CFR 61 that would mean a pilot might not be>>> night<<< current anymore but do 121 operator's op specs have
+  10. [act=6.288]  The fire broke out during the congested city's>>> evening<<< rush hour
+  11. [act=6.242]  20
+ "I Really Should've Gone Out Last>>> Night<<<" – 6:55
+ "I Off
+  12. [act=5.811]  –A.D. 1185), when the>>> evening<<< was marked with poetry and music by court aristocrats
+  13. [act=5.137]   my most fondly remembered game is a very competitive>>> Dark<<< Sun one shot throne war. As a GM,
+
+Most frequent activating tokens (top 4): "night", "Night", "evening", "Dark"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Time of Day",
+  "explanation": "The feature activates on words related to nighttime or evening, indicating it detects concepts related to time of day",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 19
+USER PROMPT:
+Feature index: 19
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 10 activating examples (ordered strongest first):
+   1. [act=8.809]  A>>> VIS<<<UALLY STUNNING architectural biography of Minnesota�
+   2. [act=8.629]   rich history and culture, and as anyone planning a>>> visit<<< to the City by the Bay realizes, it can
+   3. [act=6.747]   thing to do while there. Aside from the usual>>> tourist<<< spots like the Golden Gate Bridge, Alcatraz
+   4. [act=6.680]  igated stupidity” coming out of the CDC and>>> visit<<< the church. The plan was to “lay
+   5. [act=6.426]   of honeymoons from island-hopping to>>> visiting<<< cultural sites.
+
+With Authentic Experiences
+   6. [act=5.890]  ” most weekends since he took office, and>>> visited<<< other Trump-owned properties on the rare weekends he
+   7. [act=5.875]   can be difficult to narrow down all the places to>>> visit<<< and thing to do while there. Aside from the
+   8. [act=5.848]   a time that suits your schedule, please call or>>> visit<<< our office to schedule an appointment with the next available
+   9. [act=5.805]   Anyone who want to buy wholesale rear view cameras can>>> visit<<< TVC-Mall.com for
+  10. [act=5.797]  .detekt.api.Detekt>>>Vis<<<itor
+import io.gitlab.arturb
+
+Most frequent activating tokens (top 6): "visit", "VIS", "tourist", "visiting", "visited", "Vis"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Travel or Visitation",
+  "explanation": "The feature activates on words related to traveling or visiting places, indicating it detects concepts related to tourism or exploration.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 0
+USER PROMPT:
+Feature index: 0
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 5 activating examples (ordered strongest first):
+   1. [act=6.549]   precincts of economic and political life, and for the>>> most<<< part they have succeeded. They can lead companies,
+   2. [act=6.059]  ’t know how this dish has survived for>>> so<<< long,
+   3. [act=6.057]  . Yet the sad reality is that, for the>>> most<<< part, zoo animals have become, as the art
+   4. [act=5.512]  ferior Socket for Paladin PvE Gems for the>>> most<<< part, but Superior for PvP.A side-
+   5. [act=5.459]   tie a noose. These two boys, for>>> whatever<<< reason, tied nooses on opposite ends of a
+
+Most frequent activating tokens (top 3): "most", "so", "whatever"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Degree or extent",
+  "explanation": "The feature detects words and phrases that indicate the level or amount of something, such as 'most', 'so', and 'whatever'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 3
+USER PROMPT:
+Feature index: 3
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=7.890]  
+Career
+Jones was a highly decorated World>>> War<<< II veteran. He played 10 games in the American
+   2. [act=7.387]  Career
+Jones was a highly decorated World War>>> II<<< veteran. He played 10 games in the American League
+   3. [act=6.079]   and Karl Liebknecht on 15 January>>> 1919<<<
+   4. [act=5.955]   a Facebook post on his fan page. The Vietnam>>> War<<< veteran had been ailing for some time.
+
+   5. [act=5.604]   international level for England in a single game during the>>> 1893<<< Home Nations Championship. After retiring from playing sport he
+   6. [act=5.557]  
+The Sand Ridge State Forest largely dates back to>>> 1939<<<, when
+   7. [act=5.285]  
+
+“Following the global financial crisis of>>> 2007<<<–08, it was observed that senior executives and
+   8. [act=5.254]   the fossil Protochrysis Bischoff,>>> 1916<<< (Insecta: Hymenoptera:
+   9. [act=5.225]   at the University of Iowa as an independent during the>>> 1942<<< college football season. The team compiled a 7–
+  10. [act=5.173]   the building of the Boston Opera House, completed in>>> 1909<<<, supplying steelworks used in the construction of the
+  11. [act=5.161]   in Folklore of the Northern Counties (18>>>79<<<), taken from a letter sent by the historian Robert
+  12. [act=5.151]  stedt, Germany.
+
+It was opened>>> 1953<<< as a stop of the Alster Northern Railway (
+  13. [act=5.142]  support free peoples,” he proclaimed in March>>> 1947<<<, “who are resisting attempted subjugation by
+  14. [act=5.125]   authorities erected numerous concentration camps in Croatia between 1941 and>>> 1945<<<. These camps were used to isolate and murder Jews
+  15. [act=5.102]   the inhabitants of the area near Llanelli between>>> 1909<<< and 1953 and was one of several basic halts
+
+Most frequent activating tokens (top 13): "War", "1909", "II", "1919", "1893", "1939", "2007", "1916", "1942", "79", "1953", "1947", "1945"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Historical Year Detection",
+  "explanation": "The feature activates on text snippets containing specific historical years or time periods, often related to significant events or eras",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 9
+USER PROMPT:
+Feature index: 9
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=19.899]  . 22 shootings at Parliament Hill, which exposed numerous>>> security<<< gaps, as well as the
+   2. [act=17.660]  -free zones, as they have armed and unarmed>>> security<<< personnel. In addition, several studies show the vast
+   3. [act=17.353]   is only an interim measure designed to address the current>>> security<<< challenges and will be resumed as soon as normalcy
+   4. [act=17.251]   are predominantly socialist and antipathetical to the future>>> security<<< and prosperity of the west”.
+
+
+   5. [act=17.215]  The Harper government is looking for>>> security<<< experts to help harden federal buildings in the Ottawa
+   6. [act=16.211]  MANILA (Reuters) - Philippine>>> security<<< forces on Saturday killed a foreign national and his female
+   7. [act=13.837]   IT department is responsible for upkeep, maintenance, and>>> security<<< of networks. This may include analyzing the computer and
+   8. [act=13.464]   risk of hitting a bug that would somehow compromise system>>> security<<< is very low.
+So can someone please point
+   9. [act=10.715]   candidates have been lulled into a false sense of>>> security<<<, ignoring or forgetting the benefits that come with
+  10. [act=9.237]   go anywhere.
+
+Greene is a maximum>>> security<<< prison, classified as a “Supermax�
+  11. [act=5.827]  Introduction {#>>>Sec<<<1}
+============
+
+Small heat-shock
+  12. [act=5.827]  Introduction {#>>>Sec<<<1}
+============
+
+Alcohol use disorders
+  13. [act=5.685]  Introduction {#>>>sec<<<1}
+============
+
+Acute aort
+  14. [act=5.685]  Introduction {#>>>sec<<<1-1}
+============
+
+Inflix
+  15. [act=5.301]  1. Introduction {#>>>sec<<<1}
+===============
+
+Stroke
+
+Most frequent activating tokens (top 3): "security", "sec", "Sec"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Security Concept",
+  "explanation": "The feature detects mentions of security, including national, physical, and digital security, as well as section headers in documents.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 10
+USER PROMPT:
+Feature index: 10
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 3 activating examples (ordered strongest first):
+   1. [act=5.810]  Ever noticed how close “rib>>>bit<<<” and “rabbit” sounded
+   2. [act=5.791]  D may be used for a word line driving,>>> bit<<< line driving
+   3. [act=5.744]   that $m$ is a multiset of>>> bit<<<strings where all bitstrings have the same length,
+
+Most frequent activating tokens (top 1): "bit"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Binary Data Reference",
+  "explanation": "This feature detects mentions of binary data or bits in the input text, often related to computing or information theory concepts",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 14
+USER PROMPT:
+Feature index: 14
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 6 activating examples (ordered strongest first):
+   1. [act=5.948]   last night and at one point, the long was>>> so<<< long, it actually wrapped around the building.1
+   2. [act=5.880]  v adjusts the bias point of the two transistors>>> so<<< that T1 and T2 are always conducting a
+   3. [act=5.860]   fans using blockchain technology.
+
+We built it>>> so<<< that everyone can have an easy and secure way to
+   4. [act=5.433]  . Ducky edited it and made the lines cleaner>>> so<<< it'd look better than before. It's a
+   5. [act=5.314]  abbard shared that they had 38,000 donors>>> so<<< far, Daniel Clark shared. Clark is a volunteer
+   6. [act=5.025]   la ville cette semaine. Lundi>>> so<<<ir, sa présence à un débat
+
+Most frequent activating tokens (top 1): "so"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Causal Indicator",
+  "explanation": "The feature detects the token 'so' which often indicates a causal or explanatory relationship between clauses or ideas.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 15
+USER PROMPT:
+Feature index: 15
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=17.126]   another dog, one that didn’t seem>>> to<<< mind really, but the gaze from the stud that
+   2. [act=16.665]  ile strike amid rising tensions with North Korea, seems>>> to<<< have sparked an unusually rapid response on Capitol Hill.
+   3. [act=16.312]   strongly interact with light. The latest observed characteristic seems>>> to<<< confirm a long-held theory that dark matter can
+   4. [act=14.481]  r/LEGO, the source of which seems>>> to<<< be early listings on the Mexican version of Amazon.
+   5. [act=14.328]   interesting for example.
+However Google doesn't appear>>> to<<< allow you to change a property from the classic code
+   6. [act=13.924]   of refraction of light water in some places seems>>> to<<< be dark blue, in other - clear and transparent
+   7. [act=13.785]   chatbox at the bottom of my page which seems>>> to<<< be inheriting CSS style from bootstrap.min
+   8. [act=13.568]   thought it was reflecting the light, but it appears>>> to<<< be painted on.
+   9. [act=13.461]   facelift - when?
+
+Up seems>>> to<<< be forgotten model in VW structure. Hey VW we
+  10. [act=13.140]  Americans
+
+A record-setting reality show appears>>> to<<< be paddling in the wrong direction as its fifth
+  11. [act=12.757]   frequently contains thinly myelinated axons which appear>>> to<<< conduct signals abnormally, although it is uncertain whether
+  12. [act=12.369]   Hurricanes, Tornadoes and more. Sometimes he appears>>> to<<< be
+  13. [act=12.276]   growth and a dominant position within Europe, everything seemed>>> to<<< be going well for the German ruling class. However
+  14. [act=11.532]   RichTextEdit?
+
+There doesn't seem>>> to<<< be a default context menu (with copy, paste
+  15. [act=11.352]   which traverse the site of spinal cord injury, appears>>> to<<< contribute to post-traumatic neurological deficits, although the
+
+Most frequent activating tokens (top 1): "to"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Indicating Uncertainty",
+  "explanation": "The feature detects phrases that express uncertainty or possibility, often introduced by words like 'seems' or 'appears' followed by 'to'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 16
+USER PROMPT:
+Feature index: 16
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 1 activating examples (ordered strongest first):
+   1. [act=6.210]   be a counterexample, under the mild>>> assumption<<< that there exists a
+
+Most frequent activating tokens (top 1): "assumption"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Mild Assumption Concept",
+  "explanation": "This feature detects the presence of a mild or general assumption in a statement or argument.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 18
+USER PROMPT:
+Feature index: 18
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 13 activating examples (ordered strongest first):
+   1. [act=13.789]  Q:
+
+How do airline pilots maintain>>> night<<< currency?
+
+Does flying as an airline pilot
+   2. [act=13.223]  There is no denying the fact that>>> night<<< shift workers are fast losing on their health. Long
+   3. [act=12.085]   he's looking quite snazzy.
+
+>>>Night<<<wing stands about 10' tall (via Toyark
+   4. [act=11.956]  ...
+
+AWANA...February 21 - Regular>>> Night<<<! Begins at 6:30 p.m.
+   5. [act=11.636]  Kogan's opera roles have included Queen of the>>> Night<<< in Die Zauberflöte, Zer
+   6. [act=10.565]   around this?
+
+A:
+
+The>>> night<<< currency requirements are in 14 CFR 61.57,
+   7. [act=8.760]   pilot under 14 CFR 121 provide different ways to maintain>>> night<<< currency? Suppose a pilot were to bid only day
+   8. [act=7.528]  Club>>> night<<< 7:30pm Prevention Of Obesity Club. Every
+   9. [act=7.028]   CFR 61 that would mean a pilot might not be>>> night<<< current anymore but do 121 operator's op specs have
+  10. [act=6.288]  The fire broke out during the congested city's>>> evening<<< rush hour
+  11. [act=6.242]  20
+ "I Really Should've Gone Out Last>>> Night<<<" – 6:55
+ "I Off
+  12. [act=5.811]  –A.D. 1185), when the>>> evening<<< was marked with poetry and music by court aristocrats
+  13. [act=5.137]   my most fondly remembered game is a very competitive>>> Dark<<< Sun one shot throne war. As a GM,
+
+Most frequent activating tokens (top 4): "night", "Night", "evening", "Dark"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Time of Day",
+  "explanation": "The feature activates on words related to nighttime or evening, indicating it detects concepts related to time of day",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 19
+USER PROMPT:
+Feature index: 19
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 10 activating examples (ordered strongest first):
+   1. [act=8.809]  A>>> VIS<<<UALLY STUNNING architectural biography of Minnesota�
+   2. [act=8.629]   rich history and culture, and as anyone planning a>>> visit<<< to the City by the Bay realizes, it can
+   3. [act=6.747]   thing to do while there. Aside from the usual>>> tourist<<< spots like the Golden Gate Bridge, Alcatraz
+   4. [act=6.680]  igated stupidity” coming out of the CDC and>>> visit<<< the church. The plan was to “lay
+   5. [act=6.426]   of honeymoons from island-hopping to>>> visiting<<< cultural sites.
+
+With Authentic Experiences
+   6. [act=5.890]  ” most weekends since he took office, and>>> visited<<< other Trump-owned properties on the rare weekends he
+   7. [act=5.875]   can be difficult to narrow down all the places to>>> visit<<< and thing to do while there. Aside from the
+   8. [act=5.848]   a time that suits your schedule, please call or>>> visit<<< our office to schedule an appointment with the next available
+   9. [act=5.805]   Anyone who want to buy wholesale rear view cameras can>>> visit<<< TVC-Mall.com for
+  10. [act=5.797]  .detekt.api.Detekt>>>Vis<<<itor
+import io.gitlab.arturb
+
+Most frequent activating tokens (top 6): "visit", "VIS", "tourist", "visiting", "visited", "Vis"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Travel or Visitation",
+  "explanation": "The feature activates on words related to traveling or visiting places, indicating it detects concepts related to tourism or exploration",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 0
+USER PROMPT:
+Feature index: 0
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 5 activating examples (ordered strongest first):
+   1. [act=6.549]   precincts of economic and political life, and for the>>> most<<< part they have succeeded. They can lead companies,
+   2. [act=6.059]  ’t know how this dish has survived for>>> so<<< long,
+   3. [act=6.057]  . Yet the sad reality is that, for the>>> most<<< part, zoo animals have become, as the art
+   4. [act=5.512]  ferior Socket for Paladin PvE Gems for the>>> most<<< part, but Superior for PvP.A side-
+   5. [act=5.459]   tie a noose. These two boys, for>>> whatever<<< reason, tied nooses on opposite ends of a
+
+Most frequent activating tokens (top 3): "most", "so", "whatever"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Degree or Extent",
+  "explanation": "This feature detects words and phrases that indicate the level or amount of something, such as 'most', 'so', and 'whatever'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 3
+USER PROMPT:
+Feature index: 3
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=7.890]  
+Career
+Jones was a highly decorated World>>> War<<< II veteran. He played 10 games in the American
+   2. [act=7.387]  Career
+Jones was a highly decorated World War>>> II<<< veteran. He played 10 games in the American League
+   3. [act=6.079]   and Karl Liebknecht on 15 January>>> 1919<<<
+   4. [act=5.955]   a Facebook post on his fan page. The Vietnam>>> War<<< veteran had been ailing for some time.
+
+   5. [act=5.604]   international level for England in a single game during the>>> 1893<<< Home Nations Championship. After retiring from playing sport he
+   6. [act=5.557]  
+The Sand Ridge State Forest largely dates back to>>> 1939<<<, when
+   7. [act=5.285]  
+
+“Following the global financial crisis of>>> 2007<<<–08, it was observed that senior executives and
+   8. [act=5.254]   the fossil Protochrysis Bischoff,>>> 1916<<< (Insecta: Hymenoptera:
+   9. [act=5.225]   at the University of Iowa as an independent during the>>> 1942<<< college football season. The team compiled a 7–
+  10. [act=5.173]   the building of the Boston Opera House, completed in>>> 1909<<<, supplying steelworks used in the construction of the
+  11. [act=5.161]   in Folklore of the Northern Counties (18>>>79<<<), taken from a letter sent by the historian Robert
+  12. [act=5.151]  stedt, Germany.
+
+It was opened>>> 1953<<< as a stop of the Alster Northern Railway (
+  13. [act=5.142]  support free peoples,” he proclaimed in March>>> 1947<<<, “who are resisting attempted subjugation by
+  14. [act=5.125]   authorities erected numerous concentration camps in Croatia between 1941 and>>> 1945<<<. These camps were used to isolate and murder Jews
+  15. [act=5.102]   the inhabitants of the area near Llanelli between>>> 1909<<< and 1953 and was one of several basic halts
+
+Most frequent activating tokens (top 13): "War", "1909", "II", "1919", "1893", "1939", "2007", "1916", "1942", "79", "1953", "1947", "1945"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Historical Year Detection",
+  "explanation": "The feature detects mentions of specific years, often in the context of historical events or time periods",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 9
+USER PROMPT:
+Feature index: 9
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=19.899]  . 22 shootings at Parliament Hill, which exposed numerous>>> security<<< gaps, as well as the
+   2. [act=17.660]  -free zones, as they have armed and unarmed>>> security<<< personnel. In addition, several studies show the vast
+   3. [act=17.353]   is only an interim measure designed to address the current>>> security<<< challenges and will be resumed as soon as normalcy
+   4. [act=17.251]   are predominantly socialist and antipathetical to the future>>> security<<< and prosperity of the west”.
+
+
+   5. [act=17.215]  The Harper government is looking for>>> security<<< experts to help harden federal buildings in the Ottawa
+   6. [act=16.211]  MANILA (Reuters) - Philippine>>> security<<< forces on Saturday killed a foreign national and his female
+   7. [act=13.837]   IT department is responsible for upkeep, maintenance, and>>> security<<< of networks. This may include analyzing the computer and
+   8. [act=13.464]   risk of hitting a bug that would somehow compromise system>>> security<<< is very low.
+So can someone please point
+   9. [act=10.715]   candidates have been lulled into a false sense of>>> security<<<, ignoring or forgetting the benefits that come with
+  10. [act=9.237]   go anywhere.
+
+Greene is a maximum>>> security<<< prison, classified as a “Supermax�
+  11. [act=5.827]  Introduction {#>>>Sec<<<1}
+============
+
+Small heat-shock
+  12. [act=5.827]  Introduction {#>>>Sec<<<1}
+============
+
+Alcohol use disorders
+  13. [act=5.685]  Introduction {#>>>sec<<<1}
+============
+
+Acute aort
+  14. [act=5.685]  Introduction {#>>>sec<<<1-1}
+============
+
+Inflix
+  15. [act=5.301]  1. Introduction {#>>>sec<<<1}
+===============
+
+Stroke
+
+Most frequent activating tokens (top 3): "security", "sec", "Sec"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Security Concept",
+  "explanation": "This feature detects mentions of security, including national security, computer security, and prison security, across various contexts",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 10
+USER PROMPT:
+Feature index: 10
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 3 activating examples (ordered strongest first):
+   1. [act=5.810]  Ever noticed how close “rib>>>bit<<<” and “rabbit” sounded
+   2. [act=5.791]  D may be used for a word line driving,>>> bit<<< line driving
+   3. [act=5.744]   that $m$ is a multiset of>>> bit<<<strings where all bitstrings have the same length,
+
+Most frequent activating tokens (top 1): "bit"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Binary Data Reference",
+  "explanation": "The feature detects mentions of binary data or bits in the input text, often related to computing or information theory concepts",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 14
+USER PROMPT:
+Feature index: 14
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 6 activating examples (ordered strongest first):
+   1. [act=5.948]   last night and at one point, the long was>>> so<<< long, it actually wrapped around the building.1
+   2. [act=5.880]  v adjusts the bias point of the two transistors>>> so<<< that T1 and T2 are always conducting a
+   3. [act=5.860]   fans using blockchain technology.
+
+We built it>>> so<<< that everyone can have an easy and secure way to
+   4. [act=5.433]  . Ducky edited it and made the lines cleaner>>> so<<< it'd look better than before. It's a
+   5. [act=5.314]  abbard shared that they had 38,000 donors>>> so<<< far, Daniel Clark shared. Clark is a volunteer
+   6. [act=5.025]   la ville cette semaine. Lundi>>> so<<<ir, sa présence à un débat
+
+Most frequent activating tokens (top 1): "so"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Causal Indicator",
+  "explanation": "The feature detects the token 'so' which often indicates a causal or explanatory relationship between clauses or ideas.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 15
+USER PROMPT:
+Feature index: 15
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 15 activating examples (ordered strongest first):
+   1. [act=17.126]   another dog, one that didn’t seem>>> to<<< mind really, but the gaze from the stud that
+   2. [act=16.665]  ile strike amid rising tensions with North Korea, seems>>> to<<< have sparked an unusually rapid response on Capitol Hill.
+   3. [act=16.312]   strongly interact with light. The latest observed characteristic seems>>> to<<< confirm a long-held theory that dark matter can
+   4. [act=14.481]  r/LEGO, the source of which seems>>> to<<< be early listings on the Mexican version of Amazon.
+   5. [act=14.328]   interesting for example.
+However Google doesn't appear>>> to<<< allow you to change a property from the classic code
+   6. [act=13.924]   of refraction of light water in some places seems>>> to<<< be dark blue, in other - clear and transparent
+   7. [act=13.785]   chatbox at the bottom of my page which seems>>> to<<< be inheriting CSS style from bootstrap.min
+   8. [act=13.568]   thought it was reflecting the light, but it appears>>> to<<< be painted on.
+   9. [act=13.461]   facelift - when?
+
+Up seems>>> to<<< be forgotten model in VW structure. Hey VW we
+  10. [act=13.140]  Americans
+
+A record-setting reality show appears>>> to<<< be paddling in the wrong direction as its fifth
+  11. [act=12.757]   frequently contains thinly myelinated axons which appear>>> to<<< conduct signals abnormally, although it is uncertain whether
+  12. [act=12.369]   Hurricanes, Tornadoes and more. Sometimes he appears>>> to<<< be
+  13. [act=12.276]   growth and a dominant position within Europe, everything seemed>>> to<<< be going well for the German ruling class. However
+  14. [act=11.532]   RichTextEdit?
+
+There doesn't seem>>> to<<< be a default context menu (with copy, paste
+  15. [act=11.352]   which traverse the site of spinal cord injury, appears>>> to<<< contribute to post-traumatic neurological deficits, although the
+
+Most frequent activating tokens (top 1): "to"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Indicating Uncertainty",
+  "explanation": "The feature detects phrases that express uncertainty or possibility, often introduced by words like 'seems' or 'appears' followed by 'to'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 16
+USER PROMPT:
+Feature index: 16
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 1 activating examples (ordered strongest first):
+   1. [act=6.210]   be a counterexample, under the mild>>> assumption<<< that there exists a
+
+Most frequent activating tokens (top 1): "assumption"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Mild Assumption Concept",
+  "explanation": "This feature detects the presence of mild or general assumptions in a statement or argument.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 18
+USER PROMPT:
+Feature index: 18
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 13 activating examples (ordered strongest first):
+   1. [act=13.789]  Q:
+
+How do airline pilots maintain>>> night<<< currency?
+
+Does flying as an airline pilot
+   2. [act=13.223]  There is no denying the fact that>>> night<<< shift workers are fast losing on their health. Long
+   3. [act=12.085]   he's looking quite snazzy.
+
+>>>Night<<<wing stands about 10' tall (via Toyark
+   4. [act=11.956]  ...
+
+AWANA...February 21 - Regular>>> Night<<<! Begins at 6:30 p.m.
+   5. [act=11.636]  Kogan's opera roles have included Queen of the>>> Night<<< in Die Zauberflöte, Zer
+   6. [act=10.565]   around this?
+
+A:
+
+The>>> night<<< currency requirements are in 14 CFR 61.57,
+   7. [act=8.760]   pilot under 14 CFR 121 provide different ways to maintain>>> night<<< currency? Suppose a pilot were to bid only day
+   8. [act=7.528]  Club>>> night<<< 7:30pm Prevention Of Obesity Club. Every
+   9. [act=7.028]   CFR 61 that would mean a pilot might not be>>> night<<< current anymore but do 121 operator's op specs have
+  10. [act=6.288]  The fire broke out during the congested city's>>> evening<<< rush hour
+  11. [act=6.242]  20
+ "I Really Should've Gone Out Last>>> Night<<<" – 6:55
+ "I Off
+  12. [act=5.811]  –A.D. 1185), when the>>> evening<<< was marked with poetry and music by court aristocrats
+  13. [act=5.137]   my most fondly remembered game is a very competitive>>> Dark<<< Sun one shot throne war. As a GM,
+
+Most frequent activating tokens (top 4): "night", "Night", "evening", "Dark"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Time of Day",
+  "explanation": "The feature activates on tokens related to nighttime or evening, indicating it detects concepts related to time of day",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID n/a
+FEATURE 19
+USER PROMPT:
+Feature index: 19
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 10 activating examples (ordered strongest first):
+   1. [act=8.809]  A>>> VIS<<<UALLY STUNNING architectural biography of Minnesota�
+   2. [act=8.629]   rich history and culture, and as anyone planning a>>> visit<<< to the City by the Bay realizes, it can
+   3. [act=6.747]   thing to do while there. Aside from the usual>>> tourist<<< spots like the Golden Gate Bridge, Alcatraz
+   4. [act=6.680]  igated stupidity” coming out of the CDC and>>> visit<<< the church. The plan was to “lay
+   5. [act=6.426]   of honeymoons from island-hopping to>>> visiting<<< cultural sites.
+
+With Authentic Experiences
+   6. [act=5.890]  ” most weekends since he took office, and>>> visited<<< other Trump-owned properties on the rare weekends he
+   7. [act=5.875]   can be difficult to narrow down all the places to>>> visit<<< and thing to do while there. Aside from the
+   8. [act=5.848]   a time that suits your schedule, please call or>>> visit<<< our office to schedule an appointment with the next available
+   9. [act=5.805]   Anyone who want to buy wholesale rear view cameras can>>> visit<<< TVC-Mall.com for
+  10. [act=5.797]  .detekt.api.Detekt>>>Vis<<<itor
+import io.gitlab.arturb
+
+Most frequent activating tokens (top 6): "visit", "VIS", "tourist", "visiting", "visited", "Vis"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Travel or Visitation",
+  "explanation": "The feature activates on words related to traveling or visiting places, indicating it detects concepts related to tourism or exploration",
+  "confidence": "high"
+}
+================================================================================
