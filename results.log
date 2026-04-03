@@ -1,0 +1,462 @@
+======================================================================
+   IDX   CONF   LABEL
+======================================================================
+     0   high   Numerical Values
+     1   high   Biological Terms
+     2   high   Time Periods
+     3   high   Apology or excuse
+     4   high   Transition or Contrast
+     5   high   Preposition Detection
+     6   high   Definite Article Indicator
+     7   high   Instructional Content
+     8   high   Causality indicator
+     9   high   Possessive form indicator
+    10   high   Possessive form
+======================================================================
+Total: 11 features | High confidence: 11 | Errors: 0
+
+✓ Feature 0
+   Label      : Numerical Values
+   Confidence : high
+   Explanation: The feature activates on a wide range of numerical values, including integers and percentages, across various contexts.
+   Top tokens : 3, 36, 70, two, eight, 11, 19, 4, 38, one
+
+✓ Feature 1
+   Label      : Biological Terms
+   Confidence : high
+   Explanation: The feature activates on various biological terms such as 'aux', 'mast', and 'kin', indicating it detects concepts related to biology and biochemistry
+   Top tokens : aux, mast, Pier, Ave, mer, appet, Kin, Spear, anton
+
+✓ Feature 2
+   Label      : Time Periods
+   Confidence : high
+   Explanation: The feature detects mentions of various time periods, such as years, months, weeks, and hours, in the given text snippets
+   Top tokens : years, months, week, time, month, hours, Minutes, minutes, decades, %
+
+✓ Feature 3
+   Label      : Apology or excuse
+   Confidence : high
+   Explanation: The feature activates on phrases expressing regret, apology, or a request for forgiveness, often accompanied by phrases like 'sorry', 'excuse me', or 'forgive me'.
+   Top tokens : for, the, if, my, to, me, I
+
+✓ Feature 4
+   Label      : Transition or Contrast
+   Confidence : high
+   Explanation: The feature detects tokens that indicate a transition, contrast, or change in the text, such as conjunctions and punctuation marks.
+   Top tokens : ., and, but, or, This, ,, ;, may, ",, change
+
+✓ Feature 5
+   Label      : Preposition Detection
+   Confidence : high
+   Explanation: The feature detects the presence of prepositions, particularly 'in' and 'of', in the given text snippets
+   Top tokens : in, of, inner, a, on, about
+
+✓ Feature 6
+   Label      : Definite Article Indicator
+   Confidence : high
+   Explanation: The feature detects the presence of definite articles and similar introductory phrases that precede a noun or a title, often indicating the beginning of a descriptive phrase about a person, organization, or entity.
+   Top tokens : an, a, Former, formerly, was
+
+✓ Feature 7
+   Label      : Instructional Content
+   Confidence : high
+   Explanation: The feature detects tokens related to instructional or guidance-related content, such as recipes, tutorials, and patterns
+   Top tokens : recipes, patterns, pattern, Invention, recipe, tutorial, reci, tutorials, schematic, Pattern
+
+✓ Feature 8
+   Label      : Causality indicator
+   Confidence : high
+   Explanation: The feature detects words that indicate causation or agency, such as 'by', 'of', 'from', and 'to', which are often used to express relationships between events or entities
+   Top tokens : the, a, from, of, to, by
+
+✓ Feature 9
+   Label      : Possessive form indicator
+   Confidence : high
+   Explanation: The feature detects the presence of possessive forms, often denoted by 's, in the input text
+   Top tokens : �
+
+✓ Feature 10
+   Label      : Possessive form
+   Confidence : high
+   Explanation: The feature activates on tokens that are in the possessive form, often indicated by an apostrophe and the letter 's' or 's' alone, which is denoted by the � symbol in the provided text snippets
+   Top tokens : �
+
+======================================================================
+   IDX   CONF   LABEL
+======================================================================
+    11   high   Personal Data Concern
+    12   high   Quotation attribution
+    13   high   Problem Resolution
+    14   high   Illustrative Example
+    15   high   Domain Specific Terms
+    16   high   Provision Relationship
+    17   high   Prefix Ste
+    18   high   Reference marker detection
+    19   high   Age and decades
+    20   high   Proper Noun Detection
+======================================================================
+Total: 10 features | High confidence: 10 | Errors: 0
+
+✓ Feature 11
+   Label      : Personal Data Concern
+   Confidence : high
+   Explanation: The feature detects text related to individual privacy and security, such as webcam surveillance and data protection
+   Top tokens : he, your, cam, move, the, only, how, lets, hate, watching
+
+✓ Feature 12
+   Label      : Quotation attribution
+   Confidence : high
+   Explanation: The feature detects instances where someone is being quoted or has spoken, often indicated by the word 'told' or similar phrases
+   Top tokens : told, to
+
+✓ Feature 13
+   Label      : Problem Resolution
+   Confidence : high
+   Explanation: The feature detects tokens related to solving, fixing, or addressing issues, as evidenced by words like 'resolved', 'answered', and 'treated'.
+   Top tokens : answered, resolved, achieved, treated, ated, minimized, of, settled, possible, established
+
+✓ Feature 14
+   Label      : Illustrative Example
+   Confidence : high
+   Explanation: The feature detects phrases introducing an illustrative example or instance to explain a concept or idea.
+   Top tokens : example, instance
+
+✓ Feature 15
+   Label      : Domain Specific Terms
+   Confidence : high
+   Explanation: The feature detects specialized vocabulary from various domains such as medicine, technology, and science.
+   Top tokens : neural, leadership, scoring, Prior, brain, treatment, heat, programming, data, software
+
+✓ Feature 16
+   Label      : Provision Relationship
+   Confidence : high
+   Explanation: The feature detects phrases indicating something is being provided or supplied to someone or something, often marked by the preposition 'with'.
+   Top tokens : with
+
+✓ Feature 17
+   Label      : Prefix Ste
+   Confidence : high
+   Explanation: The feature detects the presence of the prefix 'Ste' in various words, such as names, locations, and technical terms
+   Top tokens : Ste, ste, STE
+
+✓ Feature 18
+   Label      : Reference marker detection
+   Confidence : high
+   Explanation: The feature detects tokens that appear to be reference markers or citation numbers in a text, often in the format of brackets or numbers
+   Top tokens : 2, 3, 6, 5, 98, 0002
+
+✓ Feature 19
+   Label      : Age and decades
+   Confidence : high
+   Explanation: The feature detects mentions of age, decades, and numerical values related to years, which are commonly used to express time periods or stages of life
+   Top tokens : s, years, 40, 's, ys, 25, aged, ish, her, birthday
+
+✓ Feature 20
+   Label      : Proper Noun Detection
+   Confidence : high
+   Explanation: The feature detects tokens that are often proper nouns, such as names of people, places, and organizations
+   Top tokens : amalg, Anglo, Proto, Anglic, Ath, flatt, Alfred, Stro, sta, -  
+
+======================================================================
+   IDX   CONF   LABEL
+======================================================================
+    21   high   Proper Noun Detection
+    22   high   Proper Noun Detection
+    23   high   Time Period Concept
+    24   high   Something appears
+    25   high   Plural Nouns Detection
+    26   high   News Source Names
+    27   high   Fire or Damage
+    28   high   Alternative Options
+    29   high   Prefix or Suffix
+    30   high   Movement or Action
+======================================================================
+Total: 10 features | High confidence: 10 | Errors: 0
+
+✓ Feature 21
+   Label      : Proper Noun Detection
+   Confidence : high
+   Explanation: The feature activates on a wide range of proper nouns, including names of people, places, and organizations, indicating it detects specific entities in text.
+   Top tokens : Instruments, kins, oley, ima, Osborne, ados, Lumpur, Wynne, flex, Omar
+
+✓ Feature 22
+   Label      : Proper Noun Detection
+   Confidence : high
+   Explanation: The feature activates on a variety of proper nouns, including names, locations, and specific terms, indicating it detects named entities in text.
+   Top tokens : Kru, Sec, Rath, antis, Inform, Kos, summ, Stre, platinum, Lancaster
+
+✓ Feature 23
+   Label      : Time Period Concept
+   Confidence : high
+   Explanation: The feature detects words related to periods of time, such as era, age, epoch, and dynasty, indicating a semantic concept of time periods or historical contexts
+   Top tokens : era, age, epoch, dynasty, ze, Dynasty, times, trends
+
+✓ Feature 24
+   Label      : Something appears
+   Confidence : high
+   Explanation: The feature detects when something becomes visible, noticeable, or present, often denoted by verbs like 'up', 'appear', 'emerge', and 'arise'
+   Top tokens : up, appear, emerged, appeared, arise, surfaced, arises
+
+✓ Feature 25
+   Label      : Plural Nouns Detection
+   Confidence : high
+   Explanation: The feature activates on words that are often plural nouns, indicated by suffixes such as 'ons', 'ies', and 'als', suggesting it detects plural forms in language
+   Top tokens : ons, ies, als, Ghosts, Warriors, heads, ools, igs, s, ners
+
+✓ Feature 26
+   Label      : News Source Names
+   Confidence : high
+   Explanation: The feature activates on tokens that are names of news sources and publications, indicating it detects references to media outlets
+   Top tokens : Times, Guardian, Chronicle, Telegraph, Advocate, hill, Express, sun, Daily, Economist
+
+✓ Feature 27
+   Label      : Fire or Damage
+   Confidence : high
+   Explanation: The feature detects words related to fire, burning, or damage, such as 'burn', 'stain', and 'extinguishing'
+   Top tokens : burn, Stain, Burn, Peel, -, Crew, extingu, Draw, boot, Richards
+
+✓ Feature 28
+   Label      : Alternative Options
+   Confidence : high
+   Explanation: This feature detects phrases where an alternative or substitute is being presented or discussed, often using words like 'instead of' or 'rather than'.
+   Top tokens : of, than
+
+✓ Feature 29
+   Label      : Prefix or Suffix
+   Confidence : high
+   Explanation: The feature detects tokens that are often prefixes or suffixes of words, such as 'regist', 'epit', 'tem', and 'sem', which are common prefixes in English words
+   Top tokens : regist, epit, tem, hyd, cant, semic, ab, gl, rep, arm
+
+✓ Feature 30
+   Label      : Movement or Action
+   Confidence : high
+   Explanation: The feature detects tokens that imply movement, direction, or action, such as 'away', 'up', 'in', and 'through'.
+   Top tokens : away, up, in, off, over, aging, good, through, at    
+
+======================================================================
+   IDX   CONF   LABEL
+======================================================================
+    31   high   Transition or Connection
+    32   high   Prefix detector
+    33   high   Militant Support Concept
+    34   high   Work Location Context
+    35   high   News Reporting Verb
+    36   high   Proper Noun Detection
+    37   high   Proper Noun Detection
+    38   high   Academic Study Reference
+    39   high   Location or residence
+    40   high   Degree or extent
+======================================================================
+Total: 10 features | High confidence: 10 | Errors: 0
+
+✓ Feature 31
+   Label      : Transition or Connection
+   Confidence : high
+   Explanation: The feature detects words and phrases that indicate a transition, connection, or continuation of thought, such as 'which', 'and', and 'it', which are often used to link ideas or clauses
+   Top tokens : which, ,, came, It, it, and, memories, ", are, .
+
+✓ Feature 32
+   Label      : Prefix detector
+   Confidence : high
+   Explanation: The feature detects tokens that are prefixes of various words, such as 'ac', 'int', and 'ob', which are commonly found in technical and scientific terminology
+   Top tokens : ac, int, ob
+
+✓ Feature 33
+   Label      : Militant Support Concept
+   Confidence : high
+   Explanation: This feature detects language related to supporting or assisting militant groups, terrorism, or conflict
+   Top tokens : with, supporting, for, assistance, of, assist, supported, backed, helping, fight
+
+✓ Feature 34
+   Label      : Work Location Context
+   Confidence : high
+   Explanation: This feature detects tokens that indicate the context or setting of someone's work or employment, often involving prepositions or words related to occupation or industry
+   Top tokens : the, in, forging, at, including, worked, a, department, ,, end
+
+✓ Feature 35
+   Label      : News Reporting Verb
+   Confidence : high
+   Explanation: The feature detects verbs related to news reporting, such as 'reported' and 'reports', indicating a focus on journalistic communication
+   Top tokens : reported, reports, report
+
+✓ Feature 36
+   Label      : Proper Noun Detection
+   Confidence : high
+   Explanation: The feature activates on a variety of proper nouns, including names, locations, and organizations, indicating it detects specific entities in text.
+   Top tokens : opp, Philipp, Samp, umm, app, stem, Tim, SAP, apan, MISS
+
+✓ Feature 37
+   Label      : Proper Noun Detection
+   Confidence : high
+   Explanation: The feature activates on tokens that are often proper nouns, such as names of people, organizations, and titles, indicating it detects specific entities in text.
+   Top tokens : N, Bill, National, Neo, Robin, Gru, Sir, ., Department, Dr
+
+✓ Feature 38
+   Label      : Academic Study Reference
+   Confidence : high
+   Explanation: The feature detects mentions of academic or scientific studies, researchers, and institutions in the given text snippets.
+   Top tokens : Carter, suggest, ia, study
+
+✓ Feature 39
+   Label      : Location or residence
+   Confidence : high
+   Explanation: The feature detects the concept of location or residence, as it strongly activates on the token 'in' in contexts describing where someone or something is living or located
+   Top tokens : in
+
+✓ Feature 40
+   Label      : Degree or extent
+   Confidence : high
+   Explanation: The feature detects words and phrases that indicate degree, extent, or manner, such as 'only', 'especially', and 'likely', which provide additional information about a situation or condition
+   Top tokens : only, apparently, got, a, especially, obviously, hard, very, your, almost   
+
+======================================================================
+   IDX   CONF   LABEL
+======================================================================
+    41   high   General Category Term
+    42   high   New or Recent
+    43   high   Web Resource Reference
+    44   high   Geographic Location
+    45   high   Story Introduction
+    46   high   Geopolitical Entity
+    47   high   Professional Terms
+    48   high   Promotion Concept
+    49   high   Existence or absence
+    50   high   Abstract Noun Suffix
+======================================================================
+Total: 10 features | High confidence: 10 | Errors: 0
+
+✓ Feature 41
+   Label      : General Category Term
+   Confidence : high
+   Explanation: The feature detects general category terms that are often used to classify or describe things, such as 'method', 'Teen', 'School', 'class', and 'State'.
+   Top tokens : method, Teen, ter, Abstract, icon, School, V, ic, 8, Children
+
+✓ Feature 42
+   Label      : New or Recent
+   Confidence : high
+   Explanation: The feature detects words and phrases indicating something is new, recent, or has recently occurred or been created
+   Top tokens : newly, Newly, freshly, -, recently, specially
+
+✓ Feature 43
+   Label      : Web Resource Reference
+   Confidence : high
+   Explanation: The feature detects mentions of web pages, links, and online resources in the text
+   Top tokens : a, available, page, with, ation, an, website, the, Source, nice
+
+✓ Feature 44
+   Label      : Geographic Location
+   Confidence : high
+   Explanation: The feature activates on tokens related to countries, regions, or places, such as 'India', 'Iraq', and 'humans' in the context of geographic location or nationality
+   Top tokens : humans, is, very, India, abortions, users, extinction, in, ground, were
+
+✓ Feature 45
+   Label      : Story Introduction
+   Confidence : high
+   Explanation: The feature detects phrases that introduce a story or narrative, often with prepositions like 'of' and articles like 'the'.
+   Top tokens : of, the, a
+
+✓ Feature 46
+   Label      : Geopolitical Entity
+   Confidence : high
+   Explanation: The feature activates on tokens related to countries, states, and political entities, indicating it detects geopolitical concepts
+   Top tokens : America, Labour, state, solar, Thai, Space, Africa, Br, ., Australian
+
+✓ Feature 47
+   Label      : Professional Terms
+   Confidence : high
+   Explanation: The feature activates on tokens related to professional occupations, technical terms, and formal language, indicating it detects professional or specialized concepts.
+   Top tokens : patients, doctors, Power, feature, budget, first, and, open, by, mt
+
+✓ Feature 48
+   Label      : Promotion Concept
+   Confidence : high
+   Explanation: This feature detects the concept of promoting or advocating for something, such as a product, idea, or interest, across various contexts
+   Top tokens : the, a, an, specific, its, his, health, economic, Israel, good
+
+✓ Feature 49
+   Label      : Existence or absence
+   Confidence : high
+   Explanation: The feature detects the presence or absence of something, often indicated by words like 'is', 'no', and 'have'
+   Top tokens : is, no, 's, interest, the, that, health, woman, have, applied
+
+✓ Feature 50
+   Label      : Abstract Noun Suffix
+   Confidence : high
+   Explanation: The feature detects words ending with the suffix '-ness', which is often used to form abstract nouns in English
+   Top tokens : ness, eness, iness   
+
+======================================================================
+   IDX   CONF   LABEL
+======================================================================
+    51   high   Verb existence state
+    52   high   Artistic Category
+    53   high   Reference to MI
+    54   high   US Presidential Election
+    55   high   Pause or separator
+    56   high   Intentional Action
+    57   high   Existence or Condition
+    58   high   Word Ending 'ers'
+    59   high   Location Transition
+    60   high   Absolute Position
+======================================================================
+Total: 10 features | High confidence: 10 | Errors: 0
+
+✓ Feature 51
+   Label      : Verb existence state
+   Confidence : high
+   Explanation: The feature detects the presence of verbs indicating existence, condition, or state of being, such as 'is', 'have', 'be', and auxiliary verbs like 
+   Top tokens : 's, to, have, always, be, I, is, me, 'm, all
+
+✓ Feature 52
+   Label      : Artistic Category
+   Confidence : high
+   Explanation: The feature detects tokens related to categories or types of art, music, or entertainment, such as genres, franchises, or styles
+   Top tokens : genre, franchises, genres, RPG, fields, style, requency
+
+✓ Feature 53
+   Label      : Reference to MI
+   Confidence : high
+   Explanation: The feature detects mentions of 'MI' or its variants, which can refer to the US state of Michigan, the medical term myocardial infarction, or the technology company Xiaomi's 'Mi' brand
+   Top tokens : mi, MI, Mi, Xiaomi
+
+✓ Feature 54
+   Label      : US Presidential Election
+   Confidence : high
+   Explanation: The feature activates on text snippets related to presidential candidates, nominations, and elections, indicating it detects concepts related to US presidential elections.
+   Top tokens : candidate, presidential, nomination, candidates, rival, party, (
+
+✓ Feature 55
+   Label      : Pause or separator
+   Confidence : high
+   Explanation: The feature activates on commas, which are often used to separate clauses or items in a list, indicating a pause or separation in the text.
+   Top tokens : ,
+
+✓ Feature 56
+   Label      : Intentional Action
+   Confidence : high
+   Explanation: The feature detects verbs indicating purpose or intention, such as 'related', 'directed', and 'aimed', which suggest a deliberate action or goal
+   Top tokens : related, directed, aimed, defined, done, provided, designed, targeted, assisted, distributed
+
+✓ Feature 57
+   Label      : Existence or Condition
+   Confidence : high
+   Explanation: The feature detects phrases indicating the existence or a specific condition of something, often introduced by words like 'that' or 'the fact that'
+   Top tokens : that, the
+
+✓ Feature 58
+   Label      : Word Ending 'ers'
+   Confidence : high
+   Explanation: The feature detects words that end with the suffix 'ers', which is a common pattern in English words indicating agents or performers of an action
+   Top tokens : ers, ERS
+
+✓ Feature 59
+   Label      : Location Transition
+   Confidence : high
+   Explanation: The feature detects phrases indicating movement or transition to a new location, often marked by prepositions like 'to', 'at', or 'in'.
+   Top tokens : the, at, to, States, work, attend, in
+
+✓ Feature 60
+   Label      : Absolute Position
+   Confidence : high
+   Explanation: The feature detects the concept of absolute position or reference, often related to physical or spatial measurements, as well as CSS styling and absolute values in various contexts
+   Top tokens : absolute, the, Absolute, Abs, clusive, ablished   

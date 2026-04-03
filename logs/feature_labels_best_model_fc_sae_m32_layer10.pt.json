@@ -1,0 +1,58 @@
+{
+  "2388": {
+    "feature_idx": 2388,
+    "label": "Geographic Location",
+    "explanation": "The feature activates on tokens related to places, such as 'mont', 'belmont', 'colorado', and 'boulder', indicating a geographic location concept",
+    "confidence": "high",
+    "request_id": "c9edbdbd-7fc4-4e88-ab22-d26b4c1362cd",
+    "updated_at": "2026-04-03T15:47:32Z"
+  },
+  "3036": {
+    "feature_idx": 3036,
+    "label": "Time and Periods",
+    "explanation": "The feature detects words related to time periods, such as days, years, months, and weekends, indicating a concept of temporal measurement or duration.",
+    "confidence": "high",
+    "request_id": "7a85f5fe-666b-4b22-b48c-7a9f580bc084",
+    "updated_at": "2026-04-03T15:49:01Z"
+  },
+  "1345": {
+    "feature_idx": 1345,
+    "label": "Acquisition Concept",
+    "explanation": "The feature detects words related to obtaining or transferring ownership, such as purchasing, leasing, renting, and replacing, indicating a concept related to acquisition or transfer of goods and services",
+    "confidence": "high",
+    "request_id": "56cd0877-160f-458e-9a1c-85c4526297b7",
+    "updated_at": "2026-04-03T15:51:52Z"
+  },
+  "6068": {
+    "feature_idx": 6068,
+    "label": "Emphasis or extent",
+    "explanation": "The feature detects words that indicate degree, emphasis, or extent, such as 'enough', 'detail', 'excited', and 'thrilled'.",
+    "confidence": "high",
+    "request_id": "387a0e65-d0ab-440a-84d0-a99b0e6d40ae",
+    "updated_at": "2026-04-03T15:54:10Z"
+  },
+  "4212": {
+    "feature_idx": 4212,
+    "label": "Emotional State",
+    "explanation": "The feature detects words related to emotions, uncertainty, and mental states, such as worry, wonder, anxiety, and knowing",
+    "confidence": "high",
+    "request_id": "f0d9a6df-29a8-47a2-8508-10a167808de3",
+    "updated_at": "2026-04-03T15:57:31Z"
+  },
+  "5164": {
+    "feature_idx": 5164,
+    "label": "Emotional Distress Concept",
+    "explanation": "The feature detects words related to worries, concerns, and emotional distress, indicating a semantic concept of negative emotional states or troubles",
+    "confidence": "high",
+    "request_id": "89c75903-ca2a-4bf0-bcbc-e367c84136ff",
+    "updated_at": "2026-04-03T16:11:23Z"
+  },
+  "1405": {
+    "feature_idx": 1405,
+    "label": "Motion and Progress",
+    "explanation": "The feature detects words related to movement, progression, and continuation, such as 'running', 'going', 'miles', and 'campaign', indicating a concept of motion and progress",
+    "confidence": "high",
+    "request_id": "23d6f803-258b-4ea0-859d-96244e1cd5cf",
+    "updated_at": "2026-04-03T16:14:58Z"
+  }
+}

@@ -87,426 +87,1160 @@ RESPONSE:
 ================================================================================
 
 ================================================================================
-REQUEST_ID 3970bd2c-1610-4087-a6d1-d0e0cd32d8d8
-FEATURE 1069
+REQUEST_ID 5e1cf9f1-20c9-486f-9676-11a6ffd66fe1
+FEATURE 3612
 USER PROMPT:
-Feature index: 1069
+Feature index: 3612
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 21 activating examples (ordered strongest first):
+   1. [act=3.570]   state in terms of infrastructure standpoint belmont light could>>> support<<< really whatever you'd like to put there incinerator
+   2. [act=3.570]   this country when my great grandfather settled it he was>>> a<<< carpenter
+   3. [act=3.570]   people ask you well they want to know how fresh>>> it<<< is how long it's gonna last what's the
+   4. [act=3.570]   some of the architectural points of interest about the building>>> they<<< always call it a round church for instance but in
+   5. [act=3.570]   medium so much i knew that when i wanted to>>> tell<<< our story that that was the right way to go
+   6. [act=3.570]  're building on lot two though right because there's>>> a<<< pretty significant drop off on the back on that street
+   7. [act=3.570]   the boosters have kicked in and helped out for example>>> with<<< the floor project at belmont high school last year
+   8. [act=3.570]   chairman one town clerk one assessor one collector one>>> overse<<<er of the poor two constables two justices of
+   9. [act=3.570]   to change an approach to ppta in general and>>> just<<< use it like use a small collect a small amount
+  10. [act=3.570]   is having its next drive event to look at the>>> electric<<< cars and test drive them on june 24th
+  11. [act=3.570]   form of like maus or the fun home or>>> per<<<sepolis just in straight graphic narrative form
+  12. [act=3.570]   got probably the most airtime and the most press>>> this<<< winter were both our boys and girls basketball teams both
+  13. [act=3.570]   do to protect ourselves against this affecting future auctions is>>> there<<< anything that can be done or is this just anyone
+  14. [act=3.570]  ba to start with cause while i recently saw the>>> film<<< it's about this ninety year old ship that goes
+  15. [act=3.570]   not enforceable then we certainly it would take it>>> outside<<< the economic loss provision because the duties were not set
+  16. [act=3.570]   another rental tesla from frisco in color>>>ado<<< down to boulder
+  17. [act=0.723]   stabilization fund to offset what is under collected throughout the>>> year<<< or transfer whatever we over collected through ppt to
+  18. [act=0.541]   as doing yeoman's work over at the white>>>field<<< house
+  19. [act=0.541]   either collect it and use rates stabilization fund to offset>>> what<<< is under collected throughout the year or transfer whatever we
+  20. [act=0.372]   of changing ppt rate you know every few months>>> as<<< we used to do
+  21. [act=0.192]   keep the rate more less flat instead of changing p>>>pt<<< rate you know every few months as we used to
+
+Most frequent activating tokens (top 10): "a", "support", "it", "they", "tell", "with", "overse", "just", "electric", "per"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Indefinite Article Usage",
+  "explanation": "The feature detects the usage of indefinite articles, particularly 'a', in various contexts, indicating a focus on generic or non-specific references.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID eba745d0-5707-4b84-b505-59bbbbf3926f
+FEATURE 6336
+USER PROMPT:
+Feature index: 6336
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
 Top 25 activating examples (ordered strongest first):
-   1. [act=6.733]   affecting future auctions is there anything that can be done>>> or<<< is this just anyone who is in new england
-   2. [act=1.825]  and you help them with how to prepare>>> or<<< are they pretty much it's fully cooked ready to
-   3. [act=1.805]   ii and that there were soldiers around the house and>>> or<<< she'd think that we were eating dog meat for
-   4. [act=1.666]  i thought we drew that down to reserve that we>>> or<<< you or i think the board you presented to the
-   5. [act=1.469]  's as to any claims injury or loss arising from>>> or<<< in connection with this agreement to recover damages over the
-   6. [act=1.362]   we drew that down to reserve that we or you>>> or<<< i think the board you presented to the board and
-   7. [act=1.269]   counter some popular misconceptions of things you might have heard>>> and<<< say how why they they love driving electric
-   8. [act=0.855]  tell me how important and how valuable the parents are>>> and<<< the friends of groups and the boosters are to the
-   9. [act=0.790]   future auctions is there anything that can be done or>>> is<<< this just anyone who is in new england is
-  10. [act=0.743]   driving when you figure in the leasing or purchase costs>>> or<<< and the cost of fueling
-  11. [act=0.666]   upon their frequently stated intent to consummate the agreement>>> and<<< enter into the ground lease and other contracts that we
-  12. [act=0.498]   me how important and how valuable the parents are and>>> the<<< friends of groups and the boosters are to the programming
-  13. [act=0.243]  as courts have made clear that that arising from or>>> in<<< connection with language is indeed as broad as it sounds
-  14. [act=0.219]   glad you're all able to see where i live>>> and<<< what we do
-  15. [act=0.150]   so glad you're here and i'm glad you>>>'re<<< all able to see where i live and what we
-  16. [act=0.046]   stated intent to consummate the agreement and enter into>>> the<<< ground lease and other contracts that we north presid
-  17. [act=0.012]  middelburg with more stores>>> and<<< outlets than you can ever see you can get everything
-  18. [act=0.000]   do to protect ourselves against this affecting future auctions is>>> there<<< anything that can be done or is this just anyone
-  19. [act=0.000]   that can be done or is this just anyone who>>> is<<< in new england is dealing with the same exact
-  20. [act=0.000]   against this affecting future auctions is there anything that can>>> be<<< done or is this just anyone who is in new
-  21. [act=0.000]   ourselves against this affecting future auctions is there anything that>>> can<<< be done or is this just anyone who is in
-  22. [act=0.000]   protect ourselves against this affecting future auctions is there anything>>> that<<< can be done or is this just anyone who is
-  23. [act=0.000]   to protect ourselves against this affecting future auctions is there>>> anything<<< that can be done or is this just anyone who
-  24. [act=0.000]   auctions is there anything that can be done or is>>> this<<< just anyone who is in new england is dealing
-  25. [act=0.000]   this affecting future auctions is there anything that can be>>> done<<< or is this just anyone who is in new eng
+   1. [act=2.043]   work the day i cut up a cheap paperback copy>>> of<<< lewis carroll's alice in wonder
+   2. [act=2.043]   state in terms of infrastructure standpoint belmont light could>>> support<<< really whatever you'd like to put there incinerator
+   3. [act=2.043]  ba to start with cause while i recently saw the>>> film<<< it's about this ninety year old ship that goes
+   4. [act=2.043]   this country when my great grandfather settled it he was>>> a<<< carpenter
+   5. [act=2.043]   not enforceable then we certainly it would take it>>> outside<<< the economic loss provision because the duties were not set
+   6. [act=2.043]   people ask you well they want to know how fresh>>> it<<< is how long it's gonna last what's the
+   7. [act=2.043]   do to protect ourselves against this affecting future auctions is>>> there<<< anything that can be done or is this just anyone
+   8. [act=2.043]   some of the architectural points of interest about the building>>> they<<< always call it a round church for instance but in
+   9. [act=2.043]   another rental tesla from frisco in color>>>ado<<< down to boulder
+  10. [act=2.043]   medium so much i knew that when i wanted to>>> tell<<< our story that that was the right way to go
+  11. [act=2.043]   driving a sort of a standard new car that gets>>> twenty<<< nine miles per gallon to an electric vehicle without changing
+  12. [act=2.043]  're building on lot two though right because there's>>> a<<< pretty significant drop off on the back on that street
+  13. [act=2.043]   team come back on board here in belmont after>>> being<<< a coop for the last several years with water
+  14. [act=2.043]   the boosters have kicked in and helped out for example>>> with<<< the floor project at belmont high school last year
+  15. [act=2.043]   i have a small car so i thought what can>>> i<<< bring that doesn't take up a lot of space
+  16. [act=2.043]   chairman one town clerk one assessor one collector one>>> overse<<<er of the poor two constables two justices of
+  17. [act=2.043]   be sure that the opportunities for companies at every level>>> from<<< the smallest two person manufacturer to general electric and global
+  18. [act=2.043]   to change an approach to ppta in general and>>> just<<< use it like use a small collect a small amount
+  19. [act=2.043]   with my methodist friends went to shul with>>> my<<< jewish friends to quaker summer camp to everything
+  20. [act=2.043]   is having its next drive event to look at the>>> electric<<< cars and test drive them on june 24th
+  21. [act=2.043]  fashioned for that and i didn't really find the>>> voice<<< until i got back to paper
+  22. [act=2.043]   form of like maus or the fun home or>>> per<<<sepolis just in straight graphic narrative form
+  23. [act=2.043]  't substantively breach of contract claim turning specifically to>>> the<<< fraud pleadings i wanna just highlight in my time
+  24. [act=2.043]   got probably the most airtime and the most press>>> this<<< winter were both our boys and girls basketball teams both
+  25. [act=2.043]  ve we've got i think the final precinct is>>> in<<< for the board of selectmen and it looks like
 
-Most frequent activating tokens (top 10): "or", "and", "is", "the", "in", "'re", "there", "be", "can", "that"
+Most frequent activating tokens (top 10): "a", "of", "support", "film", "outside", "it", "there", "they", "ado", "tell"
 
 
 Based on these examples, what concept does this SAE feature detect?
 
 RESPONSE:
 {
-  "label": "Alternative or Addition",
-  "explanation": "The feature detects phrases indicating a choice or addition between two options, often marked by 'or' or 'and' conjunctions",
+  "label": "Prepositions and Articles",
+  "explanation": "The feature activates on common prepositions and articles like 'of', 'a', 'it', and 'there', indicating it detects grammatical function words",
   "confidence": "high"
 }
 ================================================================================
 
 ================================================================================
-REQUEST_ID 28fffc9f-6284-4092-9d99-ae378da2ceff
-FEATURE 1069
+REQUEST_ID d22c3d92-664c-41dd-bf61-310b69dc6740
+FEATURE 3612
 USER PROMPT:
-Feature index: 1069
+Feature index: 3612
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
-Top 17 activating examples (ordered strongest first):
-   1. [act=6.788]   affecting future auctions is there anything that can be done>>> or<<< is this just anyone who is in new england
-   2. [act=1.882]  and you help them with how to prepare>>> or<<< are they pretty much it's fully cooked ready to
-   3. [act=1.867]   ii and that there were soldiers around the house and>>> or<<< she'd think that we were eating dog meat for
-   4. [act=1.709]  i thought we drew that down to reserve that we>>> or<<< you or i think the board you presented to the
-   5. [act=1.513]  's as to any claims injury or loss arising from>>> or<<< in connection with this agreement to recover damages over the
-   6. [act=1.398]   we drew that down to reserve that we or you>>> or<<< i think the board you presented to the board and
-   7. [act=1.317]   counter some popular misconceptions of things you might have heard>>> and<<< say how why they they love driving electric
-   8. [act=0.995]   brand new with all the software that allows the children>>> or<<< the students to basically do video editing with the work
-   9. [act=0.897]  tell me how important and how valuable the parents are>>> and<<< the friends of groups and the boosters are to the
-  10. [act=0.839]   future auctions is there anything that can be done or>>> is<<< this just anyone who is in new england is
-  11. [act=0.813]   driving when you figure in the leasing or purchase costs>>> or<<< and the cost of fueling
-  12. [act=0.699]   upon their frequently stated intent to consummate the agreement>>> and<<< enter into the ground lease and other contracts that we
-  13. [act=0.528]   me how important and how valuable the parents are and>>> the<<< friends of groups and the boosters are to the programming
-  14. [act=0.276]  as courts have made clear that that arising from or>>> in<<< connection with language is indeed as broad as it sounds
-  15. [act=0.264]   glad you're all able to see where i live>>> and<<< what we do
-  16. [act=0.213]   so glad you're here and i'm glad you>>>'re<<< all able to see where i live and what we
-  17. [act=0.191]   all of the different groups and families that we have>>> and<<< that represent the belmont community
+Top 40 activating examples (ordered strongest first):
+   1. [act=3.707]   state in terms of infrastructure standpoint belmont light could>>> support<<< really whatever you'd like to put there incinerator
+   2. [act=3.707]   this country when my great grandfather settled it he was>>> a<<< carpenter
+   3. [act=3.707]   people ask you well they want to know how fresh>>> it<<< is how long it's gonna last what's the
+   4. [act=3.707]   some of the architectural points of interest about the building>>> they<<< always call it a round church for instance but in
+   5. [act=3.707]   medium so much i knew that when i wanted to>>> tell<<< our story that that was the right way to go
+   6. [act=3.707]  're building on lot two though right because there's>>> a<<< pretty significant drop off on the back on that street
+   7. [act=3.707]   the boosters have kicked in and helped out for example>>> with<<< the floor project at belmont high school last year
+   8. [act=3.707]   a decrease in transmission cost due to the savings related>>> to<<< the kind of would from eversource and the
+   9. [act=3.707]   chairman one town clerk one assessor one collector one>>> overse<<<er of the poor two constables two justices of
+  10. [act=3.707]   to change an approach to ppta in general and>>> just<<< use it like use a small collect a small amount
+  11. [act=3.707]   another rental tesla from frisco in color>>>ado<<< down to boulder
+  12. [act=3.707]  's are particularly good in battery management the tes>>>la<<<'s are very good too
+  13. [act=3.707]   and forty nine and the great surge westward across>>> north<<< america had already begun
+  14. [act=3.707]   in forward capacity market charges which like makes most of>>> this<<< amount
+  15. [act=3.707]   is having its next drive event to look at the>>> electric<<< cars and test drive them on june 24th
+  16. [act=3.707]   form of like maus or the fun home or>>> per<<<sepolis just in straight graphic narrative form
+  17. [act=3.707]   got probably the most airtime and the most press>>> this<<< winter were both our boys and girls basketball teams both
+  18. [act=3.707]   do to protect ourselves against this affecting future auctions is>>> there<<< anything that can be done or is this just anyone
+  19. [act=3.707]  ba to start with cause while i recently saw the>>> film<<< it's about this ninety year old ship that goes
+  20. [act=3.707]   not enforceable then we certainly it would take it>>> outside<<< the economic loss provision because the duties were not set
+  21. [act=3.707]   do with opposing counsel mr leonard's>>> argument<<< that while they couldn't collect the money ahead of
+  22. [act=3.707]   driving a sort of a standard new car that gets>>> twenty<<< nine miles per gallon to an electric vehicle without changing
+  23. [act=3.707]   to later file the policy as a trial exhibit on>>> j<<<uly thirty one two thousand and eighteen because coverage had
+  24. [act=3.707]   that this was the best thing i could have ever>>> done<<<
+  25. [act=3.707]   team come back on board here in belmont after>>> being<<< a coop for the last several years with water
+  26. [act=3.707]   i have a small car so i thought what can>>> i<<< bring that doesn't take up a lot of space
+  27. [act=3.707]   be sure that the opportunities for companies at every level>>> from<<< the smallest two person manufacturer to general electric and global
+  28. [act=3.707]   with my methodist friends went to shul with>>> my<<< jewish friends to quaker summer camp to everything
+  29. [act=3.707]   work the day i cut up a cheap paperback copy>>> of<<< lewis carroll's alice in wonder
+  30. [act=3.707]  fashioned for that and i didn't really find the>>> voice<<< until i got back to paper
+  31. [act=3.707]  't substantively breach of contract claim turning specifically to>>> the<<< fraud pleadings i wanna just highlight in my time
+  32. [act=3.707]  ve we've got i think the final precinct is>>> in<<< for the board of selectmen and it looks like
+  33. [act=3.707]   the court of appeals city of beaumont and>>> tex<<<as court of appeals
+  34. [act=3.707]   in the church and that was an hour plus of>>> just<<< everything just detailed information about the church
+  35. [act=3.707]   process are they can they be part of the committee>>> yes<<< they are part of the committee
+  36. [act=3.707]   planning commission approve recommend council approve the champion capitol>>> final<<< plan including the modification to our subdivision ordinance section thirty
+  37. [act=3.707]   be a developer that would do this and we'd>>> just<<< have a purchase power agreement with that developer correct
+  38. [act=3.707]   state of virginia in the springtime of one>>> thousand<<< nine hundred and fifty six
+  39. [act=3.707]   reserve that we or you or i think the board>>> you<<< presented to the board and we approved it you approved
+  40. [act=3.707]   the parents are and the friends of groups and the>>> boosters<<< are to the programming at belmont high
 
-Most frequent activating tokens (top 6): "or", "and", "is", "the", "in", "'re"
+Most frequent activating tokens (top 10): "just", "a", "this", "support", "it", "they", "tell", "with", "to", "overse"
 
 
 Based on these examples, what concept does this SAE feature detect?
 
 RESPONSE:
 {
-  "label": "Conjunctions and Connectors",
-  "explanation": "The feature detects the presence of conjunctions and connecting words that link ideas or clauses in a sentence",
+  "label": "General Function Words",
+  "explanation": "The feature detects common function words that provide grammatical structure, such as 'a', 'this', 'it', and 'just', which are often used to connect ideas or provide context in sentences",
   "confidence": "high"
 }
 ================================================================================
 
 ================================================================================
-REQUEST_ID eb3b59d3-c546-48d0-b716-3a1f3dd9ca66
-FEATURE 1666
+REQUEST_ID 3fbd3e32-3e28-4116-a25e-c15f1862c2ca
+FEATURE 6247
 USER PROMPT:
-Feature index: 1666
+Feature index: 6247
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 40 activating examples (ordered strongest first):
+   1. [act=1.010]   ppt to raise stabilization fund and just to keep>>> the<<< rate more less flat instead of changing ppt rate
+   2. [act=1.010]   indeed as broad as it sounds it encompasses any dispute>>> connected<<< to the agreement even claims that merely relate to it
+   3. [act=0.957]   standpoint belmont light could support really whatever you'd>>> like<<< to put there incinerator solar really anything
+   4. [act=0.957]   and fifty eight in the home of thomas r>>>ams<<<den
+   5. [act=0.957]   want to know how fresh it is how long it>>>'s<<< gonna last what's the best way to keep it
+   6. [act=0.957]   ma'am what claim yes i don't understand>>> how<<< the new ceo changing direction is fraud
+   7. [act=0.957]   of interest about the building they always call it a>>> round<<< church for instance but in the film you go into
+   8. [act=0.957]   are what it's so you know there's a>>> lot<<< of units there's a lot of management
+   9. [act=0.957]   that when i wanted to tell our story that that>>> was<<< the right way to go
+  10. [act=0.957]   but i'll just say looked at comparing say a>>> a<<< chevy volt to a chevy malibu
+  11. [act=0.957]   though right because there's a pretty significant drop off>>> on<<< the back on that street
+  12. [act=0.957]  's not a lot of variances being granted on>>> new<<< developments
+  13. [act=0.957]   and helped out for example with the floor project at>>> bel<<<mont high school last year they've been instrumental and
+  14. [act=0.957]   wonderful building that it was a great opportunity to learn>>> more<<< about it
+  15. [act=0.957]   currently utilizing three modular spaces behind the high school and>>> we<<< will expand to move into three more spaces utilizing all
+  16. [act=0.957]   assessor one collector one overseer of the poor>>> two<<< constables two justices of the peace as many overse
+  17. [act=0.957]   to farmers market yeah we come on wednesdays>>> and<<< then i have three little nieces so they
+  18. [act=0.957]   ppta in general and just use it like use>>> a<<< small collect a small amount of money every month instead
+  19. [act=0.957]   either a new piece of gear or new software i>>> need<<< a project to sink my teeth into
+  20. [act=0.957]   one of the older buildings relative to its heating and>>> air<<< conditioning systems
+  21. [act=0.957]   believe as i sat at the table it was based>>> on<<< the true respect that we want to be able to
+  22. [act=0.957]   here in belmont after being a coop for>>> the<<< last several years with watertown
+  23. [act=0.957]   that are also brand new with all the software that>>> allows<<< the children or the students to basically do video editing
+  24. [act=0.957]   event to look at the electric cars and test drive>>> them<<< on june 24th from one hundred to four
+  25. [act=0.957]   due to the savings related to the kind of would>>> from<<< eversource and the elimination of eversource
+  26. [act=0.957]   or the fun home or persepolis just>>> in<<< straight graphic narrative form
+  27. [act=0.957]  time and the most press this winter were both our>>> boys<<< and girls basketball teams both had great runs in the
+  28. [act=0.957]   battery management the tesla's are very good>>> too<<<
+  29. [act=0.957]   this affecting future auctions is there anything that can be>>> done<<< or is this just anyone who is in new eng
+  30. [act=0.957]   great surge westward across north america had already>>> begun<<<
+  31. [act=0.957]  r leonard's argument that while they couldn>>>'t<<< collect the money ahead of time before closing that the
+  32. [act=0.957]   while i recently saw the film it's about this>>> ninety<<< year old ship that goes up and down this huge
+  33. [act=0.957]   as a trial exhibit on july thirty one two>>> thousand<<< and eighteen because coverage had already been admitted by the
+  34. [act=0.957]   certainly it would take it outside the economic loss provision>>> because<<< the duties were not set by a contract because the
+  35. [act=0.957]   was an hour plus of just everything just detailed information>>> about<<< the church
+  36. [act=0.957]   standard new car that gets twenty nine miles per gallon>>> to<<< an electric vehicle without changing your driving habits is equivalent
+  37. [act=0.957]   came about through the act of making the drawings and>>> then<<< revisiting them and retelling them
+  38. [act=0.957]   you have the thing is that your phone is always>>> on<<<
+  39. [act=0.957]   car you're producing about four hundred or so grams>>> of<<< co2 per mile driven
+  40. [act=0.957]   or you have a place at work where you can>>> change<<< the time you spent charge and the sort of inconvenience
+
+Most frequent activating tokens (top 10): "on", "the", "a", "connected", "like", "ams", "'s", "how", "round", "lot"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Preposition Usage",
+  "explanation": "The feature activates on various prepositions and words that indicate relationships or connections between entities, suggesting it detects preposition usage in sentences.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 8ad468e6-0869-4835-9c06-2ef57fd0ce09
+FEATURE 9337
+USER PROMPT:
+Feature index: 9337
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
 Top 25 activating examples (ordered strongest first):
-   1. [act=2.932]   where you want to live a city where you want>>> to<<< enjoy life and a city that must be yours mine
-   2. [act=2.599]  is that to keep em moist that's to>>> keep<<< the weeds out
-   3. [act=1.615]  again how to freeze it how>>> to<<< can it how long to blanch it if there
-   4. [act=1.395]   city where you want to live a city where you>>> want<<< to enjoy life and a city that must be yours
-   5. [act=1.278]   ready and available and sometimes we're short and we>>> have<<< to scramble
-   6. [act=1.260]   it'll be the equivalent of getting seventy cents gallon>>> seventy<<< cent gas
-   7. [act=1.250]   like everybody else but you don't have to pay>>> for<<< the electricity
-   8. [act=1.209]   battery out of that that has ever had that's>>> ever<<< lost charge
-   9. [act=1.070]   so glad you're here and i'm glad you>>>'re<<< all able to see where i live and what we
-  10. [act=1.012]   enough ready and available and sometimes we're short and>>> we<<< have to scramble
-  11. [act=0.825]   live a city where you want to enjoy life and>>> a<<< city that must be yours mine
-  12. [act=0.701]   a city where you want to live a city where>>> you<<< want to enjoy life and a city that must be
-  13. [act=0.683]  're going to have a information session first and then>>> the<<< ride and drive event that test drives various vehicles out
-  14. [act=0.593]   this market because the people are so nice and they>>>'re<<< willing to try new things which is what i'm
-  15. [act=0.423]  sometimes we have more than enough ready and available and>>> sometimes<<< we're short and we have to scramble
-  16. [act=0.376]   everybody else but you don't have to pay for>>> the<<< electricity
-  17. [act=0.351]  again how to freeze it how to can it>>> how<<< long to blanch it if there's better ways
-  18. [act=0.335]  backs those are they they have room for a lot>>> of<<< stuff in them you can get some that are you
-  19. [act=0.330]  one of the biggest things>>> is<<< that physicians view hallucinations always as something that we need
-  20. [act=0.284]   you can get some that are you know very fast>>> some<<< that will park anywhere
-  21. [act=0.262]  again how to freeze it how to can>>> it<<< how long to blanch it if there's better
-  22. [act=0.249]  is that to keep em moist that's to keep>>> the<<< weeds out
-  23. [act=0.248]   was my efficiency they they measured it in watt hours>>> per<<< mile but it was negative
-  24. [act=0.231]   i'm so glad you're here and i'm>>> glad<<< you're all able to see where i live and
-  25. [act=0.209]   leasing these as a as an approach then the cost>>> per<<< mile that you would get for leasing a volt when
+   1. [act=1.167]   when i wanted to tell our story that that was>>> the<<< right way to go
+   2. [act=1.167]   and the most press this winter were both our boys>>> and<<< girls basketball teams both had great runs in the tournament
+   3. [act=1.167]   to know how fresh it is how long it's>>> gonna<<< last what's the best way to keep it
+   4. [act=1.167]   the fun home or persepolis just in>>> straight<<< graphic narrative form
+   5. [act=1.167]   to look at the electric cars and test drive them>>> on<<< june 24th from one hundred to four hundred
+   6. [act=1.167]   belmont light could support really whatever you'd like>>> to<<< put there incinerator solar really anything
+   7. [act=1.167]  pta in general and just use it like use a>>> small<<< collect a small amount of money every month instead of
+   8. [act=1.167]   i recently saw the film it's about this ninety>>> year<<< old ship that goes up and down this huge lake
+   9. [act=1.167]   helped out for example with the floor project at bel>>>mont<<< high school last year they've been instrumental and refurb
+  10. [act=1.167]   affecting future auctions is there anything that can be done>>> or<<< is this just anyone who is in new england
+  11. [act=1.167]   right because there's a pretty significant drop off on>>> the<<< back on that street
+  12. [act=1.167]   interest about the building they always call it a round>>> church<<< for instance but in the film you go into some
+  13. [act=1.167]  or one collector one overseer of the poor two>>> const<<<ables two justices of the peace as many overseers
+  14. [act=0.896]  time and the most press this winter were both our>>> boys<<< and girls basketball teams both had great runs in the
+  15. [act=0.896]   standpoint belmont light could support really whatever you'd>>> like<<< to put there incinerator solar really anything
+  16. [act=0.896]   and helped out for example with the floor project at>>> bel<<<mont high school last year they've been instrumental and
+  17. [act=0.896]   or the fun home or persepolis just>>> in<<< straight graphic narrative form
+  18. [act=0.896]   want to know how fresh it is how long it>>>'s<<< gonna last what's the best way to keep it
+  19. [act=0.896]   of interest about the building they always call it a>>> round<<< church for instance but in the film you go into
+  20. [act=0.896]   event to look at the electric cars and test drive>>> them<<< on june 24th from one hundred to four
+  21. [act=0.896]   that when i wanted to tell our story that that>>> was<<< the right way to go
+  22. [act=0.896]   while i recently saw the film it's about this>>> ninety<<< year old ship that goes up and down this huge
+  23. [act=0.896]   assessor one collector one overseer of the poor>>> two<<< constables two justices of the peace as many overse
+  24. [act=0.896]   though right because there's a pretty significant drop off>>> on<<< the back on that street
+  25. [act=0.896]   ppta in general and just use it like use>>> a<<< small collect a small amount of money every month instead
 
-Most frequent activating tokens (top 10): "the", "to", "'re", "per", "keep", "want", "have", "seventy", "for", "ever"
+Most frequent activating tokens (top 10): "the", "on", "and", "gonna", "straight", "to", "small", "year", "mont", "or"
 
 
 Based on these examples, what concept does this SAE feature detect?
 
 RESPONSE:
 {
-  "label": "Preposition and Conjunction",
-  "explanation": "The feature detects tokens that are prepositions or conjunctions, often indicating relationships between entities or actions in a sentence",
+  "label": "Prepositions and Articles",
+  "explanation": "The feature strongly activates on common prepositions and articles like 'the', 'on', 'and', indicating it detects basic grammatical structures in language",
   "confidence": "high"
 }
 ================================================================================
 
 ================================================================================
-REQUEST_ID 440a149f-9fcf-406e-8b00-4715d109e115
-FEATURE 3989
+REQUEST_ID af18948c-b828-4a51-a5f6-d7318c2c0aab
+FEATURE 2711
 USER PROMPT:
-Feature index: 3989
+Feature index: 2711
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
-Top 4 activating examples (ordered strongest first):
-   1. [act=10.041]  we have a lot of people that>>> love<<< to eat out but i'm sure that we will
-   2. [act=9.927]  and i>>> love<<< this market because the people are so nice and they
-   3. [act=9.715]  and so i because she>>> loved<<< the medium so much i knew that when i wanted
-   4. [act=9.383]   you might have heard and say how why they they>>> love<<< driving electric
+Top 40 activating examples (ordered strongest first):
+   1. [act=16.783]  i pledge allegiance to the flag of the>>> united<<< states of america and to the republic for which
+   2. [act=3.609]  a and to the republic for which it stands one>>> nation<<< under god indivisible with liberty and justice for
+   3. [act=2.826]   for which it stands one nation under god indiv>>>isible<<< with liberty and justice for all
+   4. [act=1.900]  over the years the original thirty six>>> square<<< miles of grant township was broken down and split into
+   5. [act=1.812]  three waiver by>>> americ<<<an family insurance not over filing it's declar
+   6. [act=1.570]   pledge allegiance to the flag of the united states of>>> americ<<<a and to the republic for which it stands one
+   7. [act=1.459]   modification to our subdivision ordinance section thirty eight thousand five>>> hundred<<< and thirty six blocks lots and parcels be approved subject
+   8. [act=1.424]   posture with us having gone to court first for the>>> u<<<mpire and the appraiser for them too assert a
+   9. [act=1.362]  these are the>>> proud<<< hills of the state of virginia in the spring
+  10. [act=1.360]  a township>>> organized<<< on october 20th one thousand eight hundred and
+  11. [act=1.296]  so it's like the car is>>> connected<<< to you
+  12. [act=1.248]  one work could be compensated after closing under the you>>> know<<<
+  13. [act=1.233]  i think if you bring>>> together<<< some individuals or just charge chris to sort of
+  14. [act=1.233]  it became the duty and obligation of>>> americ<<<an family to file it's dj action on it
+  15. [act=1.142]   point where i thought it was meddling personally because my>>> different<<< strokes i didn't get elected reelected so you
+  16. [act=1.125]   tying in with the ppta memo that's also>>> included<<< in the packet it's somewhat of a retroactive
+  17. [act=1.116]  five different churches came>>> together<<< and it was volunteers
+  18. [act=1.080]   he got out of the navy and then came to>>> americ<<<a
+  19. [act=1.078]   is the sheets that i handed out to you doubles>>>ided<<< but the basically we from the technology side while there
+  20. [act=1.071]  lowe's is actually>>> splitting<<< the argument
+  21. [act=1.015]  there's no>>> separation<<< there and that's where her honor ran a foul
+  22. [act=0.999]   of the united states of america and to the>>> republic<<< for which it stands one nation under god indiv
+  23. [act=0.982]   one hundred and eight effective july 1st two>>> thousand<<< and eighteen no no no
+  24. [act=0.945]   to be enforceable but what term of it would>>> change<<< our analysis i agree with the general principle that an
+  25. [act=0.941]  l j torres gymnasium here at wob>>>urn<<< memorial high school for tonight's division two north final
+  26. [act=0.932]  the only issue was the one hundred>>> and<<< fifty five penalty attorney fee and prejudgment interest but
+  27. [act=0.912]  w>>>elcome<<< to winter field house for miaa tournament basketball
+  28. [act=0.912]  w>>>elcome<<< to carl j torres gymnasium here
+  29. [act=0.912]  w>>>elcome<<< thanks nice to be here
+  30. [act=0.891]  so but if you have if you're in a>>> detached<<< home or you have a place at work where you
+  31. [act=0.873]  the tesla is the undis>>>puted<<< king and of that and that is in twenty minutes
+  32. [act=0.868]   a rate of two effective july 1st two>>> thousand<<< and eighteen
+  33. [act=0.840]   i give credit to anybody who does it that being>>> said<<< you know i i've known mark for a long
+  34. [act=0.833]   a spring sport it starts right after two that may>>> sandwich<<< you in too much
+  35. [act=0.831]   including the modification to our subdivision ordinance section thirty eight>>> thousand<<< five hundred and thirty six blocks lots and parcels be
+  36. [act=0.828]   foot wide sanitary slash utility easement between the>>> fifty<<< foot building line and the property line along valley road
+  37. [act=0.811]  i think that waiver by payment by>>> americ<<<an family on july nine two thousand and eighteen
+  38. [act=0.807]   when no factual basis for the tort claim would exist>>> had<<< the defendant complied with the contract
+  39. [act=0.740]   is about subscribing to the lobbying arm of energy new>>> eng<<<land regarding the programs and having a seat at the
+  40. [act=0.724]  amfam as we colloquially referred to>>> americ<<<an family insurance wisconsin
 
-Most frequent activating tokens (top 2): "love", "loved"
+Most frequent activating tokens (top 10): "americ", "thousand", "elcome", "together", "united", "nation", "isible", "square", "hundred", "u"
 
 
 Based on these examples, what concept does this SAE feature detect?
 
 RESPONSE:
 {
-  "label": "Affection or Love",
-  "explanation": "This feature detects the concept of affection or love, as it strongly activates on tokens related to loving or having a strong liking for something",
+  "label": "American Identity",
+  "explanation": "The feature activates on tokens related to American culture, geography, and institutions, such as 'united', 'america', and 'american', indicating it detects concepts of American identity",
   "confidence": "high"
 }
 ================================================================================
 
 ================================================================================
-REQUEST_ID 392ad2e4-8397-4b3b-bbb7-29e92c9a7102
-FEATURE 4893
+REQUEST_ID 10446540-4ddf-4c40-b696-efe25cddb947
+FEATURE 3999
 USER PROMPT:
-Feature index: 4893
+Feature index: 3999
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
-Top 10 activating examples (ordered strongest first):
-   1. [act=10.540]  if if you>>> like<<< that kind of stuff
-   2. [act=9.688]   got cooked and that they did the batteries didn't>>> like<<< that
-   3. [act=9.477]  and i>>> love<<< this market because the people are so nice and they
-   4. [act=2.914]  it's probably what your mom is used>>> to<<< in peru right yeah we have our markets and
-   5. [act=0.901]   you want to live a city where you want to>>> enjoy<<< life and a city that must be yours mine
-   6. [act=0.811]  cause we had a lot of people yesterday>>> like<<< my bean plants aren't looking very good no more
-   7. [act=0.497]  so you know and another advantage>>> of<<< prius's originally had right you're you're
-   8. [act=0.204]  if if you like>>> that<<< kind of stuff
-   9. [act=0.178]  and that way i'm not up>>> taking<<< up are the spaces pretty wide there yes
-  10. [act=0.102]  and i love>>> this<<< market because the people are so nice and they're
+Top 40 activating examples (ordered strongest first):
+   1. [act=14.390]  the>>> most<<< important issue is how did judge mcbryde
+   2. [act=13.822]  you can get the>>> most<<< of the other cars seat five
+   3. [act=11.525]  i think probably the marquee programs that got probably the>>> most<<< airtime and the most press this winter were both
+   4. [act=7.417]   programs that got probably the most airtime and the>>> most<<< press this winter were both our boys and girls basketball
+   5. [act=6.106]   supporters and then the the which would be maybe the>>> more<<< traditional belmonteans and then but he's
+   6. [act=5.348]   enforceable we should be able to recover the very>>> least<<< of the promissory estoppel because they
+   7. [act=4.605]   mums he put together what i'll consider the>>> more<<< liberal at least to me a little bit what i
+   8. [act=4.490]  so the>>> more<<< you can think about that i think would be valuable
+   9. [act=4.356]   me a little bit what i'll call from the>>> more<<< liberal or progressive faction
+  10. [act=3.207]   kept filling it up it killed my average but it>>> most<<< people over estimate the range that they need
+  11. [act=3.011]  which is probably even a>>> more<<< thankless job in many ways than the board of
+  12. [act=2.933]  i think a>>> more<<< realistic dates so we can plan what we're doing
+  13. [act=2.844]   units that we're going to need for the seventh>>> and<<< eighth grade at the middle school
+  14. [act=2.328]   cannot recover their full measure of damages is all the>>> more<<< reason to apply the economic loss rule
+  15. [act=2.080]  the the>>> greatest<<< advantage around the tesla itself around driving those
+  16. [act=1.814]   think probably the marquee programs that got probably the most>>> air<<<time and the most press this winter were both our
+  17. [act=1.732]  in your cell phone you fully discharged the battery or>>> more<<< you fully charge it
+  18. [act=1.659]   are not this nice but we are really enjoying the>>> best<<< of farming here
+  19. [act=1.650]   some other things that that the state can provide as>>> well<<<
+  20. [act=1.445]   and refurbishing the fitness center at bhs as>>> well<<< as doing yeoman's work over at the white
+  21. [act=1.399]   thousand and eighteen for the champion capital final subdivision as>>> well<<< as the nine recommendations so stated in the memo
+  22. [act=1.343]  't work for me but actually eighty miles works for>>> almost<<< all
+  23. [act=1.343]   is better known in the or i think it's>>> more<<< known in the belmont community
+  24. [act=1.325]   least one injection of vaccine had about four times as>>> much<<< protection as those without it
+  25. [act=1.164]   to push the envelope and put as much as they>>> could<<< into a small piece of property
+  26. [act=1.105]  and that is much>>> more<<< timely
+  27. [act=1.078]  the tesla is the>>> undis<<<puted king and of that and that is in twenty
+  28. [act=1.038]  and then if we have to do something>>> more<<< formal we will
+  29. [act=0.935]   it and we participated tonight then we would need a>>> majority<<< vote but because it wasn't brought up this is
+  30. [act=0.915]  've all come back to say that this was the>>> best<<< thing i could have ever done
+  31. [act=0.874]  this is going to be much>>> more<<< common in the future
+  32. [act=0.872]   to increase in forward capacity market charges which like makes>>> most<<< of this amount
+  33. [act=0.808]   the platform we will through the professional development committee as>>> well<<< as the technology steering committee talk about well how else
+  34. [act=0.806]   have tried to push the envelope and put as much>>> as<<< they could into a small piece of property
+  35. [act=0.788]  're just they're the backbone of the program and>>> such<<<
+  36. [act=0.659]   this and we had a lot of questions during the>>> campaign<<< but you know i think jack i think the the
+  37. [act=0.656]   what can i bring that doesn't take up a>>> lot<<< of space that's why i make jewelry
+  38. [act=0.654]  and this is not unique because>>> most<<< superintendents are not the evaluation is not completed
+  39. [act=0.578]   probably the marquee programs that got probably the most air>>>time<<< and the most press this winter were both our boys
+  40. [act=0.577]   in the energy committee and roger colton as>>> well<<< to sort of discuss what we and provide some leadership
 
-Most frequent activating tokens (top 8): "like", "love", "to", "enjoy", "of", "that", "taking", "this"
+Most frequent activating tokens (top 10): "more", "most", "well", "best", "least", "and", "greatest", "air", "almost", "much"
 
 
 Based on these examples, what concept does this SAE feature detect?
 
 RESPONSE:
 {
-  "label": "Positive Sentiment",
-  "explanation": "The feature activates on tokens indicating affection or approval, such as 'like', 'love', and 'enjoy', suggesting it detects positive sentiment in text",
+  "label": "Comparative Degrees",
+  "explanation": "The feature detects words and phrases that express comparative degrees, such as 'more', 'most', 'best', and 'least'.",
   "confidence": "high"
 }
 ================================================================================
 
 ================================================================================
-REQUEST_ID 987aba36-711b-4f0d-9df9-6266f3a23a14
-FEATURE 4893
+REQUEST_ID fcd6d680-c234-4aba-b231-3a0a4a2b0a8d
+FEATURE 2892
 USER PROMPT:
-Feature index: 4893
+Feature index: 2892
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
-Top 9 activating examples (ordered strongest first):
-   1. [act=12.044]  and so yeah we>>> like<<< to stop here
-   2. [act=10.235]  and at least that's how i>>> like<<< to try to figure it out
-   3. [act=9.703]  if if you>>> like<<< that kind of stuff
-   4. [act=9.150]   got cooked and that they did the batteries didn't>>> like<<< that
-   5. [act=9.070]  something they've always>>> liked<<<
-   6. [act=8.666]  and i>>> love<<< this market because the people are so nice and they
-   7. [act=8.618]  and so i because she>>> loved<<< the medium so much i knew that when i wanted
-   8. [act=7.788]   you might have heard and say how why they they>>> love<<< driving electric
-   9. [act=7.399]  we have a lot of people that>>> love<<< to eat out but i'm sure that we will
+Top 25 activating examples (ordered strongest first):
+   1. [act=4.803]  time and the most press this winter were both our>>> boys<<< and girls basketball teams both had great runs in the
+   2. [act=2.450]  for>>> brother<<< james rutherford leased a school site for district
+   3. [act=1.540]  one of which shall be designated as>>> chairman<<< one town clerk one assessor one collector one overse
+   4. [act=1.188]   the parents are and the friends of groups and the>>> boosters<<< are to the programming at belmont high
+   5. [act=1.120]  for brother j>>>ames<<< rutherford leased a school site for district seven without
+   6. [act=0.898]   one collector one overseer of the poor two const>>>ables<<< two justices of the peace as many overseers of
+   7. [act=0.825]   for the work the day i cut up a cheap>>> paperback<<< copy of lewis carroll's alice
+   8. [act=0.690]   all the space behind the middle the high school for>>> modular<<< space
+   9. [act=0.608]  okay so it's not a real>>> distinction<<<
+  10. [act=0.594]   my methodist friends went to shul with my>>> jew<<<ish friends to quaker summer camp to everything
+  11. [act=0.498]  but i'm a little too old>>>fashioned<<< for that and i didn't really find the voice
+  12. [act=0.494]  on the >>>igo<<< we've really gone through the it's one of
+  13. [act=0.469]   alice in wonderland to make alice's>>> bath<<<robe
+  14. [act=0.379]   be brief i don't want to make myself a>>> liar<<< so i will sit down and let your honor's
+  15. [act=0.378]   four hundred and thirty two votes versus a one thousand>>> four<<< hundred and twenty eight votes for the alexandra
+  16. [act=0.371]  and you spoke about the fact that the>>> boosters<<< have kicked in and helped out for example with the
+  17. [act=0.363]  and then if we have to do something more>>> formal<<< we will
+  18. [act=0.325]  i think probably the>>> marquee<<< programs that got probably the most airtime and the
+  19. [act=0.283]  g in this>>> room<<< a lot of anxiety for these kids christofor
+  20. [act=0.250]   shul with my jewish friends to quaker>>> summer<<< camp to everything
+  21. [act=0.169]  i went off to sund>>>ay<<< school with my methodist friends went to shul
+  22. [act=0.128]   high school as you know we are currently utilizing three>>> modular<<< spaces behind the high school and we will expand to
+  23. [act=0.126]   clear and unequivocal on this point north presid>>>io<<< hereby waives and releases any right to sue low
+  24. [act=0.120]  ist friends went to shul with my jewish>>> friends<<< to quaker summer camp to everything
+  25. [act=0.105]   designated as chairman one town clerk one assessor one>>> collector<<< one overseer of the poor two constables two
 
-Most frequent activating tokens (top 4): "like", "love", "liked", "loved"
+Most frequent activating tokens (top 10): "boosters", "modular", "boys", "brother", "chairman", "ames", "ables", "paperback", "distinction", "jew"
 
 
 Based on these examples, what concept does this SAE feature detect?
 
 RESPONSE:
 {
-  "label": "Positive Sentiment",
-  "explanation": "The feature detects tokens related to expressing fondness or affection, such as 'like' and 'love', indicating a positive sentiment or preference",
+  "label": "Organizational Roles",
+  "explanation": "The feature detects tokens related to titles, positions, and groups within organizations, such as 'brother', 'chairman', 'boosters', and 'modular' spaces, which are often associated with structured groups or teams.",
   "confidence": "high"
 }
 ================================================================================
 
 ================================================================================
-REQUEST_ID 4083a936-d21e-4d1a-81fc-b244ee594e80
-FEATURE 0
+REQUEST_ID dd7be87d-90bf-4975-a412-bf98b677aa01
+FEATURE 7789
 USER PROMPT:
-Feature index: 0
+Feature index: 7789
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
-Top 29 activating examples (ordered strongest first):
-   1. [act=4.621]   the electricity prices is lowest but you can also for>>> some<<< charges you can ask it to charge when the power
-   2. [act=4.504]  yeah for a>>> lot<<< of kids this is their opportunity to connect to the
-   3. [act=4.494]   can plug in your electric car that works great for>>> almost<<< every person with normal with normal driving habits you will
-   4. [act=4.156]   car it you shouldn't be idling for a>>> long<<< times before you go right
-   5. [act=4.025]   was at one stretch i was on autopilot for>>> about<<< you know about ninety five of the time on the
-   6. [act=3.740]  he has served for a>>> long<<< time on many committees
-   7. [act=3.560]   than you can ever see you can get everything for>>> whatever<<< price you want but we have cheap buns for
-   8. [act=3.559]   you could just go to bed and sleep for a>>> little<<< bit
-   9. [act=3.190]  yeah for a lot>>> of<<< kids this is their opportunity to connect to the school
-  10. [act=3.160]  't work for me but actually eighty miles works for>>> almost<<< all
-  11. [act=3.093]   don't pull down from the rate stabilization fund for>>> at<<< the end of the year perhaps
-  12. [act=1.938]  so again it'll depend on the household but for>>> many<<< households simply changing what vehicle you're driving can be
-  13. [act=1.856]   do know that i probably will be putting in for>>> some<<< funding for this to be able to continue as we
-  14. [act=1.801]   twenty thousand additional cost to us to do it for>>> nothing<<<
-  15. [act=1.765]  they make a great first car for>>> some<<< for someone in college
-  16. [act=1.723]   established a community then they they did get together for>>> many<<< different things
-  17. [act=1.561]  and so you have gone through>>> quite<<< a few transformations since then i bet
-  18. [act=1.224]   could just go to bed and sleep for a little>>> bit<<<
-  19. [act=0.936]   hatchbacks those are they they have room for a>>> lot<<< of stuff in them you can get some that are
-  20. [act=0.931]   we're just laying out a very general framework for>>> some<<< contracts that that was essentially to come into effect if
-  21. [act=0.930]   you can ever see you can get everything for whatever>>> price<<< you want but we have cheap buns for you
-  22. [act=0.777]   well this is what the rate stabilization fund is for>>> so<<< i don't have a particular issue with using this
-  23. [act=0.771]   a story about his devotion towards ringing the bell for>>> all<<< the wedding services
-  24. [act=0.680]   work for me but actually eighty miles works for almost>>> all<<<
-  25. [act=0.532]   we met once a week we met probably for a>>> couple<<< of hours seven to nine we had our agenda we
-  26. [act=0.368]  so how do you do your produce how>>> do<<< you pick it we have a crew
-  27. [act=0.175]   this position of special ed director is so important to>>> so<<< many of our parents
-  28. [act=0.136]   met once a week we met probably for a couple>>> of<<< hours seven to nine we had our agenda we'd
-  29. [act=0.042]   and other contracts that we north presidio spent>>> substantial<<< funds and resources to develop the property in a manner
+Top 24 activating examples (ordered strongest first):
+   1. [act=2.374]  i would think congratulations to mark and>>> congratulations<<< to alexandra who did at least in this
+   2. [act=2.349]   constables two justices of the peace as many overse>>>ers<<< of roads as there are road districts in the town
+   3. [act=1.460]   so so it's just these are very battery the>>> battery<<< is not going to have to be replaced
+   4. [act=1.293]   part of the committee yes they are part of the>>> committee<<<
+   5. [act=1.070]   thirty two votes versus a one thousand four hundred and>>> twenty<<< eight votes for the alexandra rubin
+   6. [act=1.027]  for the year for the>>> year<<<
+   7. [act=0.793]   is having its next drive event to look at the>>> electric<<< cars and test drive them on june 24th
+   8. [act=0.734]  roll's alice in wonderland to make al>>>ice<<<'s bathrobe
+   9. [act=0.667]   our subdivision ordinance section thirty eight thousand five hundred and>>> thirty<<< six blocks lots and parcels be approved subject to those
+  10. [act=0.666]   four hundred and thirty two votes versus a one thousand>>> four<<< hundred and twenty eight votes for the alexandra
+  11. [act=0.492]   programs that got probably the most airtime and the>>> most<<< press this winter were both our boys and girls basketball
+  12. [act=0.477]  position and>>> it<<<'s a very important position
+  13. [act=0.425]   just if chris is going to be out perhaps>>> out<<<
+  14. [act=0.396]   peace as many overseers of roads as there are>>> road<<< districts in the town
+  15. [act=0.262]   votes versus a one thousand four hundred and twenty eight>>> votes<<< for the alexandra rubin
+  16. [act=0.255]   future auctions is there anything that can be done or>>> is<<< this just anyone who is in new england is
+  17. [act=0.232]   you or i think the board you presented to the>>> board<<< and we approved it you approved the transfer to rate
+  18. [act=0.211]   charging the actual based on the calculations and either collect>>> it<<< and use rates stabilization fund to offset what is under
+  19. [act=0.174]   you presented to the board and we approved it you>>> approved<<< the transfer to rate stabilization fund
+  20. [act=0.166]   auctions is there anything that can be done or is>>> this<<< just anyone who is in new england is dealing
+  21. [act=0.158]  basically in>>> terms<<< of i should state in terms of infrastructure standpoint bel
+  22. [act=0.137]   only sixty three per one hundred thousand while among the>>> un<<<vaccinated their attack rate was two hundred and ninety
+  23. [act=0.128]   protect ourselves against this affecting future auctions is there anything>>> that<<< can be done or is this just anyone who is
+  24. [act=0.116]   to do forty miles a day right yeah so yeah>>> so<<< so it's just these are very battery the battery
 
-Most frequent activating tokens (top 10): "some", "lot", "almost", "long", "of", "many", "so", "all", "about", "whatever"
+Most frequent activating tokens (top 10): "it", "congratulations", "ers", "battery", "committee", "twenty", "year", "electric", "ice", "thirty"
 
 
 Based on these examples, what concept does this SAE feature detect?
 
 RESPONSE:
 {
-  "label": "Quantity or extent",
-  "explanation": "The feature activates on tokens indicating amounts, durations, or degrees, such as 'some', 'lot', 'almost', and 'long'.",
-  "confidence": "high"
-}
-================================================================================
-
-================================================================================
-REQUEST_ID a4a5b752-b690-4235-9237-854b5d5ed16f
-FEATURE 0
-USER PROMPT:
-Feature index: 0
-
-The feature most strongly activates on the following tokens and their surrounding context.
-The activating token is marked with >>> <<< to help you focus on it.
-
-Top 7 activating examples (ordered strongest first):
-   1. [act=4.231]   the electricity prices is lowest but you can also for>>> some<<< charges you can ask it to charge when the power
-   2. [act=4.222]   can plug in your electric car that works great for>>> almost<<< every person with normal with normal driving habits you will
-   3. [act=4.209]  yeah for a>>> lot<<< of kids this is their opportunity to connect to the
-   4. [act=3.913]   car it you shouldn't be idling for a>>> long<<< times before you go right
-   5. [act=3.806]   was at one stretch i was on autopilot for>>> about<<< you know about ninety five of the time on the
-   6. [act=3.341]   you could just go to bed and sleep for a>>> little<<< bit
-   7. [act=3.232]   than you can ever see you can get everything for>>> whatever<<< price you want but we have cheap buns for
-
-Most frequent activating tokens (top 7): "some", "almost", "lot", "long", "about", "little", "whatever"
-
-
-Based on these examples, what concept does this SAE feature detect?
-
-RESPONSE:
-{
-  "label": "Quantity or extent",
-  "explanation": "The feature detects words related to amount, degree, or duration, such as 'some', 'almost', 'lot', and 'long'.",
-  "confidence": "high"
-}
-================================================================================
-
-================================================================================
-REQUEST_ID c54f24b6-dc06-4749-ab38-ae573e6b760b
-FEATURE 3
-USER PROMPT:
-Feature index: 3
-
-The feature most strongly activates on the following tokens and their surrounding context.
-The activating token is marked with >>> <<< to help you focus on it.
-
-Top 2 activating examples (ordered strongest first):
-   1. [act=5.293]   lot of that she would think she was around world>>> war<<< ii and that there were soldiers around the house and
-   2. [act=4.165]  it was scuttled at the end of the>>> war<<<
-
-Most frequent activating tokens (top 1): "war"
-
-
-Based on these examples, what concept does this SAE feature detect?
-
-RESPONSE:
-{
-  "label": "War and Conflict",
-  "explanation": "The feature detects mentions of war, indicating a semantic concept related to military conflict and violence.",
-  "confidence": "high"
-}
-================================================================================
-
-================================================================================
-REQUEST_ID 3bc9fe24-41e3-47eb-b126-e70ed456c505
-FEATURE 6
-USER PROMPT:
-Feature index: 6
-
-The feature most strongly activates on the following tokens and their surrounding context.
-The activating token is marked with >>> <<< to help you focus on it.
-
-Top 2 activating examples (ordered strongest first):
-   1. [act=3.183]   have that hometown feeling down here right and the open>>>air<<< market that's kind of special
-   2. [act=3.035]  're hoping that that helps other communities reach their tipping>>> point<<<
-
-Most frequent activating tokens (top 2): "air", "point"
-
-
-Based on these examples, what concept does this SAE feature detect?
-
-RESPONSE:
-{
-  "label": "Outdoor Public Spaces",
-  "explanation": "The feature detects words related to outdoor public areas or significant moments, such as markets or tipping points, that are often associated with community gatherings or events.",
+  "label": "Formal Address Terms",
+  "explanation": "The feature detects formal address terms and phrases often used in official or congratulatory contexts, such as 'congratulations' and 'committee'.",
   "confidence": "medium"
 }
 ================================================================================
 
 ================================================================================
-REQUEST_ID 3285bce6-77e2-4e92-a432-e8612ea86395
-FEATURE 8
+REQUEST_ID 18be5081-7b30-494f-a00d-dcfc5e731924
+FEATURE 7789
 USER PROMPT:
-Feature index: 8
+Feature index: 7789
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
-Top 2 activating examples (ordered strongest first):
-   1. [act=8.462]  and last week on m>>>onday<<< we had administrative retreat and that is a day where
-   2. [act=7.190]   of manufacturing week we will open our doors on m>>>onday<<< to the students of mohonasen school
+Top 24 activating examples (ordered strongest first):
+   1. [act=2.374]  i would think congratulations to mark and>>> congratulations<<< to alexandra who did at least in this
+   2. [act=2.349]   constables two justices of the peace as many overse>>>ers<<< of roads as there are road districts in the town
+   3. [act=1.460]   so so it's just these are very battery the>>> battery<<< is not going to have to be replaced
+   4. [act=1.293]   part of the committee yes they are part of the>>> committee<<<
+   5. [act=1.070]   thirty two votes versus a one thousand four hundred and>>> twenty<<< eight votes for the alexandra rubin
+   6. [act=1.027]  for the year for the>>> year<<<
+   7. [act=0.793]   is having its next drive event to look at the>>> electric<<< cars and test drive them on june 24th
+   8. [act=0.734]  roll's alice in wonderland to make al>>>ice<<<'s bathrobe
+   9. [act=0.667]   our subdivision ordinance section thirty eight thousand five hundred and>>> thirty<<< six blocks lots and parcels be approved subject to those
+  10. [act=0.666]   four hundred and thirty two votes versus a one thousand>>> four<<< hundred and twenty eight votes for the alexandra
+  11. [act=0.492]   programs that got probably the most airtime and the>>> most<<< press this winter were both our boys and girls basketball
+  12. [act=0.477]  position and>>> it<<<'s a very important position
+  13. [act=0.425]   just if chris is going to be out perhaps>>> out<<<
+  14. [act=0.396]   peace as many overseers of roads as there are>>> road<<< districts in the town
+  15. [act=0.262]   votes versus a one thousand four hundred and twenty eight>>> votes<<< for the alexandra rubin
+  16. [act=0.255]   future auctions is there anything that can be done or>>> is<<< this just anyone who is in new england is
+  17. [act=0.232]   you or i think the board you presented to the>>> board<<< and we approved it you approved the transfer to rate
+  18. [act=0.211]   charging the actual based on the calculations and either collect>>> it<<< and use rates stabilization fund to offset what is under
+  19. [act=0.174]   you presented to the board and we approved it you>>> approved<<< the transfer to rate stabilization fund
+  20. [act=0.166]   auctions is there anything that can be done or is>>> this<<< just anyone who is in new england is dealing
+  21. [act=0.158]  basically in>>> terms<<< of i should state in terms of infrastructure standpoint bel
+  22. [act=0.137]   only sixty three per one hundred thousand while among the>>> un<<<vaccinated their attack rate was two hundred and ninety
+  23. [act=0.128]   protect ourselves against this affecting future auctions is there anything>>> that<<< can be done or is this just anyone who is
+  24. [act=0.116]   to do forty miles a day right yeah so yeah>>> so<<< so it's just these are very battery the battery
 
-Most frequent activating tokens (top 1): "onday"
+Most frequent activating tokens (top 10): "it", "congratulations", "ers", "battery", "committee", "twenty", "year", "electric", "ice", "thirty"
 
 
 Based on these examples, what concept does this SAE feature detect?
 
 RESPONSE:
 {
-  "label": "Day of Week",
-  "explanation": "The feature detects mentions of specific days of the week, particularly Monday, in the given context",
+  "label": "Formal Address Terms",
+  "explanation": "The feature detects tokens that are often used in formal language, such as congratulatory phrases, titles, and official terminology, which are common in formal addresses or speeches.",
+  "confidence": "medium"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 7db09061-05ba-4938-b14b-44e4e75d2338
+FEATURE 2388
+USER PROMPT:
+Feature index: 2388
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=6.379]  good>>> evening<<< everyone
+   2. [act=1.687]  it's a pretty>>> tight<<< space you're building on lot two though right because
+   3. [act=1.230]  you know we had our>>> girls<<< hockey team come back on board here in belmont
+   4. [act=1.151]   i bring that doesn't take up a lot of>>> space<<< that's why i make jewelry
+   5. [act=1.121]   probably the most airtime and the most press this>>> winter<<< were both our boys and girls basketball teams both had
+   6. [act=1.111]   thousand four hundred and twenty eight votes for the a>>>lex<<<andra rubin
+   7. [act=1.002]   another rental tesla from frisco in color>>>ado<<< down to boulder
+   8. [act=0.920]  we sponsor the>>> chef<<< series as well as when we do the salsa showdown
+   9. [act=0.920]   of i should state in terms of infrastructure standpoint bel>>>mont<<< light could support really whatever you'd like to put
+  10. [act=0.869]   day i cut up a cheap paperback copy of le>>>w<<<is carroll's alice in wonderland to
+  11. [act=0.827]   chef series as well as when we do the salsa>>> showdown<<<
+  12. [act=0.738]   light could support really whatever you'd like to put>>> there<<< incinerator solar really anything
+  13. [act=0.710]   the fitness center at bhs as well as doing>>> ye<<<oman's work over at the whitefield house
+  14. [act=0.651]  it's a pretty tight>>> space<<< you're building on lot two though right because there
+  15. [act=0.481]   the chef series as well as when we do the>>> salsa<<< showdown
+  16. [act=0.454]   probably the marquee programs that got probably the most air>>>time<<< and the most press this winter were both our boys
+  17. [act=0.441]   an easy thing because after all a calf's a>>> youngster<<< like himself
+  18. [act=0.425]  let me>>> interrupt<<< for a moment steve we've got i think
+  19. [act=0.400]  and also bel>>>mont<<< drive's electric is having its next drive event to
+  20. [act=0.393]  i think a more realistic>>> dates<<< so we can plan what we're doing right
+  21. [act=0.379]   the final precinct is in for the board of select>>>men<<< and it looks like we have a definite winner in
+  22. [act=0.356]  a sterility test>>> confirming<<< those of the manufacturer is carried out
+  23. [act=0.305]   and girls basketball teams both had great runs in the>>> tournament<<<
+  24. [act=0.300]  mont after being a coop for the last several>>> years<<< with watertown
+  25. [act=0.283]  i think a more realistic dates>>> so<<< we can plan what we're doing right
+
+Most frequent activating tokens (top 10): "space", "mont", "evening", "tight", "girls", "winter", "lex", "ado", "chef", "w"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Location Reference",
+  "explanation": "The feature detects tokens that often refer to geographical locations, such as 'mont' or 'colorado', or words that imply a specific setting or area, like 'space' or 'evening'",
+  "confidence": "medium"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 4f7ce3f1-2e99-4203-a692-d00a3608de9e
+FEATURE 1058
+USER PROMPT:
+Feature index: 1058
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=2.079]   i thought what can i bring that doesn't take>>> up<<< a lot of space that's why i make jewelry
+   2. [act=1.350]   thought what can i bring that doesn't take up>>> a<<< lot of space that's why i make jewelry
+   3. [act=1.304]   electrical the emissions from all of the electricity you would>>> use<<< for other things
+   4. [act=1.102]  maybe some people think i'm anal i>>> don<<<'t know
+   5. [act=1.051]  i have more than enough range for a given>>> day<<<
+   6. [act=0.966]   equivalent to driving over six thousand fewer miles a year>>> or<<< it's about the equivalent of your entire electrical the
+   7. [act=0.856]   can i bring that doesn't take up a lot>>> of<<< space that's why i make jewelry
+   8. [act=0.787]   make jewelry also i do i have a small car>>> so<<< i thought what can i bring that doesn't take
+   9. [act=0.769]   miles per gallon to an electric vehicle without changing your>>> driving<<< habits is equivalent to driving over six thousand fewer miles
+  10. [act=0.691]   so i thought what can i bring that doesn't>>> take<<< up a lot of space that's why i make
+  11. [act=0.681]   what can i bring that doesn't take up a>>> lot<<< of space that's why i make jewelry
+  12. [act=0.654]   two constables two justices of the peace as many>>> overse<<<ers of roads as there are road districts in the
+  13. [act=0.644]   habits is equivalent to driving over six thousand fewer miles>>> a<<< year or it's about the equivalent of your entire
+  14. [act=0.641]   jewelry also i do i have a small car so>>> i<<< thought what can i bring that doesn't take up
+  15. [act=0.639]   just to keep the rate more less flat instead of>>> changing<<< ppt rate you know every few months as we
+  16. [act=0.559]  chris chris anything else i just reading the>>> agenda<<< again
+  17. [act=0.526]   miles a year or it's about the equivalent of>>> your<<< entire electrical the emissions from all of the electricity you
+  18. [act=0.491]   of a standard new car that gets twenty nine miles>>> per<<< gallon to an electric vehicle without changing your driving habits
+  19. [act=0.487]   twenty nine miles per gallon to an electric vehicle without>>> changing<<< your driving habits is equivalent to driving over six thousand
+  20. [act=0.482]  and i found the voice for the>>> work<<< the day i cut up a cheap paperback copy of
+  21. [act=0.476]  and that's because you learn to to just>>> drive<<< with one foot
+  22. [act=0.448]   a small amount of money every month instead of just>>> charging<<< the actual based on the calculations and either collect it
+  23. [act=0.418]   off to sunday school with my methodist friends>>> went<<< to shul with my jewish friends to qu
+  24. [act=0.405]   small collect a small amount of money every month instead>>> of<<< just charging the actual based on the calculations and either
+  25. [act=0.398]   easy thing because after all a calf's a youngster>>> like<<< himself
+
+Most frequent activating tokens (top 10): "a", "of", "changing", "up", "use", "don", "day", "or", "so", "driving"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Preposition and article usage",
+  "explanation": "The feature detects the usage of prepositions and articles, such as 'a', 'of', 'up', and 'use', which are often used to indicate relationships between objects or ideas in a sentence",
   "confidence": "high"
 }
 ================================================================================
 
 ================================================================================
-REQUEST_ID 3c322742-34d1-4821-adba-b3c3807393c5
-FEATURE 1000
+REQUEST_ID c0cb3e1c-824e-4650-a302-ae931b54f742
+FEATURE 5476
 USER PROMPT:
-Feature index: 1000
+Feature index: 5476
 
 The feature most strongly activates on the following tokens and their surrounding context.
 The activating token is marked with >>> <<< to help you focus on it.
 
-Top 15 activating examples (ordered strongest first):
-   1. [act=12.558]  we sat down for the interview here in the>>> church<<< and that was an hour plus of just everything just
-   2. [act=11.368]  une as synods to encourage the people in their>>> church<<< minnesotans to vote against this amendment
-   3. [act=11.218]   really nice to bring my mom to armenian>>> church<<< and you know sure enough we got there and she
-   4. [act=11.048]  so the>>> church<<< is protected from fire whereas it hadn't been in
-   5. [act=9.635]  five different>>> churches<<< came together and it was volunteers
-   6. [act=9.499]   interest about the building they always call it a round>>> church<<< for instance but in the film you go into some
-   7. [act=9.381]   hour plus of just everything just detailed information about the>>> church<<<
-   8. [act=9.011]   you know it might be helpful to bring her to>>> church<<< someday and sure enough after the service the priest came
-   9. [act=7.327]   as an end for weary travelers between stillwater and>>> saint<<< paul
-  10. [act=5.938]   to church someday and sure enough after the service the>>> priest<<< came up to her and asked her what was her
-  11. [act=4.792]   may or in the beginning of june as syn>>>ods<<< to encourage the people in their church minnesot
-  12. [act=4.364]  nikolaidis back to>>> christ<<<ofori
-  13. [act=3.788]  's call has to get it in she does to>>> christ<<<ofori
-  14. [act=3.525]   got there and she just kind of got into the>>> service<<< and standing up and down and and started kind of
-  15. [act=3.177]   bring her to church someday and sure enough after the>>> service<<< the priest came up to her and asked her what
+Top 25 activating examples (ordered strongest first):
+   1. [act=12.800]   hundred and ninety two for one hundred thousand almost four>>> times<<< as high
+   2. [act=2.843]   and ninety two for one hundred thousand almost four times>>> as<<< high
+   3. [act=2.096]  yeah>>> once<<< again i'm a huge advocate
+   4. [act=1.755]  and and so it's hard to do forty>>> miles<<< a day right yeah so yeah so so it's
+   5. [act=1.463]   our girls hockey team come back on board here in>>> bel<<<mont after being a coop for the last several
+   6. [act=1.381]   driving habits is equivalent to driving over six thousand fewer>>> miles<<< a year or it's about the equivalent of your
+   7. [act=1.374]   in paragraph fifteen of the complaint that based upon their>>> frequently<<< stated intent to consummate the agreement and enter into
+   8. [act=1.291]  but even if all of this wasn't>>> substant<<<ively breach of contract claim turning specifically to the fraud
+   9. [act=1.132]   use rates stabilization fund to offset what is under collected>>> throughout<<< the year or transfer whatever we over collected through p
+  10. [act=1.100]  and so i because she loved the medium so>>> much<<< i knew that when i wanted to tell our story
+  11. [act=1.074]   sort of a standard new car that gets twenty nine>>> miles<<< per gallon to an electric vehicle without changing your driving
+  12. [act=1.020]  so one example i drove from in another rental t>>>es<<<la from frisco in colorado down to boulder
+  13. [act=0.940]   ninety two for one hundred thousand almost four times as>>> high<<<
+  14. [act=0.864]   attack rate for paralytic polio was only sixty three>>> per<<< one hundred thousand while among the unvaccinated their
+  15. [act=0.852]   probably the marquee programs that got probably the most air>>>time<<< and the most press this winter were both our boys
+  16. [act=0.788]   for the work the day i cut up a cheap>>> paperback<<< copy of lewis carroll's alice
+  17. [act=0.783]   was two hundred and ninety two for one hundred thousand>>> almost<<< four times as high
+  18. [act=0.698]   chairman one town clerk one assessor one collector one>>> overse<<<er of the poor two constables two justices of
+  19. [act=0.690]   of a standard new car that gets twenty nine miles>>> per<<< gallon to an electric vehicle without changing your driving habits
+  20. [act=0.480]   and helped out for example with the floor project at>>> bel<<<mont high school last year they've been instrumental and
+  21. [act=0.320]   the ground lease and other contracts that we north pres>>>id<<<io spent substantial funds and resources to develop the property
+  22. [act=0.303]   of groups and the boosters are to the programming at>>> bel<<<mont high
+  23. [act=0.292]   habits is equivalent to driving over six thousand fewer miles>>> a<<< year or it's about the equivalent of your entire
+  24. [act=0.226]  g in this room a>>> lot<<< of anxiety for these kids christofori with
+  25. [act=0.216]  so one example i>>> drove<<< from in another rental tesla from frisco
+
+Most frequent activating tokens (top 10): "miles", "bel", "per", "times", "as", "once", "frequently", "substant", "throughout", "much"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Quantitative Comparison",
+  "explanation": "The feature detects tokens that are part of phrases comparing or measuring quantities, such as distances, rates, or frequencies.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 831f2373-84de-4473-acd2-8f356876122c
+FEATURE 4764
+USER PROMPT:
+Feature index: 4764
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=4.418]  a ster>>>ility<<< test confirming those of the manufacturer is carried out
+   2. [act=3.943]   one town clerk one assessor one collector one overse>>>er<<< of the poor two constables two justices of the
+   3. [act=3.839]   shall be designated as chairman one town clerk one assess>>>or<<< one collector one overseer of the poor two const
+   4. [act=3.686]  and if the court finds that is not enforce>>>able<<< then we certainly it would take it outside the economic
+   5. [act=3.684]   maus or the fun home or persep>>>olis<<< just in straight graphic narrative form
+   6. [act=3.446]   from one hundred to four hundred at the chen>>>ery<<< middle school
+   7. [act=3.189]   smallest two person manufacturer to general electric and global found>>>ries<<< and regeneron have the employees that they need
+   8. [act=3.084]   constables two justices of the peace as many overse>>>ers<<< of roads as there are road districts in the town
+   9. [act=3.068]   on board here in belmont after being a co>>>op<<< for the last several years with watertown
+  10. [act=2.941]   probably the marquee programs that got probably the most air>>>time<<< and the most press this winter were both our boys
+  11. [act=2.584]   one collector one overseer of the poor two const>>>ables<<< two justices of the peace as many overseers of
+  12. [act=2.361]   support really whatever you'd like to put there inciner>>>ator<<< solar really anything
+  13. [act=2.177]   when my great grandfather settled it he was a car>>>penter<<<
+  14. [act=1.914]   fitness center at bhs as well as doing ye>>>oman<<<'s work over at the whitefield house
+  15. [act=1.885]  bas>>>ically<<< in terms of i should state in terms of infrastructure
+  16. [act=1.824]   manufacturer to general electric and global foundries and regener>>>on<<< have the employees that they need
+  17. [act=1.822]   keep the rate more less flat instead of changing p>>>pt<<< rate you know every few months as we used to
+  18. [act=1.594]   with the same exact thing with no ability to ins>>>ulate<<< yourself from
+  19. [act=1.081]   high school last year they've been instrumental and refurb>>>ishing<<< the fitness center at bhs as well as doing
+  20. [act=1.048]   one example i drove from in another rental tes>>>la<<< from frisco in colorado down to boulder
+  21. [act=1.020]   electric cars and test drive them on june 24>>>th<<< from one hundred to four hundred at the chen
+  22. [act=0.998]  and there's a drip line irrigation under every>>> one<<<
+  23. [act=0.744]   or is this just anyone who is in new eng>>>land<<< is dealing with the same exact thing with no ability
+  24. [act=0.743]  and the general>>> speaking<<< we are trying to change an approach to ppta
+  25. [act=0.732]   sterility test confirming those of the manufacturer is carried>>> out<<<
+
+Most frequent activating tokens (top 10): "ility", "er", "or", "able", "olis", "ery", "ries", "ers", "op", "time"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Occupational suffixes",
+  "explanation": "The feature detects words with suffixes related to occupations, roles, or functions, such as '-er', '-or', and '-able'",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID b413da91-6782-49e7-b0df-95b6ce819ceb
+FEATURE 1069
+USER PROMPT:
+Feature index: 1069
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 20 activating examples (ordered strongest first):
+   1. [act=6.764]   affecting future auctions is there anything that can be done>>> or<<< is this just anyone who is in new england
+   2. [act=6.373]  what sales will be>>> or<<< your demand will be absolutely
+   3. [act=2.799]   like to give it a little trim yourself you can>>> or<<< just
+   4. [act=1.697]  i thought we drew that down to reserve that we>>> or<<< you or i think the board you presented to the
+   5. [act=1.697]  i think people are switching over>>> or<<< have switched over
+   6. [act=1.520]  's as to any claims injury or loss arising from>>> or<<< in connection with this agreement to recover damages over the
+   7. [act=1.445]   we drew that down to reserve that we or you>>> or<<< i think the board you presented to the board and
+   8. [act=1.219]  october one>>> or<<< fifteen i don't carry the one
+   9. [act=1.101]   i mean i think our enrollment will continue to increase>>> and<<< because of that we'll continue to feel the fiscal
+  10. [act=0.991]   brand new with all the software that allows the children>>> or<<< the students to basically do video editing with the work
+  11. [act=0.897]   future auctions is there anything that can be done or>>> is<<< this just anyone who is in new england is
+  12. [act=0.892]  tell me how important and how valuable the parents are>>> and<<< the friends of groups and the boosters are to the
+  13. [act=0.638]   upon their frequently stated intent to consummate the agreement>>> and<<< enter into the ground lease and other contracts that we
+  14. [act=0.598]   me how important and how valuable the parents are and>>> the<<< friends of groups and the boosters are to the programming
+  15. [act=0.485]  what sales will be or>>> your<<< demand will be absolutely
+  16. [act=0.338]  as courts have made clear that that arising from or>>> in<<< connection with language is indeed as broad as it sounds
+  17. [act=0.216]   i think you you know and i've said this>>> and<<< we had a lot of questions during the campaign but
+  18. [act=0.162]   all of the different groups and families that we have>>> and<<< that represent the belmont community
+  19. [act=0.139]  the class iii recs alternative recs or>>> such<<< as biomass landfill gas or renewable because they you can
+  20. [act=0.138]   came about through the act of making the drawings and>>> then<<< revisiting them and retelling them
+
+Most frequent activating tokens (top 8): "or", "and", "is", "the", "your", "in", "such", "then"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Conjunctions and Alternatives",
+  "explanation": "The feature detects the presence of conjunctions and alternative phrases, such as 'or', 'and', and 'is', which indicate a choice or connection between ideas or options",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID c9edbdbd-7fc4-4e88-ab22-d26b4c1362cd
+FEATURE 2388
+USER PROMPT:
+Feature index: 2388
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=6.379]  good>>> evening<<< everyone
+   2. [act=1.687]  it's a pretty>>> tight<<< space you're building on lot two though right because
+   3. [act=1.230]  you know we had our>>> girls<<< hockey team come back on board here in belmont
+   4. [act=1.151]   i bring that doesn't take up a lot of>>> space<<< that's why i make jewelry
+   5. [act=1.121]   probably the most airtime and the most press this>>> winter<<< were both our boys and girls basketball teams both had
+   6. [act=1.111]   thousand four hundred and twenty eight votes for the a>>>lex<<<andra rubin
+   7. [act=1.002]   another rental tesla from frisco in color>>>ado<<< down to boulder
+   8. [act=0.920]  we sponsor the>>> chef<<< series as well as when we do the salsa showdown
+   9. [act=0.920]   of i should state in terms of infrastructure standpoint bel>>>mont<<< light could support really whatever you'd like to put
+  10. [act=0.869]   day i cut up a cheap paperback copy of le>>>w<<<is carroll's alice in wonderland to
+  11. [act=0.827]   chef series as well as when we do the salsa>>> showdown<<<
+  12. [act=0.738]   light could support really whatever you'd like to put>>> there<<< incinerator solar really anything
+  13. [act=0.710]   the fitness center at bhs as well as doing>>> ye<<<oman's work over at the whitefield house
+  14. [act=0.651]  it's a pretty tight>>> space<<< you're building on lot two though right because there
+  15. [act=0.481]   the chef series as well as when we do the>>> salsa<<< showdown
+  16. [act=0.454]   probably the marquee programs that got probably the most air>>>time<<< and the most press this winter were both our boys
+  17. [act=0.441]   an easy thing because after all a calf's a>>> youngster<<< like himself
+  18. [act=0.425]  let me>>> interrupt<<< for a moment steve we've got i think
+  19. [act=0.400]  and also bel>>>mont<<< drive's electric is having its next drive event to
+  20. [act=0.393]  i think a more realistic>>> dates<<< so we can plan what we're doing right
+  21. [act=0.379]   the final precinct is in for the board of select>>>men<<< and it looks like we have a definite winner in
+  22. [act=0.356]  a sterility test>>> confirming<<< those of the manufacturer is carried out
+  23. [act=0.305]   and girls basketball teams both had great runs in the>>> tournament<<<
+  24. [act=0.300]  mont after being a coop for the last several>>> years<<< with watertown
+  25. [act=0.283]  i think a more realistic dates>>> so<<< we can plan what we're doing right
+
+Most frequent activating tokens (top 10): "space", "mont", "evening", "tight", "girls", "winter", "lex", "ado", "chef", "w"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Geographic Location",
+  "explanation": "The feature activates on tokens related to places, such as 'mont', 'belmont', 'colorado', and 'boulder', indicating a geographic location concept",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 7a85f5fe-666b-4b22-b48c-7a9f580bc084
+FEATURE 3036
+USER PROMPT:
+Feature index: 3036
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=11.153]  and i found the voice for the work the>>> day<<< i cut up a cheap paperback copy of lew
+   2. [act=10.298]  i have more than enough range for a given>>> day<<<
+   3. [act=6.525]  you know it's weekends it's>>> nights<<<
+   4. [act=5.353]   and so it's hard to do forty miles a>>> day<<< right yeah so yeah so so it's just these
+   5. [act=4.027]  yes we spoke the other>>> day<<<
+   6. [act=3.313]  for the six months remaining in the>>> year<<<
+   7. [act=3.254]  let me interrupt for a>>> moment<<< steve we've got i think the final precinct
+   8. [act=2.696]   stabilization fund to offset what is under collected throughout the>>> year<<< or transfer whatever we over collected through ppt to
+   9. [act=1.592]  you know it's>>> weekends<<< it's nights
+  10. [act=1.354]   shul with my jewish friends to quaker>>> summer<<< camp to everything
+  11. [act=1.259]   driving habits is equivalent to driving over six thousand fewer>>> miles<<< a year or it's about the equivalent of your
+  12. [act=1.228]  i went off to sund>>>ay<<< school with my methodist friends went to shul
+  13. [act=1.193]  for the six>>> months<<< remaining in the year
+  14. [act=1.121]   three per one hundred thousand while among the unvacc>>>inated<<< their attack rate was two hundred and ninety two for
+  15. [act=0.885]  ok>>>ay<<< so it's not a real distinction
+  16. [act=0.774]   the fraud pleadings i wanna just highlight in my>>> time<<< left two failings in that respect
+  17. [act=0.747]   well they want to know how fresh it is how>>> long<<< it's gonna last what's the best way to
+  18. [act=0.643]   both our boys and girls basketball teams both had great>>> runs<<< in the tournament
+  19. [act=0.446]   lot two though right because there's a pretty significant>>> drop<<< off on the back on that street
+  20. [act=0.421]   instead of changing ppt rate you know every few>>> months<<< as we used to do
+  21. [act=0.310]  we sponsor the chef series as well as>>> when<<< we do the salsa showdown
+  22. [act=0.298]  well i think we've come to the>>> end<<<
+  23. [act=0.248]  and they also cited a>>> case<<< from the court of appeals city of beaumont
+  24. [act=0.225]   fund and just to keep the rate more less flat>>> instead<<< of changing ppt rate you know every few months
+  25. [act=0.174]   use a small collect a small amount of money every>>> month<<< instead of just charging the actual based on the calculations
+
+Most frequent activating tokens (top 10): "day", "year", "ay", "months", "nights", "moment", "weekends", "summer", "miles", "inated"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Time and Periods",
+  "explanation": "The feature detects words related to time periods, such as days, years, months, and weekends, indicating a concept of temporal measurement or duration.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 56cd0877-160f-458e-9a1c-85c4526297b7
+FEATURE 1345
+USER PROMPT:
+Feature index: 1345
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 23 activating examples (ordered strongest first):
+   1. [act=7.839]   that would do this and we'd just have a>>> purchase<<< power agreement with that developer correct
+   2. [act=3.075]   voice for the work the day i cut up a>>> cheap<<< paperback copy of lewis carroll's al
+   3. [act=2.147]  for brother james rutherford>>> leased<<< a school site for district seven without charge to the
+   4. [act=1.663]  okay you're>>> renting<<< a house yes
+   5. [act=1.548]  for brother james rutherford leased>>> a<<< school site for district seven without charge to the community
+   6. [act=1.370]  okay you're renting>>> a<<< house yes
+   7. [act=1.352]  mont high school last year they've been instrumental and>>> refurb<<<ishing the fitness center at bhs as well as
+   8. [act=1.229]   battery the battery is not going to have to be>>> replaced<<<
+   9. [act=1.182]  a sterility test confirming those of the>>> manufacturer<<< is carried out
+  10. [act=0.951]  to put this another way>>> switching<<< from driving a sort of a standard new car that
+  11. [act=0.918]   behind the high school and we will expand to move>>> into<<< three more spaces utilizing all the space behind the middle
+  12. [act=0.718]  and so that analysis you know will supplement the>>> cost<<< of service
+  13. [act=0.594]   high school last year they've been instrumental and refurb>>>ishing<<< the fitness center at bhs as well as doing
+  14. [act=0.540]   and ninety nine will go monkey kidney tissue first carefully>>> minced<<< by hand
+  15. [act=0.502]  okay you're renting a>>> house<<< yes
+  16. [act=0.488]   modular spaces behind the high school and we will expand>>> to<<< move into three more spaces utilizing all the space behind
+  17. [act=0.487]  so one example i drove from in another>>> rental<<< tesla from frisco in colorado down
+  18. [act=0.346]  and just to talk about li>>>em<<<ba to start with cause while i recently saw the
+  19. [act=0.299]  and so that analysis you know will supplement the cost>>> of<<< service
+  20. [act=0.256]   year or transfer whatever we over collected through ppt>>> to<<< raise stabilization fund and just to keep the rate more
+  21. [act=0.242]   what kind of questions do people ask you well they>>> want<<< to know how fresh it is how long it's
+  22. [act=0.223]  i think probably the marquee programs that>>> got<<< probably the most airtime and the most press this
+  23. [act=0.132]   a case from the court of appeals city of be>>>aum<<<ont and texas court of appeals
+
+Most frequent activating tokens (top 10): "a", "to", "purchase", "cheap", "leased", "renting", "refurb", "replaced", "manufacturer", "switching"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Acquisition Concept",
+  "explanation": "The feature detects words related to obtaining or transferring ownership, such as purchasing, leasing, renting, and replacing, indicating a concept related to acquisition or transfer of goods and services",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 387a0e65-d0ab-440a-84d0-a99b0e6d40ae
+FEATURE 6068
+USER PROMPT:
+Feature index: 6068
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 13 activating examples (ordered strongest first):
+   1. [act=3.470]  as joe already mentioned we were fortunate>>> enough<<< to pick up a double oven pizza oven and our
+   2. [act=1.604]   instance but in the film you go into some more>>> detail<<<
+   3. [act=1.348]   three per one hundred thousand while among the unvacc>>>inated<<< their attack rate was two hundred and ninety two for
+   4. [act=1.334]   that dominic mentioned and superintendent spring we're very>>> excited<<< to be able to look at the facility that is
+   5. [act=1.283]  and the manufacturing sector accounts>>> for<<< eighty of our country's exports and ninety of our
+   6. [act=1.255]  but we're>>> thrilled<<< to death to be part of a ninety where you
+   7. [act=1.219]   do they really understand and walk the teacher's shoes>>> okay<<< and plan for a whole day
+   8. [act=0.604]   hoskins plan that comes down that's shown>>> on<<< the overhead is that already there that road already built
+   9. [act=0.521]   wind class ii recs are hydro and alternative rec>>>s<<< call it class iii for ease of conversation
+  10. [act=0.267]  and listen i understand you're contr>>>ite<<< and you understand the mistake but we have rules and
+  11. [act=0.180]   for quote its share of the project costs but nowhere>>> either<<< in the pleadings or in the agreement does north
+  12. [act=0.160]   capacity market charges and transmission charges rates for the period>>> starting<<< two thousand and thirteen up to two thousand and twenty
+  13. [act=0.150]   of serving with william monaghan who had been>>> on<<< the board for i don't know probably twenty years
+
+Most frequent activating tokens (top 10): "on", "enough", "detail", "inated", "excited", "for", "thrilled", "okay", "s", "ite"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Emphasis or extent",
+  "explanation": "The feature detects words that indicate degree, emphasis, or extent, such as 'enough', 'detail', 'excited', and 'thrilled'.",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID f0d9a6df-29a8-47a2-8508-10a167808de3
+FEATURE 4212
+USER PROMPT:
+Feature index: 4212
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 21 activating examples (ordered strongest first):
+   1. [act=2.428]   what what tends to detract from that is that people>>> worry<<< about running out of juice and that's really shouldn
+   2. [act=1.176]   of lewis carroll's alice in>>> wonder<<<land to make alice's bathrobe
+   3. [act=1.120]  and so i because she loved the medium so>>> much<<< i knew that when i wanted to tell our story
+   4. [act=0.965]  a township organized on october>>> 20<<<th one thousand eight hundred and fifty eight in the
+   5. [act=0.951]  th or august 27th well we should just>>> if<<< chris is going to be out perhaps out
+   6. [act=0.918]  they would i imagine they probably were>>> involved<<< in helping each other build buildings
+   7. [act=0.708]  g in this room a lot of>>> anxiety<<< for these kids christofori with the line
+   8. [act=0.613]  so north presidio instead of>>> engaging<<< on these key terms it turns instead to the spirit
+   9. [act=0.586]  i don't>>> know<<< about you but for me to really learn either a
+  10. [act=0.487]  the decision by the school committee was not>>> taken<<< lightly and i believe as i sat at the table
+  11. [act=0.455]   work the day i cut up a cheap paperback copy>>> of<<< lewis carroll's alice in wonder
+  12. [act=0.446]   at belmont high school last year they've been>>> instrumental<<< and refurbishing the fitness center at bhs as
+  13. [act=0.442]   here in you know recently but there's not a>>> lot<<< of variances being granted on new developments
+  14. [act=0.347]  g in this room a lot of anxiety>>> for<<< these kids christofori with the line drive
+  15. [act=0.298]  a township organized on october 20>>>th<<< one thousand eight hundred and fifty eight in the home
+  16. [act=0.274]   spoke about the fact that the boosters have kicked in>>> and<<< helped out for example with the floor project at bel
+  17. [act=0.255]  let me interrupt for a moment ste>>>ve<<< we've got i think the final precinct is in
+  18. [act=0.224]  do parents have an opportunity in the>>> process<<< are they can they be part of the committee yes
+  19. [act=0.192]   him in on july 30th or august>>> 27<<<th well we should just if chris is going
+  20. [act=0.171]  and so i because she loved the medium>>> so<<< much i knew that when i wanted to tell our
+  21. [act=0.150]   paperback copy of lewis carroll's al>>>ice<<< in wonderland to make alice's bathrobe
+
+Most frequent activating tokens (top 10): "worry", "wonder", "much", "20", "if", "involved", "anxiety", "engaging", "know", "taken"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Emotional State",
+  "explanation": "The feature detects words related to emotions, uncertainty, and mental states, such as worry, wonder, anxiety, and knowing",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 8f955893-a327-4bd9-a370-636b920d5da1
+FEATURE 5164
+USER PROMPT:
+Feature index: 5164
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 25 activating examples (ordered strongest first):
+   1. [act=2.079]   else we need to do to protect ourselves against this>>> affecting<<< future auctions is there anything that can be done or
+   2. [act=1.076]  therefore staff's recommending>>> that<<< the planning commission approve recommend council approve the champion cap
+   3. [act=0.993]   one collector one overseer of the poor two const>>>ables<<< two justices of the peace as many overseers of
+   4. [act=0.988]  th from one hundred to four hundred at the c>>>hen<<<ery middle school
+   5. [act=0.961]   how fresh it is how long it's gonna last>>> what<<<'s the best way to keep it
+   6. [act=0.951]   a few words about some of the architectural points of>>> interest<<< about the building they always call it a round church
+   7. [act=0.832]  is there anything else we>>> need<<< to do to protect ourselves against this affecting future auctions
+   8. [act=0.775]  therefore staff's>>> recommending<<< that the planning commission approve recommend council approve the champion
+   9. [act=0.758]   lots and parcels be approved subject to those nine conditions>>> that<<< are listed in my report
+  10. [act=0.624]   terms of i should state in terms of infrastructure standpoint>>> bel<<<mont light could support really whatever you'd like to
+  11. [act=0.607]  and so what kind of>>> questions<<< do people ask you well they want to know how
+  12. [act=0.581]  's a pretty significant drop off on the back on>>> that<<< street
+  13. [act=0.580]  and so>>> that<<< analysis you know will supplement the cost of service
+  14. [act=0.405]  what's your>>> preference<<< for el back to bring him in on july
+  15. [act=0.385]  yeah once again i'm a huge>>> advocate<<<
+  16. [act=0.368]   based on those figures you know we've forecast the>>> expenses<<<
+  17. [act=0.273]   constables two justices of the peace as many overse>>>ers<<< of roads as there are road districts in the town
+  18. [act=0.239]  but i'm a little too oldfashioned for>>> that<<< and i didn't really find the voice until i
+  19. [act=0.225]   protect ourselves against this affecting future auctions is there anything>>> that<<< can be done or is this just anyone who is
+  20. [act=0.215]  and also>>> bel<<<mont drive's electric is having its next drive event
+  21. [act=0.214]  i>>> believe<<< in sort of that vertical chain
+  22. [act=0.187]   with the same exact thing with no ability to ins>>>ulate<<< yourself from
+  23. [act=0.179]  is there anything else we need to do to>>> protect<<< ourselves against this affecting future auctions is there anything that
+  24. [act=0.131]   take the form of like maus or the fun>>> home<<< or persepolis just in straight graphic narrative
+  25. [act=0.131]   two votes versus a one thousand four hundred and twenty>>> eight<<< votes for the alexandra rubin
+
+Most frequent activating tokens (top 10): "that", "bel", "affecting", "ables", "hen", "what", "interest", "need", "recommending", "questions"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Indirect Object Reference",
+  "explanation": "The feature detects instances where a sentence or phrase refers to an indirect object, often introduced by words like 'that', 'what', or 'which', indicating a semantic concept of referencing or pointing to something",
+  "confidence": "medium"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 89c75903-ca2a-4bf0-bcbc-e367c84136ff
+FEATURE 5164
+USER PROMPT:
+Feature index: 5164
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 21 activating examples (ordered strongest first):
+   1. [act=9.598]  aniel yes and he he was saying one of his>>> concerns<<< was that the the voice of youth is not being
+   2. [act=9.259]  due to the fact that safety issues are a>>> concern<<< as over sixteen thousand voters revolve through the three
+   3. [act=8.672]   set up if considering the time well i'm more>>> concerned<<< the timeframe because if you set up a formal committee
+   4. [act=8.382]   of juice and that's really shouldn't be a>>> concern<<<
+   5. [act=6.429]   what what tends to detract from that is that people>>> worry<<< about running out of juice and that's really shouldn
+   6. [act=5.729]   think in our lifetime we're not gonna have to>>> worry<<< about either roof that's our plan
+   7. [act=3.719]  so she sends her>>> condolences<<< got torn into one of those last minute urgent meetings
+   8. [act=2.861]  g in this room a lot of>>> anxiety<<< for these kids christofori with the line
+   9. [act=2.558]   ask if you are elected what is your first legislative>>> priority<<< that you would bring to the to the floor of
+  10. [act=2.517]   and particularly to the business owners and particularly through fox>>> cares<<< everyone will would know
+  11. [act=2.502]  there's also sort of big picture>>> considerations<<<
+  12. [act=2.235]   yes and he he was saying one of his concerns>>> was<<< that the the voice of youth is not being heard
+  13. [act=2.047]  i think one of the>>> alarming<<< things was the sheer number of violations
+  14. [act=1.878]   that dominic mentioned and superintendent spring we're very>>> excited<<< to be able to look at the facility that is
+  15. [act=1.854]   that affirming of her reality kept her from getting>>> agitated<<<
+  16. [act=1.804]  we are a member of fox>>> cares<<<
+  17. [act=1.730]  aside from that this this case>>> involves<<< an abuse of discretion standard of review judge jul
+  18. [act=1.723]  the two proposed amendments are both>>> controversial<<< but beyond that they are quite dissimilar
+  19. [act=1.707]   at the trial court level also show that it was>>> raised<<<
+  20. [act=1.621]  and so there was some litigation>>> involved<<< with that where there was some market manipulation and threats
+  21. [act=1.565]   but schenectady county community colleges is really>>> thrilled<<< to be part of this week
+
+Most frequent activating tokens (top 10): "concern", "worry", "cares", "concerns", "concerned", "condolences", "anxiety", "priority", "considerations", "was"
+
+
+Based on these examples, what concept does this SAE feature detect?
+
+RESPONSE:
+{
+  "label": "Emotional Distress Concept",
+  "explanation": "The feature detects words related to worries, concerns, and emotional distress, indicating a semantic concept of negative emotional states or troubles",
+  "confidence": "high"
+}
+================================================================================
+
+================================================================================
+REQUEST_ID 23d6f803-258b-4ea0-859d-96244e1cd5cf
+FEATURE 1405
+USER PROMPT:
+Feature index: 1405
+
+The feature most strongly activates on the following tokens and their surrounding context.
+The activating token is marked with >>> <<< to help you focus on it.
+
+Top 40 activating examples (ordered strongest first):
+   1. [act=18.164]   tends to detract from that is that people worry about>>> running<<< out of juice and that's really shouldn't be
+   2. [act=17.192]  you know we>>> ran<<< a really hard campaign
+   3. [act=10.021]   both our boys and girls basketball teams both had great>>> runs<<< in the tournament
+   4. [act=4.897]  you know we ran>>> a<<< really hard campaign
+   5. [act=2.891]  you know we ran a really hard>>> campaign<<<
+   6. [act=1.892]  you know we ran a>>> really<<< hard campaign
+   7. [act=1.799]   on the gas car it you shouldn't be id>>>ling<<< for a long times before you go right
+   8. [act=1.573]   i just want to be clear on this point this>>> execution<<< was required
+   9. [act=1.538]  you know we ran a really>>> hard<<< campaign
+  10. [act=1.431]  and and so it's hard to do forty>>> miles<<< a day right yeah so yeah so so it's
+  11. [act=1.281]   and really waging what i thought was a very good>>> campaign<<<
+  12. [act=1.265]  and that's because you learn to to just>>> drive<<< with one foot
+  13. [act=1.191]  she was kind of>>> floating<<< in a different world
+  14. [act=1.151]   the fun home or persepolis just in>>> straight<<< graphic narrative form
+  15. [act=1.126]   the chef series as well as when we do the>>> salsa<<< showdown
+  16. [act=1.072]   you make jewelry also i do i have a small>>> car<<< so i thought what can i bring that doesn't
+  17. [act=1.061]  i think probably the marquee>>> programs<<< that got probably the most airtime and the most
+  18. [act=1.009]   27th well we should just if chris is>>> going<<< to be out perhaps out
+  19. [act=1.009]   her a lot of credit for stepping in and really>>> waging<<< what i thought was a very good campaign
+  20. [act=0.893]  two fifty four to>>> go<<< on the first period
+  21. [act=0.854]  's just these are very battery the battery is not>>> going<<< to have to be replaced
+  22. [act=0.844]  is there anything else we need to do to protect>>> ourselves<<< against this affecting future auctions is there anything that can
+  23. [act=0.799]  three waiver by american family insurance not over>>> filing<<< it's declaratory judgment action
+  24. [act=0.795]   looks like we have a definite winner in mark the>>> incumbent<<< mark paolillo to one thousand four hundred and
+  25. [act=0.794]   i mean the end of july is is the>>> best<<< time for me i learned
+  26. [act=0.790]   maus or the fun home or persep>>>olis<<< just in straight graphic narrative form
+  27. [act=0.751]   to detract from that is that people worry about running>>> out<<< of juice and that's really shouldn't be a
+  28. [act=0.717]   mean the end of july is is the best>>> time<<< for me i learned
+  29. [act=0.671]  so one example i>>> drove<<< from in another rental tesla from frisco
+  30. [act=0.639]   gear or new software i need a project to sink>>> my<<< teeth into
+  31. [act=0.592]  the decision by the school committee was not taken>>> lightly<<< and i believe as i sat at the table it
+  32. [act=0.587]   eighty miles doesn't work for me but actually eighty>>> miles<<< works for almost all
+  33. [act=0.580]   and fifty eight in the home of thomas r>>>ams<<<den
+  34. [act=0.570]   would think congratulations to mark and congratulations to alex>>>andra<<< who did at least in this man's opinion surprisingly
+  35. [act=0.564]   one of the older buildings relative to its heating and>>> air<<< conditioning systems
+  36. [act=0.559]   recognizes a no school day for next year's national>>> election<<<
+  37. [act=0.535]  it's a pretty>>> tight<<< space you're building on lot two though right because
+  38. [act=0.529]   the same exact thing with no ability to insulate>>> yourself<<< from
+  39. [act=0.515]  then and thereafter there was no need to later>>> file<<< the policy as a trial exhibit on july thirty
+  40. [act=0.412]   the friends of groups and the boosters are to the>>> programming<<< at belmont high
 
 Most frequent activating tokens (top 7): "church", "christ", "service", "churches", "saint", "priest", "ods"
 
@@ -1245,3 +1979,10 @@ Most frequent activating tokens (top 10): "that", "for", "and", "of", "one", "a"
 
 Based on these examples, what concept does this SAE feature detect?
 
+RESPONSE:
+{
+  "label": "Motion and Progress",
+  "explanation": "The feature detects words related to movement, progression, and continuation, such as 'running', 'going', 'miles', and 'campaign', indicating a concept of motion and progress",
+  "confidence": "high"
+}
+================================================================================
