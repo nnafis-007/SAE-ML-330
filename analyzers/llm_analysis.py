@@ -402,18 +402,22 @@ class FeatureLabeler:
         """
         cfg = self.cfg
         n_tokens = int(activations.shape[0])
+        stream_start = time.time()
 
-        # Accumulators
-        # Use a heap to keep track of top K efficiently.
-        # Heap stores tuples: (activation_value, unique_id, TokenContext)
-        # unique_id breaks ties and ensures stable sorting.
-        feature_heaps: Dict[int, List[Tuple[float, int, TokenContext]]] = {
+        # Use a heap to keep track of top-K efficiently.
+        # Heap entries are (activation_value, unique_id, row_idx).
+        # unique_id breaks ties and ensures stable ordering.
+        feature_heaps: Dict[int, List[Tuple[float, int, int]]] = {
             idx: [] for idx in feature_indices
         }
+        candidate_counts: Dict[int, int] = {idx: 0 for idx in feature_indices}
+        threshold_counts: Dict[int, int] = {idx: 0 for idx in feature_indices}
         global_activation_sums = torch.zeros(self.sae.d_hidden) if cfg.include_global_top_features else None
 
         batch_size = cfg.batch_size
         uid_counter = 0
+        keep_all = cfg.top_k is None or int(cfg.top_k) <= 0
+        top_k_limit = None if keep_all else int(cfg.top_k)
 
         LOGGER.info(
             "Streaming SAE encoding | tokens=%d batch_size=%d features=%d",
@@ -430,16 +434,105 @@ class FeatureLabeler:
             batch_normed = self._apply_activation_normalization(batch_acts, norm_stats)
 
             # Encode
-            z = self.sae.encode(batch_normed) # (Batch, d_hidden)
-            latents_list.append(z.cpu())
-            
-        all_latents = torch.cat(latents_list, dim=0)
+            z = self.sae.encode(batch_normed).detach().cpu()  # (Batch, d_hidden)
+
+            if global_activation_sums is not None:
+                global_activation_sums += z.sum(dim=0)
+
+            row_indices = torch.arange(start, end, dtype=torch.long)
+            if cfg.skip_first_token:
+                valid_mask = torch.tensor(
+                    [token_pos_map[i] > 0 for i in range(start, end)],
+                    dtype=torch.bool,
+                )
+                if not bool(valid_mask.any()):
+                    continue
+                row_indices = row_indices[valid_mask]
+                z = z[valid_mask]
+
+            if row_indices.numel() == 0:
+                continue
+
+            for feat_idx in feature_indices:
+                feat_vals = z[:, feat_idx]
+                candidate_counts[feat_idx] += int(feat_vals.numel())
+
+                if cfg.min_activation > 0:
+                    act_mask = feat_vals > cfg.min_activation
+                    if not bool(act_mask.any()):
+                        continue
+                    feat_vals = feat_vals[act_mask]
+                    rows = row_indices[act_mask]
+                else:
+                    rows = row_indices
+
+                threshold_counts[feat_idx] += int(feat_vals.numel())
+
+                heap = feature_heaps[feat_idx]
+                if keep_all:
+                    for val, row_idx in zip(feat_vals.tolist(), rows.tolist()):
+                        heap.append((float(val), uid_counter, int(row_idx)))
+                        uid_counter += 1
+                    continue
+
+                for val, row_idx in zip(feat_vals.tolist(), rows.tolist()):
+                    item = (float(val), uid_counter, int(row_idx))
+                    uid_counter += 1
+                    if len(heap) < top_k_limit:
+                        heapq.heappush(heap, item)
+                    elif item[0] > heap[0][0]:
+                        heapq.heapreplace(heap, item)
+
+        feature_contexts: Dict[int, List[TokenContext]] = {idx: [] for idx in feature_indices}
+        for feat_idx in feature_indices:
+            ranked = sorted(feature_heaps[feat_idx], key=lambda x: x[0], reverse=True)
+            contexts: List[TokenContext] = []
+            seen_contexts = set()
+
+            for val, _, row_idx in ranked:
+                doc_id = token_doc_map[row_idx]
+                pos = token_pos_map[row_idx]
+                toks = token_ids[doc_id]
+
+                lo = max(0, pos - cfg.context_window)
+                hi = min(len(toks), pos + cfg.context_window + 1)
+
+                prefix_text = self.tokenizer.decode(toks[lo:pos], skip_special_tokens=True)
+                target_text = self.tokenizer.decode(toks[pos:pos + 1], skip_special_tokens=True)
+                suffix_text = self.tokenizer.decode(toks[pos + 1:hi], skip_special_tokens=True)
+
+                context_str = f"{prefix_text}>>>{target_text}<<<{suffix_text}"
+                token_s = target_text.strip()
+                dedupe_key = (token_s, context_str)
+                if dedupe_key in seen_contexts:
+                    continue
+
+                seen_contexts.add(dedupe_key)
+                contexts.append(
+                    TokenContext(
+                        token=token_s,
+                        context=context_str,
+                        activation_value=float(val),
+                    )
+                )
+
+            feature_contexts[feat_idx] = contexts
+            LOGGER.info(
+                "Feature %d filtering | candidates=%d thresholded=%d top_k=%s selected=%d deduped=%d",
+                feat_idx,
+                candidate_counts[feat_idx],
+                threshold_counts[feat_idx],
+                cfg.top_k,
+                len(ranked),
+                len(contexts),
+            )
+
         LOGGER.info(
-            "Finished latent encoding | shape=%s elapsed_sec=%.2f",
-            tuple(all_latents.shape),
-            time.time() - start_time,
+            "Finished streaming collection | features=%d elapsed_sec=%.2f",
+            len(feature_indices),
+            time.time() - stream_start,
         )
-        return all_latents
+        return feature_contexts, global_activation_sums
 
     def _collect_contexts_from_latents(
         self,
@@ -497,13 +590,13 @@ class FeatureLabeler:
             pos = token_pos_map[row_idx]
             toks = token_ids[doc_id]
 
-                    cw = cfg.context_window
-                    lo = max(0, pos - cw)
-                    hi = min(len(toks), pos + cw + 1)
+            cw = cfg.context_window
+            lo = max(0, pos - cw)
+            hi = min(len(toks), pos + cw + 1)
 
-                    prefix_text = self.tokenizer.decode(toks[lo:pos], skip_special_tokens=True)
-                    target_text = self.tokenizer.decode(toks[pos:pos + 1], skip_special_tokens=True)
-                    suffix_text = self.tokenizer.decode(toks[pos + 1:hi], skip_special_tokens=True)
+            prefix_text = self.tokenizer.decode(toks[lo:pos], skip_special_tokens=True)
+            target_text = self.tokenizer.decode(toks[pos:pos + 1], skip_special_tokens=True)
+            suffix_text = self.tokenizer.decode(toks[pos + 1:hi], skip_special_tokens=True)
 
             context_str = f"{prefix_text}>>>{target_text}<<<{suffix_text}"
 
