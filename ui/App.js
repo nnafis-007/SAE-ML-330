@@ -13,6 +13,8 @@ const API_BASE = 'http://localhost:8000';
 const TAB_SAE = 'sae';
 const TAB_FEATURE_MAP = 'feature-map';
 const TAB_FEATURE_TRACE = 'feature-trace';
+const TAB_LABELED_FEATURES = 'labeled-features';
+const LABELED_FEATURES_PAGE_SIZE = 20;
 
 function sanitizeDecimalInput(value) {
   const cleaned = (value || '').replace(/[^0-9.]/g, '');
@@ -91,6 +93,33 @@ function SmallFeatureChip({ feat, onPress, styles }) {
   );
 }
 
+function LabeledFeatureRow({ feat, onPress, styles }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <View style={styles.labeledFeatureRowWrap}>
+      <TouchableOpacity
+        style={[styles.labeledFeatureRow, hovered && styles.labeledFeatureRowHovered]}
+        onPress={onPress}
+        {...(Platform.OS === 'web' ? {
+          onMouseEnter: () => setHovered(true),
+          onMouseLeave: () => setHovered(false),
+        } : {})}
+      >
+        <Text style={styles.labeledFeatureId}>#{feat.feature_id}</Text>
+        <Text style={styles.labeledFeatureLabel} numberOfLines={1}>{feat.label || `Feature ${feat.feature_id}`}</Text>
+      </TouchableOpacity>
+
+      {hovered && Platform.OS === 'web' && (
+        <View style={styles.labeledFeatureHoverBox}>
+          <Text style={styles.tooltipTitle}>Feature #{feat.feature_id}</Text>
+          <Text style={styles.tooltipDesc}>{feat.description || 'No description available.'}</Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
 export default function App() {
   const [themeMode, setThemeMode] = useState('light');
   const C = themeMode === 'light' ? LIGHT_THEME : DARK_THEME;
@@ -148,6 +177,10 @@ export default function App() {
   const [traceError, setTraceError] = useState(null);
   const [traceResult, setTraceResult] = useState(null);
   const [traceHoveredIndex, setTraceHoveredIndex] = useState(null);
+  const [labeledFeaturesLoading, setLabeledFeaturesLoading] = useState(false);
+  const [labeledFeaturesError, setLabeledFeaturesError] = useState(null);
+  const [labeledFeatures, setLabeledFeatures] = useState([]);
+  const [labeledFeaturesPage, setLabeledFeaturesPage] = useState(1);
 
   const { width } = useWindowDimensions();
   const isLargeScreen = width > 768;
@@ -471,6 +504,23 @@ export default function App() {
     ? (visibleFeatureCount ? activeToken.features.slice(0, visibleFeatureCount) : activeToken.features)
     : [];
 
+  const sortedLabeledFeatures = useMemo(() => {
+    return [...labeledFeatures].sort((a, b) => Number(a.feature_id) - Number(b.feature_id));
+  }, [labeledFeatures]);
+
+  const labeledFeaturesTotalPages = Math.max(1, Math.ceil(sortedLabeledFeatures.length / LABELED_FEATURES_PAGE_SIZE));
+
+  const pagedLabeledFeatures = useMemo(() => {
+    const start = (labeledFeaturesPage - 1) * LABELED_FEATURES_PAGE_SIZE;
+    return sortedLabeledFeatures.slice(start, start + LABELED_FEATURES_PAGE_SIZE);
+  }, [sortedLabeledFeatures, labeledFeaturesPage]);
+
+  useEffect(() => {
+    if (labeledFeaturesPage > labeledFeaturesTotalPages) {
+      setLabeledFeaturesPage(1);
+    }
+  }, [labeledFeaturesPage, labeledFeaturesTotalPages]);
+
   const runSentenceFeatureTrace = async () => {
     if (!selectedModel) {
       setTraceError('Please select a model first.');
@@ -521,6 +571,40 @@ export default function App() {
       setTraceLoading(false);
     }
   };
+
+  const loadLabeledFeatures = async () => {
+    if (!selectedModel) {
+      setLabeledFeaturesError('Please select a model first.');
+      setLabeledFeatures([]);
+      return;
+    }
+
+    setLabeledFeaturesLoading(true);
+    setLabeledFeaturesError(null);
+    try {
+      const response = await fetch(`${API_BASE}/labeled-features?model_id=${encodeURIComponent(selectedModel)}`);
+      if (!response.ok) {
+        const err = await response.json().catch(() => ({}));
+        throw new Error(err.detail || 'Failed to load labeled features');
+      }
+
+      const payload = await response.json();
+      setLabeledFeatures(payload.features || []);
+      setLabeledFeaturesPage(1);
+    } catch (e) {
+      setLabeledFeaturesError(e.message);
+      setLabeledFeatures([]);
+      setLabeledFeaturesPage(1);
+    } finally {
+      setLabeledFeaturesLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab === TAB_LABELED_FEATURES && selectedModel) {
+      loadLabeledFeatures();
+    }
+  }, [activeTab, selectedModel]);
 
   const lookupTraceFeatureInfo = async () => {
     if (!selectedModel) {
@@ -599,6 +683,7 @@ export default function App() {
             { id: TAB_SAE, label: 'SAE ANALYSIS', icon: '⬡' },
             { id: TAB_FEATURE_MAP, label: 'FEATURE MAP', icon: '◎' },
             { id: TAB_FEATURE_TRACE, label: 'FEATURE TRACE', icon: '◍' },
+            { id: TAB_LABELED_FEATURES, label: 'LABELED FEATURES', icon: '◈' },
           ].map(tab => (
             <TouchableOpacity
               key={tab.id}
@@ -973,23 +1058,19 @@ export default function App() {
                     Label features with LLM using either a range or individual feature IDs. Each successful feature is written to the model-specific label JSON file.
                   </Text>
 
-                  <View style={styles.featureMapModeSwitch}>
-                    <TouchableOpacity
-                      style={[styles.featureMapModeBtn, bulkSelectionMode === 'range' && styles.featureMapModeBtnActive]}
-                      onPress={() => setBulkSelectionMode('range')}
-                    >
-                      <Text style={[styles.featureMapModeText, bulkSelectionMode === 'range' && styles.featureMapModeTextActive]}>
-                        RANGE
-                      </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={[styles.featureMapModeBtn, bulkSelectionMode === 'individual' && styles.featureMapModeBtnActive]}
-                      onPress={() => setBulkSelectionMode('individual')}
-                    >
-                      <Text style={[styles.featureMapModeText, bulkSelectionMode === 'individual' && styles.featureMapModeTextActive]}>
-                        INDIVIDUAL IDS
-                      </Text>
-                    </TouchableOpacity>
+                  <View style={styles.bulkSelectionModeField}>
+                    <Text style={styles.lookupFieldLabel}>SELECTION MODE</Text>
+                    <View style={styles.bulkSelectionModePickerWrap}>
+                      <Picker
+                        selectedValue={bulkSelectionMode}
+                        onValueChange={setBulkSelectionMode}
+                        style={styles.bulkSelectionModePicker}
+                        itemStyle={styles.pickerItem}
+                      >
+                        <Picker.Item label="RANGE" value="range" />
+                        <Picker.Item label="INDIVIDUAL IDS" value="individual" />
+                      </Picker>
+                    </View>
                   </View>
 
                   <View style={styles.lookupGrid}>
@@ -1130,6 +1211,94 @@ export default function App() {
                 </View>
               )}
 
+            </View>
+          </View>
+        )}
+
+        {/* ===================== LABELED FEATURES TAB ===================== */}
+        {activeTab === TAB_LABELED_FEATURES && (
+          <View style={styles.contentContainer}>
+            <View style={styles.panel}>
+              <View style={styles.sectionLabelRow}>
+                <View style={[styles.sectionDot, { backgroundColor: C.yellow }]} />
+                <Text style={styles.sectionLabel}>PERSISTED FEATURE LABELS</Text>
+                <TouchableOpacity
+                  style={[styles.secondaryButton, labeledFeaturesLoading && styles.analyzeButtonDisabled, { marginLeft: 'auto' }]}
+                  onPress={loadLabeledFeatures}
+                  disabled={labeledFeaturesLoading}
+                >
+                  <Text style={styles.secondaryButtonText}>REFRESH</Text>
+                </TouchableOpacity>
+              </View>
+
+              <Text style={styles.lookupHint}>
+                Showing labels stored in logs for the selected model, sorted by feature ID. Hover a row to see its description.
+              </Text>
+
+              {labeledFeaturesLoading && (
+                <View style={styles.lookupResultsMeta}>
+                  <Text style={styles.lookupResultsMetaText}>Loading labeled features...</Text>
+                </View>
+              )}
+
+              {labeledFeaturesError && (
+                <View style={styles.errorBox}>
+                  <Text style={styles.errorLabel}>⚠ LOAD ERROR</Text>
+                  <Text style={styles.errorText}>{labeledFeaturesError}</Text>
+                </View>
+              )}
+
+              {!labeledFeaturesLoading && !labeledFeaturesError && sortedLabeledFeatures.length === 0 && (
+                <View style={styles.emptyState}>
+                  <Text style={styles.emptyStateText}>No labeled features found for this model yet.</Text>
+                </View>
+              )}
+
+              {!labeledFeaturesLoading && sortedLabeledFeatures.length > 0 && (
+                <View style={styles.lookupResults}>
+                  <View style={styles.lookupResultsHeader}>
+                    <Text style={styles.lookupResultsTitle}>LABELED FEATURES ({sortedLabeledFeatures.length})</Text>
+                    <Text style={styles.lookupResultsMetaText}>Model: {selectedModel}</Text>
+                  </View>
+
+                  <View style={styles.labeledFeaturesList}>
+                    {pagedLabeledFeatures.map((feat) => (
+                      <LabeledFeatureRow
+                        key={feat.feature_id}
+                        feat={feat}
+                        styles={styles}
+                        onPress={() => setSelectedFeature({
+                          id: feat.feature_id,
+                          name: feat.label,
+                          description: feat.description,
+                        })}
+                      />
+                    ))}
+                  </View>
+
+                  <View style={styles.labeledFeaturesPagination}>
+                    <TouchableOpacity
+                      style={[styles.secondaryButton, labeledFeaturesPage <= 1 && styles.analyzeButtonDisabled]}
+                      onPress={() => setLabeledFeaturesPage((p) => Math.max(1, p - 1))}
+                      disabled={labeledFeaturesPage <= 1}
+                    >
+                      <Text style={styles.secondaryButtonText}>PREV</Text>
+                    </TouchableOpacity>
+
+                    <Text style={styles.lookupResultsMetaText}>
+                      Page {labeledFeaturesPage} / {labeledFeaturesTotalPages}
+                    </Text>
+
+                    <TouchableOpacity
+                      style={[styles.secondaryButton, labeledFeaturesPage >= labeledFeaturesTotalPages && styles.analyzeButtonDisabled]}
+                      onPress={() => setLabeledFeaturesPage((p) => Math.min(labeledFeaturesTotalPages, p + 1))}
+                      disabled={labeledFeaturesPage >= labeledFeaturesTotalPages}
+                    >
+                      <Text style={styles.secondaryButtonText}>NEXT</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )}
             </View>
           </View>
         )}
@@ -2017,6 +2186,22 @@ const createStyles = (C) => StyleSheet.create({
   featureMapModeTextActive: {
     color: C.cyan,
   },
+  bulkSelectionModeField: {
+    marginBottom: 12,
+    maxWidth: 360,
+  },
+  bulkSelectionModePickerWrap: {
+    borderWidth: 1,
+    borderColor: C.border,
+    borderRadius: 2,
+    backgroundColor: C.bgCard,
+    overflow: 'hidden',
+  },
+  bulkSelectionModePicker: {
+    height: 42,
+    color: C.textPrimary,
+    backgroundColor: 'transparent',
+  },
   traceGrid: {
     gap: 16,
   },
@@ -2121,6 +2306,63 @@ const createStyles = (C) => StyleSheet.create({
     fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
     fontSize: 10,
     color: C.textMuted,
+  },
+  labeledFeaturesList: {
+    backgroundColor: C.bgPanel,
+    padding: 12,
+  },
+  labeledFeatureRowWrap: {
+    marginBottom: 8,
+  },
+  labeledFeatureRow: {
+    backgroundColor: C.bgCard,
+    borderWidth: 1,
+    borderColor: C.border,
+    borderLeftWidth: 3,
+    borderLeftColor: C.cyan,
+    borderRadius: 3,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  labeledFeatureRowHovered: {
+    backgroundColor: C.bgCardHover,
+    borderColor: C.cyan + '88',
+  },
+  labeledFeatureId: {
+    fontFamily: Platform.OS === 'web' ? '"Courier New", monospace' : 'monospace',
+    fontSize: 10,
+    color: C.cyan,
+    fontWeight: '700',
+    minWidth: 64,
+  },
+  labeledFeatureLabel: {
+    flex: 1,
+    color: C.textPrimary,
+    fontSize: 13,
+    fontFamily: Platform.OS === 'web' ? 'Georgia, serif' : undefined,
+  },
+  labeledFeatureHoverBox: {
+    marginTop: 6,
+    marginLeft: 12,
+    marginRight: 12,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: C.yellow + '77',
+    borderRadius: 3,
+    backgroundColor: C.bgCard,
+  },
+  labeledFeaturesPagination: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12,
+    padding: 12,
+    borderTopWidth: 1,
+    borderTopColor: C.border,
+    backgroundColor: C.bgCard,
   },
   matchCard: {
     backgroundColor: C.bgPanel,

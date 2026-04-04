@@ -264,132 +264,874 @@
     "error": null
   },
   {
-    "timestamp": "2026-04-03T16:50:31.749679+00:00",
+    "timestamp": "2026-04-03T16:29:57.780350+00:00",
     "source": "ui",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 6068,
-    "label": "Preposition or Conjunction",
-    "explanation": "The feature activates on common prepositions and conjunctions that indicate relationships between words or phrases in a sentence",
+    "feature_idx": 3164,
+    "label": "Legal Terms",
+    "explanation": "The feature strongly activates on tokens related to legal concepts, such as 'fraud', 'connection', 'claim', and 'agreement', indicating that it detects legal terminology and ideas.",
     "confidence": "high",
-    "request_id": "0b879a28-264a-4833-8158-e554aaab49f2",
+    "request_id": "1d8f31b7-71d2-4501-bfe1-0e8f70b7dd90",
     "llm_activation_mode": "standardize",
     "top_tokens": [
-      "returned",
-      "in",
-      "used",
-      "okay",
-      "to"
+      "fraud",
+      "connection",
+      "overse",
+      "right",
+      "co",
+      "id",
+      "agenda",
+      "ve",
+      "rituals",
+      "news"
     ],
-    "prompt_examples_count": 5,
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 50,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 0.1,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T16:40:14.396112+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1985,
+    "label": "Legal Terms Detector",
+    "explanation": "The feature detects tokens related to legal terminology, such as 'declaratory', 'promissory', and 'judgment', which are commonly used in legal contexts",
+    "confidence": "high",
+    "request_id": "d98c02fe-4749-4a90-8e7b-a5cc3539674f",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "atory",
+      "san",
+      "ory",
+      "score",
+      "ster",
+      "sum",
+      "adjourn",
+      "withholding",
+      "gist",
+      "tasting"
+    ],
+    "prompt_examples_count": 19,
+    "corpus_texts_count": 29,
+    "labeling_config": {
+      "top_k": 75,
+      "skip_first_token": true,
+      "min_activation": 1.5,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T16:42:35.089133+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1985,
+    "label": "Legal Terms Detector",
+    "explanation": "The feature detects tokens related to legal terminology, such as 'declaratory', 'promissory', and 'estoppel'.",
+    "confidence": "high",
+    "request_id": "bd212a4a-911c-4f71-a1d6-ef500e08cdfe",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "atory",
+      "san",
+      "ory",
+      "withholding",
+      "highlights",
+      "score"
+    ],
+    "prompt_examples_count": 10,
+    "corpus_texts_count": 20,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 1.5,
+      "num_sentences": 1000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T16:45:24.038145+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 815,
+    "label": "Formal Language",
+    "explanation": "The feature activates on tokens related to formal or official language, such as 'modification', 'relate', and 'elaborate', which are often used in formal documents or professional settings",
+    "confidence": "high",
+    "request_id": "ccd5ce25-4549-4fa1-89c4-1bf18f4449df",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "overse",
+      "ve",
+      "modular",
+      "id",
+      "detail",
+      "elaborate",
+      "graphic",
+      "modification",
+      "relate",
+      "related"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 75,
+    "labeling_config": {
+      "top_k": 75,
+      "skip_first_token": true,
+      "min_activation": 0.1,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T16:48:48.377390+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3568,
+    "label": "Legal Proceedings",
+    "explanation": "The feature activates on tokens related to legal terminology, court proceedings, and judicial decisions, indicating it detects concepts related to legal proceedings",
+    "confidence": "high",
+    "request_id": "07fc7261-2ac5-4067-9068-45d8874752e2",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "capacity",
+      "judge",
+      "ry",
+      "appraisal",
+      "evaluation",
+      "think",
+      "judgment",
+      "mistake",
+      "count",
+      "atory"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 75,
+    "labeling_config": {
+      "top_k": 75,
+      "skip_first_token": true,
+      "min_activation": 0.1,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T16:51:42.846040+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3422,
+    "label": "Uncertainty Concept",
+    "explanation": "This feature detects words related to uncertainty, probability, and likelihood, indicating a semantic concept of uncertain or probable events",
+    "confidence": "high",
+    "request_id": "8660ba95-788c-42c3-8cd7-473f9efe731a",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "likely",
+      "probability",
+      "chance",
+      "possibility",
+      "rumored"
+    ],
+    "prompt_examples_count": 9,
     "corpus_texts_count": 10,
     "labeling_config": {
-      "top_k": 25,
+      "top_k": 50,
       "skip_first_token": true,
-      "min_activation": 1.5,
-      "num_sentences": 3500
+      "min_activation": 2,
+      "num_sentences": 2000
     },
     "error": null
   },
   {
-    "timestamp": "2026-04-03T16:51:35.853477+00:00",
+    "timestamp": "2026-04-03T16:57:36.911021+00:00",
     "source": "ui",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 6068,
-    "label": "Preposition Usage",
-    "explanation": "The feature detects the usage of prepositions such as 'in', 'to', and 'with' in various contexts",
+    "feature_idx": 3322,
+    "label": "Future Planning Action",
+    "explanation": "The feature detects instances where the text is discussing or referring to future actions, plans, or intentions, often indicated by the presence of words like 'looking' or 'look'",
     "confidence": "high",
-    "request_id": "13831d3d-865c-475c-88f0-e36b370d9db5",
+    "request_id": "c1b33821-ecdd-4c15-879d-334d30cd5363",
     "llm_activation_mode": "standardize",
     "top_tokens": [
-      "returned",
-      "in",
-      "used",
-      "okay",
-      "to"
+      "looking",
+      "look",
+      "looked",
+      "looks"
     ],
-    "prompt_examples_count": 5,
-    "corpus_texts_count": 10,
+    "prompt_examples_count": 27,
+    "corpus_texts_count": 32,
     "labeling_config": {
-      "top_k": 30,
+      "top_k": 75,
       "skip_first_token": true,
-      "min_activation": 1.5,
-      "num_sentences": 3500
+      "min_activation": 4,
+      "num_sentences": 2000
     },
     "error": null
   },
   {
-    "timestamp": "2026-04-03T16:55:52.306858+00:00",
+    "timestamp": "2026-04-03T17:02:44.665027+00:00",
     "source": "ui",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 1968,
-    "label": "Location or Position",
-    "explanation": "The feature detects the concept of location or position, as indicated by the frequent activation on tokens such as 'at' and 'this' in contexts that describe physical or metaphorical locations",
+    "feature_idx": 1343,
+    "label": "Interpersonal Connection",
+    "explanation": "This feature detects tokens related to collaborative or romantic relationships and partnerships",
     "confidence": "high",
-    "request_id": "6b59b0f8-ffdd-422f-9151-622101b97f01",
+    "request_id": "7d48d93c-a6bc-481e-aab4-138eec0c8216",
     "llm_activation_mode": "standardize",
     "top_tokens": [
-      "at",
-      "this"
+      "relationship",
+      "partnerships",
+      "partnership",
+      "partners"
     ],
-    "prompt_examples_count": 23,
-    "corpus_texts_count": 25,
+    "prompt_examples_count": 4,
+    "corpus_texts_count": 4,
     "labeling_config": {
-      "top_k": 25,
+      "top_k": 75,
       "skip_first_token": true,
-      "min_activation": 1.5,
-      "num_sentences": 3500
+      "min_activation": 4,
+      "num_sentences": 2000
     },
     "error": null
   },
   {
-    "timestamp": "2026-04-03T17:18:45.289704+00:00",
+    "timestamp": "2026-04-03T17:04:11.741600+00:00",
     "source": "ui",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
     "feature_idx": 1822,
-    "label": "Emotional Positivity",
-    "explanation": "The feature detects words and phrases that convey positive emotions, such as happiness, pleasure, and satisfaction, in the given text snippets",
+    "label": "Positive Emotion",
+    "explanation": "The feature activates on tokens and contexts that express happiness, joy, or satisfaction, indicating it detects positive emotional states",
     "confidence": "high",
-    "request_id": "285e1dc8-2fc5-46ca-b9b6-859acdc78e61",
+    "request_id": "d25f3540-e2a2-4450-b027-088f878891fd",
     "llm_activation_mode": "standardize",
     "top_tokens": [
+      "glad",
       "happy",
-      "pleased",
-      "comfortable",
-      "satisfaction",
       "pleasure",
-      "to",
-      "better",
-      "fun",
-      "miserable",
-      "compelling"
+      "thrilled",
+      "joy",
+      "satisfying",
+      "great",
+      "pleasant"
     ],
-    "prompt_examples_count": 15,
-    "corpus_texts_count": 20,
+    "prompt_examples_count": 19,
+    "corpus_texts_count": 23,
     "labeling_config": {
-      "top_k": 20,
+      "top_k": 50,
       "skip_first_token": true,
-      "min_activation": 1.5,
-      "num_sentences": 3500
+      "min_activation": 2.5,
+      "num_sentences": 2000
     },
     "error": null
   },
   {
-    "timestamp": "2026-04-03T17:20:18.065527+00:00",
+    "timestamp": "2026-04-03T17:06:20.802363+00:00",
     "source": "ui",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 2620,
-    "label": "Second Person Reference",
-    "explanation": "The feature detects the presence of the word 'you' in the input text, indicating a second-person reference or address",
+    "feature_idx": 32,
+    "label": "Legal Proceedings",
+    "explanation": "The feature activates on tokens related to court proceedings, such as witnesses, testimony, and examination, indicating a concept related to legal processes",
     "confidence": "high",
-    "request_id": "ea3ff243-018f-44ac-8048-69760c2c90fd",
+    "request_id": "06278e29-b4bb-4ec7-b102-6112e5ad9bb1",
     "llm_activation_mode": "standardize",
     "top_tokens": [
-      "you"
+      "witnesses",
+      "testimony",
+      "examination",
+      "testament"
+    ],
+    "prompt_examples_count": 5,
+    "corpus_texts_count": 4,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:07:53.763994+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1822,
+    "label": "Positive Emotion",
+    "explanation": "The feature detects words and phrases that express positive emotional states, such as happiness, gladness, and thrill",
+    "confidence": "high",
+    "request_id": "a746567a-7cf2-4532-b7e5-77f7013540d5",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "happy",
+      "glad",
+      "thrilled",
+      "pleasure",
+      "satisfying"
+    ],
+    "prompt_examples_count": 13,
+    "corpus_texts_count": 14,
+    "labeling_config": {
+      "top_k": 75,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:10:41.047020+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1507,
+    "label": "Expression of Acknowledgement",
+    "explanation": "This feature detects phrases that convey recognition, apology, or admission of something, indicating a sense of acknowledgement or acceptance.",
+    "confidence": "high",
+    "request_id": "40680b57-7bd9-4233-9bdf-794d34f17fdb",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "admitted",
+      "apologize",
+      "recognize",
+      "forget"
+    ],
+    "prompt_examples_count": 4,
+    "corpus_texts_count": 6,
+    "labeling_config": {
+      "top_k": 40,
+      "skip_first_token": true,
+      "min_activation": 2,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:16:04.307815+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 93,
+    "label": "Past Action Completion",
+    "explanation": "The feature detects verbs indicating completed actions or states, often in the past tense, such as 'done', 'set', 'picked', and 'kept'.",
+    "confidence": "high",
+    "request_id": "4cb2ac0f-76a3-42e5-bf21-2ee1f4e2ea95",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "done",
+      "set",
+      "picked",
+      "kept",
+      "taken",
+      "described",
+      "tested",
+      "admitted",
+      "compensated",
+      "minced"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 50,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 1,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:19:07.001188+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1504,
+    "label": "Asking Questions",
+    "explanation": "The feature detects instances where someone is inquiring or seeking information, often using words related to questioning or curiosity.",
+    "confidence": "high",
+    "request_id": "e76cb929-374f-4e52-abf3-df86bd3209d4",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "questions",
+      "question",
+      "ask",
+      "wondering",
+      "curious",
+      "asking",
+      "asked",
+      "inquiries",
+      "wonder"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 45,
+    "labeling_config": {
+      "top_k": 75,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:19:58.791652+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4928,
+    "label": "Project Development",
+    "explanation": "The feature detects contexts related to creating, improving, or implementing plans, projects, or products",
+    "confidence": "high",
+    "request_id": "bc1549f0-f88f-4c9d-84c4-602b76d4d8e8",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "developed",
+      "develop",
+      "developing",
+      "mold",
+      "test"
+    ],
+    "prompt_examples_count": 8,
+    "corpus_texts_count": 9,
+    "labeling_config": {
+      "top_k": 75,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:23:30.380163+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2873,
+    "label": "Numerical Quantity",
+    "explanation": "The feature activates on various numerical quantities, particularly those involving the word 'hundred', indicating it detects numerical values in text.",
+    "confidence": "high",
+    "request_id": "1ab32f01-42d4-4f7d-9f8f-c062d47683c6",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "hundred"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 70,
+    "labeling_config": {
+      "top_k": 75,
+      "skip_first_token": true,
+      "min_activation": 4,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:29:30.998069+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4467,
+    "label": "Government Institution",
+    "explanation": "The feature detects mentions of government or administrative bodies in the text",
+    "confidence": "high",
+    "request_id": "b04faf1e-fad3-425d-b2f5-3c3643d6ad3c",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "government",
+      "administration"
+    ],
+    "prompt_examples_count": 10,
+    "corpus_texts_count": 10,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 5,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:30:00.983568+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3000,
+    "label": "Language Concept",
+    "explanation": "This feature detects mentions of language or dialect in text, indicating a focus on linguistic or communication-related concepts.",
+    "confidence": "high",
+    "request_id": "301a4c0c-55be-46b8-a19e-15738e27fddf",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "language",
+      "dialect"
+    ],
+    "prompt_examples_count": 4,
+    "corpus_texts_count": 4,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 5,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:33:50.694138+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3425,
+    "label": "Legal Court Context",
+    "explanation": "The feature detects mentions of a court in a legal context, often referring to a court's decision, order, or proceedings",
+    "confidence": "high",
+    "request_id": "164c4c60-99db-4dce-b197-5ed2b1b7c06a",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "court"
+    ],
+    "prompt_examples_count": 25,
+    "corpus_texts_count": 24,
+    "labeling_config": {
+      "top_k": 75,
+      "skip_first_token": true,
+      "min_activation": 5,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T17:57:12.157236+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1496,
+    "label": "Prepositions and Articles",
+    "explanation": "The feature activates on a variety of prepositions and articles, such as 'the', 'in', 'on', 'to', and 'a', which are common function words in language",
+    "confidence": "high",
+    "request_id": "10534e81-d55d-4ee6-b843-f8f621801aff",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "the",
+      "round",
+      "two",
+      "like",
+      "done",
+      "'s",
+      "in",
+      "a",
+      "was",
+      "boys"
+    ],
+    "prompt_examples_count": 25,
+    "corpus_texts_count": 25,
+    "labeling_config": {
+      "top_k": 25,
+      "skip_first_token": true,
+      "min_activation": 0.1,
+      "num_sentences": 3000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T18:16:13.136988+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3777,
+    "label": "Concept of Loss",
+    "explanation": "The feature detects the concept of loss, including financial, emotional, and physical losses, as evident from the activating tokens and surrounding context",
+    "confidence": "high",
+    "request_id": "a41e62c0-e1ee-438d-bb66-0b127893c49c",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "lost",
+      "lose",
+      "loss",
+      "losing",
+      "loses",
+      "losses"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 52,
+    "labeling_config": {
+      "top_k": 75,
+      "skip_first_token": true,
+      "min_activation": 4,
+      "num_sentences": 2500
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T18:18:06.421756+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1822,
+    "label": "Emotional Satisfaction",
+    "explanation": "The feature detects tokens related to positive emotional states such as happiness, pleasure, and delight, indicating a semantic concept of emotional satisfaction.",
+    "confidence": "high",
+    "request_id": "2fb039b4-dfc5-4075-bce9-1f02ca172fc4",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "happy",
+      "pleased",
+      "unhappy",
+      "delighted"
+    ],
+    "prompt_examples_count": 25,
+    "corpus_texts_count": 34,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 5,
+      "num_sentences": 5000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T18:20:26.423806+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5927,
+    "label": "Writing Activity",
+    "explanation": "The feature detects instances of writing, composing, or creating written content, as evidenced by the frequent activation on tokens related to writing, such as 'write', 'written', and 'wrote'.",
+    "confidence": "high",
+    "request_id": "f201b25d-9d3a-4c91-bb39-e8b2aa8ca6cf",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "written",
+      "write",
+      "wrote",
+      "a",
+      "writing",
+      "it",
+      "writer",
+      "an",
+      "pen"
+    ],
+    "prompt_examples_count": 30,
+    "corpus_texts_count": 30,
+    "labeling_config": {
+      "top_k": 30,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 3000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T18:23:32.183928+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5275,
+    "label": "Political Support Concept",
+    "explanation": "The feature detects language related to expressing or receiving support, endorsement, or backing in a political or social context",
+    "confidence": "high",
+    "request_id": "b5cefaa8-88e9-468e-adcf-153f45cae6ee",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "support",
+      "supported",
+      "supports",
+      "supporting",
+      "backed",
+      "supporter",
+      "endorsement",
+      "back",
+      "orses",
+      "by"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 50,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 2600
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T18:27:52.337285+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3730,
+    "label": "Energy Technology",
+    "explanation": "The feature detects tokens related to various forms of energy and technology, such as renewable, digital, and electrical",
+    "confidence": "high",
+    "request_id": "b42799e3-3a8d-47bc-9afa-9d3f440217b2",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "renewable",
+      "digital",
+      "electronic",
+      "automated",
+      "electrical",
+      "nuclear",
+      "portable",
+      "ized",
+      "solar"
+    ],
+    "prompt_examples_count": 12,
+    "corpus_texts_count": 14,
+    "labeling_config": {
+      "top_k": 75,
+      "skip_first_token": true,
+      "min_activation": 4,
+      "num_sentences": 2500
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T18:28:04.351414+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 78,
+    "label": "Legal or Financial Transaction",
+    "explanation": "The feature activates on tokens related to providing, giving, sharing, and exchanging, often in a legal or financial context, suggesting it detects concepts related to transactions or agreements.",
+    "confidence": "high",
+    "request_id": "f2a46078-f71c-4a61-9cc4-b5fbfb5295f5",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "provided",
+      "given",
+      "this",
+      "over",
+      "advice",
+      "shares",
+      "insurance",
+      "bill",
+      "respect",
+      "funds"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 55,
+    "labeling_config": {
+      "top_k": 55,
+      "skip_first_token": true,
+      "min_activation": 1,
+      "num_sentences": 2200
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T18:31:18.543274+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4578,
+    "label": "Fossil Fuel Concept",
+    "explanation": "The feature detects mentions of fossil fuels, such as oil, gas, and related terms, in the given text snippets",
+    "confidence": "high",
+    "request_id": "89649353-8a3e-4712-941c-47f462a79446",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "oil",
+      "ane",
+      "gases",
+      "tire",
+      "fumes"
+    ],
+    "prompt_examples_count": 10,
+    "corpus_texts_count": 11,
+    "labeling_config": {
+      "top_k": 70,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 2000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T18:35:55.420958+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3989,
+    "label": "Legal Concept",
+    "explanation": "The feature detects tokens related to legal terminology, such as 'law', 'enforcement', and 'court', indicating a strong association with legal concepts and discussions.",
+    "confidence": "high",
+    "request_id": "584ecefe-ed01-49eb-a2bd-76cc6316eec3",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "law"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 70,
+    "labeling_config": {
+      "top_k": 70,
+      "skip_first_token": true,
+      "min_activation": 6,
+      "num_sentences": 5000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T19:27:37.832264+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3777,
+    "label": "Financial or Personal Loss",
+    "explanation": "The feature detects instances of financial or personal loss, including job loss, economic loss, and loss of opportunity, as evidenced by the frequent activation on words like 'lost', 'lose', and 'loss'.",
+    "confidence": "high",
+    "request_id": "d2870e9f-0681-483d-9b2a-bb8bd3761987",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "lost",
+      "lose",
+      "loss",
+      "losing",
+      "loses",
+      "losses"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 50,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 4,
+      "num_sentences": 5000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T19:39:38.560676+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1681,
+    "label": "Temporal Reference",
+    "explanation": "The feature detects words and phrases related to time, sequence, and temporal relationships, such as 'one', 'then', 'previously', and 'time'.",
+    "confidence": "high",
+    "request_id": "29438003-bbc9-4a9d-bb09-d943d27d8830",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "one",
+      "that",
+      "previously",
+      "then",
+      "pun",
+      "time",
+      "resources",
+      "and",
+      "trust",
+      "however"
     ],
     "prompt_examples_count": 25,
     "corpus_texts_count": 25,
@@ -402,602 +1144,1526 @@
     "error": null
   },
   {
-    "timestamp": "2026-04-03T17:40:16.353145+00:00",
+    "timestamp": "2026-04-03T19:40:30.229330+00:00",
     "source": "ui",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 426,
-    "label": "Person or Human",
-    "explanation": "The feature activates on tokens related to individuals, such as 'man', 'woman', 'guy', and 'human', indicating it detects references to people or persons",
+    "feature_idx": 2977,
+    "label": "Verbatim Reference",
+    "explanation": "The feature detects instances where text mentions referencing or copying something verbatim or literally, often related to speech, testimony, or explanations.",
     "confidence": "high",
-    "request_id": "453f539d-a382-4ad7-ab2e-d9977bfcbe11",
+    "request_id": "c1ac3241-6e66-4579-a0d5-775da2b0eb54",
     "llm_activation_mode": "standardize",
     "top_tokens": [
-      "human",
-      "guy",
-      "man",
-      "men",
-      "woman",
-      "machine",
-      "eman",
-      "suspect",
-      "driver",
-      "nation"
+      "ver",
+      "vol"
     ],
-    "prompt_examples_count": 19,
+    "prompt_examples_count": 5,
+    "corpus_texts_count": 4,
+    "labeling_config": {
+      "top_k": 30,
+      "skip_first_token": true,
+      "min_activation": 6,
+      "num_sentences": 3000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T19:44:50.441639+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 368,
+    "label": "Legal Claim Concept",
+    "explanation": "The feature detects language related to legal claims, including the act of making a claim, types of claims, and claimants in a legal context",
+    "confidence": "high",
+    "request_id": "a7175802-92fc-456a-b35b-caf7eccc5112",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "claim",
+      "claims",
+      "claimant",
+      "claimants",
+      "asserts"
+    ],
+    "prompt_examples_count": 24,
     "corpus_texts_count": 25,
     "labeling_config": {
       "top_k": 25,
       "skip_first_token": true,
-      "min_activation": 1.5,
-      "num_sentences": 3500
+      "min_activation": 3,
+      "num_sentences": 4000
     },
     "error": null
   },
   {
-    "timestamp": "2026-04-03T17:47:09.394200+00:00",
+    "timestamp": "2026-04-03T19:52:40.401259+00:00",
     "source": "ui",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 949,
-    "label": "Expression of sentiment",
-    "explanation": "The feature detects tokens that convey emotions, preferences, or attitudes, such as liking, appreciating, or opposing something",
+    "feature_idx": 5209,
+    "label": "Legal Concept Modifier",
+    "explanation": "The feature detects tokens that modify or describe legal concepts, such as 'constitutional', 'federal', 'legal', and 'theoretical', which are often used to specify or clarify legal terms or ideas",
     "confidence": "high",
-    "request_id": "f0447e36-2308-4e20-86a5-51fb81099023",
+    "request_id": "30d754f2-2c4d-4983-9413-d0976a6e6889",
     "llm_activation_mode": "standardize",
     "top_tokens": [
-      "like",
-      "appreciate",
-      "to",
-      "miss",
-      "for",
-      "missed",
-      "oppose",
-      "wants",
-      "welcome",
-      "with"
+      "kind",
+      "constitutional",
+      "small",
+      "federal",
+      "singular",
+      "difficult",
+      "theoretical",
+      "legal",
+      "population",
+      "great"
     ],
-    "prompt_examples_count": 20,
-    "corpus_texts_count": 30,
-    "labeling_config": {
-      "top_k": 30,
-      "skip_first_token": true,
-      "min_activation": 2,
-      "num_sentences": 3750
-    },
-    "error": null
-  },
-  {
-    "timestamp": "2026-04-03T17:55:41.966235+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 1850,
-    "label": "Quantitative Comparison",
-    "confidence": "high",
-    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
-    "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 30,
-      "min_activation": 1.5
-    }
-  },
-  {
-    "timestamp": "2026-04-03T17:55:41.967920+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 1851,
-    "label": "Second Person Reference",
-    "confidence": "high",
-    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
-    "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 30,
-      "min_activation": 1.5
-    }
-  },
-  {
-    "timestamp": "2026-04-03T17:55:41.969333+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 1852,
-    "label": "Legal Document Reference",
-    "confidence": "high",
-    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
-    "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 30,
-      "min_activation": 1.5
-    }
-  },
-  {
-    "timestamp": "2026-04-03T17:55:41.971914+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 1853,
-    "label": "Legal Testimony Concept",
-    "confidence": "high",
-    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
-    "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 30,
-      "min_activation": 1.5
-    }
-  },
-  {
-    "timestamp": "2026-04-03T17:55:41.974583+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 1854,
-    "label": "Economic Crisis Event",
-    "confidence": "high",
-    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
-    "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 30,
-      "min_activation": 1.5
-    }
-  },
-  {
-    "timestamp": "2026-04-03T17:55:41.977427+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 1855,
-    "label": "Preposition Indicating Location",
-    "confidence": "high",
-    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
-    "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 30,
-      "min_activation": 1.5
-    }
-  },
-  {
-    "timestamp": "2026-04-03T17:55:41.980517+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 1856,
-    "label": "US Reference",
-    "confidence": "high",
-    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
-    "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 30,
-      "min_activation": 1.5
-    }
-  },
-  {
-    "timestamp": "2026-04-03T17:55:41.983447+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 1857,
-    "label": "Interrogative Pronouns",
-    "confidence": "high",
-    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
-    "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 30,
-      "min_activation": 1.5
-    }
-  },
-  {
-    "timestamp": "2026-04-03T17:55:41.986053+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 1858,
-    "label": "Contrast or Change",
-    "confidence": "high",
-    "request_id": "8bbbb283-cbe5-42ee-92a7-d6fd62ab15a8",
-    "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 30,
-      "min_activation": 1.5
-    }
-  },
-  {
-    "timestamp": "2026-04-03T18:02:08.630765+00:00",
-    "source": "ui",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 6068,
-    "label": "Sufficient Condition",
-    "explanation": "The feature detects tokens indicating a sufficient or necessary condition for something to happen or be true, often marked by words like 'enough' or 'within'",
-    "confidence": "high",
-    "request_id": "5c58abab-ec6b-487e-b00c-8cd21d0e3fcd",
-    "llm_activation_mode": "standardize",
-    "top_tokens": [
-      "enough",
-      "upset",
-      "rate",
-      "do",
-      "within",
-      "in",
-      "majority"
-    ],
-    "prompt_examples_count": 8,
-    "corpus_texts_count": 15,
+    "prompt_examples_count": 23,
+    "corpus_texts_count": 25,
     "labeling_config": {
       "top_k": 25,
       "skip_first_token": true,
-      "min_activation": 1.5,
-      "num_sentences": 3500
+      "min_activation": 2,
+      "num_sentences": 1000
     },
     "error": null
   },
   {
-    "timestamp": "2026-04-03T18:02:35.246285+00:00",
+    "timestamp": "2026-04-03T19:57:32.248969+00:00",
     "source": "ui",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 2711,
+    "feature_idx": 3405,
+    "label": "Questioning and Clarification",
+    "explanation": "The feature detects instances of questioning, seeking clarification, or requesting confirmation, often indicated by words like 'you', 'agree', 'understand', and 'know'.",
+    "confidence": "high",
+    "request_id": "5204c574-df08-44f7-8b52-9c11f53e5063",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "you",
+      "not",
+      "agree",
+      "different",
+      "well",
+      "understand",
+      "with",
+      "override",
+      "know",
+      "provide"
+    ],
+    "prompt_examples_count": 25,
+    "corpus_texts_count": 25,
+    "labeling_config": {
+      "top_k": 25,
+      "skip_first_token": true,
+      "min_activation": 2,
+      "num_sentences": 1000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T20:06:03.653183+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3405,
+    "label": "Questioning and Inquiry",
+    "explanation": "The feature activates on tokens related to questioning, such as 'do', 'what', 'how', and 'why', indicating a semantic concept of inquiry or interrogation.",
+    "confidence": "high",
+    "request_id": "e51017d7-080e-4050-910d-b0a79f1a3e72",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "you",
+      "for",
+      "well",
+      "do",
+      "not",
+      "agree",
+      "different",
+      "mesh",
+      "about",
+      "problems"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 50,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 5000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.469973+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4898,
+    "label": "Desire or intention",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.474396+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2118,
+    "label": "Verbal Communication",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.512920+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2907,
+    "label": "Geographic Location",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.535635+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1199,
+    "label": "Time and Scheduling",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.568626+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 488,
+    "label": "Positive Emotion",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.602197+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4708,
+    "label": "Political Activity",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.634021+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2185,
+    "label": "Complete Extent",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.662430+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1955,
+    "label": "Legal Evidence",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.690999+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1116,
+    "label": "Community Concept",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.719698+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 790,
+    "label": "Event Occurrence",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.747754+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3805,
+    "label": "Expression of Gratitude",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.777357+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1720,
+    "label": "Polite Expressions",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.806609+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5515,
+    "label": "Argument Focus",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.833677+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5914,
+    "label": "Legal Clarity",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.860620+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3039,
+    "label": "Positive Adjective",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.888828+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 857,
+    "label": "Hedging Language",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.913297+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2549,
+    "label": "Government Department",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.939012+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 395,
+    "label": "Education Concept",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:10:55.966655+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1647,
+    "label": "Ordinal or Quantity",
+    "confidence": "high",
+    "request_id": "69809120-8f2b-4d99-aa16-27c53b6b11f6",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.0
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:11:42.069408+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 408,
     "label": "error",
     "explanation": "",
     "confidence": "low",
-    "request_id": "fb509a64-de66-4936-b6ed-e56d754db702",
+    "request_id": "6a3e72d4-b6a4-464b-a7cc-81e40780fee5",
     "llm_activation_mode": "standardize",
     "top_tokens": [],
-    "prompt_examples_count": 18,
-    "corpus_texts_count": 25,
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 50,
     "labeling_config": {
-      "top_k": 25,
+      "top_k": 50,
       "skip_first_token": true,
-      "min_activation": 1.5,
-      "num_sentences": 2000
+      "min_activation": 3,
+      "num_sentences": 3000
     },
-    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01j1sy43ase5er8m7c6ey9d9wx` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99536, Requested 912. Please try again in 6m27.071999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
+    "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01k5628m59ewdax36782wtf684` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 99602, Requested 1681. Please try again in 18m28.512s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}"
   },
   {
-    "timestamp": "2026-04-03T18:23:39.832042+00:00",
+    "timestamp": "2026-04-03T20:23:51.352413+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 5594,
-    "label": "Frequency Adverbs",
+    "feature_idx": 584,
+    "label": "Quantity or Multiplicity",
     "confidence": "high",
-    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3000,
-      "top_k": 25,
-      "min_activation": 2.0
-    }
-  },
-  {
-    "timestamp": "2026-04-03T18:23:39.834936+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 3138,
-    "label": "Human Life Concept",
-    "confidence": "high",
-    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
-    "labeling_config": {
-      "num_sentences": 3000,
-      "top_k": 25,
-      "min_activation": 2.0
-    }
-  },
-  {
-    "timestamp": "2026-04-03T18:23:39.836779+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 923,
-    "label": "Age or Maturity",
-    "confidence": "high",
-    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
-    "labeling_config": {
-      "num_sentences": 3000,
-      "top_k": 25,
-      "min_activation": 2.0
-    }
-  },
-  {
-    "timestamp": "2026-04-03T18:23:39.838192+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 5908,
-    "label": "Superlative concept",
-    "confidence": "high",
-    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
-    "labeling_config": {
-      "num_sentences": 3000,
-      "top_k": 25,
-      "min_activation": 2.0
-    }
-  },
-  {
-    "timestamp": "2026-04-03T18:23:39.839463+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 3655,
-    "label": "Referring to multiple items",
-    "confidence": "high",
-    "request_id": "f58feee3-d604-4d8e-895b-a4384cc52568",
-    "labeling_config": {
-      "num_sentences": 3000,
-      "top_k": 25,
-      "min_activation": 2.0
-    }
-  },
-  {
-    "timestamp": "2026-04-03T18:26:39.512226+00:00",
-    "source": "ui",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 2711,
-    "label": "Geopolitical Entity",
-    "explanation": "The feature detects mentions of the United States or concepts related to unity and integration, suggesting a focus on geopolitical entities or organizations",
-    "confidence": "high",
-    "request_id": "a8bbeb26-a695-4ae9-b9ca-9f400003df9f",
-    "llm_activation_mode": "standardize",
-    "top_tokens": [
-      "united",
-      "together",
-      "joined",
-      "combined",
-      "separation",
-      "summed",
-      "union",
-      "integrated"
-    ],
-    "prompt_examples_count": 18,
-    "corpus_texts_count": 25,
-    "labeling_config": {
-      "top_k": 25,
-      "skip_first_token": true,
-      "min_activation": 1.5,
-      "num_sentences": 2000
-    },
-    "error": null
-  },
-  {
-    "timestamp": "2026-04-03T18:33:48.634145+00:00",
-    "source": "ui-bulk",
-    "analyzer": "sae",
-    "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 5183,
-    "label": "Physical Connection Concept",
-    "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
-    "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.635742+00:00",
+    "timestamp": "2026-04-03T20:23:51.354437+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 179,
-    "label": "Conceptual Connection",
+    "feature_idx": 5103,
+    "label": "Concept of Change",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.636884+00:00",
+    "timestamp": "2026-04-03T20:23:51.368048+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 5592,
-    "label": "Financial Resources",
+    "feature_idx": 5530,
+    "label": "Final Decision Concept",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.638000+00:00",
+    "timestamp": "2026-04-03T20:23:51.383484+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 1321,
-    "label": "Medical Condition",
+    "feature_idx": 2856,
+    "label": "Job or Employment",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.639036+00:00",
+    "timestamp": "2026-04-03T20:23:51.397839+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 4098,
-    "label": "Task Completion Concept",
+    "feature_idx": 1761,
+    "label": "Legal Stance",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.639986+00:00",
+    "timestamp": "2026-04-03T20:23:51.422974+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 5509,
-    "label": "National Concept",
+    "feature_idx": 1541,
+    "label": "Agreement Confirmation",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.640903+00:00",
+    "timestamp": "2026-04-03T20:23:51.437879+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 1275,
-    "label": "Official Approval Concept",
+    "feature_idx": 4836,
+    "label": "Comparison of quantity",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.641813+00:00",
+    "timestamp": "2026-04-03T20:23:51.454091+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 4513,
-    "label": "Act of Giving",
+    "feature_idx": 5639,
+    "label": "Temperature Concepts",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.642784+00:00",
+    "timestamp": "2026-04-03T20:23:51.466937+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 3653,
-    "label": "Occupational Role",
+    "feature_idx": 6055,
+    "label": "Water Concept",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.643782+00:00",
+    "timestamp": "2026-04-03T20:23:51.480748+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 3614,
-    "label": "Degree or Extent",
+    "feature_idx": 1164,
+    "label": "Counterfactual situations",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.644699+00:00",
+    "timestamp": "2026-04-03T20:23:51.498249+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 3028,
-    "label": "Memory Recall Concept",
+    "feature_idx": 2134,
+    "label": "Formal Gathering",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.645627+00:00",
+    "timestamp": "2026-04-03T20:23:51.510798+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 5993,
-    "label": "Expert Opinion",
+    "feature_idx": 5781,
+    "label": "Marital Status",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.646629+00:00",
+    "timestamp": "2026-04-03T20:23:51.527177+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
     "feature_idx": 712,
     "label": "Child Welfare",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.647588+00:00",
+    "timestamp": "2026-04-03T20:23:51.539671+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 4708,
-    "label": "Political Affiliation",
+    "feature_idx": 5196,
+    "label": "Color Reference",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.648540+00:00",
+    "timestamp": "2026-04-03T20:23:51.553907+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 1164,
-    "label": "Counterfactual Situation",
+    "feature_idx": 5976,
+    "label": "Color Mention",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "8158baaa-7608-4922-94bc-9ab9fcd12a08",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
   },
   {
-    "timestamp": "2026-04-03T18:33:48.649492+00:00",
+    "timestamp": "2026-04-03T20:33:22.237884+00:00",
     "source": "ui-bulk",
     "analyzer": "sae",
     "model_id": "best_model_fc_sae_m32_layer10.pt",
-    "feature_idx": 997,
-    "label": "Obligation or Necessity",
+    "feature_idx": 606,
+    "label": "Challenging Situation",
     "confidence": "high",
-    "request_id": "d750c33f-435e-476b-b4c1-d9f2eb3855a0",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
     "labeling_config": {
-      "num_sentences": 3500,
-      "top_k": 25,
+      "num_sentences": 5500,
+      "top_k": 100,
       "min_activation": 3.5
     }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.240245+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5834,
+    "label": "Commercial Activity",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.257246+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4689,
+    "label": "Financial Credit Concept",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.267385+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 555,
+    "label": "Quantity Indicator",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.279661+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4982,
+    "label": "Speed Concept",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.296070+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5621,
+    "label": "Economic Disaster",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.308778+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5312,
+    "label": "Consumer Protection",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.324632+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 222,
+    "label": "Legal Client Mention",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.337641+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2181,
+    "label": "To Give or Supply",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.347930+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2858,
+    "label": "Legal Case Concept",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.364380+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1868,
+    "label": "US Court System",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.377989+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1464,
+    "label": "Concept of Control",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.396515+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1917,
+    "label": "Legal Allegation",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.408470+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1706,
+    "label": "Suffix '-ly' detection",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.424499+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1665,
+    "label": "Medical Concept",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:33:22.437110+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3470,
+    "label": "Social or Economic Need",
+    "confidence": "high",
+    "request_id": "1d27d102-b7d2-43a2-850c-5c23621e652b",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:49:17.520221+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2470,
+    "label": "Negation or Uncertainty",
+    "confidence": "high",
+    "request_id": "9cecd5f8-b8a8-4e5a-bc0a-2816aff14539",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:49:17.523212+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4489,
+    "label": "Exclusivity Indicator",
+    "confidence": "high",
+    "request_id": "9cecd5f8-b8a8-4e5a-bc0a-2816aff14539",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:49:17.536370+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2250,
+    "label": "Industry and Leisure",
+    "confidence": "high",
+    "request_id": "9cecd5f8-b8a8-4e5a-bc0a-2816aff14539",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:49:17.552962+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 5031,
+    "label": "Entertainment Industry",
+    "confidence": "high",
+    "request_id": "9cecd5f8-b8a8-4e5a-bc0a-2816aff14539",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:49:17.565926+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2994,
+    "label": "Time Duration Concept",
+    "confidence": "high",
+    "request_id": "9cecd5f8-b8a8-4e5a-bc0a-2816aff14539",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:49:17.582820+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 426,
+    "label": "Male Person",
+    "confidence": "high",
+    "request_id": "9cecd5f8-b8a8-4e5a-bc0a-2816aff14539",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:49:17.609612+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2597,
+    "label": "Female Reference",
+    "confidence": "high",
+    "request_id": "9cecd5f8-b8a8-4e5a-bc0a-2816aff14539",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:49:17.628847+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2292,
+    "label": "Violation or Separation",
+    "confidence": "high",
+    "request_id": "9cecd5f8-b8a8-4e5a-bc0a-2816aff14539",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:49:17.645370+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2229,
+    "label": "Possibility or Uncertainty",
+    "confidence": "high",
+    "request_id": "9cecd5f8-b8a8-4e5a-bc0a-2816aff14539",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:49:17.661395+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 98,
+    "label": "Possibility or Uncertainty",
+    "confidence": "high",
+    "request_id": "9cecd5f8-b8a8-4e5a-bc0a-2816aff14539",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:49:17.675134+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2427,
+    "label": "Royal Titles",
+    "confidence": "high",
+    "request_id": "9cecd5f8-b8a8-4e5a-bc0a-2816aff14539",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-03T20:49:17.701861+00:00",
+    "source": "ui-bulk",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4452,
+    "label": "Animal mentions",
+    "confidence": "high",
+    "request_id": "9cecd5f8-b8a8-4e5a-bc0a-2816aff14539",
+    "labeling_config": {
+      "num_sentences": 5500,
+      "top_k": 100,
+      "min_activation": 3.5
+    }
+  },
+  {
+    "timestamp": "2026-04-04T03:31:46.301501+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 408,
+    "label": "Social Norm Concept",
+    "explanation": "This feature detects the concept of social norms or values, particularly related to decency and appropriateness.",
+    "confidence": "high",
+    "request_id": "7121da0e-8a3f-4be2-aa6a-173c07af3050",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "decency"
+    ],
+    "prompt_examples_count": 1,
+    "corpus_texts_count": 50,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 4,
+      "num_sentences": 3000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-04T04:56:35.867442+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3405,
+    "label": "Questioning and Inquiry",
+    "explanation": "The feature activates on tokens related to questioning, inquiry, and seeking clarification, indicating that it detects semantic concepts related to interrogation and investigation.",
+    "confidence": "high",
+    "request_id": "89844009-fdc2-4a8e-bb99-0b7cc7b2a6ee",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "you",
+      "do",
+      "mean",
+      "for",
+      "well",
+      "have",
+      "we",
+      "or",
+      "sense",
+      "agree"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 50,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 4,
+      "num_sentences": 3000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-04T05:01:10.589014+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 617,
+    "label": "Currency Amount",
+    "explanation": "The feature activates on text snippets containing specific amounts of money, indicated by the frequent presence of words like 'dollars', 'dollar', and 'cents' in the activating examples",
+    "confidence": "high",
+    "request_id": "0c0c2e6f-9343-4446-b746-460ba0105dda",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "dollars",
+      "dollar",
+      "cents"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 50,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 6,
+      "num_sentences": 3000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-04T05:03:13.579039+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3876,
+    "label": "Game or Play Concept",
+    "explanation": "The feature detects language related to games, sports, or playful activities, as well as metaphors involving play, such as 'play politics' or 'play a role'",
+    "confidence": "high",
+    "request_id": "7945f8aa-87bc-4dc7-9904-974bcaee665b",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "play",
+      "playing",
+      "played",
+      "plays",
+      "players",
+      "player",
+      "game",
+      "playable"
+    ],
+    "prompt_examples_count": 30,
+    "corpus_texts_count": 33,
+    "labeling_config": {
+      "top_k": 75,
+      "skip_first_token": true,
+      "min_activation": 5,
+      "num_sentences": 4000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-04T05:24:16.494849+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2490,
+    "label": "error",
+    "explanation": "",
+    "confidence": "low",
+    "request_id": "de3e1d6a-7232-4bb3-a203-68395daefc12",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 45,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 3000
+    },
+    "error": "Connection error."
+  },
+  {
+    "timestamp": "2026-04-04T05:24:33.564289+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2490,
+    "label": "Article of clothing",
+    "explanation": "The feature activates on various tokens related to clothing items, such as shirts, uniforms, suits, and dresses, indicating that it detects the concept of articles of clothing.",
+    "confidence": "high",
+    "request_id": "dd31d45f-71f4-47a4-99aa-bb5f7cf74cb7",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "uniform",
+      "shirt",
+      "wearing",
+      "suit",
+      "dress",
+      "hair",
+      "jersey",
+      "clothing",
+      "clothes",
+      "vest"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 45,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 3000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-04T05:28:49.088106+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1001,
+    "label": "Social Groups",
+    "explanation": "The feature detects mentions of various social groups, such as occupation-based, demographic, or organizational groups, in the given text snippets.",
+    "confidence": "high",
+    "request_id": "a054db88-9e01-4648-9a04-9a7e87200504",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "creditors",
+      "immigrants",
+      "farmers",
+      "shareholders",
+      "detainees",
+      "ians",
+      "ans",
+      "voters",
+      "officers",
+      "senators"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 50,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 2,
+      "num_sentences": 3000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-04T05:31:29.642765+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 6114,
+    "label": "Professional Fields",
+    "explanation": "The feature detects tokens related to various professional fields, such as economics, law, agriculture, and healthcare, indicating a concept that encompasses different occupations and areas of expertise",
+    "confidence": "high",
+    "request_id": "976bc227-34ce-45c5-8dfe-fa76a4c07779",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "dental",
+      "economics",
+      "agriculture",
+      "law",
+      "security",
+      "developer",
+      "ski",
+      "baseball",
+      "nurse",
+      "tering"
+    ],
+    "prompt_examples_count": 21,
+    "corpus_texts_count": 29,
+    "labeling_config": {
+      "top_k": 75,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 2500
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-04T05:35:13.458392+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2004,
+    "label": "Purification Concept",
+    "explanation": "The feature detects words related to making something clean, pure, or free from impurities, such as 'clean', 'fresh', and 'wipes'",
+    "confidence": "high",
+    "request_id": "7a446f8b-9b04-4d37-be31-9e43d8fff843",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "clean",
+      "fresh",
+      "cleaner",
+      "wipes",
+      "up",
+      "his"
+    ],
+    "prompt_examples_count": 17,
+    "corpus_texts_count": 17,
+    "labeling_config": {
+      "top_k": 75,
+      "skip_first_token": true,
+      "min_activation": 3.5,
+      "num_sentences": 3000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-04T05:39:46.703938+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4339,
+    "label": "Abstract Concept",
+    "explanation": "The feature detects tokens related to abstract ideas, notions, and concepts, often in the context of discussion, debate, or analysis",
+    "confidence": "high",
+    "request_id": "b85c5e7d-2d8e-4cdb-a507-609f56bf9f07",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "idea",
+      "notion",
+      "concept",
+      "ideas"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 50,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 3.5,
+      "num_sentences": 4000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-04T05:42:43.200940+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 3401,
+    "label": "Mental State Concept",
+    "explanation": "The feature detects tokens related to mental states, such as mind, brain, and cognitive functions, indicating a focus on psychological or intellectual concepts",
+    "confidence": "high",
+    "request_id": "4ef69c3b-1df3-4aa7-af1d-6277d81640f5",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "mind",
+      "mental",
+      "minds",
+      "brain",
+      "mindset",
+      "conscience",
+      "thinking",
+      "heart",
+      "intellect",
+      "cognitive"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 50,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 3,
+      "num_sentences": 3000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-04T05:47:56.084850+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 2545,
+    "label": "Violent Death Concept",
+    "explanation": "The feature detects language related to violent death, including murder, killing, and fatal incidents, as evident from the strongly activating tokens and surrounding context",
+    "confidence": "high",
+    "request_id": "d5c9e7fe-532a-467b-884d-109a9be83516",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "murder",
+      "death",
+      "died",
+      "kill",
+      "deadly",
+      "dies",
+      "dead",
+      "killing",
+      "fatalities",
+      "perished"
+    ],
+    "prompt_examples_count": 40,
+    "corpus_texts_count": 50,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 3.5,
+      "num_sentences": 3500
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-04T06:15:36.225780+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 4079,
+    "label": "Receiving Something",
+    "explanation": "The feature detects instances where an entity is getting or obtaining something, such as money, assistance, or information, as indicated by the frequent activation on tokens like 'receiving', 'received', and 'receive'.",
+    "confidence": "high",
+    "request_id": "0f29028d-ec4f-44d5-8e7e-e0d01601e7b5",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "receiving",
+      "received",
+      "receive",
+      "receipt",
+      "rece",
+      "ceive"
+    ],
+    "prompt_examples_count": 35,
+    "corpus_texts_count": 33,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 4,
+      "num_sentences": 3000
+    },
+    "error": null
+  },
+  {
+    "timestamp": "2026-04-04T06:19:15.846432+00:00",
+    "source": "ui",
+    "analyzer": "sae",
+    "model_id": "best_model_fc_sae_m32_layer10.pt",
+    "feature_idx": 1641,
+    "label": "Charitable Giving",
+    "explanation": "The feature detects text related to donating, volunteering, and philanthropy, indicating a focus on charitable activities and organizations",
+    "confidence": "high",
+    "request_id": "d2e5431d-c3ec-4187-81db-17582c82235b",
+    "llm_activation_mode": "standardize",
+    "top_tokens": [
+      "nonprofit",
+      "foundation",
+      "volunteer",
+      "contribute",
+      "charitable",
+      "philanthrop",
+      "donated",
+      "donations",
+      "charity",
+      "contribution"
+    ],
+    "prompt_examples_count": 31,
+    "corpus_texts_count": 35,
+    "labeling_config": {
+      "top_k": 50,
+      "skip_first_token": true,
+      "min_activation": 2.5,
+      "num_sentences": 3000
+    },
+    "error": null
   }
 ]

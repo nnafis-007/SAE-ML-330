@@ -57,6 +57,48 @@ def _append_interpreted_feature_log(model_id: str, entry: Dict[str, Any]) -> Non
             encoding="utf-8",
         )
 
+
+def _load_labeled_features_for_model(model_id: str) -> List[Dict[str, Any]]:
+    """Load persisted per-model feature labels from logs/feature_labels_<model>.json."""
+    labels_path = _SAE_ROOT / "logs" / f"feature_labels_{_safe_model_file_stem(model_id)}.json"
+    if not labels_path.exists():
+        return []
+
+    try:
+        payload = json.loads(labels_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise RuntimeError(f"Failed to parse feature labels JSON: {exc}") from exc
+
+    rows: List[Dict[str, Any]] = []
+
+    if isinstance(payload, dict):
+        iterable = payload.items()
+    elif isinstance(payload, list):
+        iterable = enumerate(payload)
+    else:
+        return []
+
+    for key, value in iterable:
+        if not isinstance(value, dict):
+            continue
+
+        raw_feature_id = value.get("feature_idx", key)
+        try:
+            feature_id = int(raw_feature_id)
+        except (TypeError, ValueError):
+            continue
+
+        rows.append({
+            "feature_id": feature_id,
+            "label": value.get("label") or f"Feature {feature_id}",
+            "description": value.get("explanation") or value.get("description") or "No description available.",
+            "confidence": value.get("confidence"),
+            "updated_at": value.get("updated_at"),
+        })
+
+    rows.sort(key=lambda item: item["feature_id"])
+    return rows
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -197,6 +239,25 @@ def get_models(analyzer: Optional[str] = None):
             raise HTTPException(404, f"Analyzer '{analyzer}' not found")
         return {"models": a.list_models()}
     return {"models": get_all_models()}
+
+
+@app.get("/labeled-features")
+def get_labeled_features(model_id: str):
+    """Return all persisted labeled features for a given model id."""
+    model_id = (model_id or "").strip()
+    if not model_id:
+        raise HTTPException(400, "model_id is required")
+
+    try:
+        features = _load_labeled_features_for_model(model_id)
+    except RuntimeError as exc:
+        raise HTTPException(500, str(exc))
+
+    return {
+        "model_id": model_id,
+        "count": len(features),
+        "features": features,
+    }
 
 
 @app.get("/analyzers")
